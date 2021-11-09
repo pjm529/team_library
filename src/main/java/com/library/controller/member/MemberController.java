@@ -10,8 +10,10 @@ import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.mail.javamail.MimeMessageHelper;
 import org.springframework.mail.javamail.MimeMessagePreparator;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.library.model.MemberDTO;
@@ -124,6 +126,60 @@ public class MemberController {
 		String num = Integer.toString(checkNum); // view단으로 보내기 위한 난수 String 파싱
 
 		return num;
+
+	}
+
+	// 아이디 찾기 페이지 진입
+	@RequestMapping(value = "/search_id", method = RequestMethod.GET)
+	public String searchIdGET() {
+
+		System.out.println("아이디 찾기 페이지 진입");
+
+		return "/member/sub3/search_id";
+
+	}
+
+	// 아이디 찾기 정보확인
+	@RequestMapping(value = "/search_id_check", method = RequestMethod.POST)
+	@ResponseBody
+	public String searchIdCheck(MemberDTO member) throws Exception {
+
+		System.out.println("searchIdCheck() 진입");
+
+		int result = memberService.search_id_check(member);
+
+		if (result == 0) {
+
+			return "fail";
+
+		} else {
+
+			return "success";
+
+		}
+	}
+
+	// 아이디 찾기 성공
+	@RequestMapping(value = "/search_id", method = RequestMethod.POST)
+	public String searchIdPOST(MemberDTO member, Model model) throws Exception {
+
+		System.out.println("searchId() 진입");
+
+		String result = memberService.search_id(member);
+
+		model.addAttribute("search_id", result);
+
+		System.out.println(result);
+		return "redirect:/member/search_id_result";
+
+	}
+
+	// 아이디 찾기 결과
+	@RequestMapping(value = "/search_id_result", method = RequestMethod.GET)
+	public String searchIdResult(@RequestParam String search_id, Model model) {
+
+		model.addAttribute("search_id", search_id);
+		return "/member/sub3/search_id_result";
 
 	}
 
