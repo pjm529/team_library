@@ -40,6 +40,20 @@ public class MemberServiceImpl implements MemberService {
 	public String search_id(MemberDTO member) throws Exception {
 		return memberMapper.search_id(member);
 	}
+	
+	// 비밀번호 찾기 정보 확인
+	@Override
+	public int search_pw_check(MemberDTO member) throws Exception {
+		
+		return memberMapper.search_pw_check(member);
+	}
+
+	// 비밀번호 찾기 성공후 초기화
+	@Override
+	public void reset_pw(MemberDTO member, String newPw) throws Exception {
+		memberMapper.reset_pw(member, newPw);
+		
+	}
 
 
 }
