@@ -17,4 +17,14 @@
 			select count(*) from member where user_id = #{user_id}
 		</select>
 		
+		<!-- 아이디 찾기 시 일치하는 정보가 존재하는지 -->
+		<select id="search_id_check" resultType="int">
+			select count(*) from member where user_name = #{user_name} and user_birth = #{user_birth} and user_tel = #{user_tel}
+		</select>
+		
+		<!-- 아이디 찾기 -->
+		<select id="search_id" resultType="string">
+			select user_id from member where user_name = #{user_name} and user_birth = #{user_birth} and user_tel = #{user_tel}
+		</select>
+		
 	</mapper>

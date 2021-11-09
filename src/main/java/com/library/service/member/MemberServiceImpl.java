@@ -27,6 +27,19 @@ public class MemberServiceImpl implements MemberService {
 		return memberMapper.idCheck(user_id);
 
 	}
+	
+	// 아이디 찾기 정보확인
+	@Override
+	public int search_id_check(MemberDTO member) throws Exception {
+		
+		return memberMapper.search_id_check(member);
+	}
+
+	// 아이디 찾기
+	@Override
+	public String search_id(MemberDTO member) throws Exception {
+		return memberMapper.search_id(member);
+	}
 
 
 }
