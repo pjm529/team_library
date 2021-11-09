@@ -31,7 +31,7 @@ public class AladinApi {
 		String ttbkey = "ttbpok0030002"; // 애플리케이션 클라이언트 아이디값"
 
 		String text = null;
-
+ 
 		try {
 			text = URLEncoder.encode(query, "UTF-8");
 		} catch (UnsupportedEncodingException e) {

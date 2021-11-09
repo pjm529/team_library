@@ -17,7 +17,7 @@
 		update loan_history set return_date = current_timestamp, return_status = true
 		where book_isbn = #{book_isbn} and user_id = #{user_id}
 	</update>
-	
+	 
 	<select id="count" resultType="int">
 		select count(*) from loan_history where book_isbn = #{book_isbn} and return_status = false
 	</select>

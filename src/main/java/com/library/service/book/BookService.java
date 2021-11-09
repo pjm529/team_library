@@ -11,6 +11,6 @@ public interface BookService {
 	public void update(BookDTO dto);
 	
 	public int count(String isbn);
-	
+	 
 	public List<BookDTO> book_rank();
 }

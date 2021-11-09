@@ -18,7 +18,7 @@ import com.library.page.Criteria;
 import com.library.page.ViewPage;
 import com.library.service.book.AladinApi;
 import com.library.service.book.BookService;
-
+ 
 @Controller
 @RequestMapping(value = "/search")
 public class BookController {

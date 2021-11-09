@@ -1,7 +1,7 @@
 package com.library.model;
 
 import lombok.Data;
-
+ 
 @Data
 public class BookDTO {
 	int count;

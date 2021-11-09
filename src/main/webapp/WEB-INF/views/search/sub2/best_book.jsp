@@ -16,7 +16,7 @@
 
     <div class="container">
         <div class="sub_title">
-            <div class="doc-info">
+            <div class="doc-info"> 
                 <!-- doc title -->
                 <div class="doc-title">
                     <h3>대출베스트</h3>
