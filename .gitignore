@@ -77,7 +77,7 @@ local.properties
 ### Java ###
 # Compiled class file
 *.class
-
+.classpath
 # Log file
 *.log
 
