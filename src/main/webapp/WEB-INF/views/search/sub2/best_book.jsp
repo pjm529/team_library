@@ -57,7 +57,7 @@
                                         <tr>
                                             <th style="width: 135px;">이미지</th>
                                             <th>도서 정보</th>
-                                            <th style="width: 50px;">정보</th>
+                                            <th style="width: 50px;"></th>
                                         </tr>
                                     </thead>
                                     <tbody>
@@ -84,7 +84,7 @@
                                             <td>
                                             	<form action="/search/best_book_detail" method="get">
 													<input type="hidden" name="book_isbn" value="${list.book_isbn }">
-													<button class="btn2">정보</button>
+													<button class="btn2">도서 정보</button>
 												</form>
                                             </td>
                                         </tr>
