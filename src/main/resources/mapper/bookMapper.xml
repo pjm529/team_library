@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+  
+<mapper namespace="com.library.mapper.BookMapper"> <!-- 인터페이스 참조 -->
+
+	<insert id="insert">
+		insert into 
+		loan_history(user_id, book_title, book_author, book_isbn, book_cover, book_pubDate, book_publisher, return_period)
+		values
+		(#{user_id}, #{book_title}, #{book_author}, #{book_isbn}, #{book_cover}, 
+		#{book_pubDate}, #{book_publisher}, adddate(current_timestamp, 14))
+	</insert>
+	
+	<update id="update">
+		update loan_history set return_date = current_timestamp, return_status = true
+		where book_isbn = #{book_isbn} and user_id = #{user_id}
+	</update>
+	
+	<select id="count" resultType="int">
+		select count(*) from loan_history where book_isbn = #{book_isbn} and return_status = false
+	</select>
+
+	<select id="book_rank" resultType="com.library.model.BookDTO">
+		select count(*) as 'total_count', book_title, book_isbn, book_cover, book_pubDate, book_publisher, book_author
+		 from loan_history group by book_isbn order by total_count desc limit 10;
+	</select>
+</mapper>  
