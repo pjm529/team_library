@@ -191,7 +191,7 @@
     </div>
     
     <!-- footer -->
-
+	<jsp:include page="../../footer.jsp"></jsp:include>
     <!-- 주소록 api를 위한 script -->
     <script src="https://t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
 
