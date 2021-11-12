@@ -1,12 +1,12 @@
-package com.library.service.book;
+package com.library.service.search;
 
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.library.mapper.BookMapper;
-import com.library.model.BookDTO;
+import com.library.mapper.search.BookMapper;
+import com.library.model.search.BookDTO;
 
 @Service
 public class BookServiceImpl implements BookService {

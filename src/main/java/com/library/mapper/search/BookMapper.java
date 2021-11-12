@@ -1,8 +1,8 @@
-package com.library.mapper;
+package com.library.mapper.search;
 
 import java.util.List;
 
-import com.library.model.BookDTO;
+import com.library.model.search.BookDTO;
  
 public interface BookMapper {
 

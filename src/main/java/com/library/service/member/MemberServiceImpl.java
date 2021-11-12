@@ -3,8 +3,8 @@ package com.library.service.member;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.library.mapper.MemberMapper;
-import com.library.model.MemberDTO;
+import com.library.mapper.member.MemberMapper;
+import com.library.model.member.MemberDTO;
 
 @Service
 public class MemberServiceImpl implements MemberService {

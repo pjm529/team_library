@@ -13,11 +13,11 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
-import com.library.model.BookDTO;
+import com.library.model.search.BookDTO;
 import com.library.page.Criteria;
 import com.library.page.ViewPage;
-import com.library.service.book.AladinApi;
-import com.library.service.book.BookService;
+import com.library.service.search.AladinApi;
+import com.library.service.search.BookService;
  
 @Controller
 @RequestMapping(value = "/search")
