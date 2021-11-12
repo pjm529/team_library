@@ -4,17 +4,17 @@ import lombok.Data;
  
 @Data
 public class BookDTO {
-	int count;
-	int total_count;
-	String user_id;
-	String book_title;
-	String book_author;
-	String book_isbn;
-	String book_cover;
-	String book_pubDate;
-	String book_publisher;
-	int priceStandard;
-	String description;
-	int total;
+	private int count;
+	private int total_count;
+	private String user_id;
+	private String book_title;
+	private String book_author;
+	private String book_isbn;
+	private String book_cover;
+	private String book_pubDate;
+	private String book_publisher;
+	private int priceStandard;
+	private String description;
+	private int total;
 	
 }
