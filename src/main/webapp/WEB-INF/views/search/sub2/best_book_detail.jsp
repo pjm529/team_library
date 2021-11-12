@@ -100,6 +100,7 @@
                     
                         <form action="/search/loan" onsubmit="return false;" method="post">
                         	<input type="text" id="user_id" name="user_id" required autocomplete="off">
+                        	<input type="text" id="user_id" name="user_email" required autocomplete="off" placeholder="대출자 이메일">
 							<input type="hidden" name="book_title" value="${book.book_title }">
 							<input type="hidden" name="book_author" value="${book.book_author }">
 							<input type="hidden" name="book_isbn" value="${book.book_isbn }">
@@ -174,6 +175,7 @@
 			$(".sub2").addClass("active");
 			
 			let id = document.getElementById("user_id");
+			let email = document.getElementById("user_email");
 			let count = ${count};
 			
 			$("#loan_btn").click(function() {
@@ -181,8 +183,8 @@
 				if(count == 0) {
 					alert("대출이 불가능합니다.");
 				} else {
-					if(id == "") {
-						alert("아이디를 입력해주세요");
+					if(id == "" || email == "") {
+						alert("아이디 및 이메일을 입력해주세요");
 						 
 					} else {
 						$("form").attr("onsubmit", "return true;");
