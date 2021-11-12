@@ -6,10 +6,10 @@
 <mapper namespace="com.library.mapper.search.BookMapper"> <!-- 인터페이스 참조 -->
 
 	<insert id="insert">
-		insert into 
-		loan_history(user_id, book_title, book_author, book_isbn, book_cover, book_pubDate, book_publisher, return_period)
+		insert into loan_history(user_id, user_email, book_title, book_author, book_isbn, 
+		book_cover, book_pubDate, book_publisher, return_period)
 		values
-		(#{user_id}, #{book_title}, #{book_author}, #{book_isbn}, #{book_cover}, 
+		(#{user_id}, #{user_email}, #{book_title}, #{book_author}, #{book_isbn}, #{book_cover}, 
 		#{book_pubDate}, #{book_publisher}, adddate(current_timestamp, 14))
 	</insert>
 	
