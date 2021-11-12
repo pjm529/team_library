@@ -138,34 +138,26 @@
                                 <table>
                                     <thead>
                                         <tr>
-                                            <th style=""></th>
+                                            <th style=""><input type="checkbox" class="chk-all" ></th>
                                             <th style="width: 100px;">아이디</th>
                                             <th style="">도서명</th>
                                             <th style="">ISBN</th>
                                             <th style="width: 90px;">대출날짜</th>
-                                            <th style="width: 90px">반납예정일</th>
-                                            <th style="width: 60px;">정보</th>
+                                            <th style="width: 90px;">반납예정일</th>
 	                                </tr>
                                     </thead>
                                     <tbody>
                                     	
 	                                    <c:forEach var="overdue_list" items="${overdue_list}">
 										<tr>
-											<td><input type="checkbox" name="user_id" value="${overdue_list.user_id}"></td>
-											<td class="">${overdue_list.user_id }</td>
+											<td><input type="checkbox" name="user_email" 
+											class="chk" value="${overdue_list.user_email}"></td>
+											<td>${overdue_list.user_id }</td>
 											<td>${overdue_list.book_title }</td>
 											<td>${overdue_list.book_isbn}</td>
 											<td>${overdue_list.loan_date }</td>
 											<td>${overdue_list.return_period }</td>
 											
-											<td>
-												<input type="hidden" name="amount" value="${pageMaker.cri.amount }">
-												<input type="hidden" name="page" value="${pageMaker.cri.page }">
-												<input type="hidden" name="type" value="${pageMaker.cri.type }">
-												<input type="hidden" name="keyword" value="${pageMaker.cri.keyword }">
-												<!-- <input type="hidden" name="user_id" value="${overdue_list.user_id}"> -->
-												<input type="hidden" name="loan_no" value="${overdue_list.loan_no }">
-											</td>
 										</tr>
 										</c:forEach>
 											
@@ -242,6 +234,10 @@
 					$("form").submit();
 				}
 			});
+			
+			$(".chk-all").on("click", function() {
+				$(".chk").prop("checked", this.checked);
+			})
 			 
 		});
 		

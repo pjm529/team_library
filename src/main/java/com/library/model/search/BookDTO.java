@@ -8,6 +8,7 @@ public class BookDTO {
 	private int total_count;
 	private int loan_no;
 	private String user_id;
+	private String user_email;
 	private String book_title;
 	private String book_author;
 	private String book_isbn;

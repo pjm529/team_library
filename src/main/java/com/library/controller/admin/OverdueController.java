@@ -5,6 +5,7 @@ import java.util.Random;
 
 import javax.mail.internet.InternetAddress;
 import javax.mail.internet.MimeMessage;
+import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.mail.javamail.JavaMailSender;
@@ -65,14 +66,10 @@ public class OverdueController {
 
 	// 비밀번호 찾기 성공 후 초기화
 	@RequestMapping(value = "/send_mail", method = RequestMethod.GET)
-	public String send_mail(@RequestParam String[] user_id, Model model) throws Exception {
+	public String send_mail(HttpServletRequest request, Model model) throws Exception {
 
 		String from = "library.raon@gmail.com";
-		String to[] = {"pok_nima@naver.com", "church_jesus@naver.com"};
-		
-		for(int i = 0; i < user_id.length; i++) {
-			to[i] = overdueService.search_email(user_id[i]);
-		}
+		String to[] = request.getParameterValues("user_email");
 		String title = "라온 도서관 : 연체 도서 안내";
 		String content = "라온 도서관을 이용해주셔서 감사합니다." + "<br><br>" + "현재 연체된 도서가 있으니 반납 바랍니다." + "<br><br>";
 		
