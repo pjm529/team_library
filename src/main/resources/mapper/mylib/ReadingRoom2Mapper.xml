@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+  
+<mapper namespace="com.library.mapper.mylib.ReadingRoom2Mapper">
+
+	<select id="list_all" resultType="com.library.model.mylib.ReadingRoom2DTO">
+		select r2.seat_no, seat_status, user_id, reg_time, return_time
+   		from reading_room2 r2 left join reading_room2_rental RRR 
+     	on r2.seat_no = RRR.seat_no where r2.seat_no 
+	</select>
+	
+
+	<insert id="bookingSeat">
+		insert 
+		  into reading_room2_rental  
+	    values(#{seat_no}, #{user_id}, null, date_add(current_timestamp, INTERVAL 3 HOUR))
+	</insert>
+	
+	<update id="updateStatusOccupied">
+		update reading_room2 set seat_status = 0 where seat_no = #{seat_no}
+	</update>
+
+</mapper>
