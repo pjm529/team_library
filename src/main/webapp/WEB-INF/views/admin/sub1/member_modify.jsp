@@ -143,6 +143,20 @@
                                 </td>
                             </tr>
                             
+                            <!-- book_count -->
+                            <tr>
+                                <th class="first">
+                                <span style="color: red;">*</span>
+                                    대출 중 도서 수
+                                </th>
+                                <td class="last">
+                                
+									<input class="book_count_input" autocomplete="off" name="user_book_count"
+                                    value="${member.user_book_count }" readonly> <br>
+                                    
+                                </td>
+                            </tr>
+                            
                             <!-- overdue_date -->
                             <tr>
                                 <th class="first">

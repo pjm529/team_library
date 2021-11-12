@@ -30,6 +30,9 @@ public class MemberDTO {
 
 	// 회원 상세주소
 	private String user_address_detail;
+	
+	// 회원 대출 중 도서 수
+	private int user_book_count;
 
 	// 회원 대출불가 일 수
 	private String user_overdue_date;
