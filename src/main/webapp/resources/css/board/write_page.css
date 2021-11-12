@@ -22,7 +22,7 @@ ul{
     padding: 0px;
 }
 
-/* 占쎌읈筌ｏ옙 container */
+/* �쟾泥� container */
 .container{
     margin: 0 auto;
     width: 1900px;
@@ -139,7 +139,7 @@ ul{
     position: relative;
 }
 
-/* 占쎄텢占쎌뵠占쎈굡 獄쏉옙 hover */
+/* �궗�씠�뱶 諛� hover */
 .subMenu li a:hover{
     background-color: #464f56;
     color: #fff;
@@ -147,7 +147,7 @@ ul{
 }
 
 
-/* 癰귣챶揆 �겫占썽겫占� */
+/* 蹂몃Ц 遺�遺� */
 .content{
     box-sizing: border-box;
     padding-top: 30px;
@@ -160,7 +160,7 @@ ul{
     min-height:450px;
 }
 
-/* 野껊슣�뻻占쎈솇 占쎌읈筌ｏ옙 wrapper */
+/* 寃뚯떆�뙋 �쟾泥� wrapper */
 .wrapper-bbs {
     padding: 10px 0 20px;
     font-size: 13px;
@@ -169,10 +169,10 @@ ul{
 
 
 
-/*  ======= 占쎈�믭옙�뵠�뇡占� ====== */
+/*  ======= �뀒�씠釉� ====== */
 
 form{
-    padding-top: 20px; 
+    padding-top: 20px;
 }
 
 table.bbs-edit th, table.bbs-edit td{
@@ -206,14 +206,14 @@ th, td{
     vertical-align: middle;
 }
 
-/* tbody 甕곕뜇�깈 font 占쎄퐬占쎌젟 */
+/* tbody 踰덊샇 font �꽕�젙 */
 table td .num{
     color: #888;
     font-size: 90%;
     white-space: nowrap;
 }
 
-/* tbody 占쎌젫筌륅옙 占쎌뇢筌잞옙 占쎌젟占쎌졊 */
+/* tbody �젣紐� �쇊履� �젙�젹 */
 table td.left{
     text-align: left!important;
 }
@@ -229,7 +229,7 @@ table input{
 }
 
 
-/* 疫뀐옙占쎈쾺疫뀐옙 btn */
+/* 湲��벐湲� btn */
 
 .write_btn, .update_btn, .delete_btn{
     background-color: #266ac4;
@@ -243,7 +243,7 @@ table input{
     cursor: pointer;
 }
 
-/* 筌뤴뫖以� btn */
+/* 紐⑸줉 btn */
 .list_btn{
     background-color: #fcfcfc;
     color: #000;
@@ -255,3 +255,11 @@ table input{
     cursor: pointer;
 }
 
+
+.delete_wrap{
+	float: right;
+}
+
+.list_wrap{
+	float: left;
+}
