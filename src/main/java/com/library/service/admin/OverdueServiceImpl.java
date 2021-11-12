@@ -16,24 +16,13 @@ public class OverdueServiceImpl implements OverdueService {
 	private OverdueMapper overdueMapper;
 
 	@Override
-	public List<BookDTO> overdue_list_paging(Criteria cri) {
-		return overdueMapper.overdue_list_paging(cri);
+	public List<BookDTO> overdue_list() {
+		return overdueMapper.overdue_list();
 	}
 
 	@Override
-	public int get_total(Criteria cri) {
-		return overdueMapper.get_total(cri);
-	}
-
-	// 도서 반납
-	@Override
-	public void return_book(BookDTO book) {
-		overdueMapper.return_book(book);
-	}
-
-	@Override
-	public String search_email(String user_id) {
-		return overdueMapper.search_email(user_id);
+	public int get_total() {
+		return overdueMapper.get_total();
 	}
 
 }

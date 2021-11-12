@@ -48,93 +48,10 @@
                     <div class="doc">
                         <div class="wrapper-bbs" style="">
 
-                            <!--검색-->
-                            <div class="search">
-                                <form action="" onsubmit="return false;">
-                              		<input type="hidden" name="amount" value="${pageMaker.cri.amount }">
-                              		<input type="hidden" name="page" value="1">
-                                    <select name="type">
-                                    
-                                    	<c:if test="${empty pageMaker.cri.type}">
-                                    	<option value="user_id" selected="selected">아이디</option>
-                                        <option value="book_title">도서명</option>
-                                        <option value="book_isbn">ISBN</option>
-                                    	</c:if>
-                                    	
-                                    
-                                    	<c:if test="${pageMaker.cri.type == 'user_id'}">
-                                    	<option value="user_id" selected="selected">아이디</option>
-                                        <option value="book_title">도서명</option>
-                                        <option value="book_isbn">ISBN</option>
-                                    	</c:if>
-                                    	
-                                    	<c:if test="${pageMaker.cri.type == 'book_title' }">
-                                    	<option value="user_id">아이디</option>
-                                        <option value="book_title" selected="selected">도서명</option>
-                                        <option value="book_isbn">ISBN</option>
-                                    	</c:if>
-                                    	
-                                    	<c:if test="${pageMaker.cri.type == 'book_isbn' }">
-                                    	<option value="user_id">아이디</option>
-                                        <option value="book_title">도서명</option>
-                                        <option value="book_isbn" selected="selected">ISBN</option>
-                                    	</c:if>
-                                    	
-                                    </select>
-                                    <input type="text" name="keyword" value="${pageMaker.cri.keyword }"
-                                    	autocomplete="off">
-                                    <button id="search_btn" class="btn">검색</button>
-                                    
-                                </form>
-
-                            </div>
-                            <!-- 회원 수 -->
-                            <div class="inline">
-                                <form action="">
-                                	
-                                    <span style="margin-right: 10px;"> 총 회원 : <b>${total }</b> 명</span>
-                                    <select name="amount">
-                                    	
-	                                    <c:if test="${pageMaker.cri.amount == 10 }">
-	                                    <option value="10" selected="selected">10명씩 보기</option>
-	                                    <option value="20">20명씩 보기</option>
-	                                    <option value="30">30명씩 보기</option>
-	                                    <option value="40">40명씩 보기</option>
-	                                    </c:if>
-	                                    
-	                                    <c:if test="${pageMaker.cri.amount == 20 }">
-	                                    <option value="10">10명씩 보기</option>
-	                                    <option value="20" selected="selected">20명씩 보기</option>
-	                                    <option value="30">30명씩 보기</option>
-	                                    <option value="40">40명씩 보기</option>
-	                                    </c:if>
-	                                    
-	                                    <c:if test="${pageMaker.cri.amount == 30 }">
-	                                    <option value="10">10명씩 보기</option>
-	                                    <option value="20">20명씩 보기</option>
-	                                    <option value="30" selected="selected">30명씩 보기</option>
-	                                    <option value="40">40명씩 보기</option>
-	                                    </c:if>
-	                                    
-	                                    <c:if test="${pageMaker.cri.amount == 40 }">
-	                                    <option value="10">10명씩 보기</option>
-	                                    <option value="20">20명씩 보기</option>
-	                                    <option value="30">30명씩 보기</option>
-	                                    <option value="40" selected="selected">40명씩 보기</option>
-	                                    </c:if>
-                                        
-                                    </select>
-                                    <input type="hidden" name="page" value="1">
-                                    <input type="hidden" name="type" value="${pageMaker.cri.type }">
-									<input type="hidden" name="keyword" value="${pageMaker.cri.keyword }">
-                                    <button id="list_btn" class="btn">이동</button>
-                                </form>
-
-                            </div>
-
                             <!-- 테이블 -->
-                            <div class="table-wrap">
+                            
                             <form action="/admin/send_mail" method="get" onsubmit="return false;">
+                            <div class="table-wrap" style="overflow: auto; height: 500px;">
                                 <table>
                                     <thead>
                                         <tr>
@@ -163,23 +80,10 @@
 											
                                     </tbody>
                                 </table>
+                                </div>
                                 <button class="btn2" style="float: right;">메일</button>
 	                        </form>
-                                <div class="pageInfo" style="">
-	
-									<c:if test="${pageMaker.prev }">
-										<a href="${pageMaker.startPage - 1}">이전</a>
-									</c:if>
-									
-									<c:forEach var="num" begin="${pageMaker.startPage }" end="${pageMaker.endPage }">
-										<a href="${num }">${num }</a>
-									</c:forEach>
-									
-									<c:if test="${pageMaker.next }">
-										<a href="${pageMaker.endPage + 1}">다음</a>
-									</c:if>
-								</div>
-                            </div>
+                            
 
                         </div>
 
@@ -190,13 +94,6 @@
             </div>
         </div>
     </div>
-    
-    <form method="get" class="moveForm"> 
-		<input type="hidden" name="amount" value="${pageMaker.cri.amount }">
-		<input type="hidden" name="page" value="${pageMaker.cri.page }">
-		<input type="hidden" name="type" value="${pageMaker.cri.type }">
-		<input type="hidden" name="keyword" value="${pageMaker.cri.keyword }">
-	</form>
     
     <!-- footer -->
     <jsp:include page="../../footer.jsp"></jsp:include>

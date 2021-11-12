@@ -9,14 +9,8 @@ import com.library.page.Criteria;
 public interface OverdueMapper {
 
 	// 대출 중 이력 조회
-	public List<BookDTO> overdue_list_paging(Criteria cri);
+	public List<BookDTO> overdue_list();
 
 	// 대출 수 출력
-	public int get_total(Criteria cri);
-	
-	// 도서 반납
-	public void return_book(BookDTO book);
-	
-	// 유저 이메일 검색
-	public String search_email(String user_id);
+	public int get_total();
 }

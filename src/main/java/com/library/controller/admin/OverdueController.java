@@ -35,11 +35,11 @@ public class OverdueController {
 
 	// 연체 중 리스트 출력 (get)
 	@RequestMapping(value = "/overdue_list", method = RequestMethod.GET)
-	public String overdue_list(Model model, Criteria cri) {
+	public String overdue_list(Model model) {
 
 		System.out.println("overdue_list");
 
-		List<BookDTO> overdue_list = overdueService.overdue_list_paging(cri);
+		List<BookDTO> overdue_list = overdueService.overdue_list();
 
 		for (BookDTO book : overdue_list) {
 
@@ -54,11 +54,9 @@ public class OverdueController {
 
 		model.addAttribute("overdue_list", overdue_list);
 
-		int total = overdueService.get_total(cri);
+		int total = overdueService.get_total();
 		model.addAttribute("total", total);
 
-		ViewPage vp = new ViewPage(cri, total);
-		model.addAttribute("pageMaker", vp);
 
 		return "/admin/sub3/overdue_list";
 
