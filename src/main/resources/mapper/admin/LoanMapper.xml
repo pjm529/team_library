@@ -21,6 +21,12 @@
 			  limit #{skip}, #{amount}
 		</select>
 		
+		<update id="return_book">
+			update loan_history
+			   set return_date = current_timestamp, return_status = true
+			 where loan_no = #{loan_no} 
+		</update>
+		
  		
 		<sql id="criteria">
 	        <if test="type != null">

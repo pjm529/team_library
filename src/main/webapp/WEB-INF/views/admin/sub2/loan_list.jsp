@@ -147,22 +147,22 @@
                                     </thead>
                                     <tbody>
                                     
-	                                    <c:forEach var="book_list" items="${loan_list}">
+	                                    <c:forEach var="loan_list" items="${loan_list}">
 										<tr>
-											<td class="">${book_list.user_id }</td>
-											<td>${book_list.book_title }</td>
-											<td>${book_list.book_isbn}</td>
-											<td>${book_list.loan_date }</td>
-											<td>${book_list.return_period }</td>
+											<td class="">${loan_list.user_id }</td>
+											<td>${loan_list.book_title }</td>
+											<td>${loan_list.book_isbn}</td>
+											<td>${loan_list.loan_date }</td>
+											<td>${loan_list.return_period }</td>
 											
 											<td>
-												<form action="/admin/member_view" method="get">
-													<%-- <input type="hidden" name="amount" value="${pageMaker.cri.amount }">
+												<form action="/admin/return_book" method="get" onsubmit="return false;">
+													<input type="hidden" name="amount" value="${pageMaker.cri.amount }">
 													<input type="hidden" name="page" value="${pageMaker.cri.page }">
 													<input type="hidden" name="type" value="${pageMaker.cri.type }">
 													<input type="hidden" name="keyword" value="${pageMaker.cri.keyword }">
-													<input type="hidden" name="user_id" value="${member_list.user_id }"> --%>
-													<button class="btn2">정보</button>
+													<input type="hidden" name="loan_no" value="${loan_list.loan_no }">
+													<button class="btn2">반납</button>
 												</form>
 											
 											</td>
@@ -233,6 +233,13 @@
 					$("form").submit();
 				}
 				
+			});
+			
+			$(".btn2").on("click", function(){
+				if(confirm("도서를 반납처리 하시겠습니까?")){
+					$("form").attr("onsubmit", "return true;");
+					$("form").submit();
+				}
 			});
 			 
 		});

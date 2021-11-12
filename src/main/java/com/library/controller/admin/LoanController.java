@@ -1,5 +1,7 @@
 package com.library.controller.admin;
 
+import java.io.UnsupportedEncodingException;
+import java.net.URLEncoder;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -24,7 +26,7 @@ public class LoanController {
 	@Autowired
 	private JavaMailSender mailSender; // 이메일 전송 bean
 
-	// 멤버 리스트 출력 (get)
+	// 대출 중 리스트 출력 (get)
 	@RequestMapping(value = "/loan_list", method = RequestMethod.GET)
 	public String loan_list(Model model, Criteria cri) {
 
@@ -52,6 +54,30 @@ public class LoanController {
 		model.addAttribute("pageMaker", vp);
 
 		return "/admin/sub2/loan_list";
+
+	}
+
+	// 도서 반납 (get)
+	@RequestMapping(value = "/return_book", method = RequestMethod.GET)
+	public String return_book(BookDTO book, Model model, Criteria cri) {
+
+		System.out.println("return_book 진입");
+
+		loanService.return_book(book);
+		
+		int amount = cri.getAmount();
+		int page = cri.getPage();
+		String type = cri.getType();
+		String keyword;
+		
+		try {
+			keyword = URLEncoder.encode(cri.getKeyword(), "UTF-8");
+		} catch (UnsupportedEncodingException e) {
+			return "redirect:/admin/sub2/loan_list";
+		}
+
+		return "redirect:/admin/loan_list?amount="+ amount + "&page=" + page + "&type=" + type + "&keyword="
+				+ keyword;
 
 	}
 

@@ -27,4 +27,10 @@ public class LoanServiceImpl implements LoanService {
 		return loanMapper.get_total(cri);
 	}
 
+	// 도서 반납
+	@Override
+	public void return_book(BookDTO book) {
+		loanMapper.return_book(book);
+	}
+
 }
