@@ -5,7 +5,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>라온도서관 > 관리자 > 대출내역<</title>
+<title>라온도서관 > 관리자 > 연체내역</title>
 <link rel="stylesheet" href="/resources/css/admin/member_list.css">
 <link rel="stylesheet" href="/resources/css/footer.css">
 <script src="https://code.jquery.com/jquery-3.6.0.js" 
@@ -19,7 +19,7 @@
             <div class="doc-info">
                 <!-- doc title -->
                 <div class="doc-title">
-                    <h3>대출 내역</h3>
+                    <h3>연체내역</h3>
                     <ul>
                         <!-- 홈 btn img -->
                         <li class="first" style="background-image: none;">
@@ -31,7 +31,7 @@
                             <a href="/admin/member_list">관리자</a>
                         </li>
                         <li>
-                            <a href="/admin/loan_list">대출내역</a>
+                            <a href="/admin/overdue_list">연체내역</a>
                         </li>
                     </ul>
                 </div>
@@ -147,13 +147,13 @@
                                     </thead>
                                     <tbody>
                                     
-	                                    <c:forEach var="loan_list" items="${loan_list}">
+	                                    <c:forEach var="overdue_list" items="${overdue_list}">
 										<tr>
-											<td class="">${loan_list.user_id }</td>
-											<td>${loan_list.book_title }</td>
-											<td>${loan_list.book_isbn}</td>
-											<td>${loan_list.loan_date }</td>
-											<td>${loan_list.return_period }</td>
+											<td class="">${overdue_list.user_id }</td>
+											<td>${overdue_list.book_title }</td>
+											<td>${overdue_list.book_isbn}</td>
+											<td>${overdue_list.loan_date }</td>
+											<td>${overdue_list.return_period }</td>
 											
 											<td>
 												<form action="/admin/return_book" method="get" onsubmit="return false;">
@@ -161,7 +161,7 @@
 													<input type="hidden" name="page" value="${pageMaker.cri.page }">
 													<input type="hidden" name="type" value="${pageMaker.cri.type }">
 													<input type="hidden" name="keyword" value="${pageMaker.cri.keyword }">
-													<input type="hidden" name="loan_no" value="${loan_list.loan_no }">
+													<input type="hidden" name="loan_no" value="${overdue_list.loan_no }">
 													<button class="btn2">반납</button>
 												</form>
 											
@@ -212,7 +212,7 @@
 	<script>
 		
 		$(function() {
-			$(".sub2").addClass("active");
+			$(".sub3").addClass("active");
 			
 			let moveForm = $(".moveForm");
 			

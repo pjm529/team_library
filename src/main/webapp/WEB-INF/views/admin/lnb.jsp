@@ -12,7 +12,7 @@
             <a href="/admin/loan_list">대출 내역</a>
         </li>
         <li class="sub3">
-            <a href="#">연체 내역</a>
+            <a href="/admin/overdue_list">연체 내역</a>
         </li>
     </ul>
 </div>
