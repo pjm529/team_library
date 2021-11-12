@@ -13,6 +13,9 @@ public class BookDTO {
 	private String book_cover;
 	private String book_pubDate;
 	private String book_publisher;
+	private String loan_date;
+	private String return_date;
+	private String return_period;
 	private int priceStandard;
 	private String description;
 	private int total;
