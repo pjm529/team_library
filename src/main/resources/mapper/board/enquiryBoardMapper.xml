@@ -5,7 +5,9 @@
   
 
 <mapper namespace="com.library.mapper.board.EnquiryBoardMapper"> 
-	
+
+<!-- 목록 / 본문 / 조회수 -->
+	<!-- 게시판 목록 (페이징) -->
 	<select id="getListPage" resultType="com.library.model.board.EnquiryBoardDTO">
 		select * 
 		  from enquiry 
@@ -13,6 +15,7 @@
 		 order by enquiry_no desc limit #{skip}, #{amount}
 	</select>
 	
+	<!-- 총 게시물 수 -->
 	<select id="getTotal" resultType="int">
 		select count(*) from enquiry <include refid="criteria"></include>
 	</select>
@@ -51,7 +54,10 @@
 		delete from enquiry where enquiry_no = #{enquiry_no}
 	</delete>
 	
-	
+	<!-- 게시판 정렬 -->
+	<select id="reset" statementType="CALLABLE">
+		call notice_reset()
+	</select>
 	
 	
 	<sql id="criteria">

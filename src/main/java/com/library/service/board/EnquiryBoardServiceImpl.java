@@ -14,22 +14,25 @@ public class EnquiryBoardServiceImpl implements EnquiryBoardService {
 	@Autowired
 	public EnquiryBoardMapper eMapper;
 	
-	
-	@Override
-	public void enquiryBoardInsert(EnquiryBoardDTO dto) {
-		eMapper.enquiryBoardInsert(dto);
-	}
-
-	@Override
-	public List<EnquiryBoardDTO> enquiryBoardAll() {
-		return eMapper.enquiryBoardAll();
-	}
-
+	/* 게시판 / 본문 / 조회 수 */
 	@Override
 	public EnquiryBoardDTO enquiryContent(Long enquiry_no) {
 		return eMapper.enquiryContent(enquiry_no);
 	}
+	
+	@Override
+	public void updateView(Long enquiry_no) {
+		eMapper.updateView(enquiry_no);
+		
+	}
 
+	
+	/* 등록 / 수정 / 삭제 */
+	@Override
+	public void enquiryBoardInsert(EnquiryBoardDTO dto) {
+		eMapper.enquiryBoardInsert(dto);
+	}
+	
 	@Override
 	public void enquiryBoardDelete(Long enquiry_no) {
 		eMapper.enquiryBoardDelete(enquiry_no);
@@ -42,12 +45,7 @@ public class EnquiryBoardServiceImpl implements EnquiryBoardService {
 
 	}
 
-	@Override
-	public void updateView(Long enquiry_no) {
-		eMapper.updateView(enquiry_no);
-		
-	}
-
+	/* 총 게시물 / 페이징 / 게시물 정렬 */
 	@Override
 	public int getTotal(Criteria cri) {
 		return eMapper.getTotal(cri);
@@ -56,6 +54,11 @@ public class EnquiryBoardServiceImpl implements EnquiryBoardService {
 	@Override
 	public List<EnquiryBoardDTO> getListPage(Criteria cri) {
 		return eMapper.getListPage(cri);
+	}
+
+	@Override
+	public void reset() {
+		eMapper.reset();
 	}
 
 }

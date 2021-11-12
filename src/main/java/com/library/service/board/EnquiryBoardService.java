@@ -6,35 +6,24 @@ import com.library.page.Criteria;
 
 public interface EnquiryBoardService {
 	
-	/* ��� / ���� / ��ȸ�� */
-	/* �Խ��� ��� */
-	public List<EnquiryBoardDTO> enquiryBoardAll();
-	
-	/* �Խù� ��ȸ (����) */
+	/* 게시판 / 게시물 본문 / 조회수 */
+	/* 게시물 본문 */
 	public EnquiryBoardDTO enquiryContent(Long enquiry_no);
-	
-	/* �Խù� ��ȸ�� */
+	/* 조회 수 */
 	public void updateView(Long enquiry_no);
 	
 	
-	
-	/* ��� / ���� / ���� */
-	/* �Խù� ��� */
+	/* 등록 / 수정 / 삭제 */
 	public void enquiryBoardInsert(EnquiryBoardDTO dto);
-	
-	/* �Խù� ���� */
 	public void enquiryBoardUpdate(EnquiryBoardDTO dto);
-	
-	/* �Խù� ���� */
 	public void enquiryBoardDelete(Long enquiry_no);
 	
 	
-	
-	/* �� �Խù� / ����¡ */
-	/* �Խù� �� ���� */
+	/* 총 게시물 / 게시물 페이징 */
 	public int getTotal(Criteria cri);
-	
-	/* �Խù� ����¡ */
 	public List<EnquiryBoardDTO> getListPage(Criteria cri);
+	
+	/* 게시물 정렬 */
+	public void reset();
 
 }

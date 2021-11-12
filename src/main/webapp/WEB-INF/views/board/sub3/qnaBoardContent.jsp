@@ -121,12 +121,12 @@
                                 
                                 <div class="delete_wrap">
 	                               <form action="/board/qnaBoardDelete" method="get" onsubmit="return false" class="delete_form">
-	                               		<input type="hidden" name="notice_no" value="${dto.enquiry_no}">
+	                               		<input type="hidden" name="enquiry_no" value="${dto.enquiry_no}">
 	                               		<input type="hidden" name="amount" value="${cri.amount}">
 	                               		<input type="hidden" name="page" value="${cri.page}">
                                 		<input type="hidden" name="type" value="${cri.type}">
                                 		<input type="hidden" name="keyword" value="${cri.keyword}">
-	                               		<button class="delete_btn" style="background-color: #518d7d; border: 1px solid #3e6b5f;">삭제하기</button>
+	                               		<button class="delete_btn">삭제하기</button>
 	                               	</form>
 	                            </div>
                                 

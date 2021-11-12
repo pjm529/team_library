@@ -24,16 +24,8 @@ public class EnquiryBoardController {
 	@Autowired
 	private EnquiryBoardService eBoardService;
 	
-	/* �Խ��� main ȭ�� */
-//	@GetMapping("/qnaBoardList")
-//	public String qnaBoardList(Model model) {
-//		
-//		List<EnquiryBoardDTO> qnaBoardList = eBoardService.enquiryBoardAll();
-//		model.addAttribute("qnaBoardList", qnaBoardList);
-//		
-//		return "/board/sub3/qnaBoardList";
-//	}
 	
+	/* 묻고답하기 게시판 */
 	@GetMapping("/qnaBoardList")
 	public String qnaBoardList(Model model, Criteria cri) {
 		
@@ -49,7 +41,7 @@ public class EnquiryBoardController {
 	}
 	
 	
-	/* �Խù� ���� */
+	/* 게시물 본문 */
 	@GetMapping("/qnaBoardContent")
 	public String qnaBoardContent(@RequestParam("enquiry_no")String uenquiry_no, Model model){
 		
@@ -61,15 +53,15 @@ public class EnquiryBoardController {
 		return "/board/sub3/qnaBoardContent";
 	}
 	
-	
-	/* �Խù� ��� ������ */
+
+	/* 게시물 등록 page */
 	@GetMapping("/qnaBoardWrite")
 	public String qnaBoardWrite(){
 		
 		return "/board/sub3/qnaBoardWrite";
 	}
-
-	/* �Խù� ��� */
+	
+	/* 게시물 등록 */
 	@PostMapping("/qnaBoardInsert")
 	public String qnaBoardInsert(EnquiryBoardDTO dto) {
 		eBoardService.enquiryBoardInsert(dto);
@@ -78,11 +70,12 @@ public class EnquiryBoardController {
 	}
 	
 	
-	/* �Խù� ���� */
+	/* 게시물 삭제 */
 	@GetMapping("/qnaBoardDelete")
-	public String qnaBoardDelete(Criteria cri, @RequestParam("enquiry_no")String uenquiry_no) {
+	public String qnaBoardDelete(Criteria cri, @RequestParam("enquiry_no") String uenquiry_no) {
+
 		String keyword;
-		
+
 		try {
 			keyword = URLEncoder.encode(cri.getKeyword(), "UTF-8");
 		} catch (UnsupportedEncodingException e) {
@@ -91,12 +84,13 @@ public class EnquiryBoardController {
 		
 		Long enquiry_no = Long.parseLong(uenquiry_no);
 		eBoardService.enquiryBoardDelete(enquiry_no);
-		
+		eBoardService.reset();
 		return "redirect:/board/qnaBoardList?amount=" + cri.getAmount() + "&page=" + cri.getPage() + "&keyword="
 				+ keyword + "&type=" + cri.getType();
 	}
-//	
-//	
+	
+
+	
 //	/* �Խù� ���� ������ */
 //	@GetMapping("/qnaBoardEdit")
 //	public String qnaBoardEdit(@RequestParam("enquiry_no")String uenquiry_no, Model model) {

@@ -7,36 +7,24 @@ import com.library.page.Criteria;
 
 public interface EnquiryBoardMapper {
 	
-	/* ��� / ���� / ��ȸ�� */
-	/* �Խ��� ��� */
-	public List<EnquiryBoardDTO> enquiryBoardAll();
-	
-	/* �Խù� ��ȸ (����) */
+	/* 게시판 / 본문 / 조회 수 */
 	public EnquiryBoardDTO enquiryContent(Long enquiry_no);
-	
-	/* �Խù� ��ȸ�� */
 	public void updateView(Long enquiry_no);
 	
 	
-	
-	/* ��� / ���� / ���� */
-	/* �Խù� ��� */
+	/* 등록 / 수정 / 삭제 */
+	/* 등록 */
 	public void enquiryBoardInsert(EnquiryBoardDTO dto);
-	
-	/* �Խù� ���� */
+	/* 수정 */
 	public void enquiryBoardUpdate(EnquiryBoardDTO dto);
-	
-	/* �Խù� ���� */
+	/* 삭제 */
 	public void enquiryBoardDelete(Long enquiry_no);
 	
 	
-	
-	/* �� �Խù� / ����¡ */
-	/* �Խù� �� ���� */
+	/* 총 게시물 / 페이징 / 게시물 정렬 */
 	public int getTotal(Criteria cri);
-	
-	/* �Խù� ����¡ */
 	public List<EnquiryBoardDTO> getListPage(Criteria cri);
+	public void reset();
 
 }
 
