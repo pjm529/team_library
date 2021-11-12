@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+  
+
+<mapper namespace="com.library.mapper.board.EnquiryBoardMapper"> 
+	
+	<select id="getListPage" resultType="com.library.model.board.EnquiryBoardDTO">
+		select * 
+		  from enquiry 
+		  <include refid="criteria"></include>
+		 order by enquiry_no desc limit #{skip}, #{amount}
+	</select>
+	
+	<select id="getTotal" resultType="int">
+		select count(*) from enquiry <include refid="criteria"></include>
+	</select>
+	
+	<!-- 본문 -->
+	<select id="enquiryContent" resultType="com.library.model.board.EnquiryBoardDTO">
+		select * from enquiry where enquiry_no = #{enquiry_no}
+	</select>
+	
+	<!-- 조회수 -->
+	<update id="updateView">
+		update enquiry 
+		   set enquiry_hits = (enquiry_hits + 1) 
+		where enquiry_no  = #{enquiry_no}
+	</update>
+
+
+
+
+<!-- 등록 / 수정 / 삭제 -->	
+	<!-- 게시물 등록 -->
+	<insert id="enquiryBoardInsert">
+		insert into enquiry(enquiry_title, enquiry_content, writer_id, writer_name)
+		values(#{enquiry_title}, #{enquiry_content}, #{writer_id}, #{writer_name})
+	</insert>
+	
+	<!-- 게시글 수정 -->
+	<update id="enquiryBoardUpdate">
+		update enquiry 
+		   set enquiry_title = #{enquiry_title}, enquiry_content = #{enquiry_content}
+		 where enquiry_no = #{enquiry_no};
+	</update>
+	
+	<!-- 게시글 삭제 -->
+	<delete id="enquiryBoardDelete">
+		delete from enquiry where enquiry_no = #{enquiry_no}
+	</delete>
+	
+	
+	
+	
+	<sql id="criteria">
+		<if test="type != null">
+			<if test="keyword != null">
+			
+				<if test="type == 'TC'">
+					where notice_title like concat('%', #{keyword}, '%') or notice_content like concat('%', #{keyword}, '%')
+				</if>
+				
+				<if test="type == 'title'">
+					where notice_title like concat('%', #{keyword}, '%')
+				</if>
+                 
+				<if test="type == 'content'">
+					where notice_content like concat('%', #{keyword}, '%')
+				</if>
+                 
+			</if>
+		</if>
+	</sql>
+	
+	
+
+
+
+</mapper>

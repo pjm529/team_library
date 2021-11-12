@@ -1,0 +1,273 @@
+body{
+    margin: 0;
+}
+a, a:link{
+    text-decoration: none !important;
+}
+a{
+    color: #000;
+}
+div, li, ul{
+    margin: 0;
+    padding: 0;
+    line-height: 150%;
+    word-break: keep-all;
+    font-size: 15px;
+    font-weight: normal;
+    color: #464646;
+}
+ul{
+    text-decoration: none;
+    list-style: none;
+    padding: 0px;
+}
+
+/* 占쎌읈筌ｏ옙 container */
+.container{
+    margin: 0 auto;
+    width: 1900px;
+    height: auto;
+}
+
+.sub_title{
+    width: 1900px;
+    height: 140px;
+    margin: 0 auto;
+    background-image: url(/resources/imges/common/sub-visual.gif);
+    text-align: center;
+}
+
+.doc-info{
+    width: 1260px;
+    margin: 0 auto;
+    position: relative;
+    padding: 0 0 0 270px;
+    box-sizing: border-box;
+    z-index: 2;
+}
+
+.doc-title{
+    position: relative;
+    padding-top: 38px;
+}
+
+.doc-title h3{
+    text-align: center;
+    font-size: 27px;
+    color: #222;
+    font-weight: bold;
+    margin: 0;
+}
+
+.doc-title ul{
+    margin: 0 auto;
+    padding: 0px;
+    padding-top: 5px;
+}
+
+.doc-title li{
+    display: inline-block;
+}
+
+.doc-title ul li{
+	font-size: 17px;
+    padding-left: 25px;
+    margin-left: 0px;
+    background-image: url(/resources/imges/common/sub_con4.png);
+    background-position-x: 8px;
+    background-position-y: center;
+    background-repeat: no-repeat;
+}
+
+.doc-title ul li a{
+    color: #777777;
+    font-size: 15px;
+}
+
+.section{
+    width: 1260px;
+    height: auto;
+    margin: 0 auto;
+    position: relative;
+}
+
+.section::after {content: "";display: block; clear: both;}
+
+.lnb {
+    width:280px;
+    float:left;
+}
+
+.lnb h2{
+    width: 220px !important;
+    display: block;
+    background: url(/resources/imges/common/lnb-bg-new.gif)repeat-y 1px;
+    height: 140px;
+    margin-top: -140px;
+    margin-bottom: 0px;
+}
+
+.lnb h2 b{
+    display: block;
+    color: #fff;
+    font-size: 24px;
+    line-height: 140px;
+    margin: 0;
+    text-align: center;
+    font-weight: bold;
+}
+
+.lnb ul li.active > a {
+    background-color: #464f56;
+    color: #fff;
+    position: relative;
+}
+
+.subMenu li{
+    width: 220px;
+}
+
+.subMenu li a{
+    font-size: 16px;
+    letter-spacing: -0.5px;
+    font-weight: 400;
+    display: block;
+    background: #fff;
+    color: #020202;
+    border : 1px solid #dddddd;
+    padding: 17px 40px 17px 20px;
+    position: relative;
+}
+
+/* 占쎄텢占쎌뵠占쎈굡 獄쏉옙 hover */
+.subMenu li a:hover{
+    background-color: #464f56;
+    color: #fff;
+    position: relative;
+}
+
+
+/* 癰귣챶揆 �겫占썽겫占� */
+.content{
+    box-sizing: border-box;
+    padding-top: 30px;
+    padding-bottom: 100px;
+    width: 971px;
+    margin-left: 280px;
+}
+
+.doc{
+    min-height:450px;
+}
+
+/* 野껊슣�뻻占쎈솇 占쎌읈筌ｏ옙 wrapper */
+.wrapper-bbs {
+    padding: 10px 0 20px;
+    font-size: 13px;
+    background: #fff;
+}
+
+/* inline => �룯占� 野껊슣�뻻�눧占� �겫占썽겫占� : 占쎌뇢筌잞옙 占쎌젟占쎌졊 */
+.inline {
+    display: inline-block;
+    zoom: 1;
+    vertical-align: middle;
+    float: right;
+    padding-bottom: 20px;
+}
+
+/* 野껊슣�뻻�눧占� 揶쏆뮇�땾 select */
+.inline select{
+    width: 130px;
+    height: 34px;
+    border: 1px solid #ccc;
+    font-size: inherit;
+}
+
+/* 占쎌뵠占쎈짗 button (a tag) */
+.inline a{
+    background-color: #266ac4;
+    color: #fff;
+    padding: 7px 13px;
+    border: 1px solid #1557af;
+    border-radius: 5px;
+}
+
+
+
+
+/*  ======= 占쎈�믭옙�뵠�뇡占� ====== */
+table{
+    width: 100%;
+    border-top: 1px solid #dee1e7;
+    border-bottom: 2px solid #ccc;
+    border-spacing: 0;
+    font-size: inherit;
+    margin-top: 15px;
+    border-collapse: separate;
+}
+
+table thead th{
+    border-top-color: #464747;
+    background: #f6f6f6;
+    border-top-width: 2px;
+}
+
+th, td{
+    border: 1px solid #e5e8eb;
+    vertical-align: middle;
+    padding: 7px 10px;
+    border-left: 0;
+    border-right: 0;
+    text-align: center;
+}
+
+/* tbody 甕곕뜇�깈 font 占쎄퐬占쎌젟 */
+table td .num{
+    color: #888;
+    font-size: 90%;
+    white-space: nowrap;
+}
+
+/* tbody 占쎌젫筌륅옙 占쎌뇢筌잞옙 占쎌젟占쎌졊 */
+table td.left{
+    text-align: left!important;
+}
+
+
+
+/* 疫뀐옙占쎈쾺疫뀐옙 btn */
+
+.write_btn{
+    background-color: #266ac4;
+    color: #fff;
+    padding: 7px 13px;
+    border: 1px solid #1557af;
+    border-radius: 5px;
+    float: right;
+    width: 80px;
+    margin-top: 20px;
+    cursor: pointer;
+}
+
+
+/* 甕곌쑵�뱣占쎈꺗占쎄쉐 */
+.btn {
+    width: 60px;
+    height: 35px;
+    background-color: #266ac4;
+    border: none;
+    border-radius: 5px;
+    color: #fff;
+    font-size: 15px;
+    cursor: pointer;
+}
+.btn:focus, .btn:active{
+    border: none; box-shadow: none;
+}
+
+.btn:hover{
+    background-color: #215aa3;
+}
+
+
