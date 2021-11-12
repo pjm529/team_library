@@ -1,6 +1,6 @@
 package com.library.service.member;
 
-import com.library.model.MemberDTO;
+import com.library.model.member.MemberDTO;
 
 public interface MemberService {
 

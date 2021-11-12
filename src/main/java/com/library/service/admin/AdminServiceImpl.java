@@ -5,8 +5,8 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.library.mapper.AdminMapper;
-import com.library.model.MemberDTO;
+import com.library.mapper.admin.AdminMapper;
+import com.library.model.member.MemberDTO;
 import com.library.page.Criteria;
 
 @Service
