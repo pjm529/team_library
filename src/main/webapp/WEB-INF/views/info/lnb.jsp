@@ -11,7 +11,7 @@
              <a href="/info/openingHours">이용시간 및 휴관일</a>
          </li>
          <li class="sub3">
-             <a href="#">도서대출/반납</a>
+             <a href="/info/loanBook">도서대출/반납</a>
          </li>
      </ul>
  </div>
