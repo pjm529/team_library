@@ -134,9 +134,11 @@
 
                             <!-- 테이블 -->
                             <div class="table-wrap">
+                            <form action="/admin/send_mail" method="get" onsubmit="return false;">
                                 <table>
                                     <thead>
                                         <tr>
+                                            <th style=""></th>
                                             <th style="width: 100px;">아이디</th>
                                             <th style="">도서명</th>
                                             <th style="">ISBN</th>
@@ -146,9 +148,10 @@
 	                                </tr>
                                     </thead>
                                     <tbody>
-                                    
+                                    	
 	                                    <c:forEach var="overdue_list" items="${overdue_list}">
 										<tr>
+											<td><input type="checkbox" name="user_id" value="${overdue_list.user_id}"></td>
 											<td class="">${overdue_list.user_id }</td>
 											<td>${overdue_list.book_title }</td>
 											<td>${overdue_list.book_isbn}</td>
@@ -156,22 +159,20 @@
 											<td>${overdue_list.return_period }</td>
 											
 											<td>
-												<form action="/admin/return_book" method="get" onsubmit="return false;">
-													<input type="hidden" name="amount" value="${pageMaker.cri.amount }">
-													<input type="hidden" name="page" value="${pageMaker.cri.page }">
-													<input type="hidden" name="type" value="${pageMaker.cri.type }">
-													<input type="hidden" name="keyword" value="${pageMaker.cri.keyword }">
-													<input type="hidden" name="loan_no" value="${overdue_list.loan_no }">
-													<button class="btn2">반납</button>
-												</form>
-											
+												<input type="hidden" name="amount" value="${pageMaker.cri.amount }">
+												<input type="hidden" name="page" value="${pageMaker.cri.page }">
+												<input type="hidden" name="type" value="${pageMaker.cri.type }">
+												<input type="hidden" name="keyword" value="${pageMaker.cri.keyword }">
+												<!-- <input type="hidden" name="user_id" value="${overdue_list.user_id}"> -->
+												<input type="hidden" name="loan_no" value="${overdue_list.loan_no }">
 											</td>
 										</tr>
 										</c:forEach>
-	                                        
+											
                                     </tbody>
                                 </table>
-                                
+                                <button class="btn2" style="float: right;">메일</button>
+	                        </form>
                                 <div class="pageInfo" style="">
 	
 									<c:if test="${pageMaker.prev }">

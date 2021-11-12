@@ -16,5 +16,8 @@ public interface OverdueService {
 	
 	// 도서 반납
 	public void return_book(BookDTO book);
+	
+	// 유저 이메일 검색
+	public String search_email(String user_id);
 
 }

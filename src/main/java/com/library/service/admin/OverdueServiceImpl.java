@@ -31,4 +31,9 @@ public class OverdueServiceImpl implements OverdueService {
 		overdueMapper.return_book(book);
 	}
 
+	@Override
+	public String search_email(String user_id) {
+		return overdueMapper.search_email(user_id);
+	}
+
 }
