@@ -9,7 +9,7 @@
 		<insert id="signUp">
 			insert into member values
 				(#{user_id}, #{user_pw}, #{user_name}, #{user_birth}, #{user_tel}, #{user_email}, 
-				#{user_zip}, #{user_address}, #{user_address_detail}, 0, "1", current_timestamp )
+				#{user_zip}, #{user_address}, #{user_address_detail}, 0, 0, "1", current_timestamp )
 		</insert>
 		
 		<!-- 아이디 중복 체크 -->
