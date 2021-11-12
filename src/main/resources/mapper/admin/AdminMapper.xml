@@ -3,10 +3,10 @@
   PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
  
-	<mapper namespace="com.library.mapper.AdminMapper">
+	<mapper namespace="com.library.mapper.admin.AdminMapper">
 		
 		<!-- 회원 리스트 페이징 처리 없이 출력 -->
-		<select id="member_list" resultType="com.library.model.MemberDTO">
+		<select id="member_list" resultType="com.library.model.member.MemberDTO">
 			select * from member order by user_reg_date
 		</select>
 		
@@ -17,7 +17,7 @@
 		</select>
 		
 		<!-- 회원 리스트 페이징 및 검색 시 -->
-		<select id="list_paging" resultType="com.library.model.MemberDTO">
+		<select id="list_paging" resultType="com.library.model.member.MemberDTO">
 			select * 
 			  from member 
 			  <include refid="criteria"></include>
@@ -26,7 +26,7 @@
 		</select>
 		
 		<!-- 회원 정보 출력 -->
-		<select id="member_view" resultType="com.library.model.MemberDTO">
+		<select id="member_view" resultType="com.library.model.member.MemberDTO">
 			select * from member where user_id = #{user_id}
 		</select>
  		
@@ -42,7 +42,7 @@
  		<!-- 회원 삭제 -->
  		<delete id="member_delete">
  			delete from member where user_id = #{user_id}
- 		</delete>
+ 		</delete> 
  		
 		<sql id="criteria">
 	        <if test="type != null">

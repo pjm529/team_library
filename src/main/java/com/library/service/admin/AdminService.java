@@ -2,7 +2,7 @@ package com.library.service.admin;
 
 import java.util.List;
 
-import com.library.model.MemberDTO;
+import com.library.model.member.MemberDTO;
 import com.library.page.Criteria;
 
 public interface AdminService {

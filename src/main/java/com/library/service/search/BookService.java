@@ -1,8 +1,8 @@
-package com.library.service.book;
+package com.library.service.search;
 
 import java.util.List;
 
-import com.library.model.BookDTO;
+import com.library.model.search.BookDTO;
 
 public interface BookService {
 

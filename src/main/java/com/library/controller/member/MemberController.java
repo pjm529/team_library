@@ -16,7 +16,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import com.library.model.MemberDTO;
+import com.library.model.member.MemberDTO;
 import com.library.service.member.MemberService;
 
 @Controller

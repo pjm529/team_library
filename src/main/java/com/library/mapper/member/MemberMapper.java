@@ -1,8 +1,8 @@
-package com.library.mapper;
+package com.library.mapper.member;
 
 import org.apache.ibatis.annotations.Param;
 
-import com.library.model.MemberDTO;
+import com.library.model.member.MemberDTO;
 
 public interface MemberMapper {
 

@@ -1,4 +1,4 @@
-package com.library.service.book;
+package com.library.service.search;
 
 import java.io.BufferedReader;
 
@@ -21,7 +21,7 @@ import org.json.simple.parser.JSONParser;
 import org.json.simple.parser.ParseException;
 import org.springframework.stereotype.Service;
 
-import com.library.model.BookDTO;
+import com.library.model.search.BookDTO;
 
 @Service
 public class AladinApi {
