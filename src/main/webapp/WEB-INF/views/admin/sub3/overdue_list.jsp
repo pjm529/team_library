@@ -51,6 +51,7 @@
                             <!-- 테이블 -->
                             
                             <form action="/admin/send_mail" method="get" onsubmit="return false;">
+                            <button class="btn2" style="">메일</button>
                             <div class="table-wrap" style="overflow: auto; height: 500px;">
                                 <table>
                                     <thead>
@@ -81,9 +82,8 @@
                                     </tbody>
                                 </table>
                                 </div>
-                                <button class="btn2" style="float: right;">메일</button>
+                                
 	                        </form>
-                            
 
                         </div>
 
@@ -104,38 +104,25 @@
 		$(function() {
 			$(".sub3").addClass("active");
 			
-			let moveForm = $(".moveForm");
-			
-			//pageInfo의 a태그를 누르면 a태그의 href 속성을 가져와서 moveForm의 page에 넣고 moveForm이 submit됨
-			$(".pageInfo a").on("click", function(e) {
-				e.preventDefault();
-				moveForm.find("input[name = 'page']").val($(this).attr("href"));
-				moveForm.submit();
-			});
-			
-			// 검색 버튼을 누를 시 공백이면 alert
-			$("#search_btn").on("click", function(e){
-				let keyword = $("input[name='keyword']").val();
-				if(keyword == ""){ 
-					alert("검색어를 입력해주세요.");
+			$(".btn2").on("click", function(){
+				let cnt = $("input[name=user_email]:checkbox:checked").length;
+				
+				if(cnt > 0) {
+					if(confirm("메일을 전송하시겠습니까?")){
+						$("form").attr("onsubmit", "return true;");
+						$("form").submit();
+					}
+					
 				} else {
-					$("form").attr("onsubmit", "return true");
-					$("form").submit();
+					alert("회원을 선택해주세요");
 				}
 				
-			});
-			
-			$(".btn2").on("click", function(){
-				if(confirm("도서를 반납처리 하시겠습니까?")){
-					$("form").attr("onsubmit", "return true;");
-					$("form").submit();
-				}
 			});
 			
 			$(".chk-all").on("click", function() {
 				$(".chk").prop("checked", this.checked);
 			})
-			 
+			
 		});
 		
 	</script>	
