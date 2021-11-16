@@ -6,7 +6,7 @@
 	<mapper namespace="com.library.mapper.admin.LoanMapper">
 		
 
-		<!-- 회원 total -->
+		<!-- 대출 도서 건 수 -->
 		<select id="get_total" resultType="int">
 			select count(*) from loan_history 
 			where return_status = false <include refid="criteria"></include>
@@ -17,7 +17,7 @@
 			select * 
 			  from loan_history 
 			  where return_status = false <include refid="criteria"></include>
-			  order by loan_date
+			  order by loan_date desc
 			  limit #{skip}, #{amount}
 		</select>
 		

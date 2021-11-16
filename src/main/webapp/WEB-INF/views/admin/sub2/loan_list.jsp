@@ -96,31 +96,31 @@
                                     <select name="amount">
                                     	
 	                                    <c:if test="${pageMaker.cri.amount == 10 }">
-	                                    <option value="10" selected="selected">10명씩 보기</option>
-	                                    <option value="20">20명씩 보기</option>
-	                                    <option value="30">30명씩 보기</option>
-	                                    <option value="40">40명씩 보기</option>
+	                                    <option value="10" selected="selected">10건씩 보기</option>
+	                                    <option value="20">20건씩 보기</option>
+	                                    <option value="30">30건씩 보기</option>
+	                                    <option value="40">40건씩 보기</option>
 	                                    </c:if>
 	                                    
 	                                    <c:if test="${pageMaker.cri.amount == 20 }">
-	                                    <option value="10">10명씩 보기</option>
-	                                    <option value="20" selected="selected">20명씩 보기</option>
-	                                    <option value="30">30명씩 보기</option>
-	                                    <option value="40">40명씩 보기</option>
+	                                    <option value="10">10건씩 보기</option>
+	                                    <option value="20" selected="selected">20건씩 보기</option>
+	                                    <option value="30">30건씩 보기</option>
+	                                    <option value="40">40건씩 보기</option>
 	                                    </c:if>
 	                                    
 	                                    <c:if test="${pageMaker.cri.amount == 30 }">
-	                                    <option value="10">10명씩 보기</option>
-	                                    <option value="20">20명씩 보기</option>
-	                                    <option value="30" selected="selected">30명씩 보기</option>
-	                                    <option value="40">40명씩 보기</option>
+	                                    <option value="10">10건씩 보기</option>
+	                                    <option value="20">20건씩 보기</option>
+	                                    <option value="30" selected="selected">30건씩 보기</option>
+	                                    <option value="40">40건씩 보기</option>
 	                                    </c:if>
 	                                    
 	                                    <c:if test="${pageMaker.cri.amount == 40 }">
-	                                    <option value="10">10명씩 보기</option>
-	                                    <option value="20">20명씩 보기</option>
-	                                    <option value="30">30명씩 보기</option>
-	                                    <option value="40" selected="selected">40명씩 보기</option>
+	                                    <option value="10">10건씩 보기</option>
+	                                    <option value="20">20건씩 보기</option>
+	                                    <option value="30">30건씩 보기</option>
+	                                    <option value="40" selected="selected">40건씩 보기</option>
 	                                    </c:if>
                                         
                                     </select>
