@@ -19,7 +19,7 @@
             <div class="doc-info">
                 <!-- doc title -->
                 <div class="doc-title">
-                    <h3>대출 내역</h3>
+                    <h3>대출내역</h3>
                     <ul>
                         <!-- 홈 btn img -->
                         <li class="first" style="background-image: none;">
@@ -92,7 +92,7 @@
                             <div class="inline">
                                 <form action="">
                                 	
-                                    <span style="margin-right: 10px;"> 총 회원 : <b>${total }</b> 명</span>
+                                    <span style="margin-right: 10px;"> 대출 중 : <b>${total }</b> 건</span>
                                     <select name="amount">
                                     	
 	                                    <c:if test="${pageMaker.cri.amount == 10 }">
