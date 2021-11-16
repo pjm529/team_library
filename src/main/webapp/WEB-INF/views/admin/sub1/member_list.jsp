@@ -31,7 +31,7 @@
                             <a href="/admin/member_list">관리자</a>
                         </li>
                         <li>
-                            <a href="/admin/member_list">회원 관리</a>
+                            <a href="/admin/member_list">회원관리</a>
                         </li>
                     </ul>
                 </div>

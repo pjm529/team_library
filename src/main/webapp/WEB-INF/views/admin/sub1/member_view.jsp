@@ -22,7 +22,7 @@
             <div class="doc-info">
                 <!-- doc title -->
                 <div class="doc-title">
-                    <h3>회원 관리</h3>
+                    <h3>회원관리</h3>
                     <ul>
                         <!-- 홈 btn img -->
                         <li class="" style="background-image: none;">
@@ -34,7 +34,7 @@
                             <a href="/admin/member_list">관리자</a>
                         </li>
                         <li>
-                            <a href="/admin/member_list">회원 관리</a>
+                            <a href="/admin/member_list">회원관리</a>
                         </li>
                     </ul>
                 </div>
