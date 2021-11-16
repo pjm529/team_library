@@ -5,7 +5,6 @@ import java.net.URLEncoder;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -22,9 +21,6 @@ public class LoanController {
 
 	@Autowired
 	private LoanService loanService;
-
-	@Autowired
-	private JavaMailSender mailSender; // 이메일 전송 bean
 
 	// 대출 중 리스트 출력 (get)
 	@RequestMapping(value = "/loan_list", method = RequestMethod.GET)
@@ -53,7 +49,7 @@ public class LoanController {
 		ViewPage vp = new ViewPage(cri, total);
 		model.addAttribute("pageMaker", vp);
 
-		return "/admin/sub2/loan_list";
+		return "/admin/sub3/loan_list";
 
 	}
 
@@ -65,25 +61,36 @@ public class LoanController {
 
 		// 도서 반납 처리
 		int result = loanService.return_book(book);
-		
-		if(result == 1) {
+
+		if (result == 1) {
 			// 도서 반납 시 회원 대출 중 도서 수 감소
-			loanService.user_book_count(book);
+			loanService.decrease_count(book);
+
+			// 연체 도서인지 확인
+			int date = loanService.search_overdue(book.getLoan_no());
+
+			// 연체도서 일 경우
+			if (date < 0) {
+				
+				date *= -1;
+
+				// 연체 일 업데이트
+				loanService.update_user_overdue(book.getUser_id(), date);
+			}
 		}
-		
+
 		int amount = cri.getAmount();
 		int page = cri.getPage();
 		String type = cri.getType();
 		String keyword;
-		
+
 		try {
 			keyword = URLEncoder.encode(cri.getKeyword(), "UTF-8");
 		} catch (UnsupportedEncodingException e) {
-			return "redirect:/admin/sub2/loan_list";
+			return "redirect:/admin/sub3/loan_list";
 		}
 
-		return "redirect:/admin/loan_list?amount="+ amount + "&page=" + page + "&type=" + type + "&keyword="
-				+ keyword;
+		return "redirect:/admin/loan_list?amount=" + amount + "&page=" + page + "&type=" + type + "&keyword=" + keyword;
 
 	}
 

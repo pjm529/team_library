@@ -9,10 +9,13 @@
             <a href="/admin/member_list">회원관리</a>
         </li>
         <li class="sub2">
-            <a href="/admin/loan_list">대출내역</a>
+            <a href="/admin/loan_history">대출내역</a>
         </li>
         <li class="sub3">
-            <a href="/admin/overdue_list">연체내역</a>
+            <a href="/admin/loan_list">대출중도서</a>
+        </li>
+        <li class="sub4">
+            <a href="/admin/overdue_list">연체중도서</a>
         </li>
     </ul>
 </div>

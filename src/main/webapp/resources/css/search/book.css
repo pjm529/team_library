@@ -300,7 +300,7 @@ th, td{
    font-size: 14px;
 }
 
-.pageInfo a:hover{
+.not:hover{
    box-shadow:none;
    border-color:#ccc;
    background:#eee;
