@@ -15,5 +15,8 @@ public interface LoanMapper {
 	public int get_total(Criteria cri);
 	
 	// 도서 반납
-	public void return_book(BookDTO book);
+	public int return_book(BookDTO book);
+	
+	// 회원 대출 중 도서 수 감소
+	public void user_book_count(BookDTO book);
 }

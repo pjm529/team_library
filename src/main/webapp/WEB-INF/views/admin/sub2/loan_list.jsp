@@ -162,6 +162,7 @@
 													<input type="hidden" name="type" value="${pageMaker.cri.type }">
 													<input type="hidden" name="keyword" value="${pageMaker.cri.keyword }">
 													<input type="hidden" name="loan_no" value="${loan_list.loan_no }">
+													<input type="hidden" name="user_id" value="${loan_list.user_id }">
 													<button class="btn2">반납</button>
 												</form>
 											

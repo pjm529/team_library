@@ -63,7 +63,13 @@ public class LoanController {
 
 		System.out.println("return_book 진입");
 
-		loanService.return_book(book);
+		// 도서 반납 처리
+		int result = loanService.return_book(book);
+		
+		if(result == 1) {
+			// 도서 반납 시 회원 대출 중 도서 수 감소
+			loanService.user_book_count(book);
+		}
 		
 		int amount = cri.getAmount();
 		int page = cri.getPage();

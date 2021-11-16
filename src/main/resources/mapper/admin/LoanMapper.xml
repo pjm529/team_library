@@ -21,12 +21,19 @@
 			  limit #{skip}, #{amount}
 		</select>
 		
+		<!-- 도서 반납 처리 -->
 		<update id="return_book">
 			update loan_history
 			   set return_date = current_timestamp, return_status = true
 			 where loan_no = #{loan_no} 
 		</update>
 		
+		<!-- 도서 반납 시 회원 대출 중 도서 수 감소 -->
+		<update id="user_book_count">
+			update member
+			   set user_book_count = user_book_count - 1
+			 where user_id = #{user_id}
+		</update>
  		
 		<sql id="criteria">
 	        <if test="type != null">
