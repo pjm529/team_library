@@ -5,7 +5,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>라온도서관 > 관리자 > 대출내역</title>
+<title>라온도서관 > 관리자 > 대출중도서</title>
 <link rel="stylesheet" href="/resources/css/admin/member_list.css">
 <link rel="stylesheet" href="/resources/css/footer.css">
 <script src="https://code.jquery.com/jquery-3.6.0.js" 
@@ -19,7 +19,7 @@
             <div class="doc-info">
                 <!-- doc title -->
                 <div class="doc-title">
-                    <h3>대출내역</h3>
+                    <h3>대출중도서</h3>
                     <ul>
                         <!-- 홈 btn img -->
                         <li class="first" style="background-image: none;">
@@ -31,7 +31,7 @@
                             <a href="/admin/member_list">관리자</a>
                         </li>
                         <li>
-                            <a href="/admin/loan_list">대출내역</a>
+                            <a href="/admin/loan_list">대출중도서</a>
                         </li>
                     </ul>
                 </div>
@@ -215,7 +215,7 @@
 	<script>
 		
 		$(function() {
-			$(".sub2").addClass("active");
+			$(".sub3").addClass("active");
 			
 			let moveForm = $(".moveForm");
 			

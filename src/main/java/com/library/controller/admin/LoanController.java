@@ -5,7 +5,6 @@ import java.net.URLEncoder;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -22,9 +21,6 @@ public class LoanController {
 
 	@Autowired
 	private LoanService loanService;
-
-	@Autowired
-	private JavaMailSender mailSender; // 이메일 전송 bean
 
 	// 대출 중 리스트 출력 (get)
 	@RequestMapping(value = "/loan_list", method = RequestMethod.GET)
@@ -53,7 +49,7 @@ public class LoanController {
 		ViewPage vp = new ViewPage(cri, total);
 		model.addAttribute("pageMaker", vp);
 
-		return "/admin/sub2/loan_list";
+		return "/admin/sub3/loan_list";
 
 	}
 
@@ -79,7 +75,7 @@ public class LoanController {
 		try {
 			keyword = URLEncoder.encode(cri.getKeyword(), "UTF-8");
 		} catch (UnsupportedEncodingException e) {
-			return "redirect:/admin/sub2/loan_list";
+			return "redirect:/admin/sub3/loan_list";
 		}
 
 		return "redirect:/admin/loan_list?amount="+ amount + "&page=" + page + "&type=" + type + "&keyword="

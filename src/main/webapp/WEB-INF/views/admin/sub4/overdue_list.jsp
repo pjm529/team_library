@@ -19,7 +19,7 @@
             <div class="doc-info">
                 <!-- doc title -->
                 <div class="doc-title">
-                    <h3>연체내역</h3>
+                    <h3>연체중도서</h3>
                     <ul>
                         <!-- 홈 btn img -->
                         <li class="first" style="background-image: none;">
@@ -31,7 +31,7 @@
                             <a href="/admin/member_list">관리자</a>
                         </li>
                         <li>
-                            <a href="/admin/overdue_list">연체내역</a>
+                            <a href="/admin/overdue_list">연체중도서</a>
                         </li>
                     </ul>
                 </div>
@@ -106,7 +106,7 @@
 	<script>
 		
 		$(function() {
-			$(".sub3").addClass("active");
+			$(".sub4").addClass("active");
 			
 			$(".btn2").on("click", function(){
 				let cnt = $("input[name=user_email]:checkbox:checked").length;
