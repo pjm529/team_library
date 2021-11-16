@@ -12,6 +12,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.library.model.search.BookDTO;
 import com.library.page.Criteria;
@@ -29,6 +30,8 @@ public class BookController {
 	@Autowired
 	private BookService bookService;
 
+	
+	// 검색 도서 출력
 	@RequestMapping(value = "/book", method = RequestMethod.GET)
 	public String book(Model model, Criteria cri) {
 
@@ -73,6 +76,7 @@ public class BookController {
 		return "/search/sub1/book";
 	}
 
+	// 도서 상세페이지
 	@RequestMapping(value = "/book_detail", method = RequestMethod.GET)
 	public String book_detail(Model model, Criteria cri, @RequestParam String book_isbn) {
 
@@ -135,6 +139,7 @@ public class BookController {
 		// 도서 대출 실행
 		if( bookService.count(book.getBook_isbn()) != 2) {
 			bookService.insert(book);
+			bookService.increase_count(book.getUser_id());
 		} else {
 			System.out.println("대출불가");
 		}
@@ -142,6 +147,26 @@ public class BookController {
 
 		return "redirect:/search/book_detail?amount=" + cri.getAmount() + "&page=" + cri.getPage() +
 				"&type=" + cri.getType() +"&keyword="+ keyword + "&book_isbn=" + book.getBook_isbn();
+	}
+	
+	// 대출자 상태 체크
+	@RequestMapping(value = "/statusChk", method = RequestMethod.POST)
+	@ResponseBody
+	public String statusChk(String user_id) throws Exception {
+
+		System.out.println("statusChk() 진입");
+
+		int result = bookService.statusCheck(user_id);
+
+		if (result == 1) {
+
+			return "success";
+
+		} else {
+
+			return "fail";
+
+		}
 	}
 
 	// 대출베스트 출력
@@ -200,4 +225,6 @@ public class BookController {
 		model.addAttribute("cri", cri);
 		return "/search/sub2/best_book_detail";
 	}
+	
+	
 }

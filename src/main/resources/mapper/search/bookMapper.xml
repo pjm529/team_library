@@ -13,11 +13,6 @@
 		#{book_pubDate}, #{book_publisher}, adddate(current_timestamp, 14))
 	</insert>
 	
-	<update id="update">
-		update loan_history set return_date = current_timestamp, return_status = true
-		where book_isbn = #{book_isbn} and user_id = #{user_id}
-	</update>
-	 
 	<select id="count" resultType="int">
 		select count(*) from loan_history where book_isbn = #{book_isbn} and return_status = false
 	</select>
@@ -26,4 +21,18 @@
 		select count(*) as 'total_count', book_title, book_isbn, book_cover, book_pubDate, book_publisher, book_author
 		 from loan_history group by book_isbn order by total_count desc limit 10;
 	</select>
+	
+	<select id="statusCheck" resultType="int">
+		select count(*)
+		  from member 
+		where user_id = #{user_id} and user_book_count &lt; 2 and user_overdue_date = 0
+	</select>
+	
+	<update id="increase_count">
+		update member
+		   set user_book_count = user_book_count + 1
+		 where user_id = #{user_id};
+	</update>
+	
+	
 </mapper>  
