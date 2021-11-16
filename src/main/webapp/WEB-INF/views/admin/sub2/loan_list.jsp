@@ -5,7 +5,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>라온도서관 > 관리자 > 대출내역<</title>
+<title>라온도서관 > 관리자 > 대출내역</title>
 <link rel="stylesheet" href="/resources/css/admin/member_list.css">
 <link rel="stylesheet" href="/resources/css/footer.css">
 <script src="https://code.jquery.com/jquery-3.6.0.js" 
@@ -172,6 +172,8 @@
                                     </tbody>
                                 </table>
                                 
+                                <br>
+                                
                                 <div class="pageInfo" style="">
 	
 									<c:if test="${pageMaker.prev }">
@@ -179,7 +181,7 @@
 									</c:if>
 									
 									<c:forEach var="num" begin="${pageMaker.startPage }" end="${pageMaker.endPage }">
-										<a href="${num }">${num }</a>
+										<a href="${num }"><span class="${pageMaker.cri.page == num ? "current":"" }">${num }</span></a>
 									</c:forEach>
 									
 									<c:if test="${pageMaker.next }">

@@ -194,6 +194,8 @@
                                     </tbody>
                                 </table>
                                 
+                                <br>
+                                
                                 <div class="pageInfo" style="">
 	
 									<c:if test="${pageMaker.prev }">
@@ -201,7 +203,7 @@
 									</c:if>
 									
 									<c:forEach var="num" begin="${pageMaker.startPage }" end="${pageMaker.endPage }">
-										<a href="${num }">${num }</a>
+										<a href="${num }"><span class="${pageMaker.cri.page == num ? "current":"" }">${num }</span></a>
 									</c:forEach>
 									
 									<c:if test="${pageMaker.next }">
