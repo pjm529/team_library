@@ -281,3 +281,39 @@ th, td{
 .btn2:hover{
     background-color: rgb(255, 185, 70);
 }
+
+/* 페이지 */
+.pageInfo{
+   height: auto;
+   text-align: center;
+   margin-bottom: 25px;
+}
+.not {
+   border: 1px solid black;
+   display: inline-block;
+   line-height: 24px;
+   padding: 3px 12px;
+   border: 1px solid #d9d9d9;
+   margin-left: -1px;
+   background: #fafafa;
+   color: #555;
+   font-size: 14px;
+}
+
+.pageInfo a:hover{
+   box-shadow:none;
+   border-color:#ccc;
+   background:#eee;
+}
+
+.current{
+	border: 1px solid #444;
+   	display: inline-block;
+   	line-height: 24px;
+   	padding: 3px 12px;
+   	border: 1px solid #d9d9d9;
+   	margin-left: -1px;
+   	font-size: 14px;
+   	background: #4c4c4c;
+   	color: #fff;
+}
