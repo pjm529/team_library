@@ -22,7 +22,7 @@ public class LoanServiceImpl implements LoanService {
 	public List<BookDTO> loan_list_paging(Criteria cri) {
 		return loanMapper.loan_list_paging(cri);
 	}
-	
+
 	// 대출 수 출력
 	@Override
 	public int get_total(Criteria cri) {
@@ -34,12 +34,24 @@ public class LoanServiceImpl implements LoanService {
 	public int return_book(BookDTO book) {
 		return loanMapper.return_book(book);
 	}
-	
+
 	// 회원 대출 중 도서 수 감소
 	@Override
-	public void user_book_count(BookDTO book) {
-		loanMapper.user_book_count(book);
-		
+	public void decrease_count(BookDTO book) {
+		loanMapper.decrease_count(book);
+
+	}
+
+	// 연체 도서 일 수 검색
+	@Override
+	public int search_overdue(int loan_no) {
+		return loanMapper.search_overdue(loan_no);
+	}
+
+	// 연체 일 만큼 대출 불가 일 수 추가
+	@Override
+	public void update_user_overdue(String user_id, int date) {
+		loanMapper.update_user_overdue(user_id, date);
 	}
 
 }

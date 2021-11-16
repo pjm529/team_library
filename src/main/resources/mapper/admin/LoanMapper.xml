@@ -29,9 +29,22 @@
 		</update>
 		
 		<!-- 도서 반납 시 회원 대출 중 도서 수 감소 -->
-		<update id="user_book_count">
+		<update id="decrease_count">
 			update member
 			   set user_book_count = user_book_count - 1
+			 where user_id = #{user_id}
+		</update>
+	
+		<!-- 연체일 조회 -->	
+		<select id="search_overdue" resultType="int">
+			select datediff(return_period, current_timestamp) as '연체일' from loan_history 
+			 where loan_no = #{loan_no} 
+		</select>
+		
+		<!-- 연체 일 만큼 대출 불가 일 수 추가 -->
+		<update id="update_user_overdue">
+			update member
+			   set user_overdue_date = user_overdue_date + #{date}
 			 where user_id = #{user_id}
 		</update>
  		
