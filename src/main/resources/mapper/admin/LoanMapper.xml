@@ -6,7 +6,7 @@
 	<mapper namespace="com.library.mapper.admin.LoanMapper">
 		
 
-		<!-- 회원 total -->
+		<!-- 대출 도서 건 수 -->
 		<select id="get_total" resultType="int">
 			select count(*) from loan_history 
 			where return_status = false <include refid="criteria"></include>
@@ -17,16 +17,23 @@
 			select * 
 			  from loan_history 
 			  where return_status = false <include refid="criteria"></include>
-			  order by loan_date
+			  order by loan_date desc
 			  limit #{skip}, #{amount}
 		</select>
 		
+		<!-- 도서 반납 처리 -->
 		<update id="return_book">
 			update loan_history
 			   set return_date = current_timestamp, return_status = true
 			 where loan_no = #{loan_no} 
 		</update>
 		
+		<!-- 도서 반납 시 회원 대출 중 도서 수 감소 -->
+		<update id="user_book_count">
+			update member
+			   set user_book_count = user_book_count - 1
+			 where user_id = #{user_id}
+		</update>
  		
 		<sql id="criteria">
 	        <if test="type != null">

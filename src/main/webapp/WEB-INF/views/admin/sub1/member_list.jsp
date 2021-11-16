@@ -31,7 +31,7 @@
                             <a href="/admin/member_list">관리자</a>
                         </li>
                         <li>
-                            <a href="/admin/member_list">회원 관리</a>
+                            <a href="/admin/member_list">회원관리</a>
                         </li>
                     </ul>
                 </div>
@@ -194,18 +194,20 @@
                                     </tbody>
                                 </table>
                                 
+                                <br>
+                                
                                 <div class="pageInfo" style="">
 	
 									<c:if test="${pageMaker.prev }">
-										<a href="${pageMaker.startPage - 1}">이전</a>
+										<a class="not" href="${pageMaker.startPage - 1}">이전</a>
 									</c:if>
 									
 									<c:forEach var="num" begin="${pageMaker.startPage }" end="${pageMaker.endPage }">
-										<a href="${num }">${num }</a>
+										<a class="${pageMaker.cri.page == num ? "current":"not" }" href="${num }"><span>${num }</span></a>
 									</c:forEach>
 									
 									<c:if test="${pageMaker.next }">
-										<a href="${pageMaker.endPage + 1}">다음</a>
+										<a class="not" href="${pageMaker.endPage + 1}">다음</a>
 									</c:if>
 								</div>
                             </div>

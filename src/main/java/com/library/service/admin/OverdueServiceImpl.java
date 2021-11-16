@@ -15,11 +15,13 @@ public class OverdueServiceImpl implements OverdueService {
 	@Autowired
 	private OverdueMapper overdueMapper;
 
+	// 연체 중 이력 조회
 	@Override
 	public List<BookDTO> overdue_list() {
 		return overdueMapper.overdue_list();
 	}
 
+	// 연체 수 출력
 	@Override
 	public int get_total() {
 		return overdueMapper.get_total();

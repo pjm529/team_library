@@ -5,7 +5,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>라온도서관 > 관리자 > 대출내역<</title>
+<title>라온도서관 > 관리자 > 대출내역</title>
 <link rel="stylesheet" href="/resources/css/admin/member_list.css">
 <link rel="stylesheet" href="/resources/css/footer.css">
 <script src="https://code.jquery.com/jquery-3.6.0.js" 
@@ -19,7 +19,7 @@
             <div class="doc-info">
                 <!-- doc title -->
                 <div class="doc-title">
-                    <h3>대출 내역</h3>
+                    <h3>대출내역</h3>
                     <ul>
                         <!-- 홈 btn img -->
                         <li class="first" style="background-image: none;">
@@ -92,35 +92,35 @@
                             <div class="inline">
                                 <form action="">
                                 	
-                                    <span style="margin-right: 10px;"> 총 회원 : <b>${total }</b> 명</span>
+                                    <span style="margin-right: 10px;"> 대출 중 : <b>${total }</b> 건</span>
                                     <select name="amount">
                                     	
 	                                    <c:if test="${pageMaker.cri.amount == 10 }">
-	                                    <option value="10" selected="selected">10명씩 보기</option>
-	                                    <option value="20">20명씩 보기</option>
-	                                    <option value="30">30명씩 보기</option>
-	                                    <option value="40">40명씩 보기</option>
+	                                    <option value="10" selected="selected">10건씩 보기</option>
+	                                    <option value="20">20건씩 보기</option>
+	                                    <option value="30">30건씩 보기</option>
+	                                    <option value="40">40건씩 보기</option>
 	                                    </c:if>
 	                                    
 	                                    <c:if test="${pageMaker.cri.amount == 20 }">
-	                                    <option value="10">10명씩 보기</option>
-	                                    <option value="20" selected="selected">20명씩 보기</option>
-	                                    <option value="30">30명씩 보기</option>
-	                                    <option value="40">40명씩 보기</option>
+	                                    <option value="10">10건씩 보기</option>
+	                                    <option value="20" selected="selected">20건씩 보기</option>
+	                                    <option value="30">30건씩 보기</option>
+	                                    <option value="40">40건씩 보기</option>
 	                                    </c:if>
 	                                    
 	                                    <c:if test="${pageMaker.cri.amount == 30 }">
-	                                    <option value="10">10명씩 보기</option>
-	                                    <option value="20">20명씩 보기</option>
-	                                    <option value="30" selected="selected">30명씩 보기</option>
-	                                    <option value="40">40명씩 보기</option>
+	                                    <option value="10">10건씩 보기</option>
+	                                    <option value="20">20건씩 보기</option>
+	                                    <option value="30" selected="selected">30건씩 보기</option>
+	                                    <option value="40">40건씩 보기</option>
 	                                    </c:if>
 	                                    
 	                                    <c:if test="${pageMaker.cri.amount == 40 }">
-	                                    <option value="10">10명씩 보기</option>
-	                                    <option value="20">20명씩 보기</option>
-	                                    <option value="30">30명씩 보기</option>
-	                                    <option value="40" selected="selected">40명씩 보기</option>
+	                                    <option value="10">10건씩 보기</option>
+	                                    <option value="20">20건씩 보기</option>
+	                                    <option value="30">30건씩 보기</option>
+	                                    <option value="40" selected="selected">40건씩 보기</option>
 	                                    </c:if>
                                         
                                     </select>
@@ -162,6 +162,7 @@
 													<input type="hidden" name="type" value="${pageMaker.cri.type }">
 													<input type="hidden" name="keyword" value="${pageMaker.cri.keyword }">
 													<input type="hidden" name="loan_no" value="${loan_list.loan_no }">
+													<input type="hidden" name="user_id" value="${loan_list.user_id }">
 													<button class="btn2">반납</button>
 												</form>
 											
@@ -172,18 +173,20 @@
                                     </tbody>
                                 </table>
                                 
+                                <br>
+                                
                                 <div class="pageInfo" style="">
 	
 									<c:if test="${pageMaker.prev }">
-										<a href="${pageMaker.startPage - 1}">이전</a>
+										<a class="not" href="${pageMaker.startPage - 1}">이전</a>
 									</c:if>
 									
 									<c:forEach var="num" begin="${pageMaker.startPage }" end="${pageMaker.endPage }">
-										<a href="${num }">${num }</a>
+										<a class="${pageMaker.cri.page == num ? "current":"not" }" href="${num }"><span>${num }</span></a>
 									</c:forEach>
 									
 									<c:if test="${pageMaker.next }">
-										<a href="${pageMaker.endPage + 1}">다음</a>
+										<a class="not" href="${pageMaker.endPage + 1}">다음</a>
 									</c:if>
 								</div>
                             </div>

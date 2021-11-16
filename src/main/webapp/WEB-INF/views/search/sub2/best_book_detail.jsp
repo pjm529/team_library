@@ -98,9 +98,9 @@
                     
                     <div style="display: flex; justify-content: center; align-items: center;">
                     
-                        <form action="/search/loan" onsubmit="return false;" method="post">
-                        	<input type="text" id="user_id" name="user_id" required autocomplete="off">
-                        	<input type="text" id="user_id" name="user_email" required autocomplete="off" placeholder="대출자 이메일">
+                        <form id="loan" onsubmit="return false;" method="post">
+                        	<input type="text" class="id_input" name="user_id" required autocomplete="off" placeholder="대출자 ID">
+                        	<input type="text" class="email_input" name="user_email" required autocomplete="off" placeholder="대출자 메일">
 							<input type="hidden" name="book_title" value="${book.book_title }">
 							<input type="hidden" name="book_author" value="${book.book_author }">
 							<input type="hidden" name="book_isbn" value="${book.book_isbn }">
@@ -174,23 +174,46 @@
 		$(function() {
 			$(".sub2").addClass("active");
 			
-			let id = document.getElementById("user_id");
-			let email = document.getElementById("user_email");
 			let count = ${count};
 			
 			$("#loan_btn").click(function() {
 				
+				let id = $('.id_input').val(); 
+				let email = $('.email_input').val(); 
+				
 				if(count == 0) {
 					alert("대출이 불가능합니다.");
 				} else {
+					
 					if(id == "" || email == "") {
+						
 						alert("아이디 및 이메일을 입력해주세요");
 						 
 					} else {
-						$("form").attr("onsubmit", "return true;");
-						$("form").submit();
-					}
+						
+						let data = {
+	            				user_id: id
+	            		};
+	            		
+	            		$.ajax({
+	            			type: "post",
+	            			url: "/search/statusChk",
+	            			data: data,
+	            			success: function(result) {
+	            				
+	            				if (result == "success") {
+	            					alert("대출이 완료되었습니다.");
+	            					$("#loan").attr("action", "/search/loan");
+	            					$("#loan").attr("onsubmit", "return true;");
+	            					$("#loan").submit();
+	        						
+	            				} else {
+	            					alert("대출이 불가능한 상태입니다.");
+	            				}
+	            			}
+	            		});
 					
+					}
 				}
 			});
 		});

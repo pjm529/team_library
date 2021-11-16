@@ -11,7 +11,7 @@ public interface OverdueService {
 	// 연체 중 이력 조회
 	public List<BookDTO> overdue_list();
 
-	// 대출 수 출력
+	// 연체 수 출력
 	public int get_total();
 
 }
