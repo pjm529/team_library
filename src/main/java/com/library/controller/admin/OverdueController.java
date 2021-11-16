@@ -62,7 +62,7 @@ public class OverdueController {
 
 	}
 
-	// 비밀번호 찾기 성공 후 초기화
+	// 연체 자 메일 전송
 	@RequestMapping(value = "/send_mail", method = RequestMethod.GET)
 	public String send_mail(HttpServletRequest request, Model model) throws Exception {
 
@@ -96,29 +96,5 @@ public class OverdueController {
 		return "redirect:/admin/overdue_list";
 
 	}
-
-	// 도서 반납 (get)
-//	@RequestMapping(value = "/return_book", method = RequestMethod.GET)
-//	public String return_book(BookDTO book, Model model, Criteria cri) {
-//
-//		System.out.println("return_book 진입");
-//
-//		loanService.return_book(book);
-//		
-//		int amount = cri.getAmount();
-//		int page = cri.getPage();
-//		String type = cri.getType();
-//		String keyword;
-//		
-//		try {
-//			keyword = URLEncoder.encode(cri.getKeyword(), "UTF-8");
-//		} catch (UnsupportedEncodingException e) {
-//			return "redirect:/admin/sub2/loan_list";
-//		}
-//
-//		return "redirect:/admin/loan_list?amount="+ amount + "&page=" + page + "&type=" + type + "&keyword="
-//				+ keyword;
-//
-//	}
 
 }
