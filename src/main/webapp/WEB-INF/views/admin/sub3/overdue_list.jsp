@@ -47,7 +47,11 @@
                 <div class="content" style="">
                     <div class="doc">
                         <div class="wrapper-bbs" style="">
-
+							<!-- 회원 수 -->
+                            <div class="inline">
+                                <span style="margin-right: 10px;"> 연체 중 : <b>${total }</b> 건</span>
+                            </div> 
+                            <br>
                             <!-- 테이블 -->
                             
                             <form action="/admin/send_mail" method="get" onsubmit="return false;">
