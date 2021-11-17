@@ -28,10 +28,10 @@
                             </a>
                         </li> 
                         <li>
-                            <a href="/admin/member_list">관리자</a>
+                            <a href="/admin/member-list">관리자</a>
                         </li>
                         <li>
-                            <a href="/admin/loan_history">대출내역</a>
+                            <a href="/admin/loan-history">대출내역</a>
                         </li>
                     </ul>
                 </div>

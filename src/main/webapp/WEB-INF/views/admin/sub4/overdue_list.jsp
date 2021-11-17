@@ -28,10 +28,10 @@
                             </a>
                         </li> 
                         <li>
-                            <a href="/admin/member_list">관리자</a>
+                            <a href="/admin/member-list">관리자</a>
                         </li>
                         <li>
-                            <a href="/admin/overdue_list">연체중도서</a>
+                            <a href="/admin/overdue-list">연체중도서</a>
                         </li>
                     </ul>
                 </div>
@@ -54,7 +54,7 @@
                             <br>
                             <!-- 테이블 -->
                             
-                            <form action="/admin/send_mail" method="get" onsubmit="return false;">
+                            <form action="/admin/send-mail" method="get" onsubmit="return false;">
                             <button class="btn2" style="">메일</button>
                             <div class="table-wrap" style="overflow: auto; height: 500px;">
                                 <table>

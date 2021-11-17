@@ -33,7 +33,7 @@
                             <a href="/member/login">회원관련</a>
                         </li>
                         <li>
-                            <a href="/member/search_pw">비밀번호 찾기</a>
+                            <a href="/member/search-pw">비밀번호 찾기</a>
                         </li>
                     </ul>
                 </div>
@@ -219,19 +219,19 @@
             		
             		$.ajax({
             			type: "post",
-            			url: "/member/search_pw_check",
+            			url: "/member/search-pw-check",
             			data: data,
             			success: function(result) {
             				
             				if (result == "success") {
             					alert("비밀번호가 초기화 되었습니다. 메일을 확인해주세요.");
             					$("#search_pw_form").attr("onsubmit", "return true;");
-                                $("#search_pw_form").attr("action", "/member/search_pw");
+                                $("#search_pw_form").attr("action", "/member/search-pw");
                                 $("#search_pw_form").submit();
                                 
             				} else {
             					alert("일치하는 회원이 존재하지 않습니다.");
-            					window.location.href='/member/search_pw';
+            					window.location.href='/member/search-pw';
             				}
             				
             			}

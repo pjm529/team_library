@@ -162,7 +162,7 @@
                                             	
                                             </td>
                                             <td>
-                                            	<form action="/search/book_detail" method="get">
+                                            	<form action="/search/book-detail" method="get">
 													<input type="hidden" name="amount" value="${pageMaker.cri.amount }">
 													<input type="hidden" name="page" value="${pageMaker.cri.page }">
 													<input type="hidden" name="type" value="${pageMaker.cri.type }">

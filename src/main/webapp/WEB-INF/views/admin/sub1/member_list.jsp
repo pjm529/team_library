@@ -28,10 +28,10 @@
                             </a>
                         </li> 
                         <li>
-                            <a href="/admin/member_list">관리자</a>
+                            <a href="/admin/member-list">관리자</a>
                         </li>
                         <li>
-                            <a href="/admin/member_list">회원관리</a>
+                            <a href="/admin/member-list">회원관리</a>
                         </li>
                     </ul>
                 </div>
@@ -178,7 +178,7 @@
 											
 											<td>${member_list.user_reg_date }</td>
 											<td>
-												<form action="/admin/member_view" method="get">
+												<form action="/admin/member-view" method="get">
 													<input type="hidden" name="amount" value="${pageMaker.cri.amount }">
 													<input type="hidden" name="page" value="${pageMaker.cri.page }">
 													<input type="hidden" name="type" value="${pageMaker.cri.type }">

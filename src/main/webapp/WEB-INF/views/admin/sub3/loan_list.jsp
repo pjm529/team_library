@@ -28,10 +28,10 @@
                             </a>
                         </li> 
                         <li>
-                            <a href="/admin/member_list">관리자</a>
+                            <a href="/admin/member-list">관리자</a>
                         </li>
                         <li>
-                            <a href="/admin/loan_list">대출중도서</a>
+                            <a href="/admin/loan-list">대출중도서</a>
                         </li>
                     </ul>
                 </div>
@@ -156,7 +156,7 @@
 											<td>${loan_list.return_period }</td>
 											
 											<td>
-												<form action="/admin/return_book" method="get" onsubmit="return false;">
+												<form action="/admin/return-book" method="get" onsubmit="return false;">
 													<input type="hidden" name="amount" value="${pageMaker.cri.amount }">
 													<input type="hidden" name="page" value="${pageMaker.cri.page }">
 													<input type="hidden" name="type" value="${pageMaker.cri.type }">

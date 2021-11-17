@@ -13,6 +13,7 @@ import org.springframework.mail.javamail.MimeMessageHelper;
 import org.springframework.mail.javamail.MimeMessagePreparator;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -24,7 +25,7 @@ import com.library.page.ViewPage;
 import com.library.service.admin.OverdueService;
 
 @Controller
-@RequestMapping(value = "/admin")
+@RequestMapping("/admin")
 public class OverdueController {
 
 	@Autowired
@@ -34,7 +35,7 @@ public class OverdueController {
 	private JavaMailSender mailSender; // 이메일 전송 bean
 
 	// 연체 중 리스트 출력 (get)
-	@RequestMapping(value = "/overdue_list", method = RequestMethod.GET)
+	@GetMapping("/overdue-list")
 	public String overdue_list(Model model) {
 
 		System.out.println("overdue_list");
@@ -63,7 +64,7 @@ public class OverdueController {
 	}
 
 	// 연체 자 메일 전송
-	@RequestMapping(value = "/send_mail", method = RequestMethod.GET)
+	@GetMapping("/send-mail")
 	public String send_mail(HttpServletRequest request, Model model) throws Exception {
 
 		String from = "library.raon@gmail.com";
@@ -93,7 +94,7 @@ public class OverdueController {
 			e.printStackTrace();
 		}
 
-		return "redirect:/admin/overdue_list";
+		return "redirect:/admin/overdue-list";
 
 	}
 

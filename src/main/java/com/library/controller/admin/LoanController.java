@@ -7,6 +7,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
@@ -16,14 +17,14 @@ import com.library.page.ViewPage;
 import com.library.service.admin.LoanService;
 
 @Controller
-@RequestMapping(value = "/admin")
+@RequestMapping("/admin")
 public class LoanController {
 
 	@Autowired
 	private LoanService loanService;
 
 	// 대출 중 리스트 출력 (get)
-	@RequestMapping(value = "/loan_list", method = RequestMethod.GET)
+	@GetMapping("/loan-list")
 	public String loan_list(Model model, Criteria cri) {
 
 		System.out.println("loan_list 진입");
@@ -54,7 +55,7 @@ public class LoanController {
 	}
 
 	// 도서 반납 (get)
-	@RequestMapping(value = "/return_book", method = RequestMethod.GET)
+	@GetMapping("/return-book")
 	public String return_book(BookDTO book, Model model, Criteria cri) {
 
 		System.out.println("return_book 진입");
@@ -87,10 +88,10 @@ public class LoanController {
 		try {
 			keyword = URLEncoder.encode(cri.getKeyword(), "UTF-8");
 		} catch (UnsupportedEncodingException e) {
-			return "redirect:/admin/sub3/loan_list";
+			return "redirect:/admin/sub3/loan-list";
 		}
 
-		return "redirect:/admin/loan_list?amount=" + amount + "&page=" + page + "&type=" + type + "&keyword=" + keyword;
+		return "redirect:/admin/loan-list?amount=" + amount + "&page=" + page + "&type=" + type + "&keyword=" + keyword;
 
 	}
 

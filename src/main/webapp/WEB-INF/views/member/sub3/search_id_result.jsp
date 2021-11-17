@@ -32,7 +32,7 @@
                             <a href="/member/login">회원관련</a>
                         </li>
                         <li>
-                            <a href="/member/search_id">아이디 찾기</a>
+                            <a href="/member/search-id">아이디 찾기</a>
                         </li>
                     </ul>
                 </div>

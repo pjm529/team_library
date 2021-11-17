@@ -33,7 +33,7 @@
                             <a href="/search/book">자료검색</a>
                         </li>
                         <li>
-                            <a href="/search/best_book">대출베스트</a>
+                            <a href="/search/best-book">대출베스트</a>
                         </li>
                     </ul>
 

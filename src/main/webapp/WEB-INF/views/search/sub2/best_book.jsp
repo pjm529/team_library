@@ -31,7 +31,7 @@
                             <a href="/search/book">자료검색</a>
                         </li>
                         <li>
-                            <a href="/search/best_book">대출베스트</a>
+                            <a href="/search/best-book">대출베스트</a>
                         </li>
                     </ul>
 
@@ -82,7 +82,7 @@
                                             	</c:if>
                                             </td>
                                             <td>
-                                            	<form action="/search/best_book_detail" method="get">
+                                            	<form action="/search/best-book-detail" method="get">
 													<input type="hidden" name="book_isbn" value="${list.book_isbn }">
 													<button class="btn2">도서 정보</button>
 												</form>
