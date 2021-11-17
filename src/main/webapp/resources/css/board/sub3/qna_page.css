@@ -1,12 +1,15 @@
 body{
     margin: 0;
 }
+
 a, a:link{
     text-decoration: none !important;
 }
+
 a{
     color: #000;
 }
+
 div, li, ul{
     margin: 0;
     padding: 0;
@@ -16,13 +19,17 @@ div, li, ul{
     font-weight: normal;
     color: #464646;
 }
+
 ul{
     text-decoration: none;
     list-style: none;
     padding: 0px;
 }
 
-/* �쟾泥� container */
+select {
+	cursor: pointer;
+}
+
 .container{
     margin: 0 auto;
     width: 1900px;
@@ -139,7 +146,6 @@ ul{
     position: relative;
 }
 
-/* �궗�씠�뱶 諛� hover */
 .subMenu li a:hover{
     background-color: #464f56;
     color: #fff;
@@ -147,7 +153,6 @@ ul{
 }
 
 
-/* 蹂몃Ц 遺�遺� */
 .content{
     box-sizing: border-box;
     padding-top: 30px;
@@ -160,14 +165,12 @@ ul{
     min-height:450px;
 }
 
-/* 寃뚯떆�뙋 �쟾泥� wrapper */
 .wrapper-bbs {
     padding: 10px 0 20px;
     font-size: 13px;
     background: #fff;
 }
 
-/* inline => 珥� 寃뚯떆臾� 遺�遺� : �쇊履� �젙�젹 */
 .inline {
     display: inline-block;
     zoom: 1;
@@ -176,7 +179,6 @@ ul{
     padding-bottom: 20px;
 }
 
-/* 寃뚯떆臾� 媛쒖닔 select */
 .inline select{
     width: 130px;
     height: 34px;
@@ -184,7 +186,6 @@ ul{
     font-size: inherit;
 }
 
-/* �씠�룞 button (a tag) */
 .inline a{
     background-color: #266ac4;
     color: #fff;
@@ -195,8 +196,6 @@ ul{
 
 
 
-
-/*  ======= �뀒�씠釉� ====== */
 table{
     width: 100%;
     border-top: 1px solid #dee1e7;
@@ -222,21 +221,18 @@ th, td{
     text-align: center;
 }
 
-/* tbody 踰덊샇 font �꽕�젙 */
 table td .num{
     color: #888;
     font-size: 90%;
     white-space: nowrap;
 }
 
-/* tbody �젣紐� �쇊履� �젙�젹 */
 table td.left{
     text-align: left!important;
 }
 
 
 
-/* 湲��벐湲� btn */
 
 .write_btn{
     background-color: #266ac4;
@@ -271,3 +267,83 @@ table td.left{
 }
 
 
+/* 글쓰기 버튼 */
+.write{
+	height: 80px;
+}
+
+/* 페이지 */
+.pageInfo{
+   height: auto;
+   text-align: center;
+   margin-bottom: 25px;
+}
+.not {
+   border: 1px solid black;
+   display: inline-block;
+   line-height: 24px;
+   padding: 3px 12px;
+   border: 1px solid #d9d9d9;
+   margin-left: -1px;
+   background: #fafafa;
+   color: #555;
+   font-size: 14px;
+}
+
+.pageInfo a:hover{
+   box-shadow:none;
+   border-color:#ccc;
+   background:#eee;
+}
+
+.current{
+   border: 1px solid #444;
+   display: inline-block;
+   line-height: 24px;
+   padding: 3px 12px;
+   border: 1px solid #d9d9d9;
+   margin-left: -1px;
+   font-size: 14px;
+   background: #4c4c4c;
+   color: #fff;
+}
+
+
+
+/* 검색 */
+.searchBox{
+	border: 1px solid #dcdcdc;
+	border-radius: 3px;
+	background: #f6f6f6;
+	padding: 10px;
+}
+
+.searchBox form{
+	margin-bottom: 0px;
+	text-align: center;
+}
+
+.searchBox select{
+    width: 130px;
+    height: 34px;
+    border: 1px solid #ccc;
+    border-radius: 3px;
+    font-size: inherit;
+}
+
+.searchBox input{
+	height: 31px !important;
+	width: 250px;
+    border: 1px solid #ccc;
+    border-radius: 3px;
+    padding: 0 5px;
+    font-size: inherit;
+}
+
+.search_btn{
+	background-color: #266ac4;
+	border-color: #1557af;
+	color: #fff;
+	width: 80px !important;
+	cursor: pointer;
+}

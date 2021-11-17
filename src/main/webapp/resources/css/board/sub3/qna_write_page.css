@@ -22,7 +22,6 @@ ul{
     padding: 0px;
 }
 
-/* �쟾泥� container */
 .container{
     margin: 0 auto;
     width: 1900px;
@@ -253,5 +252,14 @@ table input{
     width: 80px;
     margin-top: 20px;
     cursor: pointer;
+}
+
+
+.delete_wrap{
+	float: right;
+}
+
+.list_wrap{
+	float: left;
 }
 
