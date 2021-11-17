@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.library.mapper.board.AnswerBoardMapper">
+	
+	<!-- 본문 -->
+ 	<select id="answerContent" resultType="com.library.model.board.AnswerBoardDTO">
+		select * from answer where answer_no = #{answer_no}
+	</select> 
+	
+	<!-- 조회수 -->
+ 	<update id="updateView">
+		update answer 
+		   set answer_hits = (answer_hits + 1) 
+		where answer_no  = #{answer_no}
+	</update>
+
+
+<!-- 등록 / 수정 / 삭제 -->	
+	<!-- 게시물 등록 -->
+	<insert id="answerBoardInsert">
+		insert into answer(enquiry_no, answer_title, answer_content, a_writer_id, a_writer_name)
+		values(#{enquiry_no}, #{answer_title}, #{answer_content}, #{a_writer_id}, #{a_writer_name})
+	</insert>
+	
+	<!-- 게시글 수정 -->
+ 	<update id="answerBoardUpdate">
+		update answer 
+		   set answer_title = #{answer_title}, answer_content = #{answer_content}
+		 where answer_no = #{answer_no}
+	</update> 
+	
+	<!-- 게시글 삭제 -->
+ 	<delete id="answerBoardDelete">
+		delete from answer where answer_no = #{answer_no}
+	</delete> 
+	
+	
+<!-- 게시판(페이징) / 총 게시물 / 게시판 정렬 -->
+<!-- 	<select id="getListPage" resultType="com.library.model.board.EnquiryBoardDTO">
+		select * 
+		  from enquiry 
+		  <include refid="criteria"></include>
+		 order by enquiry_no desc limit #{skip}, #{amount}
+	</select>
+	
+	<select id="getTotal" resultType="int">
+		select count(*) from enquiry <include refid="criteria"></include>
+	</select>	
+	
+	<select id="reset" statementType="CALLABLE">
+		call enquiry_reset()
+	</select>	
+	
+	
+	
+	<sql id="criteria">
+		<if test="type != null">
+			<if test="keyword != null">
+			
+				<if test="type == 'TC'">
+					where enquiry_title like concat('%', #{keyword}, '%') or enquiry_content like concat('%', #{keyword}, '%')
+				</if>
+				
+				<if test="type == 'title'">
+					where enquiry_title like concat('%', #{keyword}, '%')
+				</if>
+                 
+				<if test="type == 'content'">
+					where enquiry_content like concat('%', #{keyword}, '%')
+				</if>
+                 
+			</if>
+		</if>
+	</sql> -->
+	
+	
+
+
+
+</mapper>

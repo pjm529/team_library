@@ -12,9 +12,11 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import com.library.model.board.AnswerBoardDTO;
 import com.library.model.board.EnquiryBoardDTO;
 import com.library.page.Criteria;
 import com.library.page.ViewPage;
+import com.library.service.board.AnswerBoardService;
 import com.library.service.board.EnquiryBoardService;
 
 @Controller
@@ -24,22 +26,15 @@ public class EnquiryBoardController {
 	@Autowired
 	private EnquiryBoardService eBoardService;
 	
-	/* �Խ��� main ȭ�� */
-//	@GetMapping("/qnaBoardList")
-//	public String qnaBoardList(Model model) {
-//		
-//		List<EnquiryBoardDTO> qnaBoardList = eBoardService.enquiryBoardAll();
-//		model.addAttribute("qnaBoardList", qnaBoardList);
-//		
-//		return "/board/sub3/qnaBoardList";
-//	}
+	@Autowired
+	private AnswerBoardService aBoardService;
 	
+	/* 묻고답하기 게시판 */
 	@GetMapping("/qnaBoardList")
 	public String qnaBoardList(Model model, Criteria cri) {
 		
 		List<EnquiryBoardDTO> qnaBoardList = eBoardService.getListPage(cri);
 		model.addAttribute("qnaBoardList", qnaBoardList);
-		
 		int total = eBoardService.getTotal(cri);
 		model.addAttribute("total", total);
 		ViewPage vp = new ViewPage(cri, total);
@@ -49,27 +44,28 @@ public class EnquiryBoardController {
 	}
 	
 	
-	/* �Խù� ���� */
+	/* 게시물 본문 */
 	@GetMapping("/qnaBoardContent")
-	public String qnaBoardContent(@RequestParam("enquiry_no")String uenquiry_no, Model model){
+	public String qnaBoardContent(@RequestParam("enquiry_no")String uenquiry_no, Model model, Criteria cri){
 		
 		Long enquiry_no = Long.parseLong(uenquiry_no);
 		eBoardService.updateView(enquiry_no);
 		EnquiryBoardDTO dto = eBoardService.enquiryContent(enquiry_no);	
 		model.addAttribute("dto", dto);
+		model.addAttribute("cri", cri);
 		
 		return "/board/sub3/qnaBoardContent";
 	}
 	
 	
-	/* �Խù� ��� ������ */
+	/* 등록 / 수정 / 삭제 */
+	/* 게시물 작성 page */
 	@GetMapping("/qnaBoardWrite")
 	public String qnaBoardWrite(){
-		
 		return "/board/sub3/qnaBoardWrite";
 	}
 
-	/* �Խù� ��� */
+	/* 게시물 작성 */
 	@PostMapping("/qnaBoardInsert")
 	public String qnaBoardInsert(EnquiryBoardDTO dto) {
 		eBoardService.enquiryBoardInsert(dto);
@@ -77,46 +73,147 @@ public class EnquiryBoardController {
 		return "redirect:/board/qnaBoardList";
 	}
 	
-	
-	/* �Խù� ���� */
-	@GetMapping("/qnaBoardDelete")
-	public String qnaBoardDelete(Criteria cri, @RequestParam("enquiry_no")String uenquiry_no) {
-		String keyword;
+	/* 게시물 수정 page */
+	@GetMapping("/qnaBoardEdit")
+	public String qnaBoardEdit(@RequestParam("enquiry_no")String uenquiry_no, Model model, Criteria cri) {
 		
+		Long enquiry_no = Long.parseLong(uenquiry_no);
+		EnquiryBoardDTO dto = eBoardService.enquiryContent(enquiry_no);	
+		model.addAttribute("dto", dto);
+		model.addAttribute("cri", cri);
+		
+		return "/board/sub3/qnaBoardEdit";
+	}
+	
+	/* 게시물 수정 */
+	@PostMapping("/qnaBoardUpdate")
+	public String qnaBoardUpdate(EnquiryBoardDTO dto, Criteria cri) {
+		
+		String keyword;
+
 		try {
 			keyword = URLEncoder.encode(cri.getKeyword(), "UTF-8");
 		} catch (UnsupportedEncodingException e) {
 			return "redirect:/board/qnaBoardList";
 		}
+
+		eBoardService.enquiryBoardUpdate(dto);
+		
+		return "redirect:/board/qnaBoardContent?amount=" + cri.getAmount() + "&page=" + cri.getPage() + "&keyword=" + keyword
+				+ "&type=" + cri.getType() + "&enquiry_no=" + dto.getEnquiry_no();
+	}
+	
+	/* 게시물 삭제 */
+	@GetMapping("/qnaBoardDelete")
+	public String qnaBoardDelete(Criteria cri, @RequestParam("enquiry_no")String uenquiry_no) {
+		String keyword;
+
+		try {
+			keyword = URLEncoder.encode(cri.getKeyword(), "UTF-8");
+			Long enquiry_no = Long.parseLong(uenquiry_no);
+			eBoardService.enquiryBoardDelete(enquiry_no);
+			eBoardService.reset();
+			return "redirect:/board/qnaBoardList?amount=" + cri.getAmount() + "&page=" + cri.getPage() + "&keyword="
+					+ keyword + "&type=" + cri.getType();
+		} catch (UnsupportedEncodingException e) {
+			return "redirect:/board/qnaBoardList";
+		}
+		
+		
+		
+	}
+
+	
+	
+	
+	
+	/* 답글 */
+	/* 답글 게시물 본문 / 조회수 */
+	@GetMapping("/answerBoardContent")
+	public String answerBoardContent(@RequestParam("answer_no")String uanswer_no, Model model, Criteria cri){
+		
+		Long answer_no = Long.parseLong(uanswer_no);
+		aBoardService.updateView(answer_no);
+		AnswerBoardDTO dto = aBoardService.answerContent(answer_no);
+		model.addAttribute("dto", dto);
+		model.addAttribute("cri", cri);
+		
+		return "/board/sub3/answerBoardContent";
+	}
+	
+	/* 답글 등록 page */
+	@GetMapping("/answerBoardWrite")
+	public String goAnswerBoardWrite(@RequestParam("enquiry_no")String uenquiry_no, Model model, Criteria cri) {
 		
 		Long enquiry_no = Long.parseLong(uenquiry_no);
-		eBoardService.enquiryBoardDelete(enquiry_no);
+		EnquiryBoardDTO dto = eBoardService.enquiryContent(enquiry_no);	
+		model.addAttribute("enquiry", dto);
+		model.addAttribute("cri", cri);
 		
-		return "redirect:/board/qnaBoardList?amount=" + cri.getAmount() + "&page=" + cri.getPage() + "&keyword="
-				+ keyword + "&type=" + cri.getType();
+		return "/board/sub3/answerBoardWrite";
 	}
-//	
-//	
-//	/* �Խù� ���� ������ */
-//	@GetMapping("/qnaBoardEdit")
-//	public String qnaBoardEdit(@RequestParam("enquiry_no")String uenquiry_no, Model model) {
-//		
-//		Long enquiry_no = Long.parseLong(uenquiry_no);
-//		EnquiryBoardDTO dto = eBoardService.enquiryContent(enquiry_no);	
-//		model.addAttribute("dto", dto);
-//		
-//		return "qnaBoardEdit";
-//	}
-//	
-//	
-//	/* �Խù� ���� */
-//	@PostMapping("/qnaBoardUpdate")
-//	public String qnaBoardUpdate(EnquiryBoardDTO dto, @RequestParam("enquiry_no")String uenquiry_no) {
-//		Long enquiry_no = Long.parseLong(uenquiry_no);
-//		eBoardService.enquiryBoardUpdate(dto);
-//		
-//		return "redirect:/qnaBoardContent?enquiry_no=" + enquiry_no;
-//	}
-//	
+	
+	/* 답글 등록 */
+	@PostMapping("/answerBoardWrite")
+	public String answerBoardWrite(AnswerBoardDTO dto, Criteria cri) {
+		aBoardService.answerBoardInsert(dto);
+		
+		return "redirect:/board/qnaBoardList";
+	}
+	
+	/* 답글 수정 page */
+	@GetMapping("/answerBoardEdit")
+	public String answerBoardEdit(@RequestParam("answer_no")String uanswer_no, Model model, Criteria cri) {
+		
+		Long answer_no = Long.parseLong(uanswer_no);
+		AnswerBoardDTO dto = aBoardService.answerContent(answer_no);	
+		model.addAttribute("answer", dto);
+		model.addAttribute("cri", cri);
+		
+		return "/board/sub3/answerBoardEdit";
+	}
+	
+	/* 게시물 수정 */
+	@PostMapping("/answerBoardUpdate")
+	public String answerBoardUpdate(AnswerBoardDTO dto, Criteria cri) {
+		
+		String keyword;
+
+		try {
+			keyword = URLEncoder.encode(cri.getKeyword(), "UTF-8");
+		} catch (UnsupportedEncodingException e) {
+			return "redirect:/board/answerBoardEdit";
+		}
+
+		aBoardService.answerBoardUpdate(dto);
+		
+		return "redirect:/board/answerBoardContent?amount=" + cri.getAmount() + "&page=" + cri.getPage() + "&keyword=" + keyword
+				+ "&type=" + cri.getType() + "&answer_no=" + dto.getAnswer_no();
+	}
+	
+	
+	/* 삭제 */
+	@GetMapping("/answerBoardDelete")
+	public String answerBoardDelete(Criteria cri, @RequestParam("answer_no")String uanswer_no) {
+		String keyword;
+
+		try {
+			keyword = URLEncoder.encode(cri.getKeyword(), "UTF-8");
+			Long answer_no = Long.parseLong(uanswer_no);
+			aBoardService.answerBoardDelete(answer_no);
+//			eBoardService.reset();
+			return "redirect:/board/qnaBoardList?amount=" + cri.getAmount() + "&page=" + cri.getPage() + "&keyword="
+					+ keyword + "&type=" + cri.getType();
+		} catch (UnsupportedEncodingException e) {
+			return "redirect:/board/qnaBoardList";
+		}
+		
+		
+		
+	}
+	
+	
+	
+	
 	
 }

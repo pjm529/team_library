@@ -47,31 +47,31 @@
 
                             <!-- 테이블 -->
                             <div class="table-wrap">
-                            <input type="hidden" value="${dto.enquiry_no}" name="${dto.enquiry_no}">
+                            <input type="hidden" value="${dto.answer_no}" name="${dto.answer_no}">
                                 <table class="bbs-edit">
                                     <tbody>
                                         <!-- 제목 -->
                                         <tr>
                                             <td class="bbs-title" colspan="6">
-                                                <b>${dto.enquiry_title}</b>
+                                                <b>${dto.answer_title}</b>
                                             </td>
                                         </tr>
 
                                         <!-- 작성자 | 작성일 | 조회수 -->
-                                        <tr>
+                                         <tr>
                                             <th class="first">작성자</th>
-                                            <td style="width: 15%;">${dto.writer_id}</td>
+                                            <td style="width: 15%;">${dto.a_writer_id}</td>
                                             <th class="first">작성일</th>
-                                            <td>${fn:substring(dto.enquiry_reg_date, 0, 11)}</td>
+                                            <td>${fn:substring(dto.answer_reg_date, 0, 11)}</td>
                                             <th class="first">조회수</th>
-                                            <td>${dto.enquiry_hits}</td>
-                                        </tr>
+                                            <td>${dto.answer_hits}</td>
+                                        </tr> 
 
                                         <!-- 본문 내용 -->
                                         <tr>
                                             <td colspan="6">
                                                 <div class="bbs-content">
-                                                    <p>${dto.enquiry_content}</p>
+                                                    <p>${dto.answer_content}</p>
                                                 </div>
                                             </td>
                                         </tr>
@@ -91,8 +91,8 @@
                                 </div>
                                 
                                 <div class="delete_wrap">
-	                               <form action="/board/qnaBoardDelete" method="get" onsubmit="return false" class="delete_form">
-	                               		<input type="hidden" name="enquiry_no" value="${dto.enquiry_no}">
+	                               <form action="/board/answerBoardDelete" method="get" onsubmit="return false" class="delete_form">
+	                               		<input type="hidden" name="answer_no" value="${dto.answer_no}">
 	                               		<input type="hidden" name="amount" value="${cri.amount}">
 	                               		<input type="hidden" name="page" value="${cri.page}">
                                 		<input type="hidden" name="type" value="${cri.type}">
@@ -102,8 +102,8 @@
 	                            </div>
                                 
 								<div class="update_wrap">
-									<form action="/board/qnaBoardEdit" method="get">
-	                               		<input type="hidden" name="enquiry_no" value="${dto.enquiry_no}">
+									<form action="/board/answerBoardEdit" method="get">
+	                               		<input type="hidden" name="answer_no" value="${dto.answer_no}">
 	                               		<input type="hidden" name="amount" value="${cri.amount}">
 	                               		<input type="hidden" name="page" value="${cri.page}">
                                 		<input type="hidden" name="type" value="${cri.type}">
@@ -112,18 +112,6 @@
 	                               	</form>
 								</div>  
 								          
-								<div class="answer_wrap">
-									<form action="/board/answerBoardWrite" method="get">
-	                               		<input type="hidden" name="enquiry_no" value="${dto.enquiry_no}">
-	                               		<input type="hidden" name="amount" value="${cri.amount}">
-	                               		<input type="hidden" name="page" value="${cri.page}">
-                                		<input type="hidden" name="type" value="${cri.type}">
-                                		<input type="hidden" name="keyword" value="${cri.keyword}">
-	                               		<button class="update_btn" style="margin-right: 20px;">답변하기</button>
-	                               	</form>
-								</div>            
-								          
-
                             </div>
 
                         </div>
