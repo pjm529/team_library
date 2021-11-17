@@ -5,8 +5,8 @@
 <!DOCTYPE html>
 <html>
 <head>
-<title>Q&A Board Edit</title>
-<link rel="stylesheet" href="/resources/css/board/write_page.css">
+<title>라온도서관 > 묻고답하기 > 글 수정페이지</title>
+<link rel="stylesheet" href="/resources/css/board/sub3/qna_edit_page.css">
 </head>
 <body>
 
@@ -27,7 +27,7 @@
                             <a href="#">열린공간</a>
                         </li>
                         <li>
-                            <a href="/qnaBoardList">묻고답하기</a>
+                            <a href="/board/qnaBoardList">묻고답하기</a>
                         </li>
                     </ul>
 
@@ -38,28 +38,7 @@
             <div class="doc">
 
                 <!-- 왼쪽 사이드바 -->
-                <div class="lnb">
-                    <h2>
-                        <b>열린공간</b>
-                    </h2>
-                    <ul class="subMenu">
-                        <li>
-                            <a href="#">공지사항</a>
-                        </li>
-                        <li>
-                            <a href="#">자주묻는질문</a>
-                        </li>
-                        <li class="active">
-                            <a href="/qnaBoardList">묻고답하기</a>
-                        </li>
-                        <li>
-                            <a href="#">분실물찾기</a>
-                        </li>
-                        <li>
-                            <a href="#">도서관일정</a>
-                        </li>
-                    </ul>
-                </div>
+                <jsp:include page="../lnb.jsp"></jsp:include>
 
                 <!-- 본문 -->
                 <div class="content">
@@ -68,10 +47,14 @@
 
                             <!-- 테이블 -->
                             <div class="table-wrap">
-                                <form action="/qnaBoardUpdate" method="post">
-                                	<input type="text" value="${dto.enquiry_no}" name="${dto.enquiry_no}">
+                                <form action="/board/qnaBoardUpdate" method="post">
+                                	<input type="hidden" name="enquiry_no" value="${dto.enquiry_no}" >
                                 	<input type="hidden" name="writer_id" value="writer_id">
                                     <input type="hidden" name="writer_name" value="writer_name">
+                                    <input type="hidden" name="amount" value="${cri.amount}">
+                                	<input type="hidden" name="page" value="${cri.page}">
+                                	<input type="hidden" name="type" value="${cri.type}">
+                                	<input type="hidden" name="keyword" value="${cri.keyword}">
                                     
                                     <table class="bbs-edit">
                                         <tbody>
@@ -93,13 +76,6 @@
                                                 </td>
                                             </tr>
                                             <tr>
-                                                <th class="first">비밀번호</th>
-                                                <td colspan="3">
-<!--                                                     <input type="password" style="width: 30%;" maxlength="10"
-                                                        placeholder="10자리 이내로 입력해 주세요"> -->
-                                                </td>
-                                            </tr>
-                                            <tr>
                                                 <td colspan="4">
                                                     <textarea id="popContent" name="enquiry_content" cols="108"
                                                         rows="15">${dto.enquiry_content}</textarea>
@@ -111,14 +87,23 @@
 
                                     <!-- 글쓰기 btn -->
                                     <div class="write">
-                                        <input type="submit" class="write_btn" value="수정하기">
-                                        <button class="list_btn" type="button" onclick="location.href='/qnaBoardList'">목록으로</button>
+                                        <input type="submit" class="write_btn" value="수정하기" style="margin-top: 40px;">
                                     </div>
 
                                 </form>
-
+                                
+                                <div class="list_wrap">
+                                	<form action="/board/qnaBoardList" method="get">
+                                		<input type="hidden" name="amount" value="${cri.amount}">
+                                		<input type="hidden" name="page" value="${cri.page}">
+                                		<input type="hidden" name="type" value="${cri.type}">
+                                		<input type="hidden" name="keyword" value="${cri.keyword}">
+                                		<button class="list_btn">목록으로</button>
+                                	</form>
+                                </div>
+                                
                             </div>
-
+                            
                         </div>
 
                     </div>
@@ -129,9 +114,23 @@
         </div>
     </div>
 
+<script src="https://code.jquery.com/jquery-3.6.0.js" integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk=" crossorigin="anonymous"></script>
+<script>
+	$(function() {
+		
+		$(".sub3").addClass("active");
+		
+		$(".write_btn").on("click", function() {
+			if(confirm('등록하시겠습니까?')) {
+				$("form").attr("onsubmit", "result true");
+				$("form").submit();
+			}
+		});
+		
+		
+	});
 
-
-
+</script>
 
 </body>
 </html>

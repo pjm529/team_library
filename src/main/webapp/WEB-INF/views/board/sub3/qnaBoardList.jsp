@@ -7,15 +7,17 @@
 <head>
 	<title>라온도서관 > 열린공간 > 묻고답하기</title>
 </head>
-<link rel="stylesheet" href="/resources/css/board/sb_page.css">
+<link rel="stylesheet" href="/resources/css/board/sub3/qna_page.css">
+<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.14.0/css/all.css" integrity="sha384-HzLeBuhoNPvSl5KYnjx0BT+WB0QEEqLprO+NBkkk5gbc67FTaL7XIGa2w1L0Xbgc" crossorigin="anonymous">
 <body>
+
 
     <div class="container">
         <div class="sub_title">
             <div class="doc-info">
                 <!-- doc title -->
                 <div class="doc-title">
-                    <h3>공지사항</h3>
+                    <h3>묻고답하기</h3>
                     <ul>
                         <!-- 홈 btn img -->
                         <li class="first" style="background-image: none;">
@@ -27,13 +29,14 @@
                             <a href="/board/noticeList">열린공간</a> 
                         </li>
                         <li>
-                            <a href="/board/noticeList">공지사항</a>
+                            <a href="/board/qnaBoardList">묻고답하기</a>
                         </li>
                     </ul>
 
                 </div>
             </div>
         </div>
+        
         <div class="section">
             <div class="doc">
 
@@ -83,7 +86,6 @@
 	                                
 	                                </select>
 	                                
-	                                
 	                                <input type="hidden" name="page" value="1">
 	                                <button class="btn">이동</button>
                                 </form>
@@ -104,10 +106,10 @@
                                     </thead>
                                     <tbody>
                                     <c:forEach var="eBod" items="${qnaBoardList}">
+                                    
                                         <tr>
                                             <td class="num">${eBod.enquiry_no}</td>
                                             <td class="left contentGo" style="padding-left: 15px;">
-                                           		<%-- <a href="/noticeContent?amount=${pageMaker.cri.amount}&page=${pageMaker.cri.page}&type=${pageMaker.cri.type}&keyword=${pageMaker.cri.keyword}&notice_no=${noticeList.notice_no}">${noticeList.notice_title}</a> --%>
  												<a href="${eBod.enquiry_no}">${eBod.enquiry_title}</a>
                                             </td>
                                             <td>${eBod.writer_name}</td>
@@ -117,31 +119,51 @@
                                             </td>
                                             <td>${eBod.enquiry_hits}</td>
                                         </tr>
+                                        
+                                        <c:if test="${eBod.answerList.answer_title != null}">
+                                        <tr>
+                                            <td class="num"><input type="hidden" value="${eBod.answerList.answer_no}"></td>
+                                            <td class="left answerContentGo" style="padding-left: 15px;">
+ 												<a href="${eBod.answerList.answer_no}">
+ 												<img src=/resources/imges/common/icon_reply.gif alt="답변 아이콘 이미지">
+ 													${eBod.answerList.answer_title}
+ 												</a>
+                                            </td>
+                                            <td>${eBod.answerList.a_writer_name}</td>
+                                            <td>
+                                            	<fmt:formatDate var="answer_reg_date" value="${eBod.answerList.answer_reg_date}" pattern="yyyy-MM-dd"/>
+												${answer_reg_date}
+                                            </td>
+                                            <td>${eBod.answerList.answer_hits}</td>
+                                        </tr>
+                                        </c:if>
                                     </c:forEach>   
                                     </tbody>
                                 </table>
                                 
-                                <div class="pageInfo">
-									<c:if test="${pageMaker.prev}">
-										<a href="${pageMaker.startPage - 1}">이전</a>
-									</c:if>
-								
-									<c:forEach var="num" begin="${pageMaker.startPage}" end="${pageMaker.endPage}">
-										<a href="${num}">${num}</a>
-									</c:forEach>
-									
-									<c:if test="${pageMaker.next}">
-										<a href="${pageMaker.endPage + 1}">다음</a>
-									</c:if>
-								</div>
-								
                                 <!-- 글쓰기 btn -->
                                 <div class="write">
-                                    <button class="write_btn" onclick="location.href='/board/insertNoticeForm'" style="cursor: pointer">글쓰기</button>
+                                    <button class="write_btn" onclick="location.href='/board/qnaBoardWrite'" style="cursor: pointer">글쓰기</button>
                                 </div>
                                 
+                                <div class="pageInfo" style="">
+   
+		                           <c:if test="${pageMaker.prev }">
+		                              <a class="not" href="${pageMaker.startPage - 1}">이전</a>
+		                           </c:if>
+		                           
+		                           <c:forEach var="num" begin="${pageMaker.startPage }" end="${pageMaker.endPage }">
+		                              <a class="${pageMaker.cri.page == num ? "current":"not" }" href="${num }"><span>${num }</span></a>
+		                           </c:forEach>
+		                           
+		                           <c:if test="${pageMaker.next }">
+		                              <a class="not" href="${pageMaker.endPage + 1}">다음</a>
+		                           </c:if>
+		                        </div>
+								
+                                
                                 <div class="searchBox">
-                                	<form action="/board/noticeList" method="get">
+                                	<form action="/board/qnaBoardList" method="get">
                                 		<input type="hidden" name="page" value="1">
                                 		<input type="hidden" name="amount" value="${pageMaker.cri.amount}">
                                 		
@@ -177,7 +199,7 @@
                                 		</c:choose>
                                 		
                                 		
-                                		<input type="submit" value="검색">
+                                		<input class="search_btn" type="submit" value="검색">
                                 	</form>
                                 </div>
                                 
@@ -195,10 +217,10 @@
     </div> 
     
     <form action="/board/qnaBoardList" method="get" class="moveForm">
-		<input type="text" name="page" value="${pageMaker.cri.page}">
-		<input type="text" name="amount" value="${pageMaker.cri.amount}">
-		<input type="text" name="keyword" value="${pageMaker.cri.keyword}">
-		<input type="text" name="type" value="${pageMaker.cri.type}">
+		<input type="hidden" name="page" value="${pageMaker.cri.page}">
+		<input type="hidden" name="amount" value="${pageMaker.cri.amount}">
+		<input type="hidden" name="keyword" value="${pageMaker.cri.keyword}">
+		<input type="hidden" name="type" value="${pageMaker.cri.type}">
 	</form>
 	
 	<form action="/board/qnaBoardContent" method="get" class="moveForm2">
@@ -207,6 +229,7 @@
 		<input type="hidden" name="keyword" value="${pageMaker.cri.keyword}">
 		<input type="hidden" name="type" value="${pageMaker.cri.type}">
 		<input type="hidden" name="enquiry_no" value="">
+		<input type="hidden" name="answer_no" value="">
 	</form>
 	
 <script src="https://code.jquery.com/jquery-3.6.0.js" integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk=" crossorigin="anonymous"></script>
@@ -216,12 +239,20 @@
 		$(".sub3").addClass("active");
 		var moveForm = $(".moveForm");
 		var moveForm2 = $(".moveForm2");
-		
+
 		$(".pageInfo a").on("click", function(e) {
 			e.preventDefault();
 			moveForm.find("input[name = 'page']").val($(this).attr("href"));
 			moveForm.submit();
 		})
+		
+		$(".answerContentGo a").on("click", function(e) {
+			e.preventDefault();
+			moveForm2.find("input[name = 'answer_no']").val($(this).attr("href"));
+			moveForm2.attr("action", "/board/answerBoardContent");
+			moveForm2.submit();
+			
+		}); 
 		
 		$(".contentGo a").on("click", function(e) {
 			e.preventDefault();
@@ -229,9 +260,13 @@
 			moveForm2.attr("action", "/board/qnaBoardContent");
 			moveForm2.submit();
 			
-		}) 
+		}); 
 		
-	})
+		
+		
+		
+		
+	});
 
 	
 </script>

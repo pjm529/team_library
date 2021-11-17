@@ -15,32 +15,11 @@ public class EnquiryBoardServiceImpl implements EnquiryBoardService {
 	@Autowired
 	public EnquiryBoardMapper eMapper;
 	
-	
-	@Override
-	public void enquiryBoardInsert(EnquiryBoardDTO dto) {
-		eMapper.enquiryBoardInsert(dto);
-	}
 
-	@Override
-	public List<EnquiryBoardDTO> enquiryBoardAll() {
-		return eMapper.enquiryBoardAll();
-	}
-
+	/* 게시물 본문 / 조회수 */
 	@Override
 	public EnquiryBoardDTO enquiryContent(Long enquiry_no) {
 		return eMapper.enquiryContent(enquiry_no);
-	}
-
-	@Override
-	public void enquiryBoardDelete(Long enquiry_no) {
-		eMapper.enquiryBoardDelete(enquiry_no);
-
-	}
-
-	@Override
-	public void enquiryBoardUpdate(EnquiryBoardDTO dto) {
-		eMapper.enquiryBoardUpdate(dto);
-
 	}
 
 	@Override
@@ -48,15 +27,43 @@ public class EnquiryBoardServiceImpl implements EnquiryBoardService {
 		eMapper.updateView(enquiry_no);
 		
 	}
+	
+	
+	
+	/* 등록 / 수정 / 삭제 */
+	@Override
+	public void enquiryBoardInsert(EnquiryBoardDTO dto) {
+		eMapper.enquiryBoardInsert(dto);
+	}
 
+	@Override
+	public void enquiryBoardUpdate(EnquiryBoardDTO dto) {
+		eMapper.enquiryBoardUpdate(dto);
+	}
+	
+	@Override
+	public void enquiryBoardDelete(Long enquiry_no) {
+		eMapper.enquiryBoardDelete(enquiry_no);
+
+	}
+
+
+
+	/* 게시판(페이징) / 총 게시물 / 게시판 정렬 */
+	@Override
+	public List<EnquiryBoardDTO> getListPage(Criteria cri) {
+		return eMapper.getListPage(cri);
+	}
+	
 	@Override
 	public int getTotal(Criteria cri) {
 		return eMapper.getTotal(cri);
 	}
 
 	@Override
-	public List<EnquiryBoardDTO> getListPage(Criteria cri) {
-		return eMapper.getListPage(cri);
+	public void reset() {
+		eMapper.reset();
+		
 	}
 
 }

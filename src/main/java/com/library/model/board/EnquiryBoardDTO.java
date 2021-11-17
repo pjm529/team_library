@@ -14,5 +14,7 @@ public class EnquiryBoardDTO {
 	private String writer_name;
 	private int enquiry_hits;
 	private Timestamp enquiry_reg_date;
+	
+	private AnswerBoardDTO answerList;
 
 }
