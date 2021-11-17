@@ -6,7 +6,7 @@
 <html>
 <head>
 <title>라온도서관 > 묻고답하기 > 본문</title>
-<link rel="stylesheet" href="/resources/css/board/sub3/qna_content_page.css">
+<link rel="stylesheet" href="/resources/css/board/sub3/answer_content_page.css">
 </head>
 <body>
 

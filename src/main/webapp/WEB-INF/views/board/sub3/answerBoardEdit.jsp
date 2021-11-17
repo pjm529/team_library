@@ -6,7 +6,7 @@
 <html>
 <head>
 <title>라온도서관 > 묻고답하기 > 글 수정페이지</title>
-<link rel="stylesheet" href="/resources/css/board/sub3/qna_write_page.css">
+<link rel="stylesheet" href="/resources/css/board/sub3/answer_edit_page.css">
 </head>
 <body>
 
@@ -49,7 +49,7 @@
                             <div class="table-wrap">
                                 <form action="/board/answerBoardUpdate" method="post">
                                 	<input type="hidden" name="answer_no" value="${answer.answer_no}" >
-                                	<input type="text" name="enquiry_no" value="${answer.enquiry_no}" >
+                                	<input type="hidden" name="enquiry_no" value="${answer.enquiry_no}" >
                                 	<input type="hidden" name="a_writer_id" value="${answer.a_writer_id}">
                                     <input type="hidden" name="a_writer_name" value="${answer.a_writer_name}">
                                     <input type="hidden" name="amount" value="${cri.amount}">

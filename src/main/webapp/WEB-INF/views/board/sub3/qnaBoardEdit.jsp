@@ -6,7 +6,7 @@
 <html>
 <head>
 <title>라온도서관 > 묻고답하기 > 글 수정페이지</title>
-<link rel="stylesheet" href="/resources/css/board/sub3/qna_write_page.css">
+<link rel="stylesheet" href="/resources/css/board/sub3/qna_edit_page.css">
 </head>
 <body>
 
