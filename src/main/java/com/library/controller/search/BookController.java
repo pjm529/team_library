@@ -9,6 +9,8 @@ import org.json.simple.parser.ParseException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -21,7 +23,7 @@ import com.library.service.search.AladinApi;
 import com.library.service.search.BookService;
  
 @Controller
-@RequestMapping(value = "/search")
+@RequestMapping("/search")
 public class BookController {
 
 	@Autowired
@@ -32,7 +34,7 @@ public class BookController {
 
 	
 	// 검색 도서 출력
-	@RequestMapping(value = "/book", method = RequestMethod.GET)
+	@GetMapping("/book")
 	public String book(Model model, Criteria cri) {
 
 		System.out.println("/search/book 진입");
@@ -77,7 +79,7 @@ public class BookController {
 	}
 
 	// 도서 상세페이지
-	@RequestMapping(value = "/book_detail", method = RequestMethod.GET)
+	@GetMapping("/book_detail")
 	public String book_detail(Model model, Criteria cri, @RequestParam String book_isbn) {
 
 		// isbn이 null이 아닐 때
@@ -118,7 +120,7 @@ public class BookController {
 	}
 
 	// 책 대출
-	@RequestMapping(value = "/loan", method = RequestMethod.POST)
+	@PostMapping("/loan")
 	public String loan(Model model, Criteria cri, BookDTO book) {
 
 		System.out.println("\n======================== 대출 신청 ========================");
@@ -150,8 +152,8 @@ public class BookController {
 	}
 	
 	// 대출자 상태 체크
-	@RequestMapping(value = "/statusChk", method = RequestMethod.POST)
 	@ResponseBody
+	@PostMapping("/statusChk")
 	public String statusChk(String user_id) throws Exception {
 
 		System.out.println("statusChk() 진입");
@@ -170,7 +172,7 @@ public class BookController {
 	}
 
 	// 대출베스트 출력
-	@RequestMapping(value = "/best_book", method = RequestMethod.GET)
+	@GetMapping("/best_book")
 	public String best_book(Model model, Criteria cri) {
 
 		System.out.println("best_book 진입");
@@ -188,7 +190,7 @@ public class BookController {
 	}
 
 	// 대출베스트 책 상세내용
-	@RequestMapping(value = "/best_book_detail", method = RequestMethod.GET)
+	@GetMapping("/best_book_detail")
 	public String best_book_detail(Model model, Criteria cri, @RequestParam String book_isbn) {
 
 		if (book_isbn != null && book_isbn != "") {

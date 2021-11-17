@@ -5,6 +5,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
@@ -14,14 +15,14 @@ import com.library.page.ViewPage;
 import com.library.service.admin.LoanHistoryService;
 
 @Controller
-@RequestMapping(value = "/admin")
+@RequestMapping("/admin")
 public class LoanHistoryController {
 
 	@Autowired
 	private LoanHistoryService service;
 
 	// 대출 중 리스트 출력 (get)
-	@RequestMapping(value = "/loan_history", method = RequestMethod.GET)
+	@GetMapping("/loan_history")
 	public String loan_list(Model model, Criteria cri) {
 
 		System.out.println("loan_history 진입");

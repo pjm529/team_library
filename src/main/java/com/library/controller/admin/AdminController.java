@@ -5,9 +5,10 @@ import java.net.URLEncoder;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -18,17 +19,14 @@ import com.library.page.ViewPage;
 import com.library.service.admin.AdminService;
 
 @Controller
-@RequestMapping(value = "/admin")
+@RequestMapping("/admin")
 public class AdminController {
 
 	@Autowired
 	private AdminService adminService;
 
-	@Autowired
-	private JavaMailSender mailSender; // 이메일 전송 bean
-
 	// 멤버 리스트 출력 (get)
-	@RequestMapping(value = "/member_list", method = RequestMethod.GET)
+	@GetMapping("/member_list")
 	public String member_list(Model model, Criteria cri) {
 
 		System.out.println("member_list 진입");
@@ -55,7 +53,7 @@ public class AdminController {
 	}
 
 	// 멤버 조회
-	@RequestMapping(value = "/member_view", method = RequestMethod.GET)
+	@GetMapping("/member_view")
 	public String member_view(Model model, Criteria cri, @RequestParam String user_id) {
 
 		MemberDTO member = adminService.member_view(user_id);
@@ -69,7 +67,7 @@ public class AdminController {
 	}
 
 	// 회원 수정 폼 진입
-	@RequestMapping(value = "/member_modify", method = RequestMethod.GET)
+	@GetMapping("/member_modify")
 	public String member_modifyGet(Model model, Criteria cri, @RequestParam String user_id) {
 
 		MemberDTO member = adminService.member_view(user_id);
@@ -83,7 +81,7 @@ public class AdminController {
 	}
 
 	// 회원 수정
-	@RequestMapping(value = "/member_modify", method = RequestMethod.POST)
+	@PostMapping("/member_modify")
 	public String member_modifyPost(Model model, Criteria cri, MemberDTO member) {
 
 		adminService.member_modify(member);
@@ -104,7 +102,7 @@ public class AdminController {
 	}
 	
 	// 회원 탈퇴
-	@RequestMapping(value = "/member_delete", method = RequestMethod.GET)
+	@GetMapping("/member_delete")
 	public String member_delete(Criteria cri, @RequestParam String user_id) {
 
 		adminService.member_delete(user_id);

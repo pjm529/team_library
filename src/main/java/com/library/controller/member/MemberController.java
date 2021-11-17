@@ -11,6 +11,8 @@ import org.springframework.mail.javamail.MimeMessageHelper;
 import org.springframework.mail.javamail.MimeMessagePreparator;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -20,11 +22,17 @@ import com.library.model.member.MemberDTO;
 import com.library.service.member.MemberService;
 
 @Controller
-@RequestMapping(value = "/member")
+@RequestMapping("/member")
 public class MemberController {
 
+	@Autowired
+	private MemberService memberService;
+
+	@Autowired
+	private JavaMailSender mailSender; // 이메일 전송 bean
+	
 	// 로그인 페이지 진입
-	@RequestMapping(value = "/login", method = RequestMethod.GET)
+	@GetMapping("/login")
 	public String loginGET() {
 
 		System.out.println("로그인 페이지 진입");
@@ -33,14 +41,8 @@ public class MemberController {
 
 	}
 
-	@Autowired
-	private MemberService memberService;
-
-	@Autowired
-	private JavaMailSender mailSender; // 이메일 전송 bean
-
 	// 회원가입 페이지 진입 (get)
-	@RequestMapping(value = "/signup", method = RequestMethod.GET)
+	@GetMapping("/signup")
 	public String signupGET() {
 
 		System.out.println("회원가입 페이지 진입");
@@ -50,7 +52,7 @@ public class MemberController {
 	}
 
 	// 회원가입 (post)
-	@RequestMapping(value = "/signup", method = RequestMethod.POST)
+	@PostMapping("/signup")
 	public String signupPOST(MemberDTO member) throws Exception {
 
 		// 회원가입 service 쿼리 실행
@@ -62,8 +64,8 @@ public class MemberController {
 	}
 
 	// 아이디 중복검사
-	@RequestMapping(value = "/memberIdChk", method = RequestMethod.POST)
 	@ResponseBody
+	@PostMapping("/memberIdChk")
 	public String memberIdChkPOST(String memberId) throws Exception {
 
 		System.out.println("memberIdChk() 진입");
@@ -82,8 +84,8 @@ public class MemberController {
 	}
 
 	// 이메일 인증
-	@RequestMapping(value = "/mailCheck", method = RequestMethod.GET)
 	@ResponseBody
+	@GetMapping("/mailCheck")
 	public String mailCheckGET(String email) throws Exception {
 
 		// view로부터 넘어온 데이터 확인
@@ -140,8 +142,8 @@ public class MemberController {
 	}
 
 	// 아이디 찾기 정보확인
-	@RequestMapping(value = "/search_id_check", method = RequestMethod.POST)
 	@ResponseBody
+	@PostMapping("/search_id_check")
 	public String searchIdCheck(MemberDTO member) throws Exception {
 
 		System.out.println("searchIdCheck() 진입");
@@ -160,7 +162,7 @@ public class MemberController {
 	}
 
 	// 아이디 찾기 성공
-	@RequestMapping(value = "/search_id", method = RequestMethod.POST)
+	@PostMapping("/search_id")
 	public String searchIdPOST(MemberDTO member, Model model) throws Exception {
 
 		System.out.println("searchId() 진입");
@@ -175,7 +177,7 @@ public class MemberController {
 	}
 
 	// 아이디 찾기 결과
-	@RequestMapping(value = "/search_id_result", method = RequestMethod.GET)
+	@GetMapping("/search_id_result")
 	public String searchIdResult(@RequestParam String search_id, Model model) {
 
 		model.addAttribute("search_id", search_id);
@@ -184,7 +186,7 @@ public class MemberController {
 	}
 
 	// 비밀번호 찾기 페이지 진입
-	@RequestMapping(value = "/search_pw", method = RequestMethod.GET)
+	@GetMapping("/search_pw")
 	public String searchPwGET() {
 
 		System.out.println("비밀번호 찾기 페이지 진입");
@@ -194,8 +196,8 @@ public class MemberController {
 	}
 
 	// 비밀번호 찾기 정보확인
-	@RequestMapping(value = "/search_pw_check", method = RequestMethod.POST)
 	@ResponseBody
+	@PostMapping("/search_pw_check")
 	public String searchPwCheck(MemberDTO member) throws Exception {
 
 		System.out.println("searchPwdCheck() 진입");
@@ -214,7 +216,7 @@ public class MemberController {
 	}
 
 	// 비밀번호 찾기 성공 후 초기화
-	@RequestMapping(value = "/search_pw", method = RequestMethod.POST)
+	@PostMapping("/search_pw")
 	public String searchPwPost(MemberDTO member, Model model) throws Exception {
 
 		// 인증번호 난수 생성
