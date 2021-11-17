@@ -9,7 +9,7 @@
             <a href="/search/book">도서검색</a>
         </li>
         <li class="sub2">
-            <a href="/search/best_book">대출베스트</a>
+            <a href="/search/best-book">대출베스트</a>
         </li> 
         <li>
             <a href="#">추천도서</a>

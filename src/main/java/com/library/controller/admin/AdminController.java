@@ -26,7 +26,7 @@ public class AdminController {
 	private AdminService adminService;
 
 	// 멤버 리스트 출력 (get)
-	@GetMapping("/member_list")
+	@GetMapping("/member-list")
 	public String member_list(Model model, Criteria cri) {
 
 		System.out.println("member_list 진입");
@@ -53,7 +53,7 @@ public class AdminController {
 	}
 
 	// 멤버 조회
-	@GetMapping("/member_view")
+	@GetMapping("/member-view")
 	public String member_view(Model model, Criteria cri, @RequestParam String user_id) {
 
 		MemberDTO member = adminService.member_view(user_id);
@@ -67,7 +67,7 @@ public class AdminController {
 	}
 
 	// 회원 수정 폼 진입
-	@GetMapping("/member_modify")
+	@GetMapping("/member-modify")
 	public String member_modifyGet(Model model, Criteria cri, @RequestParam String user_id) {
 
 		MemberDTO member = adminService.member_view(user_id);
@@ -81,7 +81,7 @@ public class AdminController {
 	}
 
 	// 회원 수정
-	@PostMapping("/member_modify")
+	@PostMapping("/member-modify")
 	public String member_modifyPost(Model model, Criteria cri, MemberDTO member) {
 
 		adminService.member_modify(member);
@@ -97,12 +97,12 @@ public class AdminController {
 			return "redirect:/admin/member_list";
 		}
 
-		return "redirect:/admin/member_view?amount=" + amount + "&page=" + page + "&type=" + type + "&keyword="
+		return "redirect:/admin/member-view?amount=" + amount + "&page=" + page + "&type=" + type + "&keyword="
 				+ keyword;
 	}
 	
 	// 회원 탈퇴
-	@GetMapping("/member_delete")
+	@GetMapping("/member-delete")
 	public String member_delete(Criteria cri, @RequestParam String user_id) {
 
 		adminService.member_delete(user_id);
@@ -115,10 +115,10 @@ public class AdminController {
 		try {
 			keyword = URLEncoder.encode(cri.getKeyword(), "UTF-8");
 		} catch (UnsupportedEncodingException e) {
-			return "redirect:/admin/member_list";
+			return "redirect:/admin/member-list";
 		}
 		
-		return "redirect:/admin/member_list?amount=" + amount + "&page=" + page + "&type=" + type + "&keyword="
+		return "redirect:/admin/member-list?amount=" + amount + "&page=" + page + "&type=" + type + "&keyword="
 		+ keyword;
 	}
 

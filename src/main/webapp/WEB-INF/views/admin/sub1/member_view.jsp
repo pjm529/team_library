@@ -31,10 +31,10 @@
                             </a>
                         </li>
                         <li>
-                            <a href="/admin/member_list">관리자</a>
+                            <a href="/admin/member-list">관리자</a>
                         </li>
                         <li>
-                            <a href="/admin/member_list">회원관리</a>
+                            <a href="/admin/member-list">회원관리</a>
                         </li>
                     </ul>
                 </div>
@@ -183,7 +183,7 @@
                     <br>
                     
                     <div class="member_modify_wrap">
-                    	<form action="/admin/member_modify" method="get">
+                    	<form action="/admin/member-modify" method="get">
                     		<input type="hidden" name="amount" value="${cri.amount }">
 							<input type="hidden" name="page" value="${cri.page }">
 							<input type="hidden" name="type" value="${cri.type }">
@@ -194,7 +194,7 @@
                     </div>
                     
                     <div class="member_delete_wrap">
-                    	<form action="/admin/member_delete" method="get" onsubmit="return false;">
+                    	<form action="/admin/member-delete" method="get" onsubmit="return false;">
                     		<input type="hidden" name="amount" value="${cri.amount }">
 							<input type="hidden" name="page" value="${cri.page }">
 							<input type="hidden" name="type" value="${cri.type }">
@@ -207,7 +207,7 @@
                     
                     
                     <div class="member_list_wrap">
-                    	<form action="/admin/member_list" method="get">
+                    	<form action="/admin/member-list" method="get">
                     		<input type="hidden" name="amount" value="${cri.amount }">
 							<input type="hidden" name="page" value="${cri.page }">
 							<input type="hidden" name="type" value="${cri.type }">

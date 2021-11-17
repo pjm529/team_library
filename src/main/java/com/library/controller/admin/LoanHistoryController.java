@@ -22,7 +22,7 @@ public class LoanHistoryController {
 	private LoanHistoryService service;
 
 	// 대출 중 리스트 출력 (get)
-	@GetMapping("/loan_history")
+	@GetMapping("/loan-history")
 	public String loan_list(Model model, Criteria cri) {
 
 		System.out.println("loan_history 진입");

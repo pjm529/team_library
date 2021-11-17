@@ -35,7 +35,7 @@ public class OverdueController {
 	private JavaMailSender mailSender; // 이메일 전송 bean
 
 	// 연체 중 리스트 출력 (get)
-	@GetMapping("/overdue_list")
+	@GetMapping("/overdue-list")
 	public String overdue_list(Model model) {
 
 		System.out.println("overdue_list");
@@ -64,7 +64,7 @@ public class OverdueController {
 	}
 
 	// 연체 자 메일 전송
-	@GetMapping("/send_mail")
+	@GetMapping("/send-mail")
 	public String send_mail(HttpServletRequest request, Model model) throws Exception {
 
 		String from = "library.raon@gmail.com";
@@ -94,7 +94,7 @@ public class OverdueController {
 			e.printStackTrace();
 		}
 
-		return "redirect:/admin/overdue_list";
+		return "redirect:/admin/overdue-list";
 
 	}
 

@@ -79,7 +79,7 @@ public class BookController {
 	}
 
 	// 도서 상세페이지
-	@GetMapping("/book_detail")
+	@GetMapping("/book-detail")
 	public String book_detail(Model model, Criteria cri, @RequestParam String book_isbn) {
 
 		// isbn이 null이 아닐 때
@@ -172,7 +172,7 @@ public class BookController {
 	}
 
 	// 대출베스트 출력
-	@GetMapping("/best_book")
+	@GetMapping("/best-book")
 	public String best_book(Model model, Criteria cri) {
 
 		System.out.println("best_book 진입");
@@ -190,7 +190,7 @@ public class BookController {
 	}
 
 	// 대출베스트 책 상세내용
-	@GetMapping("/best_book_detail")
+	@GetMapping("/best-book-detail")
 	public String best_book_detail(Model model, Criteria cri, @RequestParam String book_isbn) {
 
 		if (book_isbn != null && book_isbn != "") {

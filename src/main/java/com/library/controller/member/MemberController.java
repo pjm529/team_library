@@ -132,7 +132,7 @@ public class MemberController {
 	}
 
 	// 아이디 찾기 페이지 진입
-	@RequestMapping(value = "/search_id", method = RequestMethod.GET)
+	@GetMapping("/search-id")
 	public String searchIdGET() {
 
 		System.out.println("아이디 찾기 페이지 진입");
@@ -143,7 +143,7 @@ public class MemberController {
 
 	// 아이디 찾기 정보확인
 	@ResponseBody
-	@PostMapping("/search_id_check")
+	@PostMapping("/search-id-check")
 	public String searchIdCheck(MemberDTO member) throws Exception {
 
 		System.out.println("searchIdCheck() 진입");
@@ -162,7 +162,7 @@ public class MemberController {
 	}
 
 	// 아이디 찾기 성공
-	@PostMapping("/search_id")
+	@PostMapping("/search-id")
 	public String searchIdPOST(MemberDTO member, Model model) throws Exception {
 
 		System.out.println("searchId() 진입");
@@ -172,12 +172,12 @@ public class MemberController {
 		model.addAttribute("search_id", result);
 
 		System.out.println(result);
-		return "redirect:/member/search_id_result";
+		return "redirect:/member/search-id-result";
 
 	}
 
 	// 아이디 찾기 결과
-	@GetMapping("/search_id_result")
+	@GetMapping("/search-id-result")
 	public String searchIdResult(@RequestParam String search_id, Model model) {
 
 		model.addAttribute("search_id", search_id);
@@ -186,7 +186,7 @@ public class MemberController {
 	}
 
 	// 비밀번호 찾기 페이지 진입
-	@GetMapping("/search_pw")
+	@GetMapping("/search-pw")
 	public String searchPwGET() {
 
 		System.out.println("비밀번호 찾기 페이지 진입");
@@ -197,7 +197,7 @@ public class MemberController {
 
 	// 비밀번호 찾기 정보확인
 	@ResponseBody
-	@PostMapping("/search_pw_check")
+	@PostMapping("/search-pw-check")
 	public String searchPwCheck(MemberDTO member) throws Exception {
 
 		System.out.println("searchPwdCheck() 진입");
@@ -216,7 +216,7 @@ public class MemberController {
 	}
 
 	// 비밀번호 찾기 성공 후 초기화
-	@PostMapping("/search_pw")
+	@PostMapping("/search-pw")
 	public String searchPwPost(MemberDTO member, Model model) throws Exception {
 
 		// 인증번호 난수 생성

@@ -30,10 +30,10 @@
                             </a>
                         </li>
                         <li>
-                            <a href="/admin/member_list">관리자</a>
+                            <a href="/admin/member-list">관리자</a>
                         </li>
                         <li>
-                            <a href="/admin/member_list">회원관리</a>
+                            <a href="/admin/member-list">회원관리</a>
                         </li>
                     </ul>
                 </div>
@@ -181,7 +181,7 @@
                     </form>
                     
                     <div class="member_list_wrap">
-	                   	<form action="/admin/member_list" method="get">
+	                   	<form action="/admin/member-list" method="get">
 	                   		<input type="hidden" name="amount" value="${cri.amount }">
 							<input type="hidden" name="page" value="${cri.page }">
 							<input type="hidden" name="type" value="${cri.type }">
@@ -279,7 +279,7 @@
                 // 최종 유효성 검사 (모든 check 값들이 true일 경우)
                 if ( nameCheck && birthCheck && phoneCheck && addressCheck && overdueCheck) {
                     $("#modify_form").attr("onsubmit", "return true;");
-                    $("#modify_form").attr("action", "/admin/member_modify");
+                    $("#modify_form").attr("action", "/admin/member-modify");
                     $("#modify_form").submit();
                 }
 

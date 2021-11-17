@@ -6,16 +6,16 @@
     </h2>
     <ul class="subMenu">
         <li class="sub1">
-            <a href="/admin/member_list">회원관리</a>
+            <a href="/admin/member-list">회원관리</a>
         </li>
         <li class="sub2">
-            <a href="/admin/loan_history">대출내역</a>
+            <a href="/admin/loan-history">대출내역</a>
         </li>
         <li class="sub3">
-            <a href="/admin/loan_list">대출중도서</a>
+            <a href="/admin/loan-list">대출중도서</a>
         </li>
         <li class="sub4">
-            <a href="/admin/overdue_list">연체중도서</a>
+            <a href="/admin/overdue-list">연체중도서</a>
         </li>
     </ul>
 </div>

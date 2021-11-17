@@ -12,10 +12,10 @@
             <a href="/member/signup">회원가입</a>
         </li>
         <li class="sub3">
-            <a href="/member/search_id">아이디 찾기</a>
+            <a href="/member/search-id">아이디 찾기</a>
         </li>
         <li class="sub4">
-            <a href="/member/search_pw">비밀번호 찾기</a>
+            <a href="/member/search-pw">비밀번호 찾기</a>
         </li>
     </ul>
 </div>
