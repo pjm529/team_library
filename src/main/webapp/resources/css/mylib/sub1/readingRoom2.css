@@ -37,7 +37,6 @@
 
 /* 좌석 배치도 */
 .seat-chart{
-    /* border: 1px solid darkorange; */
     width: 90%;
     height: 430px;
     margin: 0 auto;
@@ -107,13 +106,25 @@
     margin: 2%;
 }
 
+/* 내자리 */
+.mine{
+    background-color: rgb(228, 162, 76);
+    border: 1px solid #e55b00;
+    border-radius: 5px;
+    cursor: pointer;
+    color: #fff;
+    font-size: 14px;
+    width: 40px;
+    height: 40px;
+    margin: 2%;
+}
+
 /* 눌렀을 때 or 자기 자신의 색 */
 .seat-wrapper button:active{
     background-color: #ff6600;
     border: 1px solid #e55b00;
     color: #fff;
 }
-
 
 /*  ======= 테이블 ====== */
 .wrapper-table {
@@ -170,6 +181,8 @@ td{
     margin-top: 20px;
     margin-left: auto;
     cursor: pointer;
+    float: right;
+    
 }
 
 
@@ -202,5 +215,3 @@ td{
     margin-top: 20px;
     cursor: pointer;
 }
-
-

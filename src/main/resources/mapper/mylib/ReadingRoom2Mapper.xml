@@ -9,18 +9,59 @@
 	<select id="list_all" resultType="com.library.model.mylib.ReadingRoom2DTO">
 		select r2.seat_no, seat_status, user_id, reg_time, return_time
    		from reading_room2 r2 left join reading_room2_rental RRR 
-     	on r2.seat_no = RRR.seat_no where r2.seat_no 
+     	on r2.seat_no = RRR.seat_no where r2.seat_no order by r2.seat_no
 	</select>
 	
-
-	<insert id="bookingSeat">
+	<!-- 좌석 예약 -->
+	<insert id="room2_booking">
 		insert 
 		  into reading_room2_rental  
 	    values(#{seat_no}, #{user_id}, null, date_add(current_timestamp, INTERVAL 3 HOUR))
 	</insert>
 	
+	<!-- 좌석 예약 -->
 	<update id="updateStatusOccupied">
 		update reading_room2 set seat_status = 0 where seat_no = #{seat_no}
 	</update>
+	
+	<select id="room2_info" resultType="com.library.model.mylib.ReadingRoom2DTO">
+		select * 
+		from reading_room2_rental
+		where user_id = #{user_id}		 
+	</select>
+	
+	<!-- 좌석 반납&퇴실 -->
+	<delete id="room2_delete">
+		delete from reading_room2_rental where seat_no = #{seat_no}
+	</delete>
+	
+	<!-- 좌석 반납&퇴실 -->
+	<update id="updateStatusVacant">
+		update reading_room2 set seat_status = 1 where seat_no = #{seat_no}
+	</update>
+	
+	<!-- 좌석 연장 -->
+	<update id="room2_extend">
+		update reading_room2_rental set return_time = date_add(return_time, interval 2 hour) where seat_no = #{seat_no} 
+	</update>
+	
+	<!-- 좌석 이동 -->
+	<update id="moveSeat2">
+		update reading_room2_rental set seat_no =#{seat_no} where seat_no = #{seat_no} 
+	</update>
+	
+	<delete id="updateReading_Room2_RentalTable">
+		delete
+		from reading_room2_rental
+		<![CDATA[where return_time <= now()]]>
+	</delete>
+	
+	<update id="updateReading_Room2Table">
+		update reading_room2
+		set seat_status = 1
+		where seat_no in (select seat_no from reading_room2_rental <![CDATA[where return_time <= now()]]>)
+	</update>
+	
+	
 
 </mapper>

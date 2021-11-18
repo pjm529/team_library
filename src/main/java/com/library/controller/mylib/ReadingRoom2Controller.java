@@ -1,5 +1,6 @@
 package com.library.controller.mylib;
 
+import java.util.Date;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,51 +21,88 @@ public class ReadingRoom2Controller {
 	@Autowired
 	private ReadingRoom2Service readingRoom2Service;
 	
-	/*
-	 * @Autowired private ReadingRoom2DTO dto;
-	 */
-	
-//	@GetMapping("/readingRoom")
-//	public String readingRoom() {
-//				
-//		return "/mylib/sub1/readingRoom";
-//		
-//		//컨트롤러에서 서비스단으로 넘긴다.(모델이라는 객체 이용하면 뷰단으로 쉽게 빼낼 수 있음)
-//	}
-//	
-	
-	
-	@GetMapping("/room2")
-	public String room2() {
-				
-		return "/mylib/sub1/room2";
-		
-		//컨트롤러에서 서비스단으로 넘긴다.(모델이라는 객체 이용하면 뷰단으로 쉽게 빼낼 수 있음)
-	}
 	
 	@GetMapping("/readingRoom2Rental")
 	public String readingRoomRental(Model model) {
 		
-		List<ReadingRoom2DTO> readingRoomlist = readingRoom2Service.list_all();
+		readingRoom2Service.updateReading_Room2Table();
+		readingRoom2Service.updateReading_Room2_RentalTable();
 		
+
+		List<ReadingRoom2DTO> readingRoomlist = readingRoom2Service.list_all();		
 		model.addAttribute("readingRoomlist", readingRoomlist);
+		
+
+		String user_id = "user123"; //세션 아이디
+		
+		if(readingRoom2Service.room2_info(user_id) == null) {
+			
+			return "/mylib/sub1/readingRoom2Rental";
+		}else {
+			ReadingRoom2DTO room2_info = readingRoom2Service.room2_info(user_id);
+			
+			Date now = new Date();
+			
+			room2_info.setDiff_time(room2_info.getReturn_time().getTime() - now.getTime());
+						
+			model.addAttribute("room2_info", room2_info);
+		}
 
 		return "/mylib/sub1/readingRoom2Rental";
 		
 		//컨트롤러에서 서비스단으로 넘긴다.(모델이라는 객체 이용하면 뷰단으로 쉽게 빼낼 수 있음)
 	}
 	
-	
-	@GetMapping("/bookingSeat2")
-	public String bookingSeat2(@RequestParam("seat_no")String seat_no) {
+	  @GetMapping("/room2_delete")
+	  public String room2_delete(@RequestParam("seat_no") String seat_no) {
+		  
+		  readingRoom2Service.room2_delete(seat_no);
+		  readingRoom2Service.updateStatusVacant(seat_no);
+		  
+		  return "redirect:/mylib/readingRoom2Rental";
+		  
+	  }
+	 
 
-		readingRoom2Service.bookingSeat(seat_no);
-		readingRoom2Service.updateStatusOccupied(seat_no);
+	@GetMapping("/room2_booking")
+	public String room2booking(ReadingRoom2DTO dto) {
+			
+		dto.setUser_id("user123"); //세션아이디 없어서 강제로 주입
+
+		readingRoom2Service.room2_booking(dto);
+		readingRoom2Service.updateStatusOccupied(dto);
+
+		return "redirect:/mylib/readingRoom2Rental";
+	}
+	
+	@GetMapping("/room2_extend")
+	public String room2extend(@RequestParam("seat_no") String seat_no) {
+		
+		 
+		readingRoom2Service.room2_extend(seat_no);
+
+		return "redirect:/mylib/readingRoom2Rental";
+		
+		//컨트롤러에서 서비스단으로 넘긴다.(모델이라는 객체 이용하면 뷰단으로 쉽게 빼낼 수 있음)
+	}
+	
+	@GetMapping("/moveSeat2")
+	public String moveSeat2(ReadingRoom2DTO dto, @RequestParam("newSeat_no") int newSeat_no) {
+		
+		readingRoom2Service.room2_delete(dto);
+		readingRoom2Service.updateStatusVacant(dto);
+		
+		dto.setUser_id("user123"); //세션아이디 없어서 강제로 주입
+		dto.setSeat_no(newSeat_no);
+		
+		readingRoom2Service.room2_booking(dto);
+		readingRoom2Service.updateStatusOccupied(dto);
+		
 
 		return "redirect:/mylib/readingRoom2Rental";
 	}
 
-	
+}
 	
 //	@GetMapping("/articleList")
 //	public String articleList(Model model, Criteria cri) {
@@ -206,4 +244,4 @@ public class ReadingRoom2Controller {
 //		
 	
 
-}
+

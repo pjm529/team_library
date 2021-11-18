@@ -46,7 +46,7 @@
 
                             <!-- 테이블 -->
                             <div class="table-wrap">
-                                <form action="/board/articleInsertForm" method="post">
+                                <form action="/board/articleInsertForm" method="post" enctype="multipart/form-data">
                                     <table class="bbs-edit">
                                         <tbody>
                                             <tr>
@@ -84,13 +84,31 @@
                                                         rows="15"></textarea>
                                                 </td>
                                             </tr>
+                                            
+                                            <!-- 파일 업로드 -->
+                                           <tr>
+                                           	<td>
+	                                           	
+	                                           	
+	                                           	
+	                                           	<div class="uploadDiv">
+													 <input type="file" name="uploadFile" multiple>
+													 
+													
+												</div>
+                                           	
+                                           	
+                                           	
+                                           	</td>
+                                           </tr>
                                         </tbody>
 
                                     </table>
 
                                     <!-- 글쓰기 btn -->
                                     <div class="write">
-                                        <button class="write_btn" onclick="location.href='/board/articleInsertForm'">글쓰기</button>
+                                     	<!-- <button class="write_btn" onclick="location.href='/board/articleInsertForm'">글쓰기</button> -->
+                                        <button class="write_btn" id="uploadBtn">글쓰기</button>
                                     </div>
 
                                 </form>
@@ -112,6 +130,48 @@
 <script>
    $(function() {
 	   $(".sub4").addClass("active");
+	   
+		$("#uploadBtn").on('click', function(e) {
+		
+			var formData = new FormData();
+			var inputFile = $("input[name='uploadFile']");
+			var files = inputFile[0].files;
+			
+			for(var i=0; i<files.length; i++){
+				formData.append('uploadFile', files[i]);
+			}
+			
+			$.ajax({
+				
+				url: '/board/articleInsertForm',
+				processData:false,
+				contentType:false,
+				data:formData,
+				type:"post",
+				success: function (result) {
+					alert("업로드 완료");
+				}
+				
+				
+			})
+			
+			
+		})
+		
+
+	   
+	   
+	   
+	   
+	   
+	   
+	   
+	   
+	   
+	   
+	   
+	   
+	   
    })
 </script>
 </body>

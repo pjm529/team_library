@@ -1,8 +1,7 @@
 package com.library.model.board;
 
 import java.sql.Timestamp;
-
-import org.springframework.stereotype.Component;
+import java.util.List;
 
 import lombok.Data;
 
@@ -17,5 +16,7 @@ public class ArticleDTO {
 	private String writer_name;
 	private Timestamp article_reg_date;
 	private int article_views;
+	
+	private List<AttachFileDTO> attachList;
 		
 }
