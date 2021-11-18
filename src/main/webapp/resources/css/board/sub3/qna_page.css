@@ -1,15 +1,13 @@
-body{
+html, body{
     margin: 0;
 }
 
 a, a:link{
     text-decoration: none !important;
 }
-
 a{
     color: #000;
 }
-
 div, li, ul{
     margin: 0;
     padding: 0;
@@ -19,17 +17,13 @@ div, li, ul{
     font-weight: normal;
     color: #464646;
 }
-
 ul{
     text-decoration: none;
     list-style: none;
     padding: 0px;
 }
 
-select {
-	cursor: pointer;
-}
-
+/* 전체 container */
 .container{
     margin: 0 auto;
     width: 1900px;
@@ -146,6 +140,7 @@ select {
     position: relative;
 }
 
+/* 사이드 바 hover */
 .subMenu li a:hover{
     background-color: #464f56;
     color: #fff;
@@ -153,6 +148,7 @@ select {
 }
 
 
+/* 본문 부분 */
 .content{
     box-sizing: border-box;
     padding-top: 30px;
@@ -165,12 +161,14 @@ select {
     min-height:450px;
 }
 
+/* 게시판 전체 wrapper */
 .wrapper-bbs {
     padding: 10px 0 20px;
     font-size: 13px;
     background: #fff;
 }
 
+/* inline => 총 게시물 부분 : 왼쪽 정렬 */
 .inline {
     display: inline-block;
     zoom: 1;
@@ -179,6 +177,7 @@ select {
     padding-bottom: 20px;
 }
 
+/* 게시물 개수 select */
 .inline select{
     width: 130px;
     height: 34px;
@@ -186,6 +185,7 @@ select {
     font-size: inherit;
 }
 
+/* 이동 button (a tag) */
 .inline a{
     background-color: #266ac4;
     color: #fff;
@@ -196,6 +196,8 @@ select {
 
 
 
+
+/*  ======= 테이블 ====== */
 table{
     width: 100%;
     border-top: 1px solid #dee1e7;
@@ -221,19 +223,21 @@ th, td{
     text-align: center;
 }
 
+/* tbody 번호 font 설정 */
 table td .num{
     color: #888;
     font-size: 90%;
     white-space: nowrap;
 }
 
+/* tbody 제목 왼쪽 정렬 */
 table td.left{
     text-align: left!important;
 }
 
 
 
-
+/* 글쓰기 btn */
 .write_btn{
     background-color: #266ac4;
     color: #fff;
@@ -247,7 +251,7 @@ table td.left{
 }
 
 
-/* 踰꾪듉�냽�꽦 */
+/* 버튼속성 */
 .btn {
     width: 60px;
     height: 35px;

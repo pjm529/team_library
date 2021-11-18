@@ -1,12 +1,15 @@
 html, body{
     margin: 0;
 }
+
 a, a:link{
     text-decoration: none !important;
 }
+
 a{
     color: #000;
 }
+
 div, li, ul{
     margin: 0;
     padding: 0;
@@ -16,12 +19,14 @@ div, li, ul{
     font-weight: normal;
     color: #464646;
 }
+
 ul{
     text-decoration: none;
     list-style: none;
     padding: 0px;
 }
 
+/* 전체 container */
 .container{
     margin: 0 auto;
     width: 1900px;
@@ -158,7 +163,9 @@ ul{
 }
 
 .wrapper-bbs {
-    padding-top: 20px;
+    padding: 10px 0 20px;
+    font-size: 13px;
+    background: #fff;
 }
 
 .bbs-content b {
@@ -168,11 +175,7 @@ ul{
 }
 
 
-
-form{
-    padding-top: 20px;
-}
-
+/*  ======= 테이블 ====== */
 table.bbs-edit th, table.bbs-edit td{
     padding: 8px 10px;
     font-weight: normal;
@@ -184,6 +187,7 @@ table.bbs-edit th, table.bbs-edit td{
 table.bbs-edit th{
     background: #f7f7f7;
 }
+
 table{
     width: 100%;
     border-top: 2px solid #5e6062;
@@ -204,12 +208,14 @@ th, td{
     vertical-align: middle;
 }
 
+/* tbody 번호 font 설정 */
 table td .num{
     color: #888;
     font-size: 90%;
     white-space: nowrap;
 }
 
+/* tbody 제목 왼쪽 정렬 */
 table td.left{
     text-align: left!important;
 }
@@ -222,14 +228,6 @@ table input{
     padding: 0 5px;
     vertical-align: middle;
     border: 1px solid #ddd;
-}
-
-.bbs-title {
-    height: 40px;
-}
-
-.bbs-content {
-    min-height: 240px;
 }
 
 p {
