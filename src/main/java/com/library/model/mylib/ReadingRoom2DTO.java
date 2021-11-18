@@ -11,4 +11,6 @@ public class ReadingRoom2DTO {
 	private String user_id;
 	private Timestamp reg_time; 
 	private Timestamp return_time; 
+	private long diff_time;
+	
 }
