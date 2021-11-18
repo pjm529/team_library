@@ -59,6 +59,20 @@ public class NotebookRoomServiceImpl implements NotebookRoomService {
 		nbMapper.nb_seat_extend(dto);
 	}
 
+	
+	/* 좌석 자동 반납 */
+	@Override
+	public void updateNotebook_Room_RentalTable() {
+		nbMapper.updateNotebook_Room_RentalTable();
+		
+	}
+
+	@Override
+	public void updateNotebook_RoomTable() {
+		nbMapper.updateNotebook_RoomTable();
+		
+	}
+
 
 
 }

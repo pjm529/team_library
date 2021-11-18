@@ -63,5 +63,22 @@
 	</update>
 
 
+	<!-- ===== 자동 반납 ===== -->
+	<!-- 반납 시간이 지난 자리 비워주기 -->
+	<delete id="updateNotebook_Room_RentalTable">
+		delete
+  		  from notebook_room_rental
+		<![CDATA[where return_time <= now()]]>
+	</delete>
+	
+	<update id="updateNotebook_RoomTable">
+		update notebook_room
+		   set seat_status = 1
+		 where seat_no in (select seat_no
+							 from notebook_room_rental
+				   <![CDATA[where return_time <= now()]]>);
+	</update>
+	
+
 
 </mapper>

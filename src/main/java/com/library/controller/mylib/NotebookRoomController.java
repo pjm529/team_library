@@ -20,14 +20,19 @@ public class NotebookRoomController {
 	@Autowired
 	private NotebookRoomService nbService;
 
+	/* 좌석 리스트 출력 */
 	@GetMapping("/notebookRoom")
 	public String seatsList(Model model) {
+		
+		/* 반납 시간 지난 자리 자동 비움 */
+		nbService.updateNotebook_RoomTable();
+		nbService.updateNotebook_Room_RentalTable();
 
 		List<NoteBookRoomDTO> notebookRoomlist = nbService.seats_list_all();
 		model.addAttribute("notebookRoomlist", notebookRoomlist);
 
 		// 세션 id
-		String user_id = "id3";
+		String user_id = "id2";
 
 		if (nbService.reservation_info(user_id) == null) {
 
@@ -50,7 +55,7 @@ public class NotebookRoomController {
 	@GetMapping("/nb_seat_booking")
 	public String notebookRoom_booking(NoteBookRoomDTO dto) {
 
-		dto.setUser_id("id3");
+		dto.setUser_id("id2");
 
 		nbService.nb_seat_booking(dto);
 		nbService.updateStatusOccupied(dto);

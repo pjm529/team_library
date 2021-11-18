@@ -20,5 +20,11 @@ public interface NotebookRoomMapper {
 	
 	/* 좌석 연장 */
 	public void nb_seat_extend(NoteBookRoomDTO dto);
+	
+	
+	/* 좌석 자동 반납 */
+	public void updateNotebook_Room_RentalTable();
+	public void updateNotebook_RoomTable();
+	
 
 }
