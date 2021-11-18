@@ -8,6 +8,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import com.library.model.mylib.NoteBookRoomDTO;
 import com.library.service.mylib.NotebookRoomService;
@@ -26,7 +27,7 @@ public class NotebookRoomController {
 		model.addAttribute("notebookRoomlist", notebookRoomlist);
 		
 		// 세션 id
-		String user_id = "id";
+		String user_id = "id3";
 		
 		if(nbService.reservation_info(user_id) == null){
 			
@@ -47,6 +48,7 @@ public class NotebookRoomController {
 	}
 	
 	
+	/* 좌석 예약 */
 	@GetMapping("/nb_seat_booking")
 	public String notebookRoom_booking(NoteBookRoomDTO dto) {
 		
@@ -54,6 +56,17 @@ public class NotebookRoomController {
 		
 		nbService.nb_seat_booking(dto);
 		nbService.updateStatusOccupied(dto);
+		
+		return "redirect:/mylib/notebookRoom";
+	}
+	
+	
+	/* 좌석 반납&퇴실 */
+	@GetMapping("/nb_seat_return")
+	public String nb_seat_return(@RequestParam("seat_no") String seat_no) {
+		
+		nbService.nb_seat_return(seat_no);
+		nbService.updateStatusVacant(seat_no);
 		
 		return "redirect:/mylib/notebookRoom";
 	}

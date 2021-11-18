@@ -12,5 +12,10 @@ public interface NotebookRoomMapper {
 	/* 좌석 예약 */
 	public void nb_seat_booking(NoteBookRoomDTO dto);
 	public void updateStatusOccupied(NoteBookRoomDTO dto);
+	
+	
+	/* 좌석 반납&퇴실 */
+	public void nb_seat_return(String seat_no);
+	public void updateStatusVacant(String seat_no);
 
 }

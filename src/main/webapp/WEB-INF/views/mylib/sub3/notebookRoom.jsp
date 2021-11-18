@@ -89,13 +89,13 @@
 	                                    	</c:if>
 	                                    	
 	                                    	<!-- 예약된 좌석의 id와 저장된 session id가 일치할 시, class name == mine -->
-	                                    	<c:if test="${nb.user_id == 'id'}">
+	                                    	<c:if test="${nb.user_id == 'id1'}">
 	                                    		<button class="mine" id="${nb.seat_no}">${nb.seat_no}</button>
 	                                    	</c:if>
 	                                    	
 	                                    	<!-- 예약된 좌석의 id와 저장된 session id가 불일치할 시, class name == status -->
 	                                    		<!-- status => 사용 중이면 occupied || 사용 가능하면 vacant -->
-	                                    	<c:if test="${nb.user_id != 'id'}">
+	                                    	<c:if test="${nb.user_id != 'id1'}">
 	                                    		<button class="${status}" id="${nb.seat_no}">${nb.seat_no}</button>
 	                                    	</c:if>
 	                                    
@@ -149,13 +149,13 @@
 	                                    	</c:if>
 	                                    	
 	                                    	<!-- 예약된 좌석의 id와 저장된 session id가 일치할 시, class name == mine -->
-	                                    	<c:if test="${nb.user_id == 'id'}">
+	                                    	<c:if test="${nb.user_id == 'id3'}">
 	                                    		<button class="mine" id="${nb.seat_no}">${nb.seat_no}</button>
 	                                    	</c:if>
 	                                    	
 	                                    	<!-- 예약된 좌석의 id와 저장된 session id가 불일치할 시, class name == status -->
 	                                    		<!-- status => 사용 중이면 occupied || 사용 가능하면 vacant -->
-	                                    	<c:if test="${nb.user_id != 'id'}">
+	                                    	<c:if test="${nb.user_id != 'id3'}">
 	                                    		<button class="${status}" id="${nb.seat_no}">${nb.seat_no}</button>
 	                                    	</c:if>
 	                                    </c:forEach>
@@ -178,13 +178,13 @@
 	                                    	</c:if>
 	                                    	
 	                                    	<!-- 예약된 좌석의 id와 저장된 session id가 일치할 시, class name == mine -->
-	                                    	<c:if test="${nb.user_id == 'id'}">
+	                                    	<c:if test="${nb.user_id == 'id3'}">
 	                                    		<button class="mine" id="${nb.seat_no}">${nb.seat_no}</button>
 	                                    	</c:if>
 	                                    	
 	                                    	<!-- 예약된 좌석의 id와 저장된 session id가 불일치할 시, class name == status -->
 	                                    		<!-- status => 사용 중이면 occupied || 사용 가능하면 vacant -->
-	                                    	<c:if test="${nb.user_id != 'id'}">
+	                                    	<c:if test="${nb.user_id != 'id3'}">
 	                                    		<button class="${status}" id="${nb.seat_no}">${nb.seat_no}</button>
 	                                    	</c:if>
 	                                    </c:forEach>
@@ -233,7 +233,7 @@
                         <div class="wrapper-table">
                         
                             <!-- 예약 x 테이블 -->
-                             <c:if test="${reservation_info != null}">
+                             <c:if test="${reservation_info == null}">
                             	<input type="text" name="user_id" value="id">
                             	<input type="text" name="seat_no" value="seat_no" class="input_selected_seat_no">
                             
@@ -399,6 +399,7 @@
 		
 		
 		
+		/* mine 좌석 click 시, 좌석 반납 */
 		$(".mine").on("click", function(e) {
 			
 			e.preventDefault();
@@ -408,21 +409,25 @@
 			if(confirm("좌석을 반납하시겠습니까?")){
 				
 				alert (seat_no + "번 반납완료");
+				
+				location.href = "/mylib/nb_seat_return?seat_no=" + seat_no;
 			}
 			
 			
 		});
 		
-		
+		/* 퇴실 btn click 시, 좌석 반납 */
 		$(".return_btn").on("click", function(e) {
 			
 			e.preventDefault();
 			
-			var seat_no = $(".my_seat_no").attr("id");
+			var seat_no = $(".my_seat_no").val();
 			
 			if(confirm("좌석을 반납하시겠습니까?")){
 				
-				alert (seat_no + "번 반납완료");
+				alert (seat_no + "번 퇴실 완료");
+				
+				location.href = "/mylib/nb_seat_return?seat_no=" + seat_no;
 			}
 			
 			
