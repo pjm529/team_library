@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+  
+  
+
+<mapper namespace="com.library.mapper.mylib.NotebookRoomMapper">
+
+	<select id="seats_list_all" resultType="com.library.model.mylib.NoteBookRoomDTO">
+		select nb.seat_no, seat_status, user_id, reg_time, return_time
+		  from notebook_room nb left join notebook_room_rental nbr
+		    on nb.seat_no = nbr.seat_no
+		 where nb.seat_no order by nb.seat_no
+	</select>
+
+
+
+
+
+</mapper>
