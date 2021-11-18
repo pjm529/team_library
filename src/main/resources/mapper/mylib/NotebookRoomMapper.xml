@@ -14,7 +14,27 @@
 		    on nb.seat_no = nbr.seat_no
 		 where nb.seat_no order by nb.seat_no
 	</select>
+	
+	<select id="reservation_info" resultType="com.library.model.mylib.NoteBookRoomDTO">
+		select *
+		  from notebook_room_rental
+		 where user_id = #{user_id}
+	</select>
 
+
+	<!-- 좌석 예약 -->
+	<insert id="nb_seat_booking">
+		insert 
+		  into notebook_room_rental
+	    values(#{seat_no}, #{user_id}, null, date_add(current_timestamp, INTERVAL 3 HOUR))
+	</insert>
+	
+	<!-- 좌석 예약 -->
+	<update id="updateStatusOccupied">
+		update notebook_room 
+		   set seat_status = 0 
+		 where seat_no = #{seat_no}
+	</update>
 
 
 

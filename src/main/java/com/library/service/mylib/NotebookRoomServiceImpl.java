@@ -21,4 +21,25 @@ public class NotebookRoomServiceImpl implements NotebookRoomService {
 		return nbMapper.seats_list_all();
 	}
 
+
+	@Override
+	public NoteBookRoomDTO reservation_info(String user_id) {
+		return nbMapper.reservation_info(user_id);
+	}
+
+
+	/* 좌석 예약 */
+	@Override
+	public void nb_seat_booking(NoteBookRoomDTO dto) {
+		nbMapper.nb_seat_booking(dto);
+	}
+
+
+	@Override
+	public void updateStatusOccupied(NoteBookRoomDTO dto) {
+		nbMapper.updateStatusOccupied(dto);
+	}
+
+
+
 }

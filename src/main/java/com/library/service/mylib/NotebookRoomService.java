@@ -6,6 +6,13 @@ import com.library.model.mylib.NoteBookRoomDTO;
 
 public interface NotebookRoomService {
 
-	List<NoteBookRoomDTO> seats_list_all();
-
+	public List<NoteBookRoomDTO> seats_list_all();
+	public NoteBookRoomDTO reservation_info(String user_id);
+	
+	/* 좌석 예약 */
+	public void nb_seat_booking(NoteBookRoomDTO dto);
+	public void updateStatusOccupied(NoteBookRoomDTO dto);
+	
+	
+	
 }
