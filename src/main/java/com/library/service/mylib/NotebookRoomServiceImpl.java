@@ -15,12 +15,10 @@ public class NotebookRoomServiceImpl implements NotebookRoomService {
 	private NotebookRoomMapper nbMapper;
 	
 	
-	
 	@Override
 	public List<NoteBookRoomDTO> seats_list_all() {
 		return nbMapper.seats_list_all();
 	}
-
 
 	@Override
 	public NoteBookRoomDTO reservation_info(String user_id) {
@@ -43,15 +41,22 @@ public class NotebookRoomServiceImpl implements NotebookRoomService {
 	
 	/* 좌석 반납&퇴실 */
 	@Override
-	public void nb_seat_return(String seat_no) {
-		nbMapper.nb_seat_return(seat_no);
+	public void nb_seat_return(NoteBookRoomDTO dto) {
+		nbMapper.nb_seat_return(dto);
 		
 	}
 
 	@Override
-	public void updateStatusVacant(String seat_no) {
-		nbMapper.updateStatusVacant(seat_no);
+	public void updateStatusVacant(NoteBookRoomDTO dto) {
+		nbMapper.updateStatusVacant(dto);
 		
+	}
+
+	
+	/* 좌석 연장 */
+	@Override
+	public void nb_seat_extend(NoteBookRoomDTO dto) {
+		nbMapper.nb_seat_extend(dto);
 	}
 
 

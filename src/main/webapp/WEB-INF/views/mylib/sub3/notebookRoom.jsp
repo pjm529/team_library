@@ -350,12 +350,15 @@
 			/* .vacant class의 id 속성 값을 가져와 seat_no 변수에 저장 */
 			var seat_no = $(this).attr("id"); 
 			
-			if($(".mine").lenght){
+			if($(".mine").length){
 				
-				if(confirm(seat_no + "번 좌석으로 이동하시겠습니까?")){
+				if(confirm("노트북실" + seat_no + "번 좌석으로 이동하시겠습니까?")){
+					
 					alert("이동 완료");
+
 					var mySeat_no = $(".mine").attr("id");
 					
+					location.href = "/mylib/moveSeat?newSeat_no=" + seat_no + "&seat_no=" + mySeat_no;
 				}
 				
 			}else {
@@ -434,6 +437,7 @@
 		});
 		
 		
+		/* 자리 연장 */
 		$(".extend_btn").on("click", function(e) {
 			
 			e.preventDefault();
@@ -441,8 +445,9 @@
 	      	var diff_hour = $("#diff_hour").val();
 	        var diff_min = $("#diff_min").val();
 	        var result = diff_hour < 1 && diff_min < 30;
+	        /* 30분 이하로만 자리 연장 가능 */
 			
-			var seat_no = $(".my_seat_no").attr("id");
+			var seat_no = $(".my_seat_no").val();
 			
 			if(result == false){
 				
@@ -451,8 +456,9 @@
 	         }else{
 	        	 
 	            if(confirm("좌석을 연장하시겠습니까?")){
-	               alert(seat_no+"번 자리 연장 완료~~");
+	               alert(seat_no+ "번 자리 연장되었습니다.");
 	               
+	               location.href = "/mylib/nb_seat_extend?seat_no=" + seat_no;
 	            }
 	         }  
 			

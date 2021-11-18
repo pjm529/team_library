@@ -52,6 +52,15 @@
 		   set seat_status = 1 
 		 where seat_no = #{seat_no}
 	</update>
+	
+	
+	<!-- ===== 연장 ===== -->
+	<!-- 좌석 연장 -->
+	<update id="nb_seat_extend">
+		update notebook_room_rental 
+		   set return_time = date_add(return_time, interval 2 hour) 
+		 where seat_no = #{seat_no}
+	</update>
 
 
 
