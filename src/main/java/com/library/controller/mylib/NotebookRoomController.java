@@ -8,6 +8,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import com.library.model.mylib.NoteBookRoomDTO;
 import com.library.service.mylib.NotebookRoomService;
@@ -54,6 +55,23 @@ public class NotebookRoomController {
 		nbService.nb_seat_booking(dto);
 		nbService.updateStatusOccupied(dto);
 
+		return "redirect:/mylib/notebookRoom";
+	}
+	
+	
+	/* 좌석 자리 이동 */
+	@GetMapping("/moveSeat")
+	public String moveSeat(NoteBookRoomDTO dto, @RequestParam("newSeat_no") int newSeat_no) {
+		
+		nbService.nb_seat_return(dto);
+		nbService.updateStatusVacant(dto);
+		
+		dto.setUser_id("id3");
+		dto.setSeat_no(newSeat_no);
+		
+		nbService.nb_seat_booking(dto);
+		nbService.updateStatusOccupied(dto);
+		
 		return "redirect:/mylib/notebookRoom";
 	}
 

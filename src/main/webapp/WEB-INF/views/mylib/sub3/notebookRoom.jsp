@@ -352,7 +352,7 @@
 			
 			if($(".mine").length){
 				
-				if(confirm("노트북실" + seat_no + "번 좌석으로 이동하시겠습니까?")){
+				if(confirm("노트북실 " + seat_no + "번 좌석으로 이동하시겠습니까?")){
 					
 					alert("이동 완료");
 
