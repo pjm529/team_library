@@ -1,4 +1,4 @@
-html, body{
+body{
     margin: 0;
 }
 a, a:link{
@@ -22,6 +22,7 @@ ul{
     padding: 0px;
 }
 
+/* 전체 container */
 .container{
     margin: 0 auto;
     width: 1900px;
@@ -69,7 +70,7 @@ ul{
 }
 
 .doc-title ul li{
-    font-size: 17px;
+	font-size: 17px;
     padding-left: 25px;
     margin-left: 0px;
     background-image: url(/resources/imges/common/sub_con4.png);
@@ -138,6 +139,7 @@ ul{
     position: relative;
 }
 
+/* 사이드 바 hover */
 .subMenu li a:hover{
     background-color: #464f56;
     color: #fff;
@@ -145,6 +147,7 @@ ul{
 }
 
 
+/* 본문 부분 */
 .content{
     box-sizing: border-box;
     padding-top: 30px;
