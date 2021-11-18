@@ -17,6 +17,6 @@ public class ArticleDTO {
 	private Timestamp article_reg_date;
 	private int article_views;
 	
-	private List<AttachFileDTO> attachList;
+	private List<ArticleAttachDTO> attachList;
 		
 }

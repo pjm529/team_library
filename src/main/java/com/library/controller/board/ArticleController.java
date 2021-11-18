@@ -1,29 +1,32 @@
 package com.library.controller.board;
 
 import java.io.File;
-import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.UnsupportedEncodingException;
 import java.net.URLEncoder;
 import java.nio.file.Files;
 import java.util.List;
-import java.util.UUID;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.util.FileCopyUtils;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import com.library.model.board.ArticleAttachDTO;
 import com.library.model.board.ArticleDTO;
 import com.library.page.Criteria;
 import com.library.page.ViewPage;
 import com.library.service.board.ArticleService;
-
-import net.coobird.thumbnailator.Thumbnailator;
 
 
 @Controller
@@ -59,43 +62,18 @@ public class ArticleController {
 	}
 	
 	@PostMapping("/articleInsertForm")
-	public String articleInsert(ArticleDTO dto, MultipartFile[] uploadFile) throws IOException, Exception{
+	public String articleInsert(ArticleDTO dto, RedirectAttributes rttr) throws IOException, Exception{
 		
-		String uploadFolder = "C:\\upload";
-		
-		File uploadPath = new File(uploadFolder);
-		if(uploadPath.exists() == false) {
-			uploadPath.mkdir();
+		System.out.println("-------------insert----------" + dto);
+		if (dto.getAttachList() != null) {
+
+			dto.getAttachList().forEach(attach -> System.out.println(attach));
+
 		}
-		
-		for(MultipartFile multipartFile: uploadFile) {
-			
-			String uploadFileName = multipartFile.getOriginalFilename();
-			uploadFileName = uploadFileName.substring(uploadFileName.lastIndexOf("\\")+1);
-			
-			
-			UUID uuid = UUID.randomUUID();
-			uploadFileName = uuid.toString() + "_" + uploadFileName;
-			
-			File saveFile = new File(uploadPath, uploadFileName);
-			
-			try {
-				multipartFile.transferTo(saveFile);
-				
-				if(checkImageType(saveFile)) {
-					FileOutputStream thumbnail = new FileOutputStream(new File(uploadPath, "s_"+ uploadFileName));
-					Thumbnailator.createThumbnail(multipartFile.getInputStream(), thumbnail, 150, 150);
-					thumbnail.close();
-				}
-			} catch (Exception e) {
-				// TODO: handle exception
-			}
-			
-		}
-		
-		
 		
 		articleService.articleInsert(dto);
+		
+		rttr.addFlashAttribute("result", dto.getArticle_no());
 		
 		return "redirect:/board/articleList";
 	}
@@ -111,6 +89,19 @@ public class ArticleController {
 		}
 		
 		return false;
+	}
+	
+	@GetMapping(value = "/getAttachList", produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
+	@ResponseBody
+	public ResponseEntity<List<ArticleAttachDTO>> getAttachList(Long article_no){
+		System.out.println("컨트롤러 내 article_no==============" + article_no);
+		
+		List<ArticleAttachDTO> a = articleService.getAttachList(article_no);
+		
+		System.out.println("컨트롤러 내 List<ArticleAttachDTO> a==============" + a);
+		
+		return new ResponseEntity<>(articleService.getAttachList(article_no), HttpStatus.OK);
+		
 	}
 	
 	@GetMapping("/articleContent")
@@ -223,6 +214,7 @@ public class ArticleController {
 //		return "redirect:/userInfo?uno="+uno;
 //	}
 //		
+	
 	
 
 }

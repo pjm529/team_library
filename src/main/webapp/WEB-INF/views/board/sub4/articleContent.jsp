@@ -155,14 +155,114 @@ p {
         </div>
     </div>
     
+	<div class='bigPictureWrapper'>
+		<div class='bigPicture'>
+		</div>
+	</div>
+
+ 	<div class="panel-heading">Files</div>
+      <div class="panel-body">
+        <div class='uploadResult'> 
+          <ul>
+          
+          </ul>
+        </div>
+      </div>
+    
 
 <script src="https://code.jquery.com/jquery-3.6.0.js" integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk=" crossorigin="anonymous"></script>
+
 <script>
 
-	$(function() {
-		$(".sub4").addClass("active");	
-	})
-		  
+$(document).ready(function(){
+$(".sub4").addClass("active");	
+  (function(){
+  
+    var article_no = '<c:out value="${dto.article_no}"/>';
+    
+    /* $.getJSON("/board/getAttachList", {bno: bno}, function(arr){
+    
+      console.log(arr);
+      
+      
+    }); *///end getjson
+    $.getJSON("/board/getAttachList", {article_no: article_no}, function(arr){
+        
+       alert(arr);
+       console.log(arr);
+       
+       var str = "";
+       
+       $(arr).each(function(i, attach){
+    	   
+         //image type
+         if(attach.file_type){
+           var fileCallPath =  encodeURIComponent(attach.upload_path+ "/s_"+attach.uuid +"_"+attach.file_name);
+           alert('if문 타는중');
+           
+           str += "<li data-path='"+attach.upload_path+"' data-uuid='"+attach.uuid+"' data-filename='"+attach.file_name+"' data-type='"+attach.file_type+"' ><div>";
+           str += "<img src='/display?file_name="+fileCallPath+"'>";
+           str += "</div>";
+           str +"</li>";
+         }else{
+            
+           str += "<li data-path='"+attach.upload_path+"' data-uuid='"+attach.uuid+"' data-filename='"+attach.file_name+"' data-type='"+attach.file_type+"' ><div>";
+           str += "<span> "+ attach.file_name+"</span><br/>";
+           str += "<img src='/resources/fileImage/default.png'></a>";
+           str += "</div>";
+           str +"</li>";
+         }
+       });
+       
+       $(".uploadResult ul").html(str);
+       
+       
+     });//end getjson
+
+    
+  })();//end function
+  
+  $(".uploadResult").on("click","li", function(e){
+      
+    console.log("view image");
+    
+    var liObj = $(this);
+    
+    var path = encodeURIComponent(liObj.data("path")+"/" + liObj.data("uuid")+"_" + liObj.data("filename"));
+    
+    if(liObj.data("type")){
+      showImage(path.replace(new RegExp(/\\/g),"/"));
+    }else {
+      //download 
+      self.location ="/download?file_name="+path
+    }
+    
+    
+  });
+  
+  function showImage(fileCallPath){
+	    
+    alert(fileCallPath);
+    
+    $(".bigPictureWrapper").css("display","flex").show();
+    
+    $(".bigPicture")
+    .html("<img src='/display?file_name="+fileCallPath+"' >")
+    .animate({width:'100%', height: '100%'}, 1000);
+    
+  }
+
+  $(".bigPictureWrapper").on("click", function(e){
+    $(".bigPicture").animate({width:'0%', height: '0%'}, 1000);
+    setTimeout(function(){
+      $('.bigPictureWrapper').hide();
+    }, 1000);
+  });
+
+  
+});
+
 </script>
+
 </body>
 </html>

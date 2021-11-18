@@ -4,8 +4,11 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.library.mapper.board.ArticleMapper;
+import com.library.mapper.board.ArticleAttachMapper;
+import com.library.model.board.ArticleAttachDTO;
 import com.library.model.board.ArticleDTO;
 import com.library.page.Criteria;
 
@@ -14,6 +17,9 @@ public class ArticleServiceImpl implements ArticleService {
 
 	@Autowired
 	private ArticleMapper mapper;
+	
+	@Autowired
+	private ArticleAttachMapper attachMapper;
 	
 //	@Override
 //	public void insert(UserDTO dto) {
@@ -37,9 +43,26 @@ public class ArticleServiceImpl implements ArticleService {
 		return mapper.articleContent(article_no);
 	}
 
+	@Transactional
 	@Override
 	public void articleInsert(ArticleDTO dto) {
 		mapper.articleInsert(dto);
+		System.out.println("no===================================== "+dto.getArticle_no());
+		
+		if (dto.getAttachList() == null || dto.getAttachList().size() <= 0) {
+			return;
+		}
+		
+		dto.getAttachList().forEach(attach -> {
+
+			attach.setArticle_no(dto.getArticle_no());
+			
+			
+			attachMapper.insert(attach);
+		});
+		
+		
+		
 		
 	}
 
@@ -79,6 +102,14 @@ public class ArticleServiceImpl implements ArticleService {
 	public void reset() {
 		mapper.reset();
 		
+	}
+
+	@Override
+	public List<ArticleAttachDTO> getAttachList(Long article_no) {
+		
+		System.out.println("impl내 article_no============ "+article_no);
+		
+		return attachMapper.findByArticle_no(article_no);
 	}
 
 
