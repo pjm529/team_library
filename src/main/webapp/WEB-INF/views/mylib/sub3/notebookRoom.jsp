@@ -70,33 +70,153 @@
                             <div class="seat-wrapper">
 
                                 <div class="line1">
+                                	
+                                	<!-- 좌석 1 ~ 3 -->
                                     <div class="seat-list" style="width:60px;">
 	                                    <c:forEach var="nb" items="${notebookRoomlist}" begin="0" end="2">
-	                                    	<button class=" vacant">${nb.seat_no}</button>
+	                               			
+	                               			<!-- seat_status == 0 => 좌석 예약 불가 (사용 중) -->
+	                                    	<c:if test="${nb.seat_status == '0'}">
+	                                    		<c:set var="status" value="occupied"/>
+	                                    		<c:set var="user_id" value="${nb.user_id}"/>
+	                                    	</c:if>
+	                                    	
+	                                    	<!-- seat_status == 1 => 좌석 예약 가능 -->
+	                                    	<c:if test="${nb.seat_status == '1'}">
+	                                    		<c:set var="status" value="vacant" />
+	                                    		<c:set var="user_id" value="id"/>
+	                                    	</c:if>
+	                                    	
+	                                    	<!-- 예약된 좌석의 id와 저장된 session id가 일치할 시, class name == mine -->
+	                                    	<c:if test="${nb.user_id == 'id'}">
+	                                    		<button class="mine" id="${nb.seat_no}">${nb.seat_no}</button>
+	                                    	</c:if>
+	                                    	
+	                                    	<!-- 예약된 좌석의 id와 저장된 session id가 불일치할 시, class name == status -->
+	                                    		<!-- status => 사용 중이면 occupied || 사용 가능하면 vacant -->
+	                                    	<c:if test="${nb.user_id != 'id'}">
+	                                    		<button class="${status}" id="${nb.seat_no}">${nb.seat_no}</button>
+	                                    	</c:if>
+	                                    
 	                                    </c:forEach>
                                     </div>
                                     
+                                    
+                                    <!-- 좌석 4~13 -->
                                     <div class="seat-list">
                                     	<c:forEach var="nb" items="${notebookRoomlist}" begin="3" end="12">
-	                                    	<button class=" vacant">${nb.seat_no}</button>
+                                    	
+	                                    	<!-- seat_status == 0 => 좌석 예약 불가 (사용 중) -->
+	                                    	<c:if test="${nb.seat_status == '0'}">
+	                                    		<c:set var="status" value="occupied"/>
+	                                    		<c:set var="user_id" value="${nb.user_id}"/>
+	                                    	</c:if>
+	                                    	
+	                                    	<!-- seat_status == 1 => 좌석 예약 가능 -->
+	                                    	<c:if test="${nb.seat_status == '1'}">
+	                                    		<c:set var="status" value="vacant" />
+	                                    		<c:set var="user_id" value="id"/>
+	                                    	</c:if>
+	                                    	
+	                                    	<!-- 예약된 좌석의 id와 저장된 session id가 일치할 시, class name == mine -->
+	                                    	<c:if test="${nb.user_id == 'id'}">
+	                                    		<button class="mine" id="${nb.seat_no}">${nb.seat_no}</button>
+	                                    	</c:if>
+	                                    	
+	                                    	<!-- 예약된 좌석의 id와 저장된 session id가 불일치할 시, class name == status -->
+	                                    		<!-- status => 사용 중이면 occupied || 사용 가능하면 vacant -->
+	                                    	<c:if test="${nb.user_id != 'id'}">
+	                                    		<button class="${status}" id="${nb.seat_no}">${nb.seat_no}</button>
+	                                    	</c:if>
 	                                    </c:forEach>
                                     </div>
-
+                                    
+                                    
+                                    <!-- 좌석 14~21 -->
                                     <div class="seat-list" style="margin-right: 145px;">
                                     	<c:forEach var="nb" items="${notebookRoomlist}" begin="13" end="20">
-	                                    	<button class=" vacant">${nb.seat_no}</button>
+	                                    	<!-- seat_status == 0 => 좌석 예약 불가 (사용 중) -->
+	                                    	<c:if test="${nb.seat_status == '0'}">
+	                                    		<c:set var="status" value="occupied"/>
+	                                    		<c:set var="user_id" value="${nb.user_id}"/>
+	                                    	</c:if>
+	                                    	
+	                                    	<!-- seat_status == 1 => 좌석 예약 가능 -->
+	                                    	<c:if test="${nb.seat_status == '1'}">
+	                                    		<c:set var="status" value="vacant" />
+	                                    		<c:set var="user_id" value="id"/>
+	                                    	</c:if>
+	                                    	
+	                                    	<!-- 예약된 좌석의 id와 저장된 session id가 일치할 시, class name == mine -->
+	                                    	<c:if test="${nb.user_id == 'id'}">
+	                                    		<button class="mine" id="${nb.seat_no}">${nb.seat_no}</button>
+	                                    	</c:if>
+	                                    	
+	                                    	<!-- 예약된 좌석의 id와 저장된 session id가 불일치할 시, class name == status -->
+	                                    		<!-- status => 사용 중이면 occupied || 사용 가능하면 vacant -->
+	                                    	<c:if test="${nb.user_id != 'id'}">
+	                                    		<button class="${status}" id="${nb.seat_no}">${nb.seat_no}</button>
+	                                    	</c:if>
 	                                    </c:forEach>
                                     </div>
 
+
+									<!-- 좌석 22~25 -->
                                     <div class="seat-list">
                                     	<c:forEach var="nb" items="${notebookRoomlist}" begin="21" end="24">
-	                                    	<button class=" vacant">${nb.seat_no}</button>
+	                                    	<!-- seat_status == 0 => 좌석 예약 불가 (사용 중) -->
+	                                    	<c:if test="${nb.seat_status == '0'}">
+	                                    		<c:set var="status" value="occupied"/>
+	                                    		<c:set var="user_id" value="${nb.user_id}"/>
+	                                    	</c:if>
+	                                    	
+	                                    	<!-- seat_status == 1 => 좌석 예약 가능 -->
+	                                    	<c:if test="${nb.seat_status == '1'}">
+	                                    		<c:set var="status" value="vacant" />
+	                                    		<c:set var="user_id" value="id"/>
+	                                    	</c:if>
+	                                    	
+	                                    	<!-- 예약된 좌석의 id와 저장된 session id가 일치할 시, class name == mine -->
+	                                    	<c:if test="${nb.user_id == 'id'}">
+	                                    		<button class="mine" id="${nb.seat_no}">${nb.seat_no}</button>
+	                                    	</c:if>
+	                                    	
+	                                    	<!-- 예약된 좌석의 id와 저장된 session id가 불일치할 시, class name == status -->
+	                                    		<!-- status => 사용 중이면 occupied || 사용 가능하면 vacant -->
+	                                    	<c:if test="${nb.user_id != 'id'}">
+	                                    		<button class="${status}" id="${nb.seat_no}">${nb.seat_no}</button>
+	                                    	</c:if>
 	                                    </c:forEach>
                                     </div>
 
+
+									<!-- 좌석 26~28 -->
                                     <div class="seat-list" style="width:60px; margin-right: 0px;">
                                     	<c:forEach var="nb" items="${notebookRoomlist}" begin="25" end="27">
-	                                    	<button class=" vacant">${nb.seat_no}</button>
+                                    	
+	                                    	<!-- seat_status == 0 => 좌석 예약 불가 (사용 중) -->
+	                                    	<c:if test="${nb.seat_status == '0'}">
+	                                    		<c:set var="status" value="occupied"/>
+	                                    		<c:set var="user_id" value="${nb.user_id}"/>
+	                                    	</c:if>
+	                                    	
+	                                    	<!-- seat_status == 1 => 좌석 예약 가능 -->
+	                                    	<c:if test="${nb.seat_status == '1'}">
+	                                    		<c:set var="status" value="vacant" />
+	                                    		<c:set var="user_id" value="id"/>
+	                                    	</c:if>
+	                                    	
+	                                    	<!-- 예약된 좌석의 id와 저장된 session id가 일치할 시, class name == mine -->
+	                                    	<c:if test="${nb.user_id == 'id'}">
+	                                    		<button class="mine" id="${nb.seat_no}">${nb.seat_no}</button>
+	                                    	</c:if>
+	                                    	
+	                                    	<!-- 예약된 좌석의 id와 저장된 session id가 불일치할 시, class name == status -->
+	                                    		<!-- status => 사용 중이면 occupied || 사용 가능하면 vacant -->
+	                                    	<c:if test="${nb.user_id != 'id'}">
+	                                    		<button class="${status}" id="${nb.seat_no}">${nb.seat_no}</button>
+	                                    	</c:if>
+	                                    	
 	                                    </c:forEach>
                                     </div>
 
@@ -167,18 +287,22 @@
 
 
 
-    <script src="https://code.jquery.com/jquery-3.6.0.js"
-        integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk=" crossorigin="anonymous"></script>
+<script src="https://code.jquery.com/jquery-3.6.0.js"
+    integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk=" crossorigin="anonymous"></script>
 
 
-    <script>
+<script>
 
-        // class가 occupied인 button은 disabled 속성 사용해 버튼 비활성화
-        $(function () {
-            $(".occupied").prop("disabled", true);
+	// class가 occupied인 button은 disabled 속성 사용해 버튼 비활성화
+	$(function () {
+		$(".sub3").addClass("active");
+		
+		
+		
+	    $(".occupied").prop("disabled", true);
+	
+	});
 
-        });
-
-    </script>
+</script>
 </body>
 </html>

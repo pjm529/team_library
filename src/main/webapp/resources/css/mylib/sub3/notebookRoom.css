@@ -107,6 +107,19 @@
     margin: 2%;
 }
 
+/* 자신이 예약한 자리 */
+.mine{
+    background-color: rgb(228, 162, 76);
+    border: 1px solid #e55b00;
+    border-radius: 5px;
+    cursor: pointer;
+    color: #fff;
+    font-size: 14px;
+    width: 40px;
+    height: 40px;
+    margin: 2%;
+}
+
 /* 눌렀을 때 or 자기 자신의 색 */
 .seat-wrapper button:active{
     background-color: #ff6600;
