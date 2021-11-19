@@ -129,15 +129,24 @@ p {
 	                                	<input type="hidden" name="page" value="${cri.page}">
 	                                	<input type="hidden" name="type" value="${cri.type}">
 	                                	<input type="hidden" name="keyword" value="${cri.keyword}">
+	                                	<input type="hidden" name="uuid" id="uuid">
+	                                	<input type="hidden" name="thumb" id="thumb">
+	                                	<input type="hidden" name="file_name" id="file_name">
+	                                	
+	                                	
 	                                    <button class="delete_btn">삭제하기</button>
 	                                 </form>       
                                  </div>       
                                    
                                  <div class="update_wrap"> 
                                  	 
-	                                    <button class="update_btn" style="margin-right: 20px;"
-	                                        onclick="location.href='/board/articleModifyForm?article_no=${dto.article_no}&amount=${cri.amount}&page=${cri.page}'">수정하기</button>
-                          
+	                               <button class="update_btn" style="margin-right: 20px;"
+	                                        onclick="location.href='/board/articleModifyForm?article_no=${dto.article_no}&amount=${cri.amount}&page=${cri.page}'">수정하기</button> 
+                           
+                           
+                       <!--    <button class="update_btn" style="margin-right: 20px;"
+	                            onclick="modifunc()">수정하기</button>  -->
+                         
                                  
                                  </div>       
 
@@ -155,12 +164,13 @@ p {
         </div>
     </div>
     
+    <!-- 첨부파일 -->
 	<div class='bigPictureWrapper'>
 		<div class='bigPicture'>
 		</div>
 	</div>
 
- 	<div class="panel-heading">Files</div>
+ 	<div class="panel-heading">첨부파일</div>
       <div class="panel-body">
         <div class='uploadResult'> 
           <ul>
@@ -179,16 +189,13 @@ $(".sub4").addClass("active");
   (function(){
   
     var article_no = '<c:out value="${dto.article_no}"/>';
+
     
-    /* $.getJSON("/board/getAttachList", {bno: bno}, function(arr){
+  
     
-      console.log(arr);
-      
-      
-    }); *///end getjson
     $.getJSON("/board/getAttachList", {article_no: article_no}, function(arr){
         
-       alert(arr);
+     
        console.log(arr);
        
        var str = "";
@@ -198,7 +205,12 @@ $(".sub4").addClass("active");
          //image type
          if(attach.file_type){
            var fileCallPath =  encodeURIComponent(attach.upload_path+ "/s_"+attach.uuid +"_"+attach.file_name);
-           alert('if문 타는중');
+           var uuidName = $("#uuid").val(attach.uuid+"_"+attach.file_name);
+           var thumbName = $("#thumb").val('s_'+attach.uuid+"_"+attach.file_name);
+          /*  var file_name =$("#file_name").val(attach.file_name); */
+           $("input[name='uuid']").attr('value',uuidName);
+           $("input[name='thumb']").attr('value',thumbName);
+          /*  $("input[name='file_name']").attr('value',file_name); */
            
            str += "<li data-path='"+attach.upload_path+"' data-uuid='"+attach.uuid+"' data-filename='"+attach.file_name+"' data-type='"+attach.file_type+"' ><div>";
            str += "<img src='/display?file_name="+fileCallPath+"'>";
@@ -240,6 +252,9 @@ $(".sub4").addClass("active");
     
   });
   
+  
+
+  
   function showImage(fileCallPath){
 	    
     alert(fileCallPath);
@@ -258,11 +273,30 @@ $(".sub4").addClass("active");
       $('.bigPictureWrapper').hide();
     }, 1000);
   });
+  
+
 
   
 });
 
 </script>
+
+<!-- <script type="text/javascript">
+  function modifunc() {
+  	
+  	var article_no = ${dto.article_no};
+  	var amount = ${cri.amount};
+  	var page = ${cri.page};
+/*     var uuidName = $("#uuid").val();
+    var thumbName = $("#thumb").val(); */
+    /* location.href='/board/articleModifyForm?article_no='+article_no+'&amount='+amount+'&page='+page+'&uuidName='+uuidName+'&thumbName='+thumbName
+   */  
+    console.log();
+   
+  
+  }
+</script> -->
+
 
 </body>
 </html>

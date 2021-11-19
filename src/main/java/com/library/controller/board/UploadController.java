@@ -41,17 +41,6 @@ public class UploadController {
 		log.info("upload form");
 	}
 
-	// @PostMapping("/uploadFormAction")
-	// public void uploadFormPost(MultipartFile[] uploadFile, Model model) {
-	//
-	// for (MultipartFile multipartFile : uploadFile) {
-	//
-	// log.info("-------------------------------------");
-	// log.info("Upload File Name: " +multipartFile.getOriginalFilename());
-	// log.info("Upload File Size: " +multipartFile.getSize());
-	//
-	// }
-	// }
 
 	@PostMapping("/uploadFormAction")
 	public void uploadFormPost(MultipartFile[] uploadFile, Model model) {
@@ -81,49 +70,18 @@ public class UploadController {
 		log.info("upload ajax");
 	}
 
-	// @PostMapping("/uploadAjaxAction")
-	// public void uploadAjaxPost(MultipartFile[] uploadFile) {
-	//
-	// log.info("update ajax post.........");
-	//
-	// String uploadFolder = "C:\\upload";
-	//
-	// for (MultipartFile multipartFile : uploadFile) {
-	//
-	// log.info("-------------------------------------");
-	// log.info("Upload File Name: " + multipartFile.getOriginalFilename());
-	// log.info("Upload File Size: " + multipartFile.getSize());
-	//
-	// String uploadFileName = multipartFile.getOriginalFilename();
-	//
-	// // IE has file path
-	// uploadFileName = uploadFileName.substring(uploadFileName.lastIndexOf("\\") +
-	// 1);
-	// log.info("only file name: " + uploadFileName);
-	//
-	// File saveFile = new File(uploadFolder, uploadFileName);
-	//
-	// try {
-	//
-	// multipartFile.transferTo(saveFile);
-	// } catch (Exception e) {
-	// log.error(e.getMessage());
-	// } // end catch
-	//
-	// } // end for
-	//
-	// }
-
-	private String getFolder() {
-
-		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
-
-		Date date = new Date();
-
-		String str = sdf.format(date);
-
-		return str.replace("-", File.separator);
-	}
+	
+// 날짜별 폴더 생성
+//	private String getFolder() {
+//
+//		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+//
+//		Date date = new Date();
+//
+//		String str = sdf.format(date);
+//
+//		return str.replace("-", File.separator);
+//	}
 
 
 
@@ -151,9 +109,10 @@ public class UploadController {
 		List<AttachFileDTO> list = new ArrayList<>();
 		String uploadFolder = "C:\\upload";
 
-		String uploadFolderPath = getFolder();
+//		String uploadFolderPath = getFolder();
 		// make folder --------
-		File uploadPath = new File(uploadFolder, uploadFolderPath);
+		File uploadPath = new File(uploadFolder);
+//		File uploadPath = new File(uploadFolder, uploadFolderPath);
 
 		if (uploadPath.exists() == false) {
 			uploadPath.mkdirs();
@@ -180,7 +139,7 @@ public class UploadController {
 				multipartFile.transferTo(saveFile);
 
 				attachDTO.setUuid(uuid.toString());
-				attachDTO.setUpload_path(uploadFolderPath);
+				attachDTO.setUpload_path(uploadFolder);
 
 				// check image type file
 				if (checkImageType(saveFile)) {
@@ -188,7 +147,7 @@ public class UploadController {
 					attachDTO.setImage(true);
 
 					FileOutputStream thumbnail = new FileOutputStream(new File(uploadPath, "s_" + uploadFileName));
-
+						
 					Thumbnailator.createThumbnail(multipartFile.getInputStream(), thumbnail, 100, 100);
 
 					thumbnail.close();
@@ -209,11 +168,7 @@ public class UploadController {
 	@ResponseBody
 	public ResponseEntity<byte[]> getFile(String file_name) {
 
-		System.out.println("+++++++++++++++++++++++++++++++++++++++++++++++++++++fileName: " + file_name);
-
-		File file = new File("c:\\upload\\" + file_name);
-
-		System.out.println("+++++++++++++++++++++++++++++++++++++++++++++++++++++file: " + file);
+		File file = new File(file_name);
 
 		ResponseEntity<byte[]> result = null;
 
@@ -229,124 +184,7 @@ public class UploadController {
 		return result;
 	}
 
-	// @GetMapping(value = "/download", produces =
-	// MediaType.APPLICATION_OCTET_STREAM_VALUE)
-	// @ResponseBody
-	// public ResponseEntity<Resource> downloadFile(String fileName) {
-	//
-	// log.info("download file: " + fileName);
-	//
-	// Resource resource = new FileSystemResource("c:\\upload\\" + fileName);
-	//
-	// log.info("resource: " + resource);
-	//
-	// return null;
-	// }
-
-	// @GetMapping(value = "/download", produces =
-	// MediaType.APPLICATION_OCTET_STREAM_VALUE)
-	// @ResponseBody
-	// public ResponseEntity<Resource> downloadFile(String fileName) {
-	//
-	// log.info("download file: " + fileName);
-	//
-	// Resource resource = new FileSystemResource("c:\\upload\\" + fileName);
-	//
-	// log.info("resource: " + resource);
-	//
-	// String resourceName = resource.getFilename();
-	//
-	// HttpHeaders headers = new HttpHeaders();
-	// try {
-	// headers.add("Content-Disposition",
-	// "attachment; filename=" + new String(resourceName.getBytes("UTF-8"),
-	// "ISO-8859-1"));
-	// } catch (UnsupportedEncodingException e) {
-	// e.printStackTrace();
-	// }
-	// return new ResponseEntity<Resource>(resource, headers, HttpStatus.OK);
-	// }
-
-	// @GetMapping(value="/download" ,
-	// produces=MediaType.APPLICATION_OCTET_STREAM_VALUE)
-	// @ResponseBody
-	// public ResponseEntity<Resource>
-	// downloadFile(@RequestHeader("User-Agent")String userAgent, String fileName){
-	//
-	// Resource resource = new FileSystemResource("c:\\upload\\" + fileName);
-	//
-	// if(resource.exists() == false) {
-	// return new ResponseEntity<>(HttpStatus.NOT_FOUND);
-	// }
-	//
-	// String resourceName = resource.getFilename();
-	//
-	// HttpHeaders headers = new HttpHeaders();
-	// try {
-	//
-	// boolean checkIE = (userAgent.indexOf("MSIE") > -1 ||
-	// userAgent.indexOf("Trident") > -1);
-	//
-	// String downloadName = null;
-	//
-	// if (checkIE) {
-	// downloadName = URLEncoder.encode(resourceName, "UTF8").replaceAll("\\+", "
-	// ");
-	// } else {
-	// downloadName = new String(resourceName.getBytes("UTF-8"), "ISO-8859-1");
-	// }
-	//
-	// headers.add("Content-Disposition", "attachment; filename=" + downloadName);
-	//
-	// } catch (UnsupportedEncodingException e) {
-	// e.printStackTrace();
-	// }
-	//
-	// return new ResponseEntity<Resource>(resource, headers, HttpStatus.OK);
-	// }
-
-	// @GetMapping(value="/download" ,
-	// produces=MediaType.APPLICATION_OCTET_STREAM_VALUE)
-	// @ResponseBody
-	// public ResponseEntity<Resource>
-	// downloadFile(@RequestHeader("User-Agent")String userAgent, String fileName){
-	//
-	// Resource resource = new FileSystemResource("c:\\upload\\" + fileName);
-	//
-	// if(resource.exists() == false) {
-	// return new ResponseEntity<>(HttpStatus.NOT_FOUND);
-	// }
-	//
-	// String resourceName = resource.getFilename();
-	//
-	// //remove UUID
-	// String resourceOriginalName =
-	// resourceName.substring(resourceName.indexOf("_")+1);
-	//
-	// HttpHeaders headers = new HttpHeaders();
-	// try {
-	//
-	// boolean checkIE = (userAgent.indexOf("MSIE") > -1 ||
-	// userAgent.indexOf("Trident") > -1);
-	//
-	// String downloadName = null;
-	//
-	// if(checkIE) {
-	// downloadName = URLEncoder.encode(resourceOriginalName,
-	// "UTF8").replaceAll("\\+", " ");
-	// }else {
-	// downloadName = new
-	// String(resourceOriginalName.getBytes("UTF-8"),"ISO-8859-1");
-	// }
-	//
-	// headers.add("Content-Disposition", "attachment; filename="+downloadName);
-	//
-	// } catch (UnsupportedEncodingException e) {
-	// e.printStackTrace();
-	// }
-	//
-	// return new ResponseEntity<Resource>(resource, headers,HttpStatus.OK);
-	// }
+	
 
 	@GetMapping(value = "/download", produces = MediaType.APPLICATION_OCTET_STREAM_VALUE)
 	@ResponseBody
@@ -393,14 +231,14 @@ public class UploadController {
 
 	@PostMapping("/deleteFile")
 	@ResponseBody
-	public ResponseEntity<String> deleteFile(String fileName, String type) {
+	public ResponseEntity<String> deleteFile(String file_name, String type) {
 
-		log.info("deleteFile: " + fileName);
+		log.info("deleteFile: " + file_name);
 
 		File file;
 
 		try {
-			file = new File("c:\\upload\\" + URLDecoder.decode(fileName, "UTF-8"));
+			file = new File("c:\\upload\\" + URLDecoder.decode(file_name, "UTF-8"));
 
 			file.delete();
 

@@ -12,5 +12,7 @@ public interface ArticleAttachMapper {
 	
 	public List<ArticleAttachDTO> findByArticle_no(Long article_no);
 	
+	public void deleteAll(Long article_no);
+	
 
 }

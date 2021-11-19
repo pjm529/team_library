@@ -18,6 +18,8 @@
 	<select id="findByArticle_no" resultType="com.library.model.board.ArticleAttachDTO">
 		select * from attach_file where article_no = #{article_no}
 	</select>
+	
+	
  	
  	
  	

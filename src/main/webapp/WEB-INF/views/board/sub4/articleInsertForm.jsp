@@ -243,12 +243,12 @@ $(document).ready(function(e){
 				
 				if(obj.image){
 					var fileCallPath =  encodeURIComponent( obj.upload_path+ "/s_"+obj.uuid +"_"+obj.file_name);
+					
 					str += "<li data-path='"+obj.upload_path+"'";
 					str +=" data-uuid='"+obj.uuid+"' data-filename='"+obj.file_name+"' data-type='"+obj.image+"'"
 					str +" ><div>";
 					str += "<span> "+ obj.file_name+"</span>";
-					str += "<button type='button' data-file=\'"+fileCallPath+"\' "
-					str += "data-type='image' class='btn btn-warning btn-circle'>x</button><br>";
+					str += "<button type='button' data-file=\'"+fileCallPath+"\' data-type='image'>x</button><br>";
 					str += "<img src='/display?file_name="+fileCallPath+"'>";
 					str += "</div>";
 					str +"</li>";
@@ -259,8 +259,7 @@ $(document).ready(function(e){
 					str += "<li "
 					str += "data-path='"+obj.upload_path+"' data-uuid='"+obj.uuid+"' data-filename='"+obj.file_name+"' data-type='"+obj.image+"' ><div>";
 					str += "<span> "+ obj.file_name+"</span>";
-					str += "<button type='button' data-file=\'"+fileCallPath+"\' data-type='file' " 
-					str += "class='btn btn-warning btn-circle'>x</button><br>";
+					str += "<button type='button' data-file=\'"+fileCallPath+"\' data-type='image'>x</button><br>";
 					str += "<img src='/resources/fileImage/default.png' width='150px'></a>";
 					str += "</div>";
 					str +"</li>";
@@ -271,7 +270,7 @@ $(document).ready(function(e){
 		    uploadUL.append(str);
 		  }
 	   
-	   
+	   /* x버튼 눌렀을 때 첨부파일 화면에서 사라짐 */
 	   $(".uploadResult").on("click", "button", function(e){
 		    
 		    console.log("delete file");
@@ -287,7 +286,7 @@ $(document).ready(function(e){
 		      dataType:'text',
 		      type: 'POST',
 		        success: function(result){
-		           alert(result);
+		        
 		           
 		           targetLi.remove();
 		         }

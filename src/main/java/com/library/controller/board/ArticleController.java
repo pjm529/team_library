@@ -64,7 +64,7 @@ public class ArticleController {
 	@PostMapping("/articleInsertForm")
 	public String articleInsert(ArticleDTO dto, RedirectAttributes rttr) throws IOException, Exception{
 		
-		System.out.println("-------------insert----------" + dto);
+		
 		if (dto.getAttachList() != null) {
 
 			dto.getAttachList().forEach(attach -> System.out.println(attach));
@@ -94,22 +94,23 @@ public class ArticleController {
 	@GetMapping(value = "/getAttachList", produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
 	@ResponseBody
 	public ResponseEntity<List<ArticleAttachDTO>> getAttachList(Long article_no){
-		System.out.println("컨트롤러 내 article_no==============" + article_no);
+		
 		
 		List<ArticleAttachDTO> a = articleService.getAttachList(article_no);
 		
-		System.out.println("컨트롤러 내 List<ArticleAttachDTO> a==============" + a);
+		
 		
 		return new ResponseEntity<>(articleService.getAttachList(article_no), HttpStatus.OK);
 		
 	}
 	
 	@GetMapping("/articleContent")
-	public String articleContent(Criteria cri, @RequestParam("article_no")String a_article_no, Model model) {
+	public String articleContent(Criteria cri, @RequestParam("article_no")String a_article_no, Model model ) {
 		
 		Long article_no = Long.parseLong(a_article_no);
 		articleService.articleViewsCount(article_no);
 		ArticleDTO dto = articleService.articleContent(article_no);
+		
 		model.addAttribute("dto", dto);
 		model.addAttribute("cri", cri);
 		
@@ -119,26 +120,60 @@ public class ArticleController {
 	}
 	
 	@GetMapping("/articleDelete")
-	public String articleDelete(Criteria cri, @RequestParam("article_no") String a_article_no) { 
+	public String articleDelete(Criteria cri, @RequestParam("article_no") String a_article_no, 
+			@RequestParam("uuid") String uuid,@RequestParam("thumb") String thumb) { 
 		
 		String keyword;
 		
 		try {
 			keyword = URLEncoder.encode(cri.getKeyword(), "UTF-8");
+			fileDelete(uuid,thumb);
 		} catch (UnsupportedEncodingException e) {
 			return "redirect:/board/articleList";
 		}
 				
 		Long article_no = Long.parseLong(a_article_no); //들어오는 스트링값이 롱값으로 변환됌
 		articleService.articleDelete(article_no);
+		
 		articleService.reset();
 		
 		return "redirect:/board/articleList?amount=" + cri.getAmount() + "&page=" + cri.getPage() + "&keyword=" + keyword + "&type" + cri.getType(); //리다이렉트로 새로고침된 값을 뿌린다.
 	}
 	
+	// 파일삭제
+	   public void fileDelete(String uuid,  String thumb) {
+
+	   
+	      String filePath = "C:\\upload\\";
+	      
+	      
+	      
+	      
+	      File deleteFileName = new File(filePath + uuid);
+	      File deleteThumFileName = new File(filePath + thumb);
+	      
+	      
+	      
+	      if(deleteFileName.exists() || deleteThumFileName.exists()) {
+	         
+	         deleteFileName.delete();
+	         deleteThumFileName.delete();
+	         
+	         System.out.println("파일삭제완료");
+	         
+	      }else {
+	         System.out.println("파일삭제실패");
+	         
+	      }
+	   
+	   
+	   
+	   }
+	
+	
 	@GetMapping("/articleModifyForm")
 	public String modifyForm(@RequestParam("article_no")String a_article_no, Model model, Criteria cri) {		
-		
+	
 		Long article_no = Long.parseLong(a_article_no);
 		ArticleDTO dto = articleService.articleContent(article_no);
 		model.addAttribute("dto", dto);
@@ -163,6 +198,7 @@ public class ArticleController {
 		
 		return "redirect:/board/articleContent?amount=" + cri.getAmount() + "&page=" + cri.getPage() + "&keyword=" + keyword + "&type" + cri.getType() + "&article_no=" + dto.getArticle_no(); //리다이렉트할때는 위에 매핑주소를 따라간다.
 	}
+	
 	
 	
 //	@GetMapping("/userInsert")

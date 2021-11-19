@@ -21,33 +21,24 @@ public class ArticleServiceImpl implements ArticleService {
 	@Autowired
 	private ArticleAttachMapper attachMapper;
 	
-//	@Override
-//	public void insert(UserDTO dto) {
-//		
-//		mapper.insert(dto);				
-//	}
+
 	@Override
 	public List<ArticleDTO> list_all(){
 		return mapper.list_all();
 		
 		//impl에서 xml로 넘긴다.(mapper 자바도 가서 만들어줘야함)
 	}
-//	@Override
-//	public void delete(Long bno) {
-//		mapper.delete(bno);
-//		
-//	}
+
 
 	@Override
 	public ArticleDTO articleContent(Long article_no) {
 		return mapper.articleContent(article_no);
 	}
-
+// 파일첨부
 	@Transactional
 	@Override
 	public void articleInsert(ArticleDTO dto) {
 		mapper.articleInsert(dto);
-		System.out.println("no===================================== "+dto.getArticle_no());
 		
 		if (dto.getAttachList() == null || dto.getAttachList().size() <= 0) {
 			return;
@@ -65,16 +56,29 @@ public class ArticleServiceImpl implements ArticleService {
 		
 		
 	}
+	
 
 	@Override
 	public void articleDelete(Long article_no) {
 		mapper.articleDelete(article_no);
 		
 	}
-
+	
+	// 수정해야함ㅠㅠ
+	@Transactional
 	@Override
 	public void articleUpdate(ArticleDTO dto) {
 		mapper.articleUpdate(dto);
+		
+		if (dto.getAttachList() == null || dto.getAttachList().size() <= 0) {
+			return;
+		}
+		
+		dto.getAttachList().forEach(attach -> {
+
+			attach.setArticle_no(dto.getArticle_no());	
+			attachMapper.insert(attach);
+		});
 		
 	}
 
@@ -111,6 +115,7 @@ public class ArticleServiceImpl implements ArticleService {
 		
 		return attachMapper.findByArticle_no(article_no);
 	}
+	
 
 
 
