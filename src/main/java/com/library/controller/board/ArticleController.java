@@ -5,6 +5,8 @@ import java.io.IOException;
 import java.io.UnsupportedEncodingException;
 import java.net.URLEncoder;
 import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -40,6 +42,8 @@ public class ArticleController {
 	@GetMapping("/articleList")
 	public String articleList(Model model, Criteria cri) {
 		
+		
+		
 		List<ArticleDTO> articleList = articleService.getListPaging(cri);
 		model.addAttribute("articleList", articleList); 
 		
@@ -58,6 +62,7 @@ public class ArticleController {
 	@GetMapping("/articleInsertForm")
 	public String goArticleInsert() {
 		
+
 		return "/board/sub4/articleInsertForm";
 	}
 	
@@ -98,8 +103,6 @@ public class ArticleController {
 		
 		List<ArticleAttachDTO> a = articleService.getAttachList(article_no);
 		
-		
-		
 		return new ResponseEntity<>(articleService.getAttachList(article_no), HttpStatus.OK);
 		
 	}
@@ -121,18 +124,29 @@ public class ArticleController {
 	
 	@GetMapping("/articleDelete")
 	public String articleDelete(Criteria cri, @RequestParam("article_no") String a_article_no, 
-			@RequestParam("uuid") String uuid,@RequestParam("thumb") String thumb) { 
+			@RequestParam("uuid") String uuid,@RequestParam("thumb") String thumb, RedirectAttributes rttr) { 
 		
 		String keyword;
-		
 		try {
 			keyword = URLEncoder.encode(cri.getKeyword(), "UTF-8");
+			
+			
+			List<ArticleAttachDTO> attachList = articleService.getAttachList(Long.parseLong( a_article_no));
+			deleteFiles(attachList);
+			rttr.addFlashAttribute("result", "success");
+			
+			
 			fileDelete(uuid,thumb);
 		} catch (UnsupportedEncodingException e) {
 			return "redirect:/board/articleList";
 		}
 				
 		Long article_no = Long.parseLong(a_article_no); //들어오는 스트링값이 롱값으로 변환됌
+		
+		
+		
+		
+		
 		articleService.articleDelete(article_no);
 		
 		articleService.reset();
@@ -140,20 +154,47 @@ public class ArticleController {
 		return "redirect:/board/articleList?amount=" + cri.getAmount() + "&page=" + cri.getPage() + "&keyword=" + keyword + "&type" + cri.getType(); //리다이렉트로 새로고침된 값을 뿌린다.
 	}
 	
-	// 파일삭제
+	
+	private void deleteFiles(List<ArticleAttachDTO> attachList) {
+	    
+	    if(attachList == null || attachList.size() == 0) {
+	      return;
+	    }
+	    
+	    	System.out.println("attachList============="+attachList);
+	    
+	    attachList.forEach(attach -> {
+	      try {        
+	        Path file  = Paths.get("C:\\upload\\" + attach.getUuid()+"_"+ attach.getFile_name());
+	        
+	        Files.deleteIfExists(file);
+	        
+	        if(Files.probeContentType(file).startsWith("image")) {
+	        
+	          Path thumbNail = Paths.get("C:\\upload\\"+"\\s_" + attach.getUuid()+"_"+ attach.getFile_name());
+	          
+	          Files.delete(thumbNail);
+	        }
+	
+	      }catch(Exception e) {
+	    	  
+	    	  System.out.println("파일삭제 실패=========" + e.getMessage());
+	    	  
+	      }//end catch
+	    });//end foreachd
+	  }
+
+	
+	
+	// upload폴더 내 파일삭제
 	   public void fileDelete(String uuid,  String thumb) {
 
 	   
 	      String filePath = "C:\\upload\\";
-	      
-	      
-	      
-	      
+ 
 	      File deleteFileName = new File(filePath + uuid);
 	      File deleteThumFileName = new File(filePath + thumb);
-	      
-	      
-	      
+ 
 	      if(deleteFileName.exists() || deleteThumFileName.exists()) {
 	         
 	         deleteFileName.delete();
@@ -179,6 +220,15 @@ public class ArticleController {
 		model.addAttribute("dto", dto);
 		model.addAttribute("cri", cri);
 		
+		
+		
+		
+		
+		
+		
+		
+		/* fileDelete(uuid,thumb); */
+		
 		return "/board/sub4/articleModifyForm";
 		
 	}
@@ -199,58 +249,7 @@ public class ArticleController {
 		return "redirect:/board/articleContent?amount=" + cri.getAmount() + "&page=" + cri.getPage() + "&keyword=" + keyword + "&type" + cri.getType() + "&article_no=" + dto.getArticle_no(); //리다이렉트할때는 위에 매핑주소를 따라간다.
 	}
 	
-	
-	
-//	@GetMapping("/userInsert")
-//	public String goUserInsert() {
-//		
-//		return "userInsert";
-//	}
-		
-//	@PostMapping("/userInsert")
-//	public String userInsert(UserDTO dto) {
-//		//System.out.println(dto); 콘솔창에 값 들어오는지 확인		
-//		userService.userInsert(dto);
-//		return "redirect:/userList"; // 리다이렉트의 슬러시 의미는 @GetMapping("/") 주소로 가라
-//	}
-//	@GetMapping("/articleList")
-//	public String articleList(Model model) {
-//		
-//		List<ArticleDTO> articleList = articleService.list_all();
-//		model.addAttribute("articleList", articleList); 
-//		
-//		return "articleList";
-//		
-//		//컨트롤러에서 서비스단으로 넘긴다.(모델이라는 객체 이용하면 뷰단으로 쉽게 빼낼 수 있음)
-//	}
-//	@GetMapping("/userDelete")
-//	public String delete(@RequestParam("uno")String u_no) { 
-//		
-//		Long uno = Long.parseLong(u_no); //들어오는 스트링값이 롱값으로 변환됌
-//		userService.userDelete(uno);
-//		
-//		
-//		return "redirect:/userList"; //리다이렉트로 새로고침된 값을 뿌린다.
-//	}
 
-//	@GetMapping("/userModifyForm")
-//	public String modifyForm(@RequestParam("uno")String u_no, Model model) {		
-//		
-//		Long uno = Long.parseLong(u_no);
-//		UserDTO dto = userService.userInfo(uno);
-//		model.addAttribute("dto", dto);
-//		
-//		return "userModifyForm";
-//		
-//	}
-//	@PostMapping("/userModify")
-//	public String userModify(UserDTO dto, @RequestParam("uno") String uno ) {
-//		
-//		userService.userUpdate(dto);
-//		return "redirect:/userInfo?uno="+uno;
-//	}
-//		
-	
 	
 
 }

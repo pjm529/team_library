@@ -16,7 +16,7 @@ public interface ArticleService {
 
 	public void articleDelete(Long article_no);
 
-	public void articleUpdate(ArticleDTO dto);
+	public boolean articleUpdate(ArticleDTO dto);
 	
 	public void articleViewsCount(Long article_no);
 	

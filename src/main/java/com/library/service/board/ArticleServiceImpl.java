@@ -52,35 +52,59 @@ public class ArticleServiceImpl implements ArticleService {
 			attachMapper.insert(attach);
 		});
 		
-		
-		
-		
 	}
 	
-
+	@Transactional
 	@Override
 	public void articleDelete(Long article_no) {
+		attachMapper.deleteAll(article_no);
+		
 		mapper.articleDelete(article_no);
 		
 	}
 	
+	
+	
 	// 수정해야함ㅠㅠ
-	@Transactional
-	@Override
-	public void articleUpdate(ArticleDTO dto) {
-		mapper.articleUpdate(dto);
-		
-		if (dto.getAttachList() == null || dto.getAttachList().size() <= 0) {
-			return;
+		@Transactional
+		@Override
+		public boolean articleUpdate(ArticleDTO dto) {
+			
+			attachMapper.deleteAll(dto.getArticle_no());
+			
+			boolean modifyResult = mapper.articleUpdate(dto);
+			
+			if(modifyResult && dto.getAttachList() != null && dto.getAttachList().size() > 0) {
+				dto.getAttachList().forEach(attach -> {
+					
+					attach.setArticle_no(dto.getArticle_no());
+					attachMapper.insert(attach);
+					
+				});
+			}
+			
+			return modifyResult;
+			
 		}
-		
-		dto.getAttachList().forEach(attach -> {
-
-			attach.setArticle_no(dto.getArticle_no());	
-			attachMapper.insert(attach);
-		});
-		
-	}
+	
+//		// 수정해야함ㅠㅠ
+//		@Transactional
+//		@Override
+//		public void articleUpdate(ArticleDTO dto) {
+//			mapper.articleUpdate(dto);
+//			
+//			if (dto.getAttachList() == null || dto.getAttachList().size() <= 0) {
+//				return;
+//			}
+//			
+//			dto.getAttachList().forEach(attach -> {
+//
+//				attach.setArticle_no(dto.getArticle_no());	
+//				attachMapper.insert(attach);
+//			});
+//			
+//		}
+//	
 
 
 
@@ -119,35 +143,6 @@ public class ArticleServiceImpl implements ArticleService {
 
 
 
-//	@Override
-//	public ArticleDTO userInfo(Long uno) {
-//		
-//		return mapper.userInfo(uno);
-//	}
-//
-//	@Override
-//	public void userDelete(Long uno) {
-//		mapper.userDelete(uno);
-//		
-//	}
-//
-//	@Override
-//	public void userInsert(ArticleDTO dto) {
-//		mapper.userInsert(dto);
-//		
-//	}
-//
-//	@Override
-//	public void userUpdate(ArticleDTO dto) {
-//		mapper.userUpdate(dto);
-//		
-//	}
-
-//	@Override
-//	public void update(UserDTO dto) {
-//		mapper.update(dto);
-//		
-//	}
 	
 	
 

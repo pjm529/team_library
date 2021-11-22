@@ -2,6 +2,7 @@ package com.library.model.board;
 
 import lombok.Data;
 
+// DB용
 @Data
 public class ArticleAttachDTO {
 

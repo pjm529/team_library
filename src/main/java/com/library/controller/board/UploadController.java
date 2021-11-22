@@ -24,6 +24,7 @@ import org.springframework.util.FileCopyUtils;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestHeader;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 import com.library.model.board.AttachFileDTO;
@@ -35,40 +36,40 @@ import net.coobird.thumbnailator.Thumbnailator;
 @Log4j
 public class UploadController {
 
-	@GetMapping("/uploadForm")
-	public void uploadForm() {
+//	@GetMapping("/uploadForm")
+//	public void uploadForm() {
+//
+//		log.info("upload form");
+//	}
 
-		log.info("upload form");
-	}
 
-
-	@PostMapping("/uploadFormAction")
-	public void uploadFormPost(MultipartFile[] uploadFile, Model model) {
-
-		String uploadFolder = "C:\\upload";
-
-		for (MultipartFile multipartFile : uploadFile) {
-
-			log.info("-------------------------------------");
-			log.info("Upload File Name: " + multipartFile.getOriginalFilename());
-			log.info("Upload File Size: " + multipartFile.getSize());
-
-			File saveFile = new File(uploadFolder, multipartFile.getOriginalFilename());
-
-			try {
-				multipartFile.transferTo(saveFile);
-			} catch (Exception e) {
-				log.error(e.getMessage());
-			} // end catch
-		} // end for
-
-	}
-
-	@GetMapping("/uploadAjax")
-	public void uploadAjax() {
-
-		log.info("upload ajax");
-	}
+//	@PostMapping("/uploadFormAction")
+//	public void uploadFormPost(MultipartFile[] uploadFile, Model model) {
+//
+//		String uploadFolder = "C:\\upload";
+//
+//		for (MultipartFile multipartFile : uploadFile) {
+//
+//			log.info("-------------------------------------");
+//			log.info("Upload File Name: " + multipartFile.getOriginalFilename());
+//			log.info("Upload File Size: " + multipartFile.getSize());
+//
+//			File saveFile = new File(uploadFolder, multipartFile.getOriginalFilename());
+//
+//			try {
+//				multipartFile.transferTo(saveFile);
+//			} catch (Exception e) {
+//				log.error(e.getMessage());
+//			} // end catch
+//		} // end for
+//
+//	}
+//
+//	@GetMapping("/uploadAjax")
+//	public void uploadAjax() {
+//
+//		log.info("upload ajax");
+//	}
 
 	
 // 날짜별 폴더 생성
@@ -228,19 +229,22 @@ public class UploadController {
 		return new ResponseEntity<Resource>(resource, headers, HttpStatus.OK);
 	}
 	
-
+// 첨부파일 x버튼 눌렀을 때 ajax 처리과정
 	@PostMapping("/deleteFile")
 	@ResponseBody
-	public ResponseEntity<String> deleteFile(String file_name, String type) {
+	public ResponseEntity<String> deleteFile(String file_name, String type, @RequestParam("uuid") String uuid, @RequestParam("thumb") String thumb) {
 
 		log.info("deleteFile: " + file_name);
 
 		File file;
-
+		
 		try {
+						
 			file = new File("c:\\upload\\" + URLDecoder.decode(file_name, "UTF-8"));
 
 			file.delete();
+			
+			fileDelete(uuid, thumb);
 
 			if (type.equals("image")) {
 
@@ -251,6 +255,8 @@ public class UploadController {
 				file = new File(largeFileName);
 
 				file.delete();
+				
+				fileDelete(uuid, thumb);
 			}
 
 		} catch (UnsupportedEncodingException e) {
@@ -261,6 +267,69 @@ public class UploadController {
 		return new ResponseEntity<String>("deleted", HttpStatus.OK);
 
 	}
+	
+	// 폴더 내 파일삭제
+	   public void fileDelete(String uuid,  String thumb) {
+
+	   
+	      String filePath = "C:\\upload\\";
+
+	      File deleteFileName = new File(filePath + uuid);
+	      File deleteThumFileName = new File(filePath + thumb);
+
+	      if(deleteFileName.exists() || deleteThumFileName.exists()) {
+	         
+	         deleteFileName.delete();
+	         deleteThumFileName.delete();
+	         
+	         System.out.println("파일삭제완료");
+	         
+	      }else {
+	         System.out.println("파일삭제실패");
+	         
+	      }
+	   
+	   
+	   
+	   }
+	   
+	// 첨부파일 x버튼 눌렀을 때 ajax 처리과정
+		@PostMapping("/deleteFile2")
+		@ResponseBody
+		public ResponseEntity<String> deleteFile2(String file_name, String type) {
+
+			log.info("deleteFile: " + file_name);
+
+			File file;
+			
+			try {
+							
+				file = new File("c:\\upload\\" + URLDecoder.decode(file_name, "UTF-8"));
+
+				file.delete();
+				
+				
+
+				if (type.equals("image")) {
+
+					String largeFileName = file.getAbsolutePath().replace("s_", "");
+
+					log.info("largeFileName: " + largeFileName);
+
+					file = new File(largeFileName);
+
+					file.delete();
+					
+				}
+
+			} catch (UnsupportedEncodingException e) {
+				e.printStackTrace();
+				return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+			}
+
+			return new ResponseEntity<String>("deleted", HttpStatus.OK);
+
+		}
 	
 
 }

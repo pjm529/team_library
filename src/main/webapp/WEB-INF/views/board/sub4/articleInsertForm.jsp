@@ -90,6 +90,16 @@
                                            	<td>
 	                                           	
 	                                           	
+												<div class="uploadDiv">
+													 <input type="file" name="uploadFile" multiple>
+													 <input type="hidden" name="uuid" id="uuid">
+												</div>
+												
+												<div class="uploadResult">
+													<ul>
+													
+													</ul>
+												</div>
 	                                           	
 	                                           
 	                                           	
@@ -123,15 +133,6 @@
 
 
 
-												<div class="uploadDiv">
-													 <input type="file" name="uploadFile" multiple>
-												</div>
-												
-												<div class="uploadResult">
-													<ul>
-													
-													</ul>
-												</div>
 
 <script src="https://code.jquery.com/jquery-3.6.0.js" integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk=" crossorigin="anonymous"></script>
 <script>
@@ -146,6 +147,7 @@ $(document).ready(function(e){
 	     
 	   }); */
 	   
+	   /* 파일업로드 ,전송할 때 넘겨주는 것들*/
 	   
 	   var formObj = $("form[role='form']");
 	   
@@ -171,14 +173,14 @@ $(document).ready(function(e){
 	       
 	     });
 	     
-	     alert(str);
+	     
 	     
 	     formObj.append(str).submit();
 	     
 	   });
 
 	   
-	   
+	   /* 용량,파일형식 지정 */
 	   var regex = new RegExp("(.*?)\.(exe|sh|zip|alz)$");
 	   var maxSize = 5242880; //5MB
 	   
@@ -215,10 +217,11 @@ $(document).ready(function(e){
 		    $.ajax({
 		      url: '/uploadAjaxAction',
 		      processData: false, 
-		      contentType: false,data: 
-		      formData,type: 'POST',
+		      contentType: false,
+		      data: formData,
+		      type: 'POST',
 		      dataType:'json',
-		        success: function(result){
+		      success: function(result){
 		          console.log(result); 
 				  showUploadResult(result); //업로드 결과 처리 함수 
 
@@ -244,6 +247,15 @@ $(document).ready(function(e){
 				if(obj.image){
 					var fileCallPath =  encodeURIComponent( obj.upload_path+ "/s_"+obj.uuid +"_"+obj.file_name);
 					
+					var uuidName = obj.uuid+"_"+obj.file_name;
+					
+					
+           			/* var thumbName = $("#thumb").val('s_'+attach.uuid+"_"+attach.file_name); */
+           			
+	           		 $("input[name='uuid']").attr('value',uuidName);
+	           		/*  $("input[name='thumb']").attr('value',thumbName); */
+					
+					
 					str += "<li data-path='"+obj.upload_path+"'";
 					str +=" data-uuid='"+obj.uuid+"' data-filename='"+obj.file_name+"' data-type='"+obj.image+"'"
 					str +" ><div>";
@@ -252,6 +264,7 @@ $(document).ready(function(e){
 					str += "<img src='/display?file_name="+fileCallPath+"'>";
 					str += "</div>";
 					str +"</li>";
+					
 				}else{
 					var fileCallPath =  encodeURIComponent( obj.upload_path+"/"+ obj.uuid +"_"+obj.file_name);			      
 				    var fileLink = fileCallPath.replace(new RegExp(/\\/g),"/");
@@ -273,19 +286,23 @@ $(document).ready(function(e){
 	   /* x버튼 눌렀을 때 첨부파일 화면에서 사라짐 */
 	   $(".uploadResult").on("click", "button", function(e){
 		    
+		   var uuid = $("#uuid").val();
+		   var thumb = "s_"+uuid;
+		   
 		    console.log("delete file");
-		      
+			      
 		    var targetFile = $(this).data("file");
 		    var type = $(this).data("type");
+		    
 		    
 		    var targetLi = $(this).closest("li");
 		    
 		    $.ajax({
 		      url: '/deleteFile',
-		      data: {file_name: targetFile, type:type},
+		      data: {file_name: targetFile, type:type, uuid:uuid, thumb:thumb},
 		      dataType:'text',
 		      type: 'POST',
-		        success: function(result){
+		      success: function(result){
 		        
 		           
 		           targetLi.remove();

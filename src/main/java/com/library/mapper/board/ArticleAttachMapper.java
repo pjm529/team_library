@@ -15,4 +15,6 @@ public interface ArticleAttachMapper {
 	public void deleteAll(Long article_no);
 	
 
+	
+
 }

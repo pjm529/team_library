@@ -2,6 +2,7 @@ package com.library.model.board;
 
 import lombok.Data;
 
+// 이미지인지 아닌지 판단용
 @Data
 public class AttachFileDTO {
 

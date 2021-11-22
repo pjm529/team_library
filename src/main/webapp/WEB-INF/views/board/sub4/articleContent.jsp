@@ -101,6 +101,21 @@ p {
                                             <td colspan="6">
                                                 <div class="bbs-content">
                                                     <p>${dto.article_content}</p>
+                                                      <!-- 첨부파일 -->
+													<!-- <div class='bigPictureWrapper'>
+														<div class='bigPicture'>
+														</div>
+													</div> -->
+												
+												 	
+											      <div class="panel-body">
+											        <div class='uploadResult'> 
+											          <ul>
+											          	
+											          </ul>
+											        </div>
+											      </div>
+												    
                                                 </div>
                                             </td>
                                         </tr>
@@ -129,9 +144,9 @@ p {
 	                                	<input type="hidden" name="page" value="${cri.page}">
 	                                	<input type="hidden" name="type" value="${cri.type}">
 	                                	<input type="hidden" name="keyword" value="${cri.keyword}">
-	                                	<input type="hidden" name="uuid" id="uuid">
-	                                	<input type="hidden" name="thumb" id="thumb">
-	                                	<input type="hidden" name="file_name" id="file_name">
+	                                	<input type="text" name="uuid" id="uuid">
+	                                	<input type="text" name="thumb" id="thumb">
+	                                	<input type="text" name="file_name" id="file_name">
 	                                	
 	                                	
 	                                    <button class="delete_btn">삭제하기</button>
@@ -164,7 +179,7 @@ p {
         </div>
     </div>
     
-    <!-- 첨부파일 -->
+<!--     첨부파일
 	<div class='bigPictureWrapper'>
 		<div class='bigPicture'>
 		</div>
@@ -178,7 +193,7 @@ p {
           </ul>
         </div>
       </div>
-    
+     -->
 
 <script src="https://code.jquery.com/jquery-3.6.0.js" integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk=" crossorigin="anonymous"></script>
 
@@ -186,7 +201,7 @@ p {
 
 $(document).ready(function(){
 $(".sub4").addClass("active");	
-  (function(){
+  (function(){ 
   
     var article_no = '<c:out value="${dto.article_no}"/>';
 
@@ -204,7 +219,8 @@ $(".sub4").addClass("active");
     	   
          //image type
          if(attach.file_type){
-           var fileCallPath =  encodeURIComponent(attach.upload_path+ "/s_"+attach.uuid +"_"+attach.file_name);
+           var fileCallPath =  encodeURIComponent(attach.upload_path+ "/"+attach.uuid +"_"+attach.file_name);
+       
            var uuidName = $("#uuid").val(attach.uuid+"_"+attach.file_name);
            var thumbName = $("#thumb").val('s_'+attach.uuid+"_"+attach.file_name);
           /*  var file_name =$("#file_name").val(attach.file_name); */
@@ -213,7 +229,7 @@ $(".sub4").addClass("active");
           /*  $("input[name='file_name']").attr('value',file_name); */
            
            str += "<li data-path='"+attach.upload_path+"' data-uuid='"+attach.uuid+"' data-filename='"+attach.file_name+"' data-type='"+attach.file_type+"' ><div>";
-           str += "<img src='/display?file_name="+fileCallPath+"'>";
+           str += "<img width='500px' src='/display?file_name="+fileCallPath+"'>";
            str += "</div>";
            str +"</li>";
          }else{
@@ -232,7 +248,7 @@ $(".sub4").addClass("active");
      });//end getjson
 
     
-  })();//end function
+   }) ();//end function
   
   $(".uploadResult").on("click","li", function(e){
       
@@ -255,7 +271,7 @@ $(".sub4").addClass("active");
   
 
   
-  function showImage(fileCallPath){
+/*   function showImage(fileCallPath){
 	    
     alert(fileCallPath);
     
@@ -272,7 +288,7 @@ $(".sub4").addClass("active");
     setTimeout(function(){
       $('.bigPictureWrapper').hide();
     }, 1000);
-  });
+  }); */
   
 
 

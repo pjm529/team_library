@@ -15,6 +15,10 @@
 		delete from attach_file where uuid = #{uuid}
 	</delete>
 	
+	<delete id="deleteAll">
+		delete from attach_file where article_no = #{article_no}
+	</delete>
+	
 	<select id="findByArticle_no" resultType="com.library.model.board.ArticleAttachDTO">
 		select * from attach_file where article_no = #{article_no}
 	</select>
