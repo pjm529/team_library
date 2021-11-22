@@ -271,3 +271,86 @@ table td.left{
 }
 
 
+/* 글쓰기 버튼 */
+.write{
+   height: 80px;
+}
+
+/* 페이지 */
+.pageInfo{
+   height: auto;
+   text-align: center;
+   margin-bottom: 25px;
+}
+.not {
+   border: 1px solid black;
+   display: inline-block;
+   line-height: 24px;
+   padding: 3px 12px;
+   border: 1px solid #d9d9d9;
+   margin-left: -1px;
+   background: #fafafa;
+   color: #555;
+   font-size: 14px;
+}
+
+.not:hover{
+   box-shadow:none;
+   border-color:#ccc;
+   background:#eee;
+}
+
+.current{
+   border: 1px solid #444;
+      display: inline-block;
+      line-height: 24px;
+      padding: 3px 12px;
+      border: 1px solid #d9d9d9;
+      margin-left: -1px;
+      font-size: 14px;
+      background: #4c4c4c;
+      color: #fff;
+}
+
+
+
+/* 검색 */
+.searchBox{
+   border: 1px solid #dcdcdc;
+   border-radius: 3px;
+   background: #f6f6f6;
+   padding: 10px;
+}
+
+.searchBox form{
+   margin-bottom: 0px;
+   text-align: center;
+}
+
+.searchBox select{
+    width: 130px;
+    height: 34px;
+    border: 1px solid #ccc;
+    border-radius: 3px;
+    font-size: inherit;
+}
+
+.searchBox input{
+   height: 31px !important;
+   width: 250px;
+    border: 1px solid #ccc;
+    border-radius: 3px;
+    padding: 0 5px;
+    font-size: inherit;
+}
+
+.search_btn{
+   background-color: #266ac4;
+   border-color: #1557af;
+   color: #fff;
+   width: 80px !important;
+   cursor: pointer;
+}
+
+
+

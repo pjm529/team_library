@@ -83,10 +83,23 @@
                                                         rows="15"></textarea>
                                                 </td>
                                             </tr>
-                                            <tr>
+                                            <!-- <tr>
                                                 <td colspan="4">
                                                     <input type="file" name="notice_img" multiple>
                                                 </td>
+                                            </tr> -->
+                                            <tr>
+                                            	<td>
+                                            		<div class="uploadDiv">
+				                                        <input type="file" name="uploadFile" multiple>
+				                                    </div>
+				                                    
+				                                    <div class="uploadResult">
+				                                       <ul>
+				                                       
+				                                       </ul>
+				                                    </div>
+                                            	</td>
                                             </tr>
                                             
                                         </tbody>
@@ -98,6 +111,7 @@
                                         <button class="write_btn" type="submit">작성완료</button>
                                         <button class="list_btn" onclick="location.href='/board/noticeList'">목록으로</button>
                                     </div>
+                                    
                                     
                                     
 
@@ -129,6 +143,8 @@
 			
 			if(notice_title == ""){
 				
+				$("#notice_title").focus();
+				
 				return false;
 			}
 			
@@ -137,7 +153,171 @@
 				$("form").submit();
 			}
 		});
-	})
+		
+		
+		
+		
+		/* 파일 업로드 */
+		
+		var formObj = $("form[role='form']");
+		   
+		$("button[type='submit']").on("click", function(e){
+		  
+			e.preventDefault();
+			
+			var str = "";
+			
+			$(".uploadResult ul li").each(function(i, obj){
+			  
+				var jobj = $(obj);
+				
+				console.dir(jobj);
+				console.log("-------------------------");
+				
+				
+				
+				str += "<input type='hidden' name='attachList["+i+"].file_name' value='"+jobj.data("filename")+"'>";
+				str += "<input type='hidden' name='attachList["+i+"].uuid' value='"+jobj.data("uuid")+"'>";
+				str += "<input type='hidden' name='attachList["+i+"].upload_path' value='"+jobj.data("path")+"'>";
+				str += "<input type='hidden' name='attachList["+i+"].file_type' value='"+ jobj.data("type")+"'>";
+			  
+			});
+			  
+			alert(str);
+			
+			formObj.append(str).submit();
+		  
+		});
+		
+			      
+			      
+			      
+		var regex = new RegExp("(.*?)\.(exe|sh|zip|alz)$");
+		var maxSize = 5242880; //5MB
+		
+		function checkExtension(file_name, fileSize){
+		  
+			if(fileSize >= maxSize){
+			  alert("파일 사이즈 초과");
+			  return false;
+			}
+			
+			if(regex.test(file_name)){
+			  alert("해당 종류의 파일은 업로드할 수 없습니다.");
+			  return false;
+			}
+			return true;
+		}
+			      
+			      
+			      
+		$("input[type='file']").change(function(e){
+		
+			var formData = new FormData();
+			var inputFile = $("input[name='uploadFile']");
+			var files = inputFile[0].files;
+			
+			for(var i = 0; i < files.length; i++){
+			
+				if(!checkExtension(files[i].name, files[i].size) ){
+				  return false;
+				}
+				formData.append("uploadFile", files[i]);
+			}
+			
+			$.ajax({
+				url: '/uploadAjaxAction',
+				processData: false, 
+				contentType: false,data: 
+				formData,type: 'POST',
+				dataType:'json',
+				success: function(result){
+					console.log(result); 
+					showUploadResult(result); //업로드 결과 처리 함수 
+				}
+			}); //$.ajax
+		    
+		}); 
+			      
+			      
+		
+			      
+		function showUploadResult(uploadResultArr){
+		    
+			if(!uploadResultArr || uploadResultArr.length == 0){ return; }
+			
+			var uploadUL = $(".uploadResult ul");
+			
+			var str ="";
+			    
+			$(uploadResultArr).each(function(i, obj){
+			
+				if(obj.image){
+					var fileCallPath =  encodeURIComponent( obj.upload_path+ "/s_"+obj.uuid +"_"+obj.file_name);
+					
+					str += "<li data-path='"+obj.upload_path+"'";
+					str +=" data-uuid='"+obj.uuid+"' data-filename='"+obj.file_name+"' data-type='"+obj.image+"'"
+					str +" ><div>";
+					str += "<span> "+ obj.file_name+"</span>";
+					str += "<button type='button' data-file=\'"+fileCallPath+"\' data-type='image'>x</button><br>";
+					str += "<img src='/display?file_name="+fileCallPath+"'>";
+					str += "</div>";
+					str +"</li>";
+				}else{
+					var fileCallPath =  encodeURIComponent( obj.upload_path+"/"+ obj.uuid +"_"+obj.file_name);               
+					var fileLink = fileCallPath.replace(new RegExp(/\\/g),"/");
+					   
+					str += "<li "
+					str += "data-path='"+obj.upload_path+"' data-uuid='"+obj.uuid+"' data-filename='"+obj.file_name+"' data-type='"+obj.image+"' ><div>";
+					str += "<span> "+ obj.file_name+"</span>";
+					str += "<button type='button' data-file=\'"+fileCallPath+"\' data-type='image'>x</button><br>";
+					str += "<img src='/resources/fileImage/default.png' width='150px'></a>";
+					str += "</div>";
+					str +"</li>";
+				}
+			
+			});
+			
+			uploadUL.append(str);
+		}
+		
+			      
+		/* x버튼 눌렀을 때 첨부파일 화면에서 사라짐 */
+		$(".uploadResult").on("click", "button", function(e){
+		    
+			console.log("delete file");
+			  
+			var targetFile = $(this).data("file");
+			var type = $(this).data("type");
+			
+			var targetLi = $(this).closest("li");
+			    
+			$.ajax({
+				url: '/deleteFile',
+				data: {file_name: targetFile, type:type},
+				dataType:'text',
+				type: 'POST',
+				success: function(result){
+				  
+				     
+				targetLi.remove();
+				}
+			}); //$.ajax
+		});
+		
+		
+		
+		
+		
+		
+		
+})
+	
+	
+	
+	
+	
+	
 </script>
 
 

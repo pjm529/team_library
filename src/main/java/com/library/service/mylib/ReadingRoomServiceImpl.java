@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 
 import com.library.mapper.mylib.ReadingRoomMapper;
 import com.library.model.mylib.ReadingRoomDTO;
+import com.library.page.Criteria;
 
 import lombok.AllArgsConstructor;
 
@@ -16,10 +17,20 @@ public class ReadingRoomServiceImpl implements ReadingRoomService {
 
 	@Autowired
 	private ReadingRoomMapper mapper;
+
+	@Override
+	public void updateReading_Room1_RentalTable() {
+		mapper.updateReading_Room1_RentalTable();
+	}
 	
 	@Override
-	public List<ReadingRoomDTO> getSeatsList() {
-		return mapper.getSeatsList();
+	public void updateReading_Room1Table() {
+		mapper.updateReading_Room1Table();
+	}
+	
+	@Override
+	public List<ReadingRoomDTO> getSeatsList(int skip, int amount) {
+		return mapper.getSeatsList(skip, amount);
 	}
 
 	@Override
@@ -51,5 +62,7 @@ public class ReadingRoomServiceImpl implements ReadingRoomService {
 	public ReadingRoomDTO mySeatInfo(String user_id) {
 		return mapper.mySeatInfo(user_id);
 	}
+
+
 
 }

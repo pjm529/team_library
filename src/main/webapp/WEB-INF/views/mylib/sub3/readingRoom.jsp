@@ -59,40 +59,127 @@
                             <div class="seat-wrapper">
                                 <div class="line1">
                                     <div class="seat-list">
-                                    <c:forEach var="seatsList" items="${seatsList}">
+                                    <c:forEach var="seatsList" items="${seatsList1}">
                                     	
-                                    	<!-- 좌석이 예약된 상태면 status는 occupied -->
                                     	<c:if test="${seatsList.seat_status == '0'}">
                                     		<c:set var="status" value="occupied"/>
                                     		<c:set var="user_id" value="${seatsList.user_id}"/>
                                     	</c:if>
                                     	
-                                    	<!-- 좌석이 빈 상태면 status는 vacant -->
                                     	<c:if test="${seatsList.seat_status == '1'}">
                                     		<c:set var="status" value="vacant"/>
                                     		<c:set var="user_id" value="khi29"/>
                                     	</c:if>
                                     	
-                                    	<!-- 예약된 좌석의 user_id가 sessionId와 일치하면 class를 mine으로 설정 -->
                                     	<c:if test="${seatsList.user_id == 'khi29'}">
                                     		<button class="mine" id="${seatsList.seat_no}">${seatsList.seat_no}</button>
                                     	</c:if>
                                     	
-                                    	<!-- 예약된 좌석의 user_id가 sessionId와 일치하지 않을 경우 -->
                                     	<c:if test="${seatsList.user_id != 'khi29'}">
                                     		<button class="${status}" id="${seatsList.seat_no}">${seatsList.seat_no}</button>
                                     	</c:if>
                                     
-                                    	<%-- <form action="#" method="post" class="moveForm">
-											<input type="hidden" name="seat_no" value="${seatsList.seat_no}">
-											<input type="hidden" name="user_id" value="khi29">
-										</form>
-                                         --%>
                                     </c:forEach>
                                     </div>
                                     
+                                    <div class="seat-list">
+                                    <c:forEach var="seatsList2" items="${seatsList2}">
+                                    	
+                                    	<c:if test="${seatsList2.seat_status == '0'}">
+                                    		<c:set var="status" value="occupied"/>
+                                    		<c:set var="user_id" value="${seatsList2.user_id}"/>
+                                    	</c:if>
+                                    	
+                                    	<c:if test="${seatsList2.seat_status == '1'}">
+                                    		<c:set var="status" value="vacant"/>
+                                    		<c:set var="user_id" value="khi29"/>
+                                    	</c:if>
+                                    	
+                                    	<c:if test="${seatsList2.user_id == 'khi29'}">
+                                    		<button class="mine" id="${seatsList2.seat_no}">${seatsList2.seat_no}</button>
+                                    	</c:if>
+                                    	
+                                    	<c:if test="${seatsList2.user_id != 'khi29'}">
+                                    		<button class="${status}" id="${seatsList2.seat_no}">${seatsList2.seat_no}</button>
+                                    	</c:if>
+                                    </c:forEach>
+                                    </div>
+                                    
+                                    <div class="seat-list" style="height: 180px; overflow: hidden;">
+                                    <c:forEach var="seatsList2" items="${seatsList3}">
+                                    	
+                                    	<c:if test="${seatsList2.seat_status == '0'}">
+                                    		<c:set var="status" value="occupied"/>
+                                    		<c:set var="user_id" value="${seatsList2.user_id}"/>
+                                    	</c:if>
+                                    	
+                                    	<c:if test="${seatsList2.seat_status == '1'}">
+                                    		<c:set var="status" value="vacant"/>
+                                    		<c:set var="user_id" value="khi29"/>
+                                    	</c:if>
+                                    	
+                                    	<c:if test="${seatsList2.user_id == 'khi29'}">
+                                    		<button class="mine" id="${seatsList2.seat_no}">${seatsList2.seat_no}</button>
+                                    	</c:if>
+                                    	
+                                    	<c:if test="${seatsList2.user_id != 'khi29'}">
+                                    		<button class="${status}" id="${seatsList2.seat_no}">${seatsList2.seat_no}</button>
+                                    	</c:if>
+                                    </c:forEach>
+                                    </div>
+                                    
+                                    <div class="seat-list">
+                                    <c:forEach var="seatsList" items="${seatsList4}">
+                                    	
+                                    	<c:if test="${seatsList.seat_status == '0'}">
+                                    		<c:set var="status" value="occupied"/>
+                                    		<c:set var="user_id" value="${seatsList.user_id}"/>
+                                    	</c:if>
+                                    	
+                                    	<c:if test="${seatsList.seat_status == '1'}">
+                                    		<c:set var="status" value="vacant"/>
+                                    		<c:set var="user_id" value="khi29"/>
+                                    	</c:if>
+                                    	
+                                    	<c:if test="${seatsList.user_id == 'khi29'}">
+                                    		<button class="mine" id="${seatsList.seat_no}">${seatsList.seat_no}</button>
+                                    	</c:if>
+                                    	
+                                    	<c:if test="${seatsList.user_id != 'khi29'}">
+                                    		<button class="${status}" id="${seatsList.seat_no}">${seatsList.seat_no}</button>
+                                    	</c:if>
+                                    
+                                    </c:forEach>
+                                    </div>
+                                 </div>
+                                  
+                                    
+                                    <div class="line2">
+                                    	<div class="seat-list-row">
+	                                    <c:forEach var="seatsList" items="${seatsList5}">
+	                                    	
+	                                    	<c:if test="${seatsList.seat_status == '0'}">
+	                                    		<c:set var="status" value="occupied"/>
+	                                    		<c:set var="user_id" value="${seatsList.user_id}"/>
+	                                    	</c:if>
+	                                    	
+	                                    	<c:if test="${seatsList.seat_status == '1'}">
+	                                    		<c:set var="status" value="vacant"/>
+	                                    		<c:set var="user_id" value="khi29"/>
+	                                    	</c:if>
+	                                    	
+	                                    	<c:if test="${seatsList.user_id == 'khi29'}">
+	                                    		<button class="mine" id="${seatsList.seat_no}">${seatsList.seat_no}</button>
+	                                    	</c:if>
+	                                    	
+	                                    	<c:if test="${seatsList.user_id != 'khi29'}">
+	                                    		<button class="${status}" id="${seatsList.seat_no}">${seatsList.seat_no}</button>
+	                                    	</c:if>
+	                                    </c:forEach>
+	                                    </div>
+                                    </div>
+                                    
 
-                                </div>
                             </div>
                         </div>
 
@@ -208,11 +295,10 @@
 
 $(function () {
 	
-	$("#10").after("</div>");
-	$("#10").after("<div class='seat-list'>");
+	/* $("#10").after("</div><div class='seat-list'>");
 	$("#20").after("</div><div class='seat-list' style='height: 180px; overflow: hidden;'>");
 	$("#28").after("</div><div class='seat-list'>");
-	$("#38").after("</div></div><div class='line2'><div class='seat-list-row'>");
+	$("#38").after("</div></div><div class='line2'><div class='seat-list-row'>"); */
 	
 	
 	
@@ -241,28 +327,50 @@ $(function () {
 	
 	$(".vacant").on("click", function(e){
 		e.preventDefault();
-							
+		
 		var seat_no = $(this).attr("id");
 		
-		$(".selected_seat_no").html(seat_no);
-		$(".input_selected_seat_no").val(seat_no);
+		if($(".mine").length){
+			
+			if(confirm("제1열람실 "+seat_no+"번 좌석으로 이동하시겠습니까?")){
+				
+				alert("이동 완료");
+
+				var mySeat_no = $(".mine").attr("id");
+				
+				location.href = "/mylib/moveSeat?newSeat_no="+seat_no+"&seat_no="+mySeat_no;
+			}
+			
+		}else{
+
+			$(".vacant").css("background-color", "#284d70");
+			$(".vacant").css("border", "#4d445b");
+			
+			$(this).css("background-color", "#ff6600");
+			$(this).css("border", "#ff6600");
+						
+			$(".selected_seat_no").html(seat_no);
+			$(".input_selected_seat_no").val(seat_no);
+			
+			$(".booking_btn").show();
+			
+		}
 		
-		$(".booking_btn").show();
 	})
 	
 	
 	$(".booking_btn").on("click", function(e){
 		e.preventDefault();
 		
-		
 		var seat_no = $(".input_selected_seat_no").val();
-		
 												
 		if(confirm("제1열람실 "+seat_no+"번 좌석을 예약하시겠습니까?")){
-			alert("예약완료");
+			
+			alert("예약 완료");
 			
 			location.href = "/mylib/bookingSeat?seat_no="+seat_no;
-		}									
+			
+		}
 	})
 	
 	$(".return_btn").on("click", function(e){
@@ -288,38 +396,16 @@ $(function () {
 		
 		if(result == false){
 			alert("연장 가능한 시간이 아닙니다.");
-			return;
+			
 		}else{
 			if(confirm("좌석을 연장하시겠습니까?")){
 				alert(seat_no+"번 자리 연장 완료~~");
 				
 				location.href = "/mylib/extendSeat?seat_no="+seat_no;
 			}
-		}
-		
-												
+		}									
 											
 	})
-	
-	
-	/* 	var moveForm = $(".moveForm");
-		var bookingForm = $(".bookingForm"); */
-		
-		/* $(".mine").on("click", function(e){
-			e.preventDefault();
-													
-			var seat_no = $(this).attr("id");
-			var user_id = "khi29";
-													
-			if(confirm("좌석을 반납하시겠습니까?")){
-				alert("반납완료");
-																								
-				moveForm.find("input[name = 'seat_no']").val(seat_no);
-				moveForm.attr("action", "/mylib/returnSeat");
-				moveForm.submit();
-			}									
-		})  */
-	
 	
 });
         
