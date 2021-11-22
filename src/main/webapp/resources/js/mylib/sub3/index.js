@@ -1,4 +1,4 @@
-$(document).ready(function() {
+
 
 // Date 객체 사용으로 날짜 받아옴
 // let 사용 이유 => goToday 함수에서 date 값을 재할당해 주기 위해
@@ -150,23 +150,20 @@ var groupRoom_booking = () => {
 }
 
 
-
-	// 사용율 % 나타내는 함수
-	var usedSeat = "<c:out value='${usedSeat}'/>";
-	var percent = (usedSeat/28) * 100;
-	$('#nbUsedSeat').html(percent.toFixed(0) + "%");
 	
-
-	$('#new_btn').on("click", function(){
+$(document).ready(function() {
+	
+	
+	$('body').on("click", "#group_booking", function(){
 		
 		var nowDate = $(this).closest('span').find('#nowDate').val();
 		
 		alert(nowDate);
 		
+		location.href = '/mylib/groupRoom?nowDate=' + nowDate;
 		
 		
 	});
-
 
 	
 }); 
