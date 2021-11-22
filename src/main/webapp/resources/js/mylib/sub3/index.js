@@ -150,15 +150,13 @@ var groupRoom_booking = () => {
 }
 
 
-	
+/* 세미나실 예약 btn의 해당하는 날짜 값 구하기*/
 $(document).ready(function() {
 	
 	
 	$('body').on("click", "#group_booking", function(){
 		
 		var nowDate = $(this).closest('span').find('#nowDate').val();
-		
-		alert(nowDate);
 		
 		location.href = '/mylib/groupRoom?nowDate=' + nowDate;
 		
