@@ -98,7 +98,7 @@
                                                 <progress value="2" max="54"></progress>
                                             </td>
                                             <td class="percent">
-                                            	<div id="nbUsedSeat"></div>
+                                            	<div id="rd1UsedSeat"></div>
                                             	</td>
                                             <td>운영중</td>
                                             <td>
@@ -113,7 +113,7 @@
                                                 <progress value="40" max="100"></progress>
                                             </td>
                                             <td class="percent">
-                                            	<div id="nbUsedSeat"></div>
+                                            	<div id="rd2UsedSeat"></div>
                                             </td>
                                             <td>운영중</td>
                                             <td>
