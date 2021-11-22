@@ -17,4 +17,8 @@
 			select count(*) from member where user_id = #{user_id}
 		</select>
 		
+		<insert id="auth">
+			insert into member_auth values (#{user_id}, "ROLE_MEMBER")
+		</insert>
+		
 	</mapper>

@@ -51,6 +51,9 @@ public class SignupController {
 		
 		// 회원가입 service 쿼리 실행
 		signupService.signUp(member);
+		
+		// 회원 권한 추가
+		signupService.auth(member.getUser_id());
 
 		System.out.println("회원가입 성공");
 

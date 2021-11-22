@@ -9,5 +9,8 @@ public interface SignupMapper {
 
 	// 아이디 중복 검사
 	public int idCheck(String user_id);
+	
+	// 회원 권한 입력
+	public void auth(String user_id);
 
 }
