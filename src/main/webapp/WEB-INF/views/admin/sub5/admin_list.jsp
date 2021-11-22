@@ -5,7 +5,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>라온도서관 > 관리자 > 관리자권한</title>
+<title>라온도서관 > 관리자 > 관리자목록</title>
 <link rel="stylesheet" href="/resources/css/admin/member_list.css">
 <link rel="stylesheet" href="/resources/css/footer.css">
 <script src="https://code.jquery.com/jquery-3.6.0.js" 
@@ -155,7 +155,7 @@
                                             <th style="width: 90px;">생년월일</th>
                                             <th style="width: 50px;">대출불가</th>
                                             <th style="width: 90px;">회원가입일</th>
-                                            <th style="width: 60px;">정보</th>
+                                            <th style="width: 60px;">권한</th>
 	                                </tr>
                                     </thead>
                                     <tbody>
@@ -178,13 +178,13 @@
 											
 											<td>${member_list.user_reg_date }</td>
 											<td>
-												<form action="/admin/member-view" method="get">
+												<form action="/admin/revoke" method="post" onsubmit="return false;">
 													<input type="hidden" name="amount" value="${pageMaker.cri.amount }">
 													<input type="hidden" name="page" value="${pageMaker.cri.page }">
 													<input type="hidden" name="type" value="${pageMaker.cri.type }">
 													<input type="hidden" name="keyword" value="${pageMaker.cri.keyword }">
 													<input type="hidden" name="user_id" value="${member_list.user_id }">
-													<button class="btn2">정보</button>
+													<button class="btn2">해제</button>
 												</form>
 											
 											</td>
@@ -265,11 +265,20 @@
 				
 			});
 			
+			$(".btn2").on("click", function(){
+				
+				if(confirm("관리자 권한을 해제하시겠습니까?")){
+					$("form").attr("onsubmit", "return true");
+					$("form").submit();
+				} 
+			}) 
+			
+			
 			$('.add_btn').on("click",function(e){
 				
 				e.preventDefault();
 				let popUrl = "/admin/add-popup";
-				let popOption = "width = 700px, height=600px, scrollbars=no, resizeable=no";
+				let popOption = "width = 700px, height=600px, top=300px, scrollbars=no, resizeable=no";
 				window.open(popUrl,"작가 찾기" ,popOption);
 			});
 			 
