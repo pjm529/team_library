@@ -19,6 +19,11 @@ public class NotebookRoomController {
 
 	@Autowired
 	private NotebookRoomService nbService;
+	
+	@GetMapping("/sub3MainPage")
+	public String sub3MainPage() {
+		return "/mylib/sub3/sub3MainPage";
+	}
 
 	/* 좌석 리스트 출력 */
 	@GetMapping("/notebookRoom")
@@ -32,7 +37,7 @@ public class NotebookRoomController {
 		model.addAttribute("notebookRoomlist", notebookRoomlist);
 
 		// 세션 id
-		String user_id = "id2";
+		String user_id = "id";
 
 		if (nbService.reservation_info(user_id) == null) {
 
@@ -55,7 +60,7 @@ public class NotebookRoomController {
 	@GetMapping("/nb_seat_booking")
 	public String notebookRoom_booking(NoteBookRoomDTO dto) {
 
-		dto.setUser_id("id2");
+		dto.setUser_id("id");
 
 		nbService.nb_seat_booking(dto);
 		nbService.updateStatusOccupied(dto);
