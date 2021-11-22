@@ -28,4 +28,10 @@ public class SignupServiceImpl implements SignupService {
 
 	}
 
+	// 회원 권한 입력
+	@Override
+	public void auth(String user_id) {
+		signupMapper.auth(user_id);
+	}
+
 }

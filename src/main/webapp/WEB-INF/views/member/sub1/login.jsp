@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -12,6 +13,13 @@
  crossorigin="anonymous"></script>
 </head>
 <body>
+	<c:if test="${not empty SPRING_SECURITY_LAST_EXCEPTION}">
+		<script>
+			alert("ID 및 PW 오류입니다");
+		</script>
+	        <c:remove var="SPRING_SECURITY_LAST_EXCEPTION" scope="session"/>
+	</c:if>
+
 
 	<div class="header">
     </div>
@@ -59,10 +67,10 @@
                                 </div>
 
                                 <div class="loginForm">
-                                    <form action="#">
-                                        <input class="id_input" type="text" placeholder="아이디" autocomplete="off">
+                                    <form action="/login" method="post">
+                                        <input class="id_input" type="text" name="username" placeholder="아이디" autocomplete="off">
                                         <p style="font-size: 5px;"></p>
-                                        <input class="pw_input" type="password" placeholder="비밀번호" autocomplete="off">
+                                        <input class="pw_input" type="password" name="password" placeholder="비밀번호" autocomplete="off">
                                         <button class="login_btn">로그인</button>
                                     </form>
                                 </div>

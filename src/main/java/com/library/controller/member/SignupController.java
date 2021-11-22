@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.mail.javamail.MimeMessageHelper;
 import org.springframework.mail.javamail.MimeMessagePreparator;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -28,6 +29,9 @@ public class SignupController {
 	@Autowired
 	private JavaMailSender mailSender; // 이메일 전송 bean
 	
+	@Autowired
+	private PasswordEncoder pwencoder; // 암호화 Encoder
+	
 	// 회원가입 페이지 진입 (get)
 	@GetMapping("/signup")
 	public String signupGET() {
@@ -42,8 +46,14 @@ public class SignupController {
 	@PostMapping("/signup")
 	public String signupPOST(MemberDTO member) throws Exception {
 
+		String encode_pw = pwencoder.encode(member.getUser_pw());
+		member.setUser_pw(encode_pw);
+		
 		// 회원가입 service 쿼리 실행
 		signupService.signUp(member);
+		
+		// 회원 권한 추가
+		signupService.auth(member.getUser_id());
 
 		System.out.println("회원가입 성공");
 

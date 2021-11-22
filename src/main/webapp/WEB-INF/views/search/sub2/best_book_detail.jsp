@@ -1,7 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
-
+<%@ taglib uri="http://www.springframework.org/security/tags" prefix="sec" %>
 <%@ page session="false" %>
 <html>
 <head>
@@ -99,11 +99,21 @@
                     <div style="display: flex; justify-content: center; align-items: center;">
                     
                         <form id="loan" onsubmit="return false;" method="post">
-                        	<input type="text" class="id_input" name="user_id" required autocomplete="off" placeholder="대출자 ID">
-                        	<input type="text" class="email_input" name="user_email" required autocomplete="off" placeholder="대출자 메일">
+                        
+                       		<sec:authorize access="isAuthenticated()">
+							<input type="hidden" class="user_id" name="user_id" 
+								value=<sec:authentication property="principal.dto.user_id"/>>
+							<input type="hidden" class="user_email" name="user_email" 
+								value=<sec:authentication property="principal.dto.user_email"/>>
+							</sec:authorize>
+							
+							<sec:authorize access="isAnonymous()">
+							<input type="hidden" class="user_id" name="user_id">
+							</sec:authorize>
+							
 							<input type="hidden" name="book_title" value="${book.book_title }">
 							<input type="hidden" name="book_author" value="${book.book_author }">
-							<input type="hidden" name="book_isbn" value="${book.book_isbn }">
+							<input type="hidden" class="book_isbn" name="book_isbn" value="${book.book_isbn }">
 							<input type="hidden" name="book_cover" value="${book.book_cover }">
 							<input type="hidden" name="book_pubDate" value="${book.book_pubDate }">
 							<input type="hidden" name="book_publisher" value="${book.book_publisher }">
@@ -116,7 +126,7 @@
 
                         <span>　</span>
 
-                        <form action="/search/best_book">
+                        <form action="/search/best-book">
                             <button class="btn3" style="display: flex; justify-content: center; align-items: center;">
                                 <img src="/resources/imges/search/book_icon.png" style="width: 30px;">　목록
                             </button>
@@ -174,48 +184,40 @@
 		$(function() {
 			$(".sub2").addClass("active");
 			
-			let count = ${count};
-			
 			$("#loan_btn").click(function() {
 				
-				let id = $('.id_input').val(); 
-				let email = $('.email_input').val(); 
-				
-				if(count == 0) {
-					alert("대출이 불가능합니다.");
+				let id = $('.user_id').val(); 
+				let book_isbn = $('.book_isbn').val(); 
+				if(id == "") {
+					alert("로그인 후 이용해주세요");
 				} else {
 					
-					if(id == "" || email == "") {
-						
-						alert("아이디 및 이메일을 입력해주세요");
-						 
-					} else {
-						
-						let data = {
-	            				user_id: id
-	            		};
-	            		
-	            		$.ajax({
-	            			type: "post",
-	            			url: "/search/statusChk",
-	            			data: data,
-	            			success: function(result) {
-	            				
-	            				if (result == "success") {
-	            					alert("대출이 완료되었습니다.");
-	            					$("#loan").attr("action", "/search/loan");
-	            					$("#loan").attr("onsubmit", "return true;");
-	            					$("#loan").submit();
-	        						
-	            				} else {
-	            					alert("대출이 불가능한 상태입니다.");
-	            				}
-	            			}
-	            		});
+					let data = {
+	           				user_id: id,
+	           				book_isbn: book_isbn
+	           		};
 					
-					}
+					$.ajax({
+	           			type: "post",
+	           			url: "/search/statusChk",
+	           			data: data,
+	           			success: function(result) {
+	           				
+	           				if (result == "success") {
+	           					alert("대출이 완료되었습니다.");
+	           					$("#loan").attr("action", "/search/loan?detail=true");
+	           					$("#loan").attr("onsubmit", "return true;");
+	           					$("#loan").submit();
+	       						
+	           				} else {
+	           					alert("대출이 불가능한 상태입니다.");
+	           				}
+	           			}
+	           		});
+					
 				}
-			});
+					
+			});			
 		});
 	</script>
 			
