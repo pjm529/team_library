@@ -11,6 +11,9 @@
 		<result property="user_id" column="user_id" />
 		<result property="user_pw" column="user_pw" />
 		<result property="user_name" column="user_name" />
+		<result property="user_book_count" column="user_book_count" />
+		<result property="user_email" column="user_email" />
+		<result property="user_overdue_date" column="user_overdue_date" />
 		<collection property="authList" resultMap="authList"></collection>
 
 	</resultMap>
@@ -23,7 +26,7 @@
 	</resultMap>
 	
 	<select id="login" resultMap="memberMap">
-		select m.user_id, user_pw, user_name, enabled, auth 
+		select m.user_id, user_pw, user_name, enabled, auth, user_book_count, user_email, user_overdue_date 
 		  from member as m left outer join member_auth as ma 
 		    on m.user_id = ma.user_id
 		 where m.user_id = #{user_id} 
