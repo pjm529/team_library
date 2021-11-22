@@ -1,5 +1,7 @@
 package com.library.model.member;
 
+import java.util.List;
+
 import lombok.Data;
 
 @Data
@@ -39,6 +41,12 @@ public class MemberDTO {
 
 	// 회원가입일
 	private String user_reg_date;
+	
+	// 회원 권한 여부
+	private boolean enabled;
+	
+	// 회원 권한 리스트
+	private List<MemberAuthDTO> authList;
 	
 
 }

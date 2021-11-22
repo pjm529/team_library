@@ -59,10 +59,11 @@
                                 </div>
 
                                 <div class="loginForm">
-                                    <form action="#">
-                                        <input class="id_input" type="text" placeholder="아이디" autocomplete="off">
+                                    <form action="/login" method="post">
+                                        <input class="id_input" type="text" name="username" placeholder="아이디" autocomplete="off">
                                         <p style="font-size: 5px;"></p>
-                                        <input class="pw_input" type="password" placeholder="비밀번호" autocomplete="off">
+                                        <input class="pw_input" type="password" name="password" placeholder="비밀번호" autocomplete="off">
+                                        <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}">
                                         <button class="login_btn">로그인</button>
                                     </form>
                                 </div>
