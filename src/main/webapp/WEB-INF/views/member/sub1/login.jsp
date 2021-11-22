@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -12,6 +13,13 @@
  crossorigin="anonymous"></script>
 </head>
 <body>
+	<c:if test="${not empty SPRING_SECURITY_LAST_EXCEPTION}">
+		<script>
+			alert("ID 및 PW 오류입니다");
+		</script>
+	        <c:remove var="SPRING_SECURITY_LAST_EXCEPTION" scope="session"/>
+	</c:if>
+
 
 	<div class="header">
     </div>
