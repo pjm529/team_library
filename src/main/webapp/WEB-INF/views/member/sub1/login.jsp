@@ -71,7 +71,6 @@
                                         <input class="id_input" type="text" name="username" placeholder="아이디" autocomplete="off">
                                         <p style="font-size: 5px;"></p>
                                         <input class="pw_input" type="password" name="password" placeholder="비밀번호" autocomplete="off">
-                                        <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}">
                                         <button class="login_btn">로그인</button>
                                     </form>
                                 </div>
