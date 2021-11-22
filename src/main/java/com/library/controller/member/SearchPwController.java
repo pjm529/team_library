@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.mail.javamail.MimeMessageHelper;
 import org.springframework.mail.javamail.MimeMessagePreparator;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -29,6 +30,9 @@ public class SearchPwController {
 	@Autowired
 	private JavaMailSender mailSender; // 이메일 전송 bean
 
+	@Autowired
+	private PasswordEncoder pwencoder; // 암호화 Encoder
+	
 	// 비밀번호 찾기 페이지 진입
 	@GetMapping("/search-pw")
 	public String searchPwGET() {
@@ -95,8 +99,11 @@ public class SearchPwController {
 			e.printStackTrace();
 		}
 
+		
+		String encode_pw = pwencoder.encode(newPw);
+		
 		// 비밀번호 초기화 실행
-		searchPwService.reset_pw(member, newPw);
+		searchPwService.reset_pw(member, encode_pw);
 
 		return "redirect:/member/login";
 
