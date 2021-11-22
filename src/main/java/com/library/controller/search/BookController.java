@@ -121,7 +121,7 @@ public class BookController {
 
 	// 책 대출
 	@PostMapping("/loan")
-	public String loan(Model model, Criteria cri, BookDTO book) {
+	public String loan(Model model, Criteria cri, BookDTO book, @RequestParam String detail) {
 
 		System.out.println("\n======================== 대출 신청 ========================");
 		System.out.println("대출자 아이디 : " + book.getUser_id());
@@ -146,23 +146,36 @@ public class BookController {
 			System.out.println("대출불가");
 		}
 		
+		if(detail.equals("true")) {
+			
+			return "redirect:/search/best-book-detail?book_isbn=" + book.getBook_isbn();
+			
+		} else {
+			return "redirect:/search/book-detail?amount=" + cri.getAmount() + "&page=" + cri.getPage() +
+					"&type=" + cri.getType() +"&keyword="+ keyword + "&book_isbn=" + book.getBook_isbn();
+		}
 
-		return "redirect:/search/book_detail?amount=" + cri.getAmount() + "&page=" + cri.getPage() +
-				"&type=" + cri.getType() +"&keyword="+ keyword + "&book_isbn=" + book.getBook_isbn();
+		
 	}
 	
 	// 대출자 상태 체크
 	@ResponseBody
 	@PostMapping("/statusChk")
-	public String statusChk(String user_id) throws Exception {
+	public String statusChk(String user_id, String book_isbn) throws Exception {
 
 		System.out.println("statusChk() 진입");
 
 		int result = bookService.statusCheck(user_id);
 
 		if (result == 1) {
-
-			return "success";
+			int count = bookService.count(book_isbn);
+			
+			if(count != 2) {
+				return "success";
+			} else {
+				return "fail";
+			}
+			
 
 		} else {
 
