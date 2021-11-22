@@ -24,4 +24,10 @@ public interface NotebookRoomService {
 	public void updateNotebook_Room_RentalTable();
 	public void updateNotebook_RoomTable();
 	
+	/* 잔여좌석 */
+	public int usingSeat();
+	
+	/* 사용 좌석 */
+	public int usedSeat();
+	
 }

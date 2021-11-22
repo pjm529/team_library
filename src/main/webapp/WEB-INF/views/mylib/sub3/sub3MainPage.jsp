@@ -57,7 +57,7 @@
                             <a href="#">문화강좌신청/조회</a>
                         </li>
                         <li class="active">
-                            <a href="#">좌석예약/조회</a>
+                            <a href="/mylib/sub3MainPage">좌석예약/조회</a>
                         </li>
                         <li>
                             <a href="#">개인정보</a>
@@ -72,7 +72,7 @@
                         <!-- 나의 예약 현황 btn -->
                         <div style="padding: 15px;">
                             <div class="my-booking-status">
-                                <button class="my_info_btn">나의 예약현황</button>
+                                <button class="my_info_btn" onclick="my_info_btn();">나의 예약현황</button>
                             </div>
 
                             <div class="room-seat">
@@ -84,8 +84,9 @@
                                             <th>전체</th>
                                             <th class="align-right">잔여좌석</th>
                                             <th>사용율</th>
+                                            <th> </th>
                                             <th>운영상태</th>
-                                            <th></th>
+                                            <th> </th>
                                         </tr>
                                     </thead>
                                     <tbody>
@@ -94,11 +95,14 @@
                                             <td class="align-center">54</td>
                                             <td class="align-right">52</td>
                                             <td class="progress">
-                                                <progress value="40" max="100"></progress>
+                                                <progress value="2" max="54"></progress>
                                             </td>
+                                            <td class="percent">
+                                            	<div id="nbUsedSeat"></div>
+                                            	</td>
                                             <td>운영중</td>
                                             <td>
-                                                <button class="room-go-btn">상세</button>
+                                                <button class="room-go-btn"  onclick="rdRoom();">상세</button>
                                             </td>
                                         </tr>
                                         <tr>
@@ -108,21 +112,27 @@
                                             <td class="progress">
                                                 <progress value="40" max="100"></progress>
                                             </td>
+                                            <td class="percent">
+                                            	<div id="nbUsedSeat"></div>
+                                            </td>
                                             <td>운영중</td>
                                             <td>
-                                                <button class="room-go-btn">상세</button>
+                                                <button class="room-go-btn" onclick="rdRoom2();">상세</button>
                                             </td>
                                         </tr>
                                         <tr>
                                             <td class="room-name">노트북실</td>
-                                            <td class="align-center">26</td>
-                                            <td class="align-right">22</td>
+                                            <td class="align-center">28</td>
+                                            <td class="align-right">${usingSeat}</td>
                                             <td class="progress">
-                                                <progress value="40" max="100"></progress>
+                                                <progress value="${usedSeat}" max="28"></progress>
+                                            </td>
+                                            <td class="percent">
+                                            	<div id="nbUsedSeat"></div>
                                             </td>
                                             <td>운영중</td>
                                             <td>
-                                                <button class="room-go-btn">상세</button>
+                                                <button class="room-go-btn" onclick="nbRoom();">상세</button>
                                             </td>
                                         </tr>
                                     </tbody>
@@ -171,11 +181,27 @@
     </div>
 
 
-    <script src="/resources/js/mylib/sub3/index.js"></script>
 
     <script src="https://code.jquery.com/jquery-3.6.0.js"
         integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk=" crossorigin="anonymous"></script>
 
+    <script src="/resources/js/mylib/sub3/index.js"></script>
+
+
+
+	<script>
+	
+	
+	$(document).ready(function() {
+		
+		var usedSeat = "<c:out value='${usedSeat}'/>";
+		var percent = (usedSeat/28) * 100;
+		
+		
+		$('#nbUsedSeat').html(percent.toFixed(0) + "%");
+	}); 
+	
+	</script>
 
 </body>
 </html>

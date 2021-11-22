@@ -26,5 +26,9 @@ public interface NotebookRoomMapper {
 	public void updateNotebook_Room_RentalTable();
 	public void updateNotebook_RoomTable();
 	
+	/* 잔여 좌석 */
+	public int usingSeat();
+	public int usedSeat();
+	
 
 }

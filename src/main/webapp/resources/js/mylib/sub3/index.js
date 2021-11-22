@@ -1,11 +1,20 @@
+$(document).ready(function() {
+
 // Date 객체 사용으로 날짜 받아옴
 // let 사용 이유 => goToday 함수에서 date 값을 재할당해 주기 위해
 let date = new Date();
 
+
+
 var renderCalendar = () => {
+	
     var viewYear = date.getFullYear(); // 현재 년
     var viewMonth = date.getMonth(); // 현재 월
-
+	var viewDate = date.getDate();//
+	
+	var nowDate = viewYear + "-" + (viewMonth+1) + "-" + viewDate;
+	
+	
     // html .year-month 태그 채우기
     document.querySelector('.year-month').textContent
         = `${viewYear}년 ${viewMonth + 1}월`;
@@ -55,7 +64,12 @@ var renderCalendar = () => {
             : 'other';
         // 연산자 사용해 이번 달에 해당하는 부분을 this로, 나머지는 other라는 문자열로 구분 
 
-        dates[i] = `<div class="date"><span class="${condition}">${date}</sapn></div>`;
+
+        dates[i] = `<div class="date">
+						<span class="${condition}">${date}
+							<input type="hidden" id="nowDate" value="${viewYear + "-"}${viewMonth + 1 + "-"}${date}">
+						</sapn>
+					</div>`;
     })
 
     // html의 .dates 태그의 innerHTML 프로퍼티에 dates 배열에 join 메서드를 호출한 결과를 할당
@@ -77,14 +91,13 @@ var renderCalendar = () => {
     if (viewMonth === today.getMonth() && viewYear === today.getFullYear()) {
         for (let i = nowdate; i < afterWeek + 1; i++) {
 
-            let newbtn = document.createElement("button");
-            newbtn.innerHTML = "예약 가능";
-            newbtn.setAttribute("id", "new_btn");
-            newbtn.setAttribute("onclick", "#");
+            let groupBooking = document.createElement("button");
+            groupBooking.innerHTML = "예약 가능";
+            groupBooking.setAttribute("id", "group_booking");
 
             let date = document.getElementsByClassName('this')[i - 1];
 
-            date.appendChild(newbtn);
+            date.appendChild(groupBooking);
 
         }
     }
@@ -112,5 +125,55 @@ var goToday = () => {
     date = new Date();
     renderCalendar();
 }
+
+// 나의 예약 현황 btn 속성 추가
+var my_info_btn = () => {
+	location.href = "#";
+}
+
+
+// 좌석 배정 상세 btn 속성 추가
+var rdRoom1 = () => {
+	location.href = "#";
+}
+
+var rdRoom2 = () => {
+	location.href = "#";
+}
+
+var nbRoom = () =>{
+	location.href = "/mylib/notebookRoom";
+}
+
+var groupRoom_booking = () => {
+	location.href = "/mylib/notebookRoom";
+}
+
+
+
+	// 사용율 % 나타내는 함수
+	var usedSeat = "<c:out value='${usedSeat}'/>";
+	var percent = (usedSeat/28) * 100;
+	$('#nbUsedSeat').html(percent.toFixed(0) + "%");
+	
+
+	$('#new_btn').on("click", function(){
+		
+		var nowDate = $(this).closest('span').find('#nowDate').val();
+		
+		alert(nowDate);
+		
+		
+		
+	});
+
+
+	
+}); 
+
+
+
+
+
 
 

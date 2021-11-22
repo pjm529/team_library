@@ -234,7 +234,7 @@ th, td{
 }
 
 .progress{
-    width: 430px;
+    width: 420px;
 }
 
 progress{
@@ -259,6 +259,15 @@ progress {
     background: -webkit-gradient(linear, left top, left bottom, from(#99df3d), to(#649e13));
     border: 1px solid #70b314;
     border-radius: 4px;
+}
+
+.percent{
+	padding: 0px;
+	
+}
+
+.percent>div{
+	font-size: small;
 }
 
 .room-go-btn{

@@ -73,6 +73,19 @@ public class NotebookRoomServiceImpl implements NotebookRoomService {
 		
 	}
 
+	
+	/* 잔여 좌석 */
+	@Override
+	public int usingSeat() {
+		return nbMapper.usingSeat();
+	}
+
+	@Override
+	public int usedSeat() {
+		// TODO Auto-generated method stub
+		return nbMapper.usedSeat();
+	}
+
 
 
 }

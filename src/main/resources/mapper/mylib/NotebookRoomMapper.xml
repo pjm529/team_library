@@ -7,6 +7,16 @@
 
 <mapper namespace="com.library.mapper.mylib.NotebookRoomMapper">
 
+	<select id="usingSeat" resultType="int">
+	select count(*) - (select count(*) from notebook_room where seat_status = 0)
+ 	  from notebook_room
+	</select>
+	
+	<select id="usedSeat" resultType="int">
+	select count(*) from notebook_room where seat_status = 0
+	</select>
+	
+
 	<!-- ===== 좌석 리스트 ===== -->
 	<!-- 전체 좌석 정보 출력 -->
 	<select id="seats_list_all" resultType="com.library.model.mylib.NoteBookRoomDTO">
