@@ -70,7 +70,7 @@
 
 /* line2 > 가로 좌석 */
 .seat-list-row{
-    /* border: 1px solid blueviolet; */
+    /* border: 1px solid blueviolet; */ 
     width: 500px;
     max-width: 500px;
     margin: 30px 0px;
