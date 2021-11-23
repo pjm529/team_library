@@ -2,6 +2,7 @@ package com.library.service.board;
 
 import java.util.List;
 
+import com.library.model.board.ArticleAttachDTO;
 import com.library.model.board.ArticleDTO;
 import com.library.page.Criteria;
 
@@ -15,7 +16,7 @@ public interface ArticleService {
 
 	public void articleDelete(Long article_no);
 
-	public void articleUpdate(ArticleDTO dto);
+	public boolean articleUpdate(ArticleDTO dto);
 	
 	public void articleViewsCount(Long article_no);
 	
@@ -24,6 +25,8 @@ public interface ArticleService {
 	public int getTotal(Criteria cri);
 
 	public void reset();
+	
+	public List<ArticleAttachDTO> getAttachList(Long article_no);
 	
 
 //	public ArticleDTO userInfo(Long uno);

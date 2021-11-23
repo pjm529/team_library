@@ -10,6 +10,11 @@
  	<insert id="articleInsert"> <!-- mapper class method name  -->
 		insert into article(article_title, article_content, writer_id, writer_name)
 		values(#{article_title}, #{article_content}, #{writer_id}, #{writer_name})
+		
+		<selectKey resultType="Long" keyProperty="article_no" order="AFTER">
+       	 	SELECT LAST_INSERT_ID()
+    	</selectKey>
+		
 	</insert>
 	
  	<select id="list_all" resultType="com.library.model.board.ArticleDTO">

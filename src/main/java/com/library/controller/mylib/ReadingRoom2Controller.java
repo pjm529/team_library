@@ -22,7 +22,7 @@ public class ReadingRoom2Controller {
 	private ReadingRoom2Service readingRoom2Service;
 	
 	
-	@GetMapping("/readingRoom2Rental")
+	@GetMapping("/readingRoom2")
 	public String readingRoomRental(Model model) {
 		
 		readingRoom2Service.updateReading_Room2Table();
@@ -37,7 +37,7 @@ public class ReadingRoom2Controller {
 		
 		if(readingRoom2Service.room2_info(user_id) == null) {
 			
-			return "/mylib/sub1/readingRoom2Rental";
+			return "/mylib/sub3/readingRoom2";
 		}else {
 			ReadingRoom2DTO room2_info = readingRoom2Service.room2_info(user_id);
 			
@@ -48,7 +48,7 @@ public class ReadingRoom2Controller {
 			model.addAttribute("room2_info", room2_info);
 		}
 
-		return "/mylib/sub1/readingRoom2Rental";
+		return "/mylib/sub3/readingRoom2";
 		
 		//컨트롤러에서 서비스단으로 넘긴다.(모델이라는 객체 이용하면 뷰단으로 쉽게 빼낼 수 있음)
 	}
@@ -59,7 +59,7 @@ public class ReadingRoom2Controller {
 		  readingRoom2Service.room2_delete(seat_no);
 		  readingRoom2Service.updateStatusVacant(seat_no);
 		  
-		  return "redirect:/mylib/readingRoom2Rental";
+		  return "redirect:/mylib/readingRoom2";
 		  
 	  }
 	 
@@ -72,7 +72,7 @@ public class ReadingRoom2Controller {
 		readingRoom2Service.room2_booking(dto);
 		readingRoom2Service.updateStatusOccupied(dto);
 
-		return "redirect:/mylib/readingRoom2Rental";
+		return "redirect:/mylib/readingRoom2";
 	}
 	
 	@GetMapping("/room2_extend")
@@ -81,7 +81,7 @@ public class ReadingRoom2Controller {
 		 
 		readingRoom2Service.room2_extend(seat_no);
 
-		return "redirect:/mylib/readingRoom2Rental";
+		return "redirect:/mylib/readingRoom2";
 		
 		//컨트롤러에서 서비스단으로 넘긴다.(모델이라는 객체 이용하면 뷰단으로 쉽게 빼낼 수 있음)
 	}
@@ -99,7 +99,7 @@ public class ReadingRoom2Controller {
 		readingRoom2Service.updateStatusOccupied(dto);
 		
 
-		return "redirect:/mylib/readingRoom2Rental";
+		return "redirect:/mylib/readingRoom2";
 	}
 
 }

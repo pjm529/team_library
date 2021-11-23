@@ -46,7 +46,7 @@
 
                             <!-- 테이블 -->
                             <div class="table-wrap">
-                                <form action="/board/articleInsertForm" method="post" enctype="multipart/form-data">
+                                <form action="/board/articleInsertForm" method="post" role="form">
                                     <table class="bbs-edit">
                                         <tbody>
                                             <tr>
@@ -87,19 +87,22 @@
                                             
                                             <!-- 파일 업로드 -->
                                            <tr>
-                                           	<td>
-	                                           	
-	                                           	
-	                                           	
-	                                           	<div class="uploadDiv">
-													 <input type="file" name="uploadFile" multiple>
-													 
+	                                           	<td>
+		                                           	
+		                                           	
+													<div class="uploadDiv">
+														 <input type="file" name="uploadFile" multiple>
+														 <input type="hidden" name="uuid" id="uuid">
+													</div>
 													
-												</div>
-                                           	
-                                           	
-                                           	
-                                           	</td>
+													<div class="uploadResult">
+														<ul>
+														
+														</ul>
+													</div>
+		                                           	
+
+	                                           	</td>
                                            </tr>
                                         </tbody>
 
@@ -108,7 +111,7 @@
                                     <!-- 글쓰기 btn -->
                                     <div class="write">
                                      	<!-- <button class="write_btn" onclick="location.href='/board/articleInsertForm'">글쓰기</button> -->
-                                        <button class="write_btn" id="uploadBtn">글쓰기</button>
+                                        <button class="write_btn" id="uploadBtn" type="submit">글쓰기</button>
                                     </div>
 
                                 </form>
@@ -126,50 +129,184 @@
     </div>
 
 
+
+
 <script src="https://code.jquery.com/jquery-3.6.0.js" integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk=" crossorigin="anonymous"></script>
 <script>
-   $(function() {
+$(document).ready(function(e){
 	   $(".sub4").addClass("active");
 	   
-		$("#uploadBtn").on('click', function(e) {
-		
-			var formData = new FormData();
-			var inputFile = $("input[name='uploadFile']");
-			var files = inputFile[0].files;
-			
-			for(var i=0; i<files.length; i++){
-				formData.append('uploadFile', files[i]);
-			}
-			
-			$.ajax({
-				
-				url: '/board/articleInsertForm',
-				processData:false,
-				contentType:false,
-				data:formData,
-				type:"post",
-				success: function (result) {
-					alert("업로드 완료");
-				}
-				
-				
-			})
-			
-			
-		})
-		
+	   /* var formObj = $("form[role='form']");
+	   
+	   $("button[type='submit']").on("click", function(e){
+	     e.preventDefault();
+	     alert("submit clicked");
+	     
+	   }); */
+	   
+	   /* 파일업로드 ,전송할 때 넘겨주는 것들*/
+	   
+	   var formObj = $("form[role='form']");
+	   
+	   $("button[type='submit']").on("click", function(e){
+	     
+	     e.preventDefault();
+	     
+	     var str = "";
+	     
+	     $(".uploadResult ul li").each(function(i, obj){
+	       
+	       var jobj = $(obj);
+	       
+	       console.dir(jobj);
+	       console.log("-------------------------");
+	       console.log(jobj.data("filename"));
+
+		   str += "<input type='hidden' name='attachList["+i+"].file_name' value='"+jobj.data("filename")+"'>";
+	       str += "<input type='hidden' name='attachList["+i+"].uuid' value='"+jobj.data("uuid")+"'>";
+	       str += "<input type='hidden' name='attachList["+i+"].upload_path' value='"+jobj.data("path")+"'>";
+	       str += "<input type='hidden' name='attachList["+i+"].file_type' value='"+ jobj.data("type")+"'>";
+	       
+	     });
+	     
+	     console.log(str);
+	     	     
+	     formObj.append(str).submit();
+	     
+	   });
 
 	   
+	   /* 용량,파일형식 지정 */
+	   var regex = new RegExp("(.*?)\.(exe|sh|zip|alz)$");
+	   var maxSize = 5242880; //5MB
+	   
+	   function checkExtension(file_name, fileSize){
+	     
+	     if(fileSize >= maxSize){
+	       alert("파일 사이즈 초과");
+	       return false;
+	     }
+	     
+	     if(regex.test(file_name)){
+	       alert("해당 종류의 파일은 업로드할 수 없습니다.");
+	       return false;
+	     }
+	     return true;
+	   }
 	   
 	   
+	   /* 선택된 파일을 지정된 폴더에 저장  */
+	   $("input[type='file']").change(function(e){
+
+		    var formData = new FormData();
+		    var inputFile = $("input[name='uploadFile']");
+		    var files = inputFile[0].files;
+		    
+		    for(var i = 0; i < files.length; i++){
+
+		      if(!checkExtension(files[i].name, files[i].size) ){
+		        return false;
+		      }
+		      formData.append("uploadFile", files[i]);
+		    }
+		    
+		    $.ajax({
+		      url: '/uploadAjaxAction',
+		      processData: false, 
+		      contentType: false,
+		      data: formData,
+		      type: 'POST',
+		      dataType:'json',
+		      success: function(result){
+		          console.log(result); 
+				  showUploadResult(result); //업로드 결과 처리 함수 
+
+		      }
+		    }); //$.ajax
+		    
+		  }); 
 	   
 	   
+
 	   
-	   
-	   
-	   
-	   
-	   
+	   function showUploadResult(uploadResultArr){
+		    
+		    if(!uploadResultArr || uploadResultArr.length == 0){ 
+		    	return; 
+		    }
+		    
+		    var uploadUL = $(".uploadResult ul");
+		    
+		    var str =""; /* li값들이 채워짐 */
+		    
+		    $(uploadResultArr).each(function(i, obj){
+		    
+				
+				if(obj.image){
+					var fileCallPath = encodeURIComponent( obj.upload_path+ "/s_"+obj.uuid +"_"+obj.file_name);					
+					var uuidName = obj.uuid+"_"+obj.file_name;
+				
+           			/* var thumbName = $("#thumb").val('s_'+attach.uuid+"_"+attach.file_name); */
+           			
+	           		 $("input[name='uuid']").attr('value',uuidName);
+	           		/*  $("input[name='thumb']").attr('value',thumbName); */
+		
+					str += "<li data-path='"+obj.upload_path+"'";
+					str +=" data-uuid='"+obj.uuid+"' data-filename='"+obj.file_name+"' data-type='"+obj.image+"'"
+					str +" ><div>";
+					str += "<span> "+ obj.file_name+"</span>";
+					str += "<button type='button' data-file=\'"+fileCallPath+"\'data-type='image'>x</button><br>";
+					str += "<img src='/display?file_name="+fileCallPath+"'>";
+					str += "</div>";
+					str +"</li>";
+					
+				}else{
+					var fileCallPath = encodeURIComponent( obj.upload_path+"/"+ obj.uuid +"_"+obj.file_name);			      
+				    var fileLink = fileCallPath.replace(new RegExp(/\\/g),"/");
+				    var uuidName = obj.uuid+"_"+obj.file_name;
+				    
+				    $("input[name='uuid']").attr('value',uuidName);
+				      
+					str += "<li "
+					str += "data-path='"+obj.upload_path+"' data-uuid='"+obj.uuid+"' data-filename='"+obj.file_name+"' data-type='"+obj.image+"' ><div>";
+					str += "<span> "+ obj.file_name+"</span>";
+					str += "<button type='button' data-file=\'"+fileCallPath+"\'data-type='file'>x</button><br>";
+					str += "<img src='/resources/fileImage/default.png' width='150px'></a>";
+					str += "</div>";
+					str +"</li>";
+				}
+
+		    });
+		    
+		    uploadUL.append(str);
+		  }
+	  
+	   /* x버튼 눌렀을 때 첨부파일 화면에서 사라짐 */
+	   $(".uploadResult").on("click", "button", function(e){
+
+		    console.log("delete file");
+		    
+		    var uuid = $("#uuid").val();      
+		    var targetFile = $(this).data("file");
+		    var type = $(this).data("type");
+		    
+		    
+		    var targetLi = $(this).closest("li");
+		    
+		    $.ajax({
+		      url: '/deleteFile',
+		      data: {file_name: targetFile, type:type, uuid:uuid},
+		      dataType:'text',
+		      type: 'POST',
+		      success: function(result){
+		        
+		           
+		           targetLi.remove();
+		           
+		         }
+		    }); //$.ajax
+		   });
+
 	   
 	   
    })
