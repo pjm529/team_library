@@ -87,25 +87,22 @@
                                             
                                             <!-- 파일 업로드 -->
                                            <tr>
-                                           	<td>
-	                                           	
-	                                           	
-												<div class="uploadDiv">
-													 <input type="file" name="uploadFile" multiple>
-													 <input type="hidden" name="uuid" id="uuid">
-												</div>
-												
-												<div class="uploadResult">
-													<ul>
+	                                           	<td>
+		                                           	
+		                                           	
+													<div class="uploadDiv">
+														 <input type="file" name="uploadFile" multiple>
+														 <input type="hidden" name="uuid" id="uuid">
+													</div>
 													
-													</ul>
-												</div>
-	                                           	
-	                                           
-	                                           	
-                                           	
-                                           	
-                                           	</td>
+													<div class="uploadResult">
+														<ul>
+														
+														</ul>
+													</div>
+		                                           	
+
+	                                           	</td>
                                            </tr>
                                         </tbody>
 
@@ -163,18 +160,17 @@ $(document).ready(function(e){
 	       
 	       console.dir(jobj);
 	       console.log("-------------------------");
-	      
-	       
-	       
-	       str += "<input type='hidden' name='attachList["+i+"].file_name' value='"+jobj.data("filename")+"'>";
+	       console.log(jobj.data("filename"));
+
+		   str += "<input type='hidden' name='attachList["+i+"].file_name' value='"+jobj.data("filename")+"'>";
 	       str += "<input type='hidden' name='attachList["+i+"].uuid' value='"+jobj.data("uuid")+"'>";
 	       str += "<input type='hidden' name='attachList["+i+"].upload_path' value='"+jobj.data("path")+"'>";
 	       str += "<input type='hidden' name='attachList["+i+"].file_type' value='"+ jobj.data("type")+"'>";
 	       
 	     });
 	     
-	     
-	     
+	     console.log(str);
+	     	     
 	     formObj.append(str).submit();
 	     
 	   });
@@ -199,7 +195,7 @@ $(document).ready(function(e){
 	   }
 	   
 	   
-	   
+	   /* 선택된 파일을 지정된 폴더에 저장  */
 	   $("input[type='file']").change(function(e){
 
 		    var formData = new FormData();
@@ -235,44 +231,46 @@ $(document).ready(function(e){
 	   
 	   function showUploadResult(uploadResultArr){
 		    
-		    if(!uploadResultArr || uploadResultArr.length == 0){ return; }
+		    if(!uploadResultArr || uploadResultArr.length == 0){ 
+		    	return; 
+		    }
 		    
 		    var uploadUL = $(".uploadResult ul");
 		    
-		    var str ="";
+		    var str =""; /* li값들이 채워짐 */
 		    
 		    $(uploadResultArr).each(function(i, obj){
 		    
 				
 				if(obj.image){
-					var fileCallPath =  encodeURIComponent( obj.upload_path+ "/s_"+obj.uuid +"_"+obj.file_name);
-					
+					var fileCallPath = encodeURIComponent( obj.upload_path+ "/s_"+obj.uuid +"_"+obj.file_name);					
 					var uuidName = obj.uuid+"_"+obj.file_name;
-					
-					
+				
            			/* var thumbName = $("#thumb").val('s_'+attach.uuid+"_"+attach.file_name); */
            			
 	           		 $("input[name='uuid']").attr('value',uuidName);
 	           		/*  $("input[name='thumb']").attr('value',thumbName); */
-					
-					
+		
 					str += "<li data-path='"+obj.upload_path+"'";
 					str +=" data-uuid='"+obj.uuid+"' data-filename='"+obj.file_name+"' data-type='"+obj.image+"'"
 					str +" ><div>";
 					str += "<span> "+ obj.file_name+"</span>";
-					str += "<button type='button' data-file=\'"+fileCallPath+"\' data-type='image'>x</button><br>";
+					str += "<button type='button' data-file=\'"+fileCallPath+"\'data-type='image'>x</button><br>";
 					str += "<img src='/display?file_name="+fileCallPath+"'>";
 					str += "</div>";
 					str +"</li>";
 					
 				}else{
-					var fileCallPath =  encodeURIComponent( obj.upload_path+"/"+ obj.uuid +"_"+obj.file_name);			      
+					var fileCallPath = encodeURIComponent( obj.upload_path+"/"+ obj.uuid +"_"+obj.file_name);			      
 				    var fileLink = fileCallPath.replace(new RegExp(/\\/g),"/");
+				    var uuidName = obj.uuid+"_"+obj.file_name;
+				    
+				    $("input[name='uuid']").attr('value',uuidName);
 				      
 					str += "<li "
 					str += "data-path='"+obj.upload_path+"' data-uuid='"+obj.uuid+"' data-filename='"+obj.file_name+"' data-type='"+obj.image+"' ><div>";
 					str += "<span> "+ obj.file_name+"</span>";
-					str += "<button type='button' data-file=\'"+fileCallPath+"\' data-type='image'>x</button><br>";
+					str += "<button type='button' data-file=\'"+fileCallPath+"\'data-type='file'>x</button><br>";
 					str += "<img src='/resources/fileImage/default.png' width='150px'></a>";
 					str += "</div>";
 					str +"</li>";
@@ -282,15 +280,13 @@ $(document).ready(function(e){
 		    
 		    uploadUL.append(str);
 		  }
-	   
+	  
 	   /* x버튼 눌렀을 때 첨부파일 화면에서 사라짐 */
 	   $(".uploadResult").on("click", "button", function(e){
-		    
-		   var uuid = $("#uuid").val();
-		   var thumb = "s_"+uuid;
-		   
+
 		    console.log("delete file");
-			      
+		    
+		    var uuid = $("#uuid").val();      
 		    var targetFile = $(this).data("file");
 		    var type = $(this).data("type");
 		    
@@ -299,13 +295,14 @@ $(document).ready(function(e){
 		    
 		    $.ajax({
 		      url: '/deleteFile',
-		      data: {file_name: targetFile, type:type, uuid:uuid, thumb:thumb},
+		      data: {file_name: targetFile, type:type, uuid:uuid},
 		      dataType:'text',
 		      type: 'POST',
 		      success: function(result){
 		        
 		           
 		           targetLi.remove();
+		           
 		         }
 		    }); //$.ajax
 		   });

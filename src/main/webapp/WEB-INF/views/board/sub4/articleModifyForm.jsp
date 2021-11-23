@@ -98,13 +98,26 @@
 	                                            
 	                                            <tr>
 		                                            <td>
+		                                            
+			                                            <div class="uploadDiv">
+															 <input type="file" name="uploadFile" multiple>
+															 <input type="hidden" name="uuid" id="uuid">
+														</div>
+														
+														<div class="uploadResult">
+															<ul>
+															
+															</ul>
+														</div>
+		                                            
+		                                            
 		                                            		<!-- 첨부파일 -->
 														<!-- <div class='bigPictureWrapper'>
 															<div class='bigPicture'>
 															</div>
 														</div> -->
-													
-													 	<div class="panel-heading">첨부파일</div>
+													<!-- 
+														<div class="panel-heading"></div>
 													      <div class="panel-body">
 													      	
 													      	<div class="form-group uploadDiv">
@@ -117,7 +130,7 @@
 													          
 													          </ul>
 													        </div>
-													      </div>
+													      </div>  -->
 		                                            </td>
 
 	                                            	
@@ -171,6 +184,7 @@
 <script>
 $(document).ready(function(){
 	$(".sub4").addClass("active");
+	
 	/* 게시물 조회화면에서 수정화면으로 이동시 보여지는 첨부파일 화면 */
 	(function(){
 	    
@@ -202,7 +216,7 @@ $(document).ready(function(){
 	          }else{
 	             
 	            str += "<li data-path='"+attach.upload_path+"' data-uuid='"+attach.uuid+"' data-filename='"+attach.file_name+"' data-type='"+attach.file_type+"' ><div>";
-	            str += "<button type='button' data-file=\'"+fileCallPath+"\' data-type='image'>삭제x</button><br>";
+	            str += "<button type='button' data-file=\'"+fileCallPath+"\' data-type='file'>삭제x</button><br>";
 	            str += "<span> "+ attach.file_name+"</span><br/>";
 	            str += "<img src='/resources/fileImage/default.png'></a>";
 	            str += "</div>";
@@ -296,7 +310,9 @@ $(document).ready(function(){
 	  /* 첨부파일 선택했을 때 */
 	  function showUploadResult(uploadResultArr){
 		    
-		    if(!uploadResultArr || uploadResultArr.length == 0){ return; }
+		    if(!uploadResultArr || uploadResultArr.length == 0){ 
+		    	return; 
+		    }
 		    
 		    var uploadUL = $(".uploadResult ul");
 		    
@@ -307,6 +323,9 @@ $(document).ready(function(){
 				
 				if(obj.image){
 					var fileCallPath =  encodeURIComponent( obj.upload_path+ "/s_"+obj.uuid +"_"+obj.file_name);
+					var uuidName = obj.uuid+"_"+obj.file_name;
+					
+					$("input[name='uuid']").attr('value',uuidName);
 					
 					str += "<li data-path='"+obj.upload_path+"'";
 					str +=" data-uuid='"+obj.uuid+"' data-filename='"+obj.file_name+"' data-type='"+obj.image+"'"
@@ -317,13 +336,16 @@ $(document).ready(function(){
 					str += "</div>";
 					str +"</li>";
 				}else{
-					var fileCallPath =  encodeURIComponent( obj.upload_path+"/"+ obj.uuid +"_"+obj.file_name);			      
+					var fileCallPath = encodeURIComponent( obj.upload_path+"/"+ obj.uuid +"_"+obj.file_name);			      
 				    var fileLink = fileCallPath.replace(new RegExp(/\\/g),"/");
+				    var uuidName = obj.uuid+"_"+obj.file_name;
+				    
+				    $("input[name='uuid']").attr('value',uuidName);
 				      
 					str += "<li "
 					str += "data-path='"+obj.upload_path+"' data-uuid='"+obj.uuid+"' data-filename='"+obj.file_name+"' data-type='"+obj.image+"' ><div>";
 					str += "<span> "+ obj.file_name+"</span>";
-					str += "<button type='button' data-file=\'"+fileCallPath+"\' data-type='image'>x</button><br>";
+					str += "<button type='button' data-file=\'"+fileCallPath+"\' data-type='file'>x</button><br>";
 					str += "<img src='/resources/fileImage/default.png' width='150px'></a>";
 					str += "</div>";
 					str +"</li>";
@@ -338,16 +360,17 @@ $(document).ready(function(){
 	  $(".uploadResult").on("click", "button", function(e){
  
 		    console.log("delete file");
-		      
-		 /*    var targetFile = $(this).data("file");
-		    var type = $(this).data("type"); */
+		    
+		    var uuid = $("#uuid").val();
+			var targetFile = $(this).data("file");
+		    var type = $(this).data("type"); 
 		    
 		    var targetLi = $(this).closest("li");
 		    targetLi.remove();
 		    
-	/* 	    $.ajax({
+		    $.ajax({
 		      url: '/deleteFile2',
-		      data: {file_name: targetFile, type:type},
+		      data: {file_name: targetFile, type:type, uuid:uuid},
 		      dataType:'text',
 		      type: 'POST',
 		        success: function(result){
@@ -359,7 +382,7 @@ $(document).ready(function(){
 		   });
 	      
 	
-	 var formObj = $("form"); 
+	/*  var formObj = $("form"); 
 
 	  $('button').on("click", function(e){
 	    
@@ -410,7 +433,7 @@ $(document).ready(function(){
        }
    
 	    formObj.submit();
-	  }); 
+	  });  */
 	
 	
 

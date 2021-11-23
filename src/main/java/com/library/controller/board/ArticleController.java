@@ -84,18 +84,6 @@ public class ArticleController {
 	}
 	
 	
-	private boolean checkImageType(File file) {
-		
-		try {
-			String contentType = Files.probeContentType(file.toPath());
-			return contentType.startsWith("image");
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-		
-		return false;
-	}
-	
 	@GetMapping(value = "/getAttachList", produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
 	@ResponseBody
 	public ResponseEntity<List<ArticleAttachDTO>> getAttachList(Long article_no){
@@ -129,12 +117,10 @@ public class ArticleController {
 		String keyword;
 		try {
 			keyword = URLEncoder.encode(cri.getKeyword(), "UTF-8");
-			
-			
+						
 			List<ArticleAttachDTO> attachList = articleService.getAttachList(Long.parseLong( a_article_no));
 			deleteFiles(attachList);
-			rttr.addFlashAttribute("result", "success");
-			
+			rttr.addFlashAttribute("result", "success");			
 			
 			fileDelete(uuid,thumb);
 		} catch (UnsupportedEncodingException e) {
@@ -143,10 +129,7 @@ public class ArticleController {
 				
 		Long article_no = Long.parseLong(a_article_no); //들어오는 스트링값이 롱값으로 변환됌
 		
-		
-		
-		
-		
+
 		articleService.articleDelete(article_no);
 		
 		articleService.reset();
@@ -219,13 +202,7 @@ public class ArticleController {
 		ArticleDTO dto = articleService.articleContent(article_no);
 		model.addAttribute("dto", dto);
 		model.addAttribute("cri", cri);
-		
-		
-		
-		
-		
-		
-		
+
 		
 		/* fileDelete(uuid,thumb); */
 		

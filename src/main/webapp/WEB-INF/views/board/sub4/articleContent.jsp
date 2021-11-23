@@ -144,9 +144,9 @@ p {
 	                                	<input type="hidden" name="page" value="${cri.page}">
 	                                	<input type="hidden" name="type" value="${cri.type}">
 	                                	<input type="hidden" name="keyword" value="${cri.keyword}">
-	                                	<input type="text" name="uuid" id="uuid">
-	                                	<input type="text" name="thumb" id="thumb">
-	                                	<input type="text" name="file_name" id="file_name">
+	                                	<input type="hidden" name="uuid" id="uuid">
+	                                	<input type="hidden" name="thumb" id="thumb">
+	                                	<input type="hidden" name="file_name" id="file_name">
 	                                	
 	                                	
 	                                    <button class="delete_btn">삭제하기</button>

@@ -47,8 +47,6 @@ public class ArticleServiceImpl implements ArticleService {
 		dto.getAttachList().forEach(attach -> {
 
 			attach.setArticle_no(dto.getArticle_no());
-			
-			
 			attachMapper.insert(attach);
 		});
 		
@@ -57,12 +55,12 @@ public class ArticleServiceImpl implements ArticleService {
 	@Transactional
 	@Override
 	public void articleDelete(Long article_no) {
+		
 		attachMapper.deleteAll(article_no);
 		
 		mapper.articleDelete(article_no);
 		
 	}
-	
 	
 	
 	// 수정해야함ㅠㅠ
@@ -135,7 +133,6 @@ public class ArticleServiceImpl implements ArticleService {
 	@Override
 	public List<ArticleAttachDTO> getAttachList(Long article_no) {
 		
-		System.out.println("impl내 article_no============ "+article_no);
 		
 		return attachMapper.findByArticle_no(article_no);
 	}

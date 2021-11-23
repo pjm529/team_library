@@ -108,6 +108,8 @@ public class UploadController {
 	public ResponseEntity<List<AttachFileDTO>> uploadAjaxPost(MultipartFile[] uploadFile) {
 
 		List<AttachFileDTO> list = new ArrayList<>();
+		
+		//저장되는 경로
 		String uploadFolder = "C:\\upload";
 
 //		String uploadFolderPath = getFolder();
@@ -130,7 +132,7 @@ public class UploadController {
 			uploadFileName = uploadFileName.substring(uploadFileName.lastIndexOf("\\") + 1);
 			log.info("only file name: " + uploadFileName);
 			attachDTO.setFile_name(uploadFileName);
-
+			
 			UUID uuid = UUID.randomUUID();
 
 			uploadFileName = uuid.toString() + "_" + uploadFileName;
@@ -232,59 +234,66 @@ public class UploadController {
 // 첨부파일 x버튼 눌렀을 때 ajax 처리과정
 	@PostMapping("/deleteFile")
 	@ResponseBody
-	public ResponseEntity<String> deleteFile(String file_name, String type, @RequestParam("uuid") String uuid, @RequestParam("thumb") String thumb) {
+	public ResponseEntity<String> deleteFile(String file_name, String type, @RequestParam("uuid") String uuid) {
 
 		log.info("deleteFile: " + file_name);
-
-		File file;
 		
-		try {
-						
-			file = new File("c:\\upload\\" + URLDecoder.decode(file_name, "UTF-8"));
-
-			file.delete();
-			
-			fileDelete(uuid, thumb);
-
-			if (type.equals("image")) {
-
-				String largeFileName = file.getAbsolutePath().replace("s_", "");
-
-				log.info("largeFileName: " + largeFileName);
-
-				file = new File(largeFileName);
-
-				file.delete();
-				
-				fileDelete(uuid, thumb);
-			}
-
-		} catch (UnsupportedEncodingException e) {
-			e.printStackTrace();
-			return new ResponseEntity<>(HttpStatus.NOT_FOUND);
-		}
-
+		fileDelete(uuid, type);
+		
 		return new ResponseEntity<String>("deleted", HttpStatus.OK);
+
+//		File file;
+//		
+//		try {
+//						
+//			file = new File("c:\\upload\\" + URLDecoder.decode(file_name, "UTF-8"));
+//
+//			file.delete();
+//			
+//			fileDelete(uuid, thumb);
+//			fileDelete1(uuid);
+//			if (type.equals("image")) {
+//				fileDelete(uuid, type);
+//
+//				String largeFileName = file.getAbsolutePath().replace("s_", "");
+//
+//				log.info("largeFileName: " + largeFileName);
+//
+//				file = new File(largeFileName);
+//
+//				file.delete();
+//				
+//				fileDelete(uuid, thumb);
+//			}
+//		} catch (UnsupportedEncodingException e) {
+//			e.printStackTrace();
+//			return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+//		}
+//
+//		return new ResponseEntity<String>("deleted", HttpStatus.OK);
 
 	}
 	
 	// 폴더 내 파일삭제
-	   public void fileDelete(String uuid,  String thumb) {
+	   public void fileDelete(String uuid, String type) {
 
 	   
 	      String filePath = "C:\\upload\\";
-
+	      
+	      
 	      File deleteFileName = new File(filePath + uuid);
-	      File deleteThumFileName = new File(filePath + thumb);
+			/* File deleteThumFileName = new File(filePath + thumb); */
 
-	      if(deleteFileName.exists() || deleteThumFileName.exists()) {
-	         
-	         deleteFileName.delete();
-	         deleteThumFileName.delete();
-	         
-	         System.out.println("파일삭제완료");
+	      if(type.equals("image")) {
+	    	  String thumb = "s_" + uuid;
+	    	  File deleteThumbFileName = new File(filePath + thumb);
+	          deleteFileName.delete();
+	          deleteThumbFileName.delete();
+	          System.out.println("파일삭제완료");
+
 	         
 	      }else {
+	    	 deleteFileName.delete();
 	         System.out.println("파일삭제실패");
 	         
 	      }
@@ -292,44 +301,18 @@ public class UploadController {
 	   
 	   
 	   }
+
 	   
 	// 첨부파일 x버튼 눌렀을 때 ajax 처리과정
 		@PostMapping("/deleteFile2")
 		@ResponseBody
-		public ResponseEntity<String> deleteFile2(String file_name, String type) {
+		public ResponseEntity<String> deleteFile2(String file_name, String type,  @RequestParam("uuid") String uuid) {
 
 			log.info("deleteFile: " + file_name);
 
-			File file;
+			fileDelete(uuid, type);
 			
-			try {
-							
-				file = new File("c:\\upload\\" + URLDecoder.decode(file_name, "UTF-8"));
-
-				file.delete();
-				
-				
-
-				if (type.equals("image")) {
-
-					String largeFileName = file.getAbsolutePath().replace("s_", "");
-
-					log.info("largeFileName: " + largeFileName);
-
-					file = new File(largeFileName);
-
-					file.delete();
-					
-				}
-
-			} catch (UnsupportedEncodingException e) {
-				e.printStackTrace();
-				return new ResponseEntity<>(HttpStatus.NOT_FOUND);
-			}
-
 			return new ResponseEntity<String>("deleted", HttpStatus.OK);
-
 		}
-	
 
 }
