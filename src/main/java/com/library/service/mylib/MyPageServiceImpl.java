@@ -36,4 +36,10 @@ public class MyPageServiceImpl implements MyPageService {
 		myPageMapper.my_secession(user_id);
 	}
 
+	// 탈퇴 회원 테이블에 입력
+	@Override
+	public void insert_secession(String user_id) {
+		myPageMapper.insert_secession(user_id);
+	}
+
 }

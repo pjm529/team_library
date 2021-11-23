@@ -16,4 +16,6 @@ public interface MyPageMapper {
 	// 회원 탈퇴
 	public void my_secession(String user_id);
 
+	// 탈퇴 회원 테이블에 입력
+	public void insert_secession(String user_id);
 }

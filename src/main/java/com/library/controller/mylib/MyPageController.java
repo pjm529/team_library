@@ -130,6 +130,9 @@ public class MyPageController {
 				// 회원 탈퇴
 				myPageService.my_secession(id);
 				
+				// 탈퇴 회원 테이블에 입력
+				myPageService.insert_secession(id);
+				
 				// 세션 초기화
 				session.invalidate();
 				
