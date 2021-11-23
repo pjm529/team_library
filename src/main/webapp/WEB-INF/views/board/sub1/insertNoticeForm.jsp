@@ -51,7 +51,7 @@
                             <fmt:formatDate var="today" value="${now}" pattern="yyyy-MM-dd"/>
                             
                             <div class="table-wrap">
-                                <form action="/board/insertNotice" method="post" onsubmit="return false" enctype="multipart/form-data">
+                                <form action="/board/insertNotice" method="post" onsubmit="return false" role="form">
                                     <input type="hidden" name="writer_id" value="writer_id">
                             		<input type="hidden" name="writer_name" value="writer_name">
                                     
@@ -83,10 +83,24 @@
                                                         rows="15"></textarea>
                                                 </td>
                                             </tr>
-                                            <tr>
+                                            <!-- <tr>
                                                 <td colspan="4">
                                                     <input type="file" name="notice_img" multiple>
                                                 </td>
+                                            </tr> -->
+                                            <tr>
+                                            	<td>
+                                            		<div class="uploadDiv">
+				                                        <input type="file" name="uploadNoticeFile" multiple>
+				                                        <input type="hidden" name="uuid" id="uuid">
+				                                    </div>
+				                                    
+				                                    <div class="uploadResult">
+				                                       <ul>
+				                                       
+				                                       </ul>
+				                                    </div>
+                                            	</td>
                                             </tr>
                                             
                                         </tbody>
@@ -98,6 +112,7 @@
                                         <button class="write_btn" type="submit">작성완료</button>
                                         <button class="list_btn" onclick="location.href='/board/noticeList'">목록으로</button>
                                     </div>
+                                    
                                     
                                     
 
@@ -129,6 +144,8 @@
 			
 			if(notice_title == ""){
 				
+				$("#notice_title").focus();
+				
 				return false;
 			}
 			
@@ -137,7 +154,185 @@
 				$("form").submit();
 			}
 		});
-	})
+		
+		
+
+		
+		
+		
+		
+		/* 파일 업로드 */
+		var formObj = $("form[role='form']");
+		   
+		$("button[type='submit']").on("click", function(e){
+			
+			e.preventDefault();
+			
+			var str = "";
+			
+			$(".uploadResult ul li").each(function(i, obj){
+			  
+				var jobj = $(obj);
+				
+				console.dir(jobj);
+				console.log("-------------------------");
+				
+				str += "<input type='hidden' name='noticeAttachList[" + i + "].file_name' value='" + jobj.data("filename") + "'>";
+				str += "<input type='hidden' name='noticeAttachList[" + i + "].uuid' value='" + jobj.data("uuid") + "'>";
+				str += "<input type='hidden' name='noticeAttachList[" + i + "].upload_path' value='" + jobj.data("path") + "'>";
+				str += "<input type='hidden' name='noticeAttachList[" + i + "].file_type' value='" + jobj.data("type") + "'>";
+			  
+			});
+			  
+			alert(str);
+			
+			formObj.append(str).submit();
+		  
+		});
+		
+			      
+			      
+		/* 용량, 파일 형식 지정 */	      
+		var regex = new RegExp("(.*?)\.(exe|sh|zip|alz)$");
+		var maxSize = 5242880; //5MB
+		
+		function checkExtension(file_name, fileSize){
+		  
+			if(fileSize >= maxSize){
+				alert("파일 사이즈 초과");
+				return false;
+			}
+			
+			if(regex.test(file_name)){
+				alert("해당 종류의 파일은 업로드할 수 없습니다.");
+				return false;
+			}
+			return true;
+		}
+			      
+			      
+		
+		/* 선택한 파일을 지정된 폴더에 저장 */
+		$("input[type='file']").change(function(e){
+		
+			var formData = new FormData();
+			var inputFile = $("input[name='uploadNoticeFile']");
+			var files = inputFile[0].files;
+			
+			for(var i=0; i<files.length; i++){
+			
+				if(!checkExtension(files[i].name, files[i].size) ){
+				  return false;
+				}
+				formData.append("uploadNoticeFile", files[i]);
+			}
+			
+			$.ajax({
+				url: '/uploadNoticeFileAjaxAction',
+				processData: false, 
+				contentType: false, 
+				data: formData,
+				type: 'POST',
+				dataType:'json',
+				success: function(result){
+					console.log(result); 
+					showUploadResult(result); //업로드 결과 처리 함수 
+					
+				}
+			}); //$.ajax
+		    
+		}); 
+			      
+			      
+		
+		/* 첨부파일 선택했을 때 */	      
+		function showUploadResult(uploadResultArr){
+		    
+			/* 아무것도 선택 안했으면 리스트에 아무것도 안담김 -> 그냥 리턴 */
+			if(!uploadResultArr || uploadResultArr.length == 0){ 
+				return;
+			}
+			
+			var uploadUL = $(".uploadResult ul");
+			
+			var str = "";
+			
+			$(uploadResultArr).each(function(i, obj){
+			
+				if(obj.image){
+					var fileCallPath = encodeURIComponent(obj.upload_path + "/s_" + obj.uuid + "_" + obj.file_name);
+					var uuidName = obj.uuid + "_" + obj.file_name;
+					
+					$("input[name='uuid']").attr('value', uuidName);
+					
+					str += "<li data-path='" + obj.upload_path + "'";
+					str += " data-uuid='" + obj.uuid + "' data-filename='" + obj.file_name + "' data-type='" + obj.image + "'"
+					str += " ><div>";
+					str += "<span>" + obj.file_name + "</span>";
+					str += "<button type='button' data-file=\'" + fileCallPath + "\' data-type='image'>x</button><br>";
+					str += "<img src='/displayFiles?file_name=" + fileCallPath + "'>";
+					str += "</div>";
+					str += "</li>";
+				}else{
+					var fileCallPath = encodeURIComponent(obj.upload_path + "/" + obj.uuid + "_" + obj.file_name);               
+					var fileLink = fileCallPath.replace(new RegExp(/\\/g), "/");
+					var uuidName = obj.uuid + "_" + obj.file_name;
+					
+					$("input[name='uuid']").attr('value', uuidName);
+					   
+					str += "<li "
+					str += "data-path='" + obj.upload_path + "' data-uuid='" + obj.uuid + "' data-filename='" + obj.file_name + "' data-type='" + obj.image + "' ><div>";
+					str += "<span> " + obj.file_name + "</span>";
+					str += "<button type='button' data-file=\'" + fileCallPath + "\' data-type='file'>x</button><br>";
+					str += "<img src='/resources/fileImage/default.png' width='150px'></a>";
+					str += "</div>";
+					str += "</li>";
+				}
+			
+			});
+			
+			uploadUL.append(str);
+		}
+		
+		var cloneObj = $(".uploadDIV");
+			      
+		/* x버튼 눌렀을 때 첨부파일 화면에서 사라짐 */
+		$(".uploadResult").on("click", "button", function(e){
+		    
+			var uuid = $("#uuid").val();
+			
+			console.log("delete file");
+			  
+			var targetFile = $(this).data("file");
+			var type = $(this).data("type");
+			
+			var targetLi = $(this).closest("li");
+			    
+			$.ajax({
+				url: '/deleteNoticeFile',
+				data: {file_name: targetFile, type:type, uuid:uuid},
+				dataType:'text',
+				type: 'POST',
+				success: function(result){
+					targetLi.remove();
+					$(".uploadDIV").html(cloneObj.html());
+				}
+			}); //$.ajax
+		});
+		
+		
+		
+		
+		
+		
+		
+})
+	
+	
+	
+	
+	
+	
 </script>
 
 

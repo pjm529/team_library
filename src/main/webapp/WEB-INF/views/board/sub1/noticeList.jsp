@@ -121,25 +121,25 @@
                                     </tbody>
                                 </table>
                                 
-                                <div class="pageInfo">
-									<c:if test="${pageMaker.prev}">
-										<a href="${pageMaker.startPage - 1}">이전</a>
-									</c:if>
-								
-									<c:forEach var="num" begin="${pageMaker.startPage}" end="${pageMaker.endPage}">
-										<a href="${num}">${num}</a>
-									</c:forEach>
-									
-									<c:if test="${pageMaker.next}">
-										<a href="${pageMaker.endPage + 1}">다음</a>
-									</c:if>
-								</div>
 								
                                 <!-- 글쓰기 btn -->
                                 <div class="write">
                                     <button class="write_btn" onclick="location.href='/board/insertNoticeForm'" style="cursor: pointer">글쓰기</button>
                                 </div>
                                 
+                                <div class="pageInfo" style="">
+		                           <c:if test="${pageMaker.prev }">
+		                              <a class="not" href="${pageMaker.startPage - 1}">이전</a>
+		                           </c:if>
+		                           
+		                           <c:forEach var="num" begin="${pageMaker.startPage }" end="${pageMaker.endPage }">
+		                              <a class="${pageMaker.cri.page == num ? "current":"not" }" href="${num }"><span>${num }</span></a>
+		                           </c:forEach>
+		                           
+		                           <c:if test="${pageMaker.next }">
+		                              <a class="not" href="${pageMaker.endPage + 1}">다음</a>
+		                           </c:if>
+		                        </div>
                                 
                                 <%-- <div class="searchBox">
                                 	<form action="/noticeList" method="get">
@@ -196,7 +196,7 @@
                                 		</c:choose>
                                 		
                                 		
-                                		<input type="submit" value="검색">
+                                		<input class="search_btn" type="submit" value="검색">
                                 	</form>
                                 </div>
                                 

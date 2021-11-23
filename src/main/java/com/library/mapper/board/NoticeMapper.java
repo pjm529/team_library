@@ -13,7 +13,7 @@ public interface NoticeMapper {
 	public void updateViews(Long notice_no);
 	public void insert(NoticeDTO dto);
 	public void delete(Long notice_no);
-	public void update(NoticeDTO dto);
+	public boolean update(NoticeDTO dto);
 	public void reset();
 	
 	

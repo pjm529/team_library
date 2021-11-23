@@ -1,6 +1,7 @@
 package com.library.model.board;
 
 import java.sql.Timestamp;
+import java.util.List;
 
 import lombok.Data;
 
@@ -15,5 +16,8 @@ public class NoticeDTO {
 	private Timestamp notice_reg_date;
 	private int notice_views;
 	private String notice_img;
+	
+	private List<NoticeAttachDTO> noticeAttachList;
+
 	
 }
