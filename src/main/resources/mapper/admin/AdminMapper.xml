@@ -44,11 +44,6 @@
  			delete from member where user_id = #{user_id}
  		</delete> 
  		
- 		<!-- 탈퇴회원 테이블에 입력 -->
- 		<insert id="insert_secession">
- 			insert into secession_member values(#{user_id});
- 		</insert>
- 		
 		<sql id="criteria">
 	        <if test="type != null">
 			  	<if test="keyword != null">
