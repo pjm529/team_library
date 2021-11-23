@@ -261,7 +261,7 @@ input:focus{
     display: none;
 }
 
-.name_err, .birth_err, .phone_err, .email_err_1, .email_err_2, .emailck_err, .emailck_err_2, .address_err, .overdue_err {
+.name_err, .birth_err,.pre_pw_err, .pw_err, .pwck_err_1, .pwck_err_2, .phone_err, .email_err_1, .email_err_2, .emailck_err, .emailck_err_2, .address_err, .overdue_err {
     color: red;
     display: none;
 }
