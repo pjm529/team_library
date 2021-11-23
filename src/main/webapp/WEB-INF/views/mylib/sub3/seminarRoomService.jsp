@@ -5,7 +5,7 @@
 <head>
 <meta charset="UTF-8">
 <title>라온도서관 > 나의 도서관 > 좌석예약/조회(groupRoomservice)</title>
-	<link rel="stylesheet" href="/resources/css/mylib/sub3/groopRoomService.css">
+	<link rel="stylesheet" href="/resources/css/mylib/sub3/seminarRoomService.css">
 </head>
 <body>
 	<div class="container">
