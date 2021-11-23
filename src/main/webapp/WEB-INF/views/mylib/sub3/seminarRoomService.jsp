@@ -8,6 +8,7 @@
 	<link rel="stylesheet" href="/resources/css/mylib/sub3/seminarRoomService.css">
 </head>
 <body>
+	
 	<div class="container">
         <div class="sub_title">
             <div class="doc-info">
@@ -75,6 +76,7 @@
                             </div>
 
                             <button class="go-btn">예약하기</button>
+                            <input id="nowDate" type="hidden" value="${nowDate}">
 
                         </div>
                     </div>
@@ -94,7 +96,8 @@
 		$(".sub3").addClass("active");
 		
 		$(".go-btn").on("click", function() {
-			location.href = "/mylib/notebookRoom";
+			var nowDate = $('#nowDate').val();
+			location.href = "/mylib/seminarRoom?nowDate=" + nowDate;
 		});
 	});
     

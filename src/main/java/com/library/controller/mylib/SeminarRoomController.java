@@ -18,5 +18,13 @@ public class SeminarRoomController {
 		
 		return "/mylib/sub3/seminarRoomService";
 	}
+	
+	@GetMapping("/seminarRoom")
+	public String seminarRoom(@RequestParam("nowDate") String unowDate, Model model) {
+		String nowDate = unowDate;
+		model.addAttribute("nowDate", nowDate);
+		
+		return "/mylib/sub3/seminarRoom";
+	}
 
 }
