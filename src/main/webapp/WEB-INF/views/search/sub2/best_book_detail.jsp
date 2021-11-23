@@ -188,6 +188,7 @@
 				let book_isbn = $('.book_isbn').val(); 
 				if(email == "") {
 					alert("로그인 후 이용해주세요");
+					location.href="/member/login";
 				} else {
 					
 					let data = {
