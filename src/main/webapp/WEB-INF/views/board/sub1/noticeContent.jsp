@@ -104,7 +104,16 @@
                                             <td colspan="6">
                                                 <div class="bbs-content">
                                                     <p>${noticeContent.notice_content}</p>
-                                                   <%--  <img src="${noticeContent.notice_img}"> --%>
+                                                    
+                                                    <!-- 첨부 파일 -->
+													<div class="panel-body">
+														<div class='uploadResult'> 
+															<ul>
+																
+															</ul>
+														</div>
+													</div>
+													
                                                 </div>
                                             </td>
                                         </tr>
@@ -125,11 +134,14 @@
                                 
                                 <div class="delete_wrap">
 	                               <form action="/board/deleteNotice" method="get" onsubmit="return false" class="delete_form">
-	                               		<input type="hidden" name="notice_no" value="${noticeContent.notice_no}">
+	                               		<input type="hidden" name="notice_no" id="notice_no" value="${noticeContent.notice_no}">
 	                               		<input type="hidden" name="amount" value="${cri.amount}">
 	                               		<input type="hidden" name="page" value="${cri.page}">
                                 		<input type="hidden" name="type" value="${cri.type}">
                                 		<input type="hidden" name="keyword" value="${cri.keyword}">
+                                		
+                                		<input type="hidden" name="uuid" id="uuid">
+                                		<input type="hidden" name="file_type" id="file_type">
 	                               		<button class="delete_btn" style="background-color: #518d7d; border: 1px solid #3e6b5f;">삭제하기</button>
 	                               	</form>
 	                            </div>
@@ -183,8 +195,73 @@
 			}else{
 			}
 		})
-				
-	})
+		
+	});
+	
+	
+	
+
+
+	(function(){
+	 
+		var notice_no = $("#notice_no").val();
+		
+		$.getJSON("/board/getNoticeAttachList", {notice_no:notice_no}, function(arr){
+		    
+			console.log(arr);
+			
+			var str = "";
+			
+			$(arr).each(function(i, attach){
+				   
+				//image type
+				if(attach.file_type){
+					var fileCallPath = encodeURIComponent(attach.upload_path + "/" + attach.uuid + "_" + attach.file_name);
+					var uuidName = $("#uuid").val(attach.uuid + "_" + attach.file_name);
+					var thumbName = $("#thumb").val('s_' + attach.uuid + "_" + attach.file_name);
+					$("input[name='uuid']").attr('value', uuidName);
+					$("input[name='thumb']").attr('value', thumbName);
+					
+					str += "<li data-path='" + attach.upload_path + "' data-uuid='" + attach.uuid + "' data-filename='" + attach.file_name + "' data-type='" + attach.file_type + "' ><div>";
+					str += "<img width='500px' src='/displayFiles?file_name=" + fileCallPath + "'>";
+					str += "</div>";
+					str + "</li>";
+				}else{
+					str += "<li data-path='" + attach.upload_path + "' data-uuid='" + attach.uuid + "' data-filename='" + attach.file_name + "' data-type='" + attach.file_type + "' ><div>";
+					str += "<span> " + attach.file_name + "</span><br/>";
+					str += "<img src='/resources/fileImage/default.png'></a>";
+					str += "</div>";
+					str + "</li>";
+				}
+			});
+			$(".uploadResult ul").html(str);
+		   
+		});//end getjson
+		
+	})();//end function
+	
+		
+	$(".uploadResult").on("click", "li", function(e){
+		     
+		console.log("view image");
+		
+		var liObj = $(this);
+		
+		var path = encodeURIComponent(liObj.data("path") + "/" + liObj.data("uuid") + "_" + liObj.data("filename"));
+		
+		if(liObj.data("type")){
+			showImage(path.replace(new RegExp(/\\/g), "/"));
+		}else {
+			//download 
+			self.location ="/download?file_name=" + path;
+		}
+	   
+	});	
+	
+		
+		
+		
+
 	
 </script>    
     

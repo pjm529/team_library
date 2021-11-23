@@ -24,6 +24,10 @@
 		insert 
 		  into notice(notice_title, notice_content, writer_id, writer_name, notice_img) 
 		values(#{notice_title}, #{notice_content}, #{writer_id}, #{writer_name}, #{notice_img})
+		
+		<selectKey resultType="Long" keyProperty="notice_no" order="AFTER">
+			select last_insert_id()
+		</selectKey>
 	</insert>
 	
 	<update id="updateViews">

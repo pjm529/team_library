@@ -2,6 +2,7 @@ package com.library.service.board;
 
 import java.util.List;
 
+import com.library.model.board.NoticeAttachDTO;
 import com.library.model.board.NoticeDTO;
 import com.library.page.Criteria;
 
@@ -14,6 +15,8 @@ public interface NoticeService {
 	public void insert(NoticeDTO dto);
 	public void delete(Long notice_no);
 	public void reset();
-	public void update(NoticeDTO dto);
+	public boolean update(NoticeDTO dto);
+	
+	public List<NoticeAttachDTO> getNoticeAttachList(Long notice_no);
 	
 }
