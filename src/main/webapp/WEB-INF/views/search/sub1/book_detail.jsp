@@ -200,7 +200,7 @@
 	           				
 	           				if (result == "success") {
 	           					alert("대출이 완료되었습니다.");
-	           					$("#loan").attr("action", "/search/loan");
+	           					$("#loan").attr("action", "/search/loan?detail=not");
 	           					$("#loan").attr("onsubmit", "return true;");
 	           					$("#loan").submit();
 	       						
