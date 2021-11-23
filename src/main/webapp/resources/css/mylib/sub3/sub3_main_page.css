@@ -1,3 +1,5 @@
+@charset "UTF-8";
+
 body{
     margin: 0;
 }
@@ -160,120 +162,125 @@ ul{
     min-height:450px;
 }
 
-.wrapper-bbs {
-    padding-top: 20px;
+
+.my-booking-status{
+    /* border: 1px solid cadetblue;  */
+    margin: 10px 0; 
+    display: flex;
+    justify-content: flex-end;
 }
 
-.bbs-content b {
-    font-size: 140%;
-    font-weight: 800;
-    padding: 10px 15px;
+.my_info_btn{
+    background-color: #254b7c;
+    border: 1px solid #0f3c77;
+    border-radius: 5px;
+    color: #fff;
+    font-size: 14px;
+    font-weight: bold;
+    padding: 7px 13px;
+    cursor: pointer;
+}
+
+.my_info_btn:hover{
+    background-color: #5a6f8b;
+    border: 1px solid #3e4d5f;
 }
 
 
-
-form{
-    padding-top: 20px;
+.room-seat>h3{
+    color: #207dd0;
+    font-weight: 600;
+    margin: 0;
 }
 
-table.bbs-edit th, table.bbs-edit td{
-    padding: 8px 10px;
-    font-weight: normal;
-    border-left: none;
-    border-right: none;
-    border-top: none;
-}
 
-table.bbs-edit th{
-    background: #f7f7f7;
-}
+/*  ======= 테이블 ====== */
 table{
     width: 100%;
-    border-top: 2px solid #5e6062;
-    border-bottom: 2px solid #ccc;
     border-spacing: 0;
-    font-size: 14px;
+    margin-top: 15px;
+    border-collapse: separate;
 }
 
-.first{
-    width: 20%; 
+table thead th{
+    height: 27px;
+    color: #fff;
+    font-weight: 600;
+    background-color: #a3a3a3;
     text-align: left;
-    font-weight: normal;
-    border-left: none;
 }
 
 th, td{
-    border: 1px solid #e5e8eb;
     vertical-align: middle;
+    padding-left: 10px;
+    border-left: 0;
+    border-right: 0;
+    text-align: center;
+    text-align: left;
+    font-size: small;
 }
 
-table td .num{
-    color: #888;
-    font-size: 90%;
-    white-space: nowrap;
+.room-name{
+    width: 200px;
 }
 
-table td.left{
-    text-align: left!important;
+.align-center{
+    text-align: center;
+    width: 30px;
+}
+.align-right{
+    text-align: right !important;
+    font-weight: bolder;
 }
 
-
-table input{
-    border-radius: 3px;
-    background-color: #fafafa;
-    line-height: 27px;
-    padding: 0 5px;
-    vertical-align: middle;
-    border: 1px solid #ddd;
+.progress{
+    width: 420px;
 }
 
-.bbs-title {
-    height: 40px;
+progress{
+    width: 400px;
+    height: 23px;
+    margin-top: 4px;
+    margin-left: 5px;
+    
 }
 
-.bbs-content {
-    min-height: 240px;
+progress {
+    -webkit-appearance: none;
 }
 
-p {
-    margin: 0;
-    padding: 20px 15px;
-    line-height: 150%;
-    word-break: keep-all;
-    font-size: 15px;
-    font-weight: normal;
-    color: #464646;
+::-webkit-progress-bar {
+    background: -webkit-gradient(linear, left top, left bottom, from(#dfdfdf), to(#f3f2f2));
+    border: 1px solid #d3d2d2;
+    border-radius: 4px;
 }
 
-.write_btn, .update_btn, .delete_btn{
-    background-color: #266ac4;
+::-webkit-progress-value {
+    background: -webkit-gradient(linear, left top, left bottom, from(#99df3d), to(#649e13));
+    border: 1px solid #70b314;
+    border-radius: 4px;
+}
+
+.percent{
+	padding: 0px;
+	
+}
+
+.percent>div{
+	font-size: small;
+}
+
+.room-go-btn{
+    background-color: #f1c40f;
+    border: 1px solid #f1c40f;
+    border-radius: 2px;
     color: #fff;
-    padding: 7px 13px;
-    border: 1px solid #1557af;
-    border-radius: 5px;
+    padding: 3px 10px;
+    cursor: pointer;
     float: right;
-    width: 80px;
-    margin-top: 20px;
-    cursor: pointer;
-}
-
-.list_btn{
-    background-color: #fcfcfc;
-    color: #000;
-    padding: 7px 13px;
-    border: 1px solid #dddddd;
-    border-radius: 5px;
-    width: 80px;
-    margin-top: 20px;
-    cursor: pointer;
+    margin-right: 5px;
 }
 
 
-.delete_wrap, .update_wrap{
-	float: right;
-}
 
-.list_wrap{
-	float: left;
-}
 

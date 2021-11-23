@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+  
+
+<mapper namespace="com.library.mapper.mylib.NotebookRoomMapper">
+
+	<select id="usingSeat" resultType="int">
+	select count(*) - (select count(*) from notebook_room where seat_status = 0)
+ 	  from notebook_room
+	</select>
+	
+	<select id="usedSeat" resultType="int">
+	select count(*) from notebook_room where seat_status = 0
+	</select>
+	
+
+	<!-- ===== 좌석 리스트 ===== -->
+	<!-- 전체 좌석 정보 출력 -->
+	<select id="seats_list_all" resultType="com.library.model.mylib.NoteBookRoomDTO">
+		select nb.seat_no, seat_status, user_id, reg_time, return_time
+		  from notebook_room nb left join notebook_room_rental nbr
+		    on nb.seat_no = nbr.seat_no
+		 where nb.seat_no order by nb.seat_no
+	</select>
+	
+	<!-- 예약된 자리 확인 -->
+	<select id="reservation_info" resultType="com.library.model.mylib.NoteBookRoomDTO">
+		select *
+		  from notebook_room_rental
+		 where user_id = #{user_id}
+	</select>
+
+
+	<!-- ===== 예약 ===== -->
+	<!-- 좌석 예약 (자리 예약 | status 1 => 0으로 변경) -->
+	<insert id="nb_seat_booking">
+		insert 
+		  into notebook_room_rental
+	    values(#{seat_no}, #{user_id}, null, date_add(current_timestamp, INTERVAL 3 HOUR))
+	</insert>
+
+	<update id="updateStatusOccupied">
+		update notebook_room 
+		   set seat_status = 0 
+		 where seat_no = #{seat_no}
+	</update>
+	
+	
+	<!-- ===== 반납 & 퇴실 ===== -->
+	<!-- 좌석 반납&퇴실 (자리 반납 | status 0 => 1으로 변경) -->
+	<delete id="nb_seat_return">
+		delete 
+		  from notebook_room_rental 
+		 where seat_no = #{seat_no}
+	</delete>
+	
+	<update id="updateStatusVacant">
+		update notebook_room 
+		   set seat_status = 1 
+		 where seat_no = #{seat_no}
+	</update>
+	
+	
+	<!-- ===== 연장 ===== -->
+	<!-- 좌석 연장 -->
+	<update id="nb_seat_extend">
+		update notebook_room_rental 
+		   set return_time = date_add(return_time, interval 2 hour) 
+		 where seat_no = #{seat_no}
+	</update>
+
+
+	<!-- ===== 자동 반납 ===== -->
+	<!-- 반납 시간이 지난 자리 비워주기 -->
+	<delete id="updateNotebook_Room_RentalTable">
+		delete
+  		  from notebook_room_rental
+		<![CDATA[where return_time <= now()]]>
+	</delete>
+	
+	<update id="updateNotebook_RoomTable">
+		update notebook_room
+		   set seat_status = 1
+		 where seat_no in (select seat_no
+							 from notebook_room_rental
+				   <![CDATA[where return_time <= now()]]>);
+	</update>
+	
+
+
+</mapper>
