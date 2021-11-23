@@ -10,9 +10,6 @@ var renderCalendar = () => {
 	
     var viewYear = date.getFullYear(); // 현재 년
     var viewMonth = date.getMonth(); // 현재 월
-	var viewDate = date.getDate();//
-	
-	var nowDate = viewYear + "-" + (viewMonth+1) + "-" + viewDate;
 	
 	
     // html .year-month 태그 채우기
@@ -158,7 +155,7 @@ $(document).ready(function() {
 		
 		var nowDate = $(this).closest('span').find('#nowDate').val();
 		
-		location.href = '/mylib/groupRoom?nowDate=' + nowDate;
+		location.href = '/mylib/seminarRoomService?nowDate=' + nowDate;
 		
 		
 	});
