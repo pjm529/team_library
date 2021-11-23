@@ -101,14 +101,12 @@
                         <form id="loan" onsubmit="return false;" method="post">
                         
                        		<sec:authorize access="isAuthenticated()">
-							<input type="hidden" class="user_id" name="user_id" 
-								value=<sec:authentication property="principal.dto.user_id"/>>
 							<input type="hidden" class="user_email" name="user_email" 
 								value=<sec:authentication property="principal.dto.user_email"/>>
 							</sec:authorize>
 							
 							<sec:authorize access="isAnonymous()">
-							<input type="hidden" class="user_id" name="user_id">
+							<input type="hidden" class="user_email" name="user_email">
 							</sec:authorize>
 							
 							<input type="hidden" name="book_title" value="${book.book_title }">
@@ -186,14 +184,13 @@
 			
 			$("#loan_btn").click(function() {
 				
-				let id = $('.user_id').val(); 
+				let email = $('.user_email').val(); 
 				let book_isbn = $('.book_isbn').val(); 
-				if(id == "") {
+				if(email == "") {
 					alert("로그인 후 이용해주세요");
 				} else {
 					
 					let data = {
-	           				user_id: id,
 	           				book_isbn: book_isbn
 	           		};
 					
