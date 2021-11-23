@@ -28,6 +28,7 @@
 			
 			<s:intercept-url pattern="/*" access="permitAll"/>
 			<s:intercept-url pattern="/admin/*" access="hasRole('ROLE_ADMIN')"/>
+			<s:intercept-url pattern="/master/*" access="hasRole('ROLE_MASTER')"/>
 
 			<!-- 기본 로그인 폼 -->
 			<!-- <s:form-login/> -->
