@@ -31,7 +31,7 @@
                             <a href="/admin/member-list">관리자</a>
                         </li>
                         <li>
-                            <a href="/master/admin-list">관리자목록</a>
+                            <a href="/admin/admin-list">관리자목록</a>
                         </li>
                     </ul>
                 </div>
@@ -178,7 +178,7 @@
 											
 											<td>${member_list.user_reg_date }</td>
 											<td>
-												<form action="/master/revoke" method="post" onsubmit="return false;">
+												<form action="/admin/revoke" method="post" onsubmit="return false;">
 													<input type="hidden" name="amount" value="${pageMaker.cri.amount }">
 													<input type="hidden" name="page" value="${pageMaker.cri.page }">
 													<input type="hidden" name="type" value="${pageMaker.cri.type }">
@@ -277,7 +277,7 @@
 			$('.add_btn').on("click",function(e){
 				
 				e.preventDefault();
-				let popUrl = "/master/add-popup";
+				let popUrl = "/admin/add-popup";
 				let popOption = "width = 700px, height=600px, top=300px, scrollbars=no, resizeable=no";
 				window.open(popUrl,"작가 찾기" ,popOption);
 			});
