@@ -26,8 +26,8 @@ public class MyPageServiceImpl implements MyPageService {
 
 	// 회원의 대출 중 도서 수와 비밀번호 받아오기
 	@Override
-	public MemberDTO user_check(String user_id) {
-		return myPageMapper.user_check(user_id);
+	public MemberDTO user_book_count(String user_id) {
+		return myPageMapper.user_book_count(user_id);
 	}
 
 	// 회원 탈퇴
@@ -40,12 +40,6 @@ public class MyPageServiceImpl implements MyPageService {
 	@Override
 	public void insert_secession(String user_id) {
 		myPageMapper.insert_secession(user_id);
-	}
-
-	// 비밀번호 변경
-	@Override
-	public int modify_pw(String user_id, String user_pw) {
-		return myPageMapper.modify_pw(user_id, user_pw);
 	}
 
 }

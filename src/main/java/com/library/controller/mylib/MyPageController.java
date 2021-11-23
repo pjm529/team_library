@@ -100,22 +100,23 @@ public class MyPageController {
 	@ResponseBody
 	@PostMapping("/secession")
 	public String secessionPOST(String user_pw, HttpServletRequest request) {
-
+		
 		HttpSession session = request.getSession();
-
+		
 		// 로그인 된 user_id 받아오기
 		Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
 		UserDetails userDetails = (UserDetails) principal;
 		String id = userDetails.getUsername();
-
+		
+		
 		// 회원 정보 받아오기
-		MemberDTO my = myPageService.user_check(id);
-
+		MemberDTO my = myPageService.user_book_count(id); 
+		
 		// 대출 중 도서 수
 		int count = my.getUser_book_count();
-
+		
 		// db에 있는 회원 비밀번호
-		String db_pw = my.getUser_pw();
+		String db_pw = my.getUser_pw(); 
 
 		if (count > 0) {
 
@@ -125,16 +126,16 @@ public class MyPageController {
 
 			// 입력한 비밀번호과 db에 있는 비밀번호가 같으면 탈퇴 수행
 			if (pwencoder.matches(user_pw, db_pw)) {
-
+				
 				// 회원 탈퇴
 				myPageService.my_secession(id);
-
+				
 				// 탈퇴 회원 테이블에 입력
 				myPageService.insert_secession(id);
-
+				
 				// 세션 초기화
 				session.invalidate();
-
+				
 				return "success";
 
 			} else {
@@ -145,51 +146,6 @@ public class MyPageController {
 
 		}
 
-	}
-
-	@GetMapping("/modify_pw")
-	public String modifyPwGET() {
-
-		return "/mylib/sub5/modify_pw";
-	}
-
-	@ResponseBody
-	@PostMapping("/modify_pw")
-	public String modifyPwPOST(String present_pw, String user_pw, HttpServletRequest request) {
-
-		HttpSession session = request.getSession();
-
-		// 로그인 된 user_id 받아오기
-		Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-		UserDetails userDetails = (UserDetails) principal;
-		String id = userDetails.getUsername();
-		
-		// 회원 정보 받아오기
-		MemberDTO my = myPageService.user_check(id);
-
-		// db에 있는 회원 비밀번호
-		String db_pw = my.getUser_pw();
-		
-		// 입력한 현재 비밀번호과 db에 있는 비밀번호가 같으면 탈퇴 수행
-		if (pwencoder.matches(present_pw, db_pw)) {
-			
-			// 비밀번호 암호화
-			String encode_pw = pwencoder.encode(user_pw);
-			
-			// 비밀번호 변경
-			myPageService.modify_pw(id, encode_pw);
-
-			// 세션 초기화
-			session.invalidate();
-
-			return "success";
-
-		} else {
-
-			return "fail";
-
-		}
-				
 	}
 
 }

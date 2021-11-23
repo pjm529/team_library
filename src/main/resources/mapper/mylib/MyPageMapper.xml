@@ -19,7 +19,7 @@
  		</update>
  		
  		<!-- 회원의 대출 중 도서 수와 비밀번호 받아오기 -->
- 		<select id="user_check" resultType="com.library.model.member.MemberDTO">
+ 		<select id="user_book_count" resultType="com.library.model.member.MemberDTO">
  			select user_pw, user_book_count
  			  from member
  			 where user_id = #{user_id}
@@ -36,12 +36,5 @@
  		<insert id="insert_secession">
  			insert into secession_member values(#{user_id});
  		</insert>
- 		
- 		<!-- 비밀번호 변경 -->
- 		<update id="modify_pw">
- 			update member
- 			   set user_pw = #{user_pw}
- 			 where user_id = #{user_id}
- 		</update>
  		
 	</mapper>
