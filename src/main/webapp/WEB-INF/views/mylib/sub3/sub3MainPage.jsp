@@ -45,25 +45,7 @@
             <div class="doc">
 
                 <!-- 왼쪽 사이드바 -->
-                <div class="lnb">
-                    <h2>
-                        <b>나의 도서관</b>
-                    </h2>
-                    <ul class="subMenu">
-                        <li>
-                            <a href="#">희망도서신청</a>
-                        </li>
-                        <li>
-                            <a href="#">문화강좌신청/조회</a>
-                        </li>
-                        <li class="active">
-                            <a href="/mylib/sub3MainPage">좌석예약/조회</a>
-                        </li>
-                        <li>
-                            <a href="#">개인정보</a>
-                        </li>
-                    </ul>
-                </div>
+                <jsp:include page="../lnb.jsp"></jsp:include>
 
                 <!-- 본문 -->
                 <div class="content">
