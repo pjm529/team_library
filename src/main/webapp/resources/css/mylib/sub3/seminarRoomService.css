@@ -180,7 +180,7 @@ ul{
     width: 100%;
     height: auto;
     min-height: 500px;
-    border: 3px solid #E5E5E5;
+/*     border: 3px solid #E5E5E5; */
 }
 
 ul.con > li{
