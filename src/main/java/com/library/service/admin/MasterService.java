@@ -1,11 +1,11 @@
-package com.library.mapper.admin;
+package com.library.service.admin;
 
 import java.util.List;
 
 import com.library.model.member.MemberDTO;
 import com.library.page.Criteria;
 
-public interface AdminListMapper {
+public interface MasterService {
 
 	// 관리자 총 인원 수 출력
 	public int get_total(Criteria cri);
@@ -24,5 +24,4 @@ public interface AdminListMapper {
 
 	// 관리자 권한 검색
 	public int admin_check(String user_id);
-
 }

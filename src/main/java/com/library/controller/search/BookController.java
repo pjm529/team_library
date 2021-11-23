@@ -7,6 +7,8 @@ import java.util.List;
 
 import org.json.simple.parser.ParseException;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -31,7 +33,6 @@ public class BookController {
 
 	@Autowired
 	private BookService bookService;
-
 	
 	// 검색 도서 출력
 	@GetMapping("/book")
@@ -123,6 +124,14 @@ public class BookController {
 	@PostMapping("/loan")
 	public String loan(Model model, Criteria cri, BookDTO book, @RequestParam String detail) {
 
+		// 로그인 된 user_id 받아오기 
+		Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+		UserDetails userDetails = (UserDetails)principal;
+		String id = userDetails.getUsername();
+		
+		// id 세팅
+		book.setUser_id(id);
+		
 		System.out.println("\n======================== 대출 신청 ========================");
 		System.out.println("대출자 아이디 : " + book.getUser_id());
 		System.out.println("대출 책 제목 : " + book.getBook_title());
@@ -138,10 +147,15 @@ public class BookController {
 			return "redirect:/search/book";
 		}
 
-		// 도서 대출 실행
+		// 도서 대출 실행(대출하려는 도서의 대출 수가 2가 아닐 때)
 		if( bookService.count(book.getBook_isbn()) != 2) {
+			
+			// 대출
 			bookService.insert(book);
+			
+			// 대출자 대출 중 도서수 증가
 			bookService.increase_count(book.getUser_id());
+			
 		} else {
 			System.out.println("대출불가");
 		}
@@ -161,17 +175,30 @@ public class BookController {
 	// 대출자 상태 체크
 	@ResponseBody
 	@PostMapping("/statusChk")
-	public String statusChk(String user_id, String book_isbn) throws Exception {
+	public String statusChk(String book_isbn) throws Exception {
 
+		// 로그인 된 user_id 받아오기 
+		Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+		UserDetails userDetails = (UserDetails)principal;
+		String id = userDetails.getUsername();
+		
+		System.out.println(id);
 		System.out.println("statusChk() 진입");
 
-		int result = bookService.statusCheck(user_id);
+		
+		// 대출하려는 회원의 대출 상태를 체크
+		int result = bookService.statusCheck(id);
 
 		if (result == 1) {
+			
+			// 대출 중인 도서 상태 체크
 			int count = bookService.count(book_isbn);
 			
 			if(count != 2) {
+				
+				// 대출 중인 총 도서수가 2가 아닐 경우 success
 				return "success";
+				
 			} else {
 				return "fail";
 			}

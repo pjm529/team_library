@@ -16,14 +16,14 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import com.library.model.member.MemberDTO;
 import com.library.page.Criteria;
 import com.library.page.ViewPage;
-import com.library.service.admin.AdminListService;
+import com.library.service.admin.MasterService;
 
 @Controller
-@RequestMapping("/admin")
-public class AdminListController {
+@RequestMapping("/master")
+public class MasterController {
 
 	@Autowired
-	private AdminListService adminListService;
+	private MasterService adminListService;
 
 	// 관리자 목록 출력
 	@GetMapping("/admin-list")
@@ -76,7 +76,7 @@ public class AdminListController {
 
 		adminListService.grant(user_id);
 
-		return "redirect:/admin/add-popup";
+		return "redirect:/master/add-popup";
 	}
 
 	// 관리자 권한가지고 있는지 검색
@@ -107,10 +107,10 @@ public class AdminListController {
 		try {
 			keyword = URLEncoder.encode(cri.getKeyword(), "UTF-8");
 		} catch (UnsupportedEncodingException e) {
-			return "redirect:/admin/admin-list";
+			return "redirect:/master/admin-list";
 		}
 
-		return "redirect:/admin/admin-list?amount=" + amount + "&page=" + page + "&type=" + type + "&keyword="
+		return "redirect:/master/admin-list?amount=" + amount + "&page=" + page + "&type=" + type + "&keyword="
 				+ keyword;
 	}
 

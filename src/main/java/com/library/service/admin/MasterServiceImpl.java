@@ -5,15 +5,15 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.library.mapper.admin.AdminListMapper;
+import com.library.mapper.admin.MasterMapper;
 import com.library.model.member.MemberDTO;
 import com.library.page.Criteria;
 
 @Service
-public class AdminListServiceImpl implements AdminListService {
+public class MasterServiceImpl implements MasterService {
 
 	@Autowired
-	private AdminListMapper adminListMapper;
+	private MasterMapper adminListMapper;
 
 	// 관리자 총 인원 수 출력
 	@Override
