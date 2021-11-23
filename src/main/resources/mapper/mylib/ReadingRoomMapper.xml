@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+  
+<mapper namespace="com.library.mapper.mylib.ReadingRoomMapper">
+	
+	<select id="getSeatsList" resultType="com.library.model.mylib.ReadingRoomDTO">
+		select rr.seat_no as seat_no, seat_status, user_id, reg_time, return_time 
+  		  from reading_room1 as rr left join reading_room1_rental as rt
+      	 	on rr.seat_no = rt.seat_no
+	</select>
+	
+	
+	<!-- 예약 -->
+	<insert id="bookingSeat">
+		insert
+		  into reading_room1_rental
+		values(#{seat_no}, #{user_id}, null, date_add(current_timestamp, interval 3 hour))
+	</insert>
+	
+	<update id="updateStatusToOccupied">
+		update reading_room1
+		   set seat_status = 0
+		 where seat_no = #{seat_no}
+	</update>
+	
+	<select id="mySeatInfo" resultType="com.library.model.mylib.ReadingRoomDTO">
+		select * 
+		  from reading_room1_rental 
+		 where user_id = #{user_id}
+	</select>
+	
+	
+	<!-- 반납 -->
+	<delete id="returnSeat">
+		delete
+		  from reading_room1_rental
+		 where seat_no = #{seat_no}
+	</delete>
+	
+	<update id="updateStatusToVacant">
+		update reading_room1
+		   set seat_status = 1
+		 where seat_no = #{seat_no}
+	</update>
+		
+		
+	<!-- 연장 -->
+	<update id="extendSeat">
+		update reading_room1_rental 
+		   set return_time = date_add(return_time, interval 2 hour) 
+		 where seat_no = #{seat_no}
+	</update>
+	
+	
+</mapper>
