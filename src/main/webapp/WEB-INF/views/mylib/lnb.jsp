@@ -5,15 +5,18 @@
     </h2>
     <ul class="subMenu">
         <li class="sub1">
-            <a href="#">희망도서신청</a>
+            <a href="#">도서 관련</a>
         </li>
         <li class="sub2">
-            <a href="#">문화강좌신청/조회</a>
+            <a href="#">희망도서신청</a>
         </li>
         <li class="sub3">
             <a href="/mylib/sub3MainPage">좌석예약/조회</a>
         </li>
         <li class="sub4">
+            <a href="#">문화강좌신청/조회</a>
+        </li>
+        <li class="sub5">
             <a href="#">개인정보</a>
         </li>
     </ul>
