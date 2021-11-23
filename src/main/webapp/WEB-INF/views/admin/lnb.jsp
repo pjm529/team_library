@@ -18,7 +18,7 @@
             <a href="/admin/overdue-list">연체중도서</a>
         </li>
         <li class="sub5">
-            <a href="/master/admin-list">관리자목록</a>
+            <a href="/admin/admin-list">관리자목록</a>
         </li>
     </ul>
 </div>
