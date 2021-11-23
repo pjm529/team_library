@@ -24,4 +24,3 @@ public interface MyPageMapper {
 	// 비밀번호 변경
 	public int modify_pw(@Param("user_id")String user_id, @Param("user_pw")String user_pw);
 }
- 

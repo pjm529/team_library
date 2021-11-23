@@ -11,4 +11,3 @@ public interface SearchIdMapper {
 	public String search_id(MemberDTO member);
 
 }
- 

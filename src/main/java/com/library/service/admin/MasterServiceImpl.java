@@ -8,7 +8,7 @@ import org.springframework.stereotype.Service;
 import com.library.mapper.admin.MasterMapper;
 import com.library.model.member.MemberDTO;
 import com.library.page.Criteria;
- 
+
 @Service
 public class MasterServiceImpl implements MasterService {
 

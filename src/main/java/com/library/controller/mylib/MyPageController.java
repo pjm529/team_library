@@ -32,7 +32,7 @@ public class MyPageController {
 	public String mypage(Model model) {
 
 		System.out.println("마이 페이지 진입");
- 
+
 		// 로그인 된 user_id 받아오기
 		Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
 		UserDetails userDetails = (UserDetails) principal;

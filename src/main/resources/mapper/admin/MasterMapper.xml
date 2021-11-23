@@ -21,7 +21,7 @@
 			 where ma.auth = 'ROLE_ADMIN' <include refid="criteria"></include>
 			 order by user_reg_date 
 		</select>
-		 
+		
 		<!-- 관리자 권한 부여 -->
 		<insert id="grant">
 			insert into member_auth values(#{user_id}, 'ROLE_ADMIN')

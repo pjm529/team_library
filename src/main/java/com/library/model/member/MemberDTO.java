@@ -27,7 +27,7 @@ public class MemberDTO {
 	// 회원 우편번호
 	private String user_zip;
 
-	// 회원 주소 
+	// 회원 주소
 	private String user_address;
 
 	// 회원 상세주소

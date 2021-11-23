@@ -26,4 +26,3 @@ public interface MasterMapper {
 	public int admin_check(String user_id);
 
 }
- 

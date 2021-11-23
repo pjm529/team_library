@@ -27,4 +27,3 @@ public class CustomMemberDTO extends User {
 		this.dto = dto;
 	}
 }
- 

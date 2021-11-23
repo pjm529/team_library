@@ -24,7 +24,7 @@ public class MasterController {
 
 	@Autowired
 	private MasterService adminListService;
- 
+
 	// 관리자 목록 출력
 	@GetMapping("/admin-list")
 	public String overdue_list(Model model, Criteria cri) {

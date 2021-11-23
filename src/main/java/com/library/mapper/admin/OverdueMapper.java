@@ -14,4 +14,3 @@ public interface OverdueMapper {
 	// 대출 수 출력
 	public int get_total();
 }
- 

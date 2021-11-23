@@ -17,4 +17,3 @@ public interface SignupMapper {
 	public void auth(String user_id);
 
 }
- 

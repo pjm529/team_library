@@ -6,4 +6,3 @@ public interface LoginMapper {
 	
 	public MemberDTO login(String user_id);
 }
- 

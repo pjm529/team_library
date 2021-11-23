@@ -68,7 +68,7 @@
 			  		<if test="type == 'user_email'">
 			  			where user_email like concat('%', #{keyword}, '%')
 			  		</if>
-			  		 
+			  		
 				</if>
 			</if>
 	    </sql>

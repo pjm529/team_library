@@ -12,4 +12,3 @@ public class MemberAuthDTO {
 	private String auth;
 	
 }
- 

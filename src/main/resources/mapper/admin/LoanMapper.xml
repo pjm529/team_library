@@ -20,7 +20,7 @@
 			  order by loan_date desc
 			  limit #{skip}, #{amount}
 		</select>
-		 
+		
 		<!-- 도서 반납 처리 -->
 		<update id="return_book">
 			update loan_history

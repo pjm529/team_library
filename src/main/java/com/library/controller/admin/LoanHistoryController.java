@@ -20,7 +20,7 @@ public class LoanHistoryController {
 
 	@Autowired
 	private LoanHistoryService service;
- 
+
 	// 대출 중 리스트 출력 (get)
 	@GetMapping("/loan-history")
 	public String loan_list(Model model, Criteria cri) {

@@ -21,4 +21,3 @@ public interface BookMapper {
 	// 대출자 대출 수 증가
 	public void increase_count(String user_id);
 }
- 

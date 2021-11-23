@@ -21,4 +21,3 @@ public class CustomAccessDeniedHandler implements AccessDeniedHandler {
 	}
 
 }
- 

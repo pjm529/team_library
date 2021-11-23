@@ -40,7 +40,7 @@ public class SearchPwController {
 		System.out.println("비밀번호 찾기 페이지 진입");
 
 		return "/member/sub4/search_pw";
- 
+
 	}
 
 	// 비밀번호 찾기 정보확인

@@ -26,4 +26,4 @@ public interface LoanMapper {
 	
 	// 연체 일 만큼 대출 불가 일 수 추가
 	public void update_user_overdue(@Param("user_id") String user_id, @Param("date") int date);
-} 
+}
