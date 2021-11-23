@@ -57,9 +57,9 @@
 
                         <div class="seat-chart">
                             <div class="seat-wrapper">
-                                <div class="line1">
+								<div class="line1">
                                     <div class="seat-list">
-                                    <c:forEach var="seatsList" items="${seatsList1}">
+                                    <c:forEach var="seatsList" items="${seatsList}" begin="0" end="9">
                                     	
                                     	<c:if test="${seatsList.seat_status == '0'}">
                                     		<c:set var="status" value="occupied"/>
@@ -83,53 +83,53 @@
                                     </div>
                                     
                                     <div class="seat-list">
-                                    <c:forEach var="seatsList2" items="${seatsList2}">
+                                    <c:forEach var="seatsList" items="${seatsList}" begin="10" end="19">
                                     	
-                                    	<c:if test="${seatsList2.seat_status == '0'}">
+                                    	<c:if test="${seatsList.seat_status == '0'}">
                                     		<c:set var="status" value="occupied"/>
-                                    		<c:set var="user_id" value="${seatsList2.user_id}"/>
+                                    		<c:set var="user_id" value="${seatsList.user_id}"/>
                                     	</c:if>
                                     	
-                                    	<c:if test="${seatsList2.seat_status == '1'}">
+                                    	<c:if test="${seatsList.seat_status == '1'}">
                                     		<c:set var="status" value="vacant"/>
                                     		<c:set var="user_id" value="khi29"/>
                                     	</c:if>
                                     	
-                                    	<c:if test="${seatsList2.user_id == 'khi29'}">
-                                    		<button class="mine" id="${seatsList2.seat_no}">${seatsList2.seat_no}</button>
+                                    	<c:if test="${seatsList.user_id == 'khi29'}">
+                                    		<button class="mine" id="${seatsList.seat_no}">${seatsList.seat_no}</button>
                                     	</c:if>
                                     	
-                                    	<c:if test="${seatsList2.user_id != 'khi29'}">
-                                    		<button class="${status}" id="${seatsList2.seat_no}">${seatsList2.seat_no}</button>
+                                    	<c:if test="${seatsList.user_id != 'khi29'}">
+                                    		<button class="${status}" id="${seatsList.seat_no}">${seatsList.seat_no}</button>
                                     	</c:if>
                                     </c:forEach>
                                     </div>
                                     
                                     <div class="seat-list" style="height: 180px; overflow: hidden;">
-                                    <c:forEach var="seatsList2" items="${seatsList3}">
+                                    <c:forEach var="seatsList" items="${seatsList}" begin="20" end="27">
                                     	
-                                    	<c:if test="${seatsList2.seat_status == '0'}">
+                                    	<c:if test="${seatsList.seat_status == '0'}">
                                     		<c:set var="status" value="occupied"/>
-                                    		<c:set var="user_id" value="${seatsList2.user_id}"/>
+                                    		<c:set var="user_id" value="${seatsList.user_id}"/>
                                     	</c:if>
                                     	
-                                    	<c:if test="${seatsList2.seat_status == '1'}">
+                                    	<c:if test="${seatsList.seat_status == '1'}">
                                     		<c:set var="status" value="vacant"/>
                                     		<c:set var="user_id" value="khi29"/>
                                     	</c:if>
                                     	
-                                    	<c:if test="${seatsList2.user_id == 'khi29'}">
-                                    		<button class="mine" id="${seatsList2.seat_no}">${seatsList2.seat_no}</button>
+                                    	<c:if test="${seatsList.user_id == 'khi29'}">
+                                    		<button class="mine" id="${seatsList.seat_no}">${seatsList.seat_no}</button>
                                     	</c:if>
                                     	
-                                    	<c:if test="${seatsList2.user_id != 'khi29'}">
-                                    		<button class="${status}" id="${seatsList2.seat_no}">${seatsList2.seat_no}</button>
+                                    	<c:if test="${seatsList.user_id != 'khi29'}">
+                                    		<button class="${status}" id="${seatsList.seat_no}">${seatsList.seat_no}</button>
                                     	</c:if>
                                     </c:forEach>
                                     </div>
                                     
                                     <div class="seat-list">
-                                    <c:forEach var="seatsList" items="${seatsList4}">
+                                    <c:forEach var="seatsList" items="${seatsList}" begin="28" end="37">
                                     	
                                     	<c:if test="${seatsList.seat_status == '0'}">
                                     		<c:set var="status" value="occupied"/>
@@ -154,30 +154,30 @@
                                  </div>
                                   
                                     
-                                    <div class="line2">
-                                    	<div class="seat-list-row">
-	                                    <c:forEach var="seatsList" items="${seatsList5}">
-	                                    	
-	                                    	<c:if test="${seatsList.seat_status == '0'}">
-	                                    		<c:set var="status" value="occupied"/>
-	                                    		<c:set var="user_id" value="${seatsList.user_id}"/>
-	                                    	</c:if>
-	                                    	
-	                                    	<c:if test="${seatsList.seat_status == '1'}">
-	                                    		<c:set var="status" value="vacant"/>
-	                                    		<c:set var="user_id" value="khi29"/>
-	                                    	</c:if>
-	                                    	
-	                                    	<c:if test="${seatsList.user_id == 'khi29'}">
-	                                    		<button class="mine" id="${seatsList.seat_no}">${seatsList.seat_no}</button>
-	                                    	</c:if>
-	                                    	
-	                                    	<c:if test="${seatsList.user_id != 'khi29'}">
-	                                    		<button class="${status}" id="${seatsList.seat_no}">${seatsList.seat_no}</button>
-	                                    	</c:if>
-	                                    </c:forEach>
-	                                    </div>
-                                    </div>
+								<div class="line2">
+									<div class="seat-list-row">
+									<c:forEach var="seatsList" items="${seatsList}" begin="38" end="53">
+									
+										<c:if test="${seatsList.seat_status == '0'}">
+											<c:set var="status" value="occupied"/>
+											<c:set var="user_id" value="${seatsList.user_id}"/>
+										</c:if>
+									
+										<c:if test="${seatsList.seat_status == '1'}">
+											<c:set var="status" value="vacant"/>
+											<c:set var="user_id" value="khi29"/>
+										</c:if>
+									
+										<c:if test="${seatsList.user_id == 'khi29'}">
+											<button class="mine" id="${seatsList.seat_no}">${seatsList.seat_no}</button>
+										</c:if>
+									
+										<c:if test="${seatsList.user_id != 'khi29'}">
+											<button class="${status}" id="${seatsList.seat_no}">${seatsList.seat_no}</button>
+										</c:if>
+									</c:forEach>
+									</div>
+								</div>
                                     
 
                             </div>

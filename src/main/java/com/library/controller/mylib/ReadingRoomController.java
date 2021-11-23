@@ -26,20 +26,23 @@ public class ReadingRoomController {
 		readingRoomService.updateReading_Room1Table();
 		readingRoomService.updateReading_Room1_RentalTable();
 
-		List<ReadingRoomDTO> seatsList = readingRoomService.getSeatsList(0, 10);
-		model.addAttribute("seatsList1", seatsList);
+//		List<ReadingRoomDTO> seatsList = readingRoomService.getSeatsList(0, 10);
+//		model.addAttribute("seatsList1", seatsList);
+//		
+//		List<ReadingRoomDTO> seatsList2 = readingRoomService.getSeatsList(10, 10);
+//		model.addAttribute("seatsList2", seatsList2);
+//		
+//		List<ReadingRoomDTO> seatsList3 = readingRoomService.getSeatsList(20, 8);
+//		model.addAttribute("seatsList3", seatsList3);
+//		
+//		List<ReadingRoomDTO> seatsList4 = readingRoomService.getSeatsList(28, 10);
+//		model.addAttribute("seatsList4", seatsList4);
+//		
+//		List<ReadingRoomDTO> seatsList5 = readingRoomService.getSeatsList(38, 16);
+//		model.addAttribute("seatsList5", seatsList5);
 		
-		List<ReadingRoomDTO> seatsList2 = readingRoomService.getSeatsList(10, 10);
-		model.addAttribute("seatsList2", seatsList2);
-		
-		List<ReadingRoomDTO> seatsList3 = readingRoomService.getSeatsList(20, 8);
-		model.addAttribute("seatsList3", seatsList3);
-		
-		List<ReadingRoomDTO> seatsList4 = readingRoomService.getSeatsList(28, 10);
-		model.addAttribute("seatsList4", seatsList4);
-		
-		List<ReadingRoomDTO> seatsList5 = readingRoomService.getSeatsList(38, 16);
-		model.addAttribute("seatsList5", seatsList5);
+		List<ReadingRoomDTO> seatsList = readingRoomService.getSeatsList();
+		model.addAttribute("seatsList", seatsList);
 
 //		HttpSession session = request.getSession();
 //		session.setAttribute("user_id", "khi29");
@@ -91,8 +94,6 @@ public class ReadingRoomController {
 		
 		dto.setUser_id("khi29"); 
 		dto.setSeat_no(newSeat_no);
-		
-		System.out.println(dto);
 		
 		readingRoomService.bookingSeat(dto);
 		readingRoomService.updateStatusToOccupied(dto);

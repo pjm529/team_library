@@ -28,9 +28,14 @@ public class ReadingRoomServiceImpl implements ReadingRoomService {
 		mapper.updateReading_Room1Table();
 	}
 	
+//	@Override
+//	public List<ReadingRoomDTO> getSeatsList(int skip, int amount) {
+//		return mapper.getSeatsList(skip, amount);
+//	}
+	
 	@Override
-	public List<ReadingRoomDTO> getSeatsList(int skip, int amount) {
-		return mapper.getSeatsList(skip, amount);
+	public List<ReadingRoomDTO> getSeatsList() {
+		return mapper.getSeatsList();
 	}
 
 	@Override

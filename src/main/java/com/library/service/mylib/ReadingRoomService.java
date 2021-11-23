@@ -6,7 +6,8 @@ import com.library.model.mylib.ReadingRoomDTO;
 
 public interface ReadingRoomService {
 	
-	public List<ReadingRoomDTO> getSeatsList(int skip, int amount);
+//	public List<ReadingRoomDTO> getSeatsList(int skip, int amount);
+	public List<ReadingRoomDTO> getSeatsList();
 	public void bookingSeat(ReadingRoomDTO dto);
 	public void updateStatusToOccupied(ReadingRoomDTO dto);
 	public void returnSeat(ReadingRoomDTO dto);

@@ -21,13 +21,19 @@
 	</delete>
 	
 	<!-- 모든 자리 정보 출력 -->
+	<!-- <select id="getSeatsList" resultType="com.library.model.mylib.ReadingRoomDTO">
+		select rr.seat_no as seat_no, seat_status, user_id, reg_time, return_time 
+  		  from reading_room1 as rr left join reading_room1_rental as rt
+      	 	on rr.seat_no = rt.seat_no 
+      	 order by seat_no
+      	 limit #{skip}, #{amount}
+	</select> -->
 	
 	<select id="getSeatsList" resultType="com.library.model.mylib.ReadingRoomDTO">
 		select rr.seat_no as seat_no, seat_status, user_id, reg_time, return_time 
   		  from reading_room1 as rr left join reading_room1_rental as rt
       	 	on rr.seat_no = rt.seat_no 
       	 order by seat_no
-      	 limit #{skip}, #{amount}
 	</select>
 	
 	<!-- 예약 -->

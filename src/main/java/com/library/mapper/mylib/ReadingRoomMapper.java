@@ -9,7 +9,8 @@ import com.library.page.Criteria;
 
 public interface ReadingRoomMapper {
 
-	public List<ReadingRoomDTO> getSeatsList(@Param("skip")int skip, @Param("amount")int amount);
+//	public List<ReadingRoomDTO> getSeatsList(@Param("skip")int skip, @Param("amount")int amount);
+	public List<ReadingRoomDTO> getSeatsList();
 	public void bookingSeat(ReadingRoomDTO dto);
 	public void updateStatusToOccupied(ReadingRoomDTO dto);
 	public void returnSeat(ReadingRoomDTO dto);
