@@ -105,8 +105,12 @@ public class AdminController {
 	@GetMapping("/member-delete")
 	public String member_delete(Criteria cri, @RequestParam String user_id) {
 
+		// 회원탈퇴
 		adminService.member_delete(user_id);
-
+		
+		// 탈퇴 회원 테이블에 입력
+		adminService.insert_secession(user_id);
+		
 		int amount = cri.getAmount();
 		int page = cri.getPage();
 		String type = cri.getType();

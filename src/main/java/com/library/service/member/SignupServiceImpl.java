@@ -28,6 +28,12 @@ public class SignupServiceImpl implements SignupService {
 
 	}
 
+	// 탈퇴 회원 중 아이디 체크
+	@Override
+	public int secession_idCheck(String user_id) throws Exception {
+		return signupMapper.secession_idCheck(user_id);
+	}
+
 	// 회원 권한 입력
 	@Override
 	public void auth(String user_id) {

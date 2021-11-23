@@ -24,4 +24,7 @@ public interface AdminService {
 
 	// 회원 탈퇴
 	public void member_delete(String user_id);
+
+	// 탈퇴 회원 테이블에 입력
+	public void insert_secession(String user_id);
 }
