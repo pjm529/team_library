@@ -11,7 +11,7 @@
 	
 	<!-- Enables the Spring MVC @Controller programming model -->
 	<annotation-driven />
-
+	
 	<!-- Handles HTTP GET requests for /resources/** by efficiently serving up static resources in the ${webappRoot}/resources directory -->
 	<resources mapping="/resources/**" location="/resources/" />
 
@@ -22,11 +22,13 @@
 	</beans:bean>
 	
 	<!-- 파일 업로드 위한 Bean -->
-	<beans:bean id="multipartresolver" class="org.springframework.web.multipart.support.StandardServletMultipartResolver">
+	<beans:bean id="multipartResolver" class="org.springframework.web.multipart.support.StandardServletMultipartResolver">
 	</beans:bean>
 	
 	<context:component-scan base-package="com.library.controller" />
 	
-	
+
+
+
 	
 </beans:beans>
