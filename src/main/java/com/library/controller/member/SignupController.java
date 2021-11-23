@@ -69,7 +69,10 @@ public class SignupController {
 
 		int result = signupService.idCheck(memberId);
 
-		if (result != 0) {
+		// 탈퇴 회원 중 아이디 체크
+		int result2 = signupService.secession_idCheck(memberId);
+
+		if (result != 0 || result2 != 0) {
 
 			return "fail";
 
