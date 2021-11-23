@@ -21,7 +21,7 @@ import com.library.service.admin.LoanService;
 public class LoanController {
 
 	@Autowired
-	private LoanService loanService;
+	private LoanService loanService; 
 
 	// 대출 중 리스트 출력 (get)
 	@GetMapping("/loan-list")

@@ -25,7 +25,7 @@ public class BookDTO {
 	// 대출 도서 명
 	private String book_title;
 
-	// 대출 도서 저자
+	// 대출 도서 저자 
 	private String book_author;
 
 	// 대출 도서 isbn

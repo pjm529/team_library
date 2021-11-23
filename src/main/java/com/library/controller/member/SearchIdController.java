@@ -33,7 +33,7 @@ public class SearchIdController {
 	@ResponseBody
 	@PostMapping("/search-id-check")
 	public String searchIdCheck(MemberDTO member) throws Exception {
-
+ 
 		System.out.println("searchIdCheck() 진입");
 
 		int result = searchIdService.search_id_check(member);

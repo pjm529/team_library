@@ -11,7 +11,7 @@
 	alert("접근권한이 없습니다.");
 	history.back();
 	
-</script>
+</script> 
 	
 	
 </body>

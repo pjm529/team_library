@@ -19,7 +19,7 @@
         
         <li class="sub4">
             <a href="#">문화강좌신청/조회</a>
-        </li>
+        </li> 
         
         <li class="sub5">
             <a href="/mylib/mypage">개인정보</a>

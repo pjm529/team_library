@@ -42,7 +42,7 @@ public class BookController {
 		
 		// BookDTO 리스트 선언
 		List<BookDTO> list = new ArrayList<BookDTO>();
-
+ 
 		// 검색어와 검색타입이 Null이 아닐 때 실행
 		if (cri.getKeyword() != null && cri.getType() != null && cri.getKeyword() != "") {
 			System.out.println("옵션 : " + cri.getType() + ", 검색 키 : " + cri.getKeyword() + ", 페이지 : " + cri.getPage());

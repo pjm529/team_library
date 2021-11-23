@@ -28,3 +28,4 @@ public interface AdminMapper {
 	// 탈퇴 회원 테이블에 입력
 	public void insert_secession(String user_id);
 }
+ 

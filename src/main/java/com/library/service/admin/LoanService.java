@@ -4,7 +4,7 @@ import java.util.List;
 
 import com.library.model.search.BookDTO;
 import com.library.page.Criteria;
-
+ 
 public interface LoanService {
 
 	// 대출 중 이력 조회

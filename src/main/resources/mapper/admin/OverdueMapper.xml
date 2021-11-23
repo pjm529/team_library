@@ -20,5 +20,5 @@
 				and return_status = false
 				order by loan_date
 		</select>
-		
+		 
 	</mapper>

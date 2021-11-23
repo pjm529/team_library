@@ -5,7 +5,7 @@ import java.util.List;
 import com.library.model.member.MemberDTO;
 import com.library.model.search.BookDTO;
 import com.library.page.Criteria;
-
+ 
 public interface LoanHistoryService {
 
 	// 대출 내역 조회

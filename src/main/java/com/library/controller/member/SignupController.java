@@ -34,7 +34,7 @@ public class SignupController {
 	
 	// 회원가입 페이지 진입 (get)
 	@GetMapping("/signup")
-	public String signupGET() {
+	public String signupGET() { 
 
 		System.out.println("회원가입 페이지 진입");
 

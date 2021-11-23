@@ -15,3 +15,4 @@ public interface LoanHistoryMapper {
 	public int get_total(Criteria cri);
 	
 }
+ 

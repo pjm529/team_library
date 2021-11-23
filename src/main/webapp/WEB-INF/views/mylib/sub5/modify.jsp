@@ -20,7 +20,7 @@
         <div class="sub_title">
             <div class="doc-info">
                 <!-- doc title -->
-                <div class="doc-title">
+                <div class="doc-title"> 
                     <h3>마이페이지</h3>
                     <ul>
                         <!-- 홈 btn img -->

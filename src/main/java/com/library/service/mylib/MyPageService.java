@@ -22,3 +22,4 @@ public interface MyPageService {
 	// 비밀번호 변경
 	public int modify_pw(String user_id, String user_pw);
 }
+ 

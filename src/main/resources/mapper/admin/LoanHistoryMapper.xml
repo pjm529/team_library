@@ -21,7 +21,7 @@
 			  limit #{skip}, #{amount}
 		</select>
 		
- 		
+ 		 
 		<sql id="criteria">
 	        <if test="type != null">
 			  	<if test="keyword != null">
