@@ -9,10 +9,7 @@ public interface SignupMapper {
 
 	// 아이디 중복 검사
 	public int idCheck(String user_id);
-
-	// 탈퇴 회원 중 아이디 체크
-	public int secession_idCheck(String user_id) throws Exception;
-
+	
 	// 회원 권한 입력
 	public void auth(String user_id);
 

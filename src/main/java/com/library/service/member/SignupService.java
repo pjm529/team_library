@@ -10,9 +10,6 @@ public interface SignupService {
 	// 중복 아이디 체크
 	public int idCheck(String user_id) throws Exception;
 	
-	// 탈퇴 회원 중 아이디 체크
-	public int secession_idCheck(String user_id) throws Exception;
-	
 	// 회원 권한 입력
 	public void auth(String user_id);
 }
