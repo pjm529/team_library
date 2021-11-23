@@ -7,13 +7,6 @@ xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
                   id="WebApp_ID"
                   version="3.1">
                   
-	<!-- The definition of the Root Spring Container shared by all Servlets and Filters -->
-	<context-param>
-		<param-name>contextConfigLocation</param-name>
-		<param-value>/WEB-INF/spring/root-context.xml
-					/WEB-INF/spring/security-context.xml</param-value>
-	</context-param>
-	
 	<!-- Creates the Spring Container shared by all Servlets and Filters -->
 	<listener>
 		<listener-class>org.springframework.web.context.ContextLoaderListener</listener-class>
@@ -29,14 +22,23 @@ xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 		</init-param>
 		<load-on-startup>1</load-on-startup>
 		
+		<!-- 추가 부분 -->
 		<!-- file upload -->
-	     <multipart-config>
-	        <location>C:\\upload\\temp</location>
+	    <!-- <multipart-config>
+	        <location>C:\\upload\\temp</location> 파일 업로드 목적지
+	        <max-file-size>20971520</max-file-size> 1MB * 20
+	        <max-request-size>41943040</max-request-size> 40MB
+	        <file-size-threshold>20971520</file-size-threshold> 20MB
+	     </multipart-config> -->
+	     
+		<!-- notice file upload -->
+	    <multipart-config>
+	        <location>C:\\notice_file</location> <!-- 파일 업로드 목적지 -->
 	        <max-file-size>20971520</max-file-size> <!-- 1MB * 20 -->
 	        <max-request-size>41943040</max-request-size> <!-- 40MB -->
 	        <file-size-threshold>20971520</file-size-threshold> <!-- 20MB -->
 	     </multipart-config>
-		
+	     
 	</servlet>
 		
 	<servlet-mapping>
@@ -47,19 +49,22 @@ xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	
 	<!-- 한글깨짐 방지 --> 
 	<!-- filter와 filter-mapping을 만들어 준다. --> 
-	<filter> 
-	<!-- filter안에는 filter-name, filter-class, init-param을 추가해 준다. filter-name은 원하는대로 지정해도됨 --> 
+	<filter> <!-- filter안에는 filter-name, filter-class, init-param을 추가해 준다. filter-name은 원하는대로 지정해도됨 --> 
 		<filter-name>encodingFilter</filter-name>
 		<filter-class>org.springframework.web.filter.CharacterEncodingFilter</filter-class> 
-		<init-param> 
-		<!-- encoidng값을 UTF-8로 만들어 준다. --> 
-			<param-name>encoding</param-name> <param-value>UTF-8</param-value> 
+		<init-param> <!-- encoidng값을 UTF-8로 만들어 준다. --> 
+			<param-name>encoding</param-name> 
+			<param-value>UTF-8</param-value> 
 		</init-param> 
-	</filter> 
-	
+		<init-param>
+            <param-name>forceEncoding</param-name>
+            <param-value>true</param-value>
+        </init-param>
+	</filter>
+	  
 	<filter-mapping> 
 		<filter-name>encodingFilter</filter-name> 
-		<url-pattern>/*</url-pattern> 
+		<url-pattern>/*</url-pattern>
 	</filter-mapping>
 	
 	<!-- Spring Security -->
