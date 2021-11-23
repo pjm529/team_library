@@ -30,7 +30,7 @@
                </li>
                
                <li class="submenu4">
-                   <a href="#">비밀번호변경</a>
+                   <a href="/mylib/modify_pw">비밀번호변경</a>
                </li>
 
                <li class="submenu5">
