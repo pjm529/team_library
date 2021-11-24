@@ -57,7 +57,7 @@ public class MasterController {
 
 	// 관리자 추가할 회원 검색
 	@GetMapping("/admin-search")
-	public String Admin_search(Model model, Criteria cri, @RequestParam String user_id) {
+	public String Admin_search(Model model, @RequestParam String user_id) {
 		MemberDTO result = adminListService.search(user_id);
 
 		if (result != null) {
