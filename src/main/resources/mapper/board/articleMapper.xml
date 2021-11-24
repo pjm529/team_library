@@ -25,6 +25,16 @@
 		select * from article where article_no = #{article_no}
 	</select>
 	
+	<!-- 게시물 상세보기 이전글 -->
+	<select id="articlePreContent" resultType="com.library.model.board.ArticleDTO">
+		select * from article where article_no = (#{article_no}-1)
+	</select>
+	
+	<!-- 게시물 상세보기 다음글 -->
+	<select id="articleNextContent" resultType="com.library.model.board.ArticleDTO">
+		select * from article where article_no = (#{article_no}+1)
+	</select>
+	
 	<update id="articleViewsCount">
 		update article set article_views = article_views+1 
 		where article_no = #{article_no}

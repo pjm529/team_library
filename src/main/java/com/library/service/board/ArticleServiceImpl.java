@@ -136,6 +136,21 @@ public class ArticleServiceImpl implements ArticleService {
 		
 		return attachMapper.findByArticle_no(article_no);
 	}
+
+	
+	// 게시물 상세보기(이전글, 다음글)
+
+	@Override
+	public ArticleDTO articlePreContent(Long article_no) {
+		
+		return mapper.articlePreContent(article_no);
+	}
+
+	@Override
+	public ArticleDTO articleNextContent(Long article_no) {
+		// TODO Auto-generated method stub
+		return mapper.articleNextContent(article_no);
+	}
 	
 
 

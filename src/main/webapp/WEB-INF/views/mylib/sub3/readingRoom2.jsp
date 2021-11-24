@@ -426,7 +426,7 @@
 		
 		 $(".return_btn").on("click", function(e){
       		e.preventDefault();
-      
+      g
 		    var seat_no = $(".my_seat_no").val();
 		                                    
 		    if(confirm("좌석을 반납하시겠습니까?")){

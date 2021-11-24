@@ -151,7 +151,7 @@ public class UploadController {
 
 					FileOutputStream thumbnail = new FileOutputStream(new File(uploadPath, "s_" + uploadFileName));
 						
-					Thumbnailator.createThumbnail(multipartFile.getInputStream(), thumbnail, 100, 100);
+					Thumbnailator.createThumbnail(multipartFile.getInputStream(), thumbnail, 50, 50);
 
 					thumbnail.close();
 				}
@@ -188,13 +188,15 @@ public class UploadController {
 	}
 
 	
-
+	//	파일 다운로드
 	@GetMapping(value = "/download", produces = MediaType.APPLICATION_OCTET_STREAM_VALUE)
 	@ResponseBody
-	public ResponseEntity<Resource> downloadFile(@RequestHeader("User-Agent") String userAgent, String fileName) {
+	public ResponseEntity<Resource> downloadFile(@RequestHeader("User-Agent") String userAgent, String file_name) {
 
-		Resource resource = new FileSystemResource("c:\\upload\\" + fileName);
-
+		System.out.println("============file_name"+file_name);
+		
+		Resource resource = new FileSystemResource(file_name);
+			
 		if (resource.exists() == false) {
 			return new ResponseEntity<>(HttpStatus.NOT_FOUND);
 		}
@@ -203,7 +205,8 @@ public class UploadController {
 
 		// remove UUID
 		String resourceOriginalName = resourceName.substring(resourceName.indexOf("_") + 1);
-
+		
+		// 브라우저 종류
 		HttpHeaders headers = new HttpHeaders();
 		try {
 

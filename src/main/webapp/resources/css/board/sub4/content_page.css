@@ -262,3 +262,17 @@ table input{
 .list_wrap{
    float: left;
 }
+
+/* 첨부 파일 */
+.downloadArea{
+   margin-top: 30px;
+   margin-bottom: 30px;
+   border-top: 2px solid #e5e8eb;
+   border-bottom: 2px solid #e5e8eb;
+   padding: 10px;
+   height: 100px;
+   overflow-y: scroll;
+   background: #f3f3f3;
+  /*  list-style: none;
+   float: left; */
+}

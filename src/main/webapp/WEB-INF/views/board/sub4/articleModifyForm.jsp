@@ -70,12 +70,13 @@
 	                                            <tr>
 	                                                <th class="first">작성자</th>
 	                                                <td>
-	                                                	<input type="text" name ="writer_name" value="${dto.writer_name}" readonly="readonly">
+	                                                	<input type="hidden" name ="writer_name" value="${dto.writer_name}" readonly="readonly">
+	                                                	<span>${dto.writer_name}</span>
 	                                                </td>
-	                                             <!--    <th class="first">권한</th> -->
+	                                             	<%-- <th class="first">권한</th>
 	                                                <td>
 	                                                	<input type="hidden" name ="writer_id" value="${dto.writer_id}" readonly="readonly">
-	                                                </td>
+	                                                </td> --%>
 	                                                <th class="first">작성일</th>
 	                                                <td>
 	                                               		<fmt:formatDate var="article_reg_date" value="${dto.article_reg_date}" pattern="yyyy-MM-dd"/>
@@ -96,9 +97,9 @@
 	                                                </td>
 	                                            </tr>
 	                                            
+	                                            <!-- 파일 업로드 -->
 	                                            <tr>
-		                                            <td>
-		                                            
+		                                            <td colspan="4">          
 			                                            <div class="uploadDiv">
 															 <input type="file" name="uploadFile" multiple>
 															 <input type="hidden" name="uuid" id="uuid">
@@ -109,28 +110,7 @@
 															
 															</ul>
 														</div>
-		                                            
-		                                            
-		                                            		<!-- 첨부파일 -->
-														<!-- <div class='bigPictureWrapper'>
-															<div class='bigPicture'>
-															</div>
-														</div> -->
-													<!-- 
-														<div class="panel-heading"></div>
-													      <div class="panel-body">
-													      	
-													      	<div class="form-group uploadDiv">
-													            <input type="file" name='uploadFile' multiple="multiple">
-													            
-													        </div>
-													      		
-													        <div class='uploadResult'> 
-													          <ul>
-													          
-													          </ul>
-													        </div>
-													      </div>  -->
+
 		                                            </td>
 
 	                                            	
@@ -209,16 +189,18 @@ $(document).ready(function(){
 	           
 	            
 	            str += "<li data-path='"+attach.upload_path+"' data-uuid='"+attach.uuid+"' data-filename='"+attach.file_name+"' data-type='"+attach.file_type+"' ><div>";
-	            str += "<button type='button' data-file=\'"+fileCallPath+"\' data-type='image'>삭제x</button><br>";
-	            str += "<img src='/display?file_name="+fileCallPath+"'>";
+	            str += "<span>"+ attach.file_name+"</span><button type='button' data-file=\'"+fileCallPath+"\' data-type='image'>x</button><br>"
+	            str += "<img src='/display?file_name="+fileCallPath+"' style='vertical-align: middle;'>";
+	            /* str += "<button type='button' data-file=\'"+fileCallPath+"\' data-type='image'>x</button><br>"; */
 	            str += "</div>";
 	            str +"</li>";
+	            
 	          }else{
 	             
 	            str += "<li data-path='"+attach.upload_path+"' data-uuid='"+attach.uuid+"' data-filename='"+attach.file_name+"' data-type='"+attach.file_type+"' ><div>";
-	            str += "<button type='button' data-file=\'"+fileCallPath+"\' data-type='file'>삭제x</button><br>";
-	            str += "<span> "+ attach.file_name+"</span><br/>";
-	            str += "<img src='/resources/fileImage/default.png'></a>";
+	            str += "<span><img src='/resources/fileImage/text.png' width='20px' height='20px' style='vertical-align: middle;'>"+ attach.file_name+"</span>";
+	            str += "<button type='button' data-file=\'"+fileCallPath+"\' data-type='file'>x</button><br>";	            
+	            /* str += "<img src='/resources/fileImage/text.png'></a>"; */
 	            str += "</div>";
 	            str +"</li>";
 	          }
@@ -330,9 +312,9 @@ $(document).ready(function(){
 					str += "<li data-path='"+obj.upload_path+"'";
 					str +=" data-uuid='"+obj.uuid+"' data-filename='"+obj.file_name+"' data-type='"+obj.image+"'"
 					str +" ><div>";
-					str += "<span> "+ obj.file_name+"</span>";
-					str += "<button type='button' data-file=\'"+fileCallPath+"\' data-type='image'>x</button><br>";
-					str += "<img src='/display?file_name="+fileCallPath+"'>";
+					str += "<span> "+ obj.file_name+"</span><button type='button' data-file=\'"+fileCallPath+"\' data-type='image'>x</button><br>";					
+					str += "<img src='/display?file_name="+fileCallPath+"' style='vertical-align: middle;'>";
+					/* str += "<button type='button' data-file=\'"+fileCallPath+"\' data-type='image'>x</button><br>"; */
 					str += "</div>";
 					str +"</li>";
 				}else{
@@ -344,9 +326,9 @@ $(document).ready(function(){
 				      
 					str += "<li "
 					str += "data-path='"+obj.upload_path+"' data-uuid='"+obj.uuid+"' data-filename='"+obj.file_name+"' data-type='"+obj.image+"' ><div>";
-					str += "<span> "+ obj.file_name+"</span>";
+					str += "<span><img src='/resources/fileImage/text.png' width='15px' height='15px' style='vertical-align: middle;'>"+ obj.file_name+"</span>";
 					str += "<button type='button' data-file=\'"+fileCallPath+"\' data-type='file'>x</button><br>";
-					str += "<img src='/resources/fileImage/default.png' width='150px'></a>";
+					/* str += "<img src='/resources/fileImage/default.png' width='150px'></a>"; */
 					str += "</div>";
 					str +"</li>";
 				}
