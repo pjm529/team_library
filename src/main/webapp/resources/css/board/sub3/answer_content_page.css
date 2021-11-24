@@ -171,7 +171,7 @@ ul{
 }
 
 
-
+/*  ======= 테이블 ====== */
 form{
     padding-top: 20px;
 }
@@ -207,12 +207,14 @@ th, td{
     vertical-align: middle;
 }
 
+/* tbody 번호 font 설정 */
 table td .num{
     color: #888;
     font-size: 90%;
     white-space: nowrap;
 }
 
+/* tbody 제목 왼쪽 정렬 */
 table td.left{
     text-align: left!important;
 }
@@ -245,6 +247,7 @@ p {
     color: #464646;
 }
 
+/* 글쓰기 / 수정하기 / 삭제하기 btn */
 .write_btn, .update_btn, .delete_btn{
     background-color: #266ac4;
     color: #fff;
@@ -257,6 +260,11 @@ p {
     cursor: pointer;
 }
 
+.delete_wrap, .update_wrap{
+	float: right;
+}
+
+/* 목록 btn */
 .list_btn{
     background-color: #fcfcfc;
     color: #000;
@@ -268,10 +276,6 @@ p {
     cursor: pointer;
 }
 
-
-.delete_wrap, .update_wrap{
-	float: right;
-}
 
 .list_wrap{
 	float: left;

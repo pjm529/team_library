@@ -251,6 +251,12 @@ table td.left{
 }
 
 
+/* 글쓰기 버튼 */
+.write{
+	height: 80px;
+}
+
+
 /* 버튼속성 */
 .btn {
     width: 60px;
@@ -270,11 +276,6 @@ table td.left{
     background-color: #215aa3;
 }
 
-
-/* 글쓰기 버튼 */
-.write{
-	height: 80px;
-}
 
 /* 페이지 */
 .pageInfo{
