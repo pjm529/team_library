@@ -123,6 +123,38 @@ ul{
     position: relative;
 }
 
+.lnb > ul > li > ul > li.active > a{
+    background-image: url(/resources/imges/mylib/sub5/lnb-bg-depth2-on.png);
+    color: #464f56;
+    font-weight: bold;
+    background-color: #fafafa;
+    border-bottom: none;
+    border-top: none;
+}
+
+.lnb > ul > li > ul > li > a {
+    padding: 5px 20px 5px 30px;
+    background: url(/resources/imges/mylib/sub5/lnb-bg-depth2-off.png) no-repeat 15px 10px;
+    font-size: 15px;
+    border-bottom: none;
+    border-top: none;
+    background-color: #fafafa;
+}
+
+.lnb > ul > li > ul > li > a:hover{
+    color: #464f56;
+    font-weight: bold;
+    background-color: #fafafa;
+}
+
+.lnb > ul > li.active > ul {
+    display: block;
+}
+
+.lnb > ul > li > ul {
+    display: none;
+}
+
 .subMenu li{
     width: 220px;
 }
@@ -237,7 +269,6 @@ table td.left{
 
 
 /* 글쓰기 btn */
-
 .write_btn{
     background-color: #266ac4;
     color: #fff;
@@ -262,6 +293,7 @@ table td.left{
     font-size: 15px;
     cursor: pointer;
 }
+
 .btn:focus, .btn:active{
     border: none; box-shadow: none;
 }

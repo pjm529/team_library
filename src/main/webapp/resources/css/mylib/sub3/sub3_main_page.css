@@ -93,7 +93,11 @@ ul{
     position: relative;
 }
 
-.section::after {content: "";display: block; clear: both;}
+.section::after {
+	content: "";
+	display: block; 
+	clear: both;
+}
 
 .lnb {
     width:280px;
@@ -123,6 +127,38 @@ ul{
     background-color: #464f56;
     color: #fff;
     position: relative;
+}
+
+.lnb > ul > li > ul > li.active > a{
+    background-image: url(/resources/imges/mylib/sub5/lnb-bg-depth2-on.png);
+    color: #464f56;
+    font-weight: bold;
+    background-color: #fafafa;
+    border-bottom: none;
+    border-top: none;
+}
+
+.lnb > ul > li > ul > li > a {
+    padding: 5px 20px 5px 30px;
+    background: url(/resources/imges/mylib/sub5/lnb-bg-depth2-off.png) no-repeat 15px 10px;
+    font-size: 15px;
+    border-bottom: none;
+    border-top: none;
+    background-color: #fafafa;
+}
+
+.lnb > ul > li > ul > li > a:hover{
+    color: #464f56;
+    font-weight: bold;
+    background-color: #fafafa;
+}
+
+.lnb > ul > li.active > ul {
+    display: block;
+}
+
+.lnb > ul > li > ul {
+    display: none;
 }
 
 .subMenu li{
@@ -280,7 +316,5 @@ progress {
     float: right;
     margin-right: 5px;
 }
-
-
 
 
