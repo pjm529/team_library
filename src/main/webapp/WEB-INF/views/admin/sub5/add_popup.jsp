@@ -25,7 +25,7 @@
 
                             <!--검색-->
                             <div class="search">
-                                <form action="/admin/admin-search">
+                                <form action="/master/admin-search">
                                     <select name="type">
                                         <option value="user_id" selected="selected">아이디</option>
                                     </select>
@@ -59,7 +59,7 @@
 											<td>${result.user_reg_date }</td>
 											
 											<td>
-												<form action="/admin/grant" method="post" onsubmit="return false;">
+												<form action="/master/grant" method="post" onsubmit="return false;">
 													<input type="hidden" id="user_id" name="user_id" value="${result.user_id }">
 													<button class="add_btn btn">추가</button>
 												</form>
@@ -98,7 +98,7 @@
 				
 				$.ajax({
 					type: "post",
-           			url: "/admin/adminChk",
+           			url: "/master/adminChk",
            			data: data,
 					success: function(result) {
            				

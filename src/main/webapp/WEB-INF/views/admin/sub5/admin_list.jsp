@@ -31,7 +31,7 @@
                             <a href="/admin/member-list">관리자</a>
                         </li>
                         <li>
-                            <a href="/admin/admin-list">관리자목록</a>
+                            <a href="/master/admin-list">관리자목록</a>
                         </li>
                     </ul>
                 </div>
@@ -160,30 +160,30 @@
                                     </thead>
                                     <tbody>
                                     
-	                                    <c:forEach var="member_list" items="${admin_list}">
+	                                    <c:forEach var="admin_list" items="${admin_list}">
 										<tr>
-											<td class="">${member_list.user_id }</td>
-											<td class="left" style="padding-left: 15px;">${member_list.user_name }</td>
-											<td>${member_list.user_tel}</td>
-											<td>${member_list.user_email}</td>
-											<td>${member_list.user_birth }</td>
+											<td class="">${admin_list.user_id }</td>
+											<td class="left" style="padding-left: 15px;">${admin_list.user_name }</td>
+											<td>${admin_list.user_tel}</td>
+											<td>${admin_list.user_email}</td>
+											<td>${admin_list.user_birth }</td>
 											
-											<c:if test="${member_list.user_overdue_date == 0 }">
+											<c:if test="${admin_list.user_overdue_date == 0 }">
 											<td>대출가능</td>
 											</c:if>
 											
-											<c:if test="${member_list.user_overdue_date != 0 }">
-											<td>${member_list.user_overdue_date }일</td>
+											<c:if test="${admin_list.user_overdue_date != 0 }">
+											<td>${admin_list.user_overdue_date }일</td>
 											</c:if>
 											
-											<td>${member_list.user_reg_date }</td>
+											<td>${admin_list.user_reg_date }</td>
 											<td>
-												<form action="/admin/revoke" method="post" onsubmit="return false;">
+												<form action="/master/revoke" method="post" onsubmit="return false;">
 													<input type="hidden" name="amount" value="${pageMaker.cri.amount }">
 													<input type="hidden" name="page" value="${pageMaker.cri.page }">
 													<input type="hidden" name="type" value="${pageMaker.cri.type }">
 													<input type="hidden" name="keyword" value="${pageMaker.cri.keyword }">
-													<input type="hidden" name="user_id" value="${member_list.user_id }">
+													<input type="hidden" name="user_id" value="${admin_list.user_id }">
 													<button class="btn2">해제</button>
 												</form>
 											
@@ -277,7 +277,7 @@
 			$('.add_btn').on("click",function(e){
 				
 				e.preventDefault();
-				let popUrl = "/admin/add-popup";
+				let popUrl = "/master/add-popup";
 				let popOption = "width = 700px, height=600px, top=300px, scrollbars=no, resizeable=no";
 				window.open(popUrl,"작가 찾기" ,popOption);
 			});
