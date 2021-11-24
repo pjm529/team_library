@@ -194,10 +194,7 @@ public class NoticeAttachController {
 	@ResponseBody
 	public ResponseEntity<Resource> downloadNoticeFile(@RequestHeader("User-Agent") String userAgent, String file_name) {
 		
-		Resource resource = new FileSystemResource("C:\\notice_file\\" + file_name);
-		
-		System.out.println(resource);
-		System.out.println(file_name);
+		Resource resource = new FileSystemResource(file_name);
 		
 		if(resource.exists() == false) {
 			return new ResponseEntity<>(HttpStatus.NOT_FOUND);
@@ -205,12 +202,8 @@ public class NoticeAttachController {
 
 		String resourseName = resource.getFilename();
 		
-		System.out.println("resourseName ================> " + resourseName);
-		
 		//remove uuid
 		String resourseOriginalName = resourseName.substring(resourseName.indexOf("_") + 1);
-		
-		System.out.println("resourseOriginalName ================> " + resourseOriginalName);
 		
 		HttpHeaders headers = new HttpHeaders();
 		
