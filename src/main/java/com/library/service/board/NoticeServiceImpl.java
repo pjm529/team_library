@@ -70,7 +70,7 @@ public class NoticeServiceImpl implements NoticeService {
 	
 	@Override
 	public List<NoticeAttachDTO> getNoticeAttachList(Long notice_no) {
-		System.out.println("impl 내 notice_no ================> " + notice_no);
+//		System.out.println("impl 내 notice_no ================> " + notice_no);
 		return attachMapper.findByNotice_no(notice_no);
 	}
 

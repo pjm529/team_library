@@ -186,7 +186,7 @@
 						$("input[name='thumb']").attr('value', thumbName); */
 					    
 					    str += "<li data-path='" + attach.upload_path + "' data-uuid='" + attach.uuid + "' data-filename='" + attach.file_name + "' data-type='" + attach.file_type + "' ><div>";
-					    str += "<button type='button' data-file=\'" + fileCallPath + "\' data-type='image'>삭제x</button><br>";
+					    str += "<button type='button' data-file=\'" + fileCallPath + "\' data-type='image'>x</button><br>";
 					    str += "<img src='/displayFiles?file_name=" + fileCallPath + "'>";
 					    str += "</div>";
 					    str + "</li>";
@@ -194,7 +194,7 @@
 					  }else{
 					     
 					    str += "<li data-path='" + attach.upload_path + "' data-uuid='" + attach.uuid + "' data-filename='" + attach.file_name + "' data-type='" + attach.file_type + "' ><div>";
-					    str += "<button type='button' data-file=\'" + fileCallPath + "\' data-type='image'>삭제x</button><br>";
+					    str += "<button type='button' data-file=\'" + fileCallPath + "\' data-type='image'>x</button><br>";
 					    str += "<span> " + attach.file_name + "</span><br/>";
 					    str += "<img src='/resources/fileImage/default.png'></a>";
 					    str += "</div>";

@@ -112,6 +112,13 @@
 																
 															</ul>
 														</div>
+														
+														<div class="downloadAreaTitle">첨부파일</div>
+														<div class="downloadArea">
+															<ul>
+															
+															</ul>
+														</div>
 													</div>
 													
                                                 </div>
@@ -169,6 +176,7 @@
         </div>
     </div>
     
+  
 <script src="https://code.jquery.com/jquery-3.6.0.js" integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk=" crossorigin="anonymous"></script>
 <script>
 	$(function() {
@@ -211,6 +219,7 @@
 			console.log(arr);
 			
 			var str = "";
+			var str2 = "";
 			
 			$(arr).each(function(i, attach){
 				   
@@ -222,26 +231,31 @@
 					$("input[name='uuid']").attr('value', uuidName);
 					$("input[name='thumb']").attr('value', thumbName);
 					
-					str += "<li data-path='" + attach.upload_path + "' data-uuid='" + attach.uuid + "' data-filename='" + attach.file_name + "' data-type='" + attach.file_type + "' ><div>";
 					str += "<img width='500px' src='/displayFiles?file_name=" + fileCallPath + "'>";
-					str += "</div>";
-					str + "</li>";
+					
+					str2 += "<li data-path='" + attach.upload_path + "' data-uuid='" + attach.uuid + "' data-filename='" + attach.file_name + "' data-type='" + attach.file_type + "' ><div>";
+					str2 += "<span><a href='#' class='attached_file_name'>" + attach.file_name + "</a></span><br/>";
+					str2 += "</div>";
+					str2 + "</li>"; 
+					
 				}else{
-					str += "<li data-path='" + attach.upload_path + "' data-uuid='" + attach.uuid + "' data-filename='" + attach.file_name + "' data-type='" + attach.file_type + "' ><div>";
-					str += "<span> " + attach.file_name + "</span><br/>";
-					str += "<img src='/resources/fileImage/default.png'></a>";
-					str += "</div>";
-					str + "</li>";
+					
+					str2 += "<li data-path='" + attach.upload_path + "' data-uuid='" + attach.uuid + "' data-filename='" + attach.file_name + "' data-type='" + attach.file_type + "' ><div>";
+					str2 += "<span><a href='#' class='attached_file_name'>" + attach.file_name + "</a></span><br/>";
+					str2 += "</div>";
+					str2 + "</li>";
 				}
 			});
 			$(".uploadResult ul").html(str);
+			$(".downloadArea ul").html(str2);
 		   
 		});//end getjson
 		
 	})();//end function
 	
 		
-	$(".uploadResult").on("click", "li", function(e){
+	$(".downloadArea").on("click", "li", function(e){
+		e.preventDefault();
 		     
 		console.log("view image");
 		
@@ -249,17 +263,13 @@
 		
 		var path = encodeURIComponent(liObj.data("path") + "/" + liObj.data("uuid") + "_" + liObj.data("filename"));
 		
-		if(liObj.data("type")){
-			showImage(path.replace(new RegExp(/\\/g), "/"));
-		}else {
-			//download 
-			self.location ="/download?file_name=" + path;
-		}
-	   
+		alert(liObj.data("filename"));
+		
+		self.location ="/downloadNoticeFile?file_name=" + path;
+		
 	});	
 	
-		
-		
+	
 		
 
 	
