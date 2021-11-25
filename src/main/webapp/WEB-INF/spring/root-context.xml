@@ -31,6 +31,9 @@
    
    	<context:component-scan base-package="com.library.service"></context:component-scan>
    	
+  
+
+   	
    	
    	<!-- gmail설정 -->
 	<bean id="mailSender" class="org.springframework.mail.javamail.JavaMailSenderImpl"> 

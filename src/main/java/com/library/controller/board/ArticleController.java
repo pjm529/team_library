@@ -102,7 +102,19 @@ public class ArticleController {
 		articleService.articleViewsCount(article_no);
 		ArticleDTO dto = articleService.articleContent(article_no);
 		
+		// 게시물 상세보기 이전글, 다음글
+		ArticleDTO dtoPre = articleService.articlePreContent(article_no);
+		ArticleDTO dtoNext = articleService.articleNextContent(article_no);
+		
+		
+		
+		List<ArticleDTO> articleList = articleService.getListPaging(cri);
+		model.addAttribute("articleList", articleList); 
+		
+		
 		model.addAttribute("dto", dto);
+		model.addAttribute("dtoPre", dtoPre);
+		model.addAttribute("dtoNext", dtoNext);
 		model.addAttribute("cri", cri);
 		
 		return "/board/sub4/articleContent";

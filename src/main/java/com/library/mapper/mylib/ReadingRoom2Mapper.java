@@ -31,6 +31,11 @@ public interface ReadingRoom2Mapper {
 	public void updateReading_Room2Table();
 	
 	public void updateReading_Room2_RentalTable();
+	
+	/* 잔여 좌석 */
+	public int rd2UsingSeat();
+	   /* 사용 좌석 */
+	public int rd2UsedSeat();
 
 
 

@@ -8,7 +8,7 @@
 <head>
 <meta charset="UTF-8">
 <title>라온도서관 > 나의 도서관 > 제2열람실</title>
-<link rel="stylesheet" href="/resources/css/mylib/sub3/sb_page.css">
+<link rel="stylesheet" href="/resources/css/mylib/sub3/readingRoom2_sb_page.css">
 <link rel="stylesheet" href="/resources/css/mylib/sub3/readingRoom2.css">
     <style>
         .seat-list-row {
@@ -54,17 +54,18 @@
                 <jsp:include page="../lnb.jsp"></jsp:include>
                     
                 <!-- 본문 -->
-                <div class="content">
+                    <div class="content">
                     <div class="doc">
 
                         <div class="room-list">
                             <div class="list-btn">
-                                <button onclick="#">제 1열람실</button>
-                                <button class="active" onclick="location.href='/mylib/readingRoom2'">제 2열람실</button>
-                                <button>노트북실</button>
+                                <button onclick="rdRoom();">제 1열람실</button>
+                                <button onclick="rdRoom2();">제 2열람실</button>
+                                <button class="active" onclick="nbRoom();">노트북실</button>
                                 <button>세미나실</button>
                             </div>
                         </div>
+
 
 
                         <div class=" seat-chart">
@@ -426,7 +427,7 @@
 		
 		 $(".return_btn").on("click", function(e){
       		e.preventDefault();
-      
+      g
 		    var seat_no = $(".my_seat_no").val();
 		                                    
 		    if(confirm("좌석을 반납하시겠습니까?")){
@@ -459,6 +460,21 @@
 		
 		
 	})
+	
+	function rdRoom(){
+            location.href = "/mylib/readingRoom";
+         }
+         
+         function rdRoom2(){
+            location.href = "/mylib/readingRoom2";
+         }
+         
+         function nbRoom(){
+            location.href = "/mylib/notebookRoom";
+         }
+         
+         
+
 	
 	});
  

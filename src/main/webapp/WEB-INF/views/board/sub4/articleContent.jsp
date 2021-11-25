@@ -34,6 +34,9 @@ p {
 	font-weight: normal;
 	color: #464646;
 	}
+
+
+
 </style>
 </head>
 <body>
@@ -101,26 +104,84 @@ p {
                                             <td colspan="6">
                                                 <div class="bbs-content">
                                                     <p>${dto.article_content}</p>
+                                                      
+                                                      
                                                       <!-- 첨부파일 -->
-													<!-- <div class='bigPictureWrapper'>
-														<div class='bigPicture'>
-														</div>
-													</div> -->
-												
-												 	
-											      <div class="panel-body">
-											        <div class='uploadResult'> 
-											          <ul>
-											          	
-											          </ul>
-											        </div>
-											      </div>
+												      <div class="panel-body">
+												        <div class='uploadResult'> 
+												          <ul>
+												          	
+												          </ul>
+												        </div>
+												        
+												      <div class="downloadAreaWrap">  
+													       <div class="downloadArea">
+		
+														  		<ul>
+														  		
+														  		</ul>
+														 </div>
+												     </div>
+												      
+												      </div>
+												  
+											
 												    
                                                 </div>
                                             </td>
                                         </tr>
                                     </tbody>
 
+                                </table>
+                                
+                                <!-- 이전글, 다음글 -->
+                                <table class="article-board">
+                                	<tbody>
+                                		<tr class="board-prev first">
+                                			<td class="first td1">
+                                				<div class="fa-angle-up"></div>	
+                                				<span><img src="/resources/imges/board/sub4/angle_up.png" width=15px; height=15px; style="float: left;"/>이전글</span>
+                                			</td>
+											
+											
+											<c:if test="${dtoPre.article_no == null}">
+												<td>이전글이 없습니다.</td>
+												<td class="td3"></td>
+											</c:if>
+											
+											<c:if test="${dtoPre.article_no != null}">
+	                                			<td class="td2">
+	                                				<input type="hidden" value="${dtoPre.article_no}"> 
+	                                				<a href="/board/articleContent?article_no=${dtoPre.article_no}&amount=${cri.amount}&page=${cri.page}">${dtoPre.article_title}</a>                                				
+	                                			</td>
+	                                			<td class="td3">관리자</td>
+                                			</c:if>
+                                				
+                                			
+                                		</tr>
+                                		
+                                		<tr class="board-next">
+                                			<td class="first td1">
+                                				<i class="fa-angle-down"></i>
+                                				<span><img src="/resources/imges/board/sub4/angle_down.png" width=15px; height=15px; style="float:left;"/>다음글</span>
+                                			</td>
+                                			
+                                			<c:if test="${dtoNext.article_no == null}">
+												<td>다음글이 없습니다.</td>
+												<td class="td3"></td>
+											</c:if>
+                                			
+                                			<c:if test="${dtoNext.article_no != null}">
+	                                			<td class="td2">
+	                                				<input type="hidden" value="${dtoNext.article_no}">
+	                                				<a href="/board/articleContent?article_no=${dtoNext.article_no}&amount=${cri.amount}&page=${cri.page}">${dtoNext.article_title}</a>
+	                                			</td>
+	                                			<td class="td3">관리자</td>
+                                			</c:if>
+                                			
+                                			<!-- <td class="datetime last td4"></td> -->
+                                		</tr>
+                                	</tbody>
                                 </table>
 
                                 <!-- 글쓰기 btn -->
@@ -202,18 +263,19 @@ p {
 $(document).ready(function(){
 $(".sub4").addClass("active");	
   (function(){ 
+	  
+	  $(".downloadAreaWrap").hide();
   
     var article_no = '<c:out value="${dto.article_no}"/>';
 
-    
-  
-    
+
     $.getJSON("/board/getAttachList", {article_no: article_no}, function(arr){
         
      
        console.log(arr);
        
        var str = "";
+       var str2 = "";
        
        $(arr).each(function(i, attach){
     	   
@@ -228,90 +290,58 @@ $(".sub4").addClass("active");
            $("input[name='thumb']").attr('value',thumbName);
           /*  $("input[name='file_name']").attr('value',file_name); */
            
-           str += "<li data-path='"+attach.upload_path+"' data-uuid='"+attach.uuid+"' data-filename='"+attach.file_name+"' data-type='"+attach.file_type+"' ><div>";
-           str += "<img width='500px' src='/display?file_name="+fileCallPath+"'>";
-           str += "</div>";
-           str +"</li>";
+          	/* content 본문에 보여지는 첨부된 사진 원본*/
+          	str += "<img width='500px' src='/display?file_name="+fileCallPath+"'>";         
+           	
+          	str2 += "<li data-path='"+attach.upload_path+"' data-uuid='"+attach.uuid+"' data-filename='"+attach.file_name+"' data-type='"+attach.file_type+"' ><div>";
+           	str2 += "<span><img src='/resources/fileImage/imageDown.png' width='15px' height='15px' style='vertical-align: middle;'><a href='#'> "+ attach.file_name+"</a></span><br/>";         
+           	str2 += "</div>";
+           	str2 +"</li>";
          }else{
             
-           str += "<li data-path='"+attach.upload_path+"' data-uuid='"+attach.uuid+"' data-filename='"+attach.file_name+"' data-type='"+attach.file_type+"' ><div>";
-           str += "<span> "+ attach.file_name+"</span><br/>";
-           str += "<img src='/resources/fileImage/default.png'></a>";
-           str += "</div>";
-           str +"</li>";
+           str2 += "<li data-path='"+attach.upload_path+"' data-uuid='"+attach.uuid+"' data-filename='"+attach.file_name+"' data-type='"+attach.file_type+"' ><div>";
+           str2 += "<span><img src='/resources/fileImage/text.png' width='15px' height='15px' style='vertical-align: middle;'><a href='#'> "+ attach.file_name+"</a></span><br/>";
+           str2 += "</div>";
+           str2 +"</li>";
          }
        });
        
        $(".uploadResult ul").html(str);
+       $(".downloadArea ul").html(str2);
        
-       
+       if($(".downloadAreaWrap li").length){
+    	   $(".downloadAreaWrap").show();
+       }
+ 
      });//end getjson
 
     
    }) ();//end function
   
-  $(".uploadResult").on("click","li", function(e){
-      
-    console.log("view image");
-    
-    var liObj = $(this);
-    
-    var path = encodeURIComponent(liObj.data("path")+"/" + liObj.data("uuid")+"_" + liObj.data("filename"));
-    
-    if(liObj.data("type")){
-      showImage(path.replace(new RegExp(/\\/g),"/"));
-    }else {
-      //download 
-      self.location ="/download?file_name="+path
-    }
-    
-    
-  });
+   $(".downloadArea").on("click", "li a", function(e){
+	      e.preventDefault();
+	           
+	      console.log("view image");
+	      
+	      var liObj = $(this).closest("li");
+	      
+	      var path = encodeURIComponent(liObj.data("path") + "/" + liObj.data("uuid") + "_" + liObj.data("filename"));
+	      
+	      /* alert(liObj.data("filename")); */
+	      
+	      self.location ="/download?file_name=" + path;
+	      
+	   });
+   
   
   
-
   
-/*   function showImage(fileCallPath){
-	    
-    alert(fileCallPath);
-    
-    $(".bigPictureWrapper").css("display","flex").show();
-    
-    $(".bigPicture")
-    .html("<img src='/display?file_name="+fileCallPath+"' >")
-    .animate({width:'100%', height: '100%'}, 1000);
-    
-  }
-
-  $(".bigPictureWrapper").on("click", function(e){
-    $(".bigPicture").animate({width:'0%', height: '0%'}, 1000);
-    setTimeout(function(){
-      $('.bigPictureWrapper').hide();
-    }, 1000);
-  }); */
-  
-
 
   
 });
 
 </script>
 
-<!-- <script type="text/javascript">
-  function modifunc() {
-  	
-  	var article_no = ${dto.article_no};
-  	var amount = ${cri.amount};
-  	var page = ${cri.page};
-/*     var uuidName = $("#uuid").val();
-    var thumbName = $("#thumb").val(); */
-    /* location.href='/board/articleModifyForm?article_no='+article_no+'&amount='+amount+'&page='+page+'&uuidName='+uuidName+'&thumbName='+thumbName
-   */  
-    console.log();
-   
-  
-  }
-</script> -->
 
 
 </body>

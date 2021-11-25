@@ -11,6 +11,10 @@ public interface ArticleService {
 	public List<ArticleDTO> list_all();
 
 	public ArticleDTO articleContent(Long article_no);
+	
+	// 게시물 상세보기(이전글, 다음글)
+	public ArticleDTO articlePreContent(Long article_no);
+	public ArticleDTO articleNextContent(Long article_no);
 
 	public void articleInsert(ArticleDTO dto);
 

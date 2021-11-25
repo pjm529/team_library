@@ -45,8 +45,15 @@
                         <div class="wrapper-bbs">
 
                             <!-- 테이블 -->
+                            <!-- 오늘 날짜 -->
+                            <c:set var="now" value="<%=new java.util.Date()%>"/>
+                            <fmt:formatDate var="today" value="${now}" pattern="yyyy-MM-dd"/>
+                            
                             <div class="table-wrap">
                                 <form action="/board/articleInsertForm" method="post" role="form">
+                                	<input type="hidden" name ="writer_id">
+                                	<input type="hidden" name ="writer_name">
+                                	
                                     <table class="bbs-edit">
                                         <tbody>
                                             <tr>
@@ -59,25 +66,21 @@
                                             <tr>
                                                 <th class="first">작성자</th>
                                                 <td>
-                                                	<input type="text" name ="writer_name">
+                                                	
+                                                	관리자
                                                 </td>
-                                                <th class="first">권한</th>
+                                                
+                                               <!--  <th class="first">권한</th>
                                                 <td>
-                                                	<input type="text" name ="writer_id">
-                                                </td>
+                                                	<input type="hidden" name ="writer_id">
+                                                	admin
+                                                </td> -->
                                                 <th class="first">작성일</th>
                                                 <td>
-                                               	<%-- 	<fmt:formatDate var="article_reg_date" value="${dto.article_reg_date}" pattern="yyyy-MM-dd"/>
-                                    					${article_reg_date} --%>
+                                               		${today}
                                             	</td>
                                             </tr>
-<!--                                             <tr>
-                                                <th class="first">비밀번호</th>
-                                                <td colspan="3">
-                                                    <input type="password" style="width: 30%;" maxlength="10"
-                                                        placeholder="10자리 이내로 입력해 주세요">
-                                                </td>
-                                            </tr> -->
+
                                             <tr>
                                                 <td colspan="4">
                                                     <textarea id="popContent" name="article_content" cols="108"
@@ -87,11 +90,9 @@
                                             
                                             <!-- 파일 업로드 -->
                                            <tr>
-	                                           	<td>
-		                                           	
-		                                           	
+	                                           	<td colspan="4">                                      	
 													<div class="uploadDiv">
-														 <input type="file" name="uploadFile" multiple>
+														 <input type="file" name="uploadFile" id="uploadFile" multiple>
 														 <input type="hidden" name="uuid" id="uuid">
 													</div>
 													
@@ -256,7 +257,7 @@ $(document).ready(function(e){
 					str +" ><div>";
 					str += "<span> "+ obj.file_name+"</span>";
 					str += "<button type='button' data-file=\'"+fileCallPath+"\'data-type='image'>x</button><br>";
-					str += "<img src='/display?file_name="+fileCallPath+"'>";
+					str += "<img src='/display?file_name="+fileCallPath+"' style='vertical-align: middle;'>";
 					str += "</div>";
 					str +"</li>";
 					
@@ -269,9 +270,9 @@ $(document).ready(function(e){
 				      
 					str += "<li "
 					str += "data-path='"+obj.upload_path+"' data-uuid='"+obj.uuid+"' data-filename='"+obj.file_name+"' data-type='"+obj.image+"' ><div>";
-					str += "<span> "+ obj.file_name+"</span>";
+					str += "<span><img src='/resources/fileImage/text.png' width='15px' height='15px' style='vertical-align: middle;'>"+ obj.file_name+"</span>";
 					str += "<button type='button' data-file=\'"+fileCallPath+"\'data-type='file'>x</button><br>";
-					str += "<img src='/resources/fileImage/default.png' width='150px'></a>";
+					/* str += "<img src='/resources/fileImage/text.png' width='150px'></a>"; */
 					str += "</div>";
 					str +"</li>";
 				}
@@ -299,9 +300,9 @@ $(document).ready(function(e){
 		      dataType:'text',
 		      type: 'POST',
 		      success: function(result){
-		        
-		           
-		           targetLi.remove();
+      				
+		    	  targetLi.remove();
+		           $("#uploadFile").val("");
 		           
 		         }
 		    }); //$.ajax
