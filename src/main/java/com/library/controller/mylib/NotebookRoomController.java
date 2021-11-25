@@ -21,20 +21,6 @@ public class NotebookRoomController {
 
 	@Autowired
 	private NotebookRoomService nbService;
-	
-	@GetMapping("/sub3MainPage")
-	public String sub3MainPage(Model model) {
-		
-		int usingSeat = nbService.usingSeat();
-		model.addAttribute("usingSeat", usingSeat);
-		
-		int usedSeat = nbService.usedSeat();
-		model.addAttribute("usedSeat", usedSeat);
-		
-		return "/mylib/sub3/sub3MainPage";
-	}
-	
-
 
 	/* 좌석 리스트 출력 */
 	@GetMapping("/notebookRoom")

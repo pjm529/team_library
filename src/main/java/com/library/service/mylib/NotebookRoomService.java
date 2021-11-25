@@ -27,7 +27,7 @@ public interface NotebookRoomService {
 	/* 잔여좌석 */
 	public int usingSeat();
 	
-	/* 사용 좌석 */
+	/* 사용좌석 */
 	public int usedSeat();
 	
 }
