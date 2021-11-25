@@ -5,9 +5,9 @@
 <%@ page session="false" %>
 <html>
 <head>
-	<title>라온도서관 > 나의 도서관 > 열람실</title>
-	<link rel="stylesheet" href="/resources/css/mylib/sub3/sb_page.css">
-	<link rel="stylesheet" href="/resources/css/mylib/sub3/readingRoom.css">
+	<title>라온도서관 > 나의 도서관 > 좌석예약/조회</title>
+	<link rel="stylesheet" href="/resources/css/mylib/sub3/readingRoom1_sb_page.css">
+	<link rel="stylesheet" href="/resources/css/mylib/sub3/readingRoom1.css">
 
 </head>
 <body>
@@ -41,19 +41,20 @@
                 <!-- 왼쪽 사이드바 -->
                 <jsp:include page="../lnb.jsp"></jsp:include>
 
+                
                 <!-- 본문 -->
                 <div class="content">
                     <div class="doc">
 
                         <div class="room-list">
                             <div class="list-btn">
-                                <button class="active">제 1열람실</button>
-                                <button>제 2열람실</button>
-                                <button>노트북실</button>
+                                <button onclick="rdRoom();">제 1열람실</button>
+                                <button onclick="rdRoom2();">제 2열람실</button>
+                                <button class="active" onclick="nbRoom();">노트북실</button>
                                 <button>세미나실</button>
                             </div>
                         </div>
-
+                
 
                         <div class="seat-chart">
                             <div class="seat-wrapper">
@@ -408,6 +409,19 @@ $(function () {
 	})
 	
 });
+
+function rdRoom(){
+	location.href = "/mylib/readingRoom";
+}
+ 
+function rdRoom2(){
+	location.href = "/mylib/readingRoom2";
+}
+ 
+function nbRoom(){
+	location.href = "/mylib/notebookRoom";
+}
+
         
 	
 

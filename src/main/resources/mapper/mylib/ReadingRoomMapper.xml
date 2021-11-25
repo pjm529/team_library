@@ -76,6 +76,20 @@
 		   set return_time = date_add(return_time, interval 2 hour) 
 		 where seat_no = #{seat_no}
 	</update>
+
+
+	<!-- 사용 가능 좌석 -->
+	<select id="rdUsingSeat" resultType="int">
+		select count(*) - (select count(*) from notebook_room where seat_status = 0)
+		  from notebook_room
+	</select>
+	 
+	 
+	<!-- 사용 중인 좌석 -->
+	<select id="rdUsedSeat" resultType="int">
+		select count(*) from notebook_room where seat_status = 0
+	</select>
+	
 	
 	
 </mapper>

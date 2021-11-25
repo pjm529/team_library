@@ -25,7 +25,7 @@
         </li>
         
         <li class="sub3">
-            <a href="/mylib/sub3MainPage">좌석예약/조회</a>
+            <a href="/mylib/ReservationRoomPage">좌석예약/조회</a>
         </li>
         
         <li class="sub4">

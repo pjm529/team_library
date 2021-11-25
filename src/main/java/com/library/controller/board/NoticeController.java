@@ -53,8 +53,6 @@ public class NoticeController {
 	@GetMapping("/noticeContent")
 	public String noticeContent(Criteria cri, Model model, @RequestParam("notice_no") String n_notice_no) {
 		
-		
-
 		Long notice_no = Long.parseLong(n_notice_no);
 
 		noticeService.updateNoticeViews(notice_no);

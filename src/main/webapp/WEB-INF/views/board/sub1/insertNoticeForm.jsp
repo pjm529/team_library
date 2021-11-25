@@ -91,7 +91,7 @@
                                             <tr>
                                             	<td colspan="4">
                                             		<div class="uploadDiv">
-				                                        <input type="file" name="uploadNoticeFile" multiple>
+				                                        <input type="file" name="uploadNoticeFile" id="uploadNoticeFile" multiple>
 				                                        <input type="hidden" name="uuid" id="uuid">
 				                                    </div>
 				                                    
@@ -184,8 +184,6 @@
 			  
 			});
 			  
-			alert(str);
-			
 			formObj.append(str).submit();
 		  
 		});
@@ -281,20 +279,10 @@
 					
 					$("input[name='uuid']").attr('value', uuidName);
 					
-					
-					
-					/* str += "<li "
-					str += "data-path='" + obj.upload_path + "' data-uuid='" + obj.uuid + "' data-filename='" + obj.file_name + "' data-type='" + obj.image + "' ><div>";
-					str += "<span> " + obj.file_name + "</span>";
-					str += "<button type='button' data-file=\'" + fileCallPath + "\' data-type='file'>x</button><br>";
-					str += "<img src='/resources/fileImage/file_icon.png' width='150px'></a>";
-					str += "</div>";
-					str += "</li>"; */
-					
 					str += "<li "
 					str += "data-path='" + obj.upload_path + "' data-uuid='" + obj.uuid + "' data-filename='" + obj.file_name + "' data-type='" + obj.image + "' >";
 					str += "<div style='margin-top: 5px;'>";
-					str += "<img src='/resources/fileImage/file_icon.png' width='20px' height='20px' style='vertical-align: middle;'>";
+					str += "<img src='/resources/imges/board/sub1/file_icon.png' width='20px' height='20px' style='vertical-align: middle;'>";
 					str += "<span> " + obj.file_name + " </span>";
 					str += "<button type='button' data-file=\'" + fileCallPath + "\' data-type='file'>x</button><br>";
 					str += "</div>";
@@ -306,10 +294,11 @@
 			uploadUL.append(str);
 		}
 		
-		var cloneObj = $(".uploadDIV");
-			      
+		
 		/* x버튼 눌렀을 때 첨부파일 화면에서 사라짐 */
 		$(".uploadResult").on("click", "button", function(e){
+			
+			
 		    
 			var uuid = $("#uuid").val();
 			
@@ -327,13 +316,10 @@
 				type: 'POST',
 				success: function(result){
 					targetLi.remove();
-					$(".uploadDIV").html(cloneObj.html());
+					$("#uploadNoticeFile").val("");
 				}
 			}); //$.ajax
 		});
-		
-		
-		
 		
 		
 		

@@ -53,8 +53,6 @@ public class NoticeAttachController {
 	@ResponseBody
 	public ResponseEntity<List<NoticeAttachForAjaxDTO>> uploadNoticeFileAjaxPost(MultipartFile[] uploadNoticeFile) {
 		
-		System.out.println("uploadNoticeFileAjaxAction 진입완료");
-		
 		List<NoticeAttachForAjaxDTO> list = new ArrayList<>();
 		String uploadFolder = "C:\\notice_file";
 		
@@ -65,8 +63,6 @@ public class NoticeAttachController {
 		}
 		
 		for(MultipartFile multipartFile : uploadNoticeFile) {
-			
-			System.out.println("메롱메롱");
 			
 			NoticeAttachForAjaxDTO attachForAjaxDTO = new NoticeAttachForAjaxDTO();
 			String uploadFileName = multipartFile.getOriginalFilename();
@@ -170,9 +166,6 @@ public class NoticeAttachController {
 	
 	public void fileDelete(String uuid, String type) {
 		
-		System.out.println(uuid);
-		System.out.println(type);
-	
 		String filePath = "C:\\notice_file\\";
 		File deleteFileName = new File(filePath + uuid);
 		
@@ -181,10 +174,8 @@ public class NoticeAttachController {
 			File deleteThumbFileName = new File(filePath + thumb);
 			deleteFileName.delete();
 			deleteThumbFileName.delete();
-			System.out.println("파일삭제완료");
 		}else {
 			deleteFileName.delete();
-			System.out.println("파일삭제완료");
 		}
 		
 	}
