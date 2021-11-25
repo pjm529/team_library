@@ -138,7 +138,7 @@ ul{
     position: relative;
 }
 
-/* �궗�씠�뱶 諛� hover */
+/* 사이드 바 hover */
 .subMenu li a:hover{
     background-color: #464f56;
     color: #fff;
@@ -146,7 +146,7 @@ ul{
 }
 
 
-/* 蹂몃Ц 遺�遺� */
+/* 본문 부분 */
 .content{
     box-sizing: border-box;
     padding-top: 30px;
@@ -159,7 +159,7 @@ ul{
     min-height:450px;
 }
 
-/* 寃뚯떆�뙋 �쟾泥� wrapper */
+/* 게시판 전체 wrapper */
 .wrapper-bbs {
     padding: 10px 0 20px;
     font-size: 13px;
@@ -168,8 +168,7 @@ ul{
 
 
 
-/*  ======= �뀒�씠釉� ====== */
-
+/*  ======= 테이블 ====== */
 form{
     padding-top: 20px;
 }
@@ -205,14 +204,14 @@ th, td{
     vertical-align: middle;
 }
 
-/* tbody 踰덊샇 font �꽕�젙 */
+/* tbody 번호 font 설정 */
 table td .num{
     color: #888;
     font-size: 90%;
     white-space: nowrap;
 }
 
-/* tbody �젣紐� �쇊履� �젙�젹 */
+/* tbody 제목 왼쪽 정렬 */
 table td.left{
     text-align: left!important;
 }
@@ -228,8 +227,7 @@ table input{
 }
 
 
-/* 湲��벐湲� btn */
-
+/* 글쓰기 / 수정하기 / 삭제하기 btn */
 .write_btn, .update_btn, .delete_btn{
     background-color: #266ac4;
     color: #fff;
@@ -242,7 +240,11 @@ table input{
     cursor: pointer;
 }
 
-/* 紐⑸줉 btn */
+.delete_wrap{
+	float: right;
+}
+
+/* 목록 btn */
 .list_btn{
     background-color: #fcfcfc;
     color: #000;
@@ -252,11 +254,6 @@ table input{
     width: 80px;
     margin-top: 20px;
     cursor: pointer;
-}
-
-
-.delete_wrap{
-	float: right;
 }
 
 .list_wrap{
