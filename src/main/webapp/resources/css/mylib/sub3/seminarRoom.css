@@ -194,14 +194,21 @@ ul{
     min-height:450px;
 }
 
-.service-wrap h2{
-    margin-top: 10px;
+/* seminarRoom 이용 안내 */
+.service-wrap{
+    max-height: 280px;
+    overflow: scroll;
+    margin-bottom: 50px;
+}
+
+.doc > h2{
+    margin-top: 0px;
     margin-bottom: 20px;
     text-align: center;
 }
 .service-wrap h3{
     padding-left: 30px;
-    margin: 30px 0 15px 0;
+    margin: 20px 0 5px 0;
     background: url(/resources/imges/mylib/h3.gif) no-repeat 0 3px;
     font-weight: 600;
     line-height: 1.4;
@@ -212,25 +219,16 @@ ul{
     width: 100%;
     height: auto;
     min-height: 500px;
-/*     border: 3px solid #E5E5E5; */
 }
 
 ul.con > li{
-    font-size: 16px;
+    font-size: 14px;
     letter-spacing: -0.3px;
     background: url(/resources/imges/mylib/con_icon.gif) no-repeat 4px 9px;
     padding: 3px 0 3px 23px;
 }
 
-.go-btn{
-    background-color: #198aaf;
-    border: 1px solid #167c9d;
-    color: #fff;
-    padding: 7px 13px;
-    border-radius: 5px;
-    width: 80px;
-    cursor: pointer;
-    display: block;
-    margin: auto;
-    margin-top: 40px;
+li > b{
+    font-size: 14px;
 }
+
