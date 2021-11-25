@@ -11,8 +11,8 @@
         <li class="sub2">
             <a href="/search/best-book">대출베스트</a>
         </li> 
-        <li>
-            <a href="#">추천도서</a>
+        <li class="sub3">
+            <a href="/search/recommend-book">추천도서</a>
         </li> 
     </ul>
 </div>
