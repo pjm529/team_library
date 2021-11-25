@@ -22,12 +22,12 @@ function my_info_btn(){
 }
 
 // 좌석 배정 상세 btn 속성 추가
-function rdRoom1() {
-	location.href = "#";
+function rdRoom() {
+	location.href = "/mylib/readingRoom";
 }
 
 function rdRoom2() {
-	location.href = "#";
+	location.href = "/mylib/readingRoom2";
 }
 
 function nbRoom(){
