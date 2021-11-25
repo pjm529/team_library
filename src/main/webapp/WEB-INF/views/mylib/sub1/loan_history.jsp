@@ -105,8 +105,8 @@
                                         
                                     </select>
                                     <input type="hidden" name="page" value="1">
-                                    <input type="hidden" name="type" value="${pageMaker.cri.type }">
-									<input type="hidden" name="keyword" value="${pageMaker.cri.keyword }">
+                                    <input type="hidden" name="start_date" value="${start_date }">
+									<input type="hidden" name="end_date" value="${end_date }">
                                     <button id="list_btn" class="btn">이동</button>
                                 </form>
 
@@ -132,8 +132,17 @@
 											<td>${loan_history.book_title }</td> 
 											<td>${loan_history.book_author}</td>
 											<td>${loan_history.loan_date }</td>
+											
+											<c:if test="${empty loan_history.return_date }">
+											<td><span style="color:red; font-weight: bold">미반납</span></td>
+											</c:if>
+											
+											<c:if test="${not empty loan_history.return_date }">
 											<td>${loan_history.return_date }</td>
+											</c:if>
+											
 											<td>${loan_history.return_period }</td>
+											
 										</tr>
 										</c:forEach>
 	                                        
@@ -176,7 +185,9 @@
     <form method="get" class="moveForm"> 
 		<input type="hidden" name="amount" value="${pageMaker.cri.amount }">
 		<input type="hidden" name="page" value="${pageMaker.cri.page }">
-		<input type="hidden" name="type" value="${pageMaker.cri.type }">
+		<input type="hidden" name="start_date" value="${start_date }">
+		<input type="hidden" name="end_date" value="${end_date }">
+		
 	</form>
     
     <!-- footer -->
