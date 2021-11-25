@@ -19,7 +19,7 @@
             <div class="doc-info">
                 <!-- doc title -->
                 <div class="doc-title">
-                    <h3>회원 관리</h3>
+                    <h3>회원관리</h3>
                     <ul>
                         <!-- 홈 btn img -->
                         <li class="first" style="background-image: none;">

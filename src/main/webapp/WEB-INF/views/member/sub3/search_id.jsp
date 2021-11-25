@@ -4,7 +4,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>라온도서관 > 회원관련 > 아이디 찾기</title>
+<title>라온도서관 > 회원관련 > 아이디찾기</title>
 <link rel="stylesheet" href="/resources/css/member/search_id.css">
 <link rel="stylesheet" href="/resources/css/footer.css">
 <script src="https://code.jquery.com/jquery-3.6.0.js" 
@@ -21,7 +21,7 @@
             <div class="doc-info">
                 <!-- doc title -->
                 <div class="doc-title">
-                    <h3>아이디 찾기</h3>
+                    <h3>아이디찾기</h3>
                     <ul>
                         <!-- 홈 btn img -->
                         <li class="" style="background-image: none;">
@@ -33,7 +33,7 @@
                             <a href="/member/login">회원관련</a>
                         </li>
                         <li>
-                            <a href="/member/search-id">아이디 찾기</a>
+                            <a href="/member/search-id">아이디찾기</a>
                         </li>
                     </ul>
                 </div>

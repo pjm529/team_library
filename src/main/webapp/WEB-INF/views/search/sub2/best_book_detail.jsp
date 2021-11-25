@@ -5,7 +5,7 @@
 <%@ page session="false" %>
 <html>
 <head>
-	<title>라온도서관 > 자료검색 > 도서검색</title>
+	<title>라온도서관 > 자료검색 > 대출베스트</title>
 </head>
 <link rel="stylesheet" href="/resources/css/search/book_detail.css">
 <link rel="stylesheet" href="/resources/css/footer.css">
