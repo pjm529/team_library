@@ -20,6 +20,10 @@ public interface ReadingRoomMapper {
 	public void updateReading_Room1_RentalTable();
 	public void updateReading_Room1Table();
 
+	/* 잔여 좌석 */
+	public int rdUsingSeat();
 	
+	/* 사용 좌석 */
+	public int rdUsedSeat();
 	
 }
