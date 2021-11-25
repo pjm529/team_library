@@ -149,13 +149,13 @@
 	                                    	</c:if>
 	                                    	
 	                                    	<!-- 예약된 좌석의 id와 저장된 session id가 일치할 시, class name == mine -->
-	                                    	<c:if test="${nb.user_id == 'id2'}">
+	                                    	<c:if test="${nb.user_id == 'id'}">
 	                                    		<button class="mine" id="${nb.seat_no}">${nb.seat_no}</button>
 	                                    	</c:if>
 	                                    	
 	                                    	<!-- 예약된 좌석의 id와 저장된 session id가 불일치할 시, class name == status -->
 	                                    		<!-- status => 사용 중이면 occupied || 사용 가능하면 vacant -->
-	                                    	<c:if test="${nb.user_id != 'id2'}">
+	                                    	<c:if test="${nb.user_id != 'id'}">
 	                                    		<button class="${status}" id="${nb.seat_no}">${nb.seat_no}</button>
 	                                    	</c:if>
 	                                    </c:forEach>
@@ -358,7 +358,7 @@
 
 					var mySeat_no = $(".mine").attr("id");
 					
-					location.href = "/mylib/moveSeat?newSeat_no=" + seat_no + "&seat_no=" + mySeat_no;
+					location.href = "/mylib/nbMoveSeat?newSeat_no=" + seat_no + "&seat_no=" + mySeat_no;
 				}
 				
 			}else {
