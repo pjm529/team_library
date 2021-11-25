@@ -19,4 +19,20 @@
 			  order by loan_date desc
 		</select>
 		
+		<!-- 대출 정지일 -->
+		<select id="get_overdue_date" resultType="int">
+			select user_overdue_date
+			  from member
+			 where user_id = #{user_id}
+		</select>
+		
+		<!-- 연체 도서 수 -->
+		<select id="get_overdue" resultType="int">
+		
+			select count(*) from loan_history 
+			where datediff(return_period, current_timestamp) &lt; 0 
+			and return_status = false and user_id = #{user_id}
+	
+		</select>
+		
 	</mapper>

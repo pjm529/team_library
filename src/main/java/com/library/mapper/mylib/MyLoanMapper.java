@@ -14,4 +14,11 @@ public interface MyLoanMapper {
 
 	// 대출 수 출력
 	public int get_total(String user_id);
+	
+	// 대출 정지 일
+	public int get_overdue_date(String user_id);
+	
+	// 연체 도서 수
+	public int get_overdue(String user_id);
+
 }
