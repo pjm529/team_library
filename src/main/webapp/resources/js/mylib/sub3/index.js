@@ -1,16 +1,48 @@
+/* 세미나실 예약 btn의 해당하는 날짜 값 구하기*/
+$(document).ready(function() {
+	
+	$(".sub3").addClass("active");
+	
+	$('body').on("click", "#group_booking", function(){
+		
+		var nowDate = $(this).closest('span').find('#nowDate').val();
+		
+		location.href = '/mylib/seminarRoomService?nowDate=' + nowDate;
+		
+	});
+	
+	
+}); 
+
+/* 기준 위 부터 아래로 == 나의 예약 현황 | 좌석 배정 | 세미나실 */
+
+// 나의 예약 현황 btn 속성 추가
+function my_info_btn(){
+	location.href = "#";
+}
+
+// 좌석 배정 상세 btn 속성 추가
+function rdRoom1() {
+	location.href = "#";
+}
+
+function rdRoom2() {
+	location.href = "#";
+}
+
+function nbRoom(){
+	location.href = "/mylib/notebookRoom";
+}
 
 
 // Date 객체 사용으로 날짜 받아옴
 // let 사용 이유 => goToday 함수에서 date 값을 재할당해 주기 위해
 let date = new Date();
 
-
-
-var renderCalendar = () => {
+function renderCalendar(){
 	
     var viewYear = date.getFullYear(); // 현재 년
     var viewMonth = date.getMonth(); // 현재 월
-	
 	
     // html .year-month 태그 채우기
     document.querySelector('.year-month').textContent
@@ -82,19 +114,20 @@ var renderCalendar = () => {
         }
     }
 
-    let nowdate = today.getDate();
+    let nowDate = today.getDate();
     let afterWeek = today.getDate() + 6;
 
     if (viewMonth === today.getMonth() && viewYear === today.getFullYear()) {
-        for (let i = nowdate; i < afterWeek + 1; i++) {
+        for (let i = nowDate; i < afterWeek + 1; i++) {
 
             let groupBooking = document.createElement("button");
-            groupBooking.innerHTML = "예약 가능";
+            groupBooking.innerText = "예약 가능";
             groupBooking.setAttribute("id", "group_booking");
 
             let date = document.getElementsByClassName('this')[i - 1];
 
-            date.appendChild(groupBooking);
+			date.appendChild(groupBooking);
+
 
         }
     }
@@ -105,64 +138,25 @@ var renderCalendar = () => {
 // 정의해 놓은 함수 호출
 renderCalendar();
 
-
-var prevMonth = () => {
+function prevMonth (){
     date.setDate(1);
     date.setMonth(date.getMonth() - 1);
     renderCalendar();
 }
 
-var nextMonth = () => {
+function nextMonth(){
     date.setDate(1);
     date.setMonth(date.getMonth() + 1);
     renderCalendar();
 }
 
-var goToday = () => {
+function goToday(){
     date = new Date();
     renderCalendar();
 }
 
-// 나의 예약 현황 btn 속성 추가
-var my_info_btn = () => {
-	location.href = "#";
-}
 
 
-// 좌석 배정 상세 btn 속성 추가
-var rdRoom1 = () => {
-	location.href = "#";
-}
-
-var rdRoom2 = () => {
-	location.href = "#";
-}
-
-var nbRoom = () =>{
-	location.href = "/mylib/notebookRoom";
-}
-
-var groupRoom_booking = () => {
-	location.href = "/mylib/notebookRoom";
-}
-
-
-/* 세미나실 예약 btn의 해당하는 날짜 값 구하기*/
-$(document).ready(function() {
-	
-	$(".sub3").addClass("active");
-	
-	$('body').on("click", "#group_booking", function(){
-		
-		var nowDate = $(this).closest('span').find('#nowDate').val();
-		
-		location.href = '/mylib/seminarRoomService?nowDate=' + nowDate;
-		
-		
-	});
-
-	
-}); 
 
 
 

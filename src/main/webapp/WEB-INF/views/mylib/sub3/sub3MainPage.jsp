@@ -125,12 +125,12 @@
                                     <h3>세미나실</h3>
                                     <div class="header">
                                         <div class="nav">
-                                            <button class="nav-btn go-prev" onclick="prevMonth()">&lt;</button>
-                                            <button class="nav-btn go-next" onclick="nextMonth()">&gt;</button>
+                                            <button class="nav-btn go-prev" onclick="prevMonth();">&lt;</button>
+                                            <button class="nav-btn go-next" onclick="nextMonth();">&gt;</button>
                                         </div>
                                         <div class="year-month"></div>
                                         <div class="nav">
-                                            <button class="nav-btn go-today" onclick="goToday()">오늘</button>
+                                            <button class="nav-btn go-today" onclick="goToday();">오늘</button>
                                         </div>
                                     </div>
 
@@ -172,17 +172,13 @@
 
 
 	<script>
-	
-	
 	$(document).ready(function() {
 		
 		var usedSeat = "<c:out value='${usedSeat}'/>";
 		var percent = (usedSeat/28) * 100;
-		
-		
 		$('#nbUsedSeat').html(percent.toFixed(0) + "%");
+		
 	}); 
-	
 	</script>
 
 </body>
