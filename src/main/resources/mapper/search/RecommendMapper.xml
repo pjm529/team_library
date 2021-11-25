@@ -11,15 +11,23 @@
 		  from recommend_book 
 		 where recommend_date 
 		 	between concat(#{date.year}, '-', #{date.month}, '-01') and concat(#{date.year}, '-', #{date.month}, '-31' )
-		 order by recommend_date
+		 order by recommend_date desc
 		 limit #{cri.skip}, #{cri.amount}
 	</select>
 	
+	<!-- 추천 도서 권수 -->
 	<select id="get_total" resultType="int">
 		select count(*)
 		  from recommend_book
 		 where recommend_date 
 		 	between concat(#{year}, '-', #{month}, '-01') and concat(#{year}, '-', #{month}, '-31' )
 	</select>
+	
+	<!-- 추천 도서 등록 -->
+	<insert id="regist_book">
+		insert into recommend_book  
+		values(#{user_id}, #{book.book_title}, #{book.book_author}, #{book.book_isbn}, #{book.book_cover},
+		#{book.book_pubDate}, #{book.book_publisher}, null);
+	</insert>
 	
 </mapper>  

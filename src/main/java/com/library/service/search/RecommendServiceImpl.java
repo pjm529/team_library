@@ -16,13 +16,22 @@ public class RecommendServiceImpl implements RecommendService {
 	@Autowired
 	private RecommendMapper recommendMapper;
 
+	// 추천 도서 리스트
 	@Override
 	public List<BookDTO> recommend_list(Criteria cri, DateDTO date) {
 		return recommendMapper.recommend_list(cri, date);
 	}
 
+	// 추천 도서 수
 	@Override
 	public int get_total(DateDTO date) {
 		return recommendMapper.get_total(date);
+	}
+
+	
+	// 추천 도서 등록
+	@Override
+	public void regist_book(String user_id, BookDTO book) {
+		recommendMapper.regist_book(user_id, book);
 	}
 }

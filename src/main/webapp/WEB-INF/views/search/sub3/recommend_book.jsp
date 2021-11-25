@@ -19,7 +19,7 @@
             <div class="doc-info">
                 <!-- doc title -->
                 <div class="doc-title">
-                    <h3>도서검색</h3>
+                    <h3>추천도서</h3>
                     <ul>
                         <!-- 홈 btn img -->
                         <li class="first" style="background-image: none;">
@@ -120,11 +120,14 @@
                             <a class="not" href="${pageMaker.endPage + 1}">다음</a>
                         </c:if>
                     </div>
+                    <form>
+        				<input class="btn add_btn" type="submit" value="등록" style="float: right;">
+        			</form>
                 </div>
-
+			
             </div>
+            
         </div>
-
     </div>
 
     <form method="get" class="moveForm">
@@ -147,6 +150,14 @@
                 moveForm.submit();
 
             });
+            
+			$('.add_btn').on("click",function(e){
+				
+				e.preventDefault();
+				let popUrl = "/search/regist-book";
+				let popOption = "width = 710px, height=600px, top=300px, scrollbars=no, resizeable=no";
+				window.open(popUrl,"도서 등록" ,popOption);
+			});
 
         });
     </script>

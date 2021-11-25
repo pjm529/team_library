@@ -15,4 +15,7 @@ public interface RecommendMapper {
 
 	// 추천 도서 수
 	public int get_total(DateDTO date);
+
+	// 추천 도서 등록
+	public void regist_book(@Param("user_id") String user_id, @Param("book") BookDTO book);
 }
