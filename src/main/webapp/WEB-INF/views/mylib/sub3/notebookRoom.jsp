@@ -58,8 +58,8 @@
 
                         <div class="room-list">
                             <div class="list-btn">
-                                <button onclick="rbRoom();">제 1열람실</button>
-                                <button onclick="rbRoom2();">제 2열람실</button>
+                                <button onclick="rdRoom();">제 1열람실</button>
+                                <button onclick="rdRoom2();">제 2열람실</button>
                                 <button class="active" onclick="nbRoom();">노트북실</button>
                                 <button>세미나실</button>
                             </div>
@@ -468,11 +468,11 @@
 		
 	});
 	
-	function rbRoom(){
+	function rdRoom(){
 		location.href = "/mylib/readingRoom";
 	}
 	
-	function rbRoom2(){
+	function rdRoom2(){
 		location.href = "/mylib/readingRoom2";
 	}
 	
