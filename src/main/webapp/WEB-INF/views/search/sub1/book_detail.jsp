@@ -161,29 +161,34 @@
 					location.href="/member/login";
 				} else {
 					
-					let data = {
-	           				book_isbn: book_isbn
-	           		};
+					if (confirm("도서를 대출하시겠습니까?")) {
 					
-					$.ajax({
-	           			type: "post",
-	           			url: "/search/statusChk",
-	           			data: data,
-	           			success: function(result) {
-	           				
-	           				if (result == "success") {
-	           					alert("대출이 완료되었습니다.");
-	           					$("#loan").attr("action", "/search/loan?detail=not");
-	           					$("#loan").attr("onsubmit", "return true;");
-	           					$("#loan").submit();
-	       						
-	           				} else if (result == "loan"){
-	           					alert("이미 대출 중인 도서입니다.");
-	           				} else {
-	           					alert("대출이 불가능한 상태입니다.");
-	           				}
-	           			}
-	           		});
+						let data = {
+		           				book_isbn: book_isbn
+		           		};
+						
+						$.ajax({
+		           			type: "post",
+		           			url: "/search/statusChk",
+		           			data: data,
+		           			success: function(result) {
+		           				
+		           				if (result == "success") {
+		           					alert("대출이 완료되었습니다.");
+		           					$("#loan").attr("action", "/search/loan?detail=not");
+		           					$("#loan").attr("onsubmit", "return true;");
+		           					$("#loan").submit();
+		       						
+		           				} else if (result == "loan"){
+		           					alert("이미 대출 중인 도서입니다.");
+		           				} else {
+		           					alert("대출이 불가능한 상태입니다.");
+		           				}
+		           			}
+		           		});
+					
+					}
+					
 					
 				} 
 					
