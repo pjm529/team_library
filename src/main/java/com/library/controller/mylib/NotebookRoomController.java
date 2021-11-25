@@ -4,6 +4,8 @@ import java.util.Date;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -44,16 +46,20 @@ public class NotebookRoomController {
 
 		List<NoteBookRoomDTO> notebookRoomlist = nbService.seats_list_all();
 		model.addAttribute("notebookRoomlist", notebookRoomlist);
-
-		// 세션 id
-		String user_id = "id";
-
-		if (nbService.reservation_info(user_id) == null) {
+		
+		// 로그인 된 user_id 받아오기
+		Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+		UserDetails userDetails = (UserDetails) principal;
+		String id = userDetails.getUsername();
+		
+		model.addAttribute("id", id);
+		
+		if (nbService.reservation_info(id) == null) {
 
 			return "/mylib/sub3/notebookRoom";
 
 		} else {
-			NoteBookRoomDTO reservation_info = nbService.reservation_info(user_id);
+			NoteBookRoomDTO reservation_info = nbService.reservation_info(id);
 
 			Date now = new Date();
 
@@ -69,7 +75,12 @@ public class NotebookRoomController {
 	@GetMapping("/nb_seat_booking")
 	public String notebookRoom_booking(NoteBookRoomDTO dto) {
 
-		dto.setUser_id("id");
+		// 로그인 된 user_id 받아오기
+		Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+		UserDetails userDetails = (UserDetails) principal;
+		String id = userDetails.getUsername();
+		
+		dto.setUser_id(id);
 
 		nbService.nb_seat_booking(dto);
 		nbService.updateStatusOccupied(dto);
@@ -85,7 +96,12 @@ public class NotebookRoomController {
 		nbService.nb_seat_return(dto);
 		nbService.updateStatusVacant(dto);
 		
-		dto.setUser_id("id3");
+		// 로그인 된 user_id 받아오기
+		Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+		UserDetails userDetails = (UserDetails) principal;
+		String id = userDetails.getUsername();
+		
+		dto.setUser_id(id);
 		dto.setSeat_no(newSeat_no);
 		
 		nbService.nb_seat_booking(dto);

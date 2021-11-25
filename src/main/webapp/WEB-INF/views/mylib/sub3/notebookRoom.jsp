@@ -58,9 +58,9 @@
 
                         <div class="room-list">
                             <div class="list-btn">
-                                <button onclick="#'">제 1열람실</button>
-                                <button onclick="#'">제 2열람실</button>
-                                <button class="active">노트북실</button>
+                                <button onclick="rbRoom();">제 1열람실</button>
+                                <button onclick="rbRoom2();">제 2열람실</button>
+                                <button class="active" onclick="nbRoom();">노트북실</button>
                                 <button>세미나실</button>
                             </div>
                         </div>
@@ -85,17 +85,17 @@
 	                                    	<!-- seat_status == 1 => 좌석 예약 가능 -->
 	                                    	<c:if test="${nb.seat_status == '1'}">
 	                                    		<c:set var="status" value="vacant" />
-	                                    		<c:set var="user_id" value="id"/>
+	                                    		<c:set var="user_id" value="${id}"/>
 	                                    	</c:if>
 	                                    	
 	                                    	<!-- 예약된 좌석의 id와 저장된 session id가 일치할 시, class name == mine -->
-	                                    	<c:if test="${nb.user_id == 'id2'}">
+	                                    	<c:if test="${nb.user_id == id}">
 	                                    		<button class="mine" id="${nb.seat_no}">${nb.seat_no}</button>
 	                                    	</c:if>
 	                                    	
 	                                    	<!-- 예약된 좌석의 id와 저장된 session id가 불일치할 시, class name == status -->
 	                                    		<!-- status => 사용 중이면 occupied || 사용 가능하면 vacant -->
-	                                    	<c:if test="${nb.user_id != 'id2'}">
+	                                    	<c:if test="${nb.user_id != id}">
 	                                    		<button class="${status}" id="${nb.seat_no}">${nb.seat_no}</button>
 	                                    	</c:if>
 	                                    
@@ -116,17 +116,17 @@
 	                                    	<!-- seat_status == 1 => 좌석 예약 가능 -->
 	                                    	<c:if test="${nb.seat_status == '1'}">
 	                                    		<c:set var="status" value="vacant" />
-	                                    		<c:set var="user_id" value="id"/>
+	                                    		<c:set var="user_id" value="${id}"/>
 	                                    	</c:if>
 	                                    	
 	                                    	<!-- 예약된 좌석의 id와 저장된 session id가 일치할 시, class name == mine -->
-	                                    	<c:if test="${nb.user_id == 'id2'}">
+	                                    	<c:if test="${nb.user_id == id}">
 	                                    		<button class="mine" id="${nb.seat_no}">${nb.seat_no}</button>
 	                                    	</c:if>
 	                                    	
 	                                    	<!-- 예약된 좌석의 id와 저장된 session id가 불일치할 시, class name == status -->
 	                                    		<!-- status => 사용 중이면 occupied || 사용 가능하면 vacant -->
-	                                    	<c:if test="${nb.user_id != 'id2'}">
+	                                    	<c:if test="${nb.user_id != id}">
 	                                    		<button class="${status}" id="${nb.seat_no}">${nb.seat_no}</button>
 	                                    	</c:if>
 	                                    </c:forEach>
@@ -145,17 +145,17 @@
 	                                    	<!-- seat_status == 1 => 좌석 예약 가능 -->
 	                                    	<c:if test="${nb.seat_status == '1'}">
 	                                    		<c:set var="status" value="vacant" />
-	                                    		<c:set var="user_id" value="id"/>
+	                                    		<c:set var="user_id" value="${id}"/>
 	                                    	</c:if>
 	                                    	
 	                                    	<!-- 예약된 좌석의 id와 저장된 session id가 일치할 시, class name == mine -->
-	                                    	<c:if test="${nb.user_id == 'id'}">
+	                                    	<c:if test="${nb.user_id == id}">
 	                                    		<button class="mine" id="${nb.seat_no}">${nb.seat_no}</button>
 	                                    	</c:if>
 	                                    	
 	                                    	<!-- 예약된 좌석의 id와 저장된 session id가 불일치할 시, class name == status -->
 	                                    		<!-- status => 사용 중이면 occupied || 사용 가능하면 vacant -->
-	                                    	<c:if test="${nb.user_id != 'id'}">
+	                                    	<c:if test="${nb.user_id != id}">
 	                                    		<button class="${status}" id="${nb.seat_no}">${nb.seat_no}</button>
 	                                    	</c:if>
 	                                    </c:forEach>
@@ -174,17 +174,17 @@
 	                                    	<!-- seat_status == 1 => 좌석 예약 가능 -->
 	                                    	<c:if test="${nb.seat_status == '1'}">
 	                                    		<c:set var="status" value="vacant" />
-	                                    		<c:set var="user_id" value="id"/>
+	                                    		<c:set var="user_id" value="${id}"/>
 	                                    	</c:if>
 	                                    	
 	                                    	<!-- 예약된 좌석의 id와 저장된 session id가 일치할 시, class name == mine -->
-	                                    	<c:if test="${nb.user_id == 'id2'}">
+	                                    	<c:if test="${nb.user_id == id}">
 	                                    		<button class="mine" id="${nb.seat_no}">${nb.seat_no}</button>
 	                                    	</c:if>
 	                                    	
 	                                    	<!-- 예약된 좌석의 id와 저장된 session id가 불일치할 시, class name == status -->
 	                                    		<!-- status => 사용 중이면 occupied || 사용 가능하면 vacant -->
-	                                    	<c:if test="${nb.user_id != 'id2'}">
+	                                    	<c:if test="${nb.user_id != id}">
 	                                    		<button class="${status}" id="${nb.seat_no}">${nb.seat_no}</button>
 	                                    	</c:if>
 	                                    </c:forEach>
@@ -204,17 +204,17 @@
 	                                    	<!-- seat_status == 1 => 좌석 예약 가능 -->
 	                                    	<c:if test="${nb.seat_status == '1'}">
 	                                    		<c:set var="status" value="vacant" />
-	                                    		<c:set var="user_id" value="id"/>
+	                                    		<c:set var="user_id" value="${id}"/>
 	                                    	</c:if>
 	                                    	
 	                                    	<!-- 예약된 좌석의 id와 저장된 session id가 일치할 시, class name == mine -->
-	                                    	<c:if test="${nb.user_id == 'id2'}">
+	                                    	<c:if test="${nb.user_id == id}">
 	                                    		<button class="mine" id="${nb.seat_no}">${nb.seat_no}</button>
 	                                    	</c:if>
 	                                    	
 	                                    	<!-- 예약된 좌석의 id와 저장된 session id가 불일치할 시, class name == status -->
 	                                    		<!-- status => 사용 중이면 occupied || 사용 가능하면 vacant -->
-	                                    	<c:if test="${nb.user_id != 'id2'}">
+	                                    	<c:if test="${nb.user_id != id}">
 	                                    		<button class="${status}" id="${nb.seat_no}">${nb.seat_no}</button>
 	                                    	</c:if>
 	                                    	
@@ -467,6 +467,18 @@
 		
 		
 	});
+	
+	function rbRoom(){
+		location.href = "/mylib/readingRoom";
+	}
+	
+	function rbRoom2(){
+		location.href = "/mylib/readingRoom2";
+	}
+	
+	function nbRoom(){
+		location.href = "/mylib/notebookRoom";
+	}
 
 </script>
 </body>
