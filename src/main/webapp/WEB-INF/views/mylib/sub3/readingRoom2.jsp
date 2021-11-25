@@ -8,7 +8,7 @@
 <head>
 <meta charset="UTF-8">
 <title>라온도서관 > 나의 도서관 > 제2열람실</title>
-<link rel="stylesheet" href="/resources/css/mylib/sub3/sb_page.css">
+<link rel="stylesheet" href="/resources/css/mylib/sub3/readingRoom2_sb_page.css">
 <link rel="stylesheet" href="/resources/css/mylib/sub3/readingRoom2.css">
     <style>
         .seat-list-row {
