@@ -16,6 +16,7 @@ public interface NoticeService {
 	public void delete(Long notice_no);
 	public void reset();
 	public boolean update(NoticeDTO dto);
+	public List<NoticeDTO> getPrevAndNextPost(Long notice_no);
 	
 	public List<NoticeAttachDTO> getNoticeAttachList(Long notice_no);
 	

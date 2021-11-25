@@ -13,9 +13,9 @@ public interface NoticeMapper {
 	public void updateViews(Long notice_no);
 	public void insert(NoticeDTO dto);
 	public void delete(Long notice_no);
-	public boolean update(NoticeDTO dto);
 	public void reset();
-	
+	public boolean update(NoticeDTO dto);
+	public List<NoticeDTO> getPrevAndNextPost(Long notice_no);
 	
 	
 	

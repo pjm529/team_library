@@ -40,6 +40,11 @@ public class NoticeServiceImpl implements NoticeService {
 	}
 	
 	@Override
+	public List<NoticeDTO> getPrevAndNextPost(Long notice_no) {
+		return mapper.getPrevAndNextPost(notice_no);
+	}
+	
+	@Override
 	public void updateNoticeViews(Long notice_no) {
 		mapper.updateViews(notice_no);
 	}
@@ -114,6 +119,8 @@ public class NoticeServiceImpl implements NoticeService {
 		attachMapper.deleteAllByNotice_no(notice_no);
 		mapper.delete(notice_no);
 	}
+
+	
 	
 
 }

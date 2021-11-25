@@ -60,8 +60,11 @@ public class NoticeController {
 		noticeService.updateNoticeViews(notice_no);
 
 		NoticeDTO noticeContent = noticeService.noticeContent(notice_no);
+		List<NoticeDTO> posts = noticeService.getPrevAndNextPost(notice_no);
+		
 		model.addAttribute("noticeContent", noticeContent);
 		model.addAttribute("cri", cri);
+		model.addAttribute("posts", posts);
 
 		return "/board/sub1/noticeContent";
 	}

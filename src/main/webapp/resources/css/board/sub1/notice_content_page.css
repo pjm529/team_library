@@ -280,14 +280,57 @@ table input{
 }
 
 .attached_file_name:hover{
-	color: #6b9cf8;
+	color: #677dfc;
+}
+
+.attached_image_icon{
+	width: 20px;
+	vertical-align: middle;
 }
 
 .attached_file_icon{
-	width: 25px;
-	height: 25px;
+	width: 21px;
+	height: 22px;
 	vertical-align: middle;
 }
+
+
+/* 이전글, 다음글 */
+.bbs-posts{
+	border-top: none;
+    border-bottom: 2px solid #ccc;
+    /* padding: 8px 10px; */
+    line-height: 35px;
+}
+
+.bbs-posts td{
+	border: none;
+	border-top: 1px solid #dee1e7;
+}
+
+.angle{
+	width: 10px;
+	vertical-align: middle;
+	margin-right: 3px;
+}
+
+.posts_title{
+	width: 630px;
+}
+
+.prev, .next{
+	width: 120px;
+	text-align: center;
+}
+
+.posts_title{
+	padding-left: 20px;
+}
+
+.posts_title a:hover {
+	color: #677dfc;
+}
+
 
 
 

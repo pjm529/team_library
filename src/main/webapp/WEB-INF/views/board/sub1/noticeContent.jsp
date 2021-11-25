@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <%@ page session="false" %>
 <html>
 <head>
@@ -113,11 +114,13 @@
 															</ul>
 														</div>
 														
-														<div class="downloadAreaTitle">첨부파일</div>
-														<div class="downloadArea">
-															<ul>
-															
-															</ul>
+														<div class="downloadAreaWrap">
+															<div class="downloadAreaTitle">첨부파일</div>
+															<div class="downloadArea">
+																<ul>
+																
+																</ul>
+															</div>
 														</div>
 													</div>
 													
@@ -127,6 +130,55 @@
                                     </tbody>
 
                                 </table>
+                                
+                                <table class="bbs-posts">
+									<tr class="board-prev">
+										<td class="prev" style="border-right: 1px solid #dee1e7"><img src="/resources/imges/board/sub1/angle_up.png" class="angle"> 이전글</td>
+										<%-- <c:forEach var="posts" items="${posts}" begin="0" end="0">
+											<td class="posts_title"><a href="/board/noticeContent?notice_no=${posts.notice_no}">${posts.notice_title}</a></td>
+											<td class="posts_writer">${posts.writer_name}</td>
+										</c:forEach>
+										 --%>
+										 
+										 <c:choose>
+										 	<c:when test="${posts[0].notice_no > noticeContent.notice_no}">
+										 		<td class="posts_title">이전글이 없습니다.</td>
+												<td class="posts_writer"></td>
+										 	</c:when>
+										 	
+										 	<c:otherwise>
+										 		<td class="posts_title"><a href="/board/noticeContent?notice_no=${posts[0].notice_no}">${posts[0].notice_title}</a></td>
+												<td class="posts_writer">${posts[0].writer_name}</td>
+										 	</c:otherwise>
+										 </c:choose>
+										 
+									</tr>
+									
+									<tr class="board-next">
+										<td class="next" style="border-right: 1px solid #dee1e7;"><img src="/resources/imges/board/sub1/angle_down.png" class="angle"> 다음글</td>
+										
+										<c:choose>
+											<c:when test="${posts[0].notice_no > noticeContent.notice_no}">
+										 		<td class="posts_title"><a href="/board/noticeContent?notice_no=${posts[0].notice_no}">${posts[0].notice_title}</a></td>
+												<td class="posts_writer">${posts[0].writer_name}</td>
+										 	</c:when>
+										
+											<c:otherwise>
+												<c:if test="${posts[1] == null}">
+												<%-- <c:if test="${fn:length(posts) == 1}"> --%>
+													<td class="posts_title">다음글이 없습니다.</td>
+													<td class="posts_writer"></td>
+												</c:if>
+												<c:if test="${posts[1] != null}">
+													<td class="posts_title"><a href="/board/noticeContent?notice_no=${posts[1].notice_no}">${posts[1].notice_title}</a></td>
+													<td class="posts_writer">${posts[1].writer_name}</td>
+												</c:if>
+											</c:otherwise>
+										</c:choose>
+										
+									</tr>
+								</table>
+								
 
                                 <!-- 글쓰기 btn -->
                                 <div class="list_wrap">
@@ -211,6 +263,8 @@
 
 
 	(function(){
+		
+		$(".downloadAreaWrap").hide();
 	 
 		var notice_no = $("#notice_no").val();
 		
@@ -232,38 +286,40 @@
 					$("input[name='thumb']").attr('value', thumbName);
 					
 					str += "<img width='500px' src='/displayFiles?file_name=" + fileCallPath + "'>";
+					str2 += "<li data-path='" + attach.upload_path + "' data-uuid='" + attach.uuid + "' data-filename='" + attach.file_name + "' data-type='" + attach.file_type + "' ><div>";
+					str2 += "<span><a href='#' class='attached_file_name'><img src='/resources/fileImage/image_icon.png' class='attached_image_icon'> " + attach.file_name + "</a></span><br/>";
+					str2 += "</div>";
+					str2 + "</li>";
 					
-					/* str2 += "<li data-path='" + attach.upload_path + "' data-uuid='" + attach.uuid + "' data-filename='" + attach.file_name + "' data-type='" + attach.file_type + "' ><div>";
+				}else{
+					str2 += "<li data-path='" + attach.upload_path + "' data-uuid='" + attach.uuid + "' data-filename='" + attach.file_name + "' data-type='" + attach.file_type + "' ><div>";
 					str2 += "<span><a href='#' class='attached_file_name'><img src='/resources/fileImage/file_icon.png' class='attached_file_icon'> " + attach.file_name + "</a></span><br/>";
 					str2 += "</div>";
-					str2 + "</li>";  */
-					
+					str2 + "</li>";
 				}
-					
-				str2 += "<li data-path='" + attach.upload_path + "' data-uuid='" + attach.uuid + "' data-filename='" + attach.file_name + "' data-type='" + attach.file_type + "' ><div>";
-				str2 += "<span><a href='#' class='attached_file_name'><img src='/resources/fileImage/file_icon.png' class='attached_file_icon'> " + attach.file_name + "</a></span><br/>";
-				str2 += "</div>";
-				str2 + "</li>";
+				
 				
 			});
 			$(".uploadResult ul").html(str);
 			$(".downloadArea ul").html(str2);
+			
+			if($(".downloadArea li").length){
+				$(".downloadAreaWrap").show();
+			}
 		   
 		});//end getjson
 		
 	})();//end function
 	
 		
-	$(".downloadArea").on("click", "li", function(e){
+	$(".downloadArea").on("click", "li a", function(e){
 		e.preventDefault();
 		     
 		console.log("view image");
 		
-		var liObj = $(this);
+		var liObj = $(this).closest("li");
 		
 		var path = encodeURIComponent(liObj.data("path") + "/" + liObj.data("uuid") + "_" + liObj.data("filename"));
-		
-		alert(liObj.data("filename"));
 		
 		self.location ="/downloadNoticeFile?file_name=" + path;
 		
