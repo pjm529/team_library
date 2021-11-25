@@ -276,3 +276,28 @@ table input{
   /*  list-style: none;
    float: left; */
 }
+
+/* 이전글, 다음글 테이블 */
+.article-board {
+    margin: 45px 0;
+    border: none;
+   	border-top: 2px solid #ccc;
+   	border-bottom: 2px solid #ccc;
+   	height: 90px; 
+}
+
+.article-board tbody td{
+	padding: 4px 10px;
+	
+}
+
+.article-board td.first {
+    text-align: center;
+    word-break: keep-all;
+}
+
+td.td3{	
+	border-right: none;
+	text-align: center;
+	
+} 

@@ -92,7 +92,7 @@
                                            <tr>
 	                                           	<td colspan="4">                                      	
 													<div class="uploadDiv">
-														 <input type="file" name="uploadFile" multiple>
+														 <input type="file" name="uploadFile" id="uploadFile" multiple>
 														 <input type="hidden" name="uuid" id="uuid">
 													</div>
 													
@@ -300,9 +300,9 @@ $(document).ready(function(e){
 		      dataType:'text',
 		      type: 'POST',
 		      success: function(result){
-		        
-		           
-		           targetLi.remove();
+      				
+		    	  targetLi.remove();
+		           $("#uploadFile").val("");
 		           
 		         }
 		    }); //$.ajax

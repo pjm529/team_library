@@ -34,9 +34,9 @@ p {
 	font-weight: normal;
 	color: #464646;
 	}
-#default_file_icon{
-background-image: url(/resources/fileImage/text.png);
-}	
+
+
+
 </style>
 </head>
 <body>
@@ -139,8 +139,8 @@ background-image: url(/resources/fileImage/text.png);
                                 	<tbody>
                                 		<tr class="board-prev first">
                                 			<td class="first td1">
-                                				<i class="fa fa-angle-up"></i>	
-                                				<span>이전글</span>
+                                				<div class="fa-angle-up"></div>	
+                                				<span><img src="/resources/imges/board/sub4/angle_up.png" width=15px; height=15px; style="float: left;"/>이전글</span>
                                 			</td>
 											
 											
@@ -156,16 +156,14 @@ background-image: url(/resources/fileImage/text.png);
 	                                			</td>
 	                                			<td class="td3">관리자</td>
                                 			</c:if>
-                                			
-                                			
-                                			
+                                				
                                 			
                                 		</tr>
                                 		
                                 		<tr class="board-next">
                                 			<td class="first td1">
-                                				<i class="fa fa-angle-down"></i>
-                                				<span>다음글</span>
+                                				<i class="fa-angle-down"></i>
+                                				<span><img src="/resources/imges/board/sub4/angle_down.png" width=15px; height=15px; style="float:left;"/>다음글</span>
                                 			</td>
                                 			
                                 			<c:if test="${dtoNext.article_no == null}">
