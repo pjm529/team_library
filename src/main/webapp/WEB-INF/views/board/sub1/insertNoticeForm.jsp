@@ -91,7 +91,7 @@
                                             <tr>
                                             	<td colspan="4">
                                             		<div class="uploadDiv">
-				                                        <input type="file" name="uploadNoticeFile" multiple>
+				                                        <input type="file" name="uploadNoticeFile" id="uploadNoticeFile" multiple>
 				                                        <input type="hidden" name="uuid" id="uuid">
 				                                    </div>
 				                                    
@@ -294,10 +294,11 @@
 			uploadUL.append(str);
 		}
 		
-		var cloneObj = $(".uploadDIV");
-			      
+		
 		/* x버튼 눌렀을 때 첨부파일 화면에서 사라짐 */
 		$(".uploadResult").on("click", "button", function(e){
+			
+			
 		    
 			var uuid = $("#uuid").val();
 			
@@ -315,13 +316,10 @@
 				type: 'POST',
 				success: function(result){
 					targetLi.remove();
-					$(".uploadDIV").html(cloneObj.html());
+					$("#uploadNoticeFile").val("");
 				}
 			}); //$.ajax
 		});
-		
-		
-		
 		
 		
 		
