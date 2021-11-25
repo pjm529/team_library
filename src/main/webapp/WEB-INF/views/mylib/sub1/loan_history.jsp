@@ -118,9 +118,8 @@
                                 <table>
                                     <thead>
                                         <tr>
-                                            <th style="width: 100px;">아이디</th>
                                             <th style="">도서명</th>
-                                            <th style="">ISBN</th>
+                                            <th style="">저자</th>
                                             <th style="width: 90px;">대출날짜</th>
                                             <th style="width: 90px">반납날짜</th>
                                             <th style="width: 90px">반납예정일</th>
@@ -130,9 +129,8 @@
                                     
 	                                    <c:forEach var="loan_history" items="${loan_history}">
 										<tr>
-											<td>${loan_history.user_id }</td>
 											<td>${loan_history.book_title }</td> 
-											<td>${loan_history.book_isbn}</td>
+											<td>${loan_history.book_author}</td>
 											<td>${loan_history.loan_date }</td>
 											<td>${loan_history.return_date }</td>
 											<td>${loan_history.return_period }</td>
