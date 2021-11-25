@@ -114,6 +114,7 @@
 
                             <!-- 테이블 -->
                             <div class="table-wrap">
+                            	<c:if test="${not empty loan_history }">
                                 <table>
                                     <thead>
                                         <tr>
@@ -157,10 +158,15 @@
 										<a class="not" href="${pageMaker.endPage + 1}">다음</a>
 									</c:if>
 								</div>
+								</c:if>
+								
                             </div>
-
+                            
                         </div>
-
+						<br>
+                        <c:if test="${empty loan_history }">
+							<h2>조회된 도서가 없습니다.</h2>
+						</c:if>
                     </div>
 
                 </div>
