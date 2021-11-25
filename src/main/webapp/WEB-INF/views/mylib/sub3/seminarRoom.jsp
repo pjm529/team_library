@@ -42,8 +42,9 @@
                 <!-- 본문 -->
                 <div class="content">
                     <div class="doc">
+                        <!-- seminarRoom 이용 안내 -->
+                        <h2><u>세미나실 이용 안내</u></h2>
                         <div class=" service-wrap">
-                            <h2>세미나실</h2>
                             <div class="service-info">
                                 <h3 style="margin-top: 10px;">이용시간</h3>
                                 <ul class="con">
@@ -72,13 +73,10 @@
                                     <li>학습이외의 용도 사용 및 유의사항 위반 시 퇴실조치 합니다.</li>
                                     <li>다음 이용자를 위하여 깨끗이 정리, 정돈해 주십시오.</li>
                                 </ul>
-
                             </div>
-
-                            <button class="go-btn">예약하기</button>
-                            <input id="nowDate" type="hidden" value="${nowDate}">
-
                         </div>
+                        
+                        
                     </div>
                 </div>
             </div>
