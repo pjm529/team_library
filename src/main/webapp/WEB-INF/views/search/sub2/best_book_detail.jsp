@@ -5,7 +5,7 @@
 <%@ page session="false" %>
 <html>
 <head>
-	<title>라온도서관 > 자료검색 > 도서검색</title>
+	<title>라온도서관 > 자료검색 > 대출베스트</title>
 </head>
 <link rel="stylesheet" href="/resources/css/search/book_detail.css">
 <link rel="stylesheet" href="/resources/css/footer.css">
@@ -26,7 +26,7 @@
                         <!-- 홈 btn img -->
                         <li class="first" style="background-image: none;">
                             <a href="/search/book">
-                                <img src="/resources/imges/search/navi_home_icon.gif">
+                                <img src="/resources/imges/common/navi_home_icon.gif">
                             </a>
                         </li>
                         <li>
@@ -147,32 +147,6 @@
         
     </div>
      
-    <div class="pageInfo" style="text-align: center">
-		
-			<c:if test="${pageMaker.prev }">
-				<a href="${pageMaker.startPage - 1}">이전</a>
-			</c:if>
-			
-			<c:forEach var="num" begin="${pageMaker.startPage }" end="${pageMaker.endPage }">
-			
-				<c:if test="${num != 0}">
-					<a href="${num }">${num }</a>
-				</c:if>
-				
-			</c:forEach>
-			
-			<c:if test="${pageMaker.next }">
-				<a href="${pageMaker.endPage + 1}">다음</a>
-			</c:if>
-		</div>
-	
-	
-	<form method="get" class="moveForm"> 
-		<input type="hidden" name="amount" value="${pageMaker.cri.amount }">
-		<input type="hidden" name="page" value="${pageMaker.cri.page }">
-		<input type="hidden" name="type" value="${pageMaker.cri.type }">
-		<input type="hidden" name="keyword" value="${pageMaker.cri.keyword }">
-	</form>
 	
 	<!-- footer -->
 	<jsp:include page="../../footer.jsp"></jsp:include>
@@ -191,29 +165,33 @@
 					location.href="/member/login";
 				} else {
 					
-					let data = {
-	           				book_isbn: book_isbn
-	           		};
+					if (confirm("도서를 대출하시겠습니까?")) {
+						let data = {
+		           				book_isbn: book_isbn
+		           		};
+						
+						$.ajax({
+		           			type: "post",
+		           			url: "/search/statusChk",
+		           			data: data,
+		           			success: function(result) {
+		           				
+		           				if (result == "success") {
+		           					alert("대출이 완료되었습니다.");
+		           					$("#loan").attr("action", "/search/loan?detail=true");
+		           					$("#loan").attr("onsubmit", "return true;");
+		           					$("#loan").submit();
+		       						
+		           				} else if (result == "loan"){
+		           					alert("이미 대출 중인 도서입니다.");
+		           				} else {
+		           					alert("대출이 불가능한 상태입니다.");
+		           				}
+		           			}
+		           		});
+						
+					}
 					
-					$.ajax({
-	           			type: "post",
-	           			url: "/search/statusChk",
-	           			data: data,
-	           			success: function(result) {
-	           				
-	           				if (result == "success") {
-	           					alert("대출이 완료되었습니다.");
-	           					$("#loan").attr("action", "/search/loan?detail=true");
-	           					$("#loan").attr("onsubmit", "return true;");
-	           					$("#loan").submit();
-	       						
-	           				} else if (result == "loan"){
-	           					alert("이미 대출 중인 도서입니다.");
-	           				} else {
-	           					alert("대출이 불가능한 상태입니다.");
-	           				}
-	           			}
-	           		});
 					
 				}
 					

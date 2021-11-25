@@ -5,7 +5,7 @@
 <%@ taglib uri="http://www.springframework.org/security/tags" prefix="sec" %>
 <html>
 <head>
-	<title>라온도서관 > 자료검색 > 도서검색</title>
+	<title>라온도서관 > 자료검색 > 추천도서</title>
 </head>
 <link rel="stylesheet" href="/resources/css/search/book_detail.css">
 <link rel="stylesheet" href="/resources/css/footer.css">
@@ -21,7 +21,7 @@
             <div class="doc-info">
                 <!-- doc title -->
                 <div class="doc-title">
-                    <h3>도서검색</h3>
+                    <h3>추천도서</h3>
                     <ul>
                         <!-- 홈 btn img -->
                         <li class="first" style="background-image: none;">
@@ -33,7 +33,7 @@
                             <a href="/search/book">자료검색</a>
                         </li>
                         <li>
-                            <a href="/search/book">도서검색</a>
+                            <a href="/search/recommend-book">추천도서</a>
                         </li>
                     </ul>
 
@@ -115,11 +115,10 @@
 
                         <span>　</span>
 
-                        <form action="/search/book">
-                        	<input type="hidden" name="amount" value="${cri.amount }">
+                        <form action="/search/recommend-book">
+                        	<input type="hidden" name="year" value="${year}">
+                        	<input type="hidden" name="month" value="${month}">
 							<input type="hidden" name="page" value="${cri.page }">
-							<input type="hidden" name="type" value="${cri.type }">
-							<input type="hidden" name="keyword" value="${cri.keyword }">
                             <button class="btn3" style="display: flex; justify-content: center; align-items: center;">
                                 <img src="/resources/imges/search/book_icon.png" style="width: 30px;">　목록
                             </button>
@@ -141,15 +140,14 @@
         </div>
 
     </div>
- 
-	
+    
 	<!-- footer -->
 	<jsp:include page="../../footer.jsp"></jsp:include>
 	
 	<script>
 	
 		$(function() {
-			$(".sub1").addClass("active");
+			$(".sub3").addClass("active");
 			 
 			$("#loan_btn").click(function() {
 				
@@ -162,7 +160,6 @@
 				} else {
 					
 					if (confirm("도서를 대출하시겠습니까?")) {
-					
 						let data = {
 		           				book_isbn: book_isbn
 		           		};
@@ -186,9 +183,8 @@
 		           				}
 		           			}
 		           		});
-					
+						
 					}
-					
 					
 				} 
 					

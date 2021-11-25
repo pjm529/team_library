@@ -5,7 +5,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>라온도서관 > 회원관련 > 로그인<</title>
+<title>라온도서관 > 회원관련 > 로그인</title>
 <link rel="stylesheet" href="/resources/css/member/login.css">
 <link rel="stylesheet" href="/resources/css/footer.css">
 <script src="https://code.jquery.com/jquery-3.6.0.js" 
@@ -34,7 +34,7 @@
                         <!-- 홈 btn img -->
                         <li class="first" style="background-image: none;">
                             <a href="#">
-                                <img src="/resources/imges/member/navi_home_icon.gif">
+                                <img src="/resources/imges/common/navi_home_icon.gif">
                             </a>
                         </li>
                         <li>

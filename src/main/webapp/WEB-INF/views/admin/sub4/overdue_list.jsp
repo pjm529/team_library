@@ -5,7 +5,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>라온도서관 > 관리자 > 연체내역</title>
+<title>라온도서관 > 관리자 > 연체중도서</title>
 <link rel="stylesheet" href="/resources/css/admin/member_list.css">
 <link rel="stylesheet" href="/resources/css/footer.css">
 <script src="https://code.jquery.com/jquery-3.6.0.js" 
@@ -24,7 +24,7 @@
                         <!-- 홈 btn img -->
                         <li class="first" style="background-image: none;">
                             <a href="#">
-                                <img src="/resources/imges/admin/navi_home_icon.gif">
+                                <img src="/resources/imges/common/navi_home_icon.gif">
                             </a>
                         </li> 
                         <li>
