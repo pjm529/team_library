@@ -7,7 +7,7 @@
     <ul class="subMenu">
     
     	<li class="sub1">
-    	 	<a href="#">도서 관련</a>
+    	 	<a href="#">도서관련</a>
     	</li>
         <li class="sub2">
             <a href="#">희망도서신청</a>
@@ -30,7 +30,7 @@
                </li>
                
                <li class="submenu4">
-                   <a href="/mylib/modify_pw">비밀번호변경</a>
+                   <a href="/mylib/modify-pw">비밀번호변경</a>
                </li>
 
                <li class="submenu5">
