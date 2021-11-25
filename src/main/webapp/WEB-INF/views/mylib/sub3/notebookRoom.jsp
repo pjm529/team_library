@@ -39,7 +39,7 @@
                             <a href="#">나의 도서관</a>
                         </li>
                         <li>
-                            <a href="/mylib/sub3MainPage">좌석예약/조회</a>
+                            <a href="/mylib/ReservationRoomPage">좌석예약/조회</a>
                         </li>
                     </ul>
 
