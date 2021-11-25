@@ -60,7 +60,7 @@
                                         <!-- 작성자 | 작성일 | 조회수 -->
                                          <tr>
                                             <th class="first">작성자</th>
-                                            <td style="width: 15%;">${dto.a_writer_id}</td>
+                                            <td style="width: 15%;">${dto.a_writer_name}</td>
                                             <th class="first">작성일</th>
                                             <td>${fn:substring(dto.answer_reg_date, 0, 11)}</td>
                                             <th class="first">조회수</th>

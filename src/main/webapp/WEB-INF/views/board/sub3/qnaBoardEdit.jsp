@@ -69,7 +69,7 @@
                                             </tr>
                                             <tr>
                                                 <th class="first">작성자</th>
-                                                <td>${dto.writer_id}</td>
+                                                <td>${dto.writer_name}</td>
                                                 <th class="first">작성일</th>
                                                 <td>
                                                 ${fn:substring(dto.enquiry_reg_date, 0, 11)}
