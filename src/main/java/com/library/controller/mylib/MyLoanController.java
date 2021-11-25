@@ -1,5 +1,7 @@
 package com.library.controller.mylib;
 
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
@@ -13,8 +15,6 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.library.model.search.BookDTO;
-import com.library.page.Criteria;
-import com.library.page.ViewPage;
 import com.library.service.mylib.MyLoanService;
 
 @Controller
@@ -59,7 +59,7 @@ public class MyLoanController {
 		// 대출 연체 권수
 		int overdue_count = myLoanService.get_overdue(id);
 		model.addAttribute("overdue_count", overdue_count);
-		
+
 		// 회원 대출 정지일
 		int overdue_date = myLoanService.get_overdue_date(id);
 
@@ -74,40 +74,20 @@ public class MyLoanController {
 	}
 
 	public String date(int overdue_date) {
-		Date now = new Date();
-		Calendar cal = Calendar.getInstance();
 
-		cal.setTime(now);
+		// 현재시간
+		Calendar now = Calendar.getInstance();
 
-		int year = cal.get(Calendar.YEAR);
-		int month = cal.get(Calendar.MONTH) + 1;
-		int day = cal.get(Calendar.DAY_OF_MONTH);
+		now.setTime(new Date());
 
-		// 오늘 날짜가 2월일 경우
-		if (month == 2) {
+		// 현재날짜에 연체일 더하기
+		now.add(Calendar.DATE, overdue_date);
 
-			year += overdue_date / 365;
-			month += (overdue_date % 365) / 28;
-			day += (overdue_date % 365) % 28;
-
-			// 오늘 날짜가 1, 3, 5, 7, 8, 10, 12 월일 경우
-		} else if (month == 1 || month == 3 || month == 5 || month == 7 || month == 8 || month == 10 || month == 12) {
-
-			year += overdue_date / 365;
-			month += (overdue_date % 365) / 31;
-			day += (overdue_date % 365) % 31;
-
-			// 오늘 날짜가 4, 6, 9, 11월 일경우
-		} else {
-
-			year += overdue_date / 365;
-			month += (overdue_date % 365) / 30;
-			day += (overdue_date % 365) % 30;
-
-		}
+		// date형식을 yyyy-MM-dd로 설정
+		DateFormat df = new SimpleDateFormat("yyyy-MM-dd");
 
 		// 대출 정지 만기일
-		String date = year + "-" + month + "-" + day;
+		String date = df.format(now.getTime());
 
 		return date;
 	}
