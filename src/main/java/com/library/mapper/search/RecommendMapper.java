@@ -1,0 +1,18 @@
+package com.library.mapper.search;
+
+import java.util.List;
+
+import org.apache.ibatis.annotations.Param;
+
+import com.library.model.search.BookDTO;
+import com.library.model.search.DateDTO;
+import com.library.page.Criteria;
+
+public interface RecommendMapper {
+
+	// 추천 도서 리스트
+	public List<BookDTO> recommend_list(@Param("cri") Criteria cri, @Param("date") DateDTO date);
+
+	// 추천 도서 수
+	public int get_total(DateDTO date);
+}
