@@ -229,16 +229,18 @@
     <script src="https://code.jquery.com/jquery-3.6.0.js"
     integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk=" crossorigin="anonymous"></script>
     
+    <script src="/resources/js/mylib/sub3/select.js"></script>
+    
     
     <script>
     
     $(function() {
 		$(".sub3").addClass("active");
 		
-		$(".go-btn").on("click", function() {
+/* 		$(".go-btn").on("click", function() {
 			var nowDate = $('#nowDate').val();
 			location.href = "/mylib/seminarRoom?nowDate=" + nowDate;
-		});
+		}); */
 	});
     
     </script>
