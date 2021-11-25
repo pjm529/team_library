@@ -8,7 +8,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-	<link rel="stylesheet" href="/resources/css/mylib/sub3/sub3_main_page.css">
+	<link rel="stylesheet" href="/resources/css/mylib/sub3/ReservationRoomPage.css">
 	<link rel="stylesheet" href="/resources/css/mylib/sub3/calendar.css">
 
 
@@ -34,7 +34,7 @@
                             <a href="#">나의 도서관</a>
                         </li>
                         <li>
-                            <a href="#">좌석예약/조회</a>
+                            <a href="/mylib/ReservationRoomPage">좌석예약/조회</a>
                         </li>
                     </ul>
 
@@ -167,7 +167,7 @@
     <script src="https://code.jquery.com/jquery-3.6.0.js"
         integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk=" crossorigin="anonymous"></script>
 
-    <script src="/resources/js/mylib/sub3/sub3_main_page.js"></script>
+    <script src="/resources/js/mylib/sub3/ReservationRoomPage.js"></script>
 
 
 
