@@ -77,6 +77,148 @@
                         </div>
                         
                         
+                        
+                        <!-- 날짜 부분 -->
+                        <div class="wrap-seminarRoomBox">
+                            <div class="nowDate-btn">
+                                <h2>2021-11-24 ~ 2021-11-31</h2>
+                                <button>&lt;</button>
+                                <button class="today">Today</button>
+                                <button>&gt;</button>
+                            </div>
+                        </div>
+
+                        <!-- 세미나룸 시간대 | 예약하기 btn -->
+                        <div class="select-box">
+                            <span id="smName">세미나룸 1</span>
+                            <select id="allTime" name="allTime"></select>
+                            <select id="time" name="time" style="display: none;">
+                            </select>
+                            <button id="smBooking">예약하기</button>
+                        </div>
+
+                        <!-- 세미나실 예약 현황 -->
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th rowspan="2"></th>
+                                    <th class="nowDate" colspan="9">2021-11-24</th>
+                                </tr>
+                                <tr>
+                                    <th>
+                                        <span>09:00</span>
+                                    </th>
+                                    <th>
+                                        <span>10:00</span>
+                                    </th>
+                                    <th>
+                                        <span>11:00</span>
+                                    </th>
+                                    <th>
+                                        <span>12:00</span>
+                                    </th>
+                                    <th>
+                                        <span>13:00</span>
+                                    </th>
+                                    <th>
+                                        <span>14:00</span>
+                                    </th>
+                                    <th>
+                                        <span>15:00</span>
+                                    </th>
+                                    <th>
+                                        <span>16:00</span>
+                                    </th>
+                                    <th>
+                                        <span>17:00</span>
+                                    </th>
+                                </tr>
+                            </thead>
+
+                            <tbody>
+                                <tr>
+                                    <th>
+                                        <button class="smName_btn" value="세미나룸 1">세미나룸1</button>
+                                        <b>정원(4)</b>
+                                    </th>
+                                    <td>
+                                        <!-- <div></div> -->
+                                    </td>
+                                    <td>
+                                        <!-- <div></div> -->
+                                    </td>
+                                    <td></td>
+                                    <td></td>
+                                    <td></td>
+                                    <td></td>
+                                    <td></td>
+                                    <td></td>
+                                    <td></td>
+                                </tr>
+                                <tr>
+                                    <th>
+                                        <button class="smName_btn" value="세미나룸 2">세미나룸2</button>
+                                        <b>정원(4)</b>
+                                    </th>
+                                    <td></td>
+                                    <td>
+                                        <!-- <div></div> -->
+                                    </td>
+                                    <td>
+                                        <!-- <div></div> -->
+                                    </td>
+                                    <td></td>
+                                    <td></td>
+                                    <td></td>
+                                    <td></td>
+                                    <td></td>
+                                    <td></td>
+                                </tr>
+                                <tr>
+                                    <th>
+                                        <button class="smName_btn" value="세미나룸 3">세미나룸3</button>
+                                        <b>정원(8)</b>
+                                    </th>
+                                    <td></td>
+                                    <td></td>
+                                    <td></td>
+                                    <td></td>
+                                    <td></td>
+                                    <td></td>
+                                    <td></td>
+                                    <td></td>
+                                    <td></td>
+                                </tr>
+                                <tr>
+                                    <th>
+                                        <button class="smName_btn" value="세미나룸 4">세미나룸4</button>
+                                        <b>정원(12)</b>
+                                    </th>
+                                    <td></td>
+                                    <td></td>
+                                    <td></td>
+                                    <td></td>
+                                    <td></td>
+                                    <td></td>
+                                    <td></td>
+                                    <td></td>
+                                    <td></td>
+                                </tr>
+                            </tbody>
+
+                            <tfoot>
+                                <tr>
+                                    <td colspan="10">
+                                        <span>
+                                            &#8251; 1일 1회 최대 3시간 이용 가능(1시간 단위 예약)
+                                        </span>
+                                    </td>
+                                </tr>
+                            </tfoot>
+
+
+                        </table>
+                        
                     </div>
                 </div>
             </div>
