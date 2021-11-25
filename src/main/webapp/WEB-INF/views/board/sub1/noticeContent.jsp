@@ -285,16 +285,16 @@
 					$("input[name='uuid']").attr('value', uuidName);
 					$("input[name='thumb']").attr('value', thumbName);
 					
-					str += "<img src='/displayFiles?file_name=" + fileCallPath + "' style='max-width: 100%; max-height: 100%;'>";
+					str += "<img src='/displayFiles?file_name=" + fileCallPath + "' style='max-width: 100%; max-height: 100%;'><br>";
 					
 					str2 += "<li data-path='" + attach.upload_path + "' data-uuid='" + attach.uuid + "' data-filename='" + attach.file_name + "' data-type='" + attach.file_type + "' ><div>";
-					str2 += "<span><a href='#' class='attached_file_name'><img src='/resources/fileImage/image_icon.png' class='attached_image_icon'> " + attach.file_name + "</a></span><br/>";
+					str2 += "<span><a href='#' class='attached_file_name'><img src='/resources/imges/board/sub1/image_icon.png' class='attached_image_icon'> " + attach.file_name + "</a></span><br/>";
 					str2 += "</div>";
 					str2 + "</li>";
 					
 				}else{
 					str2 += "<li data-path='" + attach.upload_path + "' data-uuid='" + attach.uuid + "' data-filename='" + attach.file_name + "' data-type='" + attach.file_type + "' ><div>";
-					str2 += "<span><a href='#' class='attached_file_name'><img src='/resources/fileImage/file_icon.png' class='attached_file_icon'> " + attach.file_name + "</a></span><br/>";
+					str2 += "<span><a href='#' class='attached_file_name'><img src='/resources/imges/board/sub1/file_icon.png' class='attached_file_icon'> " + attach.file_name + "</a></span><br/>";
 					str2 += "</div>";
 					str2 + "</li>";
 				}

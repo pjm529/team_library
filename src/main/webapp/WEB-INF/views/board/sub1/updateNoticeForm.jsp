@@ -191,7 +191,7 @@
 					     
 					    str += "<li data-path='" + attach.upload_path + "' data-uuid='" + attach.uuid + "' data-filename='" + attach.file_name + "' data-type='" + attach.file_type + "' >";
 					    str += "<div style='margin-top: 5px;'>";
-					    str += "<img src='/resources/fileImage/file_icon.png' width='20px' height='20px' style='vertical-align: middle;'></a>";
+					    str += "<img src='/resources/imges/board/sub1/file_icon.png' width='20px' height='20px' style='vertical-align: middle;'></a>";
 					    str += "<span> " + attach.file_name + " </span>";
 					    str += "<button type='button' data-file=\'" + fileCallPath + "\' data-type='image'>x</button><br>";
 						str += "</div>";
