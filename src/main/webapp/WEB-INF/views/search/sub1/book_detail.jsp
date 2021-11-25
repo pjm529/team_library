@@ -141,33 +141,7 @@
         </div>
 
     </div>
-    
-    <div class="pageInfo" style="text-align: center">
-		
-			<c:if test="${pageMaker.prev }">
-				<a href="${pageMaker.startPage - 1}">이전</a>
-			</c:if>
-			
-			<c:forEach var="num" begin="${pageMaker.startPage }" end="${pageMaker.endPage }">
-			
-				<c:if test="${num != 0}">
-					<a href="${num }">${num }</a>
-				</c:if>
-				
-			</c:forEach>
-			
-			<c:if test="${pageMaker.next }">
-				<a href="${pageMaker.endPage + 1}">다음</a>
-			</c:if>
-		</div>
-	
-	
-	<form method="get" class="moveForm"> 
-		<input type="hidden" name="amount" value="${pageMaker.cri.amount }">
-		<input type="hidden" name="page" value="${pageMaker.cri.page }">
-		<input type="hidden" name="type" value="${pageMaker.cri.type }">
-		<input type="hidden" name="keyword" value="${pageMaker.cri.keyword }">
-	</form>
+ 
 	
 	<!-- footer -->
 	<jsp:include page="../../footer.jsp"></jsp:include>
