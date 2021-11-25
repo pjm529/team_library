@@ -34,7 +34,7 @@
                         <!-- 홈 btn img -->
                         <li class="first" style="background-image: none;">
                             <a href="#">
-                                <img src="/resources/imges/member/navi_home_icon.gif">
+                                <img src="/resources/imges/common/navi_home_icon.gif">
                             </a>
                         </li>
                         <li>

@@ -26,7 +26,7 @@
                         <!-- 홈 btn img -->
                         <li class="first" style="background-image: none;">
                             <a href="/search/book">
-                                <img src="/resources/imges/search/navi_home_icon.gif">
+                                <img src="/resources/imges/common/navi_home_icon.gif">
                             </a>
                         </li>
                         <li>

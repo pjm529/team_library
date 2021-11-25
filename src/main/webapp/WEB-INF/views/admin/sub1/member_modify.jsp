@@ -26,7 +26,7 @@
                         <!-- 홈 btn img -->
                         <li class="" style="background-image: none;">
                             <a href="#">
-                                <img src="/resources/imges/admin/navi_home_icon.gif">
+                                <img src="/resources/imges/common/navi_home_icon.gif">
                             </a>
                         </li>
                         <li>
