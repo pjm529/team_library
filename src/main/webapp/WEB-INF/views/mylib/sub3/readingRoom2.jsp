@@ -54,17 +54,18 @@
                 <jsp:include page="../lnb.jsp"></jsp:include>
                     
                 <!-- 본문 -->
-                <div class="content">
+                    <div class="content">
                     <div class="doc">
 
                         <div class="room-list">
                             <div class="list-btn">
-                                <button onclick="#">제 1열람실</button>
-                                <button class="active" onclick="location.href='/mylib/readingRoom2'">제 2열람실</button>
-                                <button>노트북실</button>
+                                <button onclick="rbRoom();">제 1열람실</button>
+                                <button onclick="rbRoom2();">제 2열람실</button>
+                                <button class="active" onclick="nbRoom();">노트북실</button>
                                 <button>세미나실</button>
                             </div>
                         </div>
+
 
 
                         <div class=" seat-chart">
@@ -459,6 +460,21 @@
 		
 		
 	})
+	
+	function rbRoom(){
+            location.href = "/mylib/readingRoom";
+         }
+         
+         function rbRoom2(){
+            location.href = "/mylib/readingRoom2";
+         }
+         
+         function nbRoom(){
+            location.href = "/mylib/notebookRoom";
+         }
+         
+         
+
 	
 	});
  
