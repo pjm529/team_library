@@ -178,7 +178,7 @@
 					
 					$.ajax({
             			type: "post",
-            			url: "/mylib/modify_pw",
+            			url: "/mylib/modify-pw",
             			data: data,
             			success: function(result) {
             				

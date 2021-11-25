@@ -78,7 +78,7 @@ public class NotebookRoomController {
 	
 	
 	/* 좌석 자리 이동 */
-	@GetMapping("/moveSeat")
+	@GetMapping("/moveSeat123")
 	public String moveSeat(NoteBookRoomDTO dto, @RequestParam("newSeat_no") int newSeat_no) {
 		
 		nbService.nb_seat_return(dto);

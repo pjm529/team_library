@@ -54,5 +54,8 @@ public class BookDTO {
 
 	// 도서
 	private String description;
+	
+	// 연체일
+	private int overdue_date;
 
 }

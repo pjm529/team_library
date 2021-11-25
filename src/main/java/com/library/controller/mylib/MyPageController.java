@@ -147,14 +147,14 @@ public class MyPageController {
 
 	}
 
-	@GetMapping("/modify_pw")
+	@GetMapping("/modify-pw")
 	public String modifyPwGET() {
 
 		return "/mylib/sub5/modify_pw";
 	}
 
 	@ResponseBody
-	@PostMapping("/modify_pw")
+	@PostMapping("/modify-pw")
 	public String modifyPwPOST(String present_pw, String user_pw, HttpServletRequest request) {
 
 		HttpSession session = request.getSession();

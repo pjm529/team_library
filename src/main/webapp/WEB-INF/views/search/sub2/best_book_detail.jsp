@@ -207,6 +207,8 @@
 	           					$("#loan").attr("onsubmit", "return true;");
 	           					$("#loan").submit();
 	       						
+	           				} else if (result == "loan"){
+	           					alert("이미 대출 중인 도서입니다.");
 	           				} else {
 	           					alert("대출이 불가능한 상태입니다.");
 	           				}
