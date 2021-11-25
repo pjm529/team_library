@@ -3,7 +3,6 @@ package com.library.service.mylib;
 import java.util.List;
 
 import com.library.model.search.BookDTO;
-import com.library.page.Criteria;
 
 public interface MyLoanService {
 
@@ -12,5 +11,10 @@ public interface MyLoanService {
 
 	// 대출 수 출력
 	public int get_total(String user_id);
-	
+
+	// 대출 정지 일
+	public int get_overdue_date(String user_id);
+
+	// 연체 도서 수
+	public int get_overdue(String user_id);
 }

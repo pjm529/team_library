@@ -52,8 +52,30 @@
                         <div class="wrapper-bbs" style="">
 
                             <!-- 회원 수 -->
-                            <div class="inline">
-                            	<span style="margin-right: 10px;"> 대출 중 : <b>${total }</b> 건</span>
+                            <!-- <div class="inline">
+                            	<span style="margin-right: 10px;"> 건</span>
+                            </div> -->
+                            
+                            <div class="loan_box">
+                            	<ul>
+                            		<li>
+                            			<img src="/resources/imges/mylib/loan_icon01.png">
+                            			<h4 style="margin: 0">대출 중 권수</h4> 
+                            			<span>${total }</span>
+                            		</li>
+                            		
+                            		<li>
+                            			<img src="/resources/imges/mylib/loan_icon02.png">
+                            			<h4 style="margin: 0">대출 연체 권수</h4> 
+                            			<span>${overdue_count }</span>
+                            		</li>
+                            		
+                            		<li>
+                            			<img src="/resources/imges/mylib/loan_icon03.png">
+                            			<h4 style="margin: 0">대출 정지 만기일</h4>
+                            			<span>${overdue_date }</span>
+                            		</li>
+                            	</ul>
                             </div>
 
                             <!-- 테이블 -->

@@ -27,5 +27,16 @@ public class MyLoanServiceImpl implements MyLoanService {
 		return myLoanMapper.get_total(user_id);
 	}
 
+	// 대출 정지 일
+	@Override
+	public int get_overdue_date(String user_id) {
+		return myLoanMapper.get_overdue_date(user_id);
+	}
+
+	// 연체 도서 수
+	@Override
+	public int get_overdue(String user_id) {
+		return myLoanMapper.get_overdue(user_id);
+	}
 
 }
