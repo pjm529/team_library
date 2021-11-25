@@ -43,7 +43,7 @@
 
                 <!-- 본문 -->
                 <div class="content">
-                    <div class="doc" style="border: 1px solid brown;">
+                    <div class="doc">
 
                         <div class="room-list">
                             <div class="list-btn">

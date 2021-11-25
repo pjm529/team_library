@@ -20,6 +20,10 @@
 		select * from notice where notice_no = #{notice_no}
 	</select>
 	
+	<select id="getPrevAndNextPost" resultType="com.library.model.board.NoticeDTO">
+		select * from notice where notice_no in (#{notice_no}-1, #{notice_no}+1)
+	</select>
+	
 	<insert id="insert">
 		insert 
 		  into notice(notice_title, notice_content, writer_id, writer_name, notice_img) 

@@ -81,20 +81,16 @@
                                                 </td>
                                             </tr>
                                             <tr>
-                                            	<td>
-													<div class="panel-heading">첨부파일</div>
-													
-													<div class="panel-body">
-														<div class="form-group uploadDiv">
-															<input type="file" name='uploadNoticeFile' multiple="multiple">
-															<input type="hidden" name="uuid" id="uuid">
-														</div>
-															
-														<div class='uploadResult'> 
-															<ul>
-															    
-															</ul>
-														</div>
+                                            	<td colspan="4">
+													<div class="uploadDiv">
+														<input type="file" name='uploadNoticeFile' multiple="multiple">
+														<input type="hidden" name="uuid" id="uuid">
+													</div>
+														
+													<div class='uploadResult'> 
+														<ul>
+														    
+														</ul>
 													</div>
                                             	</td>
                                             </tr>
@@ -178,28 +174,54 @@
 				$(arr).each(function(i, attach){
 				 
 					//image type /* 기존 사진 */
+					
+					
 					if(attach.file_type){
 						var fileCallPath =  encodeURIComponent(attach.upload_path + "/s_" + attach.uuid + "_" + attach.file_name);
-						/* var uuidName = $("#uuid").val(attach.uuid + "_" + attach.file_name);
-						var thumbName = $("#thumb").val('s_' + attach.uuid + "_" + attach.file_name);
-						$("input[name='uuid']").attr('value', uuidName);
-						$("input[name='thumb']").attr('value', thumbName); */
+											    
+					    str += "<li data-path='" + attach.upload_path + "' data-uuid='" + attach.uuid + "' data-filename='" + attach.file_name + "' data-type='" + attach.file_type + "' >";
+					    str += "<div style='margin-top: 5px;'>";
+					    str += "<img src='/displayFiles?file_name=" + fileCallPath + "' width='20px' height='20px' style='vertical-align: middle;'>";
+					    str += "<span> " + attach.file_name + " </span>";
+					    str += "<button type='button' data-file=\'" + fileCallPath + "\' data-type='image'>x</button><br>";
+					    str += "</div>";
+					    str += "</li>";
 					    
+					}else{
+					     
+					    str += "<li data-path='" + attach.upload_path + "' data-uuid='" + attach.uuid + "' data-filename='" + attach.file_name + "' data-type='" + attach.file_type + "' >";
+					    str += "<div style='margin-top: 5px;'>";
+					    str += "<img src='/resources/fileImage/file_icon.png' width='20px' height='20px' style='vertical-align: middle;'></a>";
+					    str += "<span> " + attach.file_name + " </span>";
+					    str += "<button type='button' data-file=\'" + fileCallPath + "\' data-type='image'>x</button><br>";
+						str += "</div>";
+					    str += "</li>";
+					}
+					
+					
+					/* if(attach.file_type){
+						var fileCallPath =  encodeURIComponent(attach.upload_path + "/s_" + attach.uuid + "_" + attach.file_name);
+											    
 					    str += "<li data-path='" + attach.upload_path + "' data-uuid='" + attach.uuid + "' data-filename='" + attach.file_name + "' data-type='" + attach.file_type + "' ><div>";
-					    str += "<button type='button' data-file=\'" + fileCallPath + "\' data-type='image'>삭제x</button><br>";
-					    str += "<img src='/displayFiles?file_name=" + fileCallPath + "'>";
+					    str += "<img src='/displayFiles?file_name=" + fileCallPath + "' width='25px' height='25px' style='vertical-align: middle;'>";
+					    str += "<span> " + attach.file_name + " </span>";
+					    str += "<button type='button' data-file=\'" + fileCallPath + "\' data-type='image'>x</button><br>";
 					    str += "</div>";
 					    str + "</li>";
 					    
-					  }else{
+					}else{
 					     
 					    str += "<li data-path='" + attach.upload_path + "' data-uuid='" + attach.uuid + "' data-filename='" + attach.file_name + "' data-type='" + attach.file_type + "' ><div>";
-					    str += "<button type='button' data-file=\'" + fileCallPath + "\' data-type='image'>삭제x</button><br>";
-					    str += "<span> " + attach.file_name + "</span><br/>";
-					    str += "<img src='/resources/fileImage/default.png'></a>";
-					    str += "</div>";
+					    str += "<img src='/resources/fileImage/file_icon.png' width='25px' height='25px' style='vertical-align: middle;'></a>";
+					    str += "<span> " + attach.file_name + " </span><br/>";
+					    str += "<button type='button' data-file=\'" + fileCallPath + "\' data-type='image'>x</button><br>";
+						str += "</div>";
 					    str + "</li>";
-					  }
+					} */
+					
+					
+					
+					
 				});
 				        
 				$(".uploadResult ul").html(str);
@@ -297,8 +319,7 @@
 			var str ="";
 			
 			$(uploadResultArr).each(function(i, obj){
-				    
-						
+				
 				if(obj.image){
 					var fileCallPath = encodeURIComponent(obj.upload_path + "/s_" + obj.uuid + "_" + obj.file_name);
 					var uuidName = obj.uuid + "_" + obj.file_name;
@@ -306,11 +327,12 @@
 					$("input[name='uuid']").attr('value', uuidName);
 					
 					str += "<li data-path='" + obj.upload_path + "'";
-					str += " data-uuid='" + obj.uuid+"' data-filename='" + obj.file_name + "' data-type='" + obj.image + "'"
-					str += " ><div>";
-					str += "<span> " + obj.file_name + "</span>";
+					str += " data-uuid='" + obj.uuid+"' data-filename='" + obj.file_name + "' data-type='" + obj.image + "'";
+					str += " ><div style='margin-top: 5px;'>";
+					str += "<img src='/displayFiles?file_name=" + fileCallPath + "' width='20px' height='20px' style='vertical-align: middle;'>";
+					str += "<span> " + obj.file_name + " </span>";
 					str += "<button type='button' data-file=\'" + fileCallPath + "\' data-type='image'>x</button><br>";
-					str += "<img src='/displayFiles?file_name=" + fileCallPath + "'>";
+
 					str += "</div>";
 					str += "</li>";
 				}else{
@@ -322,13 +344,19 @@
 					
 					
 					str += "<li "
-					str += "data-path='" + obj.upload_path + "' data-uuid='" + obj.uuid + "' data-filename='" + obj.file_name + "' data-type='" + obj.image + "' ><div>";
-					str += "<span> " + obj.file_name + "</span>";
+					str += "data-path='" + obj.upload_path + "' data-uuid='" + obj.uuid + "' data-filename='" + obj.file_name + "' data-type='" + obj.image + "' >";
+					str += "<div style='margin-top: 5px;'>";
+					str += "<img src='/resources/fileImage/file_icon.png' width='20px' height='20px' style='vertical-align: middle;'></a>";
+					str += "<span> " + obj.file_name + " </span>";
 					str += "<button type='button' data-file=\'" + fileCallPath + "\' data-type='file'>x</button><br>";
-					str += "<img src='/resources/fileImage/default.png' width='150px'></a>";
 					str += "</div>";
 					str += "</li>";
 				}
+				
+				
+				
+				
+				
 			
 			});
 			  

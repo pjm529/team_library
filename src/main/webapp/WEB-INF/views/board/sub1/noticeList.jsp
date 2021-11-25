@@ -214,10 +214,10 @@
     </div> 
     
     <form action="/board/noticeList" method="get" class="moveForm">
-		<input type="text" name="page" value="${pageMaker.cri.page}">
-		<input type="text" name="amount" value="${pageMaker.cri.amount}">
-		<input type="text" name="keyword" value="${pageMaker.cri.keyword}">
-		<input type="text" name="type" value="${pageMaker.cri.type}">
+		<input type="hidden" name="page" value="${pageMaker.cri.page}">
+		<input type="hidden" name="amount" value="${pageMaker.cri.amount}">
+		<input type="hidden" name="keyword" value="${pageMaker.cri.keyword}">
+		<input type="hidden" name="type" value="${pageMaker.cri.type}">
 	</form>
 	
 	<form action="/board/noticeContent" method="get" class="moveForm2">

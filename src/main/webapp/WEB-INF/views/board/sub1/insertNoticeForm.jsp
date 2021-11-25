@@ -89,7 +89,7 @@
                                                 </td>
                                             </tr> -->
                                             <tr>
-                                            	<td>
+                                            	<td colspan="4">
                                             		<div class="uploadDiv">
 				                                        <input type="file" name="uploadNoticeFile" multiple>
 				                                        <input type="hidden" name="uuid" id="uuid">
@@ -267,24 +267,36 @@
 					
 					str += "<li data-path='" + obj.upload_path + "'";
 					str += " data-uuid='" + obj.uuid + "' data-filename='" + obj.file_name + "' data-type='" + obj.image + "'"
-					str += " ><div>";
-					str += "<span>" + obj.file_name + "</span>";
+					str += " ><div style='margin-top: 5px;'>";
+					str += "<img src='/displayFiles?file_name=" + fileCallPath + "' width='20px' height='20px' style='vertical-align: middle;'>";
+					str += "<span> " + obj.file_name + " </span>";
 					str += "<button type='button' data-file=\'" + fileCallPath + "\' data-type='image'>x</button><br>";
-					str += "<img src='/displayFiles?file_name=" + fileCallPath + "'>";
 					str += "</div>";
 					str += "</li>";
+					
 				}else{
 					var fileCallPath = encodeURIComponent(obj.upload_path + "/" + obj.uuid + "_" + obj.file_name);               
 					var fileLink = fileCallPath.replace(new RegExp(/\\/g), "/");
 					var uuidName = obj.uuid + "_" + obj.file_name;
 					
 					$("input[name='uuid']").attr('value', uuidName);
-					   
-					str += "<li "
+					
+					
+					
+					/* str += "<li "
 					str += "data-path='" + obj.upload_path + "' data-uuid='" + obj.uuid + "' data-filename='" + obj.file_name + "' data-type='" + obj.image + "' ><div>";
 					str += "<span> " + obj.file_name + "</span>";
 					str += "<button type='button' data-file=\'" + fileCallPath + "\' data-type='file'>x</button><br>";
-					str += "<img src='/resources/fileImage/default.png' width='150px'></a>";
+					str += "<img src='/resources/fileImage/file_icon.png' width='150px'></a>";
+					str += "</div>";
+					str += "</li>"; */
+					
+					str += "<li "
+					str += "data-path='" + obj.upload_path + "' data-uuid='" + obj.uuid + "' data-filename='" + obj.file_name + "' data-type='" + obj.image + "' >";
+					str += "<div style='margin-top: 5px;'>";
+					str += "<img src='/resources/fileImage/file_icon.png' width='20px' height='20px' style='vertical-align: middle;'>";
+					str += "<span> " + obj.file_name + " </span>";
+					str += "<button type='button' data-file=\'" + fileCallPath + "\' data-type='file'>x</button><br>";
 					str += "</div>";
 					str += "</li>";
 				}

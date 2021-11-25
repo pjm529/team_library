@@ -5,11 +5,14 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.UnsupportedEncodingException;
 import java.net.URLDecoder;
+import java.net.URLEncoder;
 import java.nio.file.Files;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
 
+import org.springframework.core.io.FileSystemResource;
+import org.springframework.core.io.Resource;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
@@ -18,6 +21,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.util.FileCopyUtils;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestHeader;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
@@ -184,6 +188,51 @@ public class NoticeAttachController {
 		}
 		
 	}
+	
+	
+	@GetMapping(value = "/downloadNoticeFile", produces = MediaType.APPLICATION_OCTET_STREAM_VALUE)
+	@ResponseBody
+	public ResponseEntity<Resource> downloadNoticeFile(@RequestHeader("User-Agent") String userAgent, String file_name) {
+		
+		Resource resource = new FileSystemResource(file_name);
+		
+		if(resource.exists() == false) {
+			return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+		}
+
+		String resourseName = resource.getFilename();
+		
+		//remove uuid
+		String resourseOriginalName = resourseName.substring(resourseName.indexOf("_") + 1);
+		
+		HttpHeaders headers = new HttpHeaders();
+		
+		try {
+			String downloadName = null;
+			
+			if(userAgent.contains("Trident")) {
+				log.info("IE browser");
+				downloadName = URLEncoder.encode(resourseOriginalName, "UTF-8").replaceAll("\\+", " ");
+			}else if(userAgent.contains("Edge")) {
+				log.info("Edge browser");
+				downloadName = URLEncoder.encode(resourseOriginalName, "UTF-8");
+			}else {
+				log.info("Chrome browser");
+				downloadName = new String(resourseOriginalName.getBytes("UTF-8"),"ISO-8859-1");
+			}
+			log.info("downloadName: " + downloadName);
+			
+			headers.add("Content-Disposition", "attachment; filename=" + downloadName);
+			
+		} catch (UnsupportedEncodingException e) {
+			e.printStackTrace();
+		}
+		return new ResponseEntity<Resource>(resource, headers, HttpStatus.OK);
+	}
+	
+	
+	
+	
 	
 	
 
