@@ -6,8 +6,8 @@
 <html>
 <head>
 	<title>라온도서관 > 나의 도서관 > 열람실</title>
-	<link rel="stylesheet" href="/resources/css/mylib/sub3/sb_page.css">
-	<link rel="stylesheet" href="/resources/css/mylib/sub3/readingRoom.css">
+	<link rel="stylesheet" href="/resources/css/mylib/sub3/readingRoom1_sb_page.css">
+	<link rel="stylesheet" href="/resources/css/mylib/sub3/readingRoom1.css">
 
 </head>
 <body>
