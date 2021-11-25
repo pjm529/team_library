@@ -7,9 +7,9 @@ import com.library.model.search.BookDTO;
 public interface BookService {
 
 	// 도서 대출
-	public void insert(BookDTO dto);
+	public void loan(BookDTO dto);
 
-	// 도서 수 카운트
+	// 대출 중인 해당 도서 수 카운트
 	public int count(String isbn);
 
 	// 대출 베스트 출력
@@ -20,4 +20,7 @@ public interface BookService {
 
 	// 대출자 대출 수 증가
 	public void increase_count(String user_id);
+	
+	// 회원이 대출 중인 도서인지 체크
+	public int loan_check(String user_id, String book_isbn);
 }

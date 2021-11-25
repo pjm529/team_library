@@ -16,11 +16,11 @@ public class BookServiceImpl implements BookService {
 
 	// 도서 대출
 	@Override
-	public void insert(BookDTO dto) {
-		mapper.insert(dto);
+	public void loan(BookDTO dto) {
+		mapper.loan(dto);
 	}
 
-	// 도서 수 카운트
+	// 대출 중인 해당 도서 수 카운트
 	@Override
 	public int count(String isbn) {
 		return mapper.count(isbn);
@@ -42,5 +42,10 @@ public class BookServiceImpl implements BookService {
 	@Override
 	public void increase_count(String user_id) {
 		mapper.increase_count(user_id);
+	}
+
+	// 회원이 대출 중인 도서인지 체크
+	public int loan_check(String user_id, String book_isbn) {
+		return mapper.loan_check(user_id, book_isbn);
 	}
 }
