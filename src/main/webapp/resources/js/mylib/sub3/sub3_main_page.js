@@ -7,7 +7,7 @@ $(document).ready(function() {
 		
 		var nowDate = $(this).closest('span').find('#nowDate').val();
 		
-		location.href = '/mylib/seminarRoomService?nowDate=' + nowDate;
+		location.href = '/mylib/seminarRoom?nowDate=' + nowDate;
 		
 	});
 	
