@@ -1,5 +1,6 @@
 package com.library.controller.search;
 
+import java.security.Principal;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
@@ -163,13 +164,11 @@ public class RecommendController {
 
 	// 추천도서 등록
 	@PostMapping("regist")
-	public String regist(BookDTO book) {
+	public String regist(BookDTO book, Principal principal) {
 		System.out.println("regist 진입");
 		
 		// 로그인 된 user_id 받아오기
-		Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-		UserDetails userDetails = (UserDetails) principal;
-		String id = userDetails.getUsername();
+		String id = principal.getName();
 
 		// 추천도서 등록
 		recommendService.regist_book(id, book);

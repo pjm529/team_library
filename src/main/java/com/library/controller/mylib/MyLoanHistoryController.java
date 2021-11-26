@@ -1,5 +1,6 @@
 package com.library.controller.mylib;
 
+import java.security.Principal;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
@@ -26,14 +27,12 @@ public class MyLoanHistoryController {
 
 	// 대출 내역 리스트 출력 (get)
 	@GetMapping("/loan-history")
-	public String my_loan_history(Model model, Criteria cri, String start_date, String end_date) {
+	public String my_loan_history(Model model, Criteria cri, String start_date, String end_date, Principal principal) {
 
 		System.out.println("my_loan_history 진입");
 
 		// 로그인 된 user_id 받아오기
-		Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-		UserDetails userDetails = (UserDetails) principal;
-		String id = userDetails.getUsername();
+		String id = principal.getName();
 
 		// 회원의 대출 내역 받아오기
 		List<BookDTO> loan_history = service.loan_history(id, cri, start_date, end_date);
@@ -49,7 +48,7 @@ public class MyLoanHistoryController {
 			book.setReturn_period(book.getReturn_period().substring(0, 10));
 		}
 
-		// 대출 내역 
+		// 대출 내역
 		model.addAttribute("loan_history", loan_history);
 
 		// 대출 건수
@@ -64,12 +63,12 @@ public class MyLoanHistoryController {
 		if (start_date == null) {
 			start_date = date("start");
 		}
-		
+
 		// end_date가 null 이면 현재 날짜
 		if (end_date == null) {
 			end_date = date("end");
 		}
-		
+
 		model.addAttribute("start_date", start_date);
 		model.addAttribute("end_date", end_date);
 
@@ -82,17 +81,17 @@ public class MyLoanHistoryController {
 		Calendar cal = Calendar.getInstance();
 
 		cal.setTime(now);
-		
-		int year = cal.get(Calendar.YEAR) - 1 ;
+
+		int year = cal.get(Calendar.YEAR) - 1;
 		int month = cal.get(Calendar.MONTH) + 1;
 		int day = cal.get(Calendar.DAY_OF_MONTH);
-		
+
 		// 현재 날짜 -1년
 		String start_date = year + "-" + month + "-" + day;
-		
+
 		// 현재 날짜
 		String end_date = year + 1 + "-" + month + "-" + day;
-		
+
 		if (type.equals("start")) {
 			return start_date;
 		} else {
