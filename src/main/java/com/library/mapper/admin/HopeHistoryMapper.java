@@ -14,7 +14,10 @@ public interface HopeHistoryMapper {
 
 	// 희망도서 신청수
 	public int get_total();
-	
+
 	// 희망 도서 정보 조회
-		public HopeDTO hope_info(String hope_no);
+	public HopeDTO hope_info(String hope_no);
+
+	// 희망도서 취소
+	public void hope_cancel(HopeDTO hope);
 }

@@ -1,4 +1,3 @@
-@charset "UTF-8";
 body{
     margin: 0;
 }
@@ -96,7 +95,7 @@ ul{
 
 .lnb {
     width:280px;
-    float:left; 
+    float:left;
 }
 
 .lnb h2{
@@ -150,7 +149,7 @@ ul{
 /* 본문 부분 */
 .content{
     box-sizing: border-box;
-    padding-top: 30px;
+    padding-top: 40px;
     padding-bottom: 100px;
     width: 971px;
     margin-left: 280px;
@@ -167,158 +166,94 @@ ul{
     background: #fff;
 }
 
-/* inline => 총 게시물 부분 : 왼쪽 정렬 */
-.inline {
-    display: inline-block;
-    zoom: 1;
-    vertical-align: middle;
-    float: right;
-    padding-bottom: 20px;
+
+
+
+/* 등록 영역 */
+
+#join_form{
+    margin: 0 auto;
 }
 
-/* 게시물 개수 select */
-.inline select{
-    width: 130px;
-    height: 34px;
-    border: 1px solid #ccc;
-    font-size: inherit;
-}
-
-/* 이동 button (a tag) */
-.inline a{
-    background-color: #266ac4;
-    color: #fff;
-    padding: 7px 13px;
-    border: 1px solid #1557af;
-    border-radius: 5px;
-}
-
-
-/*  ======= 테이블 ====== */
 table{
-    width: 100%;
-    border-top: 1px solid #dee1e7;
+    border-top: none;
     border-bottom: 2px solid #ccc;
+    width: 100%;
+}
+
+table, th, td {
+    border-collapse: collapse;
     border-spacing: 0;
     font-size: inherit;
-    margin-top: 15px;
-    border-collapse: separate;
+    word-break: break-all;
+    
 }
 
-table thead th{
-    border-top-color: #464747;
-    background: #f6f6f6;
-    border-top-width: 2px;
+table tbody th, table tbody td{
+    padding: 6px 15px;
+}
+
+th{
+    background: #f8f8f8;
 }
 
 th, td{
     border: 1px solid #e5e8eb;
     vertical-align: middle;
-    padding: 7px 10px;
-    border-left: 0;
-    border-right: 0;
-    text-align: center;
 }
 
+.first{
+    width: 20%; 
+    text-align: left;
+    font-weight: normal;
+    border-left: none;
+}
 
+.last{
+    border-right: none;
+}
 
-/* 검색 */
-.search {
-    display: inline-block;
-    zoom: 1;
+input{
+    height: 31px !important;
+    border: 1px solid #ddd;
+    border-radius: 3px;
+    background: #fafafa;
+    line-height: 27px;
+    height: 27px;
+    padding: 0 5px;
     vertical-align: middle;
-    float: left;
-    padding-bottom: 20px;
 }
 
-.search select{
-    width: 100px;
-    height: 34px;
-    border: 1px solid #ccc;
-    font-size: inherit;
+input:focus{
+    outline: none;
 }
 
-.search input{
-    width: 230px;
-    height: 30px;
-    border: 1px solid #ccc;
-    font-size: inherit;
+.title_input, .author_input, .publisher_input, .note_input, .cancel_input {
+	width: 690px;
 }
 
-
-/* 버튼속성 */
-.btn {
-    width: 60px;
-    height: 35px;
+.isbn_input {
+	width: 320px;
+}
+.join_button{
+    float: right;
+    margin-top: 20px;
+    cursor: pointer;
     background-color: #266ac4;
     border: none;
     border-radius: 5px;
     color: #fff;
-    font-size: 15px;
-    cursor: pointer;
-}
-.btn:focus, .btn:active{
-    border: none; box-shadow: none;
+    font-size: 12px;
 }
 
-.btn:hover{
+.join_button:focus, .join_button:active{
+    border: none; box-shadow: none;
+
+}
+.join_button:hover{
     background-color: #215aa3;
 }
 
-.btn2{
-    width: 50px;
-    height: 25px;
-    background-color: #f1b55c;
-    border: none;
-    border-radius: 5px;
-    color: #fff;
-    font-size: 15px;
-    cursor: pointer;
-}
-
-.btn2:focus, .btn2:active{
-    border: none; box-shadow: none;
-}
-
-.btn2:hover{
-    background-color: rgb(255, 185, 70);
-}
-
-/* 페이지 */
-.pageInfo{
-   height: auto;
-   text-align: center;
-   margin-bottom: 25px;
-}
-.not {
-   border: 1px solid black;
-   display: inline-block;
-   line-height: 24px;
-   padding: 3px 12px;
-   border: 1px solid #d9d9d9;
-   margin-left: -1px;
-   background: #fafafa;
-   color: #555;
-   font-size: 14px;
-}
-
-.not:hover{
-   box-shadow:none;
-   border-color:#ccc;
-   background:#eee;
-}
-
-.current{
-	border: 1px solid #444;
-   	display: inline-block;
-   	line-height: 24px;
-   	padding: 3px 12px;
-   	border: 1px solid #d9d9d9;
-   	margin-left: -1px;
-   	font-size: 14px;
-   	background: #4c4c4c;
-   	color: #fff;
-}
 /* 서브 페이지 */
 .lnb > ul > li > ul > li.active > a{
     background-image: url(/resources/imges/mylib/sub5/lnb-bg-depth2-on.png);
@@ -351,6 +286,8 @@ th, td{
 .lnb > ul > li > ul {
     display: none;
 }
+
+
 /* 버튼속성 */
 .btn {
     width: 60px;
@@ -370,11 +307,11 @@ th, td{
     background-color: #215aa3;
 }
 
-.member_modify_wrap {
+.hope_cancel_wrap {
 	float: right;
 }
 
-.member_delete_wrap {
+.hope_own_wrap {
 	margin-right: 10px;
 	float: right;
 }

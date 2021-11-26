@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
@@ -21,7 +22,7 @@ public class HopeHistoryController {
 
 	@Autowired
 	private HopeHistoryService hopeHistoryService;
-	
+
 	@GetMapping("/hope-history")
 	public String hope_history(Model model, Criteria cri) {
 
@@ -45,10 +46,10 @@ public class HopeHistoryController {
 		return "/admin/sub5/hope_history";
 
 	}
-	
+
 	@GetMapping("/hope-info")
 	public String hope_info(Model model, Criteria cri, @RequestParam String hope_no) {
-		
+
 		HopeDTO hope = hopeHistoryService.hope_info(hope_no);
 
 		hope.setHope_reg_date(hope.getHope_reg_date().substring(0, 10));
@@ -57,5 +58,14 @@ public class HopeHistoryController {
 		model.addAttribute("cri", cri);
 
 		return "/admin/sub5/hope_info";
+	}
+
+	@PostMapping("/hope-cancel")
+	public String hope_cancel(Criteria cri, HopeDTO hope) {
+
+		hopeHistoryService.hope_cancel(hope);
+
+		return "redirect:/admin/hope-info?amount=" + cri.getAmount() + "&page=" + cri.getPage() + "&hope_no="
+				+ hope.getHope_no();
 	}
 }

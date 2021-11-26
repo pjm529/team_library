@@ -1,11 +1,12 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
 <title>라온도서관 > 나의도서관 > 희망도서신청 > 희망도서신청</title>
-<link rel="stylesheet" href="/resources/css/mylib/sub2/hope.css">
+<link rel="stylesheet" href="/resources/css/admin/hope_info.css">
 <link rel="stylesheet" href="/resources/css/footer.css">
 <script src="https://code.jquery.com/jquery-3.6.0.js" 
  integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk="
@@ -139,9 +140,52 @@
                                  value="${hope.book_price }" readonly="readonly"> <br>
                             </td>
                         </tr>
+                        
+                        <c:if test="${not empty hope.cancel_reason }">
+                        <tr>
+                            <th class="first">
+                                취소사유
+                            </th>
+                            <td class="last">
+                                <input class="cancel_input" autocomplete="off"
+                                 value="${hope.cancel_reason }" readonly="readonly"> <br>
+                            </td>
+                        </tr>
+                        </c:if>
+                        
+                        
 
                     </table>
-
+					<br>
+					<div class="hope_cancel_wrap">
+                    	<form action="/admin/hope-cancel" method="post" onsubmit="return false;">
+                    		<input type="hidden" name="amount" value="${cri.amount }">
+							<input type="hidden" name="page" value="${cri.page }">
+							<input type="hidden" name="hope_no" value="${hope.hope_no }">
+							<input type="hidden" class="reason" name="cancel_reason">
+							<button id="cancel_btn" class="btn">취소</button>
+                    	</form>
+                    </div>
+                    
+                    <div class="hope_own_wrap">
+                    	<form action="/admin/hope-own" method="get" onsubmit="return false;">
+                    		<input type="hidden" name="amount" value="${cri.amount }">
+							<input type="hidden" name="page" value="${cri.page }">
+							<input type="hidden" name="hope_no" value="${hope.hope_no }">
+							<button id="own_btn" class="btn">소장</button>
+                    	</form>
+                    </div>
+                    
+                    
+                    
+                    <div class="hope_history_wrap">
+                    	<form action="/admin/hope-history" method="get">
+                    		<input type="hidden" name="amount" value="${cri.amount }">
+							<input type="hidden" name="page" value="${cri.page }">
+							<input type="hidden" name="type" value="${cri.type }">
+							<button class="btn">목록</button>
+                    	</form>
+                    </div>
                 </div>
             </div>
         </div>
@@ -153,51 +197,24 @@
     <script>
     
 	    $(function(){
-			$(".sub2").addClass("active");
-	   		$(".submenu6").addClass("active");
-	   		
-	   		$(".join_button").on("click", function(){
-	   			
-	   			let title = $(".title_input").val();
-		   		let author = $(".author_input").val();
-		   		let publihser = $(".publisher_input").val();
-		   		let pubDate = $(".pubDate_input").val();
-		   		let price = $(".price_input").val();
-		   		
-	   			if(title == 0) {
-		   			alert("제목을 입력하세요.");
-		   			$(".title_input").focus();
-		   		} else {
-		   			if(author == "") {
-		   				alert("저자를 입력하세요.");
-		   				$(".author_input").focus();
-		   			} else {
-		   				if(publihser == "") {
-		   					alert("출판사를 입력하세요.");
-		   					$(".publisher_input").focus();
-		   				} else {
-		   					if(pubDate == "") {
-		   						alert("연도를 입력하세요.");
-		   						$(".pubDate_input").focus();
-		   					} else {
-		   						if(price == "") {
-		   							alert("가격을 입력하세요");
-		   							$(".price_input").focus();
-		   						} else {
-		   							if(confirm("해당도서를 신청하시겠습니까?")) {
-		   								$("#join_form").attr("onsubmit", "return true;");
-		   			                    $("#join_form").attr("action", "/mylib/hope");
-		   			                    $("#join_form").submit();
-		   							} else {
-		   								alert("취소되었습니다.")
-		   							}
-		   						}
-		   					}
-		   				}
-		   			}
-		   		}
+			$(".sub5").addClass("active");
+			
+			$("#cancel_btn").on("click", function(){
+				if(confirm("해당 도서를 취소처리 하시겠습니까?")) {
+					$(".reason").val(prompt("취소사유를 입력하세요"));
+					alert("취소처리 되었습니다.");
+					$("form").attr("onsubmit", "return true;");
+					$("form").submit();
+				}
 	   		});
-	   		
+			
+			$("#own_btn").on("click", function(){
+				if(confirm("해당 도서를 소장처리 하시겠습니까?")) {
+					alert("소장처리 되었습니다.");
+					$("form").attr("onsubmit", "return true;");
+					$("form").submit();
+				}
+	   		});
 		});
 		
     </script>

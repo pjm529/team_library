@@ -15,4 +15,7 @@ public interface HopeHistoryService {
 	
 	// 희망 도서 정보 조회
 	public HopeDTO hope_info(String hope_no);
+	
+	// 희망도서 취소
+	public void hope_cancel(HopeDTO hope);
 }
