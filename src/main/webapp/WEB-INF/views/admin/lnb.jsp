@@ -18,6 +18,9 @@
             <a href="/admin/overdue-list">연체중도서</a>
         </li>
         <li class="sub5">
+            <a href="/admin/hope-history">희망도서신청내역</a>
+        </li>
+        <li class="sub6">
             <a href="/master/admin-list">관리자목록</a>
         </li>
     </ul>
