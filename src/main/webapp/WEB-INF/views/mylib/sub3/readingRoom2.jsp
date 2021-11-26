@@ -3,6 +3,7 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <%@ page session="false" %>
+<%@ taglib uri="http://www.springframework.org/security/tags" prefix="sec" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -23,6 +24,9 @@
 
 </head>
 <body>
+
+<%-- <sec:authentication property="principal.dto.user_id"/>  --%>
+
   <div class="container">
         <div class="sub_title">
             <div class="doc-info">
@@ -60,8 +64,8 @@
                         <div class="room-list">
                             <div class="list-btn">
                                 <button onclick="rdRoom();">제 1열람실</button>
-                                <button onclick="rdRoom2();">제 2열람실</button>
-                                <button class="active" onclick="nbRoom();">노트북실</button>
+                                <button class="active" onclick="rdRoom2();">제 2열람실</button>
+                                <button onclick="nbRoom();">노트북실</button>
                                 <button>세미나실</button>
                             </div>
                         </div>
@@ -73,28 +77,26 @@
                                 <div class="line1">
                                     <div class="seat-list-row">
                                        <c:forEach var="readingRoomlist" items="${readingRoomlist}" begin="0" end="9">
-                                
+                              
 		                                	<!-- 좌석 예약된 상태 status(0) occupied -->
 		                                	<c:if test="${readingRoomlist.seat_status == '0'}">
 		                                    	<c:set var="status" value="occupied"/>
-		                                        <c:set var="user_id" value="${readingRoomlist.user_id}"/>
 		                                    </c:if>
 		                                    
 		                                    <!-- 좌석 예약가능한 상태 status(1) vacant -->
 		                                	<c:if test="${readingRoomlist.seat_status == '1'}">
 		                                    	<c:set var="status" value="vacant"/>
-		                                        <c:set var="user_id" value="user123"/>
 		                                    </c:if>
 		                                    
 		                                    <!-- 예약된 좌석의 user_id가 sessionId와 일치하면 class를 mine으로 설정 -->
-                                       		<c:if test="${readingRoomlist.user_id == 'user123'}">
+                                       		<c:if test="${readingRoomlist.user_id == login_id}">
                                           		<button class="mine" id="${readingRoomlist.seat_no}">${readingRoomlist.seat_no}</button>
                                        		</c:if>
                                        
-                                       <!-- 예약된 좌석의 user_id가 sessionId와 일치하지 않을 경우 -->
-                                       <c:if test="${readingRoomlist.user_id != 'user123'}">
-                                          <button class="${status}" id="${readingRoomlist.seat_no}">${readingRoomlist.seat_no}</button>
-                                       </c:if>	  
+	                                       <!-- 예약된 좌석의 user_id가 sessionId와 일치하지 않을 경우 -->
+	                                       <c:if test="${readingRoomlist.user_id != login_id}">
+	                                          <button class="${status}" id="${readingRoomlist.seat_no}">${readingRoomlist.seat_no}</button>
+	                                       </c:if>	  
 		                                </c:forEach>
                                     </div>
                                 </div>
@@ -106,24 +108,22 @@
 		                                	<!-- 좌석 예약된 상태 status(0) occupied -->
 		                                	<c:if test="${readingRoomlist.seat_status == '0'}">
 		                                    	<c:set var="status" value="occupied"/>
-		                                        <c:set var="user_id" value="${readingRoomlist.user_id}"/>
 		                                    </c:if>
 		                                    
 		                                    <!-- 좌석 예약가능한 상태 status(1) vacant -->
 		                                	<c:if test="${readingRoomlist.seat_status == '1'}">
 		                                    	<c:set var="status" value="vacant"/>
-		                                        <c:set var="user_id" value="user123"/>
 		                                    </c:if>
 		                                    
 		                                    <!-- 예약된 좌석의 user_id가 sessionId와 일치하면 class를 mine으로 설정 -->
-                                       		<c:if test="${readingRoomlist.user_id == 'user123'}">
+                                       		<c:if test="${readingRoomlist.user_id == login_id}">
                                           		<button class="mine" id="${readingRoomlist.seat_no}">${readingRoomlist.seat_no}</button>
                                        		</c:if>
                                        
-                                       <!-- 예약된 좌석의 user_id가 sessionId와 일치하지 않을 경우 -->
-                                       <c:if test="${readingRoomlist.user_id != 'user123'}">
-                                          <button class="${status}" id="${readingRoomlist.seat_no}">${readingRoomlist.seat_no}</button>
-                                       </c:if>	  
+	                                       <!-- 예약된 좌석의 user_id가 sessionId와 일치하지 않을 경우 -->
+	                                       <c:if test="${readingRoomlist.user_id != login_id}">
+	                                          <button class="${status}" id="${readingRoomlist.seat_no}">${readingRoomlist.seat_no}</button>
+	                                       </c:if>	  
 		                                </c:forEach>
                                     </div>
 
@@ -133,24 +133,22 @@
 		                                	<!-- 좌석 예약된 상태 status(0) occupied -->
 		                                	<c:if test="${readingRoomlist.seat_status == '0'}">
 		                                    	<c:set var="status" value="occupied"/>
-		                                        <c:set var="user_id" value="${readingRoomlist.user_id}"/>
 		                                    </c:if>
 		                                    
 		                                    <!-- 좌석 예약가능한 상태 status(1) vacant -->
 		                                	<c:if test="${readingRoomlist.seat_status == '1'}">
 		                                    	<c:set var="status" value="vacant"/>
-		                                        <c:set var="user_id" value="user123"/>
 		                                    </c:if>
 		                                    
 		                                    <!-- 예약된 좌석의 user_id가 sessionId와 일치하면 class를 mine으로 설정 -->
-                                       		<c:if test="${readingRoomlist.user_id == 'user123'}">
+                                       		<c:if test="${readingRoomlist.user_id == login_id}">
                                           		<button class="mine" id="${readingRoomlist.seat_no}">${readingRoomlist.seat_no}</button>
                                        		</c:if>
                                        
-                                       <!-- 예약된 좌석의 user_id가 sessionId와 일치하지 않을 경우 -->
-                                       <c:if test="${readingRoomlist.user_id != 'user123'}">
-                                          <button class="${status}" id="${readingRoomlist.seat_no}">${readingRoomlist.seat_no}</button>
-                                       </c:if>	  
+	                                       <!-- 예약된 좌석의 user_id가 sessionId와 일치하지 않을 경우 -->
+	                                       <c:if test="${readingRoomlist.user_id != login_id}">
+	                                          <button class="${status}" id="${readingRoomlist.seat_no}">${readingRoomlist.seat_no}</button>
+	                                       </c:if>	  
 		                                </c:forEach>
                                     </div> 
 
@@ -163,24 +161,22 @@
 		                                	<!-- 좌석 예약된 상태 status(0) occupied -->
 		                                	<c:if test="${readingRoomlist.seat_status == '0'}">
 		                                    	<c:set var="status" value="occupied"/>
-		                                        <c:set var="user_id" value="${readingRoomlist.user_id}"/>
 		                                    </c:if>
 		                                    
 		                                    <!-- 좌석 예약가능한 상태 status(1) vacant -->
 		                                	<c:if test="${readingRoomlist.seat_status == '1'}">
 		                                    	<c:set var="status" value="vacant"/>
-		                                        <c:set var="user_id" value="user123"/>
 		                                    </c:if>
 		                                    
 		                                    <!-- 예약된 좌석의 user_id가 sessionId와 일치하면 class를 mine으로 설정 -->
-                                       		<c:if test="${readingRoomlist.user_id == 'user123'}">
+                                       		<c:if test="${readingRoomlist.user_id == login_id}">
                                           		<button class="mine" id="${readingRoomlist.seat_no}">${readingRoomlist.seat_no}</button>
                                        		</c:if>
                                        
-                                       		<!-- 예약된 좌석의 user_id가 sessionId와 일치하지 않을 경우 -->
-                                       		<c:if test="${readingRoomlist.user_id != 'user123'}">
-                                          		<button class="${status}" id="${readingRoomlist.seat_no}">${readingRoomlist.seat_no}</button>
-                                       		</c:if>	  
+	                                       <!-- 예약된 좌석의 user_id가 sessionId와 일치하지 않을 경우 -->
+	                                       <c:if test="${readingRoomlist.user_id != login_id}">
+	                                          <button class="${status}" id="${readingRoomlist.seat_no}">${readingRoomlist.seat_no}</button>
+	                                       </c:if>	  
 		                                </c:forEach>                                	 
 
                                     </div>
@@ -191,22 +187,20 @@
 		                                	<!-- 좌석 예약된 상태 status(0) occupied -->
 		                                	<c:if test="${readingRoomlist.seat_status == '0'}">
 		                                    	<c:set var="status" value="occupied"/>
-		                                        <c:set var="user_id" value="${readingRoomlist.user_id}"/>
 		                                    </c:if>
 		                                    
 		                                    <!-- 좌석 예약가능한 상태 status(1) vacant -->
 		                                	<c:if test="${readingRoomlist.seat_status == '1'}">
 		                                    	<c:set var="status" value="vacant"/>
-		                                        <c:set var="user_id" value="user123"/>
 		                                    </c:if>
 		                                    
 		                                    <!-- 예약된 좌석의 user_id가 sessionId와 일치하면 class를 mine으로 설정 -->
-                                       		<c:if test="${readingRoomlist.user_id == 'user123'}">
+                                       		<c:if test="${readingRoomlist.user_id == login_id}">
                                           		<button class="mine" id="${readingRoomlist.seat_no}">${readingRoomlist.seat_no}</button>
                                        		</c:if>
                                        
 	                                       <!-- 예약된 좌석의 user_id가 sessionId와 일치하지 않을 경우 -->
-	                                       <c:if test="${readingRoomlist.user_id != 'user123'}">
+	                                       <c:if test="${readingRoomlist.user_id != login_id}">
 	                                          <button class="${status}" id="${readingRoomlist.seat_no}">${readingRoomlist.seat_no}</button>
 	                                       </c:if>	  
 		                                </c:forEach>    
@@ -220,25 +214,23 @@
                                 
 		                                	<!-- 좌석 예약된 상태 status(0) occupied -->
 		                                	<c:if test="${readingRoomlist.seat_status == '0'}">
-			                                	<c:set var="status" value="occupied"/>
-			                                    <c:set var="user_id" value="${readingRoomlist.user_id}"/>
+		                                    	<c:set var="status" value="occupied"/>
 		                                    </c:if>
 		                                    
-		                                    	<!-- 좌석 예약가능한 상태 status(1) vacant -->
-		                                		<c:if test="${readingRoomlist.seat_status == '1'}">
-			                                    	<c:set var="status" value="vacant"/>
-			                                        <c:set var="user_id" value="user123"/>
-		                                    	</c:if>
+		                                    <!-- 좌석 예약가능한 상태 status(1) vacant -->
+		                                	<c:if test="${readingRoomlist.seat_status == '1'}">
+		                                    	<c:set var="status" value="vacant"/>
+		                                    </c:if>
 		                                    
-		                                    	<!-- 예약된 좌석의 user_id가 sessionId와 일치하면 class를 mine으로 설정 -->
-                                       			<c:if test="${readingRoomlist.user_id == 'user123'}">
-                                          			<button class="mine" id="${readingRoomlist.seat_no}">${readingRoomlist.seat_no}</button>
-                                       			</c:if>
+		                                    <!-- 예약된 좌석의 user_id가 sessionId와 일치하면 class를 mine으로 설정 -->
+                                       		<c:if test="${readingRoomlist.user_id == login_id}">
+                                          		<button class="mine" id="${readingRoomlist.seat_no}">${readingRoomlist.seat_no}</button>
+                                       		</c:if>
                                        
-                                       			<!-- 예약된 좌석의 user_id가 sessionId와 일치하지 않을 경우 -->
-                                       			<c:if test="${readingRoomlist.user_id != 'user123'}">
-                                          			<button class="${status}" id="${readingRoomlist.seat_no}">${readingRoomlist.seat_no}</button>
-                                       			</c:if>	  
+	                                       <!-- 예약된 좌석의 user_id가 sessionId와 일치하지 않을 경우 -->
+	                                       <c:if test="${readingRoomlist.user_id != login_id}">
+	                                          <button class="${status}" id="${readingRoomlist.seat_no}">${readingRoomlist.seat_no}</button>
+	                                       </c:if>	  
 		                                	</c:forEach>
                                     </div>
                                 </div>
@@ -250,7 +242,7 @@
                         <div class="wrapper-table">
                             <!-- 예약 x 테이블 -->
                             <c:if test="${room2_info == null}">
-	                            <input type="hidden" name="user_id" value="user123">
+	                            <input type="hidden" name="user_id" value="user_id">
 	                            <input type="hidden" name="seat_no" value="seat_no" class="input_selected_seat_no"> 
 	                            
 	                            <table class="seat-info">
@@ -288,6 +280,8 @@
 	                            
 	                            <c:set var="diff_time" value="${diff_hour}:${diff_min}:${diff_sec}"></c:set>
 	                            
+	                            
+	                            <!-- 제2열람실 좌석 예약정보 -->
 	                            <table class="reserve-info">
 	                                <tbody>
 	                                    <tr>
@@ -313,6 +307,7 @@
 	                                           </c:when>
 	                                           <c:otherwise>
 	                                              <td style="color: blue; font-weight: bold;">${diff_time}</td>
+	                                             
 	                                           </c:otherwise>
 	                                        </c:choose>
 	                                    </tr>
@@ -339,13 +334,94 @@
         </div>
 
     </div>
+<%--     <div class="sec7-text-box">
+  <p class="font18">오늘의 운영시간</p>
+  <p class="runTimeCon font25">PM 09:00 ~ PM 09:00 </p>
+  <hr/>
+  <p class="font15 time-title">금일 마감까지 남은 시간</p>
+  <div class="time font40">
+    <span class="hours"></span>
+    <span class="col">:</span>
+    <span class="minutes"></span>
+    <span class="col">:</span>
+    <span class="seconds"></span>
+  </div>
 
-
-
+</div>
+<h1>diff_time<input id="test" type="text" value="${diff_time}"></h1>
+<h1>diff_hour<input id="test1" type="text" value="${diff_hour}"></h1>
+<h1>diff_min<input id="test2" type="text" value="${diff_min}"></h1>
+<h1>diff_sec<input id="test3" type="text" value="${diff_sec}"></h1>
+1111
+ 
+2222 --%>
 <script src="https://code.jquery.com/jquery-3.6.0.js" integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk=" crossorigin="anonymous"></script>
+
+<!-- <script type="text/javascript">
+
+var test = $("#test1").val();
+
+
+function remaindTime() {
+    var now = new Date();
+    var end = new Date(now.getFullYear(),now.getMonth(),now.getDate(),test,00,00);
+    var open = new Date(now.getFullYear(),now.getMonth(),now.getDate(),09,00,00);
+    
+   
+  
+    var nt = now.getTime();
+    var ot = open.getTime();
+    var et = end.getTime();
+  
+   if(nt<ot){
+     $(".time").fadeIn();
+     $("p.time-title").html("금일 오픈까지 남은 시간");
+     sec =parseInt(ot - nt) / 1000;
+     day  = parseInt(sec/60/60/24);
+     sec = (sec - (day * 60 * 60 * 24));
+     hour = parseInt(sec/60/60);
+     sec = (sec - (hour*60*60));
+     min = parseInt(sec/60);
+     sec = parseInt(sec-(min*60));
+     if(hour<10){hour="0"+hour;}
+     if(min<10){min="0"+min;}
+     if(sec<10){sec="0"+sec;}
+      $(".hours").html(hour);
+      $(".minutes").html(min);
+      $(".seconds").html(sec);
+   } else if(nt>et){
+    $("p.time-title").html("금일 마감");
+    $(".time").fadeOut();
+   }else {
+       $(".time").fadeIn();
+     $("p.time-title").html("금일 마감까지 남은 시간");
+     sec =parseInt(et - nt) / 1000;
+     day  = parseInt(sec/60/60/24);
+     sec = (sec - (day * 60 * 60 * 24));
+     hour = parseInt(sec/60/60);
+     sec = (sec - (hour*60*60));
+     min = parseInt(sec/60);
+     sec = parseInt(sec-(min*60));
+     if(hour<10){hour="0"+hour;}
+     if(min<10){min="0"+min;}
+     if(sec<10){sec="0"+sec;}
+      $(".hours").html(hour);
+      $(".minutes").html(min);
+      $(".seconds").html(sec);
+   }
+ }
+ setInterval(remaindTime,1000);
+
+
+
+</script> -->
+
+
+
 <script>
 	$(function() {
 		
+
 		$(".sub3").addClass("active");
 		
 		/*좌석번호 클릭하기 전까지 나타지않도록 */
@@ -427,7 +503,7 @@
 		
 		 $(".return_btn").on("click", function(e){
       		e.preventDefault();
-      g
+     
 		    var seat_no = $(".my_seat_no").val();
 		                                    
 		    if(confirm("좌석을 반납하시겠습니까?")){
@@ -461,23 +537,29 @@
 		
 	})
 	
-	function rdRoom(){
-            location.href = "/mylib/readingRoom";
-         }
-         
-         function rdRoom2(){
-            location.href = "/mylib/readingRoom2";
-         }
-         
-         function nbRoom(){
-            location.href = "/mylib/notebookRoom";
-         }
-         
-         
+	
 
 	
 	});
+	
+	/* 열람실 이동 함수 추가 */
+	
+	function rdRoom(){
+        location.href = "/mylib/readingRoom";
+     }
+     
+     function rdRoom2(){
+        location.href = "/mylib/readingRoom2";
+     }
+     
+     function nbRoom(){
+        location.href = "/mylib/notebookRoom";
+     }
  
 </script> 
+
+
+
+
 </body>
 </html>
