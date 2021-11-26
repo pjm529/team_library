@@ -1,12 +1,9 @@
 package com.library.controller.mylib;
 
-import java.security.Principal;
 import java.util.Date;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.core.context.SecurityContextHolder;
-import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -24,7 +21,7 @@ public class ReadingRoomController {
 	private ReadingRoomService readingRoomService;
 
 	@GetMapping("/readingRoom")
-	public String getSeatsList(Model model, Principal principal) {
+	public String getSeatsList(Model model) {
 		
 		readingRoomService.updateReading_Room1Table();
 		readingRoomService.updateReading_Room1_RentalTable();
@@ -47,20 +44,16 @@ public class ReadingRoomController {
 		List<ReadingRoomDTO> seatsList = readingRoomService.getSeatsList();
 		model.addAttribute("seatsList", seatsList);
 
-//		// 로그인 된 user_id 받아오기
-//		Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-//		System.out.println(principal);
-//		
-//		UserDetails userDetails = (UserDetails) principal;
-//		String user_id = userDetails.getUsername();
-//		
-//		System.out.println(user_id);
-		
-		if(principal == null) {
+//		HttpSession session = request.getSession();
+//		session.setAttribute("user_id", "khi29");
+//		String user_id = (String) session.getAttribute("user_id");
+
+		String user_id = "khi29"; // 세션아이디
+
+		if (readingRoomService.mySeatInfo(user_id) == null) {
+
 			return "/mylib/sub3/readingRoom";
-		}else {
-			String user_id = principal.getName();
-			
+		} else {
 			ReadingRoomDTO mySeatInfo = readingRoomService.mySeatInfo(user_id);
 
 			Date now = new Date();
@@ -68,30 +61,9 @@ public class ReadingRoomController {
 			mySeatInfo.setDiff_time(mySeatInfo.getReturn_time().getTime() - now.getTime());
 
 			model.addAttribute("mySeatInfo", mySeatInfo);
-			model.addAttribute("login_id", user_id);
 		}
-		
+
 		return "/mylib/sub3/readingRoom";
-		
-		
-		
-//		System.out.println(user_id);
-//
-//		if (readingRoomService.mySeatInfo(user_id) == null) {
-//
-//			return "/mylib/sub3/readingRoom";
-//		} else {
-//			ReadingRoomDTO mySeatInfo = readingRoomService.mySeatInfo(user_id);
-//
-//			Date now = new Date();
-//
-//			mySeatInfo.setDiff_time(mySeatInfo.getReturn_time().getTime() - now.getTime());
-//
-//			model.addAttribute("mySeatInfo", mySeatInfo);
-//			model.addAttribute("login_id", user_id);
-//		}
-//
-//		return "/mylib/sub3/readingRoom";
 	}
 
 	@GetMapping("/bookingSeat")
