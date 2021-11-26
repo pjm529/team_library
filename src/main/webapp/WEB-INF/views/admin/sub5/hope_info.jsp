@@ -153,7 +153,39 @@
                         </tr>
                         </c:if>
                         
+                        <!-- 상태 -->
+                        <tr>
+                            <th class="first">
+                                상태
+                            </th>
+                            
+							<td class="last">
+							<c:if test="${hope.hope_status == 0 }">
+                                <input class="status_input" autocomplete="off"
+                                 value="처리중" readonly="readonly"> <br>
+                            </c:if>
+                            
+                            <c:if test="${hope.hope_status == -1 }">
+                            <input class="status_input" autocomplete="off"
+                                 value="취소" readonly="readonly"> <br>
+                            </c:if>
+                            
+                            <c:if test="${hope.hope_status == 1 }">
+                            <input class="status_input" autocomplete="off"
+                                 value="소장중" readonly="readonly"> <br>
+                            </c:if>
+                            </td>
+                        </tr>
                         
+                        <tr>
+                            <th class="first">
+                                신청일
+                            </th>
+                            <td class="last">
+                                <input class="reg_date_input" autocomplete="off"
+                                 value="${hope.hope_reg_date }" readonly="readonly"> <br>
+                            </td>
+                        </tr>
 
                     </table>
 					<br>
@@ -168,7 +200,7 @@
                     </div>
                     
                     <div class="hope_own_wrap">
-                    	<form action="/admin/hope-own" method="get" onsubmit="return false;">
+                    	<form action="/admin/hope-own" method="post" onsubmit="return false;">
                     		<input type="hidden" name="amount" value="${cri.amount }">
 							<input type="hidden" name="page" value="${cri.page }">
 							<input type="hidden" name="hope_no" value="${hope.hope_no }">

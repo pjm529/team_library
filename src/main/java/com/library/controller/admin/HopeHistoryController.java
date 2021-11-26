@@ -68,4 +68,13 @@ public class HopeHistoryController {
 		return "redirect:/admin/hope-info?amount=" + cri.getAmount() + "&page=" + cri.getPage() + "&hope_no="
 				+ hope.getHope_no();
 	}
+	
+	@PostMapping("/hope-own")
+	public String hope_own(Criteria cri, HopeDTO hope) {
+
+		hopeHistoryService.hope_own(hope.getHope_no());
+
+		return "redirect:/admin/hope-info?amount=" + cri.getAmount() + "&page=" + cri.getPage() + "&hope_no="
+				+ hope.getHope_no();
+	}
 }

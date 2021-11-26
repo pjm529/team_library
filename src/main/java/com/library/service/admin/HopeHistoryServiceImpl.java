@@ -40,4 +40,10 @@ public class HopeHistoryServiceImpl implements HopeHistoryService {
 		hopeHistoryMapper.hope_cancel(hope);
 	}
 
+	// 희망 도서 소장
+	@Override
+	public void hope_own(int hope_no) {
+		hopeHistoryMapper.hope_own(hope_no);
+	}
+
 }

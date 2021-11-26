@@ -33,4 +33,11 @@
 			 where hope_no = #{hope_no}
 		</update>
 		
+		<!-- 희망 도서 소장 -->
+		<update id="hope_own">
+			update hope
+			   set hope_status = 1, cancel_reason = null
+			 where hope_no = #{hope_no}
+		</update>
+		
 	</mapper>
