@@ -189,15 +189,15 @@
             </div>
         </div>
     </div>
-    
+
     <!-- footer -->
-	<jsp:include page="../../footer.jsp"></jsp:include>
+    <jsp:include page="../../footer.jsp"></jsp:include>
     <!-- 주소록 api를 위한 script -->
     <script src="https://t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
 
     <script>
-    
-   		$(".sub2").addClass("active");
+
+        $(".sub2").addClass("active");
         let code = ""; // 이메일 전송 인증번호 저장을 위한 변수
 
         // 유효성 검사 통과 유무 변수
@@ -329,9 +329,15 @@
                 // 최종 유효성 검사 (모든 check 값들이 true일 경우)
                 if (idCheck && idckCheck && pwCheck && pwckCheck && pwckcorCheck && nameCheck
                     && birthCheck && phoneCheck && mailCheck && mailnumCheck && addressCheck) {
-                    $("#join_form").attr("onsubmit", "return true;");
-                    $("#join_form").attr("action", "/member/signup");
-                    $("#join_form").submit();
+                    if (confirm("해당정보로 회원가입을 진행하시겠습니까?")) {
+                        alert("회원가입이 완료되었습니다.")
+                        $("#join_form").attr("onsubmit", "return true;");
+                        $("#join_form").attr("action", "/member/signup");
+                        $("#join_form").submit();
+                    } else {
+                        alert("취소되었습니다.")
+                    }
+
                 }
 
                 return false;

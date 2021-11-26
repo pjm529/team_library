@@ -26,7 +26,7 @@
                             <a href="#">
                                 <img src="/resources/imges/common/navi_home_icon.gif">
                             </a>
-                        </li> 
+                        </li>
                         <li>
                             <a href="/admin/member-list">관리자</a>
                         </li>
@@ -51,93 +51,93 @@
                             <!--검색-->
                             <div class="search">
                                 <form action="" onsubmit="return false;">
-                              		<input type="hidden" name="amount" value="${pageMaker.cri.amount }">
-                              		<input type="hidden" name="page" value="1">
+                                    <input type="hidden" name="amount" value="${pageMaker.cri.amount }">
+                                    <input type="hidden" name="page" value="1">
                                     <select name="type">
-                                    
-                                    	<c:if test="${empty pageMaker.cri.type}">
-                                    	<option value="user_id" selected="selected">아이디</option>
-                                        <option value="user_name">이름</option>
-                                        <option value="user_tel">전화번호</option>
-                                        <option value="user_email">이메일</option>
-                                    	</c:if>
-                                    	
-                                    
-                                    	<c:if test="${pageMaker.cri.type == 'user_id'}">
-                                    	<option value="user_id" selected="selected">아이디</option>
-                                        <option value="user_name">이름</option>
-                                        <option value="user_tel">전화번호</option>
-                                        <option value="user_email">이메일</option>
-                                    	</c:if>
-                                    	
-                                    	<c:if test="${pageMaker.cri.type == 'user_name' }">
-                                    	<option value="user_id">아이디</option>
-                                        <option value="user_name" selected="selected">이름</option>
-                                        <option value="user_tel">전화번호</option>
-                                        <option value="user_email">이메일</option>
-                                    	</c:if>
-                                    	
-                                    	<c:if test="${pageMaker.cri.type == 'user_tel' }">
-                                    	<option value="user_id">아이디</option>
-                                        <option value="user_name">이름</option>
-                                        <option value="user_tel" selected="selected">전화번호</option>
-                                        <option value="user_email">이메일</option>
-                                    	</c:if>
-                                    	
-                                    	<c:if test="${pageMaker.cri.type == 'user_email' }">
-                                    	<option value="user_id">아이디</option>
-                                        <option value="user_name">이름</option>
-                                        <option value="user_tel">전화번호</option>
-                                        <option value="user_email" selected="selected">이메일</option>
-                                    	</c:if>
-                                        
+
+                                        <c:if test="${empty pageMaker.cri.type}">
+                                            <option value="user_id" selected="selected">아이디</option>
+                                            <option value="user_name">이름</option>
+                                            <option value="user_tel">전화번호</option>
+                                            <option value="user_email">이메일</option>
+                                        </c:if>
+
+
+                                        <c:if test="${pageMaker.cri.type == 'user_id'}">
+                                            <option value="user_id" selected="selected">아이디</option>
+                                            <option value="user_name">이름</option>
+                                            <option value="user_tel">전화번호</option>
+                                            <option value="user_email">이메일</option>
+                                        </c:if>
+
+                                        <c:if test="${pageMaker.cri.type == 'user_name' }">
+                                            <option value="user_id">아이디</option>
+                                            <option value="user_name" selected="selected">이름</option>
+                                            <option value="user_tel">전화번호</option>
+                                            <option value="user_email">이메일</option>
+                                        </c:if>
+
+                                        <c:if test="${pageMaker.cri.type == 'user_tel' }">
+                                            <option value="user_id">아이디</option>
+                                            <option value="user_name">이름</option>
+                                            <option value="user_tel" selected="selected">전화번호</option>
+                                            <option value="user_email">이메일</option>
+                                        </c:if>
+
+                                        <c:if test="${pageMaker.cri.type == 'user_email' }">
+                                            <option value="user_id">아이디</option>
+                                            <option value="user_name">이름</option>
+                                            <option value="user_tel">전화번호</option>
+                                            <option value="user_email" selected="selected">이메일</option>
+                                        </c:if>
+
                                     </select>
                                     <input type="text" name="keyword" value="${pageMaker.cri.keyword }"
-                                    	autocomplete="off">
+                                        autocomplete="off">
                                     <button id="search_btn" class="btn">검색</button>
-                                    
+
                                 </form>
 
                             </div>
                             <!-- 회원 수 -->
                             <div class="inline">
                                 <form action="">
-                                	
+
                                     <span style="margin-right: 10px;"> 총 회원 : <b>${total }</b> 명</span>
                                     <select name="amount">
-                                    	
-	                                    <c:if test="${pageMaker.cri.amount == 10 }">
-	                                    <option value="10" selected="selected">10명씩 보기</option>
-	                                    <option value="20">20명씩 보기</option>
-	                                    <option value="30">30명씩 보기</option>
-	                                    <option value="40">40명씩 보기</option>
-	                                    </c:if>
-	                                    
-	                                    <c:if test="${pageMaker.cri.amount == 20 }">
-	                                    <option value="10">10명씩 보기</option>
-	                                    <option value="20" selected="selected">20명씩 보기</option>
-	                                    <option value="30">30명씩 보기</option>
-	                                    <option value="40">40명씩 보기</option>
-	                                    </c:if>
-	                                    
-	                                    <c:if test="${pageMaker.cri.amount == 30 }">
-	                                    <option value="10">10명씩 보기</option>
-	                                    <option value="20">20명씩 보기</option>
-	                                    <option value="30" selected="selected">30명씩 보기</option>
-	                                    <option value="40">40명씩 보기</option>
-	                                    </c:if>
-	                                    
-	                                    <c:if test="${pageMaker.cri.amount == 40 }">
-	                                    <option value="10">10명씩 보기</option>
-	                                    <option value="20">20명씩 보기</option>
-	                                    <option value="30">30명씩 보기</option>
-	                                    <option value="40" selected="selected">40명씩 보기</option>
-	                                    </c:if>
-                                        
+
+                                        <c:if test="${pageMaker.cri.amount == 10 }">
+                                            <option value="10" selected="selected">10명씩 보기</option>
+                                            <option value="20">20명씩 보기</option>
+                                            <option value="30">30명씩 보기</option>
+                                            <option value="40">40명씩 보기</option>
+                                        </c:if>
+
+                                        <c:if test="${pageMaker.cri.amount == 20 }">
+                                            <option value="10">10명씩 보기</option>
+                                            <option value="20" selected="selected">20명씩 보기</option>
+                                            <option value="30">30명씩 보기</option>
+                                            <option value="40">40명씩 보기</option>
+                                        </c:if>
+
+                                        <c:if test="${pageMaker.cri.amount == 30 }">
+                                            <option value="10">10명씩 보기</option>
+                                            <option value="20">20명씩 보기</option>
+                                            <option value="30" selected="selected">30명씩 보기</option>
+                                            <option value="40">40명씩 보기</option>
+                                        </c:if>
+
+                                        <c:if test="${pageMaker.cri.amount == 40 }">
+                                            <option value="10">10명씩 보기</option>
+                                            <option value="20">20명씩 보기</option>
+                                            <option value="30">30명씩 보기</option>
+                                            <option value="40" selected="selected">40명씩 보기</option>
+                                        </c:if>
+
                                     </select>
                                     <input type="hidden" name="page" value="1">
                                     <input type="hidden" name="type" value="${pageMaker.cri.type }">
-									<input type="hidden" name="keyword" value="${pageMaker.cri.keyword }">
+                                    <input type="hidden" name="keyword" value="${pageMaker.cri.keyword }">
                                     <button id="list_btn" class="btn">이동</button>
                                 </form>
 
@@ -156,66 +156,72 @@
                                             <th style="width: 50px;">대출불가</th>
                                             <th style="width: 90px;">회원가입일</th>
                                             <th style="width: 60px;">권한</th>
-	                                </tr>
+                                        </tr>
                                     </thead>
                                     <tbody>
-                                    
-	                                    <c:forEach var="admin_list" items="${admin_list}">
-										<tr>
-											<td class="">${admin_list.user_id }</td>
-											<td class="left" style="padding-left: 15px;">${admin_list.user_name }</td>
-											<td>${admin_list.user_tel}</td>
-											<td>${admin_list.user_email}</td>
-											<td>${admin_list.user_birth }</td>
-											
-											<c:if test="${admin_list.user_overdue_date == 0 }">
-											<td>대출가능</td>
-											</c:if>
-											
-											<c:if test="${admin_list.user_overdue_date != 0 }">
-											<td>${admin_list.user_overdue_date }일</td>
-											</c:if>
-											
-											<td>${admin_list.user_reg_date }</td>
-											<td>
-												<form action="/master/revoke" method="post" onsubmit="return false;">
-													<input type="hidden" name="amount" value="${pageMaker.cri.amount }">
-													<input type="hidden" name="page" value="${pageMaker.cri.page }">
-													<input type="hidden" name="type" value="${pageMaker.cri.type }">
-													<input type="hidden" name="keyword" value="${pageMaker.cri.keyword }">
-													<input type="hidden" name="user_id" value="${admin_list.user_id }">
-													<button class="btn2">해제</button>
-												</form>
-											
-											</td>
-										</tr>
-										</c:forEach>
-	                                        
+
+                                        <c:forEach var="admin_list" items="${admin_list}">
+                                            <tr>
+                                                <td class="">${admin_list.user_id }</td>
+                                                <td class="left" style="padding-left: 15px;">${admin_list.user_name }
+                                                </td>
+                                                <td>${admin_list.user_tel}</td>
+                                                <td>${admin_list.user_email}</td>
+                                                <td>${admin_list.user_birth }</td>
+
+                                                <c:if test="${admin_list.user_overdue_date == 0 }">
+                                                    <td>대출가능</td>
+                                                </c:if>
+
+                                                <c:if test="${admin_list.user_overdue_date != 0 }">
+                                                    <td>${admin_list.user_overdue_date }일</td>
+                                                </c:if>
+
+                                                <td>${admin_list.user_reg_date }</td>
+                                                <td>
+                                                    <form action="/master/revoke" method="post"
+                                                        onsubmit="return false;">
+                                                        <input type="hidden" name="amount"
+                                                            value="${pageMaker.cri.amount }">
+                                                        <input type="hidden" name="page" value="${pageMaker.cri.page }">
+                                                        <input type="hidden" name="type" value="${pageMaker.cri.type }">
+                                                        <input type="hidden" name="keyword"
+                                                            value="${pageMaker.cri.keyword }">
+                                                        <input type="hidden" name="user_id"
+                                                            value="${admin_list.user_id }">
+                                                        <button class="btn2">해제</button>
+                                                    </form>
+
+                                                </td>
+                                            </tr>
+                                        </c:forEach>
+
                                     </tbody>
                                 </table>
-                                
+
                                 <br>
-                                
+
                                 <div style="float: right;">
-                                	<button class="add_btn btn">추가</button>
+                                    <button class="add_btn btn">추가</button>
                                 </div>
-                                
+
                                 <br>
-                                
+
                                 <div class="pageInfo" style="">
-	
-									<c:if test="${pageMaker.prev }">
-										<a class="not" href="${pageMaker.startPage - 1}">이전</a>
-									</c:if>
-									
-									<c:forEach var="num" begin="${pageMaker.startPage }" end="${pageMaker.endPage }">
-										<a class="${pageMaker.cri.page == num ? "current":"not" }" href="${num }"><span>${num }</span></a>
-									</c:forEach>
-									
-									<c:if test="${pageMaker.next }">
-										<a class="not" href="${pageMaker.endPage + 1}">다음</a>
-									</c:if>
-								</div>
+
+                                    <c:if test="${pageMaker.prev }">
+                                        <a class="not" href="${pageMaker.startPage - 1}">이전</a>
+                                    </c:if>
+
+                                    <c:forEach var="num" begin="${pageMaker.startPage }" end="${pageMaker.endPage }">
+                                        <a class="${pageMaker.cri.page == num ? " current":"not" }"
+                                            href="${num }"><span>${num }</span></a>
+                                    </c:forEach>
+
+                                    <c:if test="${pageMaker.next }">
+                                        <a class="not" href="${pageMaker.endPage + 1}">다음</a>
+                                    </c:if>
+                                </div>
                             </div>
 
                         </div>
@@ -227,64 +233,64 @@
             </div>
         </div>
     </div>
-    
-    <form method="get" class="moveForm"> 
-		<input type="hidden" name="amount" value="${pageMaker.cri.amount }">
-		<input type="hidden" name="page" value="${pageMaker.cri.page }">
-		<input type="hidden" name="type" value="${pageMaker.cri.type }">
-		<input type="hidden" name="keyword" value="${pageMaker.cri.keyword }">
-	</form>
-    
+
+    <form method="get" class="moveForm">
+        <input type="hidden" name="amount" value="${pageMaker.cri.amount }">
+        <input type="hidden" name="page" value="${pageMaker.cri.page }">
+        <input type="hidden" name="type" value="${pageMaker.cri.type }">
+        <input type="hidden" name="keyword" value="${pageMaker.cri.keyword }">
+    </form>
+
     <!-- footer -->
     <jsp:include page="../../footer.jsp"></jsp:include>
 
 
-	<script>
-		
-		$(function() {
-			$(".sub6").addClass("active");
-			
-			let moveForm = $(".moveForm");
-			
-			//pageInfo의 a태그를 누르면 a태그의 href 속성을 가져와서 moveForm의 page에 넣고 moveForm이 submit됨
-			$(".pageInfo a").on("click", function(e) {
-				e.preventDefault();
-				moveForm.find("input[name = 'page']").val($(this).attr("href"));
-				moveForm.submit();
-			});
-			
-			// 검색 버튼을 누를 시 공백이면 alert
-			$("#search_btn").on("click", function(e){
-				let keyword = $("input[name='keyword']").val();
-				if(keyword == ""){ 
-					alert("검색어를 입력해주세요.");
-				} else {
-					$("form").attr("onsubmit", "return true");
-					$("form").submit();
-				}
-				
-			});
-			
-			$(".btn2").on("click", function(){
-				
-				if(confirm("관리자 권한을 해제하시겠습니까?")){
-					$("form").attr("onsubmit", "return true");
-					$("form").submit();
-				} 
-			}) 
-			
-			
-			$('.add_btn').on("click",function(e){
-				
-				e.preventDefault();
-				let popUrl = "/master/add-popup";
-				let popOption = "width = 700px, height=600px, top=300px, scrollbars=no, resizeable=no";
-				window.open(popUrl,"작가 찾기" ,popOption);
-			});
-			 
-		});
-		
-	</script>	
+    <script>
+
+        $(function () {
+            $(".sub6").addClass("active");
+
+            let moveForm = $(".moveForm");
+
+            //pageInfo의 a태그를 누르면 a태그의 href 속성을 가져와서 moveForm의 page에 넣고 moveForm이 submit됨
+            $(".pageInfo a").on("click", function (e) {
+                e.preventDefault();
+                moveForm.find("input[name = 'page']").val($(this).attr("href"));
+                moveForm.submit();
+            });
+
+            // 검색 버튼을 누를 시 공백이면 alert
+            $("#search_btn").on("click", function (e) {
+                let keyword = $("input[name='keyword']").val();
+                if (keyword == "") {
+                    alert("검색어를 입력해주세요.");
+                } else {
+                    $("form").attr("onsubmit", "return true");
+                    $("form").submit();
+                }
+
+            });
+
+            $(".btn2").on("click", function () {
+
+                if (confirm("관리자 권한을 해제하시겠습니까?")) {
+                    alert("관리자 권한을 해제하였습니다.")
+                    $("form").attr("onsubmit", "return true");
+                    $("form").submit();
+                }
+            })
+
+            $('.add_btn').on("click", function (e) {
+
+                e.preventDefault();
+                let popUrl = "/master/add-popup";
+                let popOption = "width = 700px, height=600px, top=300px, scrollbars=no, resizeable=no";
+                window.open(popUrl, "작가 찾기", popOption);
+            });
+
+        });
+
+    </script>
 
 </body>
 </html>

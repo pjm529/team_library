@@ -26,7 +26,7 @@
                             <a href="#">
                                 <img src="/resources/imges/common/navi_home_icon.gif">
                             </a>
-                        </li> 
+                        </li>
                         <li>
                             <a href="/admin/member-list">관리자</a>
                         </li>
@@ -47,47 +47,47 @@
                 <div class="content" style="">
                     <div class="doc">
                         <div class="wrapper-bbs" style="">
-							<!-- 회원 수 -->
+                            <!-- 연체 도서 수 -->
                             <div class="inline">
                                 <span style="margin-right: 10px;"> 연체 중 : <b>${total }</b> 건</span>
-                            </div> 
+                            </div>
                             <br>
                             <!-- 테이블 -->
-                            
+
                             <form action="/admin/send-mail" method="get" onsubmit="return false;">
-                            <button class="btn2" style="">메일</button>
-                            <div class="table-wrap" style="overflow: auto; height: 500px;">
-                                <table>
-                                    <thead>
-                                        <tr>
-                                            <th style=""><input type="checkbox" class="chk-all" ></th>
-                                            <th style="width: 100px;">아이디</th>
-                                            <th style="">도서명</th>
-                                            <th style="">ISBN</th>
-                                            <th style="width: 90px;">대출날짜</th>
-                                            <th style="width: 90px;">반납예정일</th>
-	                                </tr>
-                                    </thead>
-                                    <tbody>
-                                    	
-	                                    <c:forEach var="overdue_list" items="${overdue_list}">
-										<tr>
-											<td><input type="checkbox" name="user_email" 
-											class="chk" value="${overdue_list.user_email}"></td>
-											<td>${overdue_list.user_id }</td>
-											<td>${overdue_list.book_title }</td>
-											<td>${overdue_list.book_isbn}</td>
-											<td>${overdue_list.loan_date }</td>
-											<td>${overdue_list.return_period }</td>
-											
-										</tr>
-										</c:forEach>
-											
-                                    </tbody>
-                                </table>
+                                <button class="btn2" style="">메일</button>
+                                <div class="table-wrap" style="overflow: auto; height: 500px;">
+                                    <table>
+                                        <thead>
+                                            <tr>
+                                                <th style=""><input type="checkbox" class="chk-all"></th>
+                                                <th style="width: 100px;">아이디</th>
+                                                <th style="">도서명</th>
+                                                <th style="">ISBN</th>
+                                                <th style="width: 90px;">대출날짜</th>
+                                                <th style="width: 90px;">반납예정일</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+
+                                            <c:forEach var="overdue_list" items="${overdue_list}">
+                                                <tr>
+                                                    <td><input type="checkbox" name="user_email" class="chk"
+                                                            value="${overdue_list.user_email}"></td>
+                                                    <td>${overdue_list.user_id }</td>
+                                                    <td>${overdue_list.book_title }</td>
+                                                    <td>${overdue_list.book_isbn}</td>
+                                                    <td>${overdue_list.loan_date }</td>
+                                                    <td>${overdue_list.return_period }</td>
+
+                                                </tr>
+                                            </c:forEach>
+
+                                        </tbody>
+                                    </table>
                                 </div>
-                                
-	                        </form>
+
+                            </form>
 
                         </div>
 
@@ -98,39 +98,39 @@
             </div>
         </div>
     </div>
-    
+
     <!-- footer -->
     <jsp:include page="../../footer.jsp"></jsp:include>
 
 
-	<script>
-		
-		$(function() {
-			$(".sub4").addClass("active");
-			
-			$(".btn2").on("click", function(){
-				let cnt = $("input[name=user_email]:checkbox:checked").length;
-				
-				if(cnt > 0) {
-					if(confirm("메일을 전송하시겠습니까?")){
-						$("form").attr("onsubmit", "return true;");
-						$("form").submit();
-					}
-					
-				} else {
-					alert("회원을 선택해주세요");
-				}
-				
-			});
-			
-			$(".chk-all").on("click", function() {
-				$(".chk").prop("checked", this.checked);
-			})
-			
-		});
-		
-	</script>	
+    <script>
 
+        $(function () {
+            $(".sub4").addClass("active");
+
+            $(".btn2").on("click", function () {
+                let cnt = $("input[name=user_email]:checkbox:checked").length;
+
+                if (cnt > 0) {
+                    if (confirm("메일을 전송하시겠습니까?")) {
+                        alert("메일이 전송되었습니다.")
+                        $("form").attr("onsubmit", "return true;");
+                        $("form").submit();
+                    }
+
+                } else {
+                    alert("회원을 선택해주세요");
+                }
+
+            });
+
+            $(".chk-all").on("click", function () {
+                $(".chk").prop("checked", this.checked);
+            })
+
+        });
+
+    </script>
 
 </body>
 </html>

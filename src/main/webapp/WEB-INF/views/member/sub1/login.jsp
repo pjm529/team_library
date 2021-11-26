@@ -13,17 +13,18 @@
  crossorigin="anonymous"></script>
 </head>
 <body>
-	<c:if test="${not empty SPRING_SECURITY_LAST_EXCEPTION}">
-		<script>
-			alert("ID 및 PW 오류입니다");
-		</script>
-	        <c:remove var="SPRING_SECURITY_LAST_EXCEPTION" scope="session"/>
-	</c:if>
+    <!-- 로그인 실패 -->
+    <c:if test="${not empty SPRING_SECURITY_LAST_EXCEPTION}">
+        <script>
+            alert("ID 및 PW 오류입니다");
+        </script>
+        <c:remove var="SPRING_SECURITY_LAST_EXCEPTION" scope="session" />
+    </c:if>
 
 
-	<div class="header">
+    <div class="header">
     </div>
-    
+
     <div class="container">
         <div class="sub_title">
             <div class="doc-info">
@@ -59,18 +60,20 @@
                     <div class="doc">
                         <h2><span style="color: rgb(101, 101, 255);">라온도서관</span> 방문을 환영합니다.</h2>
                         <div class="wrapper-bbs">
-                            
+
                             <div>
-                                
+
                                 <div class="login_img">
                                     <img src="/resources/imges/member/mem_loginimg.png">
                                 </div>
 
                                 <div class="loginForm">
                                     <form action="/login" method="post">
-                                        <input class="id_input" type="text" name="username" placeholder="아이디" autocomplete="off">
+                                        <input class="id_input" type="text" name="username" placeholder="아이디"
+                                            autocomplete="off">
                                         <p style="font-size: 5px;"></p>
-                                        <input class="pw_input" type="password" name="password" placeholder="비밀번호" autocomplete="off">
+                                        <input class="pw_input" type="password" name="password" placeholder="비밀번호"
+                                            autocomplete="off">
                                         <button class="login_btn">로그인</button>
                                     </form>
                                 </div>
@@ -88,7 +91,7 @@
                                 </div>
 
                             </div>
-                                
+
                         </div>
 
                     </div>
@@ -98,15 +101,14 @@
             </div>
         </div>
     </div>
-    
+
     <!-- footer -->
     <jsp:include page="../../footer.jsp"></jsp:include>
     <script>
-    	$(function(){
-    		
-    		$(".sub1").addClass("active");
-    	});
-    	
+        $(function () {
+            $(".sub1").addClass("active");
+        });
+
     </script>
 
 </body>
