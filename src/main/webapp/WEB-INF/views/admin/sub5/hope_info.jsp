@@ -5,7 +5,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>라온도서관 > 나의도서관 > 희망도서신청 > 희망도서신청</title>
+<title>라온도서관 > 관리자 > 희망도서신청정보</title>
 <link rel="stylesheet" href="/resources/css/admin/hope_info.css">
 <link rel="stylesheet" href="/resources/css/footer.css">
 <script src="https://code.jquery.com/jquery-3.6.0.js" 
@@ -22,7 +22,7 @@
             <div class="doc-info">
                 <!-- doc title -->
                 <div class="doc-title">
-                    <h3>희망도서신청</h3>
+                    <h3>희망도서신청정보</h3>
                     <ul>
                         <!-- 홈 btn img -->
                         <li class="" style="background-image: none;">
@@ -31,13 +31,10 @@
                             </a>
                         </li>
                         <li>
-                            <a href="/mylib/mypage">나의도서관</a>
+                            <a href="/admin/member-list">관리자</a>
                         </li>
                         <li>
-                            <a href="/mylib/hope">희망도서신청</a>
-                        </li>
-                        <li>
-                            <a href="/mylib/hope">희망도서신청</a>
+                            <a href="/admin/hope-history">희망도서신청</a>
                         </li>
                     </ul>
                 </div>
