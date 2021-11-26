@@ -35,6 +35,9 @@ public class HopeDTO {
 	// 희망 도서 상태
 	private String hope_status;
 	
+	// 취소 사유
+	private String cancel_reason;
+	
 	// 희망 도서 등록 일시
 	private String hope_reg_date;
 	
