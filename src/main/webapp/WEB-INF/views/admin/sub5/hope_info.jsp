@@ -34,7 +34,7 @@
                             <a href="/admin/member-list">관리자</a>
                         </li>
                         <li>
-                            <a href="/admin/hope-history">희망도서신청</a>
+                            <a href="/admin/hope-history">희망도서신청내역</a>
                         </li>
                     </ul>
                 </div>
