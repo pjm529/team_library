@@ -34,7 +34,7 @@
                             <a href="/mylib/hope">희망도서신청</a>
                         </li>
                         <li>
-                            <a href="/mylib/hope-list">희망도서신청내역</a>
+                            <a href="/mylib/hope-history">희망도서신청내역</a>
                         </li>
                     </ul>
                 </div>
