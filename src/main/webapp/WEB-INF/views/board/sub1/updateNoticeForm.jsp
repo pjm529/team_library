@@ -177,7 +177,7 @@
 					
 					
 					if(attach.file_type){
-						var fileCallPath =  encodeURIComponent(attach.upload_path + "/s_" + attach.uuid + "_" + attach.file_name);
+						var fileCallPath = encodeURIComponent(attach.upload_path + "/s_" + attach.uuid + "_" + attach.file_name);
 											    
 					    str += "<li data-path='" + attach.upload_path + "' data-uuid='" + attach.uuid + "' data-filename='" + attach.file_name + "' data-type='" + attach.file_type + "' >";
 					    str += "<div style='margin-top: 5px;'>";
