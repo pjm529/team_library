@@ -69,7 +69,7 @@ public class HopeController {
 		model.addAttribute("hope_list", hope_list);
 
 		// 나의 희망 도서 신청 수 
-		int total = hopeService.get_total(id);
+		int total = hopeService.get_total(cri, id);
 		model.addAttribute("total", total);
 
 		// 페이징

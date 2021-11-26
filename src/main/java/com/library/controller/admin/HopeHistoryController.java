@@ -40,7 +40,7 @@ public class HopeHistoryController {
 		model.addAttribute("hope_list", hope_list);
 
 		// 희망 도서 신청 수
-		int total = hopeHistoryService.get_total();
+		int total = hopeHistoryService.get_total(cri);
 		model.addAttribute("total", total);
 
 		// 페이징
@@ -72,8 +72,8 @@ public class HopeHistoryController {
 
 		hopeHistoryService.hope_cancel(hope);
 
-		return "redirect:/admin/hope-info?amount=" + cri.getAmount() + "&page=" + cri.getPage() + "&hope_no="
-				+ hope.getHope_no();
+		return "redirect:/admin/hope-info?amount=" + cri.getAmount() + "&page=" + cri.getPage() + 
+				"&type=" + cri.getType() + "&hope_no=" + hope.getHope_no();
 	}
 	
 	// 희망 도서 소유 처리
@@ -82,7 +82,7 @@ public class HopeHistoryController {
 
 		hopeHistoryService.hope_own(hope.getHope_no());
 
-		return "redirect:/admin/hope-info?amount=" + cri.getAmount() + "&page=" + cri.getPage() + "&hope_no="
-				+ hope.getHope_no();
+		return "redirect:/admin/hope-info?amount=" + cri.getAmount() + "&page=" + cri.getPage() + 
+				"&type=" + cri.getType() + "&hope_no=" + hope.getHope_no();
 	}
 }

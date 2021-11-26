@@ -351,3 +351,7 @@ th, td{
 .lnb > ul > li > ul {
     display: none;
 }
+
+.border{
+	border-left: 1px solid #e5e8eb;
+}

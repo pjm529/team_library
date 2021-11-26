@@ -378,3 +378,7 @@ th, td{
 	margin-right: 10px;
 	float: right;
 }
+
+.border{
+	border-left: 1px solid #e5e8eb;
+}

@@ -11,7 +11,7 @@ public interface HopeHistoryService {
 	public List<HopeDTO> hope_list(Criteria cri);
 	
 	// 희망 도서 신청수
-	public int get_total();
+	public int get_total(Criteria cri);
 	
 	// 희망 도서 정보 조회
 	public HopeDTO hope_info(String hope_no);
