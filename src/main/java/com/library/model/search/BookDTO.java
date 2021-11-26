@@ -49,13 +49,12 @@ public class BookDTO {
 	// 반납 예정 일
 	private String return_period;
 
-	// 도서 가격
+	// 도서 가격(AladinAPI에서 받아올 때)
 	private int priceStandard;
-
+	
 	// 도서
 	private String description;
 	
 	// 연체일
 	private int overdue_date;
-
 }
