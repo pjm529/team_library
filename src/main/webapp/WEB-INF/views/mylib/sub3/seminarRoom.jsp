@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+    <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -81,10 +82,9 @@
                         <!-- 날짜 부분 -->
                         <div class="wrap-seminarRoomBox">
                             <div class="nowDate-btn">
-                                <h2>2021-11-24 ~ 2021-11-31</h2>
-                                <button>&lt;</button>
-                                <button class="today">Today</button>
-                                <button>&gt;</button>
+                                <h2><span class="nowDate"></span></h2>
+                                <button class="go-prev">&lt;</button>
+                                <button class="go-next">&gt;</button>
                             </div>
                         </div>
 
@@ -102,7 +102,7 @@
                             <thead>
                                 <tr>
                                     <th rowspan="2"></th>
-                                    <th class="nowDate" colspan="9">2021-11-24</th>
+                                    <th class="nowDate" colspan="9"></th>
                                 </tr>
                                 <tr>
                                     <th>
@@ -228,19 +228,26 @@
     
     <script src="https://code.jquery.com/jquery-3.6.0.js"
     integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk=" crossorigin="anonymous"></script>
-    
     <script src="/resources/js/mylib/sub3/select.js"></script>
-    
     
     <script>
     
     $(function() {
+    	
+    	/* 왼쪽 사이드바 class 추가 */
 		$(".sub3").addClass("active");
+
+    	/* 받아온 날짜 값 view단에 보여주기 */
+		var d_value = "<c:out value='${nowDate}'/>";
+		var chDate = new Date(d_value);
+		var nowDate = chDate.toISOString().slice(0, 10);
+		$(".nowDate").html(nowDate); // .nowDate => &lt 상단의 <h2>태그 && 테이블 표에 날짜 부분
 		
-/* 		$(".go-btn").on("click", function() {
-			var nowDate = $('#nowDate').val();
-			location.href = "/mylib/seminarRoom?nowDate=" + nowDate;
-		}); */
+		
+		
+		
+
+		
 	});
     
     </script>
