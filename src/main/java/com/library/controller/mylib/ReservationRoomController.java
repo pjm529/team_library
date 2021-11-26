@@ -15,7 +15,7 @@ public class ReservationRoomController {
 	@Autowired
 	private ReservationRoomService resService;
 	
-	@GetMapping("/ReservationRoomPage")
+	@GetMapping("/reservationRoomPage")
 	public String sub3MainPage(Model model) {
 		
 		int nbUsingSeat = resService.nbUsingSeat();
@@ -24,7 +24,7 @@ public class ReservationRoomController {
 		int nbUsedSeat = resService.nbUsedSeat();
 		model.addAttribute("nbUsedSeat", nbUsedSeat);
 		
-		return "/mylib/sub3/ReservationRoomPage";
+		return "/mylib/sub3/reservationRoomPage";
 	}
 
 }
