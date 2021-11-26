@@ -43,6 +43,8 @@ public class SeminarRoomController {
 	@PostMapping("/sm_Room_booking")
 	@ResponseBody
 	public int sm_Room_booking(@RequestBody SeminarRoomDTO dto) {
+		System.out.println(dto);
+		smService.updateStatusOccupied(dto);
 		
 		return smService.sm_Room_booking(dto);
 		

@@ -264,17 +264,11 @@
     			room_no = 4;
     		}
     		
-    		var time_zone = $("#allTime").val(); // time_zone (room_status update 시, 필요)
     		var sm_time = $("#time option:selected").val(); // sm_time (예약 시간 : ex) A01, A02...)
     		var sm_date = chDate.toISOString().slice(0, 10); // sm_date (예약(사용할 날짜)
     		var user_id = "<c:out value='${user_id}'/>"
-			console.log(room_no);
-			console.log(time_zone);
-			console.log(sm_time);
-			console.log(sm_date);
-			console.log(user_id);
 			
-			var userRegistData = {room_no:room_no, user_id:user_id, sm_time:sm_time, sm_date:sm_date, time_zone:time_zone}
+			var userRegistData = {room_no:room_no, user_id:user_id, sm_time:sm_time, sm_date:sm_date}
 			
 			
 			$.ajax({
