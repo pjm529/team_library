@@ -1,12 +1,13 @@
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-    <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
 <title>라온도서관 > 나의 도서관 > 좌석예약/조회(세미나실 예약 안내)</title>
 	<link rel="stylesheet" href="/resources/css/mylib/sub3/seminarRoom.css">
+	<link rel="stylesheet" href="/resources/css/footer.css">
 </head>
 <body>
 	
@@ -224,6 +225,9 @@
             </div>
         </div>
     </div>
+    
+    <!-- footer -->
+    <jsp:include page="../../footer.jsp"></jsp:include>
     
     
     <script src="https://code.jquery.com/jquery-3.6.0.js"
