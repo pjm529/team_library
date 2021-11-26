@@ -53,7 +53,7 @@
                             </div>
                             <br>
                             <!-- 테이블 -->
-
+							<c:if test="${not empty overdue_list }">
                             <form action="/admin/send-mail" method="get" onsubmit="return false;">
                                 <button class="btn2" style="">메일</button>
                                 <div class="table-wrap" style="overflow: auto; height: 500px;">
@@ -88,7 +88,12 @@
                                 </div>
 
                             </form>
-
+							</c:if>
+							
+							<c:if test="${empty overdue_list }">
+								<h2 style="text-align: center;">연체 된 도서가 없습니다.</h2>
+							</c:if>
+							
                         </div>
 
                     </div>
