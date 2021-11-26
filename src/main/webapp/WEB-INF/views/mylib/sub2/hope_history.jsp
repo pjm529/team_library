@@ -104,6 +104,7 @@
                                             <th>출판사</th>
                                             <th style="width: 90px;">신청일</th>
                                             <th style="width: 75px;">처리결과</th>
+                                            <th style="width: 60px;">정보</th>
 	                                </tr>
                                     </thead>
                                     <tbody>
@@ -126,6 +127,16 @@
 											<c:if test="${hope_list.hope_status == 1 }">
 											<td>소장중</td>
 											</c:if>
+											
+											<td>
+												<form action="/mylib/hope-info" method="get">
+													<input type="hidden" name="amount" value="${pageMaker.cri.amount }">
+													<input type="hidden" name="page" value="${pageMaker.cri.page }">
+													<input type="hidden" name="hope_no" value="${hope_list.hope_no }">
+													<button class="btn2">정보</button>
+												</form>
+											
+											</td>
 											
 										</tr>
 										</c:forEach>

@@ -17,4 +17,7 @@ public interface HopeMapper {
 
 	// 희망도서 신청수
 	public int get_total(String user_id);
+
+	// 희망 도서 정보 조회
+	public HopeDTO hope_info(HopeDTO hope);
 }

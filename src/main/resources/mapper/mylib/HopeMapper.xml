@@ -27,4 +27,11 @@
 			  limit #{cri.skip}, #{cri.amount}
 		</select>
 		
+		<!-- 희망 도서 정보 조회 -->
+		<select id="hope_info" resultType="com.library.model.mylib.HopeDTO">
+			select * 
+			  from hope
+			 where user_id = #{user_id} and hope_no = #{hope_no}
+		</select>
+		
 	</mapper>

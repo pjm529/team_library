@@ -9,6 +9,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import com.library.model.mylib.HopeDTO;
 import com.library.page.Criteria;
@@ -64,5 +65,20 @@ public class HopeController {
 
 		return "/mylib/sub2/hope_history";
 
+	}
+	
+	@GetMapping("/hope-info")
+	public String hope_info(Model model, Criteria cri, HopeDTO hope, Principal principal) {
+
+		hope.setUser_id(principal.getName());
+		
+		HopeDTO hope_info = hopeService.hope_info(hope);
+
+		hope_info.setHope_reg_date(hope_info.getHope_reg_date().substring(0, 10));
+
+		model.addAttribute("hope", hope_info);
+		model.addAttribute("cri", cri);
+
+		return "/mylib/sub2/hope_info";
 	}
 }

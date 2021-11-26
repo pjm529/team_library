@@ -33,4 +33,10 @@ public class HopeServiceImpl implements HopeService {
 		return hopeMapper.get_total(user_id);
 	}
 
+	// 희망 도서 정보 조회
+	@Override
+	public HopeDTO hope_info(HopeDTO hope) {
+		return hopeMapper.hope_info(hope);
+	}
+
 }
