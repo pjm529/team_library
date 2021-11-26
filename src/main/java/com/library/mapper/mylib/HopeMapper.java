@@ -1,10 +1,20 @@
 package com.library.mapper.mylib;
 
-import com.library.model.search.BookDTO;
+import java.util.List;
+
+import org.apache.ibatis.annotations.Param;
+
+import com.library.model.mylib.HopeDTO;
+import com.library.page.Criteria;
 
 public interface HopeMapper {
 
 	// 희망도서 신청
-	public void insert_hope(BookDTO book);
+	public void insert_hope(HopeDTO book);
 
+	// 희망도서 신청내역
+	public List<HopeDTO> hope_list(@Param("cri") Criteria cri, @Param("user_id") String user_id);
+
+	// 희망도서 신청수
+	public int get_total(String user_id);
 }

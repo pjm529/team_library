@@ -29,7 +29,7 @@
                </li>
                
                <li class="submenu7">
-                   <a href="/mylib/hope-list">희망도서신청내역</a>
+                   <a href="/mylib/hope-history">희망도서신청내역</a>
                </li>
            </ul>
            
