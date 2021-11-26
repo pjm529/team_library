@@ -8,9 +8,9 @@
 		<!-- 희망 도서 신청 -->
 		<insert id="insert_hope">
 			insert into hope values(null, #{user_id}, #{book_title}, #{book_author},
-			 #{book_publisher}, #{book_pubDate}, #{book_isbn}, #{note}, #{book_price}, 0, current_timestamp );
+			 #{book_publisher}, #{book_pubDate}, #{book_isbn}, #{note}, #{book_price}, 0, null, current_timestamp );
 		</insert>		
-		
+		 
 		<!-- 희망 도서 total -->
 		<select id="get_total" resultType="int">
 			select count(*) 
