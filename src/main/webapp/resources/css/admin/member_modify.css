@@ -258,7 +258,8 @@ input:focus{
     display: none;
 }
 
-.name_err, .birth_err, .phone_err, .email_err_1, .email_err_2, .emailck_err, .emailck_err_2, .address_err, .overdue_err {
+.name_err, .birth_err, .phone_err, .email_err_1, .email_err_2, .emailck_err, .emailck_err_2, 
+.address_err, .overdue_err, .able_loan_err {
     color: red;
     display: none;
 }

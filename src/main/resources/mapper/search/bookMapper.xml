@@ -29,7 +29,8 @@
 	<select id="statusCheck" resultType="int">
 		select count(*)
 		  from member 
-		where user_id = #{user_id} and user_book_count &lt; 2 and user_overdue_date = 0
+		where user_id = #{user_id} and user_overdue_date = 0
+		 and user_book_count &lt; (select user_able_loan from member where user_id = #{user_id})
 	</select>
 	
 	<!-- 대출자 대출 중 도서 수 증가 -->

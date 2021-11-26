@@ -142,6 +142,20 @@
                                     </div>
                                 </td>
                             </tr>
+                            
+                            <!-- able_loan -->
+                            <tr>
+                                <th class="first">
+                                <span style="color: red;">*</span>
+                                    대출 가능 도서 수
+                                </th>
+                                <td class="last">
+                                
+									<input class="able_loan_input" autocomplete="off" name="user_able_loan"
+                                    value="${member.user_able_loan }"> <br>
+                                    <span class="able_loan_err">대출가능 도서 수를 입력해주세요.</span>
+                                </td>
+                            </tr>
 
                             <!-- book_count -->
                             <tr>
@@ -211,9 +225,9 @@
         let nameCheck = false;            // 이름
         let birthCheck = false;            // 이름
         let phoneCheck = false;            // 전화번호
-        let addressCheck = false         // 주소
-        let overdueCheck = false         // 주소
-
+        let addressCheck = false;         // 주소
+        let overdueCheck = false;       // 대출 불가 일 수
+		let ableCheck = false;			// 대출 가능 도서 수
 
         // 회원가입 전송
         $(document).ready(function () {
@@ -226,11 +240,11 @@
                 let birth = $('.birth_input').val();            // 생년월일 입력란
                 let phone = $('.phone_input').val();            // 전화번호 입력란
                 let addr = $('.address_input_3').val();        // 주소 입력란
-                let overdue = $('.overdue_input').val();        // 주소 입력란
-
+                let overdue = $('.overdue_input').val();        // 대출 불가 일 입력란
+				let able_loan = $('.able_loan_input').val();  // 대출 가능 도서수 입력란
+				
 
                 // 최종 유효성 검사
-
                 // 이름 유효성 검사
                 if (name == "" || name.length < 2) { // 이름이 공백이거나 2자 미만시 false
                     $('.name_err').css('display', 'block');
@@ -275,10 +289,19 @@
                     $('.overdue_err').css('display', 'none');
                     overdueCheck = true;
                 }
-
+                
+				// 대출 가능 도서 수 유효성 검사
+				if (able_loan == "") {
+                    $('.able_loan_err').css('display', 'block');
+                    ableCheck = false;
+                } else {
+                    $('.able_loan_err').css('display', 'none');
+                    ableCheck = true;
+                }
+				
                 // 최종 유효성 검사 (모든 check 값들이 true일 경우)
-                if (nameCheck && birthCheck && phoneCheck && addressCheck && overdueCheck) {
-                    if (confimr("회원 정보를 수정하시겠습니까?")) {
+                if (nameCheck && birthCheck && phoneCheck && addressCheck && overdueCheck && ableCheck) {
+                    if (confirm("회원 정보를 수정하시겠습니까?")) {
                         alert("수정이 완료되었습니다.");
                         $("#modify_form").attr("onsubmit", "return true;");
                         $("#modify_form").attr("action", "/admin/member-modify");
@@ -355,6 +378,18 @@
                 $('.overdue_err').css('display', 'none');
             } else {
                 $('.overdue_err').css('display', 'block');
+            }
+
+        });
+        
+     	// 대출 가능 도서 수 형식에 맞게 입력 시 입력해달라는 문구 none;
+        $('.able_loan_input').on("propertychange change keyup paste input", function () {
+            $(this).val($(this).val().replace(/[^0-9]/gi, ""));
+
+            if ($(this).val().length != 0) {
+                $('.able_loan_err').css('display', 'none');
+            } else {
+                $('.able_loan_err').css('display', 'block');
             }
 
         });

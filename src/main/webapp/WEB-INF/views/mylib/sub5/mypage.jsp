@@ -135,7 +135,18 @@
                                     </div>
                                 </td>
                             </tr>
-
+							<!-- able_loan -->
+                            <tr>
+                                <th class="first">
+                                    대출 가능 도서 수
+                                </th>
+                                <td class="last">
+                                
+									<input class="able_loan_input" autocomplete="off" name="user_able_loan"
+                                    value="${my.user_able_loan }권" readonly> <br>
+                                    
+                                </td>
+                            </tr>
                             <!-- book_count -->
                             <tr>
                                 <th class="first">
@@ -143,8 +154,8 @@
                                 </th>
                                 <td class="last">
 
-                                    <input class="book_count_input" autocomplete="off" name="${my.user_book_count }" value="2"
-                                        readonly> <br>
+                                    <input class="book_count_input" autocomplete="off" name="user_book_count" 
+                                    value="${my.user_book_count }권" readonly> <br>
 
                                 </td>
                             </tr>
