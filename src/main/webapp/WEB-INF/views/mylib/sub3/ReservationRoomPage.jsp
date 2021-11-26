@@ -10,8 +10,7 @@
 <meta charset="UTF-8">
 	<link rel="stylesheet" href="/resources/css/mylib/sub3/ReservationRoomPage.css">
 	<link rel="stylesheet" href="/resources/css/mylib/sub3/calendar.css">
-
-
+	<link rel="stylesheet" href="/resources/css/footer.css">
 <title>라온도서관 > 나의 도서관 > 좌석예약/조회</title>
 
 </head>
@@ -162,7 +161,8 @@
 
     </div>
 
-
+    <!-- footer -->
+    <jsp:include page="../../footer.jsp"></jsp:include>
 
     <script src="https://code.jquery.com/jquery-3.6.0.js"
         integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk=" crossorigin="anonymous"></script>

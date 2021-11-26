@@ -10,7 +10,7 @@
 <meta charset="UTF-8">
 	<link rel="stylesheet" href="/resources/css/mylib/sub3/nbRoom_sb_page.css">
 	<link rel="stylesheet" href="/resources/css/mylib/sub3/notebookRoom.css">
-
+	<link rel="stylesheet" href="/resources/css/footer.css">
    <style>
         .seat-wrapper {
             margin-top: 50px;
@@ -324,6 +324,8 @@
 
     </div>
 
+    <!-- footer -->
+    <jsp:include page="../../footer.jsp"></jsp:include>
 
 
 <script src="https://code.jquery.com/jquery-3.6.0.js"
