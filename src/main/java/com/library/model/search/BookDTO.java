@@ -52,14 +52,9 @@ public class BookDTO {
 	// 도서 가격(AladinAPI에서 받아올 때)
 	private int priceStandard;
 	
-	// 도서 가격(희망 도서 신청시)
-	private String book_price;
 	// 도서
 	private String description;
 	
 	// 연체일
 	private int overdue_date;
-
-	// 비고
-	private String note;
 }
