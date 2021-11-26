@@ -1,5 +1,7 @@
 package com.library.controller.mylib;
 
+import java.security.Principal;
+
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
@@ -29,15 +31,13 @@ public class MyPageController {
 
 	// 마이 페이지 진입
 	@GetMapping("/mypage")
-	public String mypage(Model model) {
+	public String mypage(Model model, Principal principal) {
 
 		System.out.println("마이 페이지 진입");
 
 		// 로그인 된 user_id 받아오기
-		Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-		UserDetails userDetails = (UserDetails) principal;
-		String id = userDetails.getUsername();
-
+		String id = principal.getName();
+		
 		MemberDTO my = myPageService.my_view(id);
 
 		my.setUser_reg_date(my.getUser_reg_date().substring(0, 10));
@@ -50,13 +50,11 @@ public class MyPageController {
 
 	// 수정 페이지 진입
 	@GetMapping("/modify")
-	public String modifyGET(Model model) {
+	public String modifyGET(Model model, Principal principal) {
 		System.out.println("수정 페이지 진입");
 
 		// 로그인 된 user_id 받아오기
-		Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-		UserDetails userDetails = (UserDetails) principal;
-		String id = userDetails.getUsername();
+		String id = principal.getName();
 
 		MemberDTO my = myPageService.my_view(id);
 
@@ -70,15 +68,13 @@ public class MyPageController {
 
 	// 정보 수정
 	@PostMapping("/modify")
-	public String modifyPOST(MemberDTO member) {
+	public String modifyPOST(MemberDTO member, Principal principal) {
 
 		System.out.println("수정post 진입");
 
 		// 로그인 된 user_id 받아오기
-		Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-		UserDetails userDetails = (UserDetails) principal;
-		String id = userDetails.getUsername();
-
+		String id = principal.getName();
+		
 		member.setUser_id(id);
 
 		myPageService.my_modify(member);
@@ -99,14 +95,12 @@ public class MyPageController {
 	// 탈퇴 가능 여부 체크
 	@ResponseBody
 	@PostMapping("/secession")
-	public String secessionPOST(String user_pw, HttpServletRequest request) {
+	public String secessionPOST(String user_pw, Principal principal, HttpServletRequest request) {
 
 		HttpSession session = request.getSession();
 
 		// 로그인 된 user_id 받아오기
-		Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-		UserDetails userDetails = (UserDetails) principal;
-		String id = userDetails.getUsername();
+		String id = principal.getName();
 
 		// 회원 정보 받아오기
 		MemberDTO my = myPageService.user_check(id);
@@ -117,6 +111,7 @@ public class MyPageController {
 		// db에 있는 회원 비밀번호
 		String db_pw = my.getUser_pw();
 
+		// 미반납 도서가 있을 시
 		if (count > 0) {
 
 			return "book";
@@ -155,14 +150,12 @@ public class MyPageController {
 
 	@ResponseBody
 	@PostMapping("/modify-pw")
-	public String modifyPwPOST(String present_pw, String user_pw, HttpServletRequest request) {
+	public String modifyPwPOST(String present_pw, String user_pw, Principal principal, HttpServletRequest request) {
 
 		HttpSession session = request.getSession();
 
 		// 로그인 된 user_id 받아오기
-		Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-		UserDetails userDetails = (UserDetails) principal;
-		String id = userDetails.getUsername();
+		String id = principal.getName();
 		
 		// 회원 정보 받아오기
 		MemberDTO my = myPageService.user_check(id);

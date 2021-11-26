@@ -58,8 +58,8 @@
                                     아이디
                                 </th>
                                 <td class="last">
-                                    <input class="id_input" autocomplete="off" name="user_id" 
-                                    value="${member.user_id }" readonly> <br>
+                                    <input class="id_input" autocomplete="off" name="user_id" value="${member.user_id }"
+                                        readonly> <br>
                                 </td>
                             </tr>
 
@@ -71,7 +71,7 @@
                                 </th>
                                 <td class="last">
                                     <input class="name_input" autocomplete="off" name="user_name"
-                                    value="${member.user_name }"> <br>
+                                        value="${member.user_name }"> <br>
                                     <span class="name_err">이름을 2자 이상 입력해주세요.</span>
                                 </td>
                             </tr>
@@ -98,8 +98,8 @@
                                 </th>
                                 <td class="last">
                                     <input class="phone_input" autocomplete="off" maxlength="11" name="user_tel"
-                                    value="${member.user_tel }"> <br>
-                                    <span class="phone_err" >전화번호를 10~11자 입력해주세요.</span>
+                                        value="${member.user_tel }"> <br>
+                                    <span class="phone_err">전화번호를 10~11자 입력해주세요.</span>
                                 </td>
                             </tr>
 
@@ -112,7 +112,7 @@
                                 </th>
                                 <td class="last">
                                     <input class="mail_input" style="width: 50%;" autocomplete="off" name="user_email"
-                                    value="${member.user_email }" readonly>
+                                        value="${member.user_email }" readonly>
                                 </td>
                             </tr>
 
@@ -142,62 +142,62 @@
                                     </div>
                                 </td>
                             </tr>
-                            
+
                             <!-- book_count -->
                             <tr>
                                 <th class="first">
-                                <span style="color: red;">*</span>
+                                    <span style="color: red;">*</span>
                                     대출 중 도서 수
                                 </th>
                                 <td class="last">
-                                
-									<input class="book_count_input" autocomplete="off" name="user_book_count"
-                                    value="${member.user_book_count }" readonly> <br>
-                                    
+
+                                    <input class="book_count_input" autocomplete="off" name="user_book_count"
+                                        value="${member.user_book_count }" readonly> <br>
+
                                 </td>
                             </tr>
-                            
+
                             <!-- overdue_date -->
                             <tr>
                                 <th class="first">
-                                <span style="color: red;">*</span>
+                                    <span style="color: red;">*</span>
                                     대출불가
                                 </th>
                                 <td class="last">
-									<input class="overdue_input" autocomplete="off" name="user_overdue_date"
-                                    value="${member.user_overdue_date }"> <br>
-                                     <span class="overdue_err" >대출불가 일 수를 입력해주세요.</span>
+                                    <input class="overdue_input" autocomplete="off" name="user_overdue_date"
+                                        value="${member.user_overdue_date }"> <br>
+                                    <span class="overdue_err">대출불가 일 수를 입력해주세요.</span>
                                 </td>
                             </tr>
 
                         </table>
-						
+
                         <input type="hidden" name="amount" value="${cri.amount }">
-						<input type="hidden" name="page" value="${cri.page }">
-						<input type="hidden" name="type" value="${cri.type }">
-						<input type="hidden" name="keyword" value="${cri.keyword }">
-						<br>
-						<button id="modify_btn" class="btn">수정</button>
+                        <input type="hidden" name="page" value="${cri.page }">
+                        <input type="hidden" name="type" value="${cri.type }">
+                        <input type="hidden" name="keyword" value="${cri.keyword }">
+                        <br>
+                        <button id="modify_btn" class="btn">수정</button>
                     </form>
-                    
+
                     <div class="member_list_wrap">
-	                   	<form action="/admin/member-list" method="get">
-	                   		<input type="hidden" name="amount" value="${cri.amount }">
-							<input type="hidden" name="page" value="${cri.page }">
-							<input type="hidden" name="type" value="${cri.type }">
-							<input type="hidden" name="keyword" value="${cri.keyword }">
-							<button class="btn">목록</button>
-	                   	</form>
-	                </div>
+                        <form action="/admin/member-list" method="get">
+                            <input type="hidden" name="amount" value="${cri.amount }">
+                            <input type="hidden" name="page" value="${cri.page }">
+                            <input type="hidden" name="type" value="${cri.type }">
+                            <input type="hidden" name="keyword" value="${cri.keyword }">
+                            <button class="btn">목록</button>
+                        </form>
+                    </div>
 
                 </div>
-                
-                
+
+
 
             </div>
         </div>
     </div>
-    
+
     <!-- footer -->
     <jsp:include page="../../footer.jsp"></jsp:include>
 
@@ -217,8 +217,8 @@
 
         // 회원가입 전송
         $(document).ready(function () {
-        	
-        	$(".sub1").addClass("active");
+
+            $(".sub1").addClass("active");
 
             $("#modify_btn").click(function () {
                 /* 입력값 변수 */
@@ -266,8 +266,8 @@
                     $('.address_err').css('display', 'none');
                     addressCheck = true;
                 }
-                
-             	// 대출불가 유효성 검사
+
+                // 대출불가 유효성 검사
                 if (overdue == "") {
                     $('.overdue_err').css('display', 'block');
                     overdueCheck = false;
@@ -277,21 +277,24 @@
                 }
 
                 // 최종 유효성 검사 (모든 check 값들이 true일 경우)
-                if ( nameCheck && birthCheck && phoneCheck && addressCheck && overdueCheck) {
-                    $("#modify_form").attr("onsubmit", "return true;");
-                    $("#modify_form").attr("action", "/admin/member-modify");
-                    $("#modify_form").submit();
+                if (nameCheck && birthCheck && phoneCheck && addressCheck && overdueCheck) {
+                    if (confimr("회원 정보를 수정하시겠습니까?")) {
+                        alert("수정이 완료되었습니다.");
+                        $("#modify_form").attr("onsubmit", "return true;");
+                        $("#modify_form").attr("action", "/admin/member-modify");
+                        $("#modify_form").submit();
+                    } else {
+                        alert("취소 되었습니다.");
+                    }
+
                 }
 
                 return false;
 
             });
-        }); //회원가입 전송 함수 종료
+        }); 
 
 
-
-
-      
         // 이름 입력 시 입력해달라는 문구 none;
         $('.name_input').on("propertychange change keyup paste input", function () {
 
@@ -344,7 +347,7 @@
         });
 
 
-     	// 대출 일수 형식에 맞게 입력 시 입력해달라는 문구 none;
+        // 대출 일수 형식에 맞게 입력 시 입력해달라는 문구 none;
         $('.overdue_input').on("propertychange change keyup paste input", function () {
             $(this).val($(this).val().replace(/[^0-9]/gi, ""));
 

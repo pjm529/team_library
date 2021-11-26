@@ -190,6 +190,7 @@
                     	<form action="/admin/hope-cancel" method="post" onsubmit="return false;">
                     		<input type="hidden" name="amount" value="${cri.amount }">
 							<input type="hidden" name="page" value="${cri.page }">
+							<input type="hidden" name="type" value="${cri.type }">
 							<input type="hidden" name="hope_no" value="${hope.hope_no }">
 							<input type="hidden" class="reason" name="cancel_reason">
 							<button id="cancel_btn" class="btn">취소</button>
@@ -200,6 +201,7 @@
                     	<form action="/admin/hope-own" method="post" onsubmit="return false;">
                     		<input type="hidden" name="amount" value="${cri.amount }">
 							<input type="hidden" name="page" value="${cri.page }">
+							<input type="hidden" name="type" value="${cri.type }">
 							<input type="hidden" name="hope_no" value="${hope.hope_no }">
 							<button id="own_btn" class="btn">소장</button>
                     	</form>

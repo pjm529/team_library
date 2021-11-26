@@ -1,5 +1,6 @@
 package com.library.controller.mylib;
 
+import java.security.Principal;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
@@ -26,15 +27,13 @@ public class MyLoanController {
 
 	// 대출 중 리스트 출력 (get)
 	@GetMapping("/loan-list")
-	public String my_loan_list(Model model) {
+	public String my_loan_list(Model model, Principal principal) {
 
 		System.out.println("my_loan_list 진입");
 
 		// 로그인 된 user_id 받아오기
-		Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-		UserDetails userDetails = (UserDetails) principal;
-		String id = userDetails.getUsername();
-
+		String id = principal.getName();
+		
 		// 회원 대출 중 리스트
 		List<BookDTO> loan_list = myLoanService.loan_list_paging(id);
 

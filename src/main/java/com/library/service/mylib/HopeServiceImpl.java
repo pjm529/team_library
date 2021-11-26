@@ -29,8 +29,8 @@ public class HopeServiceImpl implements HopeService {
 
 	// 희망 도서 신청 수
 	@Override
-	public int get_total(String user_id) {
-		return hopeMapper.get_total(user_id);
+	public int get_total(Criteria cri, String user_id) {
+		return hopeMapper.get_total(cri, user_id);
 	}
 
 	// 희망 도서 정보 조회

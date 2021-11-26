@@ -51,7 +51,52 @@
                     <div class="doc">
                         <div class="wrapper-bbs" style="">
 
-                            
+                            <!--검색-->
+                            <div class="search">
+                                <form action="">
+                              		<input type="hidden" name="amount" value="${pageMaker.cri.amount }">
+                              		<input type="hidden" name="page" value="1">
+                                    <select class="type" name="type" onchange="submit()">
+                                    
+                                    	<c:if test="${empty pageMaker.cri.type}">
+                                    	<option value="all" selected="selected">전체</option>
+                                        <option value="process">처리중</option>
+                                        <option value="own">소장중</option>
+                                        <option value="cancel">취소</option>
+                                    	</c:if>
+                                    	
+                                    	<c:if test="${pageMaker.cri.type == 'all'}">
+                                    	<option value="all" selected="selected">전체</option>
+                                        <option value="process">처리중</option>
+                                        <option value="own">소장중</option>
+                                        <option value="cancel">취소</option>
+                                    	</c:if>
+                                    	
+                                    	<c:if test="${pageMaker.cri.type == 'process' }">
+                                    	<option value="all">전체</option>
+                                        <option value="process" selected="selected">처리중</option>
+                                        <option value="own">소장중</option>
+                                        <option value="cancel">취소</option>
+                                    	</c:if>
+                                    	
+                                    	<c:if test="${pageMaker.cri.type == 'own' }">
+                                    	<option value="all">전체</option>
+                                        <option value="process">처리중</option>
+                                        <option value="own" selected="selected">소장중</option>
+                                        <option value="cancel">취소</option>
+                                    	</c:if>
+                                    	
+                                    	<c:if test="${pageMaker.cri.type == 'cancel' }">
+                                    	<option value="all">전체</option>
+                                        <option value="process">처리중</option>
+                                        <option value="own">소장중</option>
+                                        <option value="cancel" selected="selected">취소</option>
+                                    	</c:if>
+                                        
+                                    </select>
+                                </form>
+
+                            </div>
                             <!-- 도서 수 -->
                             <div class="inline">
                                 <form action="">
@@ -96,12 +141,13 @@
 
                             <!-- 테이블 -->
                             <div class="table-wrap">
-                                <table>
+                            	<c:if test="${not empty hope_list }">
+                                <table  >
                                     <thead>
                                         <tr>
-                                            <th>도서명</th>
-                                            <th>저자</th>
-                                            <th>출판사</th>
+                                            <th style="width: 400px;">도서명</th>
+                                            <th style="width: 150px;">저자</th>
+                                            <th style="width: 100px;">출판사</th>
                                             <th style="width: 90px;">신청일</th>
                                             <th style="width: 75px;">처리결과</th>
                                             <th style="width: 60px;">정보</th>
@@ -112,26 +158,27 @@
 	                                    <c:forEach var="hope_list" items="${hope_list}">
 										<tr>
 											<td>${hope_list.book_title }</td>
-											<td>${hope_list.book_author }</td>
-											<td>${hope_list.book_publisher}</td>
-											<td>${hope_list.hope_reg_date}</td>
+											<td class="border">${hope_list.book_author }</td>
+											<td class="border">${hope_list.book_publisher}</td>
+											<td class="border"">${hope_list.hope_reg_date}</td>
 
 											<c:if test="${hope_list.hope_status == 0 }">
-											<td>처리중</td>
+											<td class="border"">처리중</td>
 											</c:if>
 											
 											<c:if test="${hope_list.hope_status == -1 }">
-											<td>취소</td>
+											<td class="border"">취소</td>
 											</c:if>
 											
 											<c:if test="${hope_list.hope_status == 1 }">
-											<td>소장중</td>
+											<td class="border">소장중</td>
 											</c:if>
 											
-											<td>
+											<td class="border">
 												<form action="/mylib/hope-info" method="get">
 													<input type="hidden" name="amount" value="${pageMaker.cri.amount }">
 													<input type="hidden" name="page" value="${pageMaker.cri.page }">
+													<input type="hidden" name="type" value="${pageMaker.cri.type }">
 													<input type="hidden" name="hope_no" value="${hope_list.hope_no }">
 													<button class="btn2">정보</button>
 												</form>
@@ -160,10 +207,14 @@
 										<a class="not" href="${pageMaker.endPage + 1}">다음</a>
 									</c:if>
 								</div>
+								</c:if>
                             </div>
 
                         </div>
-
+						<br><br>
+						<c:if test="${empty hope_list }">
+							<h2 style="text-align: center;">조회 된 도서가 없습니다.</h2>
+						</c:if>
                     </div>
 
                 </div>
@@ -175,6 +226,7 @@
     <form method="get" class="moveForm"> 
 		<input type="hidden" name="amount" value="${pageMaker.cri.amount }">
 		<input type="hidden" name="page" value="${pageMaker.cri.page }">
+		<input type="hidden" name="type" value="${pageMaker.cri.type }">
 	</form>
     
     <!-- footer -->

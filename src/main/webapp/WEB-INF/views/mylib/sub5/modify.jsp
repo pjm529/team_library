@@ -26,14 +26,14 @@
                         <!-- 홈 btn img -->
                         <li class="" style="background-image: none;">
                             <a href="#">
-                                <img src="/resources/imges/common/navi_home_icon.gif"> 
+                                <img src="/resources/imges/common/navi_home_icon.gif">
                             </a>
                         </li>
                         <li>
                             <a href="#">나의도서관</a>
                         </li>
                         <li>
-                            <a href="/mylib/mypage">개인정보</a> 
+                            <a href="/mylib/mypage">개인정보</a>
                         </li>
                         <li>
                             <a href="/mylib/mypage">마이페이지</a>
@@ -61,8 +61,8 @@
                                     아이디
                                 </th>
                                 <td class="last">
-                                    <input class="id_input" autocomplete="off" name="user_id" 
-                                    value="${my.user_id }" readonly> <br>
+                                    <input class="id_input" autocomplete="off" name="user_id" value="${my.user_id }"
+                                        readonly> <br>
                                 </td>
                             </tr>
 
@@ -74,7 +74,7 @@
                                 </th>
                                 <td class="last">
                                     <input class="name_input" autocomplete="off" name="user_name"
-                                    value="${my.user_name }"> <br>
+                                        value="${my.user_name }"> <br>
                                     <span class="name_err">이름을 2자 이상 입력해주세요.</span>
                                 </td>
                             </tr>
@@ -101,8 +101,8 @@
                                 </th>
                                 <td class="last">
                                     <input class="phone_input" autocomplete="off" maxlength="11" name="user_tel"
-                                    value="${my.user_tel }"> <br>
-                                    <span class="phone_err" >전화번호를 10~11자 입력해주세요.</span>
+                                        value="${my.user_tel }"> <br>
+                                    <span class="phone_err">전화번호를 10~11자 입력해주세요.</span>
                                 </td>
                             </tr>
 
@@ -115,7 +115,7 @@
                                 </th>
                                 <td class="last">
                                     <input class="mail_input" style="width: 50%;" autocomplete="off" name="user_email"
-                                    value="${my.user_email }" readonly>
+                                        value="${my.user_email }" readonly>
                                 </td>
                             </tr>
 
@@ -145,20 +145,20 @@
                                     </div>
                                 </td>
                             </tr>
-                            
+
 
                         </table>
-						<br>
-						<button id="modify_btn" class="btn">수정</button>
+                        <br>
+                        <button id="modify_btn" class="btn">수정</button>
                     </form>
                 </div>
-                
-                
+
+
 
             </div>
         </div>
     </div>
-    
+
     <!-- footer -->
     <jsp:include page="../../footer.jsp"></jsp:include>
 
@@ -178,9 +178,9 @@
 
         // 회원가입 전송
         $(document).ready(function () {
-        	
-        	$(".sub5").addClass("active");
-        	$(".submenu3").addClass("active");
+
+            $(".sub5").addClass("active");
+            $(".submenu3").addClass("active");
 
             $("#modify_btn").click(function () {
                 /* 입력값 변수 */
@@ -228,8 +228,8 @@
                     $('.address_err').css('display', 'none');
                     addressCheck = true;
                 }
-                
-             	// 대출불가 유효성 검사
+
+                // 대출불가 유효성 검사
                 if (overdue == "") {
                     $('.overdue_err').css('display', 'block');
                     overdueCheck = false;
@@ -239,10 +239,16 @@
                 }
 
                 // 최종 유효성 검사 (모든 check 값들이 true일 경우)
-                if ( nameCheck && birthCheck && phoneCheck && addressCheck && overdueCheck) {
-                    $("#modify_form").attr("onsubmit", "return true;");
-                    $("#modify_form").attr("action", "/mylib/modify");
-                    $("#modify_form").submit();
+                if (nameCheck && birthCheck && phoneCheck && addressCheck && overdueCheck) {
+                    if (cofirm("회원 정보를 수정하시겠습니까?")) {
+                        alert("회원 정보가 수정되었습니다.");
+                        $("#modify_form").attr("onsubmit", "return true;");
+                        $("#modify_form").attr("action", "/mylib/modify");
+                        $("#modify_form").submit();
+                    } else {
+                        alert("취소 되었습니다.");
+                    }
+
                 }
 
                 return false;
@@ -253,7 +259,7 @@
 
 
 
-      
+
         // 이름 입력 시 입력해달라는 문구 none;
         $('.name_input').on("propertychange change keyup paste input", function () {
 
@@ -306,7 +312,7 @@
         });
 
 
-     	// 대출 일수 형식에 맞게 입력 시 입력해달라는 문구 none;
+        // 대출 일수 형식에 맞게 입력 시 입력해달라는 문구 none;
         $('.overdue_input').on("propertychange change keyup paste input", function () {
             $(this).val($(this).val().replace(/[^0-9]/gi, ""));
 

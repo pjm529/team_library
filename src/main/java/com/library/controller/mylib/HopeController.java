@@ -23,6 +23,8 @@ public class HopeController {
 	@Autowired
 	private HopeService hopeService;
 	
+	
+	// 희망 도서 신청 get
 	@GetMapping("/hope")
 	public String hopeGET(Model model) {
 
@@ -32,23 +34,32 @@ public class HopeController {
 
 	}
 	
+	// 희망도서 신청 post
 	@PostMapping("/hope")
 	public String hopePOST(HopeDTO hope, Principal principal) {
 		
 		System.out.println("도서신청 post");
+		
+		// 로그인 된 id 받아오기
 		hope.setUser_id(principal.getName());
 		
+		// 희망 도서 신청
 		hopeService.insert_hope(hope);
 		
 		return "redirect:/mylib/hope";
 	}
 	
+	// 나의 희망 도서 신청 내역
 	@GetMapping("/hope-history")
 	public String hope_history(Model model, Criteria cri, Principal principal) {
 
 		System.out.println("희망도서신청내역 진입");
 
-		List<HopeDTO> hope_list = hopeService.hope_list(cri, principal.getName());
+		// 로그인 된 id 받아오기
+		String id = principal.getName();
+		
+		// 나의 희망 도서 목록
+		List<HopeDTO> hope_list = hopeService.hope_list(cri, id);
 
 		for (HopeDTO hope : hope_list) {
 
@@ -57,9 +68,11 @@ public class HopeController {
 
 		model.addAttribute("hope_list", hope_list);
 
-		int total = hopeService.get_total(principal.getName());
+		// 나의 희망 도서 신청 수 
+		int total = hopeService.get_total(cri, id);
 		model.addAttribute("total", total);
 
+		// 페이징
 		ViewPage vp = new ViewPage(cri, total);
 		model.addAttribute("pageMaker", vp);
 
@@ -67,11 +80,17 @@ public class HopeController {
 
 	}
 	
+	// 희망 도서 정보
 	@GetMapping("/hope-info")
 	public String hope_info(Model model, Criteria cri, HopeDTO hope, Principal principal) {
 
-		hope.setUser_id(principal.getName());
+		// 로그인 된 아이디 받아오기
+		String id = principal.getName();
 		
+		// DTO id set
+		hope.setUser_id(id);
+		
+		// 희망 도서 정보 받아오기
 		HopeDTO hope_info = hopeService.hope_info(hope);
 
 		hope_info.setHope_reg_date(hope_info.getHope_reg_date().substring(0, 10));
