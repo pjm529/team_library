@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+  
+  
+<mapper namespace="com.library.mapper.mylib.SeminarRoomMapper"> 
+
+	<!-- ====== 예약 ====== -->
+	<!-- 좌석 예약 (자리 예약 시, time_table room_status column 1 => 0으로 변경 -->
+	<insert id="sm_Room_booking">
+		insert 
+		  into seminar_room_rental(room_no, user_id, sm_time, sm_date) 
+		values (#{room_no}, #{user_id}, #{sm_time}, #{sm_date});
+	</insert>
+<!-- 	<update id="updateStatusOccupied">
+	
+	
+	</update> -->
+
+
+
+
+</mapper>

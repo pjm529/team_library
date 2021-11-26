@@ -95,7 +95,7 @@
                             <select id="allTime" name="allTime"></select>
                             <select id="time" name="time" style="display: none;">
                             </select>
-                            <button id="smBooking">예약하기</button>
+                            <button id="smBooking" onclick="">예약하기</button>
                         </div>
 
                         <!-- 세미나실 예약 현황 -->
@@ -248,11 +248,59 @@
 		$(".nowDate").html(nowDate); // .nowDate => &lt 상단의 <h2>태그 && 테이블 표에 날짜 부분
 		
 		
+		/* 예약하기 btn click 시, ajax > insert */
+		$("#smBooking").on("click", function(e){
+    		e.preventDefault();
+
+    		var room_name = $("#smName").text();
+    		var room_no = 0;
+    		if(room_name == '세미나룸 1'){
+    			room_no = 1;
+    		}else if(room_name == '세미나룸 2'){
+    			room_no = 2;
+    		}else if(room_name == '세미나룸 3'){
+    			room_no = 3;
+    		}else {
+    			room_no = 4;
+    		}
+    		
+    		var time_zone = $("#allTime").val(); // time_zone (room_status update 시, 필요)
+    		var sm_time = $("#time option:selected").val(); // sm_time (예약 시간 : ex) A01, A02...)
+    		var sm_date = chDate.toISOString().slice(0, 10); // sm_date (예약(사용할 날짜)
+    		var user_id = "<c:out value='${user_id}'/>"
+			console.log(room_no);
+			console.log(time_zone);
+			console.log(sm_time);
+			console.log(sm_date);
+			console.log(user_id);
+			
+			var userRegistData = {room_no:room_no, user_id:user_id, sm_time:sm_time, sm_date:sm_date, time_zone:time_zone}
+			
+			
+			$.ajax({
+				url : '/mylib/sm_Room_booking',
+				method : 'POST',
+				contentType:'application/json;charset=utf-8', // 받아 올 때의 type
+	            dataType:'json',
+	            data: JSON.stringify(userRegistData),
+	            success:function(data){
+	               if(data==1){
+	                  alert("세미나실 예약 완료");
+	               }
+	            },
+	            error:function(request,status,error){
+	               alert("code:"+request.status+"\n"+"message:"+request.responseText+"\n"+"error:"+error);
+	            }
+	        });
+			
+    		
+    	});
 		
 		
 
 		
 	});
+    
     
     </script>
 </body>
