@@ -35,7 +35,7 @@
  			update member
  			   set user_name = #{user_name}, user_tel = #{user_tel}, user_birth = #{user_birth}, user_zip = #{user_zip},
  			   			  user_address = #{user_address}, user_address_detail = #{user_address_detail},
- 			   			  user_overdue_date = #{user_overdue_date}
+ 			   			  user_overdue_date = #{user_overdue_date}, user_able_loan = #{user_able_loan}
  			  where user_id = #{user_id}
  		</update>
  		

@@ -2,6 +2,7 @@ package com.library.controller.search;
 
 import java.io.UnsupportedEncodingException;
 import java.net.URLEncoder;
+import java.security.Principal;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -121,12 +122,10 @@ public class BookController {
 
 	// 책 대출
 	@PostMapping("/loan")
-	public String loan(Model model, Criteria cri, BookDTO book, @RequestParam String detail) {
+	public String loan(Model model, Criteria cri, BookDTO book, @RequestParam String detail, Principal principal) {
 
 		// 로그인 된 user_id 받아오기
-		Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-		UserDetails userDetails = (UserDetails) principal;
-		String id = userDetails.getUsername();
+		String id = principal.getName();
 
 		// id 세팅
 		book.setUser_id(id);
@@ -173,12 +172,10 @@ public class BookController {
 	// 대출자 상태 체크
 	@ResponseBody
 	@PostMapping("/statusChk")
-	public String statusChk(String book_isbn) throws Exception {
+	public String statusChk(String book_isbn, Principal principal) throws Exception {
 
 		// 로그인 된 user_id 받아오기
-		Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-		UserDetails userDetails = (UserDetails) principal;
-		String id = userDetails.getUsername();
+		String id = principal.getName();
 
 		System.out.println(id);
 		System.out.println("statusChk() 진입");
@@ -200,9 +197,9 @@ public class BookController {
 				// 대출 중인 도서 상태 체크
 				int count = bookService.count(book_isbn);
 
-				if (count != 2) {
+				if (count < 2) {
 
-					// 대출 중인 총 도서수가 2가 아닐 경우 success
+					// 대출 중인 해당 도서수가 2권 미만일 경우 success
 					return "success";
 
 				} else {
