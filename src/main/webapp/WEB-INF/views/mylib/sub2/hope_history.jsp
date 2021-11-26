@@ -6,7 +6,7 @@
 <head>
 <meta charset="UTF-8">
 <title>라온도서관 > 나의도서관 > 희망도서신청 > 희망도서신청내역</title>
-<link rel="stylesheet" href="/resources/css/mylib/sub2/hope_list.css">
+<link rel="stylesheet" href="/resources/css/mylib/sub2/hope_history.css">
 <link rel="stylesheet" href="/resources/css/footer.css">
 <script src="https://code.jquery.com/jquery-3.6.0.js" 
  integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk="
@@ -102,8 +102,8 @@
                                             <th>도서명</th>
                                             <th>저자</th>
                                             <th>출판사</th>
-                                            <th>신청일</th>
-                                            <th>처리결과</th>
+                                            <th style="width: 90px;">신청일</th>
+                                            <th style="width: 75px;">처리결과</th>
 	                                </tr>
                                     </thead>
                                     <tbody>
