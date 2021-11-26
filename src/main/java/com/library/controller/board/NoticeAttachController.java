@@ -54,8 +54,8 @@ public class NoticeAttachController {
 	public ResponseEntity<List<NoticeAttachForAjaxDTO>> uploadNoticeFileAjaxPost(MultipartFile[] uploadNoticeFile) {
 		
 		List<NoticeAttachForAjaxDTO> list = new ArrayList<>();
-		String uploadFolder = "C:\\notice_file";
-		
+		String uploadFolder = "C:\\library_file\\notice";
+		 
 		File uploadPath = new File(uploadFolder);
 		
 		if(uploadPath.exists() == false) {
@@ -166,7 +166,7 @@ public class NoticeAttachController {
 	
 	public void fileDelete(String uuid, String type) {
 		
-		String filePath = "C:\\notice_file\\";
+		String filePath = "C:\\library_file\\notice\\";
 		File deleteFileName = new File(filePath + uuid);
 		
 		if(type.equals("image")) {

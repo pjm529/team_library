@@ -45,9 +45,9 @@ xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	        <file-size-threshold>20971520</file-size-threshold> 20MB
 	     </multipart-config> -->
 	     
-		<!-- notice file upload -->
+		<!-- file upload -->
 	    <multipart-config>
-	        <location>C:\\notice_file</location> <!-- 파일 업로드 목적지 -->
+	        <location>C:\\library_file</location> <!-- 파일 업로드 목적지 -->
 	        <max-file-size>20971520</max-file-size> <!-- 1MB * 20 -->
 	        <max-request-size>41943040</max-request-size> <!-- 40MB -->
 	        <file-size-threshold>20971520</file-size-threshold> <!-- 20MB -->
