@@ -7,7 +7,7 @@
     <ul class="subMenu">
     
     	<li class="sub1">
-    	 	<a href="/mylib/loan-history">도서관련 +</a>
+    	 	<a href="/mylib/loan-history">도서관련 <b>+</b></a>
     	 	
     	 	<ul class="sub">
                <li class="submenu1">
@@ -21,7 +21,7 @@
            
     	</li>
         <li class="sub2">
-            <a href="/mylib/hope">희망도서신청 +</a>
+            <a href="/mylib/hope">희망도서신청 <b>+</b></a>
             
             <ul class="sub">
                <li class="submenu6">
@@ -44,7 +44,7 @@
         </li>
         
         <li class="sub5">
-            <a href="/mylib/mypage">개인정보 +</a>
+            <a href="/mylib/mypage">개인정보 <b>+</b></a>
             
             <ul class="sub">
                <li class="submenu3">
