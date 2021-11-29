@@ -2,6 +2,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <%@ page session="false" %>
+<%@ taglib uri="http://www.springframework.org/security/tags" prefix="sec" %>
 <html>
 <head>
 	<title>Insert Notice Form</title>
@@ -52,8 +53,8 @@
                             
                             <div class="table-wrap">
                                 <form action="/board/insertNotice" method="post" onsubmit="return false" role="form">
-                                    <input type="hidden" name="writer_id" value="writer_id">
-                            		<input type="hidden" name="writer_name" value="writer_name">
+                                    <!-- <input type="hidden" name="writer_id" value="writer_id"> -->
+                            		<input type="hidden" name="writer_name" value="<sec:authentication property="principal.dto.user_name"/>">
                                     
                                     <table class="bbs-edit">
                                         <tbody>
@@ -66,7 +67,7 @@
                                             </tr>
                                             <tr>
                                                 <th class="first">작성자</th>
-                                                <td>writer_name</td>
+                                                <td><sec:authentication property="principal.dto.user_name"/></td>
                                                 <th class="first">작성일</th>
                                                 <td>${today}</td>
                                             </tr>
