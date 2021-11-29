@@ -240,6 +240,9 @@
     	/* 왼쪽 사이드바 class 추가 */
 		$(".sub3").addClass("active");
 
+		/* 현재 기준 날짜 */
+		var todayDate = new Date(); // 현재 날짜 
+    	
     	/* 받아온 날짜 값 view단에 보여주기 */
 		var d_value = "<c:out value='${nowDate}'/>"; // 값 가져온 거
 		var chDate = new Date(d_value); // 가져온 값 Date로 변경
@@ -251,11 +254,26 @@
 		var lastDate = new Date(chYear, chMonth, 0); // 해당 날의 마지막 날짜 받아오기
 		var lastDay = lastDate.getDate();
 		
+		/* &lt btn을 click 했을 시, (이전 날짜 이동) */
+		$(".go-prev").on("click", function() {
+			
+			/* 날짜끼리 비교 */
+			var tDay = todayDate.getDate(); // 현재 기준 날짜
+			var cDay = chDate.getDate(); // 받아온 값의 날짜
+			
+			if(tDay < cDay){
+				var dayMinus = chDate.setDate(chDate.getDate()-1);
+				var MinusDate = new Date(dayMinus);
+				var sliceMDate = MinusDate.toISOString().slice(0, 10);
+				$(".nowDate").html(sliceMDate);
+			}
+			
+		});
 		
-		/* &gt btn을 click 했을 시, */
+		/* &gt btn을 click 했을 시, (다음 날짜 이동) */
 		$(".go-next").on("click", function() {
-			var todayDate = new Date(); // 현재 날짜 
-			var today = todayDate.toISOString().slice(0, 10); // 현재 날짜 yyyy-mm-dd 기준으로 자르기
+			
+			$(".go-prev").show();
 			
 			/* 월끼리 비교 */
 			var tMonth = todayDate.getMonth() + 1; // 현재 날짜의 월
