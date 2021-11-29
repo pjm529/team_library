@@ -24,7 +24,7 @@
 
 </head>
 <body>
-
+	<input type="hidden" class="reserve_no" value="${room2_info.seat_no}">
     <%-- <sec:authentication property="principal.dto.user_id" /> --%>
 
     <div class="container">
@@ -391,7 +391,7 @@
 
                 var seat_no = $(this).attr("id");/* a태그 vacant클래스의 아이디값, this는 $(".vacant")의미함 */
 
-                if ($(".mine").length) {
+                if ($(".reserve_no").val() != '') {
 
                     if (confirm("제2열람실 " + seat_no + "번 좌석으로 이동하시겠습니까?")) {
 						
