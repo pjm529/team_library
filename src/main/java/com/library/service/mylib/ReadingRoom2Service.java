@@ -4,56 +4,32 @@ import java.util.List;
 
 import org.springframework.web.bind.annotation.RequestParam;
 
-import com.library.model.mylib.ReadingRoom2DTO;
+import com.library.model.mylib.ReadingRoomDTO;
 
 public interface ReadingRoom2Service {
-	
-	public List<ReadingRoom2DTO> list_all();
 
-	public void room2_booking(ReadingRoom2DTO dto);
+	// 열람실 출력
+	public List<ReadingRoomDTO> list_all();
 
-	public void updateStatusOccupied(ReadingRoom2DTO dto);
+	// 열람실 예약
+	public void room2_booking(ReadingRoomDTO dto);
 
-	public ReadingRoom2DTO room2_info(String user_id);
+	// 예약 좌석 정보
+	public ReadingRoomDTO room2_info(String user_id);
 
-	public void room2_delete(String seat_no);
+	// 열람실 퇴실
+	public void room2_delete(String user_id);
 
-	public void updateStatusVacant(String seat_no);
-
+	// 열람실 좌석 시간 연장
 	public void room2_extend(String user_id);
 
-	public void moveSeat2(ReadingRoom2DTO dto);
+	// 열람실 좌석 이동
+	public void moveSeat2(ReadingRoomDTO dto);
 
-	public void room2_delete(ReadingRoom2DTO dto);
-
-	public void updateStatusVacant(ReadingRoom2DTO dto);
+	// 좌석 상태 체크
+	public int seat2_check(String seat_no);
 	
-	public void updateReading_Room2Table();
-	
-	public void updateReading_Room2_RentalTable();
-	
+	// 열람실 좌석 insert
+	public void insert(int seat_no);
 
-
-
-	
-
-
-	
-
-
-
-	
-
-	
-
-//	public ArticleDTO userInfo(Long uno);
-//
-//	public void userDelete(Long uno);//삭제는 결과값 받을게 없어서 void
-//
-//	public void userInsert(ArticleDTO dto);
-//
-//	public void userUpdate(ArticleDTO dto);
-	
-	//서비스단에서 impl로 넘긴다.
-			
 }
