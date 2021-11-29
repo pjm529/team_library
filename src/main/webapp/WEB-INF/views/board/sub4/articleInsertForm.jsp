@@ -15,7 +15,7 @@
             <div class="doc-info">
                 <!-- doc title -->
                 <div class="doc-title">
-                    <h3>공지사항</h3>
+                    <h3>분실물찾기</h3>
                     <ul>
                         <!-- 홈 btn img -->
                         <li style="background-image: none;">
@@ -27,7 +27,7 @@
                             <a href="#">열린공간</a>
                         </li>
                         <li>
-                            <a href="#">공지사항</a>
+                            <a href="/board/articleList">분실물찾기</a>
                         </li>
                     </ul>
 
