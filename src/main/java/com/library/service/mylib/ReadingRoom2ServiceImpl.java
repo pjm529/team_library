@@ -6,7 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.library.mapper.mylib.ReadingRoom2Mapper;
-import com.library.model.mylib.ReadingRoom2DTO;
+import com.library.model.mylib.ReadingRoomDTO;
 
 @Service
 public class ReadingRoom2ServiceImpl implements ReadingRoom2Service {
@@ -14,117 +14,60 @@ public class ReadingRoom2ServiceImpl implements ReadingRoom2Service {
 	@Autowired
 	private ReadingRoom2Mapper mapper;
 
+	// 2열람실 출력
 	@Override
-	public List<ReadingRoom2DTO> list_all() {
-		
+	public List<ReadingRoomDTO> list_all() {
+
 		return mapper.list_all();
 	}
 
+	
+	// 열람실 예약
 	@Override
-	public void room2_booking(ReadingRoom2DTO dto) {
+	public void room2_booking(ReadingRoomDTO dto) {
 		mapper.room2_booking(dto);
-		
+
 	}
 
+	
+	// 예약 좌석 정보
 	@Override
-	public void updateStatusOccupied(ReadingRoom2DTO dto) {
-		mapper.updateStatusOccupied(dto);
-		
-	}
-
-	@Override
-	public ReadingRoom2DTO room2_info(String user_id) {
+	public ReadingRoomDTO room2_info(String user_id) {
 		return mapper.room2_info(user_id);
-		
+
 	}
 
+	// 열람실 퇴실
 	@Override
-	public void room2_delete(String seat_no) {
-		mapper.room2_delete(seat_no);
-		
+	public void room2_delete(String user_id) {
+		mapper.room2_delete(user_id);
+
 	}
 
+	// 열람실 좌석 시간 연장
 	@Override
-	public void updateStatusVacant(String seat_no) {
-		mapper.updateStatusVacant(seat_no);
-		
+	public void room2_extend(String user_id) {
+		mapper.room2_extend(user_id);
+
 	}
 
+	// 열람실 좌석 이동
 	@Override
-	public void room2_extend(String seat_no) {
-		mapper.room2_extend(seat_no);
-		
-	}
-
-
-	@Override
-	public void moveSeat2(ReadingRoom2DTO dto) {
+	public void moveSeat2(ReadingRoomDTO dto) {
 		mapper.moveSeat2(dto);
-		
+
 	}
-
-	@Override
-	public void room2_delete(ReadingRoom2DTO dto) {
-		mapper.room2_delete(dto);
-		
-	}
-
-	@Override
-	public void updateStatusVacant(ReadingRoom2DTO dto) {
-		mapper.updateStatusVacant(dto);
-		
-	}
-
-	@Override
-	public void updateReading_Room2Table() {
-		mapper.updateReading_Room2Table();
-		
-	}
-
-	@Override
-	public void updateReading_Room2_RentalTable() {
-		mapper.updateReading_Room2_RentalTable();
-		
-	}
-
-
-
-
-
-
 	
+	// 열람실 좌석 상태 체크
+	@Override
+	public int seat2_check(String seat_no) {
+		return mapper.seat2_check(seat_no);
+	}
 
-
-//	@Override
-//	public ArticleDTO userInfo(Long uno) {
-//		
-//		return mapper.userInfo(uno);
-//	}
-//
-//	@Override
-//	public void userDelete(Long uno) {
-//		mapper.userDelete(uno);
-//		
-//	}
-//
-//	@Override
-//	public void userInsert(ArticleDTO dto) {
-//		mapper.userInsert(dto);
-//		
-//	}
-//
-//	@Override
-//	public void userUpdate(ArticleDTO dto) {
-//		mapper.userUpdate(dto);
-//		
-//	}
-
-//	@Override
-//	public void update(UserDTO dto) {
-//		mapper.update(dto);
-//		
-//	}
-	
-	
+	// 열람실 좌석 insert
+	@Override
+	public void insert(int seat_no) {
+		mapper.insert(seat_no);
+	}
 
 }

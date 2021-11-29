@@ -110,7 +110,7 @@ public class UploadController {
 		List<AttachFileDTO> list = new ArrayList<>();
 		
 		//저장되는 경로
-		String uploadFolder = "C:\\upload";
+		String uploadFolder = "C:\\library_file\\article";
 
 //		String uploadFolderPath = getFolder();
 		// make folder --------
@@ -281,7 +281,7 @@ public class UploadController {
 	   public void fileDelete(String uuid, String type) {
 
 	   
-	      String filePath = "C:\\upload\\";
+	      String filePath = "C:\\library_file\\article\\";
 	      
 	      
 	      File deleteFileName = new File(filePath + uuid);

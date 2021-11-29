@@ -2,6 +2,7 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <%@ page session="false" %>
+<%@ taglib uri="http://www.springframework.org/security/tags" prefix="sec" %>
 <html>
 <head>
    <title>라온도서관 > 열린공간 > 분실물찾기</title>
@@ -14,7 +15,7 @@
             <div class="doc-info">
                 <!-- doc title -->
                 <div class="doc-title">
-                    <h3>공지사항</h3>
+                    <h3>분실물찾기</h3>
                     <ul>
                         <!-- 홈 btn img -->
                         <li style="background-image: none;">
@@ -26,7 +27,7 @@
                             <a href="#">열린공간</a>
                         </li>
                         <li>
-                            <a href="#">공지사항</a>
+                            <a href="/board/articleList">분실물찾기</a>
                         </li>
                     </ul>
 
@@ -51,8 +52,7 @@
                             
                             <div class="table-wrap">
                                 <form action="/board/articleInsertForm" method="post" role="form">
-                                	<input type="hidden" name ="writer_id">
-                                	<input type="hidden" name ="writer_name">
+                                	<input type="hidden" name ="writer_name" value="<sec:authentication property="principal.dto.user_name"/>">
                                 	
                                     <table class="bbs-edit">
                                         <tbody>
@@ -66,8 +66,7 @@
                                             <tr>
                                                 <th class="first">작성자</th>
                                                 <td>
-                                                	
-                                                	관리자
+                                                	<sec:authentication property="principal.dto.user_name"/>
                                                 </td>
                                                 
                                                <!--  <th class="first">권한</th>
