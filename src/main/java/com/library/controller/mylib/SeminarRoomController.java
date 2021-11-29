@@ -11,7 +11,6 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
-
 import com.library.model.mylib.SeminarRoomDTO;
 import com.library.service.mylib.SeminarRoomService;
 
@@ -25,10 +24,8 @@ public class SeminarRoomController {
 	@GetMapping("/seminarRoom")
 	public String seminarRoom(@RequestParam("nowDate") String unowDate, Model model) {
 		
-		
 		String nowDate = unowDate;
 		model.addAttribute("nowDate", nowDate);
-		
 		
 		Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
 		UserDetails userDetails = (UserDetails) principal;
@@ -44,7 +41,6 @@ public class SeminarRoomController {
 	@ResponseBody
 	public int sm_Room_booking(@RequestBody SeminarRoomDTO dto) {
 		System.out.println(dto);
-		smService.updateStatusOccupied(dto);
 		
 		return smService.sm_Room_booking(dto);
 		

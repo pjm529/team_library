@@ -11,17 +11,14 @@ public class SeminarRoomServiceImpl implements SeminarRoomService {
 
 	@Autowired
 	private SeminarRoomMapper sMapper;
-
+	
 	
 	/* 룸 예약 */
 	@Override
 	public int sm_Room_booking(SeminarRoomDTO dto) {
 		return sMapper.sm_Room_booking(dto);
 	}
-	@Override
-	public void updateStatusOccupied(SeminarRoomDTO dto) {
-		sMapper.updateStatusOccupied(dto);
-	}
+	
 	
 	
 }

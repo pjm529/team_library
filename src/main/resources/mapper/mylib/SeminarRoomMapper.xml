@@ -7,6 +7,8 @@
   
 <mapper namespace="com.library.mapper.mylib.SeminarRoomMapper"> 
 
+
+
 	<!-- ====== 예약 ====== -->
 	<!-- 좌석 예약 (자리 예약 시, time_table room_status column 1 => 0으로 변경 -->
 	<insert id="sm_Room_booking">
@@ -14,86 +16,7 @@
 		  into seminar_room_rental(room_no, user_id, sm_time, sm_date) 
 		values (#{room_no}, #{user_id}, #{sm_time}, #{sm_date})
 	</insert>
-	<update id="updateStatusOccupied">
-		update time_table
-		   set room_status = 0
-		 where room_no = #{room_no}
-		 <choose>
-			 <when test="sm_time == 'A01'">
-			 	and time_zone in ('A')
-			 </when>
-			 <when test="sm_time == 'A02'">
-			 	and time_zone in ('A', 'B')
-			 </when>
-			 <when test="sm_time == 'A03'">
-			 	and time_zone in ('A', 'B', 'C')
-			 </when>
-			 
-			 <when test="sm_time == 'B01'">
-			 	and time_zone in ('B')
-			 </when>
-			 <when test="sm_time == 'B02'">
-			 	and time_zone in ('B', 'C')
-			 </when>
-			 <when test="sm_time == 'B03'">
-			 	and time_zone in ('B', 'C', 'D')
-			 </when>
-			 
-			 <when test="sm_time == 'C01'">
-			 	and time_zone in ('C')
-			 </when>
-			 <when test="sm_time == 'C02'">
-			 	and time_zone in ('C', 'D')
-			 </when>
-			 <when test="sm_time == 'C03'">
-			 	and time_zone in ('C', 'D', 'E')
-			 </when>
-			 
-			 <when test="sm_time == 'D01'">
-			 	and time_zone in ('D')
-			 </when>
-			 <when test="sm_time == 'D02'">
-			 	and time_zone in ('D', 'E')
-			 </when>
-			 <when test="sm_time == 'D03'">
-			 	and time_zone in ('D', 'E', 'F')
-			 </when>
-			 
-			 <when test="sm_time == 'E01'">
-			 	and time_zone in ('E')
-			 </when>
-			 <when test="sm_time == 'E02'">
-			 	and time_zone in ('E', 'F')
-			 </when>
-			 <when test="sm_time == 'E03'">
-			 	and time_zone in ('E', 'F', 'G')
-			 </when>
-			 
-			 <when test="sm_time == 'F01'">
-			 	and time_zone in ('F')
-			 </when>
-			 <when test="sm_time == 'F02'">
-			 	and time_zone in ('F', 'G')
-			 </when>
-			 <when test="sm_time == 'F03'">
-			 	and time_zone in ('F', 'G', 'H')
-			 </when>
-			 
-			 <when test="sm_time == 'G01'">
-			 	and time_zone in ('G')
-			 </when>
-			 <when test="sm_time == 'G02'">
-			 	and time_zone in ('G', 'H')
-			 </when>
-			 
-			 <when test="sm_time == 'H01'">
-			 	and time_zone in ('H')
-			 </when>
-			 
-		 </choose>
-	</update> 
-
-
+	
 
 
 
