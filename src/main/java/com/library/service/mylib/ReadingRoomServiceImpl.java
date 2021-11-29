@@ -19,48 +19,13 @@ public class ReadingRoomServiceImpl implements ReadingRoomService {
 	private ReadingRoomMapper mapper;
 
 	@Override
-	public void updateReading_Room1_RentalTable() {
-		mapper.updateReading_Room1_RentalTable();
-	}
-	
-	@Override
-	public void updateReading_Room1Table() {
-		mapper.updateReading_Room1Table();
-	}
-	
-//	@Override
-//	public List<ReadingRoomDTO> getSeatsList(int skip, int amount) {
-//		return mapper.getSeatsList(skip, amount);
-//	}
-	
-	@Override
-	public List<ReadingRoomDTO> getSeatsList() {
-		return mapper.getSeatsList();
+	public List<ReadingRoomDTO> getReadingRoom1SeatsList() {
+		return mapper.getReadingRoom1SeatsList();
 	}
 
 	@Override
 	public void bookingSeat(ReadingRoomDTO dto) {
-		mapper.bookingSeat(dto);		
-	}
-
-	@Override
-	public void updateStatusToOccupied(ReadingRoomDTO dto) {
-		mapper.updateStatusToOccupied(dto);
-	}
-
-	@Override
-	public void returnSeat(ReadingRoomDTO dto) {
-		mapper.returnSeat(dto);
-	}
-
-	@Override
-	public void updateStatusToVacant(ReadingRoomDTO dto) {
-		mapper.updateStatusToVacant(dto);
-	}
-	
-	@Override
-	public void extendSeat(ReadingRoomDTO dto) {
-		mapper.extendSeat(dto);		
+		mapper.bookingSeat(dto);
 	}
 
 	@Override
@@ -68,6 +33,24 @@ public class ReadingRoomServiceImpl implements ReadingRoomService {
 		return mapper.mySeatInfo(user_id);
 	}
 
+	@Override
+	public void returnSeat(String user_id) {
+		mapper.returnSeat(user_id);
+	}
 
+	@Override
+	public void extendSeat(String user_id) {
+		mapper.extendSeat(user_id);
+	}
+
+	@Override
+	public int seat_check(String seat_no) {
+		return mapper.seat_check(seat_no);
+	}
+
+	@Override
+	public void insert(int seat_no) {
+		mapper.insert(seat_no);
+	}
 
 }

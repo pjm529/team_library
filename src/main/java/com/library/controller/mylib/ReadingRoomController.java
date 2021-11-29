@@ -1,5 +1,6 @@
 package com.library.controller.mylib;
 
+import java.security.Principal;
 import java.util.Date;
 import java.util.List;
 
@@ -7,10 +8,13 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.library.model.mylib.ReadingRoomDTO;
+import com.library.service.mylib.ReadingRoom2Service;
 import com.library.service.mylib.ReadingRoomService;
 
 @Controller
@@ -21,10 +25,7 @@ public class ReadingRoomController {
 	private ReadingRoomService readingRoomService;
 
 	@GetMapping("/readingRoom")
-	public String getSeatsList(Model model) {
-		
-		readingRoomService.updateReading_Room1Table();
-		readingRoomService.updateReading_Room1_RentalTable();
+	public String getSeatsList(Model model, Principal principal) {
 
 //		List<ReadingRoomDTO> seatsList = readingRoomService.getSeatsList(0, 10);
 //		model.addAttribute("seatsList1", seatsList);
@@ -40,72 +41,81 @@ public class ReadingRoomController {
 //		
 //		List<ReadingRoomDTO> seatsList5 = readingRoomService.getSeatsList(38, 16);
 //		model.addAttribute("seatsList5", seatsList5);
-		
-		List<ReadingRoomDTO> seatsList = readingRoomService.getSeatsList();
+
+//		List<ReadingRoomDTO> seatsList = readingRoomService.getSeatsList();
+//		model.addAttribute("seatsList", seatsList);
+
+		List<ReadingRoomDTO> seatsList = readingRoomService.getReadingRoom1SeatsList();
 		model.addAttribute("seatsList", seatsList);
 
-//		HttpSession session = request.getSession();
-//		session.setAttribute("user_id", "khi29");
-//		String user_id = (String) session.getAttribute("user_id");
+		String user_id = principal.getName();
+		model.addAttribute("login_id", user_id);
 
-		String user_id = "khi29"; // 세션아이디
+		ReadingRoomDTO mySeatInfo = readingRoomService.mySeatInfo(user_id);
 
-		if (readingRoomService.mySeatInfo(user_id) == null) {
-
+		if (mySeatInfo == null) {
 			return "/mylib/sub3/readingRoom";
 		} else {
-			ReadingRoomDTO mySeatInfo = readingRoomService.mySeatInfo(user_id);
-
 			Date now = new Date();
-
-			mySeatInfo.setDiff_time(mySeatInfo.getReturn_time().getTime() - now.getTime());
-
+			mySeatInfo.setDiff_time(mySeatInfo.getCheckout_time().getTime() - now.getTime());
 			model.addAttribute("mySeatInfo", mySeatInfo);
 		}
-
 		return "/mylib/sub3/readingRoom";
+
 	}
 
-	@GetMapping("/bookingSeat")
-	public String bookingSeat(ReadingRoomDTO dto) {
+	// 좌석 예약
+	@PostMapping("/bookingSeat")
+	public String bookingSeat(ReadingRoomDTO dto, Principal principal) {
 
-		dto.setUser_id("khi29");
+		String user_id = principal.getName();
+		dto.setUser_id(user_id);
 
 		readingRoomService.bookingSeat(dto);
-		readingRoomService.updateStatusToOccupied(dto);
 
-		return "redirect:/mylib/readingRoom";
-	}
-
-	@GetMapping("/returnSeat")
-	public String returnSeat(ReadingRoomDTO dto) {
-
-		readingRoomService.returnSeat(dto);
-		readingRoomService.updateStatusToVacant(dto);
-
-		return "redirect:/mylib/readingRoom";
-	}
-
-	@GetMapping("/moveSeat") 
-	public String moveSeat(ReadingRoomDTO dto, @RequestParam("newSeat_no") int newSeat_no) {
-		
-		readingRoomService.returnSeat(dto);
-		readingRoomService.updateStatusToVacant(dto);
-		
-		dto.setUser_id("khi29"); 
-		dto.setSeat_no(newSeat_no);
-		
-		readingRoomService.bookingSeat(dto);
-		readingRoomService.updateStatusToOccupied(dto);
-		
 		return "redirect:/mylib/readingRoom";
 	}
 	
+	// 열람실 좌석 상태 체크
+	@ResponseBody
+	@PostMapping("/seat_check")
+	public String seat_check(@RequestParam String seat_no) {
+
+		int result = readingRoomService.seat_check(seat_no);
+
+		if (result == 1) {
+			return "success";
+		} else {
+			return "fail";
+		}
+	}
+
+	// 열람실 퇴실
+	@PostMapping("/returnSeat")
+	public String returnSeat(Principal principal) {
+
+		String user_id = principal.getName();
+		readingRoomService.returnSeat(user_id);
+
+		return "redirect:/mylib/readingRoom";
+	}
+
+	@PostMapping("/moveSeat")
+	public String moveSeat(ReadingRoomDTO dto, Principal principal) {
+
+		String user_id = principal.getName();
+		dto.setUser_id(user_id);
+		readingRoomService.returnSeat(user_id);
+		readingRoomService.bookingSeat(dto);
+
+		return "redirect:/mylib/readingRoom";
+	}
 
 	@GetMapping("/extendSeat")
-	public String extendSeat(ReadingRoomDTO dto) {
+	public String extendSeat(Principal principal) {
 
-		readingRoomService.extendSeat(dto);
+		String user_id = principal.getName();
+		readingRoomService.extendSeat(user_id);
 
 		return "redirect:/mylib/readingRoom";
 	}
