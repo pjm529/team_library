@@ -11,6 +11,9 @@
 
 </head>
 <body>
+
+	<input type="hidden" class="reserve_no" value="${mySeatInfo.seat_no}">
+	
     <div class="container">
         <div class="sub_title">
             <div class="doc-info">
@@ -350,7 +353,7 @@
 
                 var seat_no = $(this).attr("id");
 
-                if($(".mine").length){
+                if($(".reserve_no").val() != ""){
 
                     if (confirm("제 1열람실 " + seat_no + "번 좌석으로 이동하시겠습니까?")) {
 
