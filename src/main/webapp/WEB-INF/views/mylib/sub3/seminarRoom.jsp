@@ -10,7 +10,6 @@
 	<link rel="stylesheet" href="/resources/css/footer.css">
 </head>
 <body>
-	
 	<div class="container">
         <div class="sub_title">
             <div class="doc-info">
@@ -242,10 +241,45 @@
 		$(".sub3").addClass("active");
 
     	/* 받아온 날짜 값 view단에 보여주기 */
-		var d_value = "<c:out value='${nowDate}'/>";
-		var chDate = new Date(d_value);
-		var nowDate = chDate.toISOString().slice(0, 10);
+		var d_value = "<c:out value='${nowDate}'/>"; // 값 가져온 거
+		var chDate = new Date(d_value); // 가져온 값 Date로 변경
+		var nowDate = chDate.toISOString().slice(0, 10); // slice
 		$(".nowDate").html(nowDate); // .nowDate => &lt 상단의 <h2>태그 && 테이블 표에 날짜 부분
+		
+		var chYear = chDate.getFullYear(); // 가져온 값의 Date
+		var chMonth = chDate.getMonth()+1; // 가져온 값의 Month
+		var lastDate = new Date(chYear, chMonth, 0); // 해당 날의 마지막 날짜 받아오기
+		var lastDay = lastDate.getDate();
+		
+		
+		/* &gt btn을 click 했을 시, */
+		$(".go-next").on("click", function() {
+			var todayDate = new Date(); // 현재 날짜 
+			var today = todayDate.toISOString().slice(0, 10); // 현재 날짜 yyyy-mm-dd 기준으로 자르기
+			
+			/* 월끼리 비교 */
+			var tMonth = todayDate.getMonth() + 1; // 현재 날짜의 월
+			var cMonth = chDate.getMonth() + 1; // 받아온 값 날짜의 월
+			
+			/* 날짜끼리 비교(cDay, lastDay) 위해 받아온 값의 날짜 받아옴*/
+			var cDay = chDate.getDate();
+			
+			if(tMonth == cMonth){ // 오늘 날의 월과 받아온 값의 월이 같을 때,
+				if (cDay == lastDay){ // 받아온 값의 날짜와 마지막 날이 같을 경우 다음 달로 날짜 넘어가는 거 방지
+					alert("다음 달 예약은 해당 월 1일에 확인하실 수 있습니다.");
+				}else{ 
+					var dayPlus = chDate.setDate(chDate.getDate()+1); 
+					// 받아온 값(chDate)의 날짜를 받아와서 +1씩 증가
+					var plusDate = new Date(dayPlus);
+					// 증가한 dayPlus를 Date 형태로 변환
+					var sliceDate = plusDate.toISOString().slice(0, 10);
+					// dayPlus를 Date 형태로 변환한 후, sliceDate로 잘라서 yyyy-MM-dd 형태로 나타냄
+					$(".nowDate").html(sliceDate);
+				}
+			}
+			
+		});
+		
 		
 		
 		/* 예약하기 btn click 시, ajax > insert */
