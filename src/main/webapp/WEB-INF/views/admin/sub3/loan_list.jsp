@@ -59,6 +59,7 @@
                                             <option value="user_id" selected="selected">아이디</option>
                                             <option value="book_title">도서명</option>
                                             <option value="book_isbn">ISBN</option>
+                                            <option value="loan_date">대출날짜</option>
                                         </c:if>
 
 
@@ -66,18 +67,28 @@
                                             <option value="user_id" selected="selected">아이디</option>
                                             <option value="book_title">도서명</option>
                                             <option value="book_isbn">ISBN</option>
+                                            <option value="loan_date">대출날짜</option>
                                         </c:if>
 
                                         <c:if test="${pageMaker.cri.type == 'book_title' }">
                                             <option value="user_id">아이디</option>
                                             <option value="book_title" selected="selected">도서명</option>
                                             <option value="book_isbn">ISBN</option>
+                                            <option value="loan_date">대출날짜</option>
                                         </c:if>
 
                                         <c:if test="${pageMaker.cri.type == 'book_isbn' }">
                                             <option value="user_id">아이디</option>
                                             <option value="book_title">도서명</option>
                                             <option value="book_isbn" selected="selected">ISBN</option>
+                                            <option value="loan_date">대출날짜</option>
+                                        </c:if>
+                                        
+                                        <c:if test="${pageMaker.cri.type == 'loan_date' }">
+                                            <option value="user_id">아이디</option>
+                                            <option value="book_title">도서명</option>
+                                            <option value="book_isbn">ISBN</option>
+                                            <option value="loan_date" selected="selected">대출날짜</option>
                                         </c:if>
 
                                     </select>

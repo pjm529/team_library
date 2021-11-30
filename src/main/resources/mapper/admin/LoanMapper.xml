@@ -64,6 +64,10 @@
 			  			and book_isbn like concat('%', #{keyword}, '%')
 			  		</if>
 			  		
+			  		<if test="type == 'loan_date'">
+			  			and loan_date like concat('%', #{keyword}, '%')
+			  		</if>
+			  		
 				</if>
 			</if>
 	    </sql>
