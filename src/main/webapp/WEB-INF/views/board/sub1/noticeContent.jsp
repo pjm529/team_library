@@ -7,36 +7,6 @@
 <head>
 	<title>라온도서관 > 열린공간 > 공지사항</title>
 <link rel="stylesheet" href="/resources/css/board/sub1/notice_content_page.css">
-
-    <style>
-        .wrapper-bbs {
-            padding-top: 20px;
-        }
-
-        .bbs-content b {
-            font-size: 140%;
-            font-weight: 800;
-            padding: 10px 15px;
-        }
-
-        .bbs-title {
-            height: 40px;
-        }
-
-        .bbs-content {
-            min-height: 240px;
-        }
-
-        p {
-            margin: 0;
-            padding: 20px 15px;
-            line-height: 150%;
-            word-break: keep-all;
-            font-size: 15px;
-            font-weight: normal;
-            color: #464646;
-        }
-    </style>
 </head>
 
 <body>
