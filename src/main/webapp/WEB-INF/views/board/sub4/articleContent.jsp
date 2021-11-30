@@ -82,7 +82,7 @@
 												          	
 												          </ul>
 												        </div>
-												        
+												      <!-- 첨부파일 다운로드-->  
 												      <div class="downloadAreaWrap">  
 													       <div class="downloadArea">
 		
@@ -209,105 +209,90 @@
         </div>
     </div>
     
-<!--     첨부파일
-	<div class='bigPictureWrapper'>
-		<div class='bigPicture'>
-		</div>
-	</div>
-
- 	<div class="panel-heading">첨부파일</div>
-      <div class="panel-body">
-        <div class='uploadResult'> 
-          <ul>
-          
-          </ul>
-        </div>
-      </div>
-     -->
-
 <script src="https://code.jquery.com/jquery-3.6.0.js" integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk=" crossorigin="anonymous"></script>
 
 <script>
 
-$(document).ready(function(){
-$(".sub4").addClass("active");	
-  (function(){ 
-	  
-	  $(".downloadAreaWrap").hide();
-  
-    var article_no = '<c:out value="${dto.article_no}"/>';
-
-
-    $.getJSON("/board/getAttachList", {article_no: article_no}, function(arr){
+    $(document).ready(function () {
+        $(".sub4").addClass("active");
         
-     
-       console.log(arr);
-       
-       var str = "";
-       var str2 = "";
-       
-       $(arr).each(function(i, attach){
-    	   
-         //image type
-         if(attach.file_type){
-           var fileCallPath =  encodeURIComponent(attach.upload_path+ "/"+attach.uuid +"_"+attach.file_name);
-       
-           var uuidName = $("#uuid").val(attach.uuid+"_"+attach.file_name);
-           var thumbName = $("#thumb").val('s_'+attach.uuid+"_"+attach.file_name);
-          /*  var file_name =$("#file_name").val(attach.file_name); */
-           $("input[name='uuid']").attr('value',uuidName);
-           $("input[name='thumb']").attr('value',thumbName);
-          /*  $("input[name='file_name']").attr('value',file_name); */
-           
-          	/* content 본문에 보여지는 첨부된 사진 원본*/
-          	str += "<img width='500px' src='/display?file_name="+fileCallPath+"'>";         
-           	
-          	str2 += "<li data-path='"+attach.upload_path+"' data-uuid='"+attach.uuid+"' data-filename='"+attach.file_name+"' data-type='"+attach.file_type+"' ><div>";
-           	str2 += "<span><img src='/resources/fileImage/imageDown.png' width='15px' height='15px' style='vertical-align: middle;'><a href='#'> "+ attach.file_name+"</a></span><br/>";         
-           	str2 += "</div>";
-           	str2 +"</li>";
-         }else{
+        (function () {
+
+            $(".downloadAreaWrap").hide();
+
+            var article_no = '<c:out value="${dto.article_no}"/>';
+
+
+            $.getJSON("/board/getAttachList", { article_no: article_no }, function (arr) {
+
+
+                console.log(arr);
+
+                var str = "";
+                var str2 = "";
+
+                $(arr).each(function (i, attach) {
+
+                    //image type
+                    if (attach.file_type) {
+                        var fileCallPath = encodeURIComponent(attach.upload_path + "/" + attach.uuid + "_" + attach.file_name);
+
+                        var uuidName = $("#uuid").val(attach.uuid + "_" + attach.file_name);
+                        var thumbName = $("#thumb").val('s_' + attach.uuid + "_" + attach.file_name);
+                        
+                        $("input[name='uuid']").attr('value', uuidName);
+                        $("input[name='thumb']").attr('value', thumbName);                  
+
+                        /* content 본문에 보여지는 첨부된 사진 원본*/
+                        str += "<img width='500px' src='/display?file_name=" + fileCallPath + "'>";
+						
+                        /* 첨부파일 이름 보여지는 곳 */
+                        str2 += "<li data-path='" + attach.upload_path + "' data-uuid='" + attach.uuid + "' data-filename='" + attach.file_name + "' data-type='" + attach.file_type + "' ><div>";
+                        
+                        /* 첨부파일 아이콘 보여지는 곳 */
+                        str2 += "<span><img src='/resources/fileImage/imageDown.png' width='15px' height='15px' style='vertical-align: middle;'><a href='#'> " + attach.file_name + "</a></span><br/>";
+                        
+                        str2 += "</div>";
+                        str2 + "</li>";
+                    } else {
+
+                        str2 += "<li data-path='" + attach.upload_path + "' data-uuid='" + attach.uuid + "' data-filename='" + attach.file_name + "' data-type='" + attach.file_type + "' ><div>";
+                        str2 += "<span><img src='/resources/fileImage/text.png' width='15px' height='15px' style='vertical-align: middle;'><a href='#'> " + attach.file_name + "</a></span><br/>";
+                        str2 += "</div>";
+                        str2 + "</li>";
+                    }
+                });
+
+                $(".uploadResult ul").html(str);
+                $(".downloadArea ul").html(str2);
+
+                if ($(".downloadAreaWrap li").length) {
+                    $(".downloadAreaWrap").show();
+                }
+
+            });//end getjson
+
+
+        })();//end function
+		
+        /* 첨부파일 다운로드 */
+        $(".downloadArea").on("click", "li a", function (e) {
+            e.preventDefault();
+
+            var liObj = $(this).closest("li");
+
+            var path = encodeURIComponent(liObj.data("path") + "/" + liObj.data("uuid") + "_" + liObj.data("filename"));
             
-           str2 += "<li data-path='"+attach.upload_path+"' data-uuid='"+attach.uuid+"' data-filename='"+attach.file_name+"' data-type='"+attach.file_type+"' ><div>";
-           str2 += "<span><img src='/resources/fileImage/text.png' width='15px' height='15px' style='vertical-align: middle;'><a href='#'> "+ attach.file_name+"</a></span><br/>";
-           str2 += "</div>";
-           str2 +"</li>";
-         }
-       });
-       
-       $(".uploadResult ul").html(str);
-       $(".downloadArea ul").html(str2);
-       
-       if($(".downloadAreaWrap li").length){
-    	   $(".downloadAreaWrap").show();
-       }
- 
-     });//end getjson
+            self.location = "/download?file_name=" + path;
 
-    
-   }) ();//end function
-  
-   $(".downloadArea").on("click", "li a", function(e){
-	      e.preventDefault();
-	           
-	      console.log("view image");
-	      
-	      var liObj = $(this).closest("li");
-	      
-	      var path = encodeURIComponent(liObj.data("path") + "/" + liObj.data("uuid") + "_" + liObj.data("filename"));
-	      
-	      /* alert(liObj.data("filename")); */
-	      
-	      self.location ="/download?file_name=" + path;
-	      
-	   });
-   
-  
-  
-  
+        });
 
-  
-});
+
+
+
+
+
+    });
 
 </script>
 

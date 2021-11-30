@@ -5,8 +5,8 @@ import java.util.List;
 
 import lombok.Data;
 
-@Data //data 어노테이션은 get,set,tostring 메서드 모두 가져올 수 있음
-// 클래스 만들어 놓은 것은 설명서-> 
+// data 어노테이션은 get,set, toString 메서드 모두 가져올 수 있음
+@Data 
 public class ArticleDTO {
 	
 	private Long article_no;
@@ -17,6 +17,7 @@ public class ArticleDTO {
 	private Timestamp article_reg_date;
 	private int article_views;
 	
+	// 파일업로드
 	private List<ArticleAttachDTO> attachList;
 		
 }

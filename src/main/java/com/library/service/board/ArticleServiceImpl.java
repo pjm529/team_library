@@ -34,7 +34,8 @@ public class ArticleServiceImpl implements ArticleService {
 	public ArticleDTO articleContent(Long article_no) {
 		return mapper.articleContent(article_no);
 	}
-// 파일첨부
+	
+	// 파일첨부
 	@Transactional
 	@Override
 	public void articleInsert(ArticleDTO dto) {
@@ -63,49 +64,27 @@ public class ArticleServiceImpl implements ArticleService {
 	}
 	
 	
-	// 수정해야함ㅠㅠ
-		@Transactional
-		@Override
-		public boolean articleUpdate(ArticleDTO dto) {
+
+	@Override
+	public boolean articleUpdate(ArticleDTO dto) {
 			
-			attachMapper.deleteAll(dto.getArticle_no());
-			
-			boolean modifyResult = mapper.articleUpdate(dto);
-			
-			if(modifyResult && dto.getAttachList() != null && dto.getAttachList().size() > 0) {
-				dto.getAttachList().forEach(attach -> {
-					
-					attach.setArticle_no(dto.getArticle_no());
-					attachMapper.insert(attach);
-					
-				});
-			}
-			
-			return modifyResult;
-			
+		attachMapper.deleteAll(dto.getArticle_no());
+		
+		boolean modifyResult = mapper.articleUpdate(dto);
+		
+		if(modifyResult && dto.getAttachList() != null && dto.getAttachList().size() > 0) {
+			dto.getAttachList().forEach(attach -> {
+				
+				attach.setArticle_no(dto.getArticle_no());
+				attachMapper.insert(attach);
+				
+			});
 		}
+		
+		return modifyResult;
+		
+	}
 	
-//		// 수정해야함ㅠㅠ
-//		@Transactional
-//		@Override
-//		public void articleUpdate(ArticleDTO dto) {
-//			mapper.articleUpdate(dto);
-//			
-//			if (dto.getAttachList() == null || dto.getAttachList().size() <= 0) {
-//				return;
-//			}
-//			
-//			dto.getAttachList().forEach(attach -> {
-//
-//				attach.setArticle_no(dto.getArticle_no());	
-//				attachMapper.insert(attach);
-//			});
-//			
-//		}
-//	
-
-
-
 	@Override
 	public void articleViewsCount(Long article_no) {
 		mapper.articleViewsCount(article_no);
@@ -132,14 +111,12 @@ public class ArticleServiceImpl implements ArticleService {
 
 	@Override
 	public List<ArticleAttachDTO> getAttachList(Long article_no) {
-		
-		
+				
 		return attachMapper.findByArticle_no(article_no);
 	}
 
 	
 	// 게시물 상세보기(이전글, 다음글)
-
 	@Override
 	public ArticleDTO articlePreContent(Long article_no) {
 		
@@ -148,14 +125,9 @@ public class ArticleServiceImpl implements ArticleService {
 
 	@Override
 	public ArticleDTO articleNextContent(Long article_no) {
-		// TODO Auto-generated method stub
+
 		return mapper.articleNextContent(article_no);
 	}
-	
-
-
-
-	
 	
 
 }
