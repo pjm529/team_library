@@ -24,12 +24,6 @@ public class MyPageServiceImpl implements MyPageService {
 		myPageMapper.my_modify(member);
 	}
 
-	// 회원의 대출 중 도서 수와 비밀번호 받아오기
-	@Override
-	public MemberDTO user_check(String user_id) {
-		return myPageMapper.user_check(user_id);
-	}
-
 	// 회원 탈퇴
 	@Override
 	public void my_secession(String user_id) {
@@ -38,8 +32,8 @@ public class MyPageServiceImpl implements MyPageService {
 
 	// 탈퇴 회원 테이블에 입력
 	@Override
-	public void insert_secession(String user_id) {
-		myPageMapper.insert_secession(user_id);
+	public void insert_secession(MemberDTO member) {
+		myPageMapper.insert_secession(member);
 	}
 
 	// 비밀번호 변경

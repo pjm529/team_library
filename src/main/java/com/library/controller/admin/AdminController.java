@@ -102,13 +102,13 @@ public class AdminController {
 	
 	// 회원 탈퇴
 	@GetMapping("/member-delete")
-	public String member_delete(Criteria cri, @RequestParam String user_id) {
+	public String member_delete(Criteria cri, @RequestParam String user_id, @RequestParam String user_email) {
 
 		// 회원탈퇴
 		adminService.member_delete(user_id);
 		
 		// 탈퇴 회원 테이블에 입력
-		adminService.insert_secession(user_id);
+		adminService.insert_secession(user_id, user_email);
 		
 		int amount = cri.getAmount();
 		int page = cri.getPage();

@@ -17,7 +17,7 @@
 			select * 
 			  from hope
 			  <include refid="criteria"></include>
-			  order by hope_no 
+			  order by hope_no desc
 			  limit #{skip}, #{amount}
 		</select>
 		

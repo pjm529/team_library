@@ -28,10 +28,10 @@ public class SignupController {
 
 	@Autowired
 	private JavaMailSender mailSender; // 이메일 전송 bean
-	
+
 	@Autowired
 	private PasswordEncoder pwencoder; // 암호화 Encoder
-	
+
 	// 회원가입 페이지 진입 (get)
 	@GetMapping("/signup")
 	public String signupGET() {
@@ -48,10 +48,10 @@ public class SignupController {
 
 		String encode_pw = pwencoder.encode(member.getUser_pw());
 		member.setUser_pw(encode_pw);
-		
+
 		// 회원가입 service 쿼리 실행
 		signupService.signUp(member);
-		
+
 		// 회원 권한 추가
 		signupService.auth(member.getUser_id());
 
@@ -83,10 +83,32 @@ public class SignupController {
 		}
 	}
 
-	// 이메일 인증
+	// 메일 중복검사
 	@ResponseBody
-	@GetMapping("/mailCheck")
-	public String mailCheckGET(String email) throws Exception {
+	@PostMapping("/mailCheck")
+	public String mailCheckPOST(String email) throws Exception {
+
+		System.out.println("mailcheckPost 진입");
+
+		int result = signupService.mailCheck(email);
+
+		// 탈퇴 회원 중 메일 체크
+		int result2 = signupService.secession_mailCheck(email);
+
+		if (result != 0 || result2 != 0) {
+
+			return "fail";
+
+		} else {
+
+			return sendCode(email);
+
+		}
+	}
+
+	
+	// 이메일 인증코드 발송
+	public String sendCode(String email) throws Exception {
 
 		// view로부터 넘어온 데이터 확인
 		System.out.println("이메일 데이터 전송 확인");

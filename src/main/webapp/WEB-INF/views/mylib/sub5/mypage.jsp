@@ -166,11 +166,15 @@
                                     대출불가
                                 </th>
                                 <td class="last">
-
-                                    <input class="overdue_input" autocomplete="off" name="${my.user_overdue_date }"
-                                        value="대출가능" readonly> <br>
-
-
+									<c:if test="${my.user_overdue_date == 0 }">
+									<input class="overdue_input" autocomplete="off" name="user_overdue_date"
+                                    value="대출가능" readonly> <br>
+									</c:if>
+									
+									<c:if test="${my.user_overdue_date != 0 }">
+									<input class="overdue_input" autocomplete="off" name="user_overdue_date"
+                                    value="${my.user_overdue_date }일" readonly> <br>
+									</c:if>
                                 </td>
                             </tr>
 

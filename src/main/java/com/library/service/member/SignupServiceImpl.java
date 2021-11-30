@@ -20,6 +20,14 @@ public class SignupServiceImpl implements SignupService {
 
 	}
 
+	// 중복 이메일 체크
+	@Override
+	public int mailCheck(String user_email) throws Exception {
+
+		return signupMapper.mailCheck(user_email);
+
+	}
+
 	// 중복 아이디 체크
 	@Override
 	public int idCheck(String user_id) throws Exception {
@@ -32,6 +40,12 @@ public class SignupServiceImpl implements SignupService {
 	@Override
 	public int secession_idCheck(String user_id) throws Exception {
 		return signupMapper.secession_idCheck(user_id);
+	}
+
+	// 탈퇴 회원 중 메일 체크
+	@Override
+	public int secession_mailCheck(String user_email) throws Exception {
+		return signupMapper.secession_mailCheck(user_email);
 	}
 
 	// 회원 권한 입력

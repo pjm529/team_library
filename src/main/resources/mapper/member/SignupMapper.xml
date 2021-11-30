@@ -17,9 +17,19 @@
 			select count(*) from member where user_id = #{user_id}
 		</select>
 		
+		<!-- 아이디 중복 체크 -->
+		<select id="mailCheck" resultType="int">
+			select count(*) from member where user_email = #{user_email}
+		</select>
+		
 		<!-- 탈퇴 회원 중 아이디 중복 체크 -->
 		<select id="secession_idCheck" resultType="int">
 			select count(*) from secession_member where user_id = #{user_id}
+		</select>
+		
+		<!-- 탈퇴 회원 중 메일 중복 체크 -->
+		<select id="secession_mailCheck" resultType="int">
+			select count(*) from secession_member where user_email = #{user_email}
 		</select>
 		
 		<insert id="auth">

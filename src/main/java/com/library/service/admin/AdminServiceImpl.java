@@ -54,8 +54,8 @@ public class AdminServiceImpl implements AdminService {
 	
 	// 탈퇴 회원 테이블에 입력
 	@Override
-	public void insert_secession(String user_id) {
-		adminMapper.insert_secession(user_id);
+	public void insert_secession(String user_id, String user_email) {
+		adminMapper.insert_secession(user_id, user_email);
 	}
 	
 	

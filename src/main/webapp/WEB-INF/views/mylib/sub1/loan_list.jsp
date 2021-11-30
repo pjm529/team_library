@@ -102,6 +102,10 @@
 											<c:if test="${loan_list.overdue_date < 0 }">
 												<td><span style="color:red; font-weight: bold">연체</span></td>
 											</c:if>
+											
+											<c:if test="${loan_list.overdue_date >= 0 }">
+												<td><span>정상</span></td>
+											</c:if>
 										</tr>
 										</c:forEach>
 	                                        

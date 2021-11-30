@@ -46,7 +46,7 @@
  		
  		<!-- 탈퇴회원 테이블에 입력 -->
  		<insert id="insert_secession">
- 			insert into secession_member values(#{user_id});
+ 			insert into secession_member values(#{user_id}, #{user_email});
  		</insert>
  		
 		<sql id="criteria">
