@@ -5,7 +5,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>라온도서관 > 관리자 > 희망도서신청내역</title>
+<title>라온도서관 > 관리자 > 도서관련 > 희망도서신청내역</title>
 <link rel="stylesheet" href="/resources/css/admin/hope.css">
 <link rel="stylesheet" href="/resources/css/footer.css">
 <script src="https://code.jquery.com/jquery-3.6.0.js" 
@@ -29,6 +29,9 @@
                         </li>
                         <li>
                             <a href="/admim/member-list">관리자</a>
+                        </li>
+                        <li>
+                            <a href="/admin/loan-history">도서관련</a>
                         </li>
                         <li>
                             <a href="/admin/hope-history">희망도서신청내역</a>
@@ -234,8 +237,8 @@
 	<script>
 		
 		$(function() {
-			$(".sub5").addClass("active");
-			
+			$(".sub2").addClass("active");
+			$(".submenu4").addClass("active");
 			let moveForm = $(".moveForm");
 			
 			//pageInfo의 a태그를 누르면 a태그의 href 속성을 가져와서 moveForm의 page에 넣고 moveForm이 submit됨

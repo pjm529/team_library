@@ -47,7 +47,7 @@ public class HopeHistoryController {
 		ViewPage vp = new ViewPage(cri, total);
 		model.addAttribute("pageMaker", vp);
 
-		return "/admin/sub5/hope_history";
+		return "/admin/sub2/hope_history";
 
 	}
 
@@ -63,7 +63,7 @@ public class HopeHistoryController {
 		model.addAttribute("hope", hope);
 		model.addAttribute("cri", cri);
 
-		return "/admin/sub5/hope_info";
+		return "/admin/sub2/hope_info";
 	}
 
 	// 희망 도서 취소 처리

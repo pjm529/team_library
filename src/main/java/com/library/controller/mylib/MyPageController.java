@@ -27,15 +27,39 @@ public class MyPageController {
 	@Autowired
 	private PasswordEncoder pwencoder; // 암호화 Encoder
 
-	// 마이 페이지 진입
+	// 마이 페이지 진입 전 비밀번호 확인
 	@GetMapping("/mypage")
+	public String check() {
+		return "/mylib/sub5/check";
+	}
+
+	@ResponseBody
+	@PostMapping("/check-pw")
+	public String checkPw(String user_pw, Principal principal) {
+		String id = principal.getName();
+		MemberDTO my = myPageService.my_view(id);
+
+		// 입력한 비밀번호과 db에 있는 비밀번호가 같으면 탈퇴 수행
+		if (pwencoder.matches(user_pw, my.getUser_pw())) {
+
+			return "success";
+
+		} else {
+
+			return "fail";
+
+		}
+	}
+
+	// 마이 페이지 진입
+	@PostMapping("/mypage")
 	public String mypage(Model model, Principal principal) {
 
 		System.out.println("마이 페이지 진입");
 
 		// 로그인 된 user_id 받아오기
 		String id = principal.getName();
-		
+
 		MemberDTO my = myPageService.my_view(id);
 
 		my.setUser_reg_date(my.getUser_reg_date().substring(0, 10));
@@ -72,7 +96,7 @@ public class MyPageController {
 
 		// 로그인 된 user_id 받아오기
 		String id = principal.getName();
-		
+
 		member.setUser_id(id);
 
 		myPageService.my_modify(member);
@@ -154,19 +178,19 @@ public class MyPageController {
 
 		// 로그인 된 user_id 받아오기
 		String id = principal.getName();
-		
+
 		// 회원 정보 받아오기
 		MemberDTO my = myPageService.my_view(id);
 
 		// db에 있는 회원 비밀번호
 		String db_pw = my.getUser_pw();
-		
+
 		// 입력한 현재 비밀번호과 db에 있는 비밀번호가 같으면 탈퇴 수행
 		if (pwencoder.matches(present_pw, db_pw)) {
-			
+
 			// 비밀번호 암호화
 			String encode_pw = pwencoder.encode(user_pw);
-			
+
 			// 비밀번호 변경
 			myPageService.modify_pw(id, encode_pw);
 
@@ -180,7 +204,7 @@ public class MyPageController {
 			return "fail";
 
 		}
-				
+
 	}
 
 }

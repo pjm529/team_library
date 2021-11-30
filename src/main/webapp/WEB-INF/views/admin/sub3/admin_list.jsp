@@ -5,7 +5,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>라온도서관 > 관리자 > 대출중도서</title>
+<title>라온도서관 > 관리자 > 관리자목록</title>
 <link rel="stylesheet" href="/resources/css/admin/member_list.css">
 <link rel="stylesheet" href="/resources/css/footer.css">
 <script src="https://code.jquery.com/jquery-3.6.0.js" 
@@ -19,7 +19,7 @@
             <div class="doc-info">
                 <!-- doc title -->
                 <div class="doc-title">
-                    <h3>대출중도서</h3>
+                    <h3>관리자목록</h3>
                     <ul>
                         <!-- 홈 btn img -->
                         <li class="first" style="background-image: none;">
@@ -31,7 +31,7 @@
                             <a href="/admin/member-list">관리자</a>
                         </li>
                         <li>
-                            <a href="/admin/loan-list">대출중도서</a>
+                            <a href="/master/admin-list">관리자목록</a>
                         </li>
                     </ul>
                 </div>
@@ -57,27 +57,38 @@
 
                                         <c:if test="${empty pageMaker.cri.type}">
                                             <option value="user_id" selected="selected">아이디</option>
-                                            <option value="book_title">도서명</option>
-                                            <option value="book_isbn">ISBN</option>
+                                            <option value="user_name">이름</option>
+                                            <option value="user_tel">전화번호</option>
+                                            <option value="user_email">이메일</option>
                                         </c:if>
 
 
                                         <c:if test="${pageMaker.cri.type == 'user_id'}">
                                             <option value="user_id" selected="selected">아이디</option>
-                                            <option value="book_title">도서명</option>
-                                            <option value="book_isbn">ISBN</option>
+                                            <option value="user_name">이름</option>
+                                            <option value="user_tel">전화번호</option>
+                                            <option value="user_email">이메일</option>
                                         </c:if>
 
-                                        <c:if test="${pageMaker.cri.type == 'book_title' }">
+                                        <c:if test="${pageMaker.cri.type == 'user_name' }">
                                             <option value="user_id">아이디</option>
-                                            <option value="book_title" selected="selected">도서명</option>
-                                            <option value="book_isbn">ISBN</option>
+                                            <option value="user_name" selected="selected">이름</option>
+                                            <option value="user_tel">전화번호</option>
+                                            <option value="user_email">이메일</option>
                                         </c:if>
 
-                                        <c:if test="${pageMaker.cri.type == 'book_isbn' }">
+                                        <c:if test="${pageMaker.cri.type == 'user_tel' }">
                                             <option value="user_id">아이디</option>
-                                            <option value="book_title">도서명</option>
-                                            <option value="book_isbn" selected="selected">ISBN</option>
+                                            <option value="user_name">이름</option>
+                                            <option value="user_tel" selected="selected">전화번호</option>
+                                            <option value="user_email">이메일</option>
+                                        </c:if>
+
+                                        <c:if test="${pageMaker.cri.type == 'user_email' }">
+                                            <option value="user_id">아이디</option>
+                                            <option value="user_name">이름</option>
+                                            <option value="user_tel">전화번호</option>
+                                            <option value="user_email" selected="selected">이메일</option>
                                         </c:if>
 
                                     </select>
@@ -88,39 +99,39 @@
                                 </form>
 
                             </div>
-                            <!-- 대출 중 도서 수 -->
+                            <!-- 회원 수 -->
                             <div class="inline">
                                 <form action="">
 
-                                    <span style="margin-right: 10px;"> 대출 중 : <b>${total }</b> 건</span>
+                                    <span style="margin-right: 10px;"> 총 회원 : <b>${total }</b> 명</span>
                                     <select name="amount">
 
                                         <c:if test="${pageMaker.cri.amount == 10 }">
-                                            <option value="10" selected="selected">10건씩 보기</option>
-                                            <option value="20">20건씩 보기</option>
-                                            <option value="30">30건씩 보기</option>
-                                            <option value="40">40건씩 보기</option>
+                                            <option value="10" selected="selected">10명씩 보기</option>
+                                            <option value="20">20명씩 보기</option>
+                                            <option value="30">30명씩 보기</option>
+                                            <option value="40">40명씩 보기</option>
                                         </c:if>
 
                                         <c:if test="${pageMaker.cri.amount == 20 }">
-                                            <option value="10">10건씩 보기</option>
-                                            <option value="20" selected="selected">20건씩 보기</option>
-                                            <option value="30">30건씩 보기</option>
-                                            <option value="40">40건씩 보기</option>
+                                            <option value="10">10명씩 보기</option>
+                                            <option value="20" selected="selected">20명씩 보기</option>
+                                            <option value="30">30명씩 보기</option>
+                                            <option value="40">40명씩 보기</option>
                                         </c:if>
 
                                         <c:if test="${pageMaker.cri.amount == 30 }">
-                                            <option value="10">10건씩 보기</option>
-                                            <option value="20">20건씩 보기</option>
-                                            <option value="30" selected="selected">30건씩 보기</option>
-                                            <option value="40">40건씩 보기</option>
+                                            <option value="10">10명씩 보기</option>
+                                            <option value="20">20명씩 보기</option>
+                                            <option value="30" selected="selected">30명씩 보기</option>
+                                            <option value="40">40명씩 보기</option>
                                         </c:if>
 
                                         <c:if test="${pageMaker.cri.amount == 40 }">
-                                            <option value="10">10건씩 보기</option>
-                                            <option value="20">20건씩 보기</option>
-                                            <option value="30">30건씩 보기</option>
-                                            <option value="40" selected="selected">40건씩 보기</option>
+                                            <option value="10">10명씩 보기</option>
+                                            <option value="20">20명씩 보기</option>
+                                            <option value="30">30명씩 보기</option>
+                                            <option value="40" selected="selected">40명씩 보기</option>
                                         </c:if>
 
                                     </select>
@@ -138,25 +149,37 @@
                                     <thead>
                                         <tr>
                                             <th style="width: 100px;">아이디</th>
-                                            <th style="">도서명</th>
-                                            <th style="">ISBN</th>
-                                            <th style="width: 90px;">대출날짜</th>
-                                            <th style="width: 90px">반납예정일</th>
-                                            <th style="width: 60px;">정보</th>
+                                            <th style="width: 100px;">이름</th>
+                                            <th style="width: 100px;">전화번호</th>
+                                            <th style="width: 235px;">이메일</th>
+                                            <th style="width: 90px;">생년월일</th>
+                                            <th style="width: 50px;">대출불가</th>
+                                            <th style="width: 90px;">회원가입일</th>
+                                            <th style="width: 60px;">권한</th>
                                         </tr>
                                     </thead>
                                     <tbody>
 
-                                        <c:forEach var="loan_list" items="${loan_list}">
+                                        <c:forEach var="admin_list" items="${admin_list}">
                                             <tr>
-                                                <td class="">${loan_list.user_id }</td>
-                                                <td>${loan_list.book_title }</td>
-                                                <td>${loan_list.book_isbn}</td>
-                                                <td>${loan_list.loan_date }</td>
-                                                <td>${loan_list.return_period }</td>
+                                                <td class="">${admin_list.user_id }</td>
+                                                <td class="left" style="padding-left: 15px;">${admin_list.user_name }
+                                                </td>
+                                                <td>${admin_list.user_tel}</td>
+                                                <td>${admin_list.user_email}</td>
+                                                <td>${admin_list.user_birth }</td>
 
+                                                <c:if test="${admin_list.user_overdue_date == 0 }">
+                                                    <td>대출가능</td>
+                                                </c:if>
+
+                                                <c:if test="${admin_list.user_overdue_date != 0 }">
+                                                    <td>${admin_list.user_overdue_date }일</td>
+                                                </c:if>
+
+                                                <td>${admin_list.user_reg_date }</td>
                                                 <td>
-                                                    <form action="/admin/return-book" method="get"
+                                                    <form action="/master/revoke" method="post"
                                                         onsubmit="return false;">
                                                         <input type="hidden" name="amount"
                                                             value="${pageMaker.cri.amount }">
@@ -164,11 +187,9 @@
                                                         <input type="hidden" name="type" value="${pageMaker.cri.type }">
                                                         <input type="hidden" name="keyword"
                                                             value="${pageMaker.cri.keyword }">
-                                                        <input type="hidden" name="loan_no"
-                                                            value="${loan_list.loan_no }">
                                                         <input type="hidden" name="user_id"
-                                                            value="${loan_list.user_id }">
-                                                        <button class="btn2">반납</button>
+                                                            value="${admin_list.user_id }">
+                                                        <button class="btn2">해제</button>
                                                     </form>
 
                                                 </td>
@@ -177,6 +198,12 @@
 
                                     </tbody>
                                 </table>
+
+                                <br>
+
+                                <div style="float: right;">
+                                    <button class="add_btn btn">추가</button>
+                                </div>
 
                                 <br>
 
@@ -245,11 +272,20 @@
             });
 
             $(".btn2").on("click", function () {
-                if (confirm("도서를 반납처리 하시겠습니까?")) {
-                    alert("반납이 완료되었습니다.");
-                    $("form").attr("onsubmit", "return true;");
+
+                if (confirm("관리자 권한을 해제하시겠습니까?")) {
+                    alert("관리자 권한을 해제하였습니다.")
+                    $("form").attr("onsubmit", "return true");
                     $("form").submit();
                 }
+            })
+
+            $('.add_btn').on("click", function (e) {
+
+                e.preventDefault();
+                let popUrl = "/master/add-popup";
+                let popOption = "width = 700px, height=600px, top=300px, scrollbars=no, resizeable=no";
+                window.open(popUrl, "작가 찾기", popOption);
             });
 
         });
