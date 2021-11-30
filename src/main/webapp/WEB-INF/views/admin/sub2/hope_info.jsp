@@ -228,8 +228,8 @@
     <script>
     
 	    $(function(){
-			$(".sub5").addClass("active");
-			
+			$(".sub2").addClass("active");
+			$(".submenu4").addClass("active");
 			$("#cancel_btn").on("click", function(){
 				if(confirm("해당 도서를 취소처리 하시겠습니까?")) {
 					$(".reason").val(prompt("취소사유를 입력하세요"));

@@ -111,8 +111,8 @@
     <script>
 
         $(function () {
-            $(".sub4").addClass("active");
-
+            $(".sub2").addClass("active");
+            $(".submenu3").addClass("active");
             $(".btn2").on("click", function () {
                 let cnt = $("input[name=user_email]:checkbox:checked").length;
 

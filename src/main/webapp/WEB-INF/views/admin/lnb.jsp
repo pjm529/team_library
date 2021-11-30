@@ -9,18 +9,29 @@
             <a href="/admin/member-list">회원관리</a>
         </li>
         <li class="sub2">
-            <a href="/admin/loan-history">대출내역</a>
+            <a href="/admin/loan-history">도서관련　　　　　<b>+</b></a>
+            
+            <ul>
+            	<li class="submenu1">
+		            <a href="/admin/loan-history">대출내역</a>
+		        </li>
+		        
+		        <li class="submenu2">
+		            <a href="/admin/loan-list">대출중도서</a>
+		        </li>
+		        
+		        <li class="submenu3">
+		            <a href="/admin/overdue-list">연체중도서</a>
+		        </li>
+		        
+		        <li class="submenu4">
+		            <a href="/admin/hope-history">희망도서신청내역</a>
+		        </li>
+            </ul>
+            
         </li>
+        
         <li class="sub3">
-            <a href="/admin/loan-list">대출중도서</a>
-        </li>
-        <li class="sub4">
-            <a href="/admin/overdue-list">연체중도서</a>
-        </li>
-        <li class="sub5">
-            <a href="/admin/hope-history">희망도서신청내역</a>
-        </li>
-        <li class="sub6">
             <a href="/master/admin-list">관리자목록</a>
         </li>
     </ul>

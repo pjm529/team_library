@@ -49,7 +49,7 @@ public class LoanController {
 		ViewPage vp = new ViewPage(cri, total);
 		model.addAttribute("pageMaker", vp);
 
-		return "/admin/sub3/loan_list";
+		return "/admin/sub2/loan_list";
 
 	}
 
@@ -87,7 +87,7 @@ public class LoanController {
 		try {
 			keyword = URLEncoder.encode(cri.getKeyword(), "UTF-8");
 		} catch (UnsupportedEncodingException e) {
-			return "redirect:/admin/sub3/loan-list";
+			return "redirect:/admin/loan-list";
 		}
 
 		return "redirect:/admin/loan-list?amount=" + amount + "&page=" + page + "&type=" + type + "&keyword=" + keyword;

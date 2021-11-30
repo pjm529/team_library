@@ -248,7 +248,7 @@
     <script>
 
         $(function () {
-            $(".sub6").addClass("active");
+            $(".sub3").addClass("active");
 
             let moveForm = $(".moveForm");
 

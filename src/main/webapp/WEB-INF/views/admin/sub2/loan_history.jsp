@@ -222,6 +222,7 @@
 
         $(function () {
             $(".sub2").addClass("active");
+            $(".submenu1").addClass("active");
 
             let moveForm = $(".moveForm");
 

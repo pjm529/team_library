@@ -43,7 +43,7 @@ public class MasterController {
 		ViewPage vp = new ViewPage(cri, total);
 		model.addAttribute("pageMaker", vp);
 
-		return "/admin/sub6/admin_list";
+		return "/admin/sub3/admin_list";
 
 	}
 
@@ -51,7 +51,7 @@ public class MasterController {
 	@GetMapping("/add-popup")
 	public String add_popup(Model model) {
 
-		return "/admin/sub6/add_popup";
+		return "/admin/sub3/add_popup";
 
 	}
 
@@ -66,7 +66,7 @@ public class MasterController {
 
 		model.addAttribute("result", result);
 
-		return "/admin/sub6/add_popup";
+		return "/admin/sub3/add_popup";
 
 	}
 

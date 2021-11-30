@@ -232,8 +232,8 @@
     <script>
 
         $(function () {
-            $(".sub3").addClass("active");
-
+            $(".sub2").addClass("active");
+            $(".submenu2").addClass("active");
             let moveForm = $(".moveForm");
 
             //pageInfo의 a태그를 누르면 a태그의 href 속성을 가져와서 moveForm의 page에 넣고 moveForm이 submit됨
