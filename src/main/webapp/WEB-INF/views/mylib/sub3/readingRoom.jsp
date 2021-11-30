@@ -259,6 +259,7 @@
 
                                 <input type="hidden" id="diff_hour" value="${diff_hour}">
                                 <input type="hidden" id="diff_min" value="${diff_min}">
+                                <input type="hidden" id="diff_sec" value="${diff_sec}">
 
 
                                 <table class="reserve-info">
@@ -277,17 +278,7 @@
                                             <th class="left">반납 시간</th>
                                             <td class="checkout_time">${checkout_time}</td>
                                             <th class="left">잔여 시간</th>
-
-                                            <c:choose>
-                                                <c:when test="${diff_hour < 1 && diff_min < 30}">
-                                                    <td style="color: red; font-weight: bold;">${diff_time}</td>
-                                                </c:when>
-                                                <c:otherwise>
-                                                    <td style="color: blue; font-weight: bold;">${diff_time}</td>
-                                                </c:otherwise>
-                                            </c:choose>
-
-
+                                            <td id="time" style="color: blue; font-weight: bold;">${diff_time}</td>
                                         </tr>
                                     </tbody>
 
@@ -333,6 +324,16 @@
     <script>
 
         $(function () {
+        	
+        	// 예약된 좌석이 있으면 남은 시간 timer start
+        	if($(".reserve_no").val() != ""){
+        		var hours =  $("#diff_hour").val();
+                var minutes = $("#diff_min").val();
+                var seconds = $("#diff_sec").val();
+                var totalSeconds = (60 * 60 * hours) + (60 * minutes) + parseInt(seconds, 10) - 1;
+                var display = document.querySelector('#time');
+                startTimer(totalSeconds, display);
+        	}
 
             // class가 occupied인 button은 disabled 속성 사용해 버튼 비활성화
             $(".occupied").prop("disabled", true);
@@ -451,8 +452,6 @@
                 var diff_min = $("#diff_min").val();
                 var result = diff_hour < 1 && diff_min < 30;
 
-                var seat_no = "<c:out value='${mySeatInfo.seat_no}'/>";
-
                 if (result == false) {
                     alert("연장 가능한 시간이 아닙니다.");
 
@@ -463,9 +462,10 @@
                          $("form").submit();
                     }
                 }
-
+ 
             })
-
+            	
+            	
         });
 
         function rdRoom() {
@@ -479,7 +479,37 @@
         function nbRoom() {
             location.href = "/mylib/notebookRoom";
         }
+        
+        function startTimer(totalSeconds, display) {
+        	
+       	  var timer = totalSeconds;
+       	  var hours;
+       	  var minutes;
+       	  var seconds;
+       	  var interval = setInterval(function () {
+       		if(timer <= 0) {
+       	      clearInterval(interval);
+       	      alert("퇴실되었습니다.");
+       	      location.reload();
+         	}
+       		
+       	    hours = parseInt(timer / 60 / 60, 10);
+       	    minutes = parseInt(timer / 60 - (hours * 60), 10);
+       	    seconds = parseInt(timer % 60, 10);
 
+       	    minutes = minutes < 10 ? "0" + minutes : minutes;
+       	    seconds = seconds < 10 ? "0" + seconds : seconds;
+       	    
+			if(hours < 1 && minutes < 30) {
+				display.style.color = "red";	
+			}
+			
+  	    	display.textContent = hours + ":" + minutes + ":" + seconds;
+			
+  	    	timer--;
+  	    	
+       	  }, 1000);
+       	}
 
     </script>
 
