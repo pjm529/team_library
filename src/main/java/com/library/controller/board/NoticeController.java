@@ -36,26 +36,30 @@ public class NoticeController {
 	@Autowired
 	private NoticeService noticeService;
 
+	/* 공지사항 게시판 */
 	@GetMapping("/noticeList")
 	public String noticeList(Model model, Criteria cri) {
 
 		List<NoticeDTO> noticeList = noticeService.getListPaging(cri);
 		model.addAttribute("noticeList", noticeList);
 
+		// 전체 게시물 수
 		int total = noticeService.getTotal(cri);
-
 		model.addAttribute("total", total);
+		
 		ViewPage vp = new ViewPage(cri, total);
 		model.addAttribute("pageMaker", vp);
 
 		return "/board/sub1/noticeList";
 	}
 
+	/* 게시물 조회 */
 	@GetMapping("/noticeContent")
 	public String noticeContent(Criteria cri, Model model, @RequestParam("notice_no") String n_notice_no) {
 
 		Long notice_no = Long.parseLong(n_notice_no);
 
+		// 조회수 증가
 		noticeService.updateNoticeViews(notice_no);
 
 		NoticeDTO noticeContent = noticeService.noticeContent(notice_no);
@@ -68,20 +72,16 @@ public class NoticeController {
 		return "/board/sub1/noticeContent";
 	}
 
+	
+	/* 게시물 작성 */
+	/* 게시물 작성 page로 이동 */
 	@GetMapping("/insertNoticeForm")
 	public String insertNoticeForm() {
 
 		return "/board/sub1/insertNoticeForm";
 	}
 
-//	@PostMapping("/insertNotice")
-//	public String insertNotice(NoticeDTO dto, @RequestParam("notice_img") MultipartFile[] uploadFile) {
-//
-//		noticeService.insert(dto);
-//
-//		return "redirect:/board/noticeList";
-//	}
-
+	/* 게시물 작성 process */
 	@PostMapping("/insertNotice")
 	public String insertNotice(NoticeDTO dto, RedirectAttributes rttr) {
 
@@ -90,26 +90,29 @@ public class NoticeController {
 		UserDetails userDetails = (UserDetails) principal;
 		String id = userDetails.getUsername();
 
+		// 첨부 파일이 있는 경우
 		if (dto.getNoticeAttachList() != null) {
 			dto.getNoticeAttachList().forEach(attach -> System.out.println(attach));
 		}
-
+		
 		dto.setWriter_id(id);
 		noticeService.insert(dto);
 
-		rttr.addFlashAttribute("result", dto.getNotice_no());
+//		rttr.addFlashAttribute("result", dto.getNotice_no());
 
 		return "redirect:/board/noticeList";
 	}
 
+	/* 첨부 파일 조회 */
 	@GetMapping(value = "/getNoticeAttachList", produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
 	@ResponseBody
 	public ResponseEntity<List<NoticeAttachDTO>> getNoticeAttachList(Long notice_no) {
 
-		List<NoticeAttachDTO> a = noticeService.getNoticeAttachList(notice_no);
-		return new ResponseEntity<>(noticeService.getNoticeAttachList(notice_no), HttpStatus.OK);
+		List<NoticeAttachDTO> noticeAttachList = noticeService.getNoticeAttachList(notice_no);
+		return new ResponseEntity<>(noticeAttachList, HttpStatus.OK);
 	}
 
+	/* 게시물 삭제 */
 	@GetMapping("/deleteNotice")
 	public String deleteNotice(Criteria cri, @RequestParam("notice_no") String n_notice_no, RedirectAttributes rttr,
 			@RequestParam("uuid") String uuid, @RequestParam("file_type") String file_type) {
@@ -136,6 +139,7 @@ public class NoticeController {
 				+ "&type=" + cri.getType();
 	}
 
+	/* 폴더 내 첨부 파일 삭제 */
 	private void deleteNoticeFiles(List<NoticeAttachDTO> attachList) {
 
 		if (attachList == null || attachList.size() == 0) {
@@ -183,24 +187,7 @@ public class NoticeController {
 
 	}
 
-//	@GetMapping("/deleteNotice")
-//	public String deleteNotice(Criteria cri, @RequestParam("notice_no") String n_notice_no) {
-//
-//		String keyword;
-//
-//		try {
-//			keyword = URLEncoder.encode(cri.getKeyword(), "UTF-8");
-//		} catch (UnsupportedEncodingException e) {
-//			return "redirect:/board/noticeList";
-//		}
-//		
-//		Long notice_no = Long.parseLong(n_notice_no);
-//		noticeService.delete(notice_no);
-//		noticeService.reset();
-//		return "redirect:/board/noticeList?amount=" + cri.getAmount() + "&page=" + cri.getPage() + "&keyword="
-//				+ keyword + "&type=" + cri.getType();
-//	}
-
+	/* 게시물 수정 page */
 	@GetMapping("/updateNoticeForm")
 	public String updateNoticeForm(Criteria cri, Model model, @RequestParam("notice_no") String n_notice_no) {
 
@@ -213,23 +200,7 @@ public class NoticeController {
 		return "/board/sub1/updateNoticeForm";
 	}
 
-//	@PostMapping("/updateNotice")
-//	public String updateNotice(Criteria cri, NoticeDTO dto) {
-//
-//		String keyword;
-//
-//		try {
-//			keyword = URLEncoder.encode(cri.getKeyword(), "UTF-8");
-//		} catch (UnsupportedEncodingException e) {
-//			return "redirect:/board/noticeList";
-//		}
-//
-//		noticeService.update(dto);
-//
-//		return "redirect:/board/noticeContent?amount=" + cri.getAmount() + "&page=" + cri.getPage() + "&keyword=" + keyword
-//				+ "&type=" + cri.getType() + "&notice_no=" + dto.getNotice_no();
-//	}
-
+	/* 게시물 수정 process */
 	@PostMapping("/updateNotice")
 	public String updateNotice(Criteria cri, NoticeDTO dto, RedirectAttributes rttr) {
 

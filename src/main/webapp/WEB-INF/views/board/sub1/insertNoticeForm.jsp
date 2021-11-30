@@ -53,7 +53,6 @@
                             
                             <div class="table-wrap">
                                 <form action="/board/insertNotice" method="post" onsubmit="return false" role="form">
-                                    <!-- <input type="hidden" name="writer_id" value="writer_id"> -->
                             		<input type="hidden" name="writer_name" value="<sec:authentication property="principal.dto.user_name"/>">
                                     
                                     <table class="bbs-edit">
@@ -71,24 +70,12 @@
                                                 <th class="first">작성일</th>
                                                 <td>${today}</td>
                                             </tr>
-                                            <!-- <tr>
-                                                <th class="first">비밀번호</th>
-                                                <td colspan="3">
-                                                    <input type="password" style="width: 30%;" maxlength="10"
-                                                        placeholder="10자리 이내로 입력해 주세요">
-                                                </td>
-                                            </tr> -->
                                             <tr>
                                                 <td colspan="4">
                                                     <textarea id="popContent" name="notice_content" cols="108"
                                                         rows="15"></textarea>
                                                 </td>
                                             </tr>
-                                            <!-- <tr>
-                                                <td colspan="4">
-                                                    <input type="file" name="notice_img" multiple>
-                                                </td>
-                                            </tr> -->
                                             <tr>
                                             	<td colspan="4">
                                             		<div class="uploadDiv">
@@ -151,7 +138,7 @@
 			}
 			
 			if(confirm('등록하시겠습니까?')) {
-				$("form").attr("onsubmit", "result true");
+				$("form").attr("onsubmit", "return true;");
 				$("form").submit();
 			}
 		});
@@ -163,6 +150,7 @@
 		
 		
 		/* 파일 업로드 */
+		/* input 태그에 업로드할 파일 정보 담아서 form submit */
 		var formObj = $("form[role='form']");
 		   
 		$("button[type='submit']").on("click", function(e){
@@ -190,7 +178,6 @@
 		});
 		
 			      
-			      
 		/* 용량, 파일 형식 지정 */	      
 		var regex = new RegExp("(.*?)\.(exe|sh|zip|alz)$");
 		var maxSize = 5242880; //5MB
@@ -210,7 +197,6 @@
 		}
 			      
 			      
-		
 		/* 선택한 파일을 지정된 폴더에 저장 */
 		$("input[type='file']").change(function(e){
 		
@@ -244,7 +230,7 @@
 			      
 			      
 		
-		/* 첨부파일 선택했을 때 */	      
+		/* 첨부 파일 선택했을 때 */	      
 		function showUploadResult(uploadResultArr){
 		    
 			/* 아무것도 선택 안했으면 리스트에 아무것도 안담김 -> 그냥 리턴 */
@@ -296,11 +282,9 @@
 		}
 		
 		
-		/* x버튼 눌렀을 때 첨부파일 화면에서 사라짐 */
+		/* x버튼 눌렀을 때 첨부 파일 목록에서 사라짐 */
 		$(".uploadResult").on("click", "button", function(e){
 			
-			
-		    
 			var uuid = $("#uuid").val();
 			
 			console.log("delete file");
