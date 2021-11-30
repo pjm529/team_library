@@ -18,7 +18,8 @@
 	<select id="getReadingRoom1SeatsList" resultType="com.library.model.mylib.ReadingRoomDTO">
 		select * 
 		  from reading_room 
-		 where seat_no &lt; 55 order by seat_no
+		 where seat_no &lt; 55
+	     order by seat_no
 	</select>
 	
 	<!-- 열람실 예약 좌석 정보 -->
@@ -80,5 +81,6 @@
 	<!-- 열람실 좌석 insert -->
 	<select id="insert">
 		insert into reading_room values(#{seat_no}, null, null, null)
-	</select>	
+	</select>
+	
 </mapper>
