@@ -275,7 +275,7 @@ input:focus{
     display: none;
 }
 
-.id_err_1, .id_err_2 , .pw_err, .pwck_err_1, .pwck_err_2,.name_err, .birth_err, .phone_err, .email_err_1, .email_err_2, .emailck_err, .emailck_err_2, .address_err {
+.id_err_1, .id_err_2 , .pw_err, .pwck_err_1, .pwck_err_2,.name_err, .birth_err, .phone_err, .email_err_1, .email_err_2, .email_err_3 , .emailck_err, .emailck_err_2, .address_err {
     color: red;
     display: none;
 }

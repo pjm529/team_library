@@ -142,6 +142,7 @@
                                     <span class="email_correct">이메일이 전송 되었습니다. 이메일을 확인해주세요.</span>
                                     <span class="email_err_1">올바르지 못한 이메일 형식입니다.</span>
                                     <span class="email_err_2">이메일을 입력해주세요.</span>
+                                    <span class="email_err_3">중복된 이메일이 존재합니다.</span>
 
 
                                     <br>
@@ -404,30 +405,52 @@
             let email = $(".mail_input").val(); // 입력한 이메일
             let checkBox = $(".mailck_input"); //인증번호 입력란
 
-
             // 이메일 형식 유효성 검사
             if (mailFormCheck(email)) {
-                $(".email_correct").css("display", "block");
-                $(".email_err_1").css("display", "none");
-            } else {
-                $(".email_correct").css("display", "none");
-                $(".email_err_1").css("display", "block");
-                return false; // 형식이 올바르지 않을 경우 ajax로 가지 않고 함수 종료
-            }
-
-            $.ajax({
-
-                type: "GET",
-                url: "/member/mailCheck?email=" + email,
-                success: function (data) {
-                    checkBox.attr("disabled", false);
-                    checkBox.focus();
-                    code = data;
-
+            	
+            	// 유효성 통과 시 유효성 불통과 에러 미출력
+            	$(".email_err_1").css("display", "none");
+                let data = {
+                		email: email
                 }
-            });
-        }); // 인증 이메일 전송 함수 종료
+                
+                // 이메일 중복 검사
+                $.ajax({
 
+                    type: "post",
+                    url: "/member/mailCheck",
+                    data: data,
+                    success: function (result) {
+
+                    	// 이메일이 중복이 아닐 시 에러 코드 none, 인증 번호 입력란 사용, code에 인증번호 삽입
+                        if (result != "fail") {
+                        	
+                        	$(".email_btn").attr("disabled", "disabled");
+                        	
+                        	$('.email_err_3').css('display', 'none');
+                    		$(".email_correct").css("display", "block");
+                    		
+                    		checkBox.attr("disabled", false);
+    	                    checkBox.focus();
+    	                    code = result;
+    	                    
+                        } else {
+							// 중복 이메일 있을 시 중복 이메일 에러 출력
+                        	$('.email_err_3').css('display', 'block');
+                    		$(".email_correct").css("display", "none");
+                        }
+                    }
+
+                }); // ajax 종료
+                
+            } else {
+            	// 이메일 형식 유효성 검사 불통과시 에러 출력
+                $(".email_correct").css("display", "none");
+                $('.email_err_3').css('display', 'none');
+                $(".email_err_1").css("display", "block");
+            }
+            
+        }); // 인증 이메일 전송 함수 종료
 
 
         // 인증번호 비교
@@ -529,7 +552,8 @@
         $('.mail_input').on("propertychange change keyup paste input", function () {
             let re = /[ \{\}\[\]\/?,;:|\)*~`!^\+┼<>\#$%&\'\"\\\(\=]/gi;
             let temp = $(this).val();
-
+            $('.email_err_3').css('display', 'none');
+            
             if (re.test(temp)) { //특수문자가 포함되면 삭제하여 값으로 다시셋팅
                 $(this).val(temp.replace(re, ""));
             }
