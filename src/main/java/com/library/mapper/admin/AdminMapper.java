@@ -2,6 +2,8 @@ package com.library.mapper.admin;
 
 import java.util.List;
 
+import org.apache.ibatis.annotations.Param;
+
 import com.library.model.member.MemberDTO;
 import com.library.page.Criteria;
 
@@ -26,5 +28,5 @@ public interface AdminMapper {
 	public void member_delete(String user_id);
 
 	// 탈퇴 회원 테이블에 입력
-	public void insert_secession(String user_id);
+	public void insert_secession(@Param("user_id") String user_id, @Param("user_email") String user_email);
 }

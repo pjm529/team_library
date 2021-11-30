@@ -18,13 +18,6 @@
  			  where user_id = #{user_id}
  		</update>
  		
- 		<!-- 회원의 대출 중 도서 수와 비밀번호 받아오기 -->
- 		<select id="user_check" resultType="com.library.model.member.MemberDTO">
- 			select user_pw, user_book_count
- 			  from member
- 			 where user_id = #{user_id}
- 		</select>
- 		
  		<!-- 회원 탈퇴 -->
  		<delete id="my_secession">
  			delete
@@ -34,7 +27,7 @@
  		
  		<!-- 탈퇴회원 테이블에 입력 -->
  		<insert id="insert_secession">
- 			insert into secession_member values(#{user_id});
+ 			insert into secession_member values(#{user_id}, #{user_email});
  		</insert>
  		
  		<!-- 비밀번호 변경 -->

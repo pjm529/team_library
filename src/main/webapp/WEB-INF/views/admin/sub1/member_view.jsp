@@ -213,6 +213,7 @@
 							<input type="hidden" name="type" value="${cri.type }">
 							<input type="hidden" name="keyword" value="${cri.keyword }">
 							<input type="hidden" name="user_id" value="${member.user_id }">
+							<input type="hidden" name="user_email" value="${member.user_email }">
 							<button id="delete_btn" class="btn">탈퇴</button>
                     	</form>
                     </div>

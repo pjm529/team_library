@@ -6,8 +6,6 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.core.context.SecurityContextHolder;
-import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -103,7 +101,7 @@ public class MyPageController {
 		String id = principal.getName();
 
 		// 회원 정보 받아오기
-		MemberDTO my = myPageService.user_check(id);
+		MemberDTO my = myPageService.my_view(id);
 
 		// 대출 중 도서 수
 		int count = my.getUser_book_count();
@@ -125,7 +123,7 @@ public class MyPageController {
 				myPageService.my_secession(id);
 
 				// 탈퇴 회원 테이블에 입력
-				myPageService.insert_secession(id);
+				myPageService.insert_secession(my);
 
 				// 세션 초기화
 				session.invalidate();
@@ -158,7 +156,7 @@ public class MyPageController {
 		String id = principal.getName();
 		
 		// 회원 정보 받아오기
-		MemberDTO my = myPageService.user_check(id);
+		MemberDTO my = myPageService.my_view(id);
 
 		// db에 있는 회원 비밀번호
 		String db_pw = my.getUser_pw();
