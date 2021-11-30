@@ -302,6 +302,7 @@
 
 								<input type="hidden" id="diff_hour" value="${diff_hour }">
 								<input type="hidden" id="diff_min" value="${diff_min }">
+								<input type="hidden" id="diff_sec" value="${diff_sec }">
                                 <!-- 제2열람실 좌석 예약정보 -->
                                 <table class="reserve-info">
                                     <tbody>
@@ -322,15 +323,8 @@
                                             <th class="left">반납 시간</th>
                                             <td class="return_time">${checkout_time}</td>
                                             <th class="left">잔여 시간</th>
-                                            <c:choose>
-                                                <c:when test="${diff_hour < 1 && diff_min < 30}">
-                                                    <td style="color: red; font-weight: bold;">${diff_time}</td>
-                                                </c:when>
-                                                <c:otherwise>
-                                                    <td style="color: blue; font-weight: bold;">${diff_time}</td>
+                                            <td id="time" style="color: blue; font-weight: bold;">${diff_time}</td>
 													
-                                                </c:otherwise>
-                                            </c:choose>
                                         </tr>
                                     </tbody>
 
@@ -375,9 +369,18 @@
     <script>
         $(function () {
 
-
+			
             $(".sub3").addClass("active");
-
+			
+         // 예약된 좌석이 있으면 남은 시간 timer start
+           	if($(".reserve_no").val() != ""){
+               var hours =  $("#diff_hour").val();
+               var minutes = $("#diff_min").val();
+               var seconds = $("#diff_sec").val();
+               var totalSeconds = (60 * 60 * hours) + (60 * minutes) + parseInt(seconds, 10) - 1;
+               var display = document.querySelector('#time');
+               startTimer(totalSeconds, display);
+            }
             /*좌석번호 클릭하기 전까지 나타지않도록 */
             $(".booking_btn").hide();
 
@@ -523,6 +526,37 @@
 
         function nbRoom() {
             location.href = "/mylib/notebookRoom";
+        }
+        
+        function startTimer(totalSeconds, display) {
+            
+            var timer = totalSeconds;
+            var hours;
+            var minutes;
+            var seconds;
+            var interval = setInterval(function () {
+             if(timer <= 0) {
+                clearInterval(interval);
+                alert("퇴실되었습니다.");
+                location.reload();
+            }
+             
+              hours = parseInt(timer / 60 / 60, 10);
+              minutes = parseInt(timer / 60 - (hours * 60), 10);
+              seconds = parseInt(timer % 60, 10);
+
+              minutes = minutes < 10 ? "0" + minutes : minutes;
+              seconds = seconds < 10 ? "0" + seconds : seconds;
+              
+         if(hours < 1 && minutes < 30) {
+            display.style.color = "red";   
+         }
+         
+            display.textContent = hours + ":" + minutes + ":" + seconds;
+         
+            timer--;
+            
+            }, 1000);
         }
 
     </script>
