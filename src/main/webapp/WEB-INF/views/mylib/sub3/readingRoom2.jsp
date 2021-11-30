@@ -528,6 +528,7 @@
             location.href = "/mylib/notebookRoom";
         }
         
+        /* 열람실 잔여시간 실시간 타이머 */
         function startTimer(totalSeconds, display) {
             
             var timer = totalSeconds;
