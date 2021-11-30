@@ -5,7 +5,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>라온도서관 > 관리자 > 대출내역</title>
+<title>라온도서관 > 관리자 > 도서관련 > 대출내역</title>
 <link rel="stylesheet" href="/resources/css/admin/member_list.css">
 <link rel="stylesheet" href="/resources/css/footer.css">
 <script src="https://code.jquery.com/jquery-3.6.0.js" 
@@ -29,6 +29,9 @@
                         </li>
                         <li>
                             <a href="/admin/member-list">관리자</a>
+                        </li>
+                        <li>
+                            <a href="/admin/loan-history">도서관련</a>
                         </li>
                         <li>
                             <a href="/admin/loan-history">대출내역</a>
