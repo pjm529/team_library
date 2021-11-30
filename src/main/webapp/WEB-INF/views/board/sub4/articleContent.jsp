@@ -6,38 +6,6 @@
 <head>
    <title>라온도서관 > 열린공간 > 분실물찾기</title>
 <link rel="stylesheet" href="/resources/css/board/sub4/content_page.css">
-<style>
- .wrapper-bbs{
-	padding-top: 20px;
- 	}
-
-.bbs-content b {
-	font-size: 140%;
-	font-weight: 800;
-	padding: 10px 15px;
-	}
-
-.bbs-title {
-	height: 40px;
-	}
-
-.bbs-content {
-	min-height: 240px;
-	}
-
-p {
-	margin: 0;
-	padding: 20px 15px;
-	line-height: 150%;
-	word-break: keep-all;
-	font-size: 15px;
-	font-weight: normal;
-	color: #464646;
-	}
-
-
-
-</style>
 </head>
 <body>
 <div class="container">
@@ -89,7 +57,8 @@ p {
                                         <!-- 작성자 | 작성일 | 조회수 -->
                                         <tr>
                                             <th class="first">작성자</th>
-                                            <td style="width: 15%;">${dto.writer_name}</td>
+                                            <td style="width: 15%;">관리자</td>
+                                            <%-- <td style="width: 15%;">${dto.writer_name}</td> --%>
                                             <th class="first">작성일</th>                                            
                                             <td>
                                             	<fmt:formatDate var="article_reg_date" value="${dto.article_reg_date}" pattern="yyyy-MM-dd"/>
