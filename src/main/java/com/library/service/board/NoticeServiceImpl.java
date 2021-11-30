@@ -33,6 +33,11 @@ public class NoticeServiceImpl implements NoticeService {
 	public int getTotal(Criteria cri) {
 		return mapper.getTotal(cri);
 	}	
+	
+	@Override
+	public void updateNoticeViews(Long notice_no) {
+		mapper.updateViews(notice_no);
+	}
 
 	@Override
 	public NoticeDTO noticeContent(Long notice_no) {
@@ -40,43 +45,13 @@ public class NoticeServiceImpl implements NoticeService {
 	}
 	
 	@Override
+	public List<NoticeAttachDTO> getNoticeAttachList(Long notice_no) {
+		return attachMapper.findByNotice_no(notice_no);
+	}
+	
+	@Override
 	public List<NoticeDTO> getPrevAndNextPost(Long notice_no) {
 		return mapper.getPrevAndNextPost(notice_no);
-	}
-	
-	@Override
-	public void updateNoticeViews(Long notice_no) {
-		mapper.updateViews(notice_no);
-	}
-
-//	@Override
-//	public void insert(NoticeDTO dto) {
-//		mapper.insert(dto);		
-//	}
-
-//	@Override
-//	public void delete(Long notice_no) {
-//		mapper.delete(notice_no);		
-//	}
-
-	@Override
-	public void reset() {
-		mapper.reset();
-	}
-
-//	@Override
-//	public void update(NoticeDTO dto) {
-//		mapper.update(dto);		
-//	}
-
-	
-	
-	/* 파일 업로드 */
-	
-	@Override
-	public List<NoticeAttachDTO> getNoticeAttachList(Long notice_no) {
-//		System.out.println("impl 내 notice_no ================> " + notice_no);
-		return attachMapper.findByNotice_no(notice_no);
 	}
 
 	@Transactional
@@ -92,6 +67,19 @@ public class NoticeServiceImpl implements NoticeService {
 			attach.setNotice_no(dto.getNotice_no());
 			attachMapper.insert(attach);
 		});
+	}
+	
+	@Transactional
+	@Override
+	public void delete(Long notice_no) {
+		
+		attachMapper.deleteAllByNotice_no(notice_no);
+		mapper.delete(notice_no);
+	}
+	
+	@Override
+	public void reset() {
+		mapper.reset();
 	}
 
 	@Transactional
@@ -111,16 +99,6 @@ public class NoticeServiceImpl implements NoticeService {
 		
 		return updateResult;
 	}
-	
-	@Transactional
-	@Override
-	public void delete(Long notice_no) {
-		
-		attachMapper.deleteAllByNotice_no(notice_no);
-		mapper.delete(notice_no);
-	}
-
-	
 	
 
 }
