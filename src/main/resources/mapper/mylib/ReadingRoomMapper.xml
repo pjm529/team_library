@@ -32,7 +32,13 @@
 	<!-- 좌석 예약 -->
 	<update id="bookingSeat">
 		update reading_room
-		   set user_id = #{user_id}, checkin_time = current_timestamp, checkout_time = date_add(current_timestamp, interval 3 hour)
+		   set user_id = #{user_id}, 
+		   	   checkin_time = current_timestamp, 
+		   	   checkout_time = CASE 
+		   	   						WHEN substr(current_timestamp, 12, 2) >= 15 
+		   	   						THEN date_add(curdate(), interval 18 hour)
+		   	   						ELSE date_add(current_timestamp, interval 3 hour)
+		   	   				   END
 		 where seat_no = #{seat_no}
 	</update>
 	
@@ -43,11 +49,14 @@
 		 where user_id = #{user_id}
 	</delete>
 		
-		
 	<!-- 좌석 연장 -->
 	<update id="extendSeat">
 		update reading_room
-		   set checkout_time = date_add(checkout_time, interval 2 hour)
+		   set checkout_time = CASE 
+		   	   						WHEN substr(current_timestamp, 12, 2) >= 16 
+		   	   						THEN date_add(curdate(), interval 18 hour)
+		   	   						ELSE date_add(current_timestamp, interval 2 hour)
+		   	   				   END
 		 where user_id = #{user_id}
 	</update>
 
