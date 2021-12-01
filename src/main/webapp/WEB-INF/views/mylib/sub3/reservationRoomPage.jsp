@@ -74,9 +74,9 @@
                                         <tr>
                                             <td class="room-name">제 1열람실</td>
                                             <td class="align-center">54</td>
-                                            <td class="align-right">52</td>
+                                            <td class="align-right">${rd1Room_usingSeat}</td>
                                             <td class="progress">
-                                                <progress value="2" max="54"></progress>
+                                                <progress value="${rd1Room_usedSeat}" max="54"></progress>
                                             </td>
                                             <td class="percent">
                                             	<div id="rd1UsedSeat"></div>
@@ -89,9 +89,9 @@
                                         <tr>
                                             <td class="room-name">제 2열람실</td>
                                             <td class="align-center">42</td>
-                                            <td class="align-right">41</td>
+                                            <td class="align-right">${rd2Room_usingSeat}</td>
                                             <td class="progress">
-                                                <progress value="40" max="100"></progress>
+                                                <progress value="${rd2Room_usedSeat}" max="100"></progress>
                                             </td>
                                             <td class="percent">
                                             	<div id="rd2UsedSeat"></div>
@@ -179,6 +179,14 @@
 		var usedSeat = "<c:out value='${nbRoom_usedSeat}'/>";
 		var percent = (usedSeat/28) * 100;
 		$('#nbUsedSeat').html(percent.toFixed(0) + "%");
+		
+		var rd1_usedSeat = "<c:out value='${rd1Room_usedSeat}'/>";
+		var rd1_percent = (rd1_usedSeat/28) * 100;
+		$('#rd1UsedSeat').html(rd1_percent.toFixed(0) + "%");
+		
+		var rd2_usedSeat = "<c:out value='${rd2Room_usedSeat}'/>";
+		var rd2_percent = (rd2_usedSeat/28) * 100;
+		$('#rd2UsedSeat').html(rd2_percent.toFixed(0) + "%");
 		
 	}); 
 	</script>

@@ -19,6 +19,34 @@ public class ReservationRoomServiceImpl implements ReservationRoomService {
 	
 	
 	/* 잔여 좌석 | 사용 좌석 */
+	
+	/* ==== 열람실 1 ==== */
+	/* 잔여 좌석 */
+	@Override
+	public int rd1Room_usingSeat() {
+		return nbMapper.rd1Room_usingSeat();
+	}
+	/* 사용 좌석 */
+	@Override
+	public int rd1Room_usedSeat() {
+		return nbMapper.rd1Room_usedSeat();
+	}
+	
+	
+	/* ==== 열람실 2 ==== */
+	/* 잔여 좌석 */
+	@Override
+	public int rd2Room_usingSeat() {
+		return nbMapper.rd2Room_usingSeat();
+	}
+	/* 사용 좌석 */
+	@Override
+	public int rd2Room_usedSeat() {
+		return nbMapper.rd2Room_usedSeat();
+	}
+	
+	
+	/* ==== 노트북실 ==== */
 	/* 잔여 좌석 */
 	@Override
 	public int nbRoom_usingSeat() {
