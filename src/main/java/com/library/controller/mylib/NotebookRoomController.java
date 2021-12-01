@@ -41,7 +41,7 @@ public class NotebookRoomController {
 		}else {
 			Date now = new Date();
 			nbRoom_info.setDiff_time(nbRoom_info.getCheckout_time().getTime() - now.getTime());
-			model.addAttribute("room2_info", nbRoom_info);
+			model.addAttribute("nbRoom_info", nbRoom_info);
 		}
 		
 		return "/mylib/sub3/notebookRoom";

@@ -220,8 +220,8 @@
                         <div class="wrapper-table">
                         
                             <!-- 예약 x 테이블 -->
-                             <c:if test="${reservation_info == null}">
-                            	<input type="hidden" name="user_id" value="id">
+                             <c:if test="${nbRoom_info == null}">
+                            	<input type="hidden" name="user_id" value="user_id">
                             	<input type="hidden" name="seat_no" value="seat_no" class="input_selected_seat_no">
                             
 	                            <table class="seat-info">
@@ -242,14 +242,14 @@
 							</c:if> 
 
                             <!-- 예약 o 테이블 -->
-                            <c:if test="${reservation_info != null}">
+                            <c:if test="${nbRoom_info != null}">
                             
-                            	<fmt:formatDate var="reg_time" value="${reservation_info.reg_time}" pattern="HH:mm:ss"/>
-                            	<fmt:formatDate var="return_time" value="${reservation_info.return_time}" pattern="HH:mm:ss"/>
+                            	<fmt:formatDate var="reg_time" value="${nbRoom_info.checkin_time}" pattern="HH:mm:ss"/>
+                            	<fmt:formatDate var="return_time" value="${nbRoom_info.checkout_time}" pattern="HH:mm:ss"/>
                             	
-                            	<fmt:parseNumber var="diff_hour" value="${reservation_info.diff_time/(1000*60*60)}" integerOnly="true" />
-                            	<fmt:parseNumber var="diff_min" value="${reservation_info.diff_time/(1000*60) - diff_hour*60}" integerOnly="true" />
-                            	<fmt:parseNumber var="diff_sec" value="${reservation_info.diff_time/1000 - diff_hour*60*60 - diff_min*60}" integerOnly="true" />
+                            	<fmt:parseNumber var="diff_hour" value="${nbRoom_info.diff_time/(1000*60*60)}" integerOnly="true" />
+                            	<fmt:parseNumber var="diff_min" value="${nbRoom_info.diff_time/(1000*60) - diff_hour*60}" integerOnly="true" />
+                            	<fmt:parseNumber var="diff_sec" value="${nbRoom_info.diff_time/1000 - diff_hour*60*60 - diff_min*60}" integerOnly="true" />
 	                    		
 	                    		<c:if test="${diff_min < 10}">
 	                    			<c:set var="diff_min" value="${diff_min}" />
@@ -271,15 +271,15 @@
 	                                        <td colspan="2">노트북실</td>
 	                                        <th class="left">좌석 번호</th>
 	                                        <td colspan="2">
-	                                        	${reservation_info.seat_no}
-	                                        	<input type="hidden" class="my_seat_no" value="${reservation_info.seat_no}">
+	                                        	${nbRoom_info.seat_no}
+	                                        	<input type="hidden" class="my_seat_no" value="${nbRoom_info.seat_no}">
 	                                        </td>
 	                                    </tr>
 	                                    <tr>
 	                                        <th>예약 시간</th>
-	                                        <td class="reg_time">${reg_time}</td> 
+	                                        <td class="reg_time">${nbRoom_info.checkin_time}</td> 
 	                                        <th class="left">반납 시간</th>
-	                                        <td class="return_time">${return_time}</td>
+	                                        <td class="return_time">${nbRoom_info.checkout_time}</td>
 	                                        <th class="left">잔여 시간</th>
 	                                        <c:choose>
 	                                           <c:when test="${diff_hour < 1 && diff_min < 30}">
