@@ -40,6 +40,12 @@ public class NotebookRoomServiceImpl implements NotebookRoomService {
 		return nbMapper.nb_seat_check(seat_no);
 	}
 	
+	/* 좌석 반납 */
+	@Override
+	public void nbRoom_delete(String user_id) {
+		nbMapper.nbRoom_delete(user_id);
+	}
+	
 	
 	
 	
@@ -52,6 +58,7 @@ public class NotebookRoomServiceImpl implements NotebookRoomService {
 		nbMapper.insert(seat_no);
 		
 	}
+	
 
 	
 

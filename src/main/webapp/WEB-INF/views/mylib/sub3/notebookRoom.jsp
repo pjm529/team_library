@@ -294,8 +294,16 @@
 	
 	                            </table>
 	                            <div class="reserve-info-btn">
-	                                <button class="chk_out_btn return_btn">퇴실</button>
-	                                <button class="renew_btn extend_btn">연장</button>
+		                            <div style="float: left;">
+		                            	<form id="return_form" action="/mylib/nbRoom_delete" method="post" onsubmit="return false;">
+		                                	<button class="chk_out_btn return_btn">퇴실</button>
+		                                </form>
+	                                </div>
+	                                <div style="float: right; margin-left: 10px;">
+		                            	<form id="return_form" action="/mylib/nbRoom_extend" method="post" onsubmit="return false;">
+		                                	<button class="renew_btn extend_btn">연장</button>
+		                                </form>
+	                                </div>
 	                            </div>
                             </c:if>
 
@@ -427,17 +435,11 @@
 		/* 퇴실 btn click 시, 좌석 반납 */
 		$(".return_btn").on("click", function(e) {
 			
-			e.preventDefault();
-			
-			var seat_no = $(".my_seat_no").val();
-			
-			if(confirm("좌석을 반납하시겠습니까?")){
-				
-				alert (seat_no + "번 퇴실 완료");
-				
-				location.href = "/mylib/nb_seat_return?seat_no=" + seat_no;
-			}
-			
+			if(confirm("좌석을 반납하시겠습니까?")) {
+				alert("좌석 반납이 완료되었습니다.");
+				$("form").attr("onsubmit", "return ture;");
+				$("form").submit();
+			}	
 			
 		});
 		

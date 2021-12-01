@@ -50,9 +50,7 @@ public class NotebookRoomController {
 	
 	
 	
-	
-	
-	/* 예약 | 좌석 이동 | 퇴실 | 좌석 시간 연장 */
+	/* 예약 | 좌석 이동 | 반납 | 좌석 시간 연장 */
 	/* 좌석 예약 */
 	@PostMapping("/nbRoom_booking")
 	public String nbRoom_booking(NoteBookRoomDTO dto, Principal principal) {
@@ -75,6 +73,17 @@ public class NotebookRoomController {
 		}else {
 			return "fail";
 		}
+	}
+	
+	
+	/* 좌석 반납 */
+	@PostMapping("nbRoom_delete")
+	public String nbRoom_delete(Principal principal) {
+
+		String user_id = principal.getName();
+		nbService.nbRoom_delete(user_id);
+		
+		return "redirect:/mylib/notebookRoom";
 	}
 	
 	

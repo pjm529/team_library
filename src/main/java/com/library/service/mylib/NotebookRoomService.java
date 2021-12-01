@@ -19,6 +19,9 @@ public interface NotebookRoomService {
 	/* 좌석 상태 체크 */
 	public int nb_seat_check(String seat_no);
 	
+	/* 좌석 반납 */
+	public void nbRoom_delete(String user_id);
+	
 	
 	
 	
