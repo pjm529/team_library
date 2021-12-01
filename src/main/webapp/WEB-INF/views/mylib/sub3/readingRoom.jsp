@@ -452,8 +452,9 @@
                 var diff_hour = $("#diff_hour").val();
                 var diff_min = $("#diff_min").val();
                 var result = diff_hour < 1 && diff_min < 30;
-
-                if (result == false) {
+                var checkout_time = "<c:out value='${mySeatInfo.checkout_time}'/>";
+                
+                if (result == false || checkout_time.includes("18:00:00")) {
                     alert("연장 가능한 시간이 아닙니다.");
 
                 } else {
