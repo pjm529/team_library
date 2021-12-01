@@ -19,7 +19,6 @@ public class ReservationRoomController {
 	public String reservationRoomPage(Model model) {
 		
 		int nbRoom_usingSeat = resService.nbRoom_usingSeat();
-		System.out.println(nbRoom_usingSeat);
 		model.addAttribute("nbRoom_usingSeat", nbRoom_usingSeat);
 		
 		int nbRoom_usedSeat = resService.nbRoom_usedSeat();
