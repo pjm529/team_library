@@ -10,6 +10,7 @@
 	<link rel="stylesheet" href="/resources/css/footer.css">
 </head>
 <body>
+${smList }
 	<div class="container">
         <div class="sub_title">
             <div class="doc-info">

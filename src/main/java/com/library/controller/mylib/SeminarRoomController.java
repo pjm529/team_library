@@ -1,5 +1,7 @@
 package com.library.controller.mylib;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -26,6 +28,9 @@ public class SeminarRoomController {
 		
 		String nowDate = unowDate;
 		model.addAttribute("nowDate", nowDate);
+		
+		List<SeminarRoomDTO> smList = smService.room_list_all();
+		model.addAttribute("smList", smList);
 		
 		Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
 		UserDetails userDetails = (UserDetails) principal;
