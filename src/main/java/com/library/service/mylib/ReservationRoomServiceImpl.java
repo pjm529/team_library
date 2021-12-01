@@ -17,14 +17,18 @@ public class ReservationRoomServiceImpl implements ReservationRoomService {
 	@Autowired
 	private NotebookRoomMapper nbMapper;
 	
+	
+	/* 잔여 좌석 | 사용 좌석 */
+	/* 잔여 좌석 */
 	@Override
-	public int nbUsingSeat() {
-		return nbMapper.nbUsingSeat();
+	public int nbRoom_usingSeat() {
+		return nbMapper.nbRoom_usingSeat();
 	}
-
+	/* 사용 좌석 */
 	@Override
-	public int nbUsedSeat() {
-		return nbMapper.nbUsedSeat();
+	public int nbRoom_usedSeat() {
+		return nbMapper.nbRoom_usedSeat();
 	}
+	
 
 }

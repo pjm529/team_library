@@ -16,13 +16,14 @@ public class ReservationRoomController {
 	private ReservationRoomService resService;
 	
 	@GetMapping("/reservationRoomPage")
-	public String sub3MainPage(Model model) {
+	public String reservationRoomPage(Model model) {
 		
-		int nbUsingSeat = resService.nbUsingSeat();
-		model.addAttribute("nbUsingSeat", nbUsingSeat);
+		int nbRoom_usingSeat = resService.nbRoom_usingSeat();
+		System.out.println(nbRoom_usingSeat);
+		model.addAttribute("nbRoom_usingSeat", nbRoom_usingSeat);
 		
-		int nbUsedSeat = resService.nbUsedSeat();
-		model.addAttribute("nbUsedSeat", nbUsedSeat);
+		int nbRoom_usedSeat = resService.nbRoom_usedSeat();
+		model.addAttribute("nbRoom_usedSeat", nbRoom_usedSeat);
 		
 		return "/mylib/sub3/reservationRoomPage";
 	}

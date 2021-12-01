@@ -104,9 +104,9 @@
                                         <tr>
                                             <td class="room-name">노트북실</td>
                                             <td class="align-center">28</td>
-                                            <td class="align-right">${nbUsingSeat}</td>
+                                            <td class="align-right">${nbRoom_usingSeat}</td>
                                             <td class="progress">
-                                                <progress value="${nbUsedSeat}" max="28"></progress>
+                                                <progress value="${nbRoom_usedSeat}" max="28"></progress>
                                             </td>
                                             <td class="percent">
                                             	<div id="nbUsedSeat"></div>
@@ -176,7 +176,7 @@
 	<script>
 	$(document).ready(function() {
 		
-		var usedSeat = "<c:out value='${nbUsedSeat}'/>";
+		var usedSeat = "<c:out value='${nbRoom_usedSeat}'/>";
 		var percent = (usedSeat/28) * 100;
 		$('#nbUsedSeat').html(percent.toFixed(0) + "%");
 		

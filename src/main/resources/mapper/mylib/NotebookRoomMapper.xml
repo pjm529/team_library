@@ -18,7 +18,7 @@
 	<select id="nbRoom_info" resultType="com.library.model.mylib.NoteBookRoomDTO">
 		select *
 		  from reading_room 
-		 where  user_id = #{user_id}
+		 where user_id = #{user_id}
 	</select>
 
 
@@ -66,7 +66,23 @@
 							   END
 		 where user_id = #{user_id}
 	</update>
-
+	
+	
+	
+	
+	<!-- 잔여 좌석 | 사용 중인 좌석 -->
+	<!-- 잔여 좌석 -->
+	<select id="nbRoom_usingSeat" resultType="int">
+		select count(*) - (select count(DISTINCT(user_id)) from reading_room)
+		  from reading_room
+		  where seat_no &gt; 96
+	</select>
+	<!-- 사용 중 좌석 -->
+	<select id="nbRoom_usedSeat" resultType="int">
+		select count(DISTINCT(user_id))
+		  from reading_room
+		 where seat_no &gt; 96
+	</select>
 
 
 
