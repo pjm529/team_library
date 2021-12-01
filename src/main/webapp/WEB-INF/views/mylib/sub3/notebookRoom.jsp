@@ -76,7 +76,7 @@
                                     <div class="seat-list" style="width:60px;">
 	                                    <c:forEach var="nb" items="${notebookRoomlist}" begin="0" end="2">
 	                               			
-	                               			<!-- seat_status == 0 => 좌석 예약 불가 (사용 중) -->
+	                               			<%-- <!-- seat_status == 0 => 좌석 예약 불가 (사용 중) -->
 	                                    	<c:if test="${nb.seat_status == '0'}">
 	                                    		<c:set var="status" value="occupied"/>
 	                                    		<c:set var="user_id" value="${nb.user_id}"/>
@@ -97,7 +97,9 @@
 	                                    		<!-- status => 사용 중이면 occupied || 사용 가능하면 vacant -->
 	                                    	<c:if test="${nb.user_id != id}">
 	                                    		<button class="${status}" id="${nb.seat_no}">${nb.seat_no}</button>
-	                                    	</c:if>
+	                                    	</c:if> --%>
+	                                    	
+	                                    	<button id="${nb.seat_no}">${nb.seat_no}</button>
 	                                    
 	                                    </c:forEach>
                                     </div>
@@ -107,7 +109,7 @@
                                     <div class="seat-list">
                                     	<c:forEach var="nb" items="${notebookRoomlist}" begin="3" end="12">
                                     	
-	                                    	<!-- seat_status == 0 => 좌석 예약 불가 (사용 중) -->
+	                               <%--      	<!-- seat_status == 0 => 좌석 예약 불가 (사용 중) -->
 	                                    	<c:if test="${nb.seat_status == '0'}">
 	                                    		<c:set var="status" value="occupied"/>
 	                                    		<c:set var="user_id" value="${nb.user_id}"/>
@@ -128,7 +130,9 @@
 	                                    		<!-- status => 사용 중이면 occupied || 사용 가능하면 vacant -->
 	                                    	<c:if test="${nb.user_id != id}">
 	                                    		<button class="${status}" id="${nb.seat_no}">${nb.seat_no}</button>
-	                                    	</c:if>
+	                                    	</c:if> --%>
+	                                    	
+	                                    	<button id="${nb.seat_no}">${nb.seat_no}</button>
 	                                    </c:forEach>
                                     </div>
                                     
@@ -137,7 +141,7 @@
                                     <div class="seat-list" style="margin-right: 145px;">
                                     	<c:forEach var="nb" items="${notebookRoomlist}" begin="13" end="20">
 	                                    	<!-- seat_status == 0 => 좌석 예약 불가 (사용 중) -->
-	                                    	<c:if test="${nb.seat_status == '0'}">
+	                                    	<%-- <c:if test="${nb.seat_status == '0'}">
 	                                    		<c:set var="status" value="occupied"/>
 	                                    		<c:set var="user_id" value="${nb.user_id}"/>
 	                                    	</c:if>
@@ -157,7 +161,9 @@
 	                                    		<!-- status => 사용 중이면 occupied || 사용 가능하면 vacant -->
 	                                    	<c:if test="${nb.user_id != id}">
 	                                    		<button class="${status}" id="${nb.seat_no}">${nb.seat_no}</button>
-	                                    	</c:if>
+	                                    	</c:if> --%>
+	                                    	
+	                                    	<button id="${nb.seat_no}">${nb.seat_no}</button>
 	                                    </c:forEach>
                                     </div>
 
@@ -166,7 +172,7 @@
                                     <div class="seat-list">
                                     	<c:forEach var="nb" items="${notebookRoomlist}" begin="21" end="24">
 	                                    	<!-- seat_status == 0 => 좌석 예약 불가 (사용 중) -->
-	                                    	<c:if test="${nb.seat_status == '0'}">
+	                                    	<%-- <c:if test="${nb.seat_status == '0'}">
 	                                    		<c:set var="status" value="occupied"/>
 	                                    		<c:set var="user_id" value="${nb.user_id}"/>
 	                                    	</c:if>
@@ -186,7 +192,8 @@
 	                                    		<!-- status => 사용 중이면 occupied || 사용 가능하면 vacant -->
 	                                    	<c:if test="${nb.user_id != id}">
 	                                    		<button class="${status}" id="${nb.seat_no}">${nb.seat_no}</button>
-	                                    	</c:if>
+	                                    	</c:if> --%>
+	                                    	<button id="${nb.seat_no}">${nb.seat_no}</button>
 	                                    </c:forEach>
                                     </div>
 
@@ -196,7 +203,7 @@
                                     	<c:forEach var="nb" items="${notebookRoomlist}" begin="25" end="27">
                                     	
 	                                    	<!-- seat_status == 0 => 좌석 예약 불가 (사용 중) -->
-	                                    	<c:if test="${nb.seat_status == '0'}">
+	                                    	<%-- <c:if test="${nb.seat_status == '0'}">
 	                                    		<c:set var="status" value="occupied"/>
 	                                    		<c:set var="user_id" value="${nb.user_id}"/>
 	                                    	</c:if>
@@ -216,7 +223,9 @@
 	                                    		<!-- status => 사용 중이면 occupied || 사용 가능하면 vacant -->
 	                                    	<c:if test="${nb.user_id != id}">
 	                                    		<button class="${status}" id="${nb.seat_no}">${nb.seat_no}</button>
-	                                    	</c:if>
+	                                    	</c:if> --%>
+	                                    	
+	                                    	<button id="${nb.seat_no}">${nb.seat_no}</button>
 	                                    	
 	                                    </c:forEach>
                                     </div>
