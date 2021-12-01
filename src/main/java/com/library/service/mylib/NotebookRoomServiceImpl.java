@@ -28,7 +28,7 @@ public class NotebookRoomServiceImpl implements NotebookRoomService {
 	
 	
 	
-	/* 예약 | 좌석 이동 | 퇴실 | 좌석 시간 연장 */
+	/* 예약 | 좌석 이동 | 반납 | 좌석 시간 연장 */
 	/* 좌석 예약 */
 	@Override
 	public void nbRoom_booking(NoteBookRoomDTO dto) {
@@ -40,12 +40,24 @@ public class NotebookRoomServiceImpl implements NotebookRoomService {
 		return nbMapper.nb_seat_check(seat_no);
 	}
 	
+	/* 좌석 이동 */
+	@Override
+	public void nbRoom_moveSeat(NoteBookRoomDTO dto) {
+		nbMapper.nbRoom_moveSeat(dto);
+	}
+	
 	/* 좌석 반납 */
 	@Override
 	public void nbRoom_delete(String user_id) {
 		nbMapper.nbRoom_delete(user_id);
 	}
 	
+	/* 좌석 시간 연장 */
+	@Override
+	public void nbRoom_extend(String user_id) {
+		nbMapper.nbRoom_extend(user_id);
+		
+	}
 	
 	
 	
@@ -58,6 +70,8 @@ public class NotebookRoomServiceImpl implements NotebookRoomService {
 		nbMapper.insert(seat_no);
 		
 	}
+	
+	
 	
 
 	

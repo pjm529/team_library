@@ -75,6 +75,19 @@ public class NotebookRoomController {
 		}
 	}
 	
+	/* 좌석 이동 */
+	@PostMapping("nbRoom_moveSaet")
+	public String nbRoom_moveSaet(NoteBookRoomDTO dto, Principal principal) {
+		
+		String user_id = principal.getName();
+		
+		dto.setUser_id(user_id);
+		nbService.nbRoom_delete(user_id);
+		nbService.nbRoom_booking(dto);
+		
+		return "redirect:/mylib/notebookRoom";
+	}
+	
 	
 	/* 좌석 반납 */
 	@PostMapping("nbRoom_delete")
@@ -84,6 +97,19 @@ public class NotebookRoomController {
 		nbService.nbRoom_delete(user_id);
 		
 		return "redirect:/mylib/notebookRoom";
+	}
+	
+	
+	/* 좌석 연장 */
+	@PostMapping("/nbRoom_extend")
+	public String nbRoom_extend(Principal principal) {
+		
+		String user_id = principal.getName();
+		
+		nbService.nbRoom_extend(user_id);
+		
+		return "redirect:/mylib/notebookRoom";
+		
 	}
 	
 	

@@ -21,6 +21,7 @@
 
 </head>
 <body>
+	<input type="hidden" class="reserve_no" value="${nbRoom_info.seat_no}">
 
     <div class="container">
         <div class="sub_title">
@@ -279,7 +280,7 @@
 	                                        <th>예약 시간</th>
 	                                        <td class="reg_time">${nbRoom_info.checkin_time}</td> 
 	                                        <th class="left">반납 시간</th>
-	                                        <td class="return_time">${nbRoom_info.checkout_time}</td>
+	                                        <td class="return_time" id="checkout_time">${nbRoom_info.checkout_time}</td>
 	                                        <th class="left">잔여 시간</th>
 	                                        <c:choose>
 	                                           <c:when test="${diff_hour < 1 && diff_min < 30}">
@@ -304,6 +305,11 @@
 		                                	<button class="renew_btn extend_btn">연장</button>
 		                                </form>
 	                                </div>
+	                                
+	                                <form id="move" action="/mylib/nbRoom_moveSaet" method="post" onsubmit="return false;">
+										<input id="new_no" type="hidden" name="seat_no">
+									</form>
+									
 	                            </div>
                             </c:if>
 
@@ -349,15 +355,30 @@
 			/* .vacant class의 id 속성 값을 가져와 seat_no 변수에 저장 */
 			var seat_no = $(this).attr("id"); 
 			
-			if($(".mine").length){
+			if($(".reserve_no").val() != ''){
 				
 				if(confirm("노트북실 " + seat_no + "번 좌석으로 이동하시겠습니까?")){
 					
-					alert("이동 완료");
-
-					var mySeat_no = $(".mine").attr("id");
+					var data = {seat_no:seat_no};
+	 				
+	 				$.ajax({
+	 					type : "post",
+	 					url : "/mylib/nb_seat_check",
+	 					data : data,
+	 					success : function(result){
+							
+	 						if(result == "success"){
+	 							alert("예약이 완료되었습니다.");
+	 							$("#move #new_no").val(seat_no);
+	 							$("#move").attr("onsubmit", "return true;");
+	 							$("#move").submit();
+	 						}else{
+	 							alert("이미 예약된 좌석입니다.");
+	 							location.reload();
+	 						}
+						} 
+	 				});
 					
-					location.href = "/mylib/nbMoveSeat?newSeat_no=" + seat_no + "&seat_no=" + mySeat_no;
 				}
 				
 			}else {
@@ -451,23 +472,25 @@
 			
 	      	var diff_hour = $("#diff_hour").val();
 	        var diff_min = $("#diff_min").val();
-	        var result = diff_hour < 1 && diff_min < 30;
-	        /* 30분 이하로만 자리 연장 가능 */
-			
+	        var result = diff_hour < 1 && diff_min < 30;	/* 30분 이하로만 자리 연장 가능 */
+	        var checkout_time = "<c:out value='${nbRoom_info.checkout_time}'/>";
+	        
 			var seat_no = $(".my_seat_no").val();
 			
-			if(result == false){
-				
-	            alert("연장 가능한 시간이 아닙니다.");
-	            
-	         }else{
-	        	 
-	            if(confirm("좌석을 연장하시겠습니까?")){
-	               alert(seat_no+ "번 자리 연장되었습니다.");
-	               
-	               location.href = "/mylib/nb_seat_extend?seat_no=" + seat_no;
-	            }
-	         }  
+			if(checkout_time.includes("18")){ 
+				// checkout_time에 '18'이라는 문자열이 포함되어 있으면, 좌석 연장 여부 묻지 않고 연장 불가 메시지 바로 뜨게 함
+				alert("연장 가능한 시간이 아닙니다.");
+			}else{
+				if(result == false){
+		            alert("연장 가능한 시간이 아닙니다.");
+		         }else{
+		            if(confirm("좌석을 연장하시겠습니까?")){
+		               alert(seat_no+ "번 자리 연장되었습니다.");
+						$("form").attr("onsubmit", "return ture;");
+						$("form").submit();
+		            }
+		         }
+			}
 			
 			
 		});

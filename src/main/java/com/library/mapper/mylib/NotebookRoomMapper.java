@@ -14,14 +14,20 @@ public interface NotebookRoomMapper {
 	public NoteBookRoomDTO nbRoom_info(String user_id);
 	
 	
-	/* 예약 | 좌석 상태 체크 | 좌석 이동 | 퇴실 | 좌석 시간 연장 */
+	/* 예약 | 좌석 상태 체크 | 좌석 이동 | 반납 | 좌석 시간 연장 */
 	/* 좌석 예약 */
 	public void nbRoom_booking(NoteBookRoomDTO dto);
 	/* 좌석 상태 체크 */
 	public int nb_seat_check(String seat_no);
 	
+	/* 좌석 이동 */
+	public void nbRoom_moveSeat(NoteBookRoomDTO dto);
+	
 	/* 좌석 반납 */
 	public void nbRoom_delete(String user_id);
+	
+	/* 좌석 시간 연장 */
+	public void nbRoom_extend(String user_id);
 	
 	
 	
