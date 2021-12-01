@@ -346,13 +346,21 @@
 
 
             $(".mine").on("click", function (e) {
-            	  alert("이미 예약 중인 좌석입니다.");
+            	  alert("이미 예약된 좌석입니다.");
             });
-
+            
+            
+            var today = new Date();
+            var hours = today.getHours();
 
             $(".vacant").on("click", function (e) {
                 e.preventDefault();
-
+                
+                if(hours == '18'){
+                	alert("현재는 사용 불가한 시간입니다.");
+                	return;
+                }
+				
                 var seat_no = $(this).attr("id");
 
                 if($(".reserve_no").val() != ""){
@@ -403,7 +411,7 @@
 
             $(".booking_btn").on("click", function (e) {
                 e.preventDefault();
-
+                
                 var seat_no = $(".input_selected_seat_no").val();
 
                 if (confirm("제 1열람실 " + seat_no + "번 좌석을 예약하시겠습니까?")) {
