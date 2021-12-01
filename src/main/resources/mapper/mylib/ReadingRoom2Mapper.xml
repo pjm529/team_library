@@ -23,14 +23,25 @@
 	<!-- 좌석 예약 -->
 	<update id="room2_booking">
 		update reading_room
-		   set user_id = #{user_id}, checkin_time = current_timestamp , checkout_time = date_add(current_timestamp, INTERVAL 3 HOUR)
+		   set user_id = #{user_id}, 
+		   	   checkin_time = current_timestamp , 
+		       checkout_time = CASE
+		   							WHEN substr(current_timestamp, 12, 2) >= 15
+		   							THEN date_add(curdate(), interval 18 hour)
+		   							ELSE date_add(current_timestamp, interval 3 hour)
+		   					   END	
 	     where seat_no = #{seat_no}
 	</update>
 
 	<!-- 좌석 반납&퇴실 -->
 	<update id="room2_delete">
 		update reading_room
-		   set user_id = null, checkin_time = null, checkout_time = null
+		    set user_id = #{user_id}, 
+		       	checkout_time = CASE
+		   							WHEN substr(current_timestamp, 12, 2) >= 16
+		   							THEN date_add(curdate(), interval 18 hour)
+		   							ELSE date_add(current_timestamp, interval 2 hour)
+		   					    END	
 	     where user_id = #{user_id}
 	</update>
 	
