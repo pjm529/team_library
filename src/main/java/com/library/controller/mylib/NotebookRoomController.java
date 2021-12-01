@@ -8,7 +8,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.library.model.mylib.NoteBookRoomDTO;
 import com.library.service.mylib.NotebookRoomService;
@@ -20,11 +23,11 @@ public class NotebookRoomController {
 	@Autowired
 	private NotebookRoomService nbService;
 
-	/* 전체 좌석 출력(NotebookRoom) */
+	/* 전체 좌석 출력(NotebookRoom) | 로그인 된 아이디와 비교 */
 	@GetMapping("/notebookRoom")
 	public String notebookRoomList(Model model, Principal principal) {
 
-		List<NoteBookRoomDTO> notebookRoomlist = nbService.nb_list_all();
+		List<NoteBookRoomDTO> notebookRoomlist = nbService.nbRoom_list_all();
 		model.addAttribute("notebookRoomlist", notebookRoomlist);
 
 		/* 로그인 된 ID */
@@ -44,5 +47,38 @@ public class NotebookRoomController {
 		return "/mylib/sub3/notebookRoom";
 
 	}
+	
+	
+	
+	
+	
+	/* 예약 | 좌석 이동 | 퇴실 | 좌석 시간 연장 */
+	/* 좌석 예약 */
+	@PostMapping("/nbRoom_booking")
+	public String nbRoom_booking(NoteBookRoomDTO dto, Principal principal) {
+
+		String user_id = principal.getName();
+		dto.setUser_id(user_id);
+		
+		nbService.nbRoom_booking(dto);
+		
+		return "redirect:/mylib/notebookRoom";
+	}
+	
+	@ResponseBody
+	@PostMapping("/nb_seat_check")
+	public String nb_seat_check(@RequestParam String seat_no) {
+		int result = nbService.nb_seat_check(seat_no);
+		
+		if(result == 1) {
+			return "success";
+		}else {
+			return "fail";
+		}
+	}
+	
+	
+	
+	
 
 }

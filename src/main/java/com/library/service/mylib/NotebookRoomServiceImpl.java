@@ -17,8 +17,8 @@ public class NotebookRoomServiceImpl implements NotebookRoomService {
 	
 	/* 전체 좌석 출력(Notebook Room) */
 	@Override
-	public List<NoteBookRoomDTO> nb_list_all() {
-		return nbMapper.nb_list_all();
+	public List<NoteBookRoomDTO> nbRoom_list_all() {
+		return nbMapper.nbRoom_list_all();
 	}
 	/* 예약 좌석 정보 */
 	@Override
@@ -27,11 +27,32 @@ public class NotebookRoomServiceImpl implements NotebookRoomService {
 	}
 	
 	
+	
+	/* 예약 | 좌석 이동 | 퇴실 | 좌석 시간 연장 */
+	/* 좌석 예약 */
+	@Override
+	public void nbRoom_booking(NoteBookRoomDTO dto) {
+		nbMapper.nbRoom_booking(dto);
+	}
+	/* 좌석 상태 체크 */
+	@Override
+	public int nb_seat_check(String seat_no) {
+		return nbMapper.nb_seat_check(seat_no);
+	}
+	
+	
+	
+	
+	
+	
+	
+	
 	@Override
 	public void insert(int seat_no) {
 		nbMapper.insert(seat_no);
 		
 	}
+
 	
 
 

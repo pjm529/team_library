@@ -235,8 +235,10 @@
 	                                </tbody>
 	
 	                            </table>
-	
-	                            <button class="reserve_btn booking_btn">예약하기</button>
+								<form action="/mylib/nbRoom_booking" method="post" onsubmit="return false;">
+	                            	<input id="seat_no" type="hidden" name="seat_no">
+	                            	<button class="reserve_btn booking_btn">예약하기</button>
+	                            </form>
 							</c:if> 
 
                             <!-- 예약 o 테이블 -->
@@ -379,14 +381,28 @@
 			
 			var seat_no = $(".input_selected_seat_no").val(); 
 			
-			
  			if(confirm("노트북실 " + seat_no + "번 좌석을 예약하시겠습니까?")){
 				
-				alert("예약완료");
-				
-				location.href = "/mylib/nb_seat_booking?seat_no=" + seat_no; 
+ 				var data = {seat_no:seat_no};
+ 				
+ 				$.ajax({
+ 					type : "post",
+ 					url : "/mylib/nb_seat_check",
+ 					data : data,
+ 					success : function(result){
+						
+ 						if(result == "success"){
+ 							alert("예약이 완료되었습니다.");
+ 							$("#seat_no").val(seat_no);
+ 							$("form").attr("onsubmit", "return true;");
+ 							$("form").submit();
+ 						}else{
+ 							alert("이미 예약된 좌석입니다.");
+ 							location.reload();
+ 						}
+					} 
+ 				});
 			} 
-			
 		});
 		
 		
