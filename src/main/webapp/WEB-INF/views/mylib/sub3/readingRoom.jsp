@@ -212,7 +212,7 @@
                                 </table>
 
                                 <!-- </form> -->
-                                <form action="/mylib/bookingSeat" method="post" onsubmit="return false;">
+                                <form id="booking_form" action="/mylib/bookingSeat" method="post" onsubmit="return false;">
                                     <input id="seat_no" type="hidden" name="seat_no">
                                     <button class="reserve_btn booking_btn">예약하기</button>
                                 </form>
@@ -260,7 +260,8 @@
                                 <input type="hidden" id="diff_hour" value="${diff_hour}">
                                 <input type="hidden" id="diff_min" value="${diff_min}">
                                 <input type="hidden" id="diff_sec" value="${diff_sec}">
-
+                                
+                                
 
                                 <table class="reserve-info">
                                     <tbody>
@@ -298,7 +299,7 @@
                                         </form>
                                     </div>
 
-                                    <form id="move" action="/mylib/moveSeat" method="post" onsubmit="return false;">
+                                    <form id="move_form" action="/mylib/moveSeat" method="post" onsubmit="return false;">
                                         <input id="new_no" type="hidden" name="seat_no">
                                     </form>
                                 </div>
@@ -370,9 +371,9 @@
 
                                 if (result == "success") {
                                     alert("좌석 이동이 완료되었습니다.");
-                                    $("#move #new_no").val(seat_no);
-                                    $("#move").attr("onsubmit", "return true;");
-                                    $("#move").submit();
+                                    $("#move_form #new_no").val(seat_no);
+                                    $("#move_form").attr("onsubmit", "return true;");
+                                    $("#move_form").submit();
 
                                 } else {
                                     alert("이미 예약된 좌석입니다.");
@@ -420,8 +421,8 @@
                             if (result == "success") {
                             	alert("예약이 완료되었습니다.");
   		                      	$("#seat_no").val(seat_no);
-  		                      	$("form").attr("onsubmit", "return true;");
-  		                      	$("form").submit();
+  		                      	$("#booking_form").attr("onsubmit", "return true;");
+  		                      	$("#booking_form").submit();
 
                             } else {
                                 alert("이미 예약된 좌석입니다.");
@@ -440,8 +441,8 @@
 
                 if (confirm("좌석을 반납하시겠습니까?")) {
                 	 alert("좌석 반납을 완료하였습니다.");
-                     $("form").attr("onsubmit", "return ture;");
-                     $("form").submit();
+                     $("#return_form").attr("onsubmit", "return ture;");
+                     $("#return_form").submit();
                 }
             })
 
@@ -458,8 +459,8 @@
                 } else {
                     if (confirm("좌석을 연장하시겠습니까?")) {
                     	 alert("좌석 시간이 연장되었습니다.");
-                         $("form").attr("onsubmit", "return true;");
-                         $("form").submit();
+                         $("#extend_form").attr("onsubmit", "return true;");
+                         $("#extend_form").submit();
                     }
                 }
  

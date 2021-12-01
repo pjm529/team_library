@@ -111,7 +111,7 @@ public class ReadingRoomController {
 		return "redirect:/mylib/readingRoom";
 	}
 
-	@GetMapping("/extendSeat")
+	@PostMapping("/extendSeat")
 	public String extendSeat(Principal principal) {
 
 		String user_id = principal.getName();
