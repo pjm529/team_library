@@ -348,14 +348,13 @@
 	    $(".occupied").prop("disabled", true);
 		
 		var today = new Date();
-		var hours = today.getHours();
+		var hours = parseInt(today.getHours());
 	
 		/* class가 vacant(사용 가능)인 seat 누를 시, */
 		$(".vacant").on("click", function(e) {
-			
 			e.preventDefault();
 			
-			if(hours == '18'){
+			if(hours >= 18){
 				alert('현재는 사용 불가한 시간입니다.');
 				return;
 			}
