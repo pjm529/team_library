@@ -13,6 +13,11 @@
 		select * from seminar_room_rental
 	</select>
 	
+	<!-- 세미나실 예약 정보 -->
+	<select id="smRoom_info" resultType="com.library.model.mylib.SeminarRoomDTO">
+		select * from seminar_room_rental where user_id = #{user_id} 
+	</select>
+	
 
 	<!-- ====== 예약 ====== -->
 	<!-- 좌석 예약 (자리 예약 시, time_table room_status column 1 => 0으로 변경 -->
@@ -21,6 +26,14 @@
 		  into seminar_room_rental(room_no, user_id, sm_time, sm_date) 
 		values (#{room_no}, #{user_id}, #{sm_time}, #{sm_date})
 	</insert>
+	
+	
+	<!-- 룸 예약 취소 -->
+	<delete id="smRoom_delete">
+		delete 
+		  from seminar_room_rental 
+		 where user_id = #{user_id}
+	</delete>
 	
 
 

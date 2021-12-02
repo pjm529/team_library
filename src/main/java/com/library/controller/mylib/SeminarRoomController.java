@@ -1,5 +1,6 @@
 package com.library.controller.mylib;
 
+import java.security.Principal;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -49,6 +50,14 @@ public class SeminarRoomController {
 		
 		return smService.sm_Room_booking(dto);
 		
+	}
+	
+	@PostMapping("/smRoom_delete")
+	public String smRoom_delete(Principal principal) {
+		String user_id = principal.getName();
+		smService.smRoom_delete(user_id);
+		
+		return "redirect:/mylib/myReservationInfo";
 	}
 
 }

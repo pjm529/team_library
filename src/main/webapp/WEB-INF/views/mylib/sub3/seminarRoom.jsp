@@ -215,6 +215,13 @@ ${smList }
                                         </span>
                                     </td>
                                 </tr>
+                                <tr>
+                                    <td colspan="10">
+                                        <span>
+                                        &#8251; <b>예약 취소</b>의 경우 나의 예약 현황에서 확인 가능
+                                    	</span>
+                                    </td>
+                                </tr>
                             </tfoot>
 
 
