@@ -354,7 +354,7 @@
 		$(".vacant").on("click", function(e) {
 			e.preventDefault();
 			
-			if(hours >= 18){
+			if(hours >= 18 || hours < 9){
 				alert('현재는 사용 불가한 시간입니다.');
 				return;
 			}

@@ -1,6 +1,7 @@
 package com.library.controller.mylib;
 
 import java.security.Principal;
+import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
 
@@ -54,12 +55,22 @@ public class NotebookRoomController {
 	/* 좌석 예약 */
 	@PostMapping("/nbRoom_booking")
 	public String nbRoom_booking(NoteBookRoomDTO dto, Principal principal) {
-
-		String user_id = principal.getName();
-		dto.setUser_id(user_id);
 		
-		nbService.nbRoom_booking(dto);
+		SimpleDateFormat fmt = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+		Date now = new Date();
+		String nowTime = fmt.format(now);
 		
+		// 현재 시간
+	    int hours = Integer.parseInt(nowTime.substring(11, 13));
+	    
+	    // 현재 시간이 9 ~ 17시일 경우 예약
+	    if(hours > 8 && hours < 18) {
+			String user_id = principal.getName();
+			dto.setUser_id(user_id);
+			
+			nbService.nbRoom_booking(dto);
+	    }
+	    
 		return "redirect:/mylib/notebookRoom";
 	}
 	
