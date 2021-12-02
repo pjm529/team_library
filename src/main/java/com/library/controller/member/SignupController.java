@@ -32,9 +32,19 @@ public class SignupController {
 	@Autowired
 	private PasswordEncoder pwencoder; // 암호화 Encoder
 
-	// 회원가입 페이지 진입 (get)
-	@GetMapping("/signup")
-	public String signupGET() {
+	// 약관동의 페이지 진입 (get)
+	@GetMapping("/signup-check")
+	public String signupCheck() {
+
+		System.out.println("약관 동의 페이지 진입");
+
+		return "/member/sub2/signup_check";
+
+	}
+	
+	// 회원가입 페이지 진입
+	@PostMapping("/signup")
+	public String signup() {
 
 		System.out.println("회원가입 페이지 진입");
 
@@ -42,9 +52,9 @@ public class SignupController {
 
 	}
 
-	// 회원가입 (post)
-	@PostMapping("/signup")
-	public String signupPOST(MemberDTO member) throws Exception {
+	// 회원가입
+	@PostMapping("/signup-success")
+	public String signupSuccess(MemberDTO member) throws Exception {
 
 		String encode_pw = pwencoder.encode(member.getUser_pw());
 		member.setUser_pw(encode_pw);
@@ -106,7 +116,6 @@ public class SignupController {
 		}
 	}
 
-	
 	// 이메일 인증코드 발송
 	public String sendCode(String email) throws Exception {
 

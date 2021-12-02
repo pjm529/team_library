@@ -9,7 +9,7 @@
             <a href="/member/login">로그인</a>
         </li>
         <li class="sub2">
-            <a href="/member/signup">회원가입</a>
+            <a href="/member/signup-check">회원가입</a>
         </li>
         <li class="sub3">
             <a href="/member/search-id">아이디 찾기</a>
