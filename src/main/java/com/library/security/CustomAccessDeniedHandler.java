@@ -17,7 +17,7 @@ public class CustomAccessDeniedHandler implements AccessDeniedHandler {
 
 		System.out.println("CustomAccessDeniedHandler 동작");
 		
-		response.sendRedirect("/error/accessError");
+		response.sendRedirect("/accessError");
 	}
 
 }

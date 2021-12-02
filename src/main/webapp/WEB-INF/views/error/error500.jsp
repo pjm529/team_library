@@ -19,7 +19,7 @@
 		죄송합니다.<br>
 		홈페이지 내부에서 에러가 발생하였습니다.
 		</span>
-		<br>
+		<br><br>
 		
 		<span style="font-size: 15px; color: #888;">
 		접근하신 방식이 올바르지 않거나,<br> 
