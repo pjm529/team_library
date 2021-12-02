@@ -24,7 +24,7 @@
 
 </head>
 <body>
-
+	<input type="hidden" class="reserve_no" value="${room2_info.seat_no}">
     <%-- <sec:authentication property="principal.dto.user_id" /> --%>
 
     <div class="container">
@@ -302,6 +302,7 @@
 
 								<input type="hidden" id="diff_hour" value="${diff_hour }">
 								<input type="hidden" id="diff_min" value="${diff_min }">
+								<input type="hidden" id="diff_sec" value="${diff_sec }">
                                 <!-- 제2열람실 좌석 예약정보 -->
                                 <table class="reserve-info">
                                     <tbody>
@@ -322,15 +323,8 @@
                                             <th class="left">반납 시간</th>
                                             <td class="return_time">${checkout_time}</td>
                                             <th class="left">잔여 시간</th>
-                                            <c:choose>
-                                                <c:when test="${diff_hour < 1 && diff_min < 30}">
-                                                    <td style="color: red; font-weight: bold;">${diff_time}</td>
-                                                </c:when>
-                                                <c:otherwise>
-                                                    <td style="color: blue; font-weight: bold;">${diff_time}</td>
+                                            <td id="time" style="color: blue; font-weight: bold;">${diff_time}</td>
 													
-                                                </c:otherwise>
-                                            </c:choose>
                                         </tr>
                                     </tbody>
 
@@ -375,23 +369,41 @@
     <script>
         $(function () {
 
-
+			
             $(".sub3").addClass("active");
-
+			
+         // 예약된 좌석이 있으면 남은 시간 timer start
+           	if($(".reserve_no").val() != ""){
+               var hours =  $("#diff_hour").val();
+               var minutes = $("#diff_min").val();
+               var seconds = $("#diff_sec").val();
+               var totalSeconds = (60 * 60 * hours) + (60 * minutes) + parseInt(seconds, 10) - 1;
+               var display = document.querySelector('#time');
+               startTimer(totalSeconds, display);
+            }
             /*좌석번호 클릭하기 전까지 나타지않도록 */
             $(".booking_btn").hide();
 
             /* class가 occupied인 button은 disabled 속성 사용해 버튼 비활성화 */
             $(".occupied").prop("disabled", true);
 
-
+		
+        	var today = new Date();
+        	var hours = parseInt(today.getHours());
+ 
             $(".vacant").on("click", function (e) {
 
                 e.preventDefault();
+                
+                if(hours >= 18 || hours < 9){
+                	alert("현재는 사용 불가한 시간입니다.");
+                	return;
+                	
+                }
 
                 var seat_no = $(this).attr("id");/* a태그 vacant클래스의 아이디값, this는 $(".vacant")의미함 */
 
-                if ($(".mine").length) {
+                if ($(".reserve_no").val() != '') {
 
                     if (confirm("제2열람실 " + seat_no + "번 좌석으로 이동하시겠습니까?")) {
 						
@@ -483,29 +495,34 @@
 
                 if (confirm("좌석을 반납하시겠습니까?")) {
                     alert("좌석 반납을 완료하였습니다.");
-                    $("form").attr("onsubmit", "return ture;");
+                    $("form").attr("onsubmit", "return true;");
                     $("form").submit();
                 }
             })
-
+			
+            /* 좌석 연장 */
             $(".extend_btn").on("click", function (e) {
                 e.preventDefault();
-
                 var diff_hour = $("#diff_hour").val();
-                var diff_min = $("#diff_min").val();
+                var diff_min = $("#diff_min").val(); /* 30분 이하로만 자리 연장 가능 */
                 var result = diff_hour < 1 && diff_min < 30;
+                var checkout_time = "<c:out value='${room2_info.checkout_time}'/>";
 
-                if (result == false) {
+                if (result == false || checkout_time.includes("18:00:00")) {
+                	// checkout_time에 '18:00:00'이라는 문자열이 포함되어 있으면, 좌석 연장 여부 묻지 않고 연장 불가 메시지 바로 뜨게 함.
                     alert("연장 가능한 시간이 아닙니다.");
+          
+                	}else{
+                		if (confirm("좌석을 연장하시겠습니까?")) {
+                            alert("좌석 시간이 연장되었습니다.");
+                            $("#extend_form").attr("onsubmit", "return true;");
+                            $("#extend_form").submit();
 
-                } else {
-                    if (confirm("좌석을 연장하시겠습니까?")) {
-                        alert("좌석 시간이 연장되었습니다.");
-                        $("form").attr("onsubmit", "return true;");
-                        $("form").submit();
-
-                    }
-                }
+                        }
+                		
+                	}
+                    
+                
 
             })
 
@@ -523,6 +540,38 @@
 
         function nbRoom() {
             location.href = "/mylib/notebookRoom";
+        }
+        
+        /* 열람실 잔여시간 실시간 타이머 */
+        function startTimer(totalSeconds, display) {
+            
+            var timer = totalSeconds;
+            var hours;
+            var minutes;
+            var seconds;
+            var interval = setInterval(function () {
+             if(timer <= 0) {
+                clearInterval(interval);
+                alert("퇴실되었습니다.");
+                location.reload();
+            }
+             
+              hours = parseInt(timer / 60 / 60, 10);
+              minutes = parseInt(timer / 60 - (hours * 60), 10);
+              seconds = parseInt(timer % 60, 10);
+
+              minutes = minutes < 10 ? "0" + minutes : minutes;
+              seconds = seconds < 10 ? "0" + seconds : seconds;
+              
+         if(hours < 1 && minutes < 30) {
+            display.style.color = "red";   
+         }
+         
+            display.textContent = hours + ":" + minutes + ":" + seconds;
+         
+            timer--;
+            
+            }, 1000);
         }
 
     </script>

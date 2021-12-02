@@ -30,16 +30,4 @@ public interface ArticleMapper {
 	public void reset();
 
 	
-	
-	
-	
-
-//	public ArticleDTO userInfo(Long uno);
-
-//	public void userDelete(Long uno);
-//
-//	public void userInsert(ArticleDTO dto);
-//
-//	public void userUpdate(ArticleDTO dto);
-	
 }

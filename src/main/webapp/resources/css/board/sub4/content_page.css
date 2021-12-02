@@ -24,6 +24,17 @@ ul{
     padding: 0px;
 }
 
+p {
+	margin: 0;
+	padding: 20px 15px;
+	line-height: 150%;
+	word-break: keep-all;
+	font-size: 15px;
+	font-weight: normal;
+	color: #464646;
+}
+
+
 /* 전체 container */
 .container{
     margin: 0 auto;
@@ -148,6 +159,10 @@ ul{
     position: relative;
 }
 
+/* 제목 */
+.bbs-title {
+	height: 40px;
+}
 
 /* 본문 부분 */
 .content{
@@ -156,6 +171,18 @@ ul{
     padding-bottom: 100px;
     width: 971px;
     margin-left: 280px;
+}
+
+/* 본문 내용 */
+.bbs-content {
+	min-height: 240px;
+}
+
+/* 본문 폰트 */
+.bbs-content b {
+	font-size: 140%;
+	font-weight: 800;
+	padding: 10px 15px;
 }
 
 .doc{
@@ -167,6 +194,7 @@ ul{
     padding: 10px 0 20px;
     font-size: 13px;
     background: #fff;
+    padding-top: 20px;
 }
 
 

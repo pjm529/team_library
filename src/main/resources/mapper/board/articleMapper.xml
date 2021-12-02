@@ -86,21 +86,6 @@
          </if>
      </sql>
 
-	
-	
-<!-- 	<delete id="delete">
-		delete from board where bno = #{bno}
-	</delete>
-	
-	<select id="boardContent" resultType="com.bbs.model.BoardDTO">
-		select * from board where bno = #{bno}
-	</select>
-	
-	<update id="update">
-		update board set btitle = #{btitle}, bcontent =#{bcontent}
-		where bno = #{bno}
-		
-	</update> -->
-	
+
 
 </mapper>

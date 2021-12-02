@@ -1,6 +1,7 @@
 package com.library.controller.mylib;
 
 import java.security.Principal;
+import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
 
@@ -63,35 +64,46 @@ public class ReadingRoom2Controller {
 	@PostMapping("/room2_booking")
 	public String room2booking(ReadingRoomDTO dto, Principal principal) {
 
-		String user_id = principal.getName();
-		
-		dto.setUser_id(user_id);
+		SimpleDateFormat fmt = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+		Date now = new Date();
+		String nowTime = fmt.format(now);
 
-		readingRoom2Service.room2_booking(dto);
+		// 현재 시간
+		int hours = Integer.parseInt(nowTime.substring(11, 13));
+
+		// 현재 시간이 9~17시 일경우 예약
+		if (hours > 8 && hours < 18) {
+
+			String user_id = principal.getName();
+
+			dto.setUser_id(user_id);
+
+			readingRoom2Service.room2_booking(dto);
+		}
 
 		return "redirect:/mylib/readingRoom2";
 	}
-	
+
 	@ResponseBody
 	@PostMapping("/seat2_check")
 	public String seat2_check(@RequestParam String seat_no) {
 		int result = readingRoom2Service.seat2_check(seat_no);
-		
+
 		if (result == 1) {
 			return "success";
 		} else {
 			return "fail";
 		}
-		
+
 	}
 
 	// 제2열람실 퇴실
 	@PostMapping("/room2_delete")
 	public String room2_delete(Principal principal) {
 		String user_id = principal.getName();
-		
+
 		readingRoom2Service.room2_delete(user_id);
-		
+
 		return "redirect:/mylib/readingRoom2";
 
 	}
@@ -100,7 +112,7 @@ public class ReadingRoom2Controller {
 	@PostMapping("/room2_extend")
 	public String room2extend(Principal principal) {
 		String user_id = principal.getName();
-		
+
 		readingRoom2Service.room2_extend(user_id);
 
 		return "redirect:/mylib/readingRoom2";
@@ -112,7 +124,7 @@ public class ReadingRoom2Controller {
 	@PostMapping("/moveSeat2")
 	public String moveSeat2(ReadingRoomDTO dto, Principal principal) {
 		String user_id = principal.getName();
-		
+
 		dto.setUser_id(user_id);
 		readingRoom2Service.room2_delete(user_id);
 		readingRoom2Service.room2_booking(dto);

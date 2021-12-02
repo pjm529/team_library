@@ -1,6 +1,5 @@
 package com.library.controller.board;
 
-import java.io.File;
 import java.io.IOException;
 import java.io.UnsupportedEncodingException;
 import java.net.URLEncoder;
@@ -49,8 +48,6 @@ public class ArticleController {
 		model.addAttribute("pageMaker", vp);
 
 		return "/board/sub4/articleList";
-		// return
-		// "redirect:/articleList?amount="+cri.getAmount()+"&page="+cri.getPage();
 
 		// 컨트롤러에서 서비스단으로 넘긴다.(모델이라는 객체 이용하면 뷰단으로 쉽게 빼낼 수 있음)
 		// db에 있는 모든 정보(개별의dto)를 담아야하기때문에 list사용
@@ -63,7 +60,7 @@ public class ArticleController {
 	}
 
 	@PostMapping("/articleInsertForm")
-	public String articleInsert(ArticleDTO dto, RedirectAttributes rttr) throws IOException, Exception {
+	public String articleInsert(ArticleDTO dto /*RedirectAttributes rttr*/) throws IOException, Exception {
 
 		// 로그인 된 user_id 받아오기
 		Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
@@ -79,7 +76,7 @@ public class ArticleController {
 		dto.setWriter_id(id);
 		articleService.articleInsert(dto);
 
-		rttr.addFlashAttribute("result", dto.getArticle_no());
+		/* rttr.addFlashAttribute("result", dto.getArticle_no()); */
 
 		return "redirect:/board/articleList";
 	}
@@ -130,7 +127,6 @@ public class ArticleController {
 			deleteFiles(attachList);
 			rttr.addFlashAttribute("result", "success");
 
-			fileDelete(uuid, thumb);
 		} catch (UnsupportedEncodingException e) {
 			return "redirect:/board/articleList";
 		}
@@ -144,7 +140,8 @@ public class ArticleController {
 		return "redirect:/board/articleList?amount=" + cri.getAmount() + "&page=" + cri.getPage() + "&keyword="
 				+ keyword + "&type" + cri.getType(); // 리다이렉트로 새로고침된 값을 뿌린다.
 	}
-
+	
+	//게시글 삭제시 폴더에 들어있는 사진 및 파일 삭제하는 함수
 	private void deleteFiles(List<ArticleAttachDTO> attachList) {
 
 		if (attachList == null || attachList.size() == 0) {
@@ -175,27 +172,6 @@ public class ArticleController {
 		});// end foreachd
 	}
 
-	// upload폴더 내 파일삭제
-	public void fileDelete(String uuid, String thumb) {
-
-		String filePath = "C:\\library_file\\article\\";
-
-		File deleteFileName = new File(filePath + uuid);
-		File deleteThumFileName = new File(filePath + thumb);
-
-		if (deleteFileName.exists() || deleteThumFileName.exists()) {
-
-			deleteFileName.delete();
-			deleteThumFileName.delete();
-
-			System.out.println("파일삭제완료");
-
-		} else {
-			System.out.println("파일삭제실패");
-
-		}
-
-	}
 
 	@GetMapping("/articleModifyForm")
 	public String modifyForm(@RequestParam("article_no") String a_article_no, Model model, Criteria cri) {
@@ -204,8 +180,6 @@ public class ArticleController {
 		ArticleDTO dto = articleService.articleContent(article_no);
 		model.addAttribute("dto", dto);
 		model.addAttribute("cri", cri);
-
-		/* fileDelete(uuid,thumb); */
 
 		return "/board/sub4/articleModifyForm";
 
