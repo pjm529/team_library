@@ -35,7 +35,7 @@ ul{
     width: 1900px;
     height: 140px;
     margin: 0 auto;
-    background-image: url(../imges/sub-visual.gif);
+    background-image: url(/resources/imges/common/sub-visual.gif);
     text-align: center;
 }
 
@@ -75,7 +75,7 @@ ul{
 	font-size: 17px;
     padding-left: 25px;
     margin-left: 0px;
-    background-image: url(../imges/sub_con4.png);
+    background-image: url(/resources/imges/common/sub_con4.png);
     background-position-x: 8px;
     background-position-y: center;
     background-repeat: no-repeat;
@@ -93,7 +93,11 @@ ul{
     position: relative;
 }
 
-.section::after {content: "";display: block; clear: both;}
+.section::after {
+	content: "";
+	display: block; 
+	clear: both;
+}
 
 .lnb {
     width:280px;
@@ -103,7 +107,7 @@ ul{
 .lnb h2{
     width: 220px !important;
     display: block;
-    background: url(../imges/lnb-bg-new.gif)repeat-y 1px;
+    background: url(/resources/imges/common/lnb-bg-new.gif)repeat-y 1px;
     height: 140px;
     margin-top: -140px;
     margin-bottom: 0px;
@@ -123,6 +127,38 @@ ul{
     background-color: #464f56;
     color: #fff;
     position: relative;
+}
+
+.lnb > ul > li > ul > li.active > a{
+    background-image: url(/resources/imges/mylib/sub5/lnb-bg-depth2-on.png);
+    color: #464f56;
+    font-weight: bold;
+    background-color: #fafafa;
+    border-bottom: none;
+    border-top: none;
+}
+
+.lnb > ul > li > ul > li > a {
+    padding: 5px 20px 5px 30px;
+    background: url(/resources/imges/mylib/sub5/lnb-bg-depth2-off.png) no-repeat 15px 10px;
+    font-size: 15px;
+    border-bottom: none;
+    border-top: none;
+    background-color: #fafafa;
+}
+
+.lnb > ul > li > ul > li > a:hover{
+    color: #464f56;
+    font-weight: bold;
+    background-color: #fafafa;
+}
+
+.lnb > ul > li.active > ul {
+    display: block;
+}
+
+.lnb > ul > li > ul {
+    display: none;
 }
 
 .subMenu li{
