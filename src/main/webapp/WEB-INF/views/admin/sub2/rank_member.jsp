@@ -5,7 +5,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>라온도서관 > 관리자 > 회원관리<</title>
+<title>라온도서관 > 관리자 > 도서관련 > 회원대출순위</title>
 <link rel="stylesheet" href="/resources/css/admin/member_list.css">
 <link rel="stylesheet" href="/resources/css/footer.css">
 <script src="https://code.jquery.com/jquery-3.6.0.js" 
@@ -19,7 +19,7 @@
             <div class="doc-info">
                 <!-- doc title -->
                 <div class="doc-title">
-                    <h3>회원관리</h3>
+                    <h3>회원대출순위</h3>
                     <ul>
                         <!-- 홈 btn img -->
                         <li class="first" style="background-image: none;">
@@ -31,7 +31,10 @@
                             <a href="/admin/member-list">관리자</a>
                         </li>
                         <li>
-                            <a href="/admin/member-list">회원관리</a>
+                            <a href="/admin/loan-history">도서관련</a>
+                        </li>
+                        <li>
+                            <a href="/admin/rank-list">회원대출순위</a>
                         </li>
                     </ul>
                 </div>
