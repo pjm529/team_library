@@ -51,5 +51,8 @@ public class MemberDTO {
 	// 회원 권한 리스트
 	private List<MemberAuthDTO> authList;
 	
+	// 회원 대출 총 도서수를 위한 count
+	private int count;
+	
 
 }
