@@ -60,9 +60,9 @@
 	<update id="nbRoom_extend">
 		update reading_room 
 		   set checkout_time = CASE
-								   WHEN substr(current_timestamp, 12, 2) >= 15
+								   WHEN substr(current_timestamp, 12, 2) >= 16
 								   THEN date_add(curdate(), INTERVAL 18 HOUR)
-								   ELSE date_add(current_timestamp, INTERVAL 3 HOUR) 
+								   ELSE date_add(current_timestamp, INTERVAL 2 HOUR) 
 							   END
 		 where user_id = #{user_id}
 	</update>

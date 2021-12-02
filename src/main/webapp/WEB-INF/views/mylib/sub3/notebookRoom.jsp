@@ -245,8 +245,8 @@
                             <!-- 예약 o 테이블 -->
                             <c:if test="${nbRoom_info != null}">
                             
-                            	<fmt:formatDate var="reg_time" value="${nbRoom_info.checkin_time}" pattern="HH:mm:ss"/>
-                            	<fmt:formatDate var="return_time" value="${nbRoom_info.checkout_time}" pattern="HH:mm:ss"/>
+                            	<fmt:formatDate var="checkin_time" value="${nbRoom_info.checkin_time}" pattern="HH:mm:ss"/>
+                            	<fmt:formatDate var="checkout_time" value="${nbRoom_info.checkout_time}" pattern="HH:mm:ss"/>
                             	
                             	<fmt:parseNumber var="diff_hour" value="${nbRoom_info.diff_time/(1000*60*60)}" integerOnly="true" />
                             	<fmt:parseNumber var="diff_min" value="${nbRoom_info.diff_time/(1000*60) - diff_hour*60}" integerOnly="true" />
@@ -278,9 +278,9 @@
 	                                    </tr>
 	                                    <tr>
 	                                        <th>예약 시간</th>
-	                                        <td class="reg_time">${nbRoom_info.checkin_time}</td> 
+	                                        <td class="reg_time">${checkin_time}</td> 
 	                                        <th class="left">반납 시간</th>
-	                                        <td class="return_time" id="checkout_time">${nbRoom_info.checkout_time}</td>
+	                                        <td class="return_time" id="checkout_time">${checkout_time}</td>
 	                                        <th class="left">잔여 시간</th>
 	                                        <c:choose>
 	                                           <c:when test="${diff_hour < 1 && diff_min < 30}">
@@ -295,21 +295,23 @@
 	
 	                            </table>
 	                            <div class="reserve-info-btn">
+	                            	<!-- 퇴실 -->
 		                            <div style="float: left;">
 		                            	<form id="return_form" action="/mylib/nbRoom_delete" method="post" onsubmit="return false;">
 		                                	<button class="chk_out_btn return_btn">퇴실</button>
 		                                </form>
 	                                </div>
+	                                <!-- 연장 -->
 	                                <div style="float: right; margin-left: 10px;">
 		                            	<form id="extend_form" action="/mylib/nbRoom_extend" method="post" onsubmit="return false;">
-		                                	<button class="renew_btn extend_btn">연장</button>
+		                                	<button class="extend_btn renew_btn">연장</button>
 		                                </form>
 	                                </div>
 	                                
+	                                <!-- 좌석 이동 -->
 	                                <form id="move" action="/mylib/nbRoom_moveSaet" method="post" onsubmit="return false;">
 										<input id="new_no" type="hidden" name="seat_no">
 									</form>
-									
 	                            </div>
                             </c:if>
 
@@ -442,30 +444,18 @@
 		});
 		
 		
-		/* mine 좌석 click 시, 좌석 반납 */
 		$(".mine").on("click", function(e) {
-			
-			e.preventDefault();
-			
-			var seat_no = $(this).attr("id");
-			
-			if(confirm("좌석을 반납하시겠습니까?")){
-				
-				alert (seat_no + "번 반납완료");
-				
-				location.href = "/mylib/nb_seat_return?seat_no=" + seat_no;
-			}
-			
-			
+			alert("이미 예약 중인 좌석입니다.");
 		});
+		
 		
 		/* 퇴실 btn click 시, 좌석 반납 */
 		$(".return_btn").on("click", function(e) {
 			
 			if(confirm("좌석을 반납하시겠습니까?")) {
 				alert("좌석 반납이 완료되었습니다.");
-				$("form").attr("onsubmit", "return ture;");
-				$("form").submit();
+				$("#return_form").attr("onsubmit", "return ture;");
+				$("#return_form").submit();
 			}	
 			
 		});
@@ -489,7 +479,7 @@
 			}else {
 	            if(confirm("좌석을 연장하시겠습니까?")){
 	               alert(seat_no + "번 좌석 시간이 연장되었습니다.");
-					$("#extend_form").attr("onsubmit", "return ture;");
+					$("#extend_form").attr("onsubmit", "return true;");
 					$("#extend_form").submit();
 	            }
 			}
