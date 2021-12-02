@@ -27,6 +27,11 @@
 		        <li class="submenu4">
 		            <a href="/admin/hope-history">희망도서신청내역</a>
 		        </li>
+		        
+		        <li class="submenu5">
+		            <a href="/admin/rank-member">회원대출순위</a>
+		        </li>
+		        
             </ul>
             
         </li>

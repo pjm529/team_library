@@ -229,6 +229,14 @@ input:focus{
     outline: none;
 }
 
+.mail_content{
+    border: 1px solid #ddd;
+    border-radius: 3px;
+    background: #fafafa;
+    line-height: 27px;
+    padding: 0 5px;
+    vertical-align: middle;
+}
 
 
 /* 버튼속성 */
@@ -250,16 +258,7 @@ input:focus{
     background-color: #215aa3;
 }
 
-.mail_wrap{
-	float: right;
-}
-.member_modify_wrap {
-	margin-right: 10px;
-	float: right;
-}
-
-.member_delete_wrap {
-	margin-right: 10px;
+.mail_wrap {
 	float: right;
 }
 

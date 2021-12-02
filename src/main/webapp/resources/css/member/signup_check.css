@@ -1,4 +1,3 @@
-@charset "UTF-8";
 body{
     margin: 0;
 }
@@ -167,131 +166,38 @@ ul{
     background: #fff;
 }
 
-
-
-
-/* 회원 가입 영역 */
-
-#join_form{
-    margin: 0 auto;
+.box{
+	width: 930px; 
+	height: 200px; 
+	background-color: #F3F3F3; 
+	border: 1px solid #ccc; 
+	padding: 20px; overflow: auto; 
 }
-
-table{
-    border-top: none;
-    border-bottom: 2px solid #ccc;
-    width: 100%;
-}
-
-table, th, td {
-    border-collapse: collapse;
-    border-spacing: 0;
-    font-size: inherit;
-    word-break: break-all;
-    
-}
-
-table tbody th, table tbody td{
-    padding: 6px 15px;
-}
-
-th{
-    background: #f8f8f8;
-}
-
-th, td{
-    border: 1px solid #e5e8eb;
-    vertical-align: middle;
-}
-
-.first{
-    width: 20%; 
-    text-align: left;
-    font-weight: normal;
-    border-left: none;
-}
-
-.last{
-    border-right: none;
-}
-
-input{
-    height: 31px !important;
-    border: 1px solid #ddd;
-    border-radius: 3px;
-    background: #fafafa;
-    line-height: 27px;
-    height: 27px;
-    padding: 0 5px;
-    vertical-align: middle;
-}
-
-input:focus{
-    outline: none;
-}
-
-
-
-/* 버튼속성 */
-.btn {
-    width: 60px;
-    height: 35px;
-    background-color: #266ac4;
+.agree_button{
+    margin-top: 20px;
+    cursor: pointer;
+    background-color: #000;
     border: none;
     border-radius: 5px;
     color: #fff;
     font-size: 15px;
+    width: 115px;
+    height: 50px;
+}
+
+.not_agree_button{
+    margin-top: 20px;
     cursor: pointer;
-}
-.btn:focus, .btn:active{
-    border: none; box-shadow: none;
-}
-
-.btn:hover{
-    background-color: #215aa3;
-}
-
-.mail_wrap{
-	float: right;
-}
-.member_modify_wrap {
-	margin-right: 10px;
-	float: right;
-}
-
-.member_delete_wrap {
-	margin-right: 10px;
-	float: right;
-}
-
-
-.lnb > ul > li > ul > li.active > a{
-    background-image: url(/resources/imges/mylib/sub5/lnb-bg-depth2-on.png);
-    color: #464f56;
-    font-weight: bold;
-    background-color: #fafafa;
-    border-bottom: none;
-    border-top: none;
-}
-
-.lnb > ul > li > ul > li > a {
-    padding: 5px 20px 5px 30px;
-    background: url(/resources/imges/mylib/sub5/lnb-bg-depth2-off.png) no-repeat 15px 10px;
+    background-color: #949494;
+    border: none;
+    border-radius: 5px;
+    color: #fff;
     font-size: 15px;
-    border-bottom: none;
-    border-top: none;
-    background-color: #fafafa;
+    width: 160px;
+    height: 50px;
 }
 
-.lnb > ul > li > ul > li > a:hover{
-    color: #464f56;
-    font-weight: bold;
-    background-color: #fafafa;
-}
+.join_button:focus, .join_button:active{
+    border: none; box-shadow: none;
 
-.lnb > ul > li.active > ul {
-    display: block;
-}
-
-.lnb > ul > li > ul {
-    display: none;
 }
