@@ -77,6 +77,7 @@
 
                             </div>
 
+							<c:if test="${not empty list }">
                             <!-- 테이블 -->
                             <div class="recommend_book">
                                 <div class="clear_box"></div>
@@ -103,8 +104,13 @@
                                     </div>
                                 </c:forEach>
                             </div>
+                            </c:if>
+                            
                         </div>
-						
+						<c:if test="${empty list }">
+						<br>
+                        <h2>등록된 추천 도서가 없습니다.</h2>
+                        </c:if>
                     </div>
 		        	<div class="pageInfo" style="text-align: center;">
 								
