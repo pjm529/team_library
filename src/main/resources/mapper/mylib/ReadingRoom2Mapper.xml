@@ -36,22 +36,20 @@
 	<!-- 좌석 반납&퇴실 -->
 	<update id="room2_delete">
 		update reading_room
-		    set user_id = #{user_id}, 
-		       	checkout_time = CASE
-		   							WHEN substr(current_timestamp, 12, 2) >= 16
-		   							THEN date_add(curdate(), interval 18 hour)
-		   							ELSE date_add(current_timestamp, interval 2 hour)
-		   					    END	
+		   set user_id = null, checkin_time = null, checkout_time = null
 	     where user_id = #{user_id}
 	</update>
 	
 	<!-- 좌석 연장 -->
 	<update id="room2_extend">
 		update reading_room 
-		   set checkout_time = date_add(checkout_time, interval 2 hour) 
+		   set checkout_time = CASE
+		   							WHEN substr(current_timestamp, 12, 2) >= 16 
+		   							THEN date_add(curdate(), interval 18 hour)
+		   							ELSE date_add(current_timestamp, interval 2 hour)
+		   						END
 		 where user_id = #{user_id}  
 	</update>
-	
 	<!-- 좌석 이동 -->
 	<update id="moveSeat2">
 		update reading_room set seat_no =#{seat_no} where seat_no = #{seat_no} 
@@ -64,19 +62,19 @@
 		 where seat_no = #{seat_no} and user_id is null 
 	</select>
 	
-	
-	
-	
-	
+
 	 <!-- 사용 가능 좌석 -->
 	 <select id="rd2UsingSeat" resultType="int">
-	   select count(*) - (select count(*) from reading_room where seat_status = 0)
-	      from reading_room
+		select count(*) - (select count(DISTINCT(user_id)) from reading_room)							
+          from reading_room
+         where seat_no &gt; 54 and seat_no &lt; 97
 	 </select>
 	   
 	 <!-- 사용 중인 좌석 -->
 	 <select id="rd2UsedSeat" resultType="int">
-	   	select count(*) from reading_room2 where seat_status = 0
+	  	select count(DISTINCT(user_id))
+          from reading_room
+       	 where seat_no &gt; 54 and seat_no &lt; 97
 	 </select>
 		
 	

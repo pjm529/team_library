@@ -387,10 +387,19 @@
             /* class가 occupied인 button은 disabled 속성 사용해 버튼 비활성화 */
             $(".occupied").prop("disabled", true);
 
-
+		
+        	var today = new Date();
+        	var hours = parseInt(today.getHours());
+ 
             $(".vacant").on("click", function (e) {
 
                 e.preventDefault();
+                
+                if(hours >= 18 || hours < 9){
+                	alert("현재는 사용 불가한 시간입니다.");
+                	return;
+                	
+                }
 
                 var seat_no = $(this).attr("id");/* a태그 vacant클래스의 아이디값, this는 $(".vacant")의미함 */
 
@@ -486,29 +495,34 @@
 
                 if (confirm("좌석을 반납하시겠습니까?")) {
                     alert("좌석 반납을 완료하였습니다.");
-                    $("form").attr("onsubmit", "return ture;");
+                    $("form").attr("onsubmit", "return true;");
                     $("form").submit();
                 }
             })
-
+			
+            /* 좌석 연장 */
             $(".extend_btn").on("click", function (e) {
                 e.preventDefault();
-
                 var diff_hour = $("#diff_hour").val();
-                var diff_min = $("#diff_min").val();
+                var diff_min = $("#diff_min").val(); /* 30분 이하로만 자리 연장 가능 */
                 var result = diff_hour < 1 && diff_min < 30;
+                var checkout_time = "<c:out value='${room2_info.checkout_time}'/>";
 
-                if (result == false) {
+                if (result == false || checkout_time.includes("18:00:00")) {
+                	// checkout_time에 '18:00:00'이라는 문자열이 포함되어 있으면, 좌석 연장 여부 묻지 않고 연장 불가 메시지 바로 뜨게 함.
                     alert("연장 가능한 시간이 아닙니다.");
+          
+                	}else{
+                		if (confirm("좌석을 연장하시겠습니까?")) {
+                            alert("좌석 시간이 연장되었습니다.");
+                            $("#extend_form").attr("onsubmit", "return true;");
+                            $("#extend_form").submit();
 
-                } else {
-                    if (confirm("좌석을 연장하시겠습니까?")) {
-                        alert("좌석 시간이 연장되었습니다.");
-                        $("form").attr("onsubmit", "return true;");
-                        $("form").submit();
-
-                    }
-                }
+                        }
+                		
+                	}
+                    
+                
 
             })
 
