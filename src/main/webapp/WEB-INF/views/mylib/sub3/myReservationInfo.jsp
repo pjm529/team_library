@@ -43,7 +43,7 @@
                 <!-- 본문 -->
                 <div class="content">
                     <div class="doc">
-                        <h2>예약현황</h2>
+                        <h2>나의 예약 현황</h2>
                         <hr style="border: 1px solid #dadada;">
                         <div class="wrapper-table">
                             <div class="seat-info">
