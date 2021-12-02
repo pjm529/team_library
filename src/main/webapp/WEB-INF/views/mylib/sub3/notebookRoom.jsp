@@ -301,7 +301,7 @@
 		                                </form>
 	                                </div>
 	                                <div style="float: right; margin-left: 10px;">
-		                            	<form id="return_form" action="/mylib/nbRoom_extend" method="post" onsubmit="return false;">
+		                            	<form id="extend_form" action="/mylib/nbRoom_extend" method="post" onsubmit="return false;">
 		                                	<button class="renew_btn extend_btn">연장</button>
 		                                </form>
 	                                </div>
@@ -488,9 +488,9 @@
 				alert("연장 가능한 시간이 아닙니다.");
 			}else {
 	            if(confirm("좌석을 연장하시겠습니까?")){
-	               alert(seat_no+ "번 자리 연장되었습니다.");
-					$("form").attr("onsubmit", "return ture;");
-					$("form").submit();
+	               alert(seat_no + "번 좌석 시간이 연장되었습니다.");
+					$("#extend_form").attr("onsubmit", "return ture;");
+					$("#extend_form").submit();
 	            }
 			}
 		});
