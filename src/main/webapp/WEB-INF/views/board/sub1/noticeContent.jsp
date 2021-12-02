@@ -7,36 +7,6 @@
 <head>
 	<title>라온도서관 > 열린공간 > 공지사항</title>
 <link rel="stylesheet" href="/resources/css/board/sub1/notice_content_page.css">
-
-    <style>
-        .wrapper-bbs {
-            padding-top: 20px;
-        }
-
-        .bbs-content b {
-            font-size: 140%;
-            font-weight: 800;
-            padding: 10px 15px;
-        }
-
-        .bbs-title {
-            height: 40px;
-        }
-
-        .bbs-content {
-            min-height: 240px;
-        }
-
-        p {
-            margin: 0;
-            padding: 20px 15px;
-            line-height: 150%;
-            word-break: keep-all;
-            font-size: 15px;
-            font-weight: normal;
-            color: #464646;
-        }
-    </style>
 </head>
 
 <body>
@@ -134,12 +104,7 @@
                                 <table class="bbs-posts">
 									<tr class="board-prev">
 										<td class="prev" style="border-right: 1px solid #dee1e7"><img src="/resources/imges/board/sub1/angle_up.png" class="angle"> 이전글</td>
-										<%-- <c:forEach var="posts" items="${posts}" begin="0" end="0">
-											<td class="posts_title"><a href="/board/noticeContent?notice_no=${posts.notice_no}">${posts.notice_title}</a></td>
-											<td class="posts_writer">${posts.writer_name}</td>
-										</c:forEach>
-										 --%>
-										 
+									
 										 <c:choose>
 										 	<c:when test="${posts[0].notice_no > noticeContent.notice_no}">
 										 		<td class="posts_title">이전글이 없습니다.</td>
@@ -234,16 +199,7 @@
 	$(function() {
 		
 		$(".sub1").addClass("active");
-				
-		/* $(".delete_btn").on("click", function(){
-			
-			if(confirm("삭제하시겠습니까?")){
-				alert("게시물이 삭제되었습니다.");
-				location.href="/deleteNotice?notice_no="+${noticeContent.notice_no};
-			}else{
-			}
-		}) */
-		
+
 		var moveForm = $(".moveForm");
 		
 		$(".delete_btn").on("click", function(e) {
@@ -257,11 +213,10 @@
 		})
 		
 	});
-	
-	
+
 	
 
-
+	/* 첨부 파일 다운로드 */
 	(function(){
 		
 		$(".downloadAreaWrap").hide();

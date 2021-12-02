@@ -107,7 +107,6 @@
                                         <tr>
                                             <td class="num">${noticeList.notice_no}</td>
                                             <td class="left contentGo" style="padding-left: 15px;">
-                                           		<%-- <a href="/noticeContent?amount=${pageMaker.cri.amount}&page=${pageMaker.cri.page}&type=${pageMaker.cri.type}&keyword=${pageMaker.cri.keyword}&notice_no=${noticeList.notice_no}">${noticeList.notice_title}</a> --%>
  												<a href="${noticeList.notice_no}">${noticeList.notice_title}</a>
                                             </td>
                                             <td>${noticeList.writer_name}</td>
@@ -128,36 +127,19 @@
                                 </div>
                                 
                                 <div class="pageInfo" style="">
-		                           <c:if test="${pageMaker.prev }">
+		                           <c:if test="${pageMaker.prev}">
 		                              <a class="not" href="${pageMaker.startPage - 1}">이전</a>
 		                           </c:if>
 		                           
-		                           <c:forEach var="num" begin="${pageMaker.startPage }" end="${pageMaker.endPage }">
-		                              <a class="${pageMaker.cri.page == num ? "current":"not" }" href="${num }"><span>${num }</span></a>
+		                           <c:forEach var="num" begin="${pageMaker.startPage}" end="${pageMaker.endPage }">
+		                              <a class="${pageMaker.cri.page == num ? 'current' : 'not'}" href="${num}"><span>${num}</span></a>
 		                           </c:forEach>
 		                           
-		                           <c:if test="${pageMaker.next }">
+		                           <c:if test="${pageMaker.next}">
 		                              <a class="not" href="${pageMaker.endPage + 1}">다음</a>
 		                           </c:if>
 		                        </div>
                                 
-                                <%-- <div class="searchBox">
-                                	<form action="/noticeList" method="get">
-                                		<input type="hidden" name="page" value="${pageMaker.cri.page}">
-                                		<input type="hidden" name="amount" value="${pageMaker.cri.amount}">
-                                		
-                                		<input type="text" name="page" value="${pageMaker.cri.keyword}">
-                                		<input type="text" name="amount" value="${pageMaker.cri.type}">
-                                		
-                                		<select name="type">
-                                			<option value="TC">제목+내용</option>
-                                			<option value="title">제목</option>
-                                			<option value="content">내용</option>
-                                		</select>
-                                		<input type="text" name="keyword" placeholder="검색어를 입력하세요">
-                                		<input type="submit" value="검색">
-                                	</form>
-                                </div> --%>
                                 
                                 <div class="searchBox">
                                 	<form action="/board/noticeList" method="get">

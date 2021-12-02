@@ -1,6 +1,7 @@
 package com.library.controller.mylib;
 
 import java.security.Principal;
+import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
 
@@ -14,7 +15,6 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.library.model.mylib.ReadingRoomDTO;
-import com.library.service.mylib.ReadingRoom2Service;
 import com.library.service.mylib.ReadingRoomService;
 
 @Controller
@@ -68,14 +68,24 @@ public class ReadingRoomController {
 	@PostMapping("/bookingSeat")
 	public String bookingSeat(ReadingRoomDTO dto, Principal principal) {
 
-		String user_id = principal.getName();
-		dto.setUser_id(user_id);
+		SimpleDateFormat fmt = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+		Date now = new Date();
+		String nowTime = fmt.format(now);
 
-		readingRoomService.bookingSeat(dto);
+		// 현재 시간
+		int hours = Integer.parseInt(nowTime.substring(11, 13));
+		
+		// 현재 시간이 9~17시 일경우 예약
+		if (hours > 8 && hours < 18) {
+			String user_id = principal.getName();
+			dto.setUser_id(user_id);
+
+			readingRoomService.bookingSeat(dto);
+		}
 
 		return "redirect:/mylib/readingRoom";
 	}
-	
+
 	// 열람실 좌석 상태 체크
 	@ResponseBody
 	@PostMapping("/seat_check")
@@ -100,6 +110,7 @@ public class ReadingRoomController {
 		return "redirect:/mylib/readingRoom";
 	}
 
+	// 좌석 이동
 	@PostMapping("/moveSeat")
 	public String moveSeat(ReadingRoomDTO dto, Principal principal) {
 
@@ -111,7 +122,8 @@ public class ReadingRoomController {
 		return "redirect:/mylib/readingRoom";
 	}
 
-	@GetMapping("/extendSeat")
+	// 좌석 연장
+	@PostMapping("/extendSeat")
 	public String extendSeat(Principal principal) {
 
 		String user_id = principal.getName();
