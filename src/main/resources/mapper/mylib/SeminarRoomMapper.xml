@@ -15,7 +15,10 @@
 	
 	<!-- 세미나실 예약 정보 -->
 	<select id="smRoom_info" resultType="com.library.model.mylib.SeminarRoomDTO">
-		select * from seminar_room_rental where user_id = #{user_id} 
+		select * 
+		  from seminar_room sr join seminar_room_rental srr 
+		    on sr.room_no = srr.room_no
+		 where user_id = #{user_id} 
 	</select>
 	
 

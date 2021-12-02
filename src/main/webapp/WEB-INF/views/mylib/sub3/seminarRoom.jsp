@@ -328,7 +328,7 @@ ${smList }
     		var sm_date = chDate.toISOString().slice(0, 10); // sm_date (예약(사용할 날짜)
     		var user_id = "<c:out value='${user_id}'/>"
 			
-			var userRegistData = {room_no:room_no, user_id:user_id, sm_time:sm_time, sm_date:sm_date}
+			var userRegistData = {room_no:room_no, room_name:room_name, user_id:user_id, sm_time:sm_time, sm_date:sm_date}
 			
 			
 			$.ajax({

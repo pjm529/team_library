@@ -7,7 +7,6 @@ import lombok.Data;
 public class SeminarRoomDTO {
 	private int room_no;
 	private String room_name;
-	private int room_status;
 	private String user_id;
 	private String sm_time;
 	private String sm_date;

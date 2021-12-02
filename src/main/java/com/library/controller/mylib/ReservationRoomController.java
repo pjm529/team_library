@@ -63,7 +63,8 @@ public class ReservationRoomController {
 		NoteBookRoomDTO nbRoom_info = nbService.nbRoom_info(user_id);
 		SeminarRoomDTO smRoom_info = smService.smRoom_info(user_id);
 		
-		if(nbRoom_info == null && smRoom_info == null) {
+		if(nbRoom_info == null || smRoom_info == null) {
+			model.addAttribute("smRoom_info", smRoom_info);
 			return "/mylib/sub3/myReservationInfo";
 		}else {
 			Date now = new Date();

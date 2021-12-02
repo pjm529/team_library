@@ -50,9 +50,6 @@
                         <h2>나의 예약 현황</h2>
                         <hr style="border: 1px solid #dadada;">
                         <div class="wrapper-table">
-                        
-                        
-                        
                             <div class="seat-info">
                                 <h3>좌석 예약 현황</h3>
 
@@ -61,50 +58,81 @@
                                     <button class="renew_btn" onclick="location.href='#'">연장</button>
                                 </div>
                                 
-                                <fmt:formatDate var="reg_time" value="${nbRoom_info.checkin_time}" pattern="HH:mm:ss"/>
-                            	<fmt:formatDate var="return_time" value="${nbRoom_info.checkout_time}" pattern="HH:mm:ss"/>
-                            	
-                            	<fmt:parseNumber var="diff_hour" value="${nbRoom_info.diff_time/(1000*60*60)}" integerOnly="true" />
-                            	<fmt:parseNumber var="diff_min" value="${nbRoom_info.diff_time/(1000*60) - diff_hour*60}" integerOnly="true" />
-                            	<fmt:parseNumber var="diff_sec" value="${nbRoom_info.diff_time/1000 - diff_hour*60*60 - diff_min*60}" integerOnly="true" />
-	                    		
-	                    		<c:if test="${diff_min < 10}">
-	                    			<c:set var="diff_min" value="${diff_min}" />
-	                    		</c:if>
-	                    		
-	                    		<c:if test="${diff_sec < 10}">
-	                    			<c:set var="diff_sec" value="${diff_sec}" />
-	                    		</c:if>
-	                    		
-	                    		<c:set var="diff_time" value="${diff_hour}:${diff_min}:${diff_sec}" />
-	                    		
-	                    		<input type="hidden" id="diff_hour" value="${diff_hour}">
-								<input type="hidden" id="diff_min" value="${diff_min}">
-								
-                                <table class="seat-reserve-info">
+                                <!-- 열람실 좌석 예약 현황이 없다면, -->
+                                <c:if test="${nbRoom_info == null}">
+                                	<table class="seat-reserve-info">
                                     <tbody>
                                         <tr>
                                             <th>열람실</th>
-                                            <td>제 1열람실</td>
+                                            <td></td>
                                         </tr>
                                         <tr>
-                                            <th class="left">좌석 번호</th>
-                                            <td>${nbRoom_info.seat_no}</td>
+                                            <th>좌석 번호</th>
+                                            <td></td>
                                         </tr>
                                         <tr>
                                             <th>예약 시간</th>
-                                            <td>${nbRoom_info.checkin_time}</td>
+                                            <td></td>
                                         </tr>
                                         <tr>
-                                            <th class="left">반납 시간</th>
-                                            <td>${nbRoom_info.checkout_time}</td>
+                                            <th>반납 시간</th>
+                                            <td></td>
                                         </tr>
                                         <tr>
-                                            <th class="left">잔여 시간</th>
-                                            <td>${diff_time}</td>
+                                            <th>잔여 시간</th>
+                                            <td></td>
                                         </tr>
                                     </tbody>
                                 </table>
+                                </c:if>
+                                
+                                <!-- 열람실 좌석 예약 현황이 있다면, -->
+                                <c:if test="${nbRoom_info != null}"> 
+	                                <fmt:formatDate var="reg_time" value="${nbRoom_info.checkin_time}" pattern="HH:mm:ss"/>
+	                            	<fmt:formatDate var="return_time" value="${nbRoom_info.checkout_time}" pattern="HH:mm:ss"/>
+	                            	
+	                            	<fmt:parseNumber var="diff_hour" value="${nbRoom_info.diff_time/(1000*60*60)}" integerOnly="true" />
+	                            	<fmt:parseNumber var="diff_min" value="${nbRoom_info.diff_time/(1000*60) - diff_hour*60}" integerOnly="true" />
+	                            	<fmt:parseNumber var="diff_sec" value="${nbRoom_info.diff_time/1000 - diff_hour*60*60 - diff_min*60}" integerOnly="true" />
+		                    		
+		                    		<c:if test="${diff_min < 10}">
+		                    			<c:set var="diff_min" value="${diff_min}" />
+		                    		</c:if>
+		                    		
+		                    		<c:if test="${diff_sec < 10}">
+		                    			<c:set var="diff_sec" value="${diff_sec}" />
+		                    		</c:if>
+		                    		
+		                    		<c:set var="diff_time" value="${diff_hour}:${diff_min}:${diff_sec}" />
+		                    		
+		                    		<input type="hidden" id="diff_hour" value="${diff_hour}">
+									<input type="hidden" id="diff_min" value="${diff_min}">
+									
+	                                <table class="seat-reserve-info">
+	                                    <tbody>
+	                                        <tr>
+	                                            <th>열람실</th>
+	                                            <td>제 1열람실</td>
+	                                        </tr>
+	                                        <tr>
+	                                            <th class="left">좌석 번호</th>
+	                                            <td>${nbRoom_info.seat_no}</td>
+	                                        </tr>
+	                                        <tr>
+	                                            <th>예약 시간</th>
+	                                            <td>${nbRoom_info.checkin_time}</td>
+	                                        </tr>
+	                                        <tr>
+	                                            <th class="left">반납 시간</th>
+	                                            <td>${nbRoom_info.checkout_time}</td>
+	                                        </tr>
+	                                        <tr>
+	                                            <th class="left">잔여 시간</th>
+	                                            <td>${diff_time}</td>
+	                                        </tr>
+	                                    </tbody>
+	                                </table>
+                                </c:if>
 
                                 <div class="info-text">
                                     <span>
