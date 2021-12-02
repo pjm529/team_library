@@ -195,6 +195,17 @@
                     
                     <br>
                     
+                    <div class="mail_wrap">
+                    	<form action="/admin/mail" method="get">
+                    		<input type="hidden" name="amount" value="${cri.amount }">
+							<input type="hidden" name="page" value="${cri.page }">
+							<input type="hidden" name="type" value="${cri.type }">
+							<input type="hidden" name="keyword" value="${cri.keyword }">
+							<input type="hidden" name="user_id" value="${member.user_id }">
+							<button class="btn">메일</button>
+                    	</form>
+                    </div>
+                    
                     <div class="member_modify_wrap">
                     	<form action="/admin/member-modify" method="get">
                     		<input type="hidden" name="amount" value="${cri.amount }">
@@ -218,8 +229,6 @@
                     	</form>
                     </div>
                     
-                    
-                    
                     <div class="member_list_wrap">
                     	<form action="/admin/member-list" method="get">
                     		<input type="hidden" name="amount" value="${cri.amount }">
@@ -229,9 +238,7 @@
 							<button class="btn">목록</button>
                     	</form>
                     </div>
-                    
                 </div>
-
             </div>
         </div>
     </div>
