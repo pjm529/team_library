@@ -18,7 +18,7 @@ $(document).ready(function() {
 
 // 나의 예약 현황 btn 속성 추가
 function my_info_btn(){
-	location.href = "#";
+	location.href = "/mylib/myReservationInfo";
 }
 
 // 좌석 배정 상세 btn 속성 추가

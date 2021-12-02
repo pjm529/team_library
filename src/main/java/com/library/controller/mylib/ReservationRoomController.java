@@ -40,5 +40,10 @@ public class ReservationRoomController {
 		
 		return "/mylib/sub3/reservationRoomPage";
 	}
+	
+	@GetMapping("/myReservationInfo")
+	public String myReservationInfo() {
+		return "/mylib/sub3/myReservationInfo";
+	}
 
 }
