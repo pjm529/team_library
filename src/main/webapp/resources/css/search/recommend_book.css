@@ -150,13 +150,12 @@ ul{
 .content{
     box-sizing: border-box;
     padding-top: 30px;
-    padding-bottom: 100px;
     width: 971px;
     margin-left: 280px;
 }
 
 .doc{
-    min-height:450px;
+    min-height:300px;
 }
 
 /* 게시판 전체 wrapper */
