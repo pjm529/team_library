@@ -78,6 +78,11 @@
                                         <tr>
                                         	<td>강좌실</td>
                                         </tr>
+                                        <tr>
+                                        	<td>4층</td>
+                                        	<td colspan="1">1열람실, 2열람실, 노트북실</td>
+                                        	<td colspan="2">09:00 ~ 18:00</td>
+                                        </tr>
                                     </tbody>
                                 </table>
                                               
