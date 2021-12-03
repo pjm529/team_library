@@ -126,7 +126,7 @@
                                             <td class="num">${articleList.article_no}</td>
                                             <td class="left articleContent" style="padding-left: 15px;">
                                             	<a href="${articleList.article_no}">${articleList.article_title}</a></td>
-                                			<td>${articleList.writer_name}</td>
+                                			<td>관리자</td>
                                             <td>
                                                <fmt:formatDate var="article_reg_date" value="${articleList.article_reg_date}" pattern="yyyy-MM-dd"/>
                                     				${article_reg_date}
@@ -212,16 +212,7 @@
             </div>
         </div>
     </div>
-    
-   
-			
-	<!-- <form method="/articleList" class="moveForm"> -->	
-	<%-- <form method="get" id="moveForm">
-		<input type="hidden" name="page" value="${pageMaker.cri.page}">
-		<input type="hidden" name="amount" value="${pageMaker.cri.amount}">
-	</form> --%>
-	
-	
+
 	<form action="/board/articleList" method="get" class="moveForm">
       <input type="text" name="page" value="${pageMaker.cri.page}">
       <input type="text" name="amount" value="${pageMaker.cri.amount}">
@@ -236,6 +227,7 @@
       <input type="hidden" name="type" value="${pageMaker.cri.type}">
       <input type="hidden" name="article_no" value="">
    </form>
+   
 <script src="https://code.jquery.com/jquery-3.6.0.js" integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk=" crossorigin="anonymous"></script>
 <script>
    $(function() {

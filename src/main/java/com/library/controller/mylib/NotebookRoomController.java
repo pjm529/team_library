@@ -33,6 +33,7 @@ public class NotebookRoomController {
 	}
 	
 
+
 	/* 좌석 리스트 출력 */
 	@GetMapping("/notebookRoom")
 	public String seatsList(Model model) {
@@ -78,7 +79,7 @@ public class NotebookRoomController {
 	
 	
 	/* 좌석 자리 이동 */
-	@GetMapping("/moveSeat123")
+	@GetMapping("/nbMoveSeat")
 	public String moveSeat(NoteBookRoomDTO dto, @RequestParam("newSeat_no") int newSeat_no) {
 		
 		nbService.nb_seat_return(dto);

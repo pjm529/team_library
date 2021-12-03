@@ -7,11 +7,18 @@ import lombok.Data;
 @Data // Data = getter + setter + toString
 public class ReadingRoomDTO {
 
+	// 좌석 번호
 	private int seat_no;
-	private int seat_status;
-	private String user_id;
-	private Timestamp reg_time;
-	private Timestamp return_time;
-	private long diff_time;
 	
+	// 예약자 id
+	private String user_id;
+	
+	// 입실 시간
+	private Timestamp checkin_time;
+	
+	// 퇴실 시간
+	private Timestamp checkout_time;
+	
+	// 잔여 시간
+	private long diff_time;
 }

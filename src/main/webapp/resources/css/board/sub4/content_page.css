@@ -24,6 +24,17 @@ ul{
     padding: 0px;
 }
 
+p {
+	margin: 0;
+	padding: 20px 15px;
+	line-height: 150%;
+	word-break: keep-all;
+	font-size: 15px;
+	font-weight: normal;
+	color: #464646;
+}
+
+
 /* 전체 container */
 .container{
     margin: 0 auto;
@@ -148,6 +159,10 @@ ul{
     position: relative;
 }
 
+/* 제목 */
+.bbs-title {
+	height: 40px;
+}
 
 /* 본문 부분 */
 .content{
@@ -156,6 +171,18 @@ ul{
     padding-bottom: 100px;
     width: 971px;
     margin-left: 280px;
+}
+
+/* 본문 내용 */
+.bbs-content {
+	min-height: 240px;
+}
+
+/* 본문 폰트 */
+.bbs-content b {
+	font-size: 140%;
+	font-weight: 800;
+	padding: 10px 15px;
 }
 
 .doc{
@@ -167,6 +194,7 @@ ul{
     padding: 10px 0 20px;
     font-size: 13px;
     background: #fff;
+    padding-top: 20px;
 }
 
 
@@ -262,3 +290,42 @@ table input{
 .list_wrap{
    float: left;
 }
+
+/* 첨부 파일 */
+.downloadArea{
+   margin-top: 30px;
+   margin-bottom: 30px;
+   border-top: 2px solid #e5e8eb;
+   border-bottom: 2px solid #e5e8eb;
+   padding: 10px;
+   height: 100px;
+   overflow-y: scroll;
+   background: #f3f3f3;
+  /*  list-style: none;
+   float: left; */
+}
+
+/* 이전글, 다음글 테이블 */
+.article-board {
+    margin: 45px 0;
+    border: none;
+   	border-top: 2px solid #ccc;
+   	border-bottom: 2px solid #ccc;
+   	height: 90px; 
+}
+
+.article-board tbody td{
+	padding: 4px 10px;
+	
+}
+
+.article-board td.first {
+    text-align: center;
+    word-break: keep-all;
+}
+
+td.td3{	
+	border-right: none;
+	text-align: center;
+	
+} 

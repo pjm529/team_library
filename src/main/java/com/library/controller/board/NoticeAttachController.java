@@ -4,12 +4,14 @@ import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.UnsupportedEncodingException;
-import java.net.URLDecoder;
+import java.net.URLEncoder;
 import java.nio.file.Files;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
 
+import org.springframework.core.io.FileSystemResource;
+import org.springframework.core.io.Resource;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
@@ -18,6 +20,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.util.FileCopyUtils;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestHeader;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
@@ -32,6 +35,7 @@ import net.coobird.thumbnailator.Thumbnailator;
 @Log4j
 public class NoticeAttachController {
 	
+	// 첨부 파일 형식이 이미지인지 아닌지 체크
 	private boolean checkImageType(File file) {
 		
 		try {
@@ -44,16 +48,14 @@ public class NoticeAttachController {
 		return false;
 	}
 	
-	
+	// 첨부할 파일 선택 시
 	@PostMapping(value = "/uploadNoticeFileAjaxAction", produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
 	@ResponseBody
 	public ResponseEntity<List<NoticeAttachForAjaxDTO>> uploadNoticeFileAjaxPost(MultipartFile[] uploadNoticeFile) {
 		
-		System.out.println("uploadNoticeFileAjaxAction 진입완료");
-		
 		List<NoticeAttachForAjaxDTO> list = new ArrayList<>();
-		String uploadFolder = "C:\\notice_file";
-		
+		String uploadFolder = "C:\\library_file\\notice";
+		 
 		File uploadPath = new File(uploadFolder);
 		
 		if(uploadPath.exists() == false) {
@@ -61,8 +63,6 @@ public class NoticeAttachController {
 		}
 		
 		for(MultipartFile multipartFile : uploadNoticeFile) {
-			
-			System.out.println("메롱메롱");
 			
 			NoticeAttachForAjaxDTO attachForAjaxDTO = new NoticeAttachForAjaxDTO();
 			String uploadFileName = multipartFile.getOriginalFilename();
@@ -76,12 +76,14 @@ public class NoticeAttachController {
 			uploadFileName = uuid.toString() + "_" + uploadFileName;
 			
 			try {
+				// 파일을 폴더에 저장
 				File saveFile = new File(uploadPath, uploadFileName);
 				multipartFile.transferTo(saveFile);
 				
 				attachForAjaxDTO.setUuid(uuid.toString());
 				attachForAjaxDTO.setUpload_path(uploadFolder);
 				
+				// 해당 파일이 이미지일 경우 폴더에 썸네일 저장
 				if(checkImageType(saveFile)) {
 					attachForAjaxDTO.setImage(true);
 					FileOutputStream thumbnail = new FileOutputStream(new File(uploadPath, "s_" + uploadFileName));
@@ -99,8 +101,7 @@ public class NoticeAttachController {
 		return new ResponseEntity<>(list, HttpStatus.OK);
 	}
 	
-	
-
+	// 첨부할 파일 썸네일 출력
 	@GetMapping("/displayFiles")
 	@ResponseBody
 	public ResponseEntity<byte[]> getFile(String file_name){
@@ -121,36 +122,7 @@ public class NoticeAttachController {
 		return result;
 	}
 	
-	
-//	@PostMapping("/deleteNoticeFile")
-//	@ResponseBody
-//	public ResponseEntity<String> deleteNoticeFile(String file_name, String type, 
-//			@RequestParam("uuid") String uuid) {
-//				
-//		log.info("deleteFile: " + file_name);
-//		
-//		File file;
-//		
-//		try {
-//			file = new File("C:\\notice_file\\" + URLDecoder.decode(file_name, "UTF-8"));
-//			file.delete();
-//			fileDelete(uuid);
-//			
-//			if(type.equals("image")) {
-//				String largeFileName = file.getAbsolutePath().replace("s_", "");
-//				log.info("largeFileName: " + largeFileName);
-//				file = new File(largeFileName);
-//				file.delete();
-//				fileDelete(uuid);
-//			}
-//			
-//		} catch (UnsupportedEncodingException e) {
-//			e.printStackTrace();
-//			return new ResponseEntity<>(HttpStatus.NOT_FOUND);
-//		}
-//		return new ResponseEntity<String>("deleted", HttpStatus.OK);
-//	}
-	
+	// 첨부할 파일 선택 취소 시 폴더에 저장된 파일 삭제
 	@PostMapping("/deleteNoticeFile")
 	@ResponseBody
 	public ResponseEntity<String> deleteNoticeFile(String file_name, String type, 
@@ -163,13 +135,10 @@ public class NoticeAttachController {
 		return new ResponseEntity<String>("deleted", HttpStatus.OK);
 	}
 	
-	
+	// 폴더 내 파일 삭제 함수(이미지일 경우 썸네일까지 삭제)
 	public void fileDelete(String uuid, String type) {
 		
-		System.out.println(uuid);
-		System.out.println(type);
-	
-		String filePath = "C:\\notice_file\\";
+		String filePath = "C:\\library_file\\notice\\";
 		File deleteFileName = new File(filePath + uuid);
 		
 		if(type.equals("image")) {
@@ -177,14 +146,53 @@ public class NoticeAttachController {
 			File deleteThumbFileName = new File(filePath + thumb);
 			deleteFileName.delete();
 			deleteThumbFileName.delete();
-			System.out.println("파일삭제완료");
 		}else {
 			deleteFileName.delete();
-			System.out.println("파일삭제완료");
 		}
 		
 	}
 	
+	// 첨부 파일 다운로드
+	@GetMapping(value = "/downloadNoticeFile", produces = MediaType.APPLICATION_OCTET_STREAM_VALUE)
+	@ResponseBody
+	public ResponseEntity<Resource> downloadNoticeFile(@RequestHeader("User-Agent") String userAgent, String file_name) {
+		
+		Resource resource = new FileSystemResource(file_name);
+		
+		// 파일이 존재하지 않으면 404 에러 전달
+		if(resource.exists() == false) {
+			return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+		}
+
+		String resourseName = resource.getFilename();
+		
+		// remove uuid
+		String resourseOriginalName = resourseName.substring(resourseName.indexOf("_") + 1);
+		
+		HttpHeaders headers = new HttpHeaders();
+		
+		try {
+			String downloadName = null;
+			
+			if(userAgent.contains("Trident")) {
+				log.info("IE browser");
+				downloadName = URLEncoder.encode(resourseOriginalName, "UTF-8").replaceAll("\\+", " ");
+			}else if(userAgent.contains("Edge")) {
+				log.info("Edge browser");
+				downloadName = URLEncoder.encode(resourseOriginalName, "UTF-8");
+			}else {
+				log.info("Chrome browser");
+				downloadName = new String(resourseOriginalName.getBytes("UTF-8"),"ISO-8859-1");
+			}
+			log.info("downloadName: " + downloadName);
+			
+			headers.add("Content-Disposition", "attachment; filename=" + downloadName);
+			
+		} catch (UnsupportedEncodingException e) {
+			e.printStackTrace();
+		}
+		return new ResponseEntity<Resource>(resource, headers, HttpStatus.OK);
+	}
 	
 
 }

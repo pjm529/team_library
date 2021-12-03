@@ -3,12 +3,9 @@ import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.UnsupportedEncodingException;
-import java.net.URLDecoder;
 import java.net.URLEncoder;
 import java.nio.file.Files;
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 import java.util.UUID;
 
@@ -19,7 +16,6 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
 import org.springframework.util.FileCopyUtils;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -27,6 +23,7 @@ import org.springframework.web.bind.annotation.RequestHeader;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
+
 import com.library.model.board.AttachFileDTO;
 
 import lombok.extern.log4j.Log4j;
@@ -35,100 +32,30 @@ import net.coobird.thumbnailator.Thumbnailator;
 @Controller
 @Log4j
 public class UploadController {
-
-//	@GetMapping("/uploadForm")
-//	public void uploadForm() {
-//
-//		log.info("upload form");
-//	}
-
-
-//	@PostMapping("/uploadFormAction")
-//	public void uploadFormPost(MultipartFile[] uploadFile, Model model) {
-//
-//		String uploadFolder = "C:\\upload";
-//
-//		for (MultipartFile multipartFile : uploadFile) {
-//
-//			log.info("-------------------------------------");
-//			log.info("Upload File Name: " + multipartFile.getOriginalFilename());
-//			log.info("Upload File Size: " + multipartFile.getSize());
-//
-//			File saveFile = new File(uploadFolder, multipartFile.getOriginalFilename());
-//
-//			try {
-//				multipartFile.transferTo(saveFile);
-//			} catch (Exception e) {
-//				log.error(e.getMessage());
-//			} // end catch
-//		} // end for
-//
-//	}
-//
-//	@GetMapping("/uploadAjax")
-//	public void uploadAjax() {
-//
-//		log.info("upload ajax");
-//	}
-
 	
-// 날짜별 폴더 생성
-//	private String getFolder() {
-//
-//		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
-//
-//		Date date = new Date();
-//
-//		String str = sdf.format(date);
-//
-//		return str.replace("-", File.separator);
-//	}
-
-
-
-	private boolean checkImageType(File file) {
-
-		try {
-			String contentType = Files.probeContentType(file.toPath());
-
-			return contentType.startsWith("image");
-
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-
-		return false;
-	}
-
-
-
+	// formData에 담긴 사진 및 파일들을 가져옴 
 	@PostMapping(value = "/uploadAjaxAction", produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
 	@ResponseBody
 	public ResponseEntity<List<AttachFileDTO>> uploadAjaxPost(MultipartFile[] uploadFile) {
 
 		List<AttachFileDTO> list = new ArrayList<>();
 		
-		//저장되는 경로
-		String uploadFolder = "C:\\upload";
+		// 저장되는 경로
+		String uploadFolder = "C:\\library_file\\article";
 
-//		String uploadFolderPath = getFolder();
-		// make folder --------
 		File uploadPath = new File(uploadFolder);
-//		File uploadPath = new File(uploadFolder, uploadFolderPath);
 
 		if (uploadPath.exists() == false) {
 			uploadPath.mkdirs();
 		}
-		// make yyyy/MM/dd folder
-
+		
 		for (MultipartFile multipartFile : uploadFile) {
 
 			AttachFileDTO attachDTO = new AttachFileDTO();
 
 			String uploadFileName = multipartFile.getOriginalFilename();
 
-			// IE has file path
+			// 파일이름 중복방지
 			uploadFileName = uploadFileName.substring(uploadFileName.lastIndexOf("\\") + 1);
 			log.info("only file name: " + uploadFileName);
 			attachDTO.setFile_name(uploadFileName);
@@ -144,14 +71,14 @@ public class UploadController {
 				attachDTO.setUuid(uuid.toString());
 				attachDTO.setUpload_path(uploadFolder);
 
-				// check image type file
+				// saveFile이 이미지일 경우 checkImageType()함수 실행, 
 				if (checkImageType(saveFile)) {
 
 					attachDTO.setImage(true);
-
+					
 					FileOutputStream thumbnail = new FileOutputStream(new File(uploadPath, "s_" + uploadFileName));
 						
-					Thumbnailator.createThumbnail(multipartFile.getInputStream(), thumbnail, 100, 100);
+					Thumbnailator.createThumbnail(multipartFile.getInputStream(), thumbnail, 50, 50);
 
 					thumbnail.close();
 				}
@@ -166,7 +93,26 @@ public class UploadController {
 		} // end for
 		return new ResponseEntity<>(list, HttpStatus.OK);
 	}
+	
+	
+	// 첨부파일 이미지인지 아닌지 구별해주는 함수
+	// uploadAjaxPost()함수에 사용 됨
+	private boolean checkImageType(File file) {
 
+		try {
+			String contentType = Files.probeContentType(file.toPath());
+
+			return contentType.startsWith("image");
+
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+
+		return false;
+	}
+	
+	// view단(src = /display)의 요청에 따라서 파일을 result라는 변수에 담아 다시 view단으로 보내줌
 	@GetMapping("/display")	
 	@ResponseBody
 	public ResponseEntity<byte[]> getFile(String file_name) {
@@ -181,20 +127,21 @@ public class UploadController {
 			header.add("Content-Type", Files.probeContentType(file.toPath()));
 			result = new ResponseEntity<>(FileCopyUtils.copyToByteArray(file), header, HttpStatus.OK);
 		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+
 		}
 		return result;
 	}
 
 	
-
+	// 파일 다운로드
 	@GetMapping(value = "/download", produces = MediaType.APPLICATION_OCTET_STREAM_VALUE)
 	@ResponseBody
-	public ResponseEntity<Resource> downloadFile(@RequestHeader("User-Agent") String userAgent, String fileName) {
+	public ResponseEntity<Resource> downloadFile(@RequestHeader("User-Agent") String userAgent, String file_name) {
 
-		Resource resource = new FileSystemResource("c:\\upload\\" + fileName);
-
+		System.out.println("============file_name"+file_name);
+		
+		Resource resource = new FileSystemResource(file_name);
+			
 		if (resource.exists() == false) {
 			return new ResponseEntity<>(HttpStatus.NOT_FOUND);
 		}
@@ -203,7 +150,8 @@ public class UploadController {
 
 		// remove UUID
 		String resourceOriginalName = resourceName.substring(resourceName.indexOf("_") + 1);
-
+		
+		// 브라우저 종류
 		HttpHeaders headers = new HttpHeaders();
 		try {
 
@@ -231,7 +179,7 @@ public class UploadController {
 		return new ResponseEntity<Resource>(resource, headers, HttpStatus.OK);
 	}
 	
-// 첨부파일 x버튼 눌렀을 때 ajax 처리과정
+	// 첨부파일 x버튼 눌렀을 때 ajax 처리과정
 	@PostMapping("/deleteFile")
 	@ResponseBody
 	public ResponseEntity<String> deleteFile(String file_name, String type, @RequestParam("uuid") String uuid) {
@@ -242,47 +190,15 @@ public class UploadController {
 		
 		return new ResponseEntity<String>("deleted", HttpStatus.OK);
 
-//		File file;
-//		
-//		try {
-//						
-//			file = new File("c:\\upload\\" + URLDecoder.decode(file_name, "UTF-8"));
-//
-//			file.delete();
-//			
-//			fileDelete(uuid, thumb);
-//			fileDelete1(uuid);
-//			if (type.equals("image")) {
-//				fileDelete(uuid, type);
-//
-//				String largeFileName = file.getAbsolutePath().replace("s_", "");
-//
-//				log.info("largeFileName: " + largeFileName);
-//
-//				file = new File(largeFileName);
-//
-//				file.delete();
-//				
-//				fileDelete(uuid, thumb);
-//			}
-//		} catch (UnsupportedEncodingException e) {
-//			e.printStackTrace();
-//			return new ResponseEntity<>(HttpStatus.NOT_FOUND);
-//		}
-//
-//		return new ResponseEntity<String>("deleted", HttpStatus.OK);
 
 	}
 	
-	// 폴더 내 파일삭제
-	   public void fileDelete(String uuid, String type) {
-
+	// 첨부파일폴더 내 파일삭제 함수
+	public void fileDelete(String uuid, String type) {
 	   
-	      String filePath = "C:\\upload\\";
-	      
+	      String filePath = "C:\\library_file\\article\\";	      
 	      
 	      File deleteFileName = new File(filePath + uuid);
-			/* File deleteThumFileName = new File(filePath + thumb); */
 
 	      if(type.equals("image")) {
 	    	  String thumb = "s_" + uuid;
@@ -302,17 +218,5 @@ public class UploadController {
 	   
 	   }
 
-	   
-	// 첨부파일 x버튼 눌렀을 때 ajax 처리과정
-		@PostMapping("/deleteFile2")
-		@ResponseBody
-		public ResponseEntity<String> deleteFile2(String file_name, String type,  @RequestParam("uuid") String uuid) {
-
-			log.info("deleteFile: " + file_name);
-
-			fileDelete(uuid, type);
-			
-			return new ResponseEntity<String>("deleted", HttpStatus.OK);
-		}
 
 }

@@ -2,6 +2,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <%@ page session="false" %>
+<%@ taglib uri="http://www.springframework.org/security/tags" prefix="sec" %>
 <html>
 <head>
 	<title>Insert Notice Form</title>
@@ -52,8 +53,7 @@
                             
                             <div class="table-wrap">
                                 <form action="/board/insertNotice" method="post" onsubmit="return false" role="form">
-                                    <input type="hidden" name="writer_id" value="writer_id">
-                            		<input type="hidden" name="writer_name" value="writer_name">
+                            		<input type="hidden" name="writer_name" value="<sec:authentication property="principal.dto.user_name"/>">
                                     
                                     <table class="bbs-edit">
                                         <tbody>
@@ -66,32 +66,20 @@
                                             </tr>
                                             <tr>
                                                 <th class="first">작성자</th>
-                                                <td>writer_name</td>
+                                                <td><sec:authentication property="principal.dto.user_name"/></td>
                                                 <th class="first">작성일</th>
                                                 <td>${today}</td>
                                             </tr>
-                                            <!-- <tr>
-                                                <th class="first">비밀번호</th>
-                                                <td colspan="3">
-                                                    <input type="password" style="width: 30%;" maxlength="10"
-                                                        placeholder="10자리 이내로 입력해 주세요">
-                                                </td>
-                                            </tr> -->
                                             <tr>
                                                 <td colspan="4">
                                                     <textarea id="popContent" name="notice_content" cols="108"
                                                         rows="15"></textarea>
                                                 </td>
                                             </tr>
-                                            <!-- <tr>
-                                                <td colspan="4">
-                                                    <input type="file" name="notice_img" multiple>
-                                                </td>
-                                            </tr> -->
                                             <tr>
-                                            	<td>
+                                            	<td colspan="4">
                                             		<div class="uploadDiv">
-				                                        <input type="file" name="uploadNoticeFile" multiple>
+				                                        <input type="file" name="uploadNoticeFile" id="uploadNoticeFile" multiple>
 				                                        <input type="hidden" name="uuid" id="uuid">
 				                                    </div>
 				                                    
@@ -150,7 +138,7 @@
 			}
 			
 			if(confirm('등록하시겠습니까?')) {
-				$("form").attr("onsubmit", "result true");
+				$("form").attr("onsubmit", "return true;");
 				$("form").submit();
 			}
 		});
@@ -162,6 +150,7 @@
 		
 		
 		/* 파일 업로드 */
+		/* input 태그에 업로드할 파일 정보 담아서 form submit */
 		var formObj = $("form[role='form']");
 		   
 		$("button[type='submit']").on("click", function(e){
@@ -184,13 +173,10 @@
 			  
 			});
 			  
-			alert(str);
-			
 			formObj.append(str).submit();
 		  
 		});
 		
-			      
 			      
 		/* 용량, 파일 형식 지정 */	      
 		var regex = new RegExp("(.*?)\.(exe|sh|zip|alz)$");
@@ -211,7 +197,6 @@
 		}
 			      
 			      
-		
 		/* 선택한 파일을 지정된 폴더에 저장 */
 		$("input[type='file']").change(function(e){
 		
@@ -245,7 +230,7 @@
 			      
 			      
 		
-		/* 첨부파일 선택했을 때 */	      
+		/* 첨부 파일 선택했을 때 */	      
 		function showUploadResult(uploadResultArr){
 		    
 			/* 아무것도 선택 안했으면 리스트에 아무것도 안담김 -> 그냥 리턴 */
@@ -267,24 +252,26 @@
 					
 					str += "<li data-path='" + obj.upload_path + "'";
 					str += " data-uuid='" + obj.uuid + "' data-filename='" + obj.file_name + "' data-type='" + obj.image + "'"
-					str += " ><div>";
-					str += "<span>" + obj.file_name + "</span>";
+					str += " ><div style='margin-top: 5px;'>";
+					str += "<img src='/displayFiles?file_name=" + fileCallPath + "' width='20px' height='20px' style='vertical-align: middle;'>";
+					str += "<span> " + obj.file_name + " </span>";
 					str += "<button type='button' data-file=\'" + fileCallPath + "\' data-type='image'>x</button><br>";
-					str += "<img src='/displayFiles?file_name=" + fileCallPath + "'>";
 					str += "</div>";
 					str += "</li>";
+					
 				}else{
 					var fileCallPath = encodeURIComponent(obj.upload_path + "/" + obj.uuid + "_" + obj.file_name);               
 					var fileLink = fileCallPath.replace(new RegExp(/\\/g), "/");
 					var uuidName = obj.uuid + "_" + obj.file_name;
 					
 					$("input[name='uuid']").attr('value', uuidName);
-					   
+					
 					str += "<li "
-					str += "data-path='" + obj.upload_path + "' data-uuid='" + obj.uuid + "' data-filename='" + obj.file_name + "' data-type='" + obj.image + "' ><div>";
-					str += "<span> " + obj.file_name + "</span>";
+					str += "data-path='" + obj.upload_path + "' data-uuid='" + obj.uuid + "' data-filename='" + obj.file_name + "' data-type='" + obj.image + "' >";
+					str += "<div style='margin-top: 5px;'>";
+					str += "<img src='/resources/imges/board/sub1/file_icon.png' width='20px' height='20px' style='vertical-align: middle;'>";
+					str += "<span> " + obj.file_name + " </span>";
 					str += "<button type='button' data-file=\'" + fileCallPath + "\' data-type='file'>x</button><br>";
-					str += "<img src='/resources/fileImage/default.png' width='150px'></a>";
 					str += "</div>";
 					str += "</li>";
 				}
@@ -294,11 +281,10 @@
 			uploadUL.append(str);
 		}
 		
-		var cloneObj = $(".uploadDIV");
-			      
-		/* x버튼 눌렀을 때 첨부파일 화면에서 사라짐 */
+		
+		/* x버튼 눌렀을 때 첨부 파일 목록에서 사라짐 */
 		$(".uploadResult").on("click", "button", function(e){
-		    
+			
 			var uuid = $("#uuid").val();
 			
 			console.log("delete file");
@@ -315,13 +301,10 @@
 				type: 'POST',
 				success: function(result){
 					targetLi.remove();
-					$(".uploadDIV").html(cloneObj.html());
+					$("#uploadNoticeFile").val("");
 				}
 			}); //$.ajax
 		});
-		
-		
-		
 		
 		
 		

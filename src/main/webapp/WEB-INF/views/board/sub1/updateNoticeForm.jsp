@@ -81,20 +81,16 @@
                                                 </td>
                                             </tr>
                                             <tr>
-                                            	<td>
-													<div class="panel-heading">첨부파일</div>
-													
-													<div class="panel-body">
-														<div class="form-group uploadDiv">
-															<input type="file" name='uploadNoticeFile' multiple="multiple">
-															<input type="hidden" name="uuid" id="uuid">
-														</div>
-															
-														<div class='uploadResult'> 
-															<ul>
-															    
-															</ul>
-														</div>
+                                            	<td colspan="4">
+													<div class="uploadDiv">
+														<input type="file" name="uploadNoticeFile" id="uploadNoticeFile" multiple="multiple">
+														<input type="hidden" name="uuid" id="uuid">
+													</div>
+														
+													<div class='uploadResult'> 
+														<ul>
+														    
+														</ul>
 													</div>
                                             	</td>
                                             </tr>
@@ -153,57 +149,42 @@
 		
 		
 		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		/* 게시물 조회화면에서 수정화면으로 이동시 보여지는 첨부파일 화면 */
+		/* 기존에 첨부했던 파일 불러오기 */
 		(function(){
 		    
 			var notice_no = $("#notice_no").val();
 			    
 			$.getJSON("/board/getNoticeAttachList", {notice_no:notice_no}, function(arr){
 			  
-				console.log(arr);
-				
 				var str = "";
 				
 				$(arr).each(function(i, attach){
 				 
-					//image type /* 기존 사진 */
 					if(attach.file_type){
 						var fileCallPath =  encodeURIComponent(attach.upload_path + "/s_" + attach.uuid + "_" + attach.file_name);
-						/* var uuidName = $("#uuid").val(attach.uuid + "_" + attach.file_name);
-						var thumbName = $("#thumb").val('s_' + attach.uuid + "_" + attach.file_name);
-						$("input[name='uuid']").attr('value', uuidName);
-						$("input[name='thumb']").attr('value', thumbName); */
-					    
-					    str += "<li data-path='" + attach.upload_path + "' data-uuid='" + attach.uuid + "' data-filename='" + attach.file_name + "' data-type='" + attach.file_type + "' ><div>";
-					    str += "<button type='button' data-file=\'" + fileCallPath + "\' data-type='image'>삭제x</button><br>";
-					    str += "<img src='/displayFiles?file_name=" + fileCallPath + "'>";
+											    
+					    str += "<li data-path='" + attach.upload_path + "' data-uuid='" + attach.uuid + "' data-filename='" + attach.file_name + "' data-type='" + attach.file_type + "' >";
+					    str += "<div style='margin-top: 5px;'>";
+					    str += "<img src='/displayFiles?file_name=" + fileCallPath + "' width='20px' height='20px' style='vertical-align: middle;'>";
+					    str += "<span> " + attach.file_name + " </span>";
+					    str += "<button type='button' data-file=\'" + fileCallPath + "\' data-type='image'>x</button><br>";
 					    str += "</div>";
-					    str + "</li>";
+					    str += "</li>";
 					    
-					  }else{
+					}else{
 					     
-					    str += "<li data-path='" + attach.upload_path + "' data-uuid='" + attach.uuid + "' data-filename='" + attach.file_name + "' data-type='" + attach.file_type + "' ><div>";
-					    str += "<button type='button' data-file=\'" + fileCallPath + "\' data-type='image'>삭제x</button><br>";
-					    str += "<span> " + attach.file_name + "</span><br/>";
-					    str += "<img src='/resources/fileImage/default.png'></a>";
-					    str += "</div>";
-					    str + "</li>";
-					  }
+					    str += "<li data-path='" + attach.upload_path + "' data-uuid='" + attach.uuid + "' data-filename='" + attach.file_name + "' data-type='" + attach.file_type + "' >";
+					    str += "<div style='margin-top: 5px;'>";
+					    str += "<img src='/resources/imges/board/sub1/file_icon.png' width='20px' height='20px' style='vertical-align: middle;'></a>";
+					    str += "<span> " + attach.file_name + " </span>";
+					    str += "<button type='button' data-file=\'" + fileCallPath + "\' data-type='image'>x</button><br>";
+						str += "</div>";
+					    str += "</li>";
+					}
+					
 				});
 				        
 				$(".uploadResult ul").html(str);
-			  
 			  
 			});//end getjson
 			      
@@ -211,6 +192,7 @@
 		})();
 			
 		
+		/* input 태그에 업로드할 파일 정보 담아서 form submit */
 		var formObj = $("form[role='form']");
 		
 		$("button[type='submit']").on("click", function(e){
@@ -237,6 +219,7 @@
 		    
 		});
 			
+		
 		/* 용량, 파일 형식 지정 */
 		var regex = new RegExp("(.*?)\.(exe|sh|zip|alz)$");
 		var maxSize = 5242880; //5MB
@@ -255,6 +238,8 @@
 			return true;
 		}
 		
+		
+		/* 선택한 파일을 지정된 폴더에 저장 */
 		$("input[type='file']").change(function(e){
 		
 			var formData = new FormData();
@@ -287,7 +272,7 @@
 		});
 		
 		
-		/* 첨부파일 선택했을 때 */
+		/* 첨부 파일 선택했을 때 */
 		function showUploadResult(uploadResultArr){
 				    
 			if(!uploadResultArr || uploadResultArr.length == 0){ return; }
@@ -297,8 +282,7 @@
 			var str ="";
 			
 			$(uploadResultArr).each(function(i, obj){
-				    
-						
+				
 				if(obj.image){
 					var fileCallPath = encodeURIComponent(obj.upload_path + "/s_" + obj.uuid + "_" + obj.file_name);
 					var uuidName = obj.uuid + "_" + obj.file_name;
@@ -306,11 +290,12 @@
 					$("input[name='uuid']").attr('value', uuidName);
 					
 					str += "<li data-path='" + obj.upload_path + "'";
-					str += " data-uuid='" + obj.uuid+"' data-filename='" + obj.file_name + "' data-type='" + obj.image + "'"
-					str += " ><div>";
-					str += "<span> " + obj.file_name + "</span>";
+					str += " data-uuid='" + obj.uuid+"' data-filename='" + obj.file_name + "' data-type='" + obj.image + "'";
+					str += " ><div style='margin-top: 5px;'>";
+					str += "<img src='/displayFiles?file_name=" + fileCallPath + "' width='20px' height='20px' style='vertical-align: middle;'>";
+					str += "<span> " + obj.file_name + " </span>";
 					str += "<button type='button' data-file=\'" + fileCallPath + "\' data-type='image'>x</button><br>";
-					str += "<img src='/displayFiles?file_name=" + fileCallPath + "'>";
+
 					str += "</div>";
 					str += "</li>";
 				}else{
@@ -322,28 +307,27 @@
 					
 					
 					str += "<li "
-					str += "data-path='" + obj.upload_path + "' data-uuid='" + obj.uuid + "' data-filename='" + obj.file_name + "' data-type='" + obj.image + "' ><div>";
-					str += "<span> " + obj.file_name + "</span>";
+					str += "data-path='" + obj.upload_path + "' data-uuid='" + obj.uuid + "' data-filename='" + obj.file_name + "' data-type='" + obj.image + "' >";
+					str += "<div style='margin-top: 5px;'>";
+					str += "<img src='/resources/imges/board/sub1/file_icon.png' width='20px' height='20px' style='vertical-align: middle;'></a>";
+					str += "<span> " + obj.file_name + " </span>";
 					str += "<button type='button' data-file=\'" + fileCallPath + "\' data-type='file'>x</button><br>";
-					str += "<img src='/resources/fileImage/default.png' width='150px'></a>";
 					str += "</div>";
 					str += "</li>";
 				}
-			
+				
 			});
 			  
 			uploadUL.append(str);
 		}
 		
-		var cloneObj = $(".uploadDIV");
 		
-		/* x버튼 눌렀을 때 첨부파일 화면에서 사라짐 */
+		/* x버튼 눌렀을 때 첨부 파일 목록에서 사라짐 */
 		$(".uploadResult").on("click", "button", function(e){
-			
-			var uuid = $("#uuid").val();
 			
 			console.log("delete file");
 			  
+			var uuid = $("#uuid").val();
 			var targetFile = $(this).data("file");
 			var type = $(this).data("type");
 			
@@ -356,7 +340,7 @@
 				type: 'POST',
 				success: function(result){
 					targetLi.remove();
-					$(".uploadDIV").html(cloneObj.html());
+					$("#uploadNoticeFile").val("");
 				}
 			}); //$.ajax */
 		});
