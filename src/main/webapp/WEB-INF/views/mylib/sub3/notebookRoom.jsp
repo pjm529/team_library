@@ -62,7 +62,6 @@
                                 <button onclick="rdRoom();">제 1열람실</button>
                                 <button onclick="rdRoom2();">제 2열람실</button>
                                 <button class="active" onclick="nbRoom();">노트북실</button>
-                                <button>세미나실</button>
                             </div>
                         </div>
 
