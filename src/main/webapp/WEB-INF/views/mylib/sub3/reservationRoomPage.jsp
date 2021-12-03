@@ -48,13 +48,35 @@
                 <!-- 본문 -->
                 <div class="content">
                     <div class="doc">
-
-                        <!-- 나의 예약 현황 btn -->
                         <div style="padding: 15px;">
+                        	<!-- 열람실 이용 안내 -->
+	                        <div class="service-wrap">
+	                        	<h2><u>열람실 이용 안내</u></h2>
+	                            <div class="service-info">
+	                                <h3 style="margin-top: 10px;">이용시간</h3>
+	                                <ul class="con">
+	                                    <li>09:00 ~ 18:00</li>
+	                                </ul>
+	
+	                                <h3>유의사항</h3>
+	                                <ul class="con" style="margin-bottom: 20px;">
+	                                    <li>열람실 이용 시간은 기본 3시간이며, 연장할 경우 2시간 단위로 이용 가능합니다.</li>
+	                                    <li>대출 자료를 30일 이상 장기연체 중인 이용자는 열람실 예약이 불가합니다.</li>
+	                                    <li>흡연 및 음식물 반입을 금지합니다.</li>
+	                                    <li>실내에서는 정숙하여 주십시오.</li>
+	                                    <li>고의로 비품 및 시설을 훼손할 경우에는 변상 조치합니다.</li>
+	                                    <li>학습 이외의 용도 사용 및 유의사항 위반 시 퇴실 조치합니다.</li>
+	                                    <li>다음 이용자를 위하여 깨끗이 정리, 정돈해 주십시오.</li>
+	                                </ul>
+	                            </div>
+	                        </div>
+                        
+                        	<!-- 나의 예약 현황 btn -->
                             <div class="my-booking-status">
                                 <button class="my_info_btn" onclick="my_info_btn();">나의 예약현황</button>
                             </div>
-
+							
+							<!-- 좌석 배정 table -->
                             <div class="room-seat">
                                 <h3>좌석배정</h3>
                                 <table class="seat-info">
@@ -116,23 +138,19 @@
                                             </td>
                                         </tr>
                                     </tbody>
-
                                 </table>
-
-
                             </div>
-
+                            
+                            
 
                         </div>
-
                     </div>
                 </div>
             </div>
-
         </div>
         
-    <!-- footer -->
-    <jsp:include page="../../footer.jsp"></jsp:include>
+	    <!-- footer -->
+	    <jsp:include page="../../footer.jsp"></jsp:include>
     
     </div>
 
