@@ -24,7 +24,11 @@ public class ReservationRoomController {
 	private NotebookRoomService nbService;
 	
 	@GetMapping("/reservationRoomPage")
-	public String reservationRoomPage(Model model) {
+	public String reservationRoomPage(Model model, Principal principal) {
+		
+		/* 로그인 된 ID */
+		String user_id = principal.getName();
+		model.addAttribute("login_id", user_id);
 		
 		/* 열람실1 현황 */
 		int rd1Room_usingSeat = resService.rd1Room_usingSeat();
