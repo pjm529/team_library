@@ -4,7 +4,7 @@
 <%@ page session="false"%>
 <html>
 <head>
-<title>라온도서관 > 자료검색 > 추천도서</title>
+<title>라온도서관 > 열린공간 > 도서관일정</title>
 </head>
 <link rel="stylesheet" href="/resources/css/search/recommend_book.css">
 <link rel="stylesheet" href="/resources/css/board/sub2/calendar.css">
@@ -20,15 +20,15 @@
 			<div class="doc-info">
 				<!-- doc title -->
 				<div class="doc-title">
-					<h3>추천도서</h3>
+					<h3>도서관일정</h3>
 					<ul>
 						<!-- 홈 btn img -->
 						<li class="first" style="background-image: none;"><a
 							href="/search/book"> <img
 								src="/resources/imges/common/navi_home_icon.gif">
 						</a></li>
-						<li><a href="/search/book">자료검색</a></li>
-						<li><a href="/search/recommend-book">추천도서</a></li>
+						<li><a href="/board/noticeList">열린공간</a></li>
+						<li><a href="/board/calendar">도서관일정</a></li>
 					</ul>
 
 				</div>
