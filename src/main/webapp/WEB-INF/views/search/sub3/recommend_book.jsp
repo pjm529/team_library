@@ -48,7 +48,11 @@
                 <div class="content">
                     <div class="doc">
                         <div class="wrapper-bbs">
-
+							<div>
+								<form>
+	        						<input class="btn add_btn" type="submit" value="등록" style="float:left;">
+	        					</form>
+							</div>
                             <!-- 도서 수 -->
                             <div class="inline">
                                 <form action="">
@@ -73,6 +77,7 @@
 
                             </div>
 
+							<c:if test="${not empty list }">
                             <!-- 테이블 -->
                             <div class="recommend_book">
                                 <div class="clear_box"></div>
@@ -99,35 +104,39 @@
                                     </div>
                                 </c:forEach>
                             </div>
-                        </div>
-
-                    </div>
-                    <div class="pageInfo" style="text-align: center">
-
-                        <c:if test="${pageMaker.prev }">
-                            <a class="not" href="${pageMaker.startPage - 1}">이전</a>
-                        </c:if>
-
-                        <c:forEach var="num" begin="${pageMaker.startPage }" end="${pageMaker.endPage }">
-
-                            <c:if test="${num != 0}">
-                                <a class="${pageMaker.cri.page == num ? " current":"not" }" href="${num }">${num }</a>
                             </c:if>
-
-                        </c:forEach>
-
-                        <c:if test="${pageMaker.next }">
-                            <a class="not" href="${pageMaker.endPage + 1}">다음</a>
+                            
+                        </div>
+						<c:if test="${empty list }">
+						<br>
+                        <h2>등록된 추천 도서가 없습니다.</h2>
                         </c:if>
                     </div>
-                    <form>
-        				<input class="btn add_btn" type="submit" value="등록" style="float: right;">
-        			</form>
+		        	<div class="pageInfo" style="text-align: center;">
+								
+			           <c:if test="${pageMaker.prev }">
+			               <a class="not" href="${pageMaker.startPage - 1}">이전</a>
+			           </c:if>
+			
+			           <c:forEach var="num" begin="${pageMaker.startPage }" end="${pageMaker.endPage }">
+			
+			               <c:if test="${num != 0}">
+			                   <a class="${pageMaker.cri.page == num ? " current":"not" }" href="${num }">${num }</a>
+			               </c:if>
+			
+			           </c:forEach>
+			
+			           <c:if test="${pageMaker.next }">
+			               <a class="not" href="${pageMaker.endPage + 1}">다음</a>
+			           </c:if>
+			       </div>
                 </div>
 			
             </div>
             
+            
         </div>
+        
     </div>
 
     <form method="get" class="moveForm">

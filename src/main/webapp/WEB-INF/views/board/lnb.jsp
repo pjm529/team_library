@@ -17,7 +17,7 @@
             <a href="/board/articleList">분실물찾기</a>
         </li>
         <li class="sub5">
-            <a href="#">도서관일정</a>
+            <a href="/board/calendar">도서관일정</a>
         </li>
     </ul>
 </div>
