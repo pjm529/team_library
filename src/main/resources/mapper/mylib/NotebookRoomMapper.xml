@@ -73,7 +73,7 @@
 	<!-- 잔여 좌석 | 사용 중인 좌석 -->
 	<!-- 잔여 좌석 -->
 	<select id="nbRoom_usingSeat" resultType="int">
-		select count(*) - (select count(DISTINCT(user_id)) from reading_room)
+		select count(*) - (select count(DISTINCT(user_id)) from reading_room where seat_no &gt; 96)
 		  from reading_room
 		  where seat_no &gt; 96
 	</select>
@@ -87,21 +87,21 @@
 	<!-- 잔여 좌석 | 사용 중인 좌석 -->
 	<!-- 잔여 좌석 -->
 	<select id="rd1Room_usingSeat" resultType="int">
-		select count(*) - (select count(DISTINCT(user_id)) from reading_room)
+		select count(*) - (select count(DISTINCT(user_id)) from reading_room where seat_no &lt; 55)
 		  from reading_room
-		  where seat_no &gt; 1 and seat_no &lt; 54
+		  where seat_no &lt; 55
 	</select>
 	<!-- 사용 중 좌석 -->
 	<select id="rd1Room_usedSeat" resultType="int">
 		select count(DISTINCT(user_id))
 		  from reading_room
-		 where seat_no &gt; 1 and seat_no &lt; 54
+		 where seat_no &lt; 55
 	</select>
 	
 	<!-- 잔여 좌석 | 사용 중인 좌석 -->
 	<!-- 잔여 좌석 -->
 	<select id="rd2Room_usingSeat" resultType="int">
-		select count(*) - (select count(DISTINCT(user_id)) from reading_room)
+		select count(*) - (select count(DISTINCT(user_id)) from reading_room where seat_no &gt; 54 and seat_no &lt; 97)
 		  from reading_room
 		  where seat_no &gt; 54 and seat_no &lt; 97
 	</select>
