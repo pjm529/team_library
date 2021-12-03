@@ -44,9 +44,12 @@ public class EnquiryBoardServiceImpl implements EnquiryBoardService {
 	@Override
 	public void enquiryBoardDelete(Long enquiry_no) {
 		eMapper.enquiryBoardDelete(enquiry_no);
-
 	}
 
+	@Override
+	public String id_duplicate(String enquiry_no) {
+		return eMapper.id_duplicate(enquiry_no);
+	}
 
 
 	/* 게시판(페이징) / 총 게시물 / 게시판 정렬 */
@@ -65,5 +68,13 @@ public class EnquiryBoardServiceImpl implements EnquiryBoardService {
 		eMapper.reset();
 		
 	}
+
+	/* 관리자 계정 확인 */
+	@Override
+	public int check_admin(String user_id) {
+		return eMapper.check_admin(user_id);
+	}
+
+	
 
 }

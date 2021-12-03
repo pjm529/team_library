@@ -73,6 +73,7 @@ public class NotebookRoomController {
 	    
 		return "redirect:/mylib/notebookRoom";
 	}
+
 	
 	@ResponseBody
 	@PostMapping("/nb_seat_check")

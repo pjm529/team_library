@@ -1,5 +1,6 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn" %>
+<%@ taglib uri="http://www.springframework.org/security/tags" prefix="sec" %>
 <%@ page session="false" %>
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
@@ -10,6 +11,7 @@
 	<link rel="stylesheet" href="/resources/css/footer.css">
 </head>
 <body>
+
 
     <div class="container">
         <div class="sub_title">
@@ -91,8 +93,9 @@
                                 	</form>
                                 </div>
                                 
+                                   
                                 <div class="delete_wrap">
-	                               <form action="/board/qnaBoardDelete" method="get" onsubmit="return false" class="delete_form">
+	                               <form action="/board/qnaBoardDelete" method="post" onsubmit="return false" class="delete_form">
 	                               		<input type="hidden" name="enquiry_no" value="${dto.enquiry_no}">
 	                               		<input type="hidden" name="amount" value="${cri.amount}">
 	                               		<input type="hidden" name="page" value="${cri.page}">
@@ -103,7 +106,7 @@
 	                            </div>
                                 
 								<div class="update_wrap">
-									<form action="/board/qnaBoardEdit" method="get">
+									<form action="/board/qnaBoardEdit" method="post">
 	                               		<input type="hidden" name="enquiry_no" value="${dto.enquiry_no}">
 	                               		<input type="hidden" name="amount" value="${cri.amount}">
 	                               		<input type="hidden" name="page" value="${cri.page}">
@@ -122,8 +125,7 @@
                                 		<input type="hidden" name="keyword" value="${cri.keyword}">
 	                               		<button class="update_btn" style="margin-right: 20px;">답변하기</button>
 	                               	</form>
-								</div>            
-								          
+								</div>
 
                             </div>
 
@@ -145,7 +147,7 @@
 	$(function() {
 		
 		$(".sub3").addClass("active");
-				
+		
 		
 		var moveForm = $(".moveForm");
 		
@@ -157,14 +159,12 @@
 				$(".delete_form").submit();
 			}else{
 			}
-		})
+		});
 				
-	})
+	});
 	
-</script>  
-    
-<script>
-	function noEvent() {
+	
+	function noEvent() { // 새로고침 조회 수 + 방지
 		if (event.keyCode == 116) {
 			event.keyCode= 2;
 			return false;
@@ -174,7 +174,7 @@
 	}
 	
 	document.onkeydown = noEvent;
-</script>
+</script>  
 
 </body>
 </html>
