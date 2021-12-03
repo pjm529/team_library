@@ -34,6 +34,18 @@ public class MyLoanHistoryController {
 		// 로그인 된 user_id 받아오기
 		String id = principal.getName();
 
+		// start_date가 null 이면 현재 날짜에서 -1년한 날짜
+		if (start_date == null) {
+			start_date = date("start");
+			System.out.println(start_date);
+		}
+
+		// end_date가 null 이면 현재 날짜
+		if (end_date == null) {
+			end_date = date("end");
+			System.out.println(end_date);
+		}
+		
 		// 회원의 대출 내역 받아오기
 		List<BookDTO> loan_history = service.loan_history(id, cri, start_date, end_date);
 
@@ -59,16 +71,6 @@ public class MyLoanHistoryController {
 		ViewPage vp = new ViewPage(cri, total);
 		model.addAttribute("pageMaker", vp);
 
-		// start_date가 null 이면 현재 날짜에서 -1년한 날짜
-		if (start_date == null) {
-			start_date = date("start");
-		}
-
-		// end_date가 null 이면 현재 날짜
-		if (end_date == null) {
-			end_date = date("end");
-		}
-
 		model.addAttribute("start_date", start_date);
 		model.addAttribute("end_date", end_date);
 
@@ -86,11 +88,23 @@ public class MyLoanHistoryController {
 		int month = cal.get(Calendar.MONTH) + 1;
 		int day = cal.get(Calendar.DAY_OF_MONTH);
 
+		String strMonth = Integer.toString(month);
+		String strDay = Integer.toString(day);
+		
+		if(strMonth.length() == 1) {
+			strMonth = "0" + strMonth;
+		}
+		
+		if(strDay.length() == 1) {
+			strDay = "0" + strDay;
+		}
+		
+		
 		// 현재 날짜 -1년
-		String start_date = year + "-" + month + "-" + day;
+		String start_date = year + "-" + strMonth + "-" + strDay;
 
 		// 현재 날짜
-		String end_date = year + 1 + "-" + month + "-" + day;
+		String end_date = year + 1 + "-" + strMonth + "-" + strDay;
 
 		if (type.equals("start")) {
 			return start_date;
