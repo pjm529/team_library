@@ -172,6 +172,7 @@ public class EnquiryBoardController {
 		/* 작성자와 로그인한 user가 같거나, 관리자일 경우엔 게시물 확인 가능 */
 		if (writer_id.equals(login_id)) {
 			aBoardService.updateView(answer_no);
+			dto = aBoardService.answerContent(answer_no);
 			model.addAttribute("dto", dto);
 			model.addAttribute("cri", cri);
 
@@ -179,6 +180,7 @@ public class EnquiryBoardController {
 
 		} else if (check == 1) {
 			aBoardService.updateView(answer_no);
+			dto = aBoardService.answerContent(answer_no);
 			model.addAttribute("dto", dto);
 			model.addAttribute("cri", cri);
 
