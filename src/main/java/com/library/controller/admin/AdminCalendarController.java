@@ -18,7 +18,7 @@ import com.library.service.board.CalendarService;
 
 @Controller
 @RequestMapping("/admin")
-public class CalendarController {
+public class AdminCalendarController {
 
 	@Autowired
 	private CalendarService calService;

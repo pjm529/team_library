@@ -14,15 +14,15 @@ import com.library.service.board.CalendarService;
 
 @Controller
 @RequestMapping("/board")
-public class CanlendarController {
+public class CalendarController {
 	
 	@Autowired
 	private CalendarService service;
 
 	@GetMapping("/calendar")
-	public String calendar(Model model) {
+	public String calendar() {
 		
-		return "/board/sub2/calendar";
+		return "/board/sub5/calendar";
 	}
 	
 	@ResponseBody
