@@ -54,8 +54,18 @@
                                 <h3>좌석 예약 현황</h3>
 
                                 <div class="reserve-info-btn">
-                                    <button class="chk_out_btn" onclick="location.href='#'">퇴실</button>
-                                    <button class="renew_btn" onclick="location.href='#'">연장</button>
+                                    <!-- 퇴실 -->
+		                            <div>
+		                            	<form id="return_form" action="/mylib/nbRoom_delete" method="post" onsubmit="return false;">
+		                                	<button class="chk_out_btn return_btn">퇴실</button>
+		                                </form>
+	                                </div>
+	                                <!-- 연장 -->
+	                                <div>
+		                            	<form id="extend_form" action="/mylib/nbRoom_extend" method="post" onsubmit="return false;">
+		                                	<button class="extend_btn renew_btn">연장</button>
+		                                </form>
+	                                </div>
                                 </div>
                                 
                                 <!-- 열람실 좌석 예약 현황이 없다면, -->
@@ -88,8 +98,8 @@
                                 
                                 <!-- 열람실 좌석 예약 현황이 있다면, -->
                                 <c:if test="${nbRoom_info != null}"> 
-	                                <fmt:formatDate var="reg_time" value="${nbRoom_info.checkin_time}" pattern="HH:mm:ss"/>
-	                            	<fmt:formatDate var="return_time" value="${nbRoom_info.checkout_time}" pattern="HH:mm:ss"/>
+	                                <fmt:formatDate var="checkin_time" value="${nbRoom_info.checkin_time}" pattern="HH:mm:ss"/>
+	                            	<fmt:formatDate var="checkout_time" value="${nbRoom_info.checkout_time}" pattern="HH:mm:ss"/>
 	                            	
 	                            	<fmt:parseNumber var="diff_hour" value="${nbRoom_info.diff_time/(1000*60*60)}" integerOnly="true" />
 	                            	<fmt:parseNumber var="diff_min" value="${nbRoom_info.diff_time/(1000*60) - diff_hour*60}" integerOnly="true" />
@@ -115,16 +125,16 @@
 	                                            <td>제 1열람실</td>
 	                                        </tr>
 	                                        <tr>
-	                                            <th class="left">좌석 번호</th>
+	                                            <th>좌석 번호</th>
 	                                            <td>${nbRoom_info.seat_no}</td>
 	                                        </tr>
 	                                        <tr>
 	                                            <th>예약 시간</th>
-	                                            <td>${nbRoom_info.checkin_time}</td>
+	                                            <td>${checkin_time}</td>
 	                                        </tr>
 	                                        <tr>
-	                                            <th class="left">반납 시간</th>
-	                                            <td>${nbRoom_info.checkout_time}</td>
+	                                            <th>반납 시간</th>
+	                                            <td>${checkout_time}</td>
 	                                        </tr>
 	                                        <tr>
 	                                            <th class="left">잔여 시간</th>
@@ -142,109 +152,6 @@
 
                             </div>
 
-                            <div class="room-info">
-                                <h3>세미나룸 예약 현황</h3>
-                                <div class="reserve-info-btn">
-                                	<form id="room_delete_form" action="/mylib/smRoom_delete" method="post" onsubmit="return false;">
-                                    	<button class="chk_out_btn booking_delete_btn">예약취소</button>
-                                    </form>
-                                </div>
-                                <table class="room-reserve-info">
-
-                                    <tbody>
-                                        <tr>
-                                            <th>세미나룸</th>
-                                            <td colspan="2">${smRoom_info.room_name}</td>
-                                        </tr>
-                                        <tr>
-                                            <th>예약 날짜</th>
-                                            <td>${smRoom_info.sm_date}</td>
-                                        </tr>
-                                        <tr>
-                                            <th>예약 시간</th>
-                                            <td>
-                                            	<c:set var='time' value="${smRoom_info.sm_time}" />
-                                            	<c:choose>
-                                            		<c:when test="${time == 'A01'}">
-                                            			09:00 ~ 10:00
-                                            		</c:when>
-                                            		<c:when test="${time == 'A02'}">
-                                            			09:00 ~ 11:00
-                                            		</c:when>
-                                            		<c:when test="${time == 'A03'}">
-                                            			09:00 ~ 12:00
-                                            		</c:when>
-                                            		<c:when test="${time == 'B01'}">
-                                            			10:00 ~ 11:00
-                                            		</c:when>
-                                            		<c:when test="${time == 'B02'}">
-                                            			10:00 ~ 12:00
-                                            		</c:when>
-                                            		<c:when test="${time == 'B03'}">
-                                            			10:00 ~ 13:00
-                                            		</c:when>
-                                            		<c:when test="${time == 'C01'}">
-                                            			11:00 ~ 12:00
-                                            		</c:when>
-                                            		<c:when test="${time == 'C02'}">
-                                            			11:00 ~ 13:00
-                                            		</c:when>
-                                            		<c:when test="${time == 'C03'}">
-                                            			11:00 ~ 14:00
-                                            		</c:when>
-                                            		<c:when test="${time == 'D01'}">
-                                            			12:00 ~ 13:00
-                                            		</c:when>
-                                            		<c:when test="${time == 'D02'}">
-                                            			12:00 ~ 14:00
-                                            		</c:when>
-                                            		<c:when test="${time == 'D03'}">
-                                            			12:00 ~ 15:00
-                                            		</c:when>
-                                            		<c:when test="${time == 'E01'}">
-                                            			13:00 ~ 14:00
-                                            		</c:when>
-                                            		<c:when test="${time == 'E02'}">
-                                            			13:00 ~ 15:00
-                                            		</c:when>
-                                            		<c:when test="${time == 'E03'}">
-                                            			13:00 ~ 16:00
-                                            		</c:when>
-                                            		<c:when test="${time == 'F01'}">
-                                            			14:00 ~ 15:00
-                                            		</c:when>
-                                            		<c:when test="${time == 'F02'}">
-                                            			14:00 ~ 16:00
-                                            		</c:when>
-                                            		<c:when test="${time == 'F03'}">
-                                            			14:00 ~ 17:00
-                                            		</c:when>
-                                            		<c:when test="${time == 'G01'}">
-                                            			15:00 ~ 14:00
-                                            		</c:when>
-                                            		<c:when test="${time == 'G02'}">
-                                            			15:00 ~ 17:00
-                                            		</c:when>
-                                            		<c:when test="${time == 'H03'}">
-                                            			16:00 ~ 17:00
-                                            		</c:when>
-                                            	</c:choose>
-                                            </td>
-                                        </tr>
-                                    </tbody>
-                                </table>
-
-                                <div class="info-text">
-                                    <span>
-                                        &#8251; 1일 1회 최대 3시간 이용 가능(1시간 단위 예약)
-                                    </span>
-                                    <br>
-                                    <span>
-                                        &#8251; <b>예약 취소</b>의 경우 나의 예약 현황에서 확인 가능
-                                    </span>
-                                </div>
-
-                            </div>
                         </div>
                     </div>
                 </div>
@@ -274,8 +181,43 @@
     		});
     		
     		
-		})
-    
+    		/* 퇴실 btn click 시, 좌석 반납 */
+    		$(".return_btn").on("click", function(e) {
+    			
+    			if(confirm("좌석을 반납하시겠습니까?")) {
+    				alert("좌석 반납이 완료되었습니다.");
+    				$("#return_form").attr("onsubmit", "return ture;");
+    				$("#return_form").submit();
+    			}	
+    			
+    		});
+    		
+    		
+    		/* 자리 연장 */
+    		$(".extend_btn").on("click", function(e) {
+    			
+    			e.preventDefault();
+    			
+    	      	var diff_hour = $("#diff_hour").val();
+    	        var diff_min = $("#diff_min").val();
+    	        var result = diff_hour < 1 && diff_min < 30;	/* 30분 이하로만 자리 연장 가능 */
+    	        var checkout_time = "<c:out value='${nbRoom_info.checkout_time}'/>";
+    	        
+    			var seat_no = "<c:out value='${nbRoom_info.seat_no}'/>";
+    			
+    			if(result == false || checkout_time.includes("18:00:00")){ 
+    				// checkout_time에 '18'이라는 문자열이 포함되어 있으면, 좌석 연장 여부 묻지 않고 연장 불가 메시지 바로 뜨게 함
+    				alert("연장 가능한 시간이 아닙니다.");
+    			}else {
+    	            if(confirm("좌석을 연장하시겠습니까?")){
+    	               alert(seat_no + "번 좌석 시간이 연장되었습니다.");
+    					$("#extend_form").attr("onsubmit", "return true;");
+    					$("#extend_form").submit();
+    	            }
+    			}
+    		});
+    		
+		});
     
     </script>
 

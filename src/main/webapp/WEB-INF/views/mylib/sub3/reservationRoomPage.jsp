@@ -9,7 +9,6 @@
 <head>
 <meta charset="UTF-8">
 	<link rel="stylesheet" href="/resources/css/mylib/sub3/reservationRoomPage.css">
-	<link rel="stylesheet" href="/resources/css/mylib/sub3/calendar.css">
 	<link rel="stylesheet" href="/resources/css/footer.css">
 <title>라온도서관 > 나의 도서관 > 좌석예약/조회</title>
 
@@ -91,7 +90,7 @@
                                             <td class="align-center">42</td>
                                             <td class="align-right">${rd2Room_usingSeat}</td>
                                             <td class="progress">
-                                                <progress value="${rd2Room_usedSeat}" max="100"></progress>
+                                                <progress value="${rd2Room_usedSeat}" max="42"></progress>
                                             </td>
                                             <td class="percent">
                                             	<div id="rd2UsedSeat"></div>
@@ -120,33 +119,6 @@
 
                                 </table>
 
-                                <div class="calendar">
-                                    <h3>세미나실</h3>
-                                    <div class="header">
-                                        <div class="nav">
-                                            <button class="nav-btn go-prev" onclick="prevMonth();">&lt;</button>
-                                            <button class="nav-btn go-next" onclick="nextMonth();">&gt;</button>
-                                        </div>
-                                        <div class="year-month"></div>
-                                        <div class="nav">
-                                            <button class="nav-btn go-today" onclick="goToday();">오늘</button>
-                                        </div>
-                                    </div>
-
-                                    <div class="main">
-                                        <div class="days">
-                                            <div class="day">일</div>
-                                            <div class="day">월</div>
-                                            <div class="day">화</div>
-                                            <div class="day">수</div>
-                                            <div class="day">목</div>
-                                            <div class="day">금</div>
-                                            <div class="day line-none">토</div>
-                                        </div>
-                                        <div class="dates"></div>
-                                    </div>
-
-                                </div>
 
                             </div>
 
@@ -169,12 +141,10 @@
     <script src="https://code.jquery.com/jquery-3.6.0.js"
         integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk=" crossorigin="anonymous"></script>
 
-    <script src="/resources/js/mylib/sub3/ReservationRoomPage.js"></script>
-
-
-
 	<script>
 	$(document).ready(function() {
+		
+		$(".sub3").addClass("active");
 		
 		var usedSeat = "<c:out value='${nbRoom_usedSeat}'/>";
 		var percent = (usedSeat/28) * 100;
@@ -189,6 +159,27 @@
 		$('#rd2UsedSeat').html(rd2_percent.toFixed(0) + "%");
 		
 	}); 
+	
+	
+	/* 기준 위 부터 아래로 == 나의 예약 현황 | 좌석 배정 | 세미나실 */
+
+	// 나의 예약 현황 btn 속성 추가
+	function my_info_btn(){
+		location.href = "/mylib/myReservationInfo";
+	}
+
+	// 좌석 배정 상세 btn 속성 추가
+	function rdRoom() {
+		location.href = "/mylib/readingRoom";
+	}
+
+	function rdRoom2() {
+		location.href = "/mylib/readingRoom2";
+	}
+
+	function nbRoom(){
+		location.href = "/mylib/notebookRoom";
+	}
 	</script>
 
 </body>

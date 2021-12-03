@@ -255,21 +255,10 @@ th, td{
     padding: 7px 13px;
 }
 
-.seat-reserve-info th, .room-reserve-info th{
+.seat-reserve-info th{
     width: 280px;
     background: #fafafa;
     border-right: 1px solid #e6e6e6;
-}
-
-
-/* 세미나룸 예약 현황 */
-.room-reserve-info{
-    margin: 0 auto;
-    text-align: center;
-    width: 100%;
-    border-top: 2px solid #252525;
-    border-bottom: 2px solid #dddddd;
-    border-collapse: collapse;
 }
 
 .info-text{
@@ -281,8 +270,7 @@ th, td{
 }
 
 
-
-/* 연장 & 퇴실 button (세미나실 퇴실도 포함) */
+/* 연장 & 퇴실 button */
 .reserve-info-btn{
     margin-left: auto;
 }
