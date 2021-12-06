@@ -6,7 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
-import com.library.service.mylib.ReadingRoom2Service;
+import com.library.service.mylib.NotebookRoomService;
 
 import lombok.extern.log4j.Log4j;
 
@@ -16,16 +16,14 @@ import lombok.extern.log4j.Log4j;
 public class ReadingRoomTest {
 	
 	@Autowired
-	private ReadingRoom2Service service;
+	private NotebookRoomService service;
 	
 	@Test
 	public void roomInsert() {
 		
-		
-		for(int i = 1; i< 125; i++) {
+		for(int i = 1; i < 125; i++) {
 			service.insert(i);
 		}
-		
 	}
-	
+
 }
