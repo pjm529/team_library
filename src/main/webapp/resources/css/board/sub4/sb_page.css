@@ -181,7 +181,6 @@ ul{
 .inline select{
     width: 130px;
     height: 34px;
-    padding: 3px 10px 6px 2px;
     border: 1px solid #ccc;
     font-size: inherit;
 }
