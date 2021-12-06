@@ -103,6 +103,7 @@
 						
                             <!-- 테이블 -->
                             <div class="table-wrap">
+                            	<c:if test="${not empty articleList }">
                                 <table>
                                     <thead>
                                         <tr>
@@ -129,7 +130,11 @@
                                     </c:forEach>   
                                     </tbody>
                                 </table>
-                                
+                                </c:if>
+                                <c:if test="${empty articleList }">
+                                <br>
+                                <h2>조회된 게시글이 없습니다.</h2>
+								</c:if>
             
                              <!-- 글쓰기 btn --> 
                              <div class="write">
@@ -207,10 +212,10 @@
     </div>
 
 	<form action="/board/articleList" method="get" class="moveForm">
-      <input type="text" name="page" value="${pageMaker.cri.page}">
-      <input type="text" name="amount" value="${pageMaker.cri.amount}">
-      <input type="text" name="keyword" value="${pageMaker.cri.keyword}">
-      <input type="text" name="type" value="${pageMaker.cri.type}">
+      <input type="hidden" name="page" value="${pageMaker.cri.page}">
+      <input type="hidden" name="amount" value="${pageMaker.cri.amount}">
+      <input type="hidden" name="keyword" value="${pageMaker.cri.keyword}">
+      <input type="hidden" name="type" value="${pageMaker.cri.type}">
    </form>
    
    <form action="/board/articleContent" method="get" class="moveForm2">

@@ -100,7 +100,9 @@
                             </div>
 
                             <!-- 테이블 -->
+                            
                             <div class="table-wrap">
+                            	<c:if test="${not empty noticeList }">
                                 <table>
                                     <thead>
                                         <tr>
@@ -128,7 +130,11 @@
                                     </c:forEach>   
                                     </tbody>
                                 </table>
-                                
+                                </c:if>
+                                <c:if test="${empty noticeList }">
+                                <br>
+                                <h2>조회된 게시글이 없습니다.</h2>
+								</c:if>
 								
                                 <!-- 글쓰기 btn -->
                                 <div class="write">
@@ -148,7 +154,6 @@
 		                              <a class="not" href="${pageMaker.endPage + 1}">다음</a>
 		                           </c:if>
 		                        </div>
-                                
                                 
                                 <div class="searchBox">
                                 	<form action="/board/noticeList" method="get">
@@ -193,9 +198,10 @@
                                 
                                                  
                             </div>
-
+							
+							
                         </div>
-
+						
                     </div>
 
                 </div>

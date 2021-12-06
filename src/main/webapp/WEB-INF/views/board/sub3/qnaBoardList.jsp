@@ -102,6 +102,7 @@
 
                             <!-- 테이블 -->
                             <div class="table-wrap">
+                            	<c:if test="${not empty qnaBoardList }">
                                 <table>
                                     <thead>
                                         <tr>
@@ -149,6 +150,12 @@
                                     </tbody>
                                 </table>
                                 
+                                </c:if>
+                                <c:if test="${empty qnaBoardList }">
+                                <br>
+                                <h2>조회된 게시글이 없습니다.</h2>
+								</c:if>
+								
                                 <!-- 글쓰기 btn -->
                                 <div class="write">
                                     <button class="write_btn" onclick="location.href='/board/qnaBoardWrite'" style="cursor: pointer">글쓰기</button>
