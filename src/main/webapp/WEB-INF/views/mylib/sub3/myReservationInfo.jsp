@@ -10,7 +10,7 @@
 <meta charset="UTF-8">
 	<link rel="stylesheet" href="/resources/css/mylib/sub3/myReservationInfo.css">
 	<link rel="stylesheet" href="/resources/css/footer.css">
-<title>나의 예약 현황</title>
+<title>라온도서관 > 나의도서관 > 나의 예약 현황</title>
 </head>
 <body>
 
@@ -23,12 +23,12 @@
                     <ul>
                         <!-- 홈 btn img -->
                         <li style="background-image: none;">
-                            <a href="#">
+                            <a href="/">
                                 <img src="/resources/imges/common/navi_home_icon.gif">
                             </a>
                         </li>
                         <li>
-                            <a href="#">나의 도서관</a>
+                            <a href="/mylib/loan-history">나의 도서관</a>
                         </li>
                         <li>
                             <a href="/mylib/reservationRoomPage">좌석예약/조회</a>
@@ -53,20 +53,7 @@
                             <div class="seat-info">
                                 <h3>좌석 예약 현황</h3>
 
-                                <div class="reserve-info-btn">
-                                    <!-- 퇴실 -->
-		                            <div>
-		                            	<form id="return_form" action="/mylib/nbRoom_delete" method="post" onsubmit="return false;">
-		                                	<button class="chk_out_btn return_btn">퇴실</button>
-		                                </form>
-	                                </div>
-	                                <!-- 연장 -->
-	                                <div>
-		                            	<form id="extend_form" action="/mylib/nbRoom_extend" method="post" onsubmit="return false;">
-		                                	<button class="extend_btn renew_btn">연장</button>
-		                                </form>
-	                                </div>
-                                </div>
+                                
                                 
                                 <!-- 열람실 좌석 예약 현황이 없다면, -->
                                 <c:if test="${nbRoom_info == null}">
@@ -98,6 +85,20 @@
                                 
                                 <!-- 열람실 좌석 예약 현황이 있다면, -->
                                 <c:if test="${nbRoom_info != null}"> 
+                                	<div class="reserve-info-btn">
+	                                    <!-- 퇴실 -->
+			                            <div>
+			                            	<form id="return_form" action="/mylib/returnSeat" method="post" onsubmit="return false;">
+			                                	<button class="chk_out_btn return_btn">퇴실</button>
+			                                </form>
+		                                </div>
+		                                <!-- 연장 -->
+		                                <div>
+			                            	<form id="extend_form" action="/mylib/extendSeat" method="post" onsubmit="return false;">
+			                                	<button class="extend_btn renew_btn">연장</button>
+			                                </form>
+		                                </div>
+	                                </div>
 	                                <fmt:formatDate var="checkin_time" value="${nbRoom_info.checkin_time}" pattern="HH:mm:ss"/>
 	                            	<fmt:formatDate var="checkout_time" value="${nbRoom_info.checkout_time}" pattern="HH:mm:ss"/>
 	                            	

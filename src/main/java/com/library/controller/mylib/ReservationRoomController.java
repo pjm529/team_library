@@ -9,8 +9,8 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
-import com.library.model.mylib.NoteBookRoomDTO;
-import com.library.service.mylib.NotebookRoomService;
+import com.library.model.mylib.ReadingRoomDTO;
+import com.library.service.mylib.ReadingRoomService;
 import com.library.service.mylib.ReservationRoomService;
 
 @Controller
@@ -20,8 +20,8 @@ public class ReservationRoomController {
 	@Autowired
 	private ReservationRoomService resService;
 	
-	@Autowired // 노트북실
-	private NotebookRoomService nbService;
+	@Autowired 
+	private ReadingRoomService roomService;
 	
 	@GetMapping("/reservationRoomPage")
 	public String reservationRoomPage(Model model, Principal principal) {
@@ -59,16 +59,15 @@ public class ReservationRoomController {
 		String user_id = principal.getName();
 		model.addAttribute("login_id", user_id);
 
-		NoteBookRoomDTO nbRoom_info = nbService.nbRoom_info(user_id);
+		ReadingRoomDTO room_info = roomService.mySeatInfo(user_id);
 		
-		if(nbRoom_info == null) {
+		if(room_info == null) {
 			return "/mylib/sub3/myReservationInfo";
 		}else {
 			Date now = new Date();
-			nbRoom_info.setDiff_time(nbRoom_info.getCheckout_time().getTime() - now.getTime());
-			model.addAttribute("nbRoom_info", nbRoom_info);
+			room_info.setDiff_time(room_info.getCheckout_time().getTime() - now.getTime());
+			model.addAttribute("nbRoom_info", room_info);
 		}
-		
 		
 		return "/mylib/sub3/myReservationInfo";
 	}

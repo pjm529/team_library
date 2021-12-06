@@ -22,6 +22,16 @@ public class ReadingRoomServiceImpl implements ReadingRoomService {
 	public List<ReadingRoomDTO> getReadingRoom1SeatsList() {
 		return mapper.getReadingRoom1SeatsList();
 	}
+	
+	@Override
+	public List<ReadingRoomDTO> getReadingRoom2SeatsList() {
+		return mapper.getReadingRoom2SeatsList();
+	}
+	
+	@Override
+	public List<ReadingRoomDTO> getNbRoomSeatsList() {
+		return mapper.getNbRoomSeatsList();
+	}
 
 	@Override
 	public void bookingSeat(ReadingRoomDTO dto) {

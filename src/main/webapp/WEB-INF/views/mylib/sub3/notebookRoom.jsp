@@ -17,7 +17,7 @@
         }
     </style>
 
-<title>라온도서관 > 나의 도서관 > 노트북실</title>
+<title>라온도서관 > 나의도서관 > 노트북실</title>
 
 </head>
 <body>
@@ -37,7 +37,7 @@
                             </a>
                         </li>
                         <li>
-                            <a href="#">나의 도서관</a>
+                            <a href="/mylib/loan-history">나의도서관</a>
                         </li>
                         <li>
                             <a href="/mylib/reservationRoomPage">좌석예약/조회</a>
@@ -235,7 +235,7 @@
 	                                </tbody>
 	
 	                            </table>
-								<form action="/mylib/nbRoom_booking" method="post" onsubmit="return false;">
+								<form action="/mylib/bookingSeat" method="post" onsubmit="return false;">
 	                            	<input id="seat_no" type="hidden" name="seat_no">
 	                            	<button class="reserve_btn booking_btn">예약하기</button>
 	                            </form>
@@ -296,19 +296,19 @@
 	                            <div class="reserve-info-btn">
 	                            	<!-- 퇴실 -->
 		                            <div style="float: left;">
-		                            	<form id="return_form" action="/mylib/nbRoom_delete" method="post" onsubmit="return false;">
+		                            	<form id="return_form" action="/mylib/returnSeat" method="post" onsubmit="return false;">
 		                                	<button class="chk_out_btn return_btn">퇴실</button>
 		                                </form>
 	                                </div>
 	                                <!-- 연장 -->
 	                                <div style="float: right; margin-left: 10px;">
-		                            	<form id="extend_form" action="/mylib/nbRoom_extend" method="post" onsubmit="return false;">
+		                            	<form id="extend_form" action="/mylib/extendSeat" method="post" onsubmit="return false;">
 		                                	<button class="extend_btn renew_btn">연장</button>
 		                                </form>
 	                                </div>
 	                                
 	                                <!-- 좌석 이동 -->
-	                                <form id="move" action="/mylib/nbRoom_moveSaet" method="post" onsubmit="return false;">
+	                                <form id="move" action="/mylib/moveSeat" method="post" onsubmit="return false;">
 										<input id="new_no" type="hidden" name="seat_no">
 									</form>
 	                            </div>
@@ -371,7 +371,7 @@
 	 				
 	 				$.ajax({
 	 					type : "post",
-	 					url : "/mylib/nb_seat_check",
+	 					url : "/mylib/seat_check",
 	 					data : data,
 	 					success : function(result){
 							
@@ -424,7 +424,7 @@
  				
  				$.ajax({
  					type : "post",
- 					url : "/mylib/nb_seat_check",
+ 					url : "/mylib/seat_check",
  					data : data,
  					success : function(result){
 						

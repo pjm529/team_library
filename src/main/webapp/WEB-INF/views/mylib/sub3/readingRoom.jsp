@@ -5,7 +5,7 @@
 <%@ page session="false" %>
 <html>
 <head>
-	<title>라온도서관 > 나의 도서관 > 좌석예약/조회</title>
+	<title>라온도서관 > 나의도서관 > 좌석예약/조회</title>
 	<link rel="stylesheet" href="/resources/css/mylib/sub3/readingRoom1_sb_page.css">
 	<link rel="stylesheet" href="/resources/css/mylib/sub3/readingRoom1.css">
 
@@ -28,7 +28,7 @@
                             </a>
                         </li>
                         <li>
-                            <a href="#">나의 도서관</a>
+                            <a href="/mylib/loan-history">나의도서관</a>
                         </li>
                         <li>
                             <a href="/mylib/reservationRoomPage">좌석예약/조회</a>
@@ -54,7 +54,6 @@
                                 <button class="active" onclick="rdRoom();">제 1열람실</button>
                                 <button onclick="rdRoom2();">제 2열람실</button>
                                 <button onclick="nbRoom();">노트북실</button>
-                                <button>세미나실</button>
                             </div>
                         </div>
 
