@@ -3,6 +3,7 @@
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <%@ page session="false" %>
+<%@ taglib uri="http://www.springframework.org/security/tags" prefix="sec" %>
 <html>
 <head>
 	<title>라온도서관 > 열린공간 > 공지사항</title>
@@ -136,10 +137,12 @@
                                 <h2>조회된 게시글이 없습니다.</h2>
 								</c:if>
 								
+								<sec:authorize access="hasRole('ROLE_ADMIN')">
                                 <!-- 글쓰기 btn -->
-                                <div class="write">
-                                    <button class="write_btn" onclick="location.href='/board/insertNoticeForm'" style="cursor: pointer">글쓰기</button>
-                                </div>
+                                <button class="write_btn" onclick="location.href='/board/insertNoticeForm'" style="cursor: pointer">글쓰기</button>
+                                </sec:authorize>
+                                
+                                <br>
                                 
                                 <div class="pageInfo" style="">
 		                           <c:if test="${pageMaker.prev}">
@@ -154,6 +157,8 @@
 		                              <a class="not" href="${pageMaker.endPage + 1}">다음</a>
 		                           </c:if>
 		                        </div>
+                                
+                                <br>
                                 
                                 <div class="searchBox">
                                 	<form action="/board/noticeList" method="get">

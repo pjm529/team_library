@@ -2,6 +2,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
+<%@ taglib uri="http://www.springframework.org/security/tags" prefix="sec" %>
 <%@ page session="false" %>
 <html>
 <head>
@@ -156,10 +157,11 @@
                                 <h2>조회된 게시글이 없습니다.</h2>
 								</c:if>
 								
+								
                                 <!-- 글쓰기 btn -->
-                                <div class="write">
-                                    <button class="write_btn" onclick="location.href='/board/qnaBoardWrite'" style="cursor: pointer">글쓰기</button>
-                                </div>
+                                <button class="write_btn" onclick="location.href='/board/qnaBoardWrite'" style="cursor: pointer">글쓰기</button>
+                                
+                                <br>
                                 
                                 <div class="pageInfo" style="">
    
@@ -176,6 +178,7 @@
 		                           </c:if>
 		                        </div>
 								
+                                <br>
                                 
                                 <div class="searchBox">
                                 	<form action="/board/qnaBoardList" method="get">

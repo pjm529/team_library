@@ -2,6 +2,7 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
+<%@ taglib uri="http://www.springframework.org/security/tags" prefix="sec" %>
 <%@ page session="false" %>
 <html>
 <head>
@@ -137,9 +138,11 @@
 								</c:if>
             
                              <!-- 글쓰기 btn --> 
-                             <div class="write">
-                               <button class="write_btn" onclick="location.href='/board/articleInsertForm'" style="cursor: pointer">글쓰기</button>
-                             </div>
+                             <sec:authorize access="hasRole('ROLE_ADMIN')">
+                             <button class="write_btn" onclick="location.href='/board/articleInsertForm'" style="cursor: pointer">글쓰기</button>
+                             </sec:authorize>
+                             
+                             <br>
                              
                              <!-- 페이징 -->
                               <div class="pageInfo" style=""> 
@@ -155,6 +158,8 @@
 		                              <a class="not" href="${pageMaker.endPage + 1}">다음</a>
 		                           </c:if>
 	                        </div>
+                            
+                            <br>
                             
                             <!-- 검색 -->  
                            	<div class="searchBox">   
