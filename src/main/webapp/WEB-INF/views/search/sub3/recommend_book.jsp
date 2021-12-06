@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%@ taglib uri="http://www.springframework.org/security/tags" prefix="sec" %>
 <%@ page session="false" %>
 <html>
 <head>
@@ -13,7 +14,14 @@
   crossorigin="anonymous"></script>
 
 <body>
-
+	<sec:authorize access="isAuthenticated()">
+	<input type="hidden" class="user_id" value=<sec:authentication property="principal.dto.user_id"/>>
+	</sec:authorize>
+	
+	<sec:authorize access="isAnonymous()">
+	<input type="hidden" class="user_id" value="">
+	</sec:authorize>
+	
     <div class="container">
         <div class="sub_title">
             <div class="doc-info">
@@ -163,9 +171,18 @@
 			$('.add_btn').on("click",function(e){
 				
 				e.preventDefault();
-				let popUrl = "/search/regist-book";
-				let popOption = "width = 710px, height=600px, top=300px, scrollbars=no, resizeable=no";
-				window.open(popUrl,"도서 등록" ,popOption);
+				
+				let user_id = $(".user_id").val();
+				
+				if(user_id == "") {
+					alert("로그인 후 이용하세요.");
+					window.location.href="/member/login";
+				} else {
+					let popUrl = "/search/regist-book";
+					let popOption = "width = 710px, height=600px, top=300px, scrollbars=no, resizeable=no";
+					window.open(popUrl,"도서 등록" ,popOption);
+				}
+				
 			});
 
         });
