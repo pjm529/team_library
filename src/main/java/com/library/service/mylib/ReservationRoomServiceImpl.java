@@ -3,20 +3,13 @@ package com.library.service.mylib;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.library.mapper.mylib.NotebookRoomMapper;
-import com.library.mapper.mylib.ReadingRoom2Mapper;
 import com.library.mapper.mylib.ReadingRoomMapper;
 
 @Service
 public class ReservationRoomServiceImpl implements ReservationRoomService {
 
 	@Autowired
-	private ReadingRoomMapper rdMapper;
-	@Autowired
-	private ReadingRoom2Mapper rd2Mapper;
-	@Autowired
-	private NotebookRoomMapper nbMapper;
-	
+	private ReadingRoomMapper roomMapper;
 	
 	/* 잔여 좌석 | 사용 좌석 */
 	
@@ -24,12 +17,12 @@ public class ReservationRoomServiceImpl implements ReservationRoomService {
 	/* 잔여 좌석 */
 	@Override
 	public int rd1Room_usingSeat() {
-		return nbMapper.rd1Room_usingSeat();
+		return roomMapper.rd1Room_usingSeat();
 	}
 	/* 사용 좌석 */
 	@Override
 	public int rd1Room_usedSeat() {
-		return nbMapper.rd1Room_usedSeat();
+		return roomMapper.rd1Room_usedSeat();
 	}
 	
 	
@@ -37,12 +30,12 @@ public class ReservationRoomServiceImpl implements ReservationRoomService {
 	/* 잔여 좌석 */
 	@Override
 	public int rd2Room_usingSeat() {
-		return nbMapper.rd2Room_usingSeat();
+		return roomMapper.rd2Room_usingSeat();
 	}
 	/* 사용 좌석 */
 	@Override
 	public int rd2Room_usedSeat() {
-		return nbMapper.rd2Room_usedSeat();
+		return roomMapper.rd2Room_usedSeat();
 	}
 	
 	
@@ -50,12 +43,12 @@ public class ReservationRoomServiceImpl implements ReservationRoomService {
 	/* 잔여 좌석 */
 	@Override
 	public int nbRoom_usingSeat() {
-		return nbMapper.nbRoom_usingSeat();
+		return roomMapper.nbRoom_usingSeat();
 	}
 	/* 사용 좌석 */
 	@Override
 	public int nbRoom_usedSeat() {
-		return nbMapper.nbRoom_usedSeat();
+		return roomMapper.nbRoom_usedSeat();
 	}
 	
 

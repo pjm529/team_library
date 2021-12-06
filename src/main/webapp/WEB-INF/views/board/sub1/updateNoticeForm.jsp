@@ -4,11 +4,19 @@
 <%@ page session="false" %>
 <html>
 <head>
-	<title>Update Notice Form</title>
+	<title>라온도서관 > 열린공간 > 공지사항</title>
     <link rel="stylesheet" href="/resources/css/board/sub1/notice_write_page.css">
+    <link rel="stylesheet" href="/resources/css/header.css">
 </head>
-
+<script
+  src="https://code.jquery.com/jquery-3.6.0.js"
+  integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk=" 
+  crossorigin="anonymous"></script>
 <body>
+
+	<div class="header">
+    <jsp:include page="../../header.jsp"></jsp:include>
+    </div>
 
     <div class="container">
         <div class="sub_title">
@@ -27,7 +35,7 @@
                             <a href="/board/noticeList">열린공간</a>
                         </li>
                         <li>
-                            <a href="/board/notice">공지사항</a>
+                            <a href="/board/noticeList">공지사항</a>
                         </li>
                     </ul>
 
@@ -70,7 +78,7 @@
                                             </tr>
                                             <tr>
                                                 <th class="first">작성자</th>
-                                                <td>${noticeContent.writer_name}</td>
+                                                <td>관리자</td>
                                                 <th class="first">작성일</th>
                                                 <td>${notice_reg_date}</td>
                                             </tr>
@@ -129,11 +137,14 @@
         </div>
     </div>
     
-<script src="https://code.jquery.com/jquery-3.6.0.js"
- integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk=" crossorigin="anonymous"></script>
-
+<script type="text/javascript" src="/resources/js/ckeditor/ckeditor.js"></script>
 <script>
 	$(function(){
+		
+		CKEDITOR.replace('popContent' , {
+			 height: 500                                                  
+	     });
+
 		
 		$(".sub1").addClass("active");
 		

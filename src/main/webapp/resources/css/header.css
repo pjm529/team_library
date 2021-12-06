@@ -87,3 +87,25 @@
     color:#f8bf2b;
     font-weight: bold;
 }
+
+.tnb {
+    padding-top: 5px; 
+    height: 25px;
+    text-align: right;
+    background-color: #b55ac1;
+}
+
+.tnb_menu{
+	width: 1540px;
+}
+
+.tnb_menu span{
+	color: white;
+    font-size: 15px;
+    font-weight: bold;
+    margin-left: 15px;
+}
+
+.tnb_menu span a {
+	color: white;
+}

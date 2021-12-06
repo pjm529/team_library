@@ -9,10 +9,15 @@
 <head>
 <meta charset="UTF-8">
 	<link rel="stylesheet" href="/resources/css/mylib/sub3/myReservationInfo.css">
+	<link rel="stylesheet" href="/resources/css/header.css">
 	<link rel="stylesheet" href="/resources/css/footer.css">
-<title>나의 예약 현황</title>
+<title>라온도서관 > 나의도서관 > 좌석예약/조회 > 나의예약현황</title>
 </head>
 <body>
+
+	<div class="header">
+    <jsp:include page="../../header.jsp"></jsp:include>
+    </div>
 
 	<div class="container">
         <div class="sub_title">
@@ -23,15 +28,18 @@
                     <ul>
                         <!-- 홈 btn img -->
                         <li style="background-image: none;">
-                            <a href="#">
+                            <a href="/">
                                 <img src="/resources/imges/common/navi_home_icon.gif">
                             </a>
                         </li>
                         <li>
-                            <a href="#">나의 도서관</a>
+                            <a href="/mylib/loan-history">나의 도서관</a>
                         </li>
                         <li>
                             <a href="/mylib/reservationRoomPage">좌석예약/조회</a>
+                        </li>
+                        <li>
+                            <a href="/mylib/myReservationInfo">나의예약현황</a>
                         </li>
                     </ul>
 
@@ -53,20 +61,7 @@
                             <div class="seat-info">
                                 <h3>좌석 예약 현황</h3>
 
-                                <div class="reserve-info-btn">
-                                    <!-- 퇴실 -->
-		                            <div>
-		                            	<form id="return_form" action="/mylib/nbRoom_delete" method="post" onsubmit="return false;">
-		                                	<button class="chk_out_btn return_btn">퇴실</button>
-		                                </form>
-	                                </div>
-	                                <!-- 연장 -->
-	                                <div>
-		                            	<form id="extend_form" action="/mylib/nbRoom_extend" method="post" onsubmit="return false;">
-		                                	<button class="extend_btn renew_btn">연장</button>
-		                                </form>
-	                                </div>
-                                </div>
+                                
                                 
                                 <!-- 열람실 좌석 예약 현황이 없다면, -->
                                 <c:if test="${nbRoom_info == null}">
@@ -98,6 +93,20 @@
                                 
                                 <!-- 열람실 좌석 예약 현황이 있다면, -->
                                 <c:if test="${nbRoom_info != null}"> 
+                                	<div class="reserve-info-btn">
+	                                    <!-- 퇴실 -->
+			                            <div>
+			                            	<form id="return_form" action="/mylib/returnSeat" method="post" onsubmit="return false;">
+			                                	<button class="chk_out_btn return_btn">퇴실</button>
+			                                </form>
+		                                </div>
+		                                <!-- 연장 -->
+		                                <div>
+			                            	<form id="extend_form" action="/mylib/extendSeat" method="post" onsubmit="return false;">
+			                                	<button class="extend_btn renew_btn">연장</button>
+			                                </form>
+		                                </div>
+	                                </div>
 	                                <fmt:formatDate var="checkin_time" value="${nbRoom_info.checkin_time}" pattern="HH:mm:ss"/>
 	                            	<fmt:formatDate var="checkout_time" value="${nbRoom_info.checkout_time}" pattern="HH:mm:ss"/>
 	                            	
@@ -106,17 +115,18 @@
 	                            	<fmt:parseNumber var="diff_sec" value="${nbRoom_info.diff_time/1000 - diff_hour*60*60 - diff_min*60}" integerOnly="true" />
 		                    		
 		                    		<c:if test="${diff_min < 10}">
-		                    			<c:set var="diff_min" value="${diff_min}" />
+		                    			<c:set var="diff_min" value="0${diff_min}" />
 		                    		</c:if>
 		                    		
 		                    		<c:if test="${diff_sec < 10}">
-		                    			<c:set var="diff_sec" value="${diff_sec}" />
+		                    			<c:set var="diff_sec" value="0${diff_sec}" />
 		                    		</c:if>
 		                    		
 		                    		<c:set var="diff_time" value="${diff_hour}:${diff_min}:${diff_sec}" />
 		                    		
 		                    		<input type="hidden" id="diff_hour" value="${diff_hour}">
-									<input type="hidden" id="diff_min" value="${diff_min}">
+	                                <input type="hidden" id="diff_min" value="${diff_min}">
+	                                <input type="hidden" id="diff_sec" value="${diff_sec}">
 									
 	                                <table class="seat-reserve-info">
 	                                    <tbody>
@@ -138,7 +148,7 @@
 	                                        </tr>
 	                                        <tr>
 	                                            <th class="left">잔여 시간</th>
-	                                            <td>${diff_time}</td>
+	                                            <td id="time">${diff_time}</td>
 	                                        </tr>
 	                                    </tbody>
 	                                </table>
@@ -169,6 +179,18 @@
     <script>
     	$(function() {
     		$(".sub3").addClass("active");
+    		$(".submenu9").addClass("active");
+    		
+    		// 예약된 좌석이 있으면 남은 시간 timer start
+        	if($(".reserve_no").val() != ""){
+        		var hours =  $("#diff_hour").val();
+                var minutes = $("#diff_min").val();
+                var seconds = $("#diff_sec").val();
+                var totalSeconds = (60 * 60 * hours) + (60 * minutes) + parseInt(seconds, 10) - 1;
+                var display = document.querySelector('#time');
+                startTimer(totalSeconds, display);
+        	}
+    		
     		
     		$(".booking_delete_btn").on("click", function(e) {
     			
@@ -216,6 +238,37 @@
     	            }
     			}
     		});
+    		
+    		function startTimer(totalSeconds, display) {
+            	
+    	       	  var timer = totalSeconds;
+    	       	  var hours;
+    	       	  var minutes;
+    	       	  var seconds;
+    	       	  var interval = setInterval(function () {
+    	       		if(timer <= 0) {
+    	       	      clearInterval(interval);
+    	       	      alert("퇴실되었습니다.");
+    	       	      location.reload();
+    	         	}
+    	       		
+    	       	    hours = parseInt(timer / 60 / 60, 10);
+    	       	    minutes = parseInt(timer / 60 - (hours * 60), 10);
+    	       	    seconds = parseInt(timer % 60, 10);
+
+    	       	    minutes = minutes < 10 ? "0" + minutes : minutes;
+    	       	    seconds = seconds < 10 ? "0" + seconds : seconds;
+    	       	    
+    				if(hours < 1 && minutes < 30) {
+    					display.style.color = "red";	
+    				}
+    				
+    	  	    	display.textContent = hours + ":" + minutes + ":" + seconds;
+    				
+    	  	    	timer--;
+    	  	    	
+    	       	  }, 1000);
+    		}
     		
 		});
     

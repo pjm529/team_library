@@ -3,12 +3,22 @@
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <%@ page session="false" %>
+<%@ taglib uri="http://www.springframework.org/security/tags" prefix="sec" %>
 <html>
 <head>
 	<title>라온도서관 > 열린공간 > 공지사항</title>
 </head>
 <link rel="stylesheet" href="/resources/css/board/sub1/notice_sb_page.css">
+<link rel="stylesheet" href="/resources/css/header.css">
+<script
+  src="https://code.jquery.com/jquery-3.6.0.js"
+  integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk=" 
+  crossorigin="anonymous"></script> 
 <body>
+
+	<div class="header">
+    <jsp:include page="../../header.jsp"></jsp:include>
+    </div>
 
     <div class="container">
         <div class="sub_title">
@@ -91,7 +101,9 @@
                             </div>
 
                             <!-- 테이블 -->
+                            
                             <div class="table-wrap">
+                            	<c:if test="${not empty noticeList }">
                                 <table>
                                     <thead>
                                         <tr>
@@ -109,7 +121,7 @@
                                             <td class="left contentGo" style="padding-left: 15px;">
  												<a href="${noticeList.notice_no}">${noticeList.notice_title}</a>
                                             </td>
-                                            <td>${noticeList.writer_name}</td>
+                                            <td>관리자</td>
                                             <td>
                                             	<fmt:formatDate var="notice_reg_date" value="${noticeList.notice_reg_date}" pattern="yyyy-MM-dd"/>
 												${notice_reg_date}
@@ -119,12 +131,18 @@
                                     </c:forEach>   
                                     </tbody>
                                 </table>
-                                
+                                </c:if>
+                                <c:if test="${empty noticeList }">
+                                <br>
+                                <h2>조회된 게시글이 없습니다.</h2>
+								</c:if>
 								
+								<sec:authorize access="hasRole('ROLE_ADMIN')">
                                 <!-- 글쓰기 btn -->
-                                <div class="write">
-                                    <button class="write_btn" onclick="location.href='/board/insertNoticeForm'" style="cursor: pointer">글쓰기</button>
-                                </div>
+                                <button class="write_btn" onclick="location.href='/board/insertNoticeForm'" style="cursor: pointer">글쓰기</button>
+                                </sec:authorize>
+                                
+                                <br>
                                 
                                 <div class="pageInfo" style="">
 		                           <c:if test="${pageMaker.prev}">
@@ -140,6 +158,7 @@
 		                           </c:if>
 		                        </div>
                                 
+                                <br>
                                 
                                 <div class="searchBox">
                                 	<form action="/board/noticeList" method="get">
@@ -184,9 +203,10 @@
                                 
                                                  
                             </div>
-
+							
+							
                         </div>
-
+						
                     </div>
 
                 </div>
@@ -210,7 +230,6 @@
 		<input type="hidden" name="notice_no" value="">
 	</form>
 	
-<script src="https://code.jquery.com/jquery-3.6.0.js" integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk=" crossorigin="anonymous"></script>
 <script>
 
 	$(function() {

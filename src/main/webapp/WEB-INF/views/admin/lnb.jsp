@@ -1,5 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib uri="http://www.springframework.org/security/tags" prefix="sec" %>    
+    
 <div class="lnb">
     <h2>
         <b>관리자</b>
@@ -38,8 +40,10 @@
         <li class="sub4">
             <a href="/admin/calendar-list">일정목록</a>
         </li>
+        <sec:authorize access="hasRole('ROLE_MASTER')">
         <li class="sub3">
             <a href="/master/admin-list">관리자목록</a>
         </li>
+        </sec:authorize>
     </ul>
 </div>

@@ -1,11 +1,13 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%@ taglib uri="http://www.springframework.org/security/tags" prefix="sec" %>
 <%@ page session="false" %>
 <html>
 <head>
 	<title>라온도서관 > 자료검색 > 추천도서</title>
 </head>
 <link rel="stylesheet" href="/resources/css/search/recommend_book.css">
+<link rel="stylesheet" href="/resources/css/header.css">
 <link rel="stylesheet" href="/resources/css/footer.css">
 <script
   src="https://code.jquery.com/jquery-3.6.0.js"
@@ -13,7 +15,18 @@
   crossorigin="anonymous"></script>
 
 <body>
-
+	<sec:authorize access="isAuthenticated()">
+	<input type="hidden" class="user_id" value=<sec:authentication property="principal.dto.user_id"/>>
+	</sec:authorize>
+	
+	<sec:authorize access="isAnonymous()">
+	<input type="hidden" class="user_id" value="">
+	</sec:authorize>
+	
+	<div class="header">
+    <jsp:include page="../../header.jsp"></jsp:include>
+    </div>
+    
     <div class="container">
         <div class="sub_title">
             <div class="doc-info">
@@ -23,7 +36,7 @@
                     <ul>
                         <!-- 홈 btn img -->
                         <li class="first" style="background-image: none;">
-                            <a href="/search/book">
+                            <a href="/">
                                 <img src="/resources/imges/common/navi_home_icon.gif">
                             </a>
                         </li>
@@ -48,11 +61,13 @@
                 <div class="content">
                     <div class="doc">
                         <div class="wrapper-bbs">
+                        	<sec:authorize access="hasRole('ROLE_ADMIN')">
 							<div>
 								<form>
 	        						<input class="btn add_btn" type="submit" value="등록" style="float:left;">
 	        					</form>
 							</div>
+							</sec:authorize>
                             <!-- 도서 수 -->
                             <div class="inline">
                                 <form action="">
@@ -163,9 +178,18 @@
 			$('.add_btn').on("click",function(e){
 				
 				e.preventDefault();
-				let popUrl = "/search/regist-book";
-				let popOption = "width = 710px, height=600px, top=300px, scrollbars=no, resizeable=no";
-				window.open(popUrl,"도서 등록" ,popOption);
+				
+				let user_id = $(".user_id").val();
+				
+				if(user_id == "") {
+					alert("로그인 후 이용하세요.");
+					window.location.href="/member/login";
+				} else {
+					let popUrl = "/search/regist-book";
+					let popOption = "width = 710px, height=600px, top=300px, scrollbars=no, resizeable=no";
+					window.open(popUrl,"도서 등록" ,popOption);
+				}
+				
 			});
 
         });

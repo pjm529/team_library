@@ -7,12 +7,17 @@
 <meta charset="UTF-8">
 <title>라온도서관 > 관리자 > 도서관련 > 대출중도서</title>
 <link rel="stylesheet" href="/resources/css/admin/member_list.css">
+<link rel="stylesheet" href="/resources/css/header.css">
 <link rel="stylesheet" href="/resources/css/footer.css">
 <script src="https://code.jquery.com/jquery-3.6.0.js" 
  integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk="
  crossorigin="anonymous"></script>
 </head>
 <body>
+
+	<div class="header">
+    <jsp:include page="../../header.jsp"></jsp:include>
+    </div>
 
     <div class="container">
         <div class="sub_title">
@@ -23,7 +28,7 @@
                     <ul>
                         <!-- 홈 btn img -->
                         <li class="first" style="background-image: none;">
-                            <a href="#">
+                            <a href="/">
                                 <img src="/resources/imges/common/navi_home_icon.gif">
                             </a>
                         </li>
@@ -147,6 +152,7 @@
                             </div>
 
                             <!-- 테이블 -->
+                            <c:if test="${not empty loan_list }">
                             <div class="table-wrap">
                                 <table>
                                     <thead>
@@ -210,8 +216,13 @@
                                     </c:if>
                                 </div>
                             </div>
+                            </c:if>
 
                         </div>
+                        <c:if test="${empty loan_list }">
+                        <br>
+                        <h2>조회 된 도서가 없습니다.</h2>
+                        </c:if>
 
                     </div>
 

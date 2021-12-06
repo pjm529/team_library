@@ -7,8 +7,17 @@
    <title>라온도서관 > 열린공간 > 분실물찾기</title>
 </head>
 <link rel="stylesheet" href="/resources/css/board/sub4/write_page.css">
+<link rel="stylesheet" href="/resources/css/header.css">
+<script
+  src="https://code.jquery.com/jquery-3.6.0.js"
+  integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk=" 
+  crossorigin="anonymous"></script>
 <body>
 
+	<div class="header">
+    <jsp:include page="../../header.jsp"></jsp:include>
+    </div>
+	
      <div class="container">
         <div class="sub_title">
             <div class="doc-info">
@@ -18,12 +27,12 @@
                     <ul>
                         <!-- 홈 btn img -->
                         <li style="background-image: none;">
-                            <a href="#">
+                            <a href="/">
                                 <img src="/resources/imges/common/navi_home_icon.gif">
                             </a>
                         </li>
                         <li>
-                            <a href="#">열린공간</a>
+                            <a href="/board/noticeList">열린공간</a>
                         </li>
                         <li>
                             <a href="/board/articleList">분실물찾기</a>
@@ -53,11 +62,6 @@
 	                                <input type="hidden" name="type" value="${cri.type}">
 	                                <input type="hidden" name="keyword" value="${cri.keyword}">
 	                              	
-	                                
-	                           <!--      <input type="text" name="thumb" id="thumb">
-	                                <input type="text" name="file_name" id="file_name">  -->
-	                        
-	                                    
 	                                    <table class="bbs-edit">
 	                                        <tbody>
 	                                            <tr>
@@ -71,25 +75,14 @@
 	                                                <th class="first">작성자</th>
 	                                                <td>
 	                                                	<input type="hidden" name ="writer_name" value="${dto.writer_name}" readonly="readonly">
-	                                                	<span>${dto.writer_name}</span>
+	                                                	<span>관리자</span>
 	                                                </td>
-	                                             	<%-- <th class="first">권한</th>
-	                                                <td>
-	                                                	<input type="hidden" name ="writer_id" value="${dto.writer_id}" readonly="readonly">
-	                                                </td> --%>
 	                                                <th class="first">작성일</th>
 	                                                <td>
 	                                               		<fmt:formatDate var="article_reg_date" value="${dto.article_reg_date}" pattern="yyyy-MM-dd"/>
 	                                    					${article_reg_date}
 	                                            	</tr>
 	
-	<!--                                             <tr>
-	                                                <th class="first">비밀번호</th>
-	                                                <td colspan="3">
-	                                                    <input type="password" style="width: 30%;" maxlength="10"
-	                                                        placeholder="10자리 이내로 입력해 주세요">
-	                                                </td>
-	                                            </tr> -->
 	                                            <tr>
 	                                                <td colspan="4">
 	                                                    <textarea id="popContent" name="article_content" cols="108"
@@ -140,9 +133,13 @@
     </div>
 
 
-<script src="https://code.jquery.com/jquery-3.6.0.js" integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk=" crossorigin="anonymous"></script>
+<script type="text/javascript" src="/resources/js/ckeditor/ckeditor.js"></script>
 <script>
 $(document).ready(function(){
+	
+	CKEDITOR.replace('popContent' , {
+  		 height: 500                                                  
+      });
 	$(".sub4").addClass("active");
 	
 	/* 게시물 조회화면에서 수정화면으로 이동시 보여지는 첨부파일 화면 */

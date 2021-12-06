@@ -24,26 +24,9 @@ public class ReadingRoomController {
 	@Autowired
 	private ReadingRoomService readingRoomService;
 
+	// 1열람실 출력
 	@GetMapping("/readingRoom")
 	public String getSeatsList(Model model, Principal principal) {
-
-//		List<ReadingRoomDTO> seatsList = readingRoomService.getSeatsList(0, 10);
-//		model.addAttribute("seatsList1", seatsList);
-//		
-//		List<ReadingRoomDTO> seatsList2 = readingRoomService.getSeatsList(10, 10);
-//		model.addAttribute("seatsList2", seatsList2);
-//		
-//		List<ReadingRoomDTO> seatsList3 = readingRoomService.getSeatsList(20, 8);
-//		model.addAttribute("seatsList3", seatsList3);
-//		
-//		List<ReadingRoomDTO> seatsList4 = readingRoomService.getSeatsList(28, 10);
-//		model.addAttribute("seatsList4", seatsList4);
-//		
-//		List<ReadingRoomDTO> seatsList5 = readingRoomService.getSeatsList(38, 16);
-//		model.addAttribute("seatsList5", seatsList5);
-
-//		List<ReadingRoomDTO> seatsList = readingRoomService.getSeatsList();
-//		model.addAttribute("seatsList", seatsList);
 
 		List<ReadingRoomDTO> seatsList = readingRoomService.getReadingRoom1SeatsList();
 		model.addAttribute("seatsList", seatsList);
@@ -64,6 +47,63 @@ public class ReadingRoomController {
 
 	}
 
+	// 2열람실 출력
+	@GetMapping("/readingRoom2")
+	public String readingRoomRental(Model model, Principal principal) {
+
+		List<ReadingRoomDTO> readingRoomlist = readingRoomService.getReadingRoom2SeatsList();
+		model.addAttribute("readingRoomlist", readingRoomlist);
+
+		// 로그인 된 아이디
+		String user_id = principal.getName();
+
+		model.addAttribute("login_id", user_id);
+
+		ReadingRoomDTO room2_info = readingRoomService.mySeatInfo(user_id);
+
+		// 제2열람실 좌석 정보
+		if (room2_info == null) {
+
+			return "/mylib/sub3/readingRoom2";
+
+		} else {
+
+			Date now = new Date();
+
+			room2_info.setDiff_time(room2_info.getCheckout_time().getTime() - now.getTime());
+
+			model.addAttribute("room2_info", room2_info);
+		}
+		return "/mylib/sub3/readingRoom2";
+		// 컨트롤러에서 서비스단으로 넘긴다.(모델이라는 객체 이용하면 뷰단으로 쉽게 빼낼 수 있음)
+	}
+	
+	
+	/* 전체 좌석 출력(NotebookRoom) | 로그인 된 아이디와 비교 */
+	@GetMapping("/notebookRoom")
+	public String notebookRoomList(Model model, Principal principal) {
+
+		List<ReadingRoomDTO> notebookRoomlist = readingRoomService.getNbRoomSeatsList();
+		model.addAttribute("notebookRoomlist", notebookRoomlist);
+
+		/* 로그인 된 ID */
+		String user_id = principal.getName();
+		model.addAttribute("login_id", user_id);
+
+		ReadingRoomDTO nbRoom_info = readingRoomService.mySeatInfo(user_id);
+		
+		if(nbRoom_info == null) {
+			return "/mylib/sub3/notebookRoom";
+		}else {
+			Date now = new Date();
+			nbRoom_info.setDiff_time(nbRoom_info.getCheckout_time().getTime() - now.getTime());
+			model.addAttribute("nbRoom_info", nbRoom_info);
+		}
+		
+		return "/mylib/sub3/notebookRoom";
+
+	}
+
 	// 좌석 예약
 	@PostMapping("/bookingSeat")
 	public String bookingSeat(ReadingRoomDTO dto, Principal principal) {
@@ -74,7 +114,7 @@ public class ReadingRoomController {
 
 		// 현재 시간
 		int hours = Integer.parseInt(nowTime.substring(11, 13));
-		
+
 		// 현재 시간이 9~17시 일경우 예약
 		if (hours > 8 && hours < 18) {
 			String user_id = principal.getName();
@@ -83,7 +123,14 @@ public class ReadingRoomController {
 			readingRoomService.bookingSeat(dto);
 		}
 
-		return "redirect:/mylib/readingRoom";
+		if (dto.getSeat_no() < 55) {
+			return "redirect:/mylib/readingRoom";
+		} else if (dto.getSeat_no() > 96) {
+			return "redirect:/mylib/notebookRoom";
+		} else {
+			return "redirect:/mylib/readingRoom2";
+		}
+
 	}
 
 	// 열람실 좌석 상태 체크
@@ -107,7 +154,7 @@ public class ReadingRoomController {
 		String user_id = principal.getName();
 		readingRoomService.returnSeat(user_id);
 
-		return "redirect:/mylib/readingRoom";
+		return "redirect:/mylib/reservationRoomPage";
 	}
 
 	// 좌석 이동
@@ -119,7 +166,13 @@ public class ReadingRoomController {
 		readingRoomService.returnSeat(user_id);
 		readingRoomService.bookingSeat(dto);
 
-		return "redirect:/mylib/readingRoom";
+		if (dto.getSeat_no() < 55) {
+			return "redirect:/mylib/readingRoom";
+		} else if (dto.getSeat_no() > 96) {
+			return "redirect:/mylib/notebookRoom";
+		} else {
+			return "redirect:/mylib/readingRoom2";
+		}
 	}
 
 	// 좌석 연장

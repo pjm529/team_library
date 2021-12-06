@@ -2,14 +2,24 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
+<%@ taglib uri="http://www.springframework.org/security/tags" prefix="sec" %>
 <%@ page session="false" %>
 <html>
 <head>
    <title>라온도서관 > 열린공간 > 분실물찾기</title>
 </head>
 <link rel="stylesheet" href="/resources/css/board/sub4/sb_page.css">
+<link rel="stylesheet" href="/resources/css/header.css">
+<script
+  src="https://code.jquery.com/jquery-3.6.0.js"
+  integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk=" 
+  crossorigin="anonymous"></script>
 <body>
 
+	<div class="header">
+    <jsp:include page="../../header.jsp"></jsp:include>
+    </div>
+	
     <div class="container">
         <div class="sub_title">
             <div class="doc-info">
@@ -19,12 +29,12 @@
                     <ul>
                         <!-- 홈 btn img -->
                         <li class="first" style="background-image: none;">
-                            <a href="#">
+                            <a href="/">
                                 <img src="/resources/imges/common/navi_home_icon.gif">
                             </a>
                         </li>
                         <li>
-                            <a href="#">열린공간</a>
+                            <a href="/board/noticeList">열린공간</a>
                         </li>
                         <li>
                             <a href="/board/articleList">분실물찾기</a>
@@ -92,24 +102,9 @@
 							
                          </div>
 						
-						<%-- <div class="search">
-							<form action="/board/articleList" method="get">
-								<input type="hidden" name="page" value="${pageMaker.cri.page}">
-								<input type="hidden" name="amount" value="${pageMaker.cri.amount}">
-								
-								<select name="type">
-									<option value="title">제목</option>
-									<option value="content">내용</option>
-									<option value="TC">제목+내용</option>
-								</select>
-								
-								<input type="text" name="keyword">
-								<input type="submit" value="검색">
-							</form>
-						</div> --%>
-						
                             <!-- 테이블 -->
                             <div class="table-wrap">
+                            	<c:if test="${not empty articleList }">
                                 <table>
                                     <thead>
                                         <tr>
@@ -136,12 +131,18 @@
                                     </c:forEach>   
                                     </tbody>
                                 </table>
-                                
+                                </c:if>
+                                <c:if test="${empty articleList }">
+                                <br>
+                                <h2>조회된 게시글이 없습니다.</h2>
+								</c:if>
             
                              <!-- 글쓰기 btn --> 
-                             <div class="write">
-                               <button class="write_btn" onclick="location.href='/board/articleInsertForm'" style="cursor: pointer">글쓰기</button>
-                             </div>
+                             <sec:authorize access="hasRole('ROLE_ADMIN')">
+                             <button class="write_btn" onclick="location.href='/board/articleInsertForm'" style="cursor: pointer">글쓰기</button>
+                             </sec:authorize>
+                             
+                             <br>
                              
                              <!-- 페이징 -->
                               <div class="pageInfo" style=""> 
@@ -157,6 +158,8 @@
 		                              <a class="not" href="${pageMaker.endPage + 1}">다음</a>
 		                           </c:if>
 	                        </div>
+                            
+                            <br>
                             
                             <!-- 검색 -->  
                            	<div class="searchBox">   
@@ -214,10 +217,10 @@
     </div>
 
 	<form action="/board/articleList" method="get" class="moveForm">
-      <input type="text" name="page" value="${pageMaker.cri.page}">
-      <input type="text" name="amount" value="${pageMaker.cri.amount}">
-      <input type="text" name="keyword" value="${pageMaker.cri.keyword}">
-      <input type="text" name="type" value="${pageMaker.cri.type}">
+      <input type="hidden" name="page" value="${pageMaker.cri.page}">
+      <input type="hidden" name="amount" value="${pageMaker.cri.amount}">
+      <input type="hidden" name="keyword" value="${pageMaker.cri.keyword}">
+      <input type="hidden" name="type" value="${pageMaker.cri.type}">
    </form>
    
    <form action="/board/articleContent" method="get" class="moveForm2">
@@ -228,7 +231,6 @@
       <input type="hidden" name="article_no" value="">
    </form>
    
-<script src="https://code.jquery.com/jquery-3.6.0.js" integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk=" crossorigin="anonymous"></script>
 <script>
    $(function() {
    		$(".sub4").addClass("active");  

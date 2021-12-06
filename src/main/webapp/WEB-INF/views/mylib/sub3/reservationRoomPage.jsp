@@ -9,12 +9,17 @@
 <head>
 <meta charset="UTF-8">
 	<link rel="stylesheet" href="/resources/css/mylib/sub3/reservationRoomPage.css">
+	<link rel="stylesheet" href="/resources/css/header.css">
 	<link rel="stylesheet" href="/resources/css/footer.css">
-<title>라온도서관 > 나의 도서관 > 좌석예약/조회</title>
+<title>라온도서관 > 나의 도서관 > 좌석예약/조회 > 열람실이용안내</title>
 
 </head>
 <body>
-
+	
+	<div class="header">
+    <jsp:include page="../../header.jsp"></jsp:include>
+    </div>
+		
 	<div class="container">
         <div class="sub_title">
             <div class="doc-info">
@@ -24,15 +29,18 @@
                     <ul>
                         <!-- 홈 btn img -->
                         <li style="background-image: none;">
-                            <a href="#">
+                            <a href="/">
                                 <img src="/resources/imges/common/navi_home_icon.gif">
                             </a>
                         </li>
                         <li>
-                            <a href="#">나의 도서관</a>
+                            <a href="/mylib/loan-history">나의 도서관</a>
                         </li>
                         <li>
                             <a href="/mylib/reservationRoomPage">좌석예약/조회</a>
+                        </li>
+                        <li>
+                            <a href="/mylib/reservationRoomPage">열람실이용안내</a>
                         </li>
                     </ul>
 
@@ -163,6 +171,7 @@
 	$(document).ready(function() {
 		
 		$(".sub3").addClass("active");
+		$(".submenu8").addClass("active");
 		
 		var usedSeat = "<c:out value='${nbRoom_usedSeat}'/>";
 		var percent = (usedSeat/28) * 100;

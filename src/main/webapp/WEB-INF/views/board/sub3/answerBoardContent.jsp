@@ -2,14 +2,25 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn" %>
 <%@ page session="false" %>
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ taglib uri="http://www.springframework.org/security/tags" prefix="sec" %>
+
 <!DOCTYPE html>
 <html>
 <head>
-<title>라온도서관 > 묻고답하기 > 본문</title>
+<title>라온도서관 > 열린공간 > 묻고답하기</title>
 	<link rel="stylesheet" href="/resources/css/board/sub3/answer_content_page.css">
+	<link rel="stylesheet" href="/resources/css/header.css">
 	<link rel="stylesheet" href="/resources/css/footer.css">
 </head>
+<script
+  src="https://code.jquery.com/jquery-3.6.0.js"
+  integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk=" 
+  crossorigin="anonymous"></script>
 <body>
+
+	<div class="header">
+    <jsp:include page="../../header.jsp"></jsp:include>
+    </div>
 
     <div class="container">
         <div class="sub_title">
@@ -25,7 +36,7 @@
                             </a>
                         </li>
                         <li>
-                            <a href="#">열린공간</a>
+                            <a href="/board/noticeList">열린공간</a>
                         </li>
                         <li>
                             <a href="/board/qnaBoardList">묻고답하기</a>
@@ -61,7 +72,7 @@
                                         <!-- 작성자 | 작성일 | 조회수 -->
                                          <tr>
                                             <th class="first">작성자</th>
-                                            <td style="width: 15%;">${dto.a_writer_name}</td>
+                                            <td style="width: 15%;">관리자</td>
                                             <th class="first">작성일</th>
                                             <td>${fn:substring(dto.answer_reg_date, 0, 11)}</td>
                                             <th class="first">조회수</th>
@@ -90,8 +101,8 @@
                                 		<button class="list_btn">목록으로</button>
                                 	</form>
                                 </div>
-                                
-                                <div class="delete_wrap">
+                               <sec:authorize access="hasRole('ROLE_ADMIN')">
+                               <div class="delete_wrap">
 	                               <form action="/board/answerBoardDelete" method="get" onsubmit="return false" class="delete_form">
 	                               		<input type="hidden" name="answer_no" value="${dto.answer_no}">
 	                               		<input type="hidden" name="amount" value="${cri.amount}">
@@ -107,11 +118,12 @@
 	                               		<input type="hidden" name="answer_no" value="${dto.answer_no}">
 	                               		<input type="hidden" name="amount" value="${cri.amount}">
 	                               		<input type="hidden" name="page" value="${cri.page}">
-                                		<input type="hidden" name="type" value="${cri.type}">
-                                		<input type="hidden" name="keyword" value="${cri.keyword}">
+	                               		<input type="hidden" name="type" value="${cri.type}">
+	                               		<input type="hidden" name="keyword" value="${cri.keyword}">
 	                               		<button class="update_btn" style="margin-right: 20px;">수정하기</button>
 	                               	</form>
 								</div>  
+                               </sec:authorize>
 								          
                             </div>
 
@@ -129,7 +141,6 @@
     <jsp:include page="../../footer.jsp"></jsp:include>
     
     
-<script src="https://code.jquery.com/jquery-3.6.0.js" integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk=" crossorigin="anonymous"></script>
 <script>
 	$(function() {
 		

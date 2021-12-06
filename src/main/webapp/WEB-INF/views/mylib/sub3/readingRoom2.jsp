@@ -8,9 +8,10 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>라온도서관 > 나의도서관 > 제2열람실</title>
+<title>라온도서관 > 나의도서관 > 좌석예약/조회 > 제2열람실</title>
 <link rel="stylesheet" href="/resources/css/mylib/sub3/readingRoom2_sb_page.css">
 <link rel="stylesheet" href="/resources/css/mylib/sub3/readingRoom2.css">
+<link rel="stylesheet" href="/resources/css/header.css">
     <style>
         .seat-list-row {
             width: 100%;
@@ -25,8 +26,11 @@
 </head>
 <body>
 	<input type="hidden" class="reserve_no" value="${room2_info.seat_no}">
-    <%-- <sec:authentication property="principal.dto.user_id" /> --%>
 
+	<div class="header">
+    <jsp:include page="../../header.jsp"></jsp:include>
+    </div>
+    
     <div class="container">
         <div class="sub_title">
             <div class="doc-info">
@@ -36,15 +40,18 @@
                     <ul>
                         <!-- 홈 btn img -->
                         <li style="background-image: none;">
-                            <a href="#">
+                            <a href="/">
                                 <img src="/resources/imges/common/navi_home_icon.gif">
                             </a>
                         </li>
                         <li>
-                            <a href="#">나의 도서관</a>
+                            <a href="/mylib/loan-history">나의도서관</a>
                         </li>
                         <li>
-                            <a href="/mylib/readingRoom2">좌석예약/조회</a>
+                            <a href="/mylib/reservationRoomPage">좌석예약/조회</a>
+                        </li>
+                        <li>
+                            <a href="/mylib/readingRoom2">제2열람실</a>
                         </li>
                     </ul>
 
@@ -66,7 +73,6 @@
                                 <button onclick="rdRoom();">제 1열람실</button>
                                 <button class="active" onclick="rdRoom2();">제 2열람실</button>
                                 <button onclick="nbRoom();">노트북실</button>
-                                <button>세미나실</button>
                             </div>
                         </div>
 
@@ -268,7 +274,7 @@
                                     </tbody>
 
                                 </table>
-								<form action="/mylib/room2_booking" method="post" onsubmit="return false;">
+								<form action="/mylib/bookingSeat" method="post" onsubmit="return false;">
 									<input id="seat_no" type="hidden" name="seat_no">
 									<button class="reserve_btn booking_btn">예약하기</button>
 								</form>
@@ -332,18 +338,18 @@
 
                                 <div class="reserve-info-btn">
                                 	<div style="float: left;">
-                                		<form id="return_form" action="/mylib/room2_delete" method="post" onsubmit="return false;">
+                                		<form id="return_form" action="/mylib/returnSeat" method="post" onsubmit="return false;">
                                         	<button class="chk_out_btn return_btn">퇴실</button>
                                     	</form>
                                 	</div>
 
 									<div style="float: right; margin-left: 10px;">
-										<form id="extend_form" action="/mylib/room2_extend" method="post" onsubmit="return false;">
+										<form id="extend_form" action="/mylib/extendSeat" method="post" onsubmit="return false;">
 											<button class="renew_btn extend_btn">연장</button>
 										</form>
 									</div>
 									
-									<form id="move" action="/mylib/moveSeat2" method="post" onsubmit="return false;">
+									<form id="move" action="/mylib/moveSeat" method="post" onsubmit="return false;">
 										<input id="new_no" type="hidden" name="seat_no">
 									</form>
                                     
@@ -371,6 +377,7 @@
 
 			
             $(".sub3").addClass("active");
+            $(".submenu11").addClass("active");
 			
          // 예약된 좌석이 있으면 남은 시간 timer start
            	if($(".reserve_no").val() != ""){
@@ -413,7 +420,7 @@
                        	
                        	$.ajax({
        		                type: "post",
-       		                url: "/mylib/seat2_check",
+       		                url: "/mylib/seat_check",
        		                data: data,
        		                success: function(result) {
        		                   
@@ -466,7 +473,7 @@
                 	
                 	$.ajax({
 		                type: "post",
-		                url: "/mylib/seat2_check",
+		                url: "/mylib/seat_check",
 		                data: data,
 		                success: function(result) {
 		                   

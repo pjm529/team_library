@@ -6,15 +6,20 @@
 <head>
 <title>라온도서관 > 열린공간 > 도서관일정</title>
 </head>
-<link rel="stylesheet" href="/resources/css/search/recommend_book.css">
-<link rel="stylesheet" href="/resources/css/board/sub2/calendar.css">
+<link rel="stylesheet" href="/resources/css/board/sub5/calendar.css">
+<link rel="stylesheet" href="/resources/css/board/sub5/calendar2.css">
+<link rel="stylesheet" href="/resources/css/header.css">
 <link rel="stylesheet" href="/resources/css/footer.css">
 <script src="https://code.jquery.com/jquery-3.6.0.js"
 	integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk="
 	crossorigin="anonymous"></script>
 
 <body>
-
+	
+	<div class="header">
+    <jsp:include page="../../header.jsp"></jsp:include>
+    </div>
+	
 	<div class="container">
 		<div class="sub_title">
 			<div class="doc-info">
@@ -23,9 +28,8 @@
 					<h3>도서관일정</h3>
 					<ul>
 						<!-- 홈 btn img -->
-						<li class="first" style="background-image: none;"><a
-							href="/search/book"> <img
-								src="/resources/imges/common/navi_home_icon.gif">
+						<li class="first" style="background-image: none;">
+						<a href="/"><img src="/resources/imges/common/navi_home_icon.gif">
 						</a></li>
 						<li><a href="/board/noticeList">열린공간</a></li>
 						<li><a href="/board/calendar">도서관일정</a></li>

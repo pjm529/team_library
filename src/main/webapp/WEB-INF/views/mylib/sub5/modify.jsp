@@ -6,6 +6,7 @@
 <meta charset="UTF-8">
 <title>라온도서관 > 나의도서관 > 개인정보 > 마이페이지</title>
 <link rel="stylesheet" href="/resources/css/mylib/sub5/modify.css">
+<link rel="stylesheet" href="/resources/css/header.css">
 <link rel="stylesheet" href="/resources/css/footer.css">
 <script src="https://code.jquery.com/jquery-3.6.0.js" 
  integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk="
@@ -14,6 +15,7 @@
 <body>
 
     <div class="header">
+    <jsp:include page="../../header.jsp"></jsp:include>
     </div>
 
     <div class="container">
@@ -25,12 +27,12 @@
                     <ul>
                         <!-- 홈 btn img -->
                         <li class="" style="background-image: none;">
-                            <a href="#">
+                            <a href="/">
                                 <img src="/resources/imges/common/navi_home_icon.gif">
                             </a>
                         </li>
                         <li>
-                            <a href="#">나의도서관</a>
+                            <a href="/mylib/loan-history">나의도서관</a>
                         </li>
                         <li>
                             <a href="/mylib/mypage">개인정보</a>

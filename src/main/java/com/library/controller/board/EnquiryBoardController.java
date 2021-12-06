@@ -58,6 +58,7 @@ public class EnquiryBoardController {
 
 		String writer_id = dto.getWriter_id(); // 작성자 ID
 		String login_id = principal.getName();// 로그인한 ID
+
 		int check = eBoardService.check_admin(login_id); // 관리자 계정 확인
 
 		/* 작성자와 로그인한 user가 같거나, 관리자일 경우엔 게시물 확인 가능 */
@@ -79,7 +80,7 @@ public class EnquiryBoardController {
 		}
 
 		else {
-			return "redirect:/board/qnaBoardList";
+			return "redirect:/accessError2";
 		}
 
 	}
@@ -108,54 +109,105 @@ public class EnquiryBoardController {
 
 	/* 게시물 수정 page */
 	@PostMapping("/qnaBoardEdit")
-	public String qnaBoardEdit(@RequestParam("enquiry_no") String uenquiry_no, Model model, Criteria cri) {
+	public String qnaBoardEdit(@RequestParam("enquiry_no") String uenquiry_no, Model model, Criteria cri,
+			Principal principal) {
 
 		Long enquiry_no = Long.parseLong(uenquiry_no);
 		EnquiryBoardDTO dto = eBoardService.enquiryContent(enquiry_no);
-		model.addAttribute("dto", dto);
-		model.addAttribute("cri", cri);
 
-		return "/board/sub3/qnaBoardEdit";
+		String writer_id = dto.getWriter_id(); // 작성자 ID
+		String login_id = principal.getName();// 로그인한 ID
+
+		/* 작성자와 로그인한 user가 같을 때 수정 가능 */
+		if (writer_id.equals(login_id)) {
+			model.addAttribute("dto", dto);
+			model.addAttribute("cri", cri);
+
+			return "/board/sub3/qnaBoardEdit";
+		} else {
+			return "redirect:/accessError2";
+		}
+
 	}
 
 	/* 게시물 수정 */
 	@PostMapping("/qnaBoardUpdate")
-	public String qnaBoardUpdate(EnquiryBoardDTO dto, Criteria cri) {
+	public String qnaBoardUpdate(EnquiryBoardDTO dto, Criteria cri, Principal principal) {
 
 		String keyword;
 
-		try {
-			keyword = URLEncoder.encode(cri.getKeyword(), "UTF-8");
-		} catch (UnsupportedEncodingException e) {
-			return "redirect:/board/qnaBoardList";
+		Long enquiry_no = dto.getEnquiry_no();
+
+		EnquiryBoardDTO dto2 = eBoardService.enquiryContent(enquiry_no);
+
+		String writer_id = dto2.getWriter_id(); // 작성자 ID
+		String login_id = principal.getName();// 로그인한 ID
+
+		if (writer_id.equals(login_id)) {
+
+			try {
+				keyword = URLEncoder.encode(cri.getKeyword(), "UTF-8");
+			} catch (UnsupportedEncodingException e) {
+				return "redirect:/board/qnaBoardList";
+			}
+
+			eBoardService.enquiryBoardUpdate(dto);
+
+			return "redirect:/board/qnaBoardContent?amount=" + cri.getAmount() + "&page=" + cri.getPage() + "&keyword="
+					+ keyword + "&type=" + cri.getType() + "&enquiry_no=" + dto.getEnquiry_no();
+			
+		} else {
+			return "redirect:/accessError2";
 		}
 
-		eBoardService.enquiryBoardUpdate(dto);
-
-		return "redirect:/board/qnaBoardContent?amount=" + cri.getAmount() + "&page=" + cri.getPage() + "&keyword="
-				+ keyword + "&type=" + cri.getType() + "&enquiry_no=" + dto.getEnquiry_no();
 	}
 
 	/* 게시물 삭제 */
 	@PostMapping("/qnaBoardDelete")
-	public String qnaBoardDelete(Criteria cri, @RequestParam("enquiry_no") String uenquiry_no) {
-		String keyword;
+	public String qnaBoardDelete(Criteria cri, @RequestParam("enquiry_no") String uenquiry_no, Principal principal) {
 
-		try {
-			keyword = URLEncoder.encode(cri.getKeyword(), "UTF-8");
-			Long enquiry_no = Long.parseLong(uenquiry_no);
-			eBoardService.enquiryBoardDelete(enquiry_no);
-			eBoardService.reset();
-			return "redirect:/board/qnaBoardList?amount=" + cri.getAmount() + "&page=" + cri.getPage() + "&keyword="
-					+ keyword + "&type=" + cri.getType();
-		} catch (UnsupportedEncodingException e) {
-			return "redirect:/board/qnaBoardList";
+		String keyword;
+		Long enquiry_no = Long.parseLong(uenquiry_no);
+		EnquiryBoardDTO dto = eBoardService.enquiryContent(enquiry_no);
+
+		String writer_id = dto.getWriter_id(); // 작성자 ID
+		String login_id = principal.getName();// 로그인한 ID
+		int check = eBoardService.check_admin(login_id); // 관리자 계정 확인
+
+		/* 작성자와 로그인한 user가 같거나, 관리자일 경우엔 게시물 삭제 가능 */
+		if (writer_id.equals(login_id)) {
+
+			try {
+				keyword = URLEncoder.encode(cri.getKeyword(), "UTF-8");
+
+				eBoardService.enquiryBoardDelete(enquiry_no);
+				eBoardService.reset();
+				return "redirect:/board/qnaBoardList?amount=" + cri.getAmount() + "&page=" + cri.getPage() + "&keyword="
+						+ keyword + "&type=" + cri.getType();
+			} catch (UnsupportedEncodingException e) {
+				return "redirect:/board/qnaBoardList";
+			}
+
+		} else if (check == 1) {
+
+			try {
+				keyword = URLEncoder.encode(cri.getKeyword(), "UTF-8");
+
+				eBoardService.enquiryBoardDelete(enquiry_no);
+				eBoardService.reset();
+				return "redirect:/board/qnaBoardList?amount=" + cri.getAmount() + "&page=" + cri.getPage() + "&keyword="
+						+ keyword + "&type=" + cri.getType();
+			} catch (UnsupportedEncodingException e) {
+				return "redirect:/board/qnaBoardList";
+			}
+		}
+
+		else {
+			return "redirect:/accessError2";
 		}
 
 	}
 
-	
-	
 	/* 답글 */
 	/* 답글 게시물 본문 / 조회수 */
 	@PostMapping("/answerBoardContent")
@@ -187,7 +239,7 @@ public class EnquiryBoardController {
 			return "/board/sub3/answerBoardContent";
 
 		} else {
-			return "redirect:/board/qnaBoardList";
+			return "redirect:/accessError2";
 		}
 
 	}
@@ -206,7 +258,8 @@ public class EnquiryBoardController {
 
 	/* 답글 등록 */
 	@PostMapping("/answerBoardWrite")
-	public String answerBoardWrite(AnswerBoardDTO dto, Criteria cri) {
+	public String answerBoardWrite(AnswerBoardDTO dto, Criteria cri, Principal principal) {
+		dto.setA_writer_id(principal.getName());
 		aBoardService.answerBoardInsert(dto);
 
 		return "redirect:/board/qnaBoardList";

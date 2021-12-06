@@ -6,12 +6,21 @@
 <!DOCTYPE html>
 <html>
 <head>
-<title>라온도서관 > 묻고답하기 > 글 수정페이지</title>
+<title>라온도서관 > 열린공간 > 묻고답하기</title>
 	<link rel="stylesheet" href="/resources/css/board/sub3/answer_edit_page.css">
+	<link rel="stylesheet" href="/resources/css/header.css">
 	<link rel="stylesheet" href="/resources/css/footer.css">
 </head>
+<script
+  src="https://code.jquery.com/jquery-3.6.0.js"
+  integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk=" 
+  crossorigin="anonymous"></script>
 <body>
 
+	<div class="header">
+    <jsp:include page="../../header.jsp"></jsp:include>
+    </div>
+    
     <div class="container">
         <div class="sub_title">
             <div class="doc-info">
@@ -26,7 +35,7 @@
                             </a>
                         </li>
                         <li>
-                            <a href="#">열린공간</a>
+                            <a href="/board/noticeList">열린공간</a>
                         </li>
                         <li>
                             <a href="/board/qnaBoardList">묻고답하기</a>
@@ -72,7 +81,7 @@
                                             </tr>
                                             <tr>
                                                 <th class="first">작성자</th>
-                                                <td>${answer.a_writer_id}</td>
+                                                <td>관리자</td>
                                                 <th class="first">작성일</th>
                                                 <td>
                                                 ${fn:substring(answer.answer_reg_date, 0, 11)}
@@ -120,9 +129,13 @@
     <!-- footer -->
     <jsp:include page="../../footer.jsp"></jsp:include>
 
-<script src="https://code.jquery.com/jquery-3.6.0.js" integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk=" crossorigin="anonymous"></script>
+<script type="text/javascript" src="/resources/js/ckeditor/ckeditor.js"></script>
 <script>
 	$(function() {
+
+		CKEDITOR.replace('popContent' , {
+			 height: 500                                                  
+	    });
 		
 		$(".sub3").addClass("active");
 		

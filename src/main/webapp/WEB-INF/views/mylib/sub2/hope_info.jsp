@@ -7,6 +7,7 @@
 <meta charset="UTF-8">
 <title>라온도서관 > 나의도서관 > 희망도서신청 > 희망도서신청정보</title>
 <link rel="stylesheet" href="/resources/css/mylib/sub2/hope_info.css">
+<link rel="stylesheet" href="/resources/css/header.css">
 <link rel="stylesheet" href="/resources/css/footer.css">
 <script src="https://code.jquery.com/jquery-3.6.0.js" 
  integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk="
@@ -15,6 +16,7 @@
 <body>
 
     <div class="header">
+    <jsp:include page="../../header.jsp"></jsp:include>
     </div>
 
     <div class="container">
@@ -26,7 +28,7 @@
                     <ul>
                         <!-- 홈 btn img -->
                         <li class="" style="background-image: none;">
-                            <a href="#">
+                            <a href="/">
                                 <img src="/resources/imges/common/navi_home_icon.gif">
                             </a>
                         </li>

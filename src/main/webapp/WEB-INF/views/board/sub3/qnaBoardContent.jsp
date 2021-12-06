@@ -6,12 +6,20 @@
 <!DOCTYPE html>
 <html>
 <head>
-<title>라온도서관 > 묻고답하기 > 본문</title>
+<title>라온도서관 > 열린공간 > 묻고답하기</title>
 	<link rel="stylesheet" href="/resources/css/board/sub3/qna_content_page.css">
+	<link rel="stylesheet" href="/resources/css/header.css">
 	<link rel="stylesheet" href="/resources/css/footer.css">
 </head>
+<script
+  src="https://code.jquery.com/jquery-3.6.0.js"
+  integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk=" 
+  crossorigin="anonymous"></script>
 <body>
-
+	
+	<div class="header">
+    <jsp:include page="../../header.jsp"></jsp:include>
+    </div>
 
     <div class="container">
         <div class="sub_title">
@@ -27,7 +35,7 @@
                             </a>
                         </li>
                         <li>
-                            <a href="#">열린공간</a>
+                            <a href="/board/noticeList">열린공간</a>
                         </li>
                         <li>
                             <a href="/board/qnaBoardList">묻고답하기</a>
@@ -115,8 +123,9 @@
 	                               		<button class="update_btn" style="margin-right: 20px;">수정하기</button>
 	                               	</form>
 								</div>  
-								          
-								<div class="answer_wrap">
+								
+								<sec:authorize access="hasRole('ROLE_ADMIN')">
+							    <div class="answer_wrap">
 									<form action="/board/answerBoardWrite" method="get">
 	                               		<input type="hidden" name="enquiry_no" value="${dto.enquiry_no}">
 	                               		<input type="hidden" name="amount" value="${cri.amount}">
@@ -126,6 +135,7 @@
 	                               		<button class="update_btn" style="margin-right: 20px;">답변하기</button>
 	                               	</form>
 								</div>
+							    </sec:authorize>
 
                             </div>
 
@@ -142,7 +152,6 @@
     <!-- footer -->
     <jsp:include page="../../footer.jsp"></jsp:include>
 
-<script src="https://code.jquery.com/jquery-3.6.0.js" integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk=" crossorigin="anonymous"></script>
 <script>
 	$(function() {
 		

@@ -1,14 +1,25 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
+<%@ taglib uri="http://www.springframework.org/security/tags" prefix="sec" %>
 <%@ page session="false" %>
 <html>
 <head>
    <title>라온도서관 > 열린공간 > 분실물찾기</title>
 <link rel="stylesheet" href="/resources/css/board/sub4/content_page.css">
+<link rel="stylesheet" href="/resources/css/header.css">
 </head>
+<script
+  src="https://code.jquery.com/jquery-3.6.0.js"
+  integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk=" 
+  crossorigin="anonymous"></script>
 <body>
-<div class="container">
+	
+	<div class="header">
+    <jsp:include page="../../header.jsp"></jsp:include>
+    </div>
+	
+	<div class="container">
         <div class="sub_title">
             <div class="doc-info">
                 <!-- doc title -->
@@ -22,10 +33,10 @@
                             </a>
                         </li>
                         <li>
-                            <a href="#">열린공간</a>
+                            <a href="/board/noticeList">열린공간</a>
                         </li>
                         <li>
-                            <a href="/articleList">분실물찾기</a>
+                            <a href="/board/articleList">분실물찾기</a>
                         </li>
                     </ul>
 
@@ -93,9 +104,6 @@
 												     </div>
 												      
 												      </div>
-												  
-											
-												    
                                                 </div>
                                             </td>
                                         </tr>
@@ -107,15 +115,11 @@
                                 <table class="article-board">
                                 	<tbody>
                                 		<tr class="board-prev first">
-                                			<td class="first td1">
-                                				<div class="fa-angle-up"></div>	
-                                				<span><img src="/resources/imges/board/sub4/angle_up.png" width=15px; height=15px; style="float: left;"/>이전글</span>
-                                			</td>
+                                			<td class="prev" style="border-right: 1px solid #dee1e7"><img src="/resources/imges/board/sub1/angle_up.png" class="angle"> 이전글</td>
 											
 											
 											<c:if test="${dtoPre.article_no == null}">
-												<td>이전글이 없습니다.</td>
-												<td class="td3"></td>
+												<td class="td2">이전글이 없습니다.</td>
 											</c:if>
 											
 											<c:if test="${dtoPre.article_no != null}">
@@ -123,21 +127,16 @@
 	                                				<input type="hidden" value="${dtoPre.article_no}"> 
 	                                				<a href="/board/articleContent?article_no=${dtoPre.article_no}&amount=${cri.amount}&page=${cri.page}">${dtoPre.article_title}</a>                                				
 	                                			</td>
-	                                			<td class="td3">관리자</td>
                                 			</c:if>
                                 				
                                 			
                                 		</tr>
                                 		
                                 		<tr class="board-next">
-                                			<td class="first td1">
-                                				<i class="fa-angle-down"></i>
-                                				<span><img src="/resources/imges/board/sub4/angle_down.png" width=15px; height=15px; style="float:left;"/>다음글</span>
-                                			</td>
+                                			<td class="next" style="border-right: 1px solid #dee1e7;"><img src="/resources/imges/board/sub1/angle_down.png" class="angle"> 다음글</td>
                                 			
                                 			<c:if test="${dtoNext.article_no == null}">
-												<td>다음글이 없습니다.</td>
-												<td class="td3"></td>
+												<td class="td2">다음글이 없습니다.</td>
 											</c:if>
                                 			
                                 			<c:if test="${dtoNext.article_no != null}">
@@ -145,7 +144,6 @@
 	                                				<input type="hidden" value="${dtoNext.article_no}">
 	                                				<a href="/board/articleContent?article_no=${dtoNext.article_no}&amount=${cri.amount}&page=${cri.page}">${dtoNext.article_title}</a>
 	                                			</td>
-	                                			<td class="td3">관리자</td>
                                 			</c:if>
                                 			
                                 			<!-- <td class="datetime last td4"></td> -->
@@ -165,7 +163,7 @@
 	                               		<button class="list_btn">목록으로</button>
 	                                </form>
 	                             </div>
-	                             
+	                             <sec:authorize access="hasRole('ROLE_ADMIN')">
 	                             <div class="delete_wrap">  
 	                             	<!-- '삭제하기' 눌렀을 때 처음 봤던 게시물 해당목록 페이지로 가기 --> 
 									<form action="/board/articleDelete" method="get" onsubmit="return confirm('삭제하시겠습니까?');">
@@ -188,14 +186,9 @@
 	                               <button class="update_btn" style="margin-right: 20px;"
 	                                        onclick="location.href='/board/articleModifyForm?article_no=${dto.article_no}&amount=${cri.amount}&page=${cri.page}'">수정하기</button> 
                            
-                           
-                       <!--    <button class="update_btn" style="margin-right: 20px;"
-	                            onclick="modifunc()">수정하기</button>  -->
-                         
                                  
-                                 </div>       
-
-                                
+                                 </div>
+                                 </sec:authorize>       
 
                             </div>
 
@@ -209,8 +202,6 @@
         </div>
     </div>
     
-<script src="https://code.jquery.com/jquery-3.6.0.js" integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk=" crossorigin="anonymous"></script>
-
 <script>
 
     $(document).ready(function () {

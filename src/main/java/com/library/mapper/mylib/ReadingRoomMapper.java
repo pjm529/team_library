@@ -9,8 +9,14 @@ import com.library.page.Criteria;
 
 public interface ReadingRoomMapper {
 
-	// 열람실 출력
+	// 1열람실 출력
 	public List<ReadingRoomDTO> getReadingRoom1SeatsList();
+
+	// 2열람실 출력
+	public List<ReadingRoomDTO> getReadingRoom2SeatsList();
+
+	// 노트북실 출력
+	public List<ReadingRoomDTO> getNbRoomSeatsList();
 
 	// 열람실 예약
 	public void bookingSeat(ReadingRoomDTO dto);
@@ -35,5 +41,28 @@ public interface ReadingRoomMapper {
 
 	/* 사용 좌석 */
 	public int rdUsedSeat();
+	
+	
+	
+	
+	/* 잔여 좌석 | 사용 좌석 */
+
+	/* ==== 열람실 1 ==== */
+	/* 잔여 좌석 */
+	public int rd1Room_usingSeat();
+	/* 사용 좌석 */
+	public int rd1Room_usedSeat();
+	
+	/* ==== 열람실 2 ==== */
+	/* 잔여 좌석 */
+	public int rd2Room_usingSeat();
+	/* 사용 좌석 */
+	public int rd2Room_usedSeat();
+	
+	/* ==== 노트북실 ==== */
+	/* 잔여 좌석 */
+	public int nbRoom_usingSeat();
+	/* 사용 좌석 */
+	public int nbRoom_usedSeat();
 
 }

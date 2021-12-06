@@ -28,7 +28,6 @@
                             <div class="table-wrap">
                                 <form id="join_form" method="POST" onsubmit="return false;">
                                     <table>
-                                        <!-- ID -->
                                         <tr>
                                             <th class="first">
                                                 <span style="color: red;">*</span>
@@ -38,7 +37,6 @@
                                                 <input class="id_input" autocomplete="off" name="title"> <br>
                                             </td>
                                         </tr>
-                                        <!-- BHD -->
                                         <tr>
                                             <th class="first">
                                                 <span style="color: red;">*</span>

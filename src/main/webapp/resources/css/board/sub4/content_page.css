@@ -307,9 +307,7 @@ table input{
 
 /* 이전글, 다음글 테이블 */
 .article-board {
-    margin: 45px 0;
     border: none;
-   	border-top: 2px solid #ccc;
    	border-bottom: 2px solid #ccc;
    	height: 90px; 
 }
@@ -320,6 +318,7 @@ table input{
 }
 
 .article-board td.first {
+    width: 120px;
     text-align: center;
     word-break: keep-all;
 }
@@ -329,3 +328,18 @@ td.td3{
 	text-align: center;
 	
 } 
+
+.td2{
+	border-right: none;
+}
+.angle {
+    width: 10px;
+    vertical-align: middle;
+    margin-right: 3px;
+}
+.prev, .next {
+    width: 100px;
+    height: 10px; 
+    text-align: center;
+    border-left: none;
+}
