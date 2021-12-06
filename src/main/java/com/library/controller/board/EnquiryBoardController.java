@@ -80,7 +80,7 @@ public class EnquiryBoardController {
 		}
 
 		else {
-			return "redirect:/board/qnaBoardList";
+			return "redirect:/accessError2";
 		}
 
 	}
@@ -125,7 +125,7 @@ public class EnquiryBoardController {
 
 			return "/board/sub3/qnaBoardEdit";
 		} else {
-			return "redirect:/board/qnaBoardList";
+			return "redirect:/accessError2";
 		}
 
 	}
@@ -157,7 +157,7 @@ public class EnquiryBoardController {
 					+ keyword + "&type=" + cri.getType() + "&enquiry_no=" + dto.getEnquiry_no();
 			
 		} else {
-			return "redirect:/board/qnaBoardList";
+			return "redirect:/accessError2";
 		}
 
 	}
@@ -203,7 +203,7 @@ public class EnquiryBoardController {
 		}
 
 		else {
-			return "redirect:/board/qnaBoardList";
+			return "redirect:/accessError2";
 		}
 
 	}
@@ -239,7 +239,7 @@ public class EnquiryBoardController {
 			return "/board/sub3/answerBoardContent";
 
 		} else {
-			return "redirect:/board/qnaBoardList";
+			return "redirect:/accessError2";
 		}
 
 	}

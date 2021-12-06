@@ -44,4 +44,11 @@ public class HomeController {
 		
 	}
 	
+	@GetMapping("/accessError2")
+	public String accessDenied2() {
+
+		return "/error/accessError2";
+		
+	}
+	
 }
