@@ -1,5 +1,35 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib uri="http://www.springframework.org/security/tags" prefix="sec" %>
+    
+<div class="tnb">
+	<div class="tnb_menu">  
+		<!-- 미 로그인 시 -->
+		<sec:authorize access="isAnonymous()">
+		<span><a href="/member/login">로그인</a></span>
+		<span>|</span>
+	    <span><a href="/member/signup-check">회원가입</a></span>
+		</sec:authorize>
+		
+		<!-- 로그인 시 -->
+		<sec:authorize access="isAuthenticated()">
+		<span><sec:authentication property="principal.dto.user_name"/>님</span>
+		<span>|</span>
+	    <span><a href="/logout">로그아웃</a></span>
+	    <span>|</span>
+	    <span><a href="/mylib/mypage">정보수정</a></span>
+	    
+	    <!-- 관리자 권한을 가지고 있을 경우 -->
+	    <sec:authorize access="hasRole('ROLE_ADMIN')">
+	    <span>|</span>
+	    <span><a href="/admin/member-list">관리자메뉴</a></span>
+	    </sec:authorize>
+		</sec:authorize>
+	</div>	
+</div>
+
+    
+    
 <div class="navi">
     <div>
         <ul class="header_menu">
