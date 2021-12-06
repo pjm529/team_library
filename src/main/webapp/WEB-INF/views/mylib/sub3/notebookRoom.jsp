@@ -18,7 +18,7 @@
         }
     </style>
 
-<title>라온도서관 > 나의도서관 > 노트북실</title>
+<title>라온도서관 > 나의도서관 > 좌석예약/조회 > 노트북실</title>
 
 </head>
 <body>
@@ -46,6 +46,9 @@
                         </li>
                         <li>
                             <a href="/mylib/reservationRoomPage">좌석예약/조회</a>
+                        </li>
+                        <li>
+                            <a href="/mylib/notebookRoom">노트북실</a>
                         </li>
                     </ul>
 

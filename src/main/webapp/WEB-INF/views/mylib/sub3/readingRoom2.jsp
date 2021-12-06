@@ -8,7 +8,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>라온도서관 > 나의도서관 > 제2열람실</title>
+<title>라온도서관 > 나의도서관 > 좌석예약/조회 > 제2열람실</title>
 <link rel="stylesheet" href="/resources/css/mylib/sub3/readingRoom2_sb_page.css">
 <link rel="stylesheet" href="/resources/css/mylib/sub3/readingRoom2.css">
 <link rel="stylesheet" href="/resources/css/header.css">
@@ -48,7 +48,10 @@
                             <a href="/mylib/loan-history">나의도서관</a>
                         </li>
                         <li>
-                            <a href="/mylib/readingRoom2">좌석예약/조회</a>
+                            <a href="/mylib/reservationRoomPage">좌석예약/조회</a>
+                        </li>
+                        <li>
+                            <a href="/mylib/readingRoom2">제2열람실</a>
                         </li>
                     </ul>
 

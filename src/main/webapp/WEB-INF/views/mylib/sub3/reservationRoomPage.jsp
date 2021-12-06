@@ -11,7 +11,7 @@
 	<link rel="stylesheet" href="/resources/css/mylib/sub3/reservationRoomPage.css">
 	<link rel="stylesheet" href="/resources/css/header.css">
 	<link rel="stylesheet" href="/resources/css/footer.css">
-<title>라온도서관 > 나의 도서관 > 좌석예약/조회</title>
+<title>라온도서관 > 나의 도서관 > 좌석예약/조회 > 열람실이용안내</title>
 
 </head>
 <body>
@@ -38,6 +38,9 @@
                         </li>
                         <li>
                             <a href="/mylib/reservationRoomPage">좌석예약/조회</a>
+                        </li>
+                        <li>
+                            <a href="/mylib/reservationRoomPage">열람실이용안내</a>
                         </li>
                     </ul>
 
