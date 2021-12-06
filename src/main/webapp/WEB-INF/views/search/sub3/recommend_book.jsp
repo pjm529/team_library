@@ -7,6 +7,7 @@
 	<title>라온도서관 > 자료검색 > 추천도서</title>
 </head>
 <link rel="stylesheet" href="/resources/css/search/recommend_book.css">
+<link rel="stylesheet" href="/resources/css/header.css">
 <link rel="stylesheet" href="/resources/css/footer.css">
 <script
   src="https://code.jquery.com/jquery-3.6.0.js"
@@ -22,6 +23,10 @@
 	<input type="hidden" class="user_id" value="">
 	</sec:authorize>
 	
+	<div class="header">
+    <jsp:include page="../../header.jsp"></jsp:include>
+    </div>
+    
     <div class="container">
         <div class="sub_title">
             <div class="doc-info">

@@ -11,6 +11,7 @@
 <title>라온도서관 > 나의도서관 > 제2열람실</title>
 <link rel="stylesheet" href="/resources/css/mylib/sub3/readingRoom2_sb_page.css">
 <link rel="stylesheet" href="/resources/css/mylib/sub3/readingRoom2.css">
+<link rel="stylesheet" href="/resources/css/header.css">
     <style>
         .seat-list-row {
             width: 100%;
@@ -25,8 +26,11 @@
 </head>
 <body>
 	<input type="hidden" class="reserve_no" value="${room2_info.seat_no}">
-    <%-- <sec:authentication property="principal.dto.user_id" /> --%>
 
+	<div class="header">
+    <jsp:include page="../../header.jsp"></jsp:include>
+    </div>
+    
     <div class="container">
         <div class="sub_title">
             <div class="doc-info">

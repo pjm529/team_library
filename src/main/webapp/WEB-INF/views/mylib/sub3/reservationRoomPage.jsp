@@ -9,12 +9,17 @@
 <head>
 <meta charset="UTF-8">
 	<link rel="stylesheet" href="/resources/css/mylib/sub3/reservationRoomPage.css">
+	<link rel="stylesheet" href="/resources/css/header.css">
 	<link rel="stylesheet" href="/resources/css/footer.css">
 <title>라온도서관 > 나의 도서관 > 좌석예약/조회</title>
 
 </head>
 <body>
-
+	
+	<div class="header">
+    <jsp:include page="../../header.jsp"></jsp:include>
+    </div>
+		
 	<div class="container">
         <div class="sub_title">
             <div class="doc-info">

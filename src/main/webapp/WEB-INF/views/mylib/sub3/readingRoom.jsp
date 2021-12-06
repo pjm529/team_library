@@ -8,12 +8,17 @@
 	<title>라온도서관 > 나의도서관 > 제1열람실</title>
 	<link rel="stylesheet" href="/resources/css/mylib/sub3/readingRoom1_sb_page.css">
 	<link rel="stylesheet" href="/resources/css/mylib/sub3/readingRoom1.css">
+	<link rel="stylesheet" href="/resources/css/header.css">
 
 </head>
 <body>
 
 	<input type="hidden" class="reserve_no" value="${mySeatInfo.seat_no}">
 	
+	<div class="header">
+    <jsp:include page="../../header.jsp"></jsp:include>
+    </div>
+    
     <div class="container">
         <div class="sub_title">
             <div class="doc-info">

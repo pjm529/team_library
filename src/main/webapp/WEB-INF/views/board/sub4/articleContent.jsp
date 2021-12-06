@@ -6,9 +6,19 @@
 <head>
    <title>라온도서관 > 열린공간 > 분실물찾기</title>
 <link rel="stylesheet" href="/resources/css/board/sub4/content_page.css">
+<link rel="stylesheet" href="/resources/css/header.css">
 </head>
+<script
+  src="https://code.jquery.com/jquery-3.6.0.js"
+  integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk=" 
+  crossorigin="anonymous"></script>
 <body>
-<div class="container">
+	
+	<div class="header">
+    <jsp:include page="../../header.jsp"></jsp:include>
+    </div>
+	
+	<div class="container">
         <div class="sub_title">
             <div class="doc-info">
                 <!-- doc title -->
@@ -209,8 +219,6 @@
         </div>
     </div>
     
-<script src="https://code.jquery.com/jquery-3.6.0.js" integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk=" crossorigin="anonymous"></script>
-
 <script>
 
     $(document).ready(function () {

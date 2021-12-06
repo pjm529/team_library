@@ -6,6 +6,7 @@
 <meta charset="UTF-8">
 <title>라온도서관 > 회원관련 > 아이디찾기</title>
 <link rel="stylesheet" href="/resources/css/member/search_id.css">
+<link rel="stylesheet" href="/resources/css/header.css">
 <link rel="stylesheet" href="/resources/css/footer.css">
 <script src="https://code.jquery.com/jquery-3.6.0.js" 
  integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk="
@@ -14,6 +15,7 @@
 <body>
 
     <div class="header">
+    <jsp:include page="../../header.jsp"></jsp:include>
     </div>
 
     <div class="container">

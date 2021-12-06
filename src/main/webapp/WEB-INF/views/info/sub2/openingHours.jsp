@@ -6,8 +6,17 @@
 <head>
 	<title>라온도서관 > 이용안내 > 이용시간 및 휴관일</title>
 	<link rel="stylesheet" href="/resources/css/info/sb_page.css">
+	<link rel="stylesheet" href="/resources/css/header.css">
 </head>
+<script
+  src="https://code.jquery.com/jquery-3.6.0.js"
+  integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk=" 
+  crossorigin="anonymous"></script>
 <body>
+
+	<div class="header">
+    <jsp:include page="../../header.jsp"></jsp:include>
+    </div>
 
     <div class="container">
         <div class="sub_title">

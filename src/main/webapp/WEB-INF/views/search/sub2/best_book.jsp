@@ -6,6 +6,7 @@
 	<title>라온도서관 > 자료검색 > 도서검색</title>
 </head>
 <link rel="stylesheet" href="/resources/css/search/book.css">
+<link rel="stylesheet" href="/resources/css/header.css">
 <link rel="stylesheet" href="/resources/css/footer.css">
 <script
   src="https://code.jquery.com/jquery-3.6.0.js"
@@ -14,6 +15,10 @@
 
 <body>
 
+	<div class="header">
+    <jsp:include page="../../header.jsp"></jsp:include>
+    </div>
+	
     <div class="container">
         <div class="sub_title">
             <div class="doc-info"> 

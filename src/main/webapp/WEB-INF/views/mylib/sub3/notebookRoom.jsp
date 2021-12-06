@@ -10,6 +10,7 @@
 <meta charset="UTF-8">
 	<link rel="stylesheet" href="/resources/css/mylib/sub3/nbRoom_sb_page.css">
 	<link rel="stylesheet" href="/resources/css/mylib/sub3/notebookRoom.css">
+	<link rel="stylesheet" href="/resources/css/header.css">
 	<link rel="stylesheet" href="/resources/css/footer.css">
    <style>
         .seat-wrapper {
@@ -22,7 +23,11 @@
 </head>
 <body>
 	<input type="hidden" class="reserve_no" value="${nbRoom_info.seat_no}">
-
+	
+	<div class="header">
+    <jsp:include page="../../header.jsp"></jsp:include>
+    </div>
+    
     <div class="container">
         <div class="sub_title">
             <div class="doc-info">
