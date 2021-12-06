@@ -2,12 +2,12 @@
     pageEncoding="UTF-8"%>
  <div class="lnb">
     <h2>
-        <b>나의 도서관</b>
+        <b>나의도서관</b>
     </h2>
     <ul class="subMenu">
     
     	<li class="sub1">
-    	 	<a href="/mylib/loan-history">도서관련</a>
+    	 	<a href="/mylib/loan-history">도서관련　　　　　<b>+</b></a>
     	 	
     	 	<ul class="sub">
                <li class="submenu1">
@@ -21,19 +21,26 @@
            
     	</li>
         <li class="sub2">
-            <a href="#">희망도서신청</a>
+            <a href="/mylib/hope">희망도서신청　　　<b>+</b></a>
+            
+            <ul class="sub">
+               <li class="submenu6">
+                   <a href="/mylib/hope">희망도서신청</a>
+               </li>
+               
+               <li class="submenu7">
+                   <a href="/mylib/hope-history">희망도서신청내역</a>
+               </li>
+           </ul>
+           
         </li>
         
         <li class="sub3">
             <a href="/mylib/reservationRoomPage">좌석예약/조회</a>
         </li>
         
-        <li class="sub4">
-            <a href="#">문화강좌신청/조회</a>
-        </li>
-        
         <li class="sub5">
-            <a href="/mylib/mypage">개인정보</a>
+            <a href="/mylib/mypage">개인정보　　　　　<b>+</b></a>
             
             <ul class="sub">
                <li class="submenu3">
