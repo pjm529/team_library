@@ -1,14 +1,17 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn" %>
+<%@ taglib uri="http://www.springframework.org/security/tags" prefix="sec" %>
 <%@ page session="false" %>
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
 <head>
 <title>라온도서관 > 묻고답하기 > 본문</title>
-<link rel="stylesheet" href="/resources/css/board/sub3/qna_content_page.css">
+	<link rel="stylesheet" href="/resources/css/board/sub3/qna_content_page.css">
+	<link rel="stylesheet" href="/resources/css/footer.css">
 </head>
 <body>
+
 
     <div class="container">
         <div class="sub_title">
@@ -60,7 +63,7 @@
                                         <!-- 작성자 | 작성일 | 조회수 -->
                                         <tr>
                                             <th class="first">작성자</th>
-                                            <td style="width: 15%;">${dto.writer_id}</td>
+                                            <td style="width: 15%;">${dto.writer_name}</td>
                                             <th class="first">작성일</th>
                                             <td>${fn:substring(dto.enquiry_reg_date, 0, 11)}</td>
                                             <th class="first">조회수</th>
@@ -90,8 +93,9 @@
                                 	</form>
                                 </div>
                                 
+                                   
                                 <div class="delete_wrap">
-	                               <form action="/board/qnaBoardDelete" method="get" onsubmit="return false" class="delete_form">
+	                               <form action="/board/qnaBoardDelete" method="post" onsubmit="return false" class="delete_form">
 	                               		<input type="hidden" name="enquiry_no" value="${dto.enquiry_no}">
 	                               		<input type="hidden" name="amount" value="${cri.amount}">
 	                               		<input type="hidden" name="page" value="${cri.page}">
@@ -102,7 +106,7 @@
 	                            </div>
                                 
 								<div class="update_wrap">
-									<form action="/board/qnaBoardEdit" method="get">
+									<form action="/board/qnaBoardEdit" method="post">
 	                               		<input type="hidden" name="enquiry_no" value="${dto.enquiry_no}">
 	                               		<input type="hidden" name="amount" value="${cri.amount}">
 	                               		<input type="hidden" name="page" value="${cri.page}">
@@ -121,8 +125,7 @@
                                 		<input type="hidden" name="keyword" value="${cri.keyword}">
 	                               		<button class="update_btn" style="margin-right: 20px;">답변하기</button>
 	                               	</form>
-								</div>            
-								          
+								</div>
 
                             </div>
 
@@ -136,13 +139,15 @@
         </div>
     </div>
 
+    <!-- footer -->
+    <jsp:include page="../../footer.jsp"></jsp:include>
 
 <script src="https://code.jquery.com/jquery-3.6.0.js" integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk=" crossorigin="anonymous"></script>
 <script>
 	$(function() {
 		
 		$(".sub3").addClass("active");
-				
+		
 		
 		var moveForm = $(".moveForm");
 		
@@ -154,14 +159,12 @@
 				$(".delete_form").submit();
 			}else{
 			}
-		})
+		});
 				
-	})
+	});
 	
-</script>  
-    
-<script>
-	function noEvent() {
+	
+	function noEvent() { // 새로고침 조회 수 + 방지
 		if (event.keyCode == 116) {
 			event.keyCode= 2;
 			return false;
@@ -171,7 +174,7 @@
 	}
 	
 	document.onkeydown = noEvent;
-</script>
+</script>  
 
 </body>
 </html>

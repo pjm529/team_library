@@ -17,13 +17,16 @@ public interface EnquiryBoardMapper {
 	public void enquiryBoardInsert(EnquiryBoardDTO dto);
 	public void enquiryBoardUpdate(EnquiryBoardDTO dto);
 	public void enquiryBoardDelete(Long enquiry_no);
-	
+	public String id_duplicate(String enquiry_no);
 	
 
 	/* 게시판(페이징) / 총 게시물 / 게시판 정렬 */
 	public List<EnquiryBoardDTO> getListPage(Criteria cri);
 	public int getTotal(Criteria cri);
 	public void reset();
+	
+	/* 관리자 계정 확인 */
+	public int check_admin(String user_id);
 
 }
 

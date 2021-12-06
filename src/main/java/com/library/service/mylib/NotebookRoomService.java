@@ -6,28 +6,41 @@ import com.library.model.mylib.NoteBookRoomDTO;
 
 public interface NotebookRoomService {
 
-	public List<NoteBookRoomDTO> seats_list_all();
-	public NoteBookRoomDTO reservation_info(String user_id);
+	/* 좌석 정보 출력(전체 | 로그인한 기준) */
+	/* 전체 좌석 조회 */
+	public List<NoteBookRoomDTO> nbRoom_list_all();
+	/* 예약 좌석 정보 */
+	public NoteBookRoomDTO nbRoom_info(String user_id);
 	
+	
+	/* 예약 | 좌석 이동 | 퇴실 | 좌석 시간 연장 */
 	/* 좌석 예약 */
-	public void nb_seat_booking(NoteBookRoomDTO dto);
-	public void updateStatusOccupied(NoteBookRoomDTO dto);
+	public void nbRoom_booking(NoteBookRoomDTO dto);
+	/* 좌석 상태 체크 */
+	public int nb_seat_check(String seat_no);
 	
-	/* 좌석 반납&퇴실 */
-	public void nb_seat_return(NoteBookRoomDTO dto);
-	public void updateStatusVacant(NoteBookRoomDTO dto);
+	/* 좌석 이동 */
+	public void nbRoom_moveSeat(NoteBookRoomDTO dto);
 	
-	/* 좌석 연장 */
-	public void nb_seat_extend(NoteBookRoomDTO dto);
+	/* 좌석 반납 */
+	public void nbRoom_delete(String user_id);
 	
-	/* 좌석 자동 반납 */
-	public void updateNotebook_Room_RentalTable();
-	public void updateNotebook_RoomTable();
+	/* 좌석 시간 연장 */
+	public void nbRoom_extend(String user_id);
 	
-	/* 잔여좌석 */
-	public int usingSeat();
 	
-	/* 사용 좌석 */
-	public int usedSeat();
+	
+	
+	/* Notebook Room 좌석 setting */
+	public void insert(int seat_no);
+
+
+
+
+
+
+
+
+	
 	
 }

@@ -13,78 +13,72 @@ public class NotebookRoomServiceImpl implements NotebookRoomService {
 
 	@Autowired
 	private NotebookRoomMapper nbMapper;
+
+	
+	/* 전체 좌석 출력(Notebook Room) */
+	@Override
+	public List<NoteBookRoomDTO> nbRoom_list_all() {
+		return nbMapper.nbRoom_list_all();
+	}
+	/* 예약 좌석 정보 */
+	@Override
+	public NoteBookRoomDTO nbRoom_info(String user_id) {
+		return nbMapper.nbRoom_info(user_id);
+	}
 	
 	
-	@Override
-	public List<NoteBookRoomDTO> seats_list_all() {
-		return nbMapper.seats_list_all();
-	}
-
-	@Override
-	public NoteBookRoomDTO reservation_info(String user_id) {
-		return nbMapper.reservation_info(user_id);
-	}
-
-
+	
+	/* 예약 | 좌석 이동 | 반납 | 좌석 시간 연장 */
 	/* 좌석 예약 */
 	@Override
-	public void nb_seat_booking(NoteBookRoomDTO dto) {
-		nbMapper.nb_seat_booking(dto);
+	public void nbRoom_booking(NoteBookRoomDTO dto) {
+		nbMapper.nbRoom_booking(dto);
 	}
-
+	/* 좌석 상태 체크 */
 	@Override
-	public void updateStatusOccupied(NoteBookRoomDTO dto) {
-		nbMapper.updateStatusOccupied(dto);
+	public int nb_seat_check(String seat_no) {
+		return nbMapper.nb_seat_check(seat_no);
 	}
+	
+	/* 좌석 이동 */
+	@Override
+	public void nbRoom_moveSeat(NoteBookRoomDTO dto) {
+		nbMapper.nbRoom_moveSeat(dto);
+	}
+	
+	/* 좌석 반납 */
+	@Override
+	public void nbRoom_delete(String user_id) {
+		nbMapper.nbRoom_delete(user_id);
+	}
+	
+	/* 좌석 시간 연장 */
+	@Override
+	public void nbRoom_extend(String user_id) {
+		nbMapper.nbRoom_extend(user_id);
+		
+	}
+	
+	
+	
+	
+	
+	
+	
+	@Override
+	public void insert(int seat_no) {
+		nbMapper.insert(seat_no);
+		
+	}
+	
+	
+	
+
+	
 
 
 	
-	/* 좌석 반납&퇴실 */
-	@Override
-	public void nb_seat_return(NoteBookRoomDTO dto) {
-		nbMapper.nb_seat_return(dto);
-		
-	}
 
-	@Override
-	public void updateStatusVacant(NoteBookRoomDTO dto) {
-		nbMapper.updateStatusVacant(dto);
-		
-	}
-
-	
-	/* 좌석 연장 */
-	@Override
-	public void nb_seat_extend(NoteBookRoomDTO dto) {
-		nbMapper.nb_seat_extend(dto);
-	}
-
-	
-	/* 좌석 자동 반납 */
-	@Override
-	public void updateNotebook_Room_RentalTable() {
-		nbMapper.updateNotebook_Room_RentalTable();
-		
-	}
-
-	@Override
-	public void updateNotebook_RoomTable() {
-		nbMapper.updateNotebook_RoomTable();
-		
-	}
-
-	
-	/* 잔여 좌석 */
-	@Override
-	public int usingSeat() {
-		return nbMapper.usingSeat();
-	}
-
-	@Override
-	public int usedSeat() {
-		// TODO Auto-generated method stub
-		return nbMapper.usedSeat();
-	}
 
 
 

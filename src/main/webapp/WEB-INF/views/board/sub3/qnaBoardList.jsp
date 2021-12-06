@@ -7,8 +7,8 @@
 <head>
 	<title>라온도서관 > 열린공간 > 묻고답하기</title>
 </head>
-<link rel="stylesheet" href="/resources/css/board/sub3/qna_page.css">
-<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.14.0/css/all.css" integrity="sha384-HzLeBuhoNPvSl5KYnjx0BT+WB0QEEqLprO+NBkkk5gbc67FTaL7XIGa2w1L0Xbgc" crossorigin="anonymous">
+	<link rel="stylesheet" href="/resources/css/board/sub3/qna_page.css">
+	<link rel="stylesheet" href="/resources/css/footer.css">
 <body>
 
 
@@ -223,7 +223,7 @@
 		<input type="hidden" name="type" value="${pageMaker.cri.type}">
 	</form>
 	
-	<form action="/board/qnaBoardContent" method="get" class="moveForm2">
+	<form action="/board/qnaBoardContent" method="post" class="moveForm2">
 		<input type="hidden" name="page" value="${pageMaker.cri.page}">
 		<input type="hidden" name="amount" value="${pageMaker.cri.amount}">
 		<input type="hidden" name="keyword" value="${pageMaker.cri.keyword}">
@@ -231,6 +231,11 @@
 		<input type="hidden" name="enquiry_no" value="">
 		<input type="hidden" name="answer_no" value="">
 	</form>
+
+
+    <!-- footer -->
+    <jsp:include page="../../footer.jsp"></jsp:include>
+
 	
 <script src="https://code.jquery.com/jquery-3.6.0.js" integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk=" crossorigin="anonymous"></script>
 <script>

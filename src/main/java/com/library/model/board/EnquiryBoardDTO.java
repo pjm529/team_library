@@ -17,4 +17,5 @@ public class EnquiryBoardDTO {
 	
 	private AnswerBoardDTO answerList;
 
+	private int count; // 관리자 계정 확인
 }

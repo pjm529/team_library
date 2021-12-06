@@ -1,5 +1,7 @@
 package com.library.controller.mylib;
 
+import java.security.Principal;
+import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
 
@@ -7,8 +9,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.library.model.mylib.NoteBookRoomDTO;
 import com.library.service.mylib.NotebookRoomService;
@@ -19,99 +23,109 @@ public class NotebookRoomController {
 
 	@Autowired
 	private NotebookRoomService nbService;
-	
-	@GetMapping("/sub3MainPage")
-	public String sub3MainPage(Model model) {
-		
-		int usingSeat = nbService.usingSeat();
-		model.addAttribute("usingSeat", usingSeat);
-		
-		int usedSeat = nbService.usedSeat();
-		model.addAttribute("usedSeat", usedSeat);
-		
-		return "/mylib/sub3/sub3MainPage";
-	}
-	
 
-
-	/* 좌석 리스트 출력 */
+	/* 전체 좌석 출력(NotebookRoom) | 로그인 된 아이디와 비교 */
 	@GetMapping("/notebookRoom")
-	public String seatsList(Model model) {
-		
-		/* 반납 시간 지난 자리 자동 비움 */
-		nbService.updateNotebook_RoomTable();
-		nbService.updateNotebook_Room_RentalTable();
+	public String notebookRoomList(Model model, Principal principal) {
 
-		List<NoteBookRoomDTO> notebookRoomlist = nbService.seats_list_all();
+		List<NoteBookRoomDTO> notebookRoomlist = nbService.nbRoom_list_all();
 		model.addAttribute("notebookRoomlist", notebookRoomlist);
 
-		// 세션 id
-		String user_id = "id";
+		/* 로그인 된 ID */
+		String user_id = principal.getName();
+		model.addAttribute("login_id", user_id);
 
-		if (nbService.reservation_info(user_id) == null) {
-
+		NoteBookRoomDTO nbRoom_info = nbService.nbRoom_info(user_id);
+		
+		if(nbRoom_info == null) {
 			return "/mylib/sub3/notebookRoom";
-
-		} else {
-			NoteBookRoomDTO reservation_info = nbService.reservation_info(user_id);
-
+		}else {
 			Date now = new Date();
-
-			reservation_info.setDiff_time(reservation_info.getReturn_time().getTime() - now.getTime());
-
-			model.addAttribute("reservation_info", reservation_info);
+			nbRoom_info.setDiff_time(nbRoom_info.getCheckout_time().getTime() - now.getTime());
+			model.addAttribute("nbRoom_info", nbRoom_info);
 		}
-
+		
 		return "/mylib/sub3/notebookRoom";
-	}
 
+	}
+	
+	
+	
+	/* 예약 | 좌석 이동 | 반납 | 좌석 시간 연장 */
 	/* 좌석 예약 */
-	@GetMapping("/nb_seat_booking")
-	public String notebookRoom_booking(NoteBookRoomDTO dto) {
+	@PostMapping("/nbRoom_booking")
+	public String nbRoom_booking(NoteBookRoomDTO dto, Principal principal) {
+		
+		SimpleDateFormat fmt = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+		Date now = new Date();
+		String nowTime = fmt.format(now);
+		
+		// 현재 시간
+	    int hours = Integer.parseInt(nowTime.substring(11, 13));
+	    
+	    // 현재 시간이 9 ~ 17시일 경우 예약
+	    if(hours > 8 && hours < 18) {
+			String user_id = principal.getName();
+			dto.setUser_id(user_id);
+			
+			nbService.nbRoom_booking(dto);
+	    }
+	    
+		return "redirect:/mylib/notebookRoom";
+	}
 
-		dto.setUser_id("id");
-
-		nbService.nb_seat_booking(dto);
-		nbService.updateStatusOccupied(dto);
-
+	
+	@ResponseBody
+	@PostMapping("/nb_seat_check")
+	public String nb_seat_check(@RequestParam String seat_no) {
+		int result = nbService.nb_seat_check(seat_no);
+		
+		if(result == 1) {
+			return "success";
+		}else {
+			return "fail";
+		}
+	}
+	
+	/* 좌석 이동 */
+	@PostMapping("nbRoom_moveSaet")
+	public String nbRoom_moveSaet(NoteBookRoomDTO dto, Principal principal) {
+		
+		String user_id = principal.getName();
+		
+		dto.setUser_id(user_id);
+		nbService.nbRoom_delete(user_id);
+		nbService.nbRoom_booking(dto);
+		
 		return "redirect:/mylib/notebookRoom";
 	}
 	
 	
-	/* 좌석 자리 이동 */
-	@GetMapping("/nbMoveSeat")
-	public String moveSeat(NoteBookRoomDTO dto, @RequestParam("newSeat_no") int newSeat_no) {
-		
-		nbService.nb_seat_return(dto);
-		nbService.updateStatusVacant(dto);
-		
-		dto.setUser_id("id3");
-		dto.setSeat_no(newSeat_no);
-		
-		nbService.nb_seat_booking(dto);
-		nbService.updateStatusOccupied(dto);
+	/* 좌석 반납 */
+	@PostMapping("nbRoom_delete")
+	public String nbRoom_delete(Principal principal) {
+
+		String user_id = principal.getName();
+		nbService.nbRoom_delete(user_id);
 		
 		return "redirect:/mylib/notebookRoom";
 	}
-
-
-	/* 좌석 반납&퇴실 */
-	@GetMapping("/nb_seat_return")
-	public String nb_seat_return(NoteBookRoomDTO dto) {
-
-		nbService.nb_seat_return(dto);
-		nbService.updateStatusVacant(dto);
-
-		return "redirect:/mylib/notebookRoom";
-	}
-
+	
+	
 	/* 좌석 연장 */
-	@GetMapping("/nb_seat_extend")
-	public String nb_seat_extend(NoteBookRoomDTO dto) {
-
-		nbService.nb_seat_extend(dto);
-
+	@PostMapping("/nbRoom_extend")
+	public String nbRoom_extend(Principal principal) {
+		
+		String user_id = principal.getName();
+		
+		nbService.nbRoom_extend(user_id);
+		
 		return "redirect:/mylib/notebookRoom";
+		
 	}
+	
+	
+	
+	
 
 }

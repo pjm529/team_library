@@ -185,6 +185,9 @@ td{
     cursor: pointer;
 }
 
+.reserve_btn{
+	float: right;
+}
 
 
 /* ====== 예약 o 테이블 =========== */

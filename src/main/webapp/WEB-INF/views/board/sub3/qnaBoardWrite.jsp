@@ -2,11 +2,13 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
 <%@ page session="false" %>
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ taglib uri="http://www.springframework.org/security/tags" prefix="sec" %>
 <!DOCTYPE html>
 <html>
 <head>
 <title>라온도서관 > 묻고답하기 > 글 작성</title>
-<link rel="stylesheet" href="/resources/css/board/sub3/qna_write_page.css">
+	<link rel="stylesheet" href="/resources/css/board/sub3/qna_write_page.css">
+	<link rel="stylesheet" href="/resources/css/footer.css">
 </head>
 <body>
 
@@ -48,8 +50,8 @@
                             <!-- 테이블 -->
                             <div class="table-wrap">
                                 <form action="/board/qnaBoardInsert" method="post">
-                                	<input type="hidden" name="writer_id" value="writer_id">
-                                    <input type="hidden" name="writer_name" value="writer_name">
+                                    <input type="hidden" name="writer_name" 
+                                    value="<sec:authentication property="principal.dto.user_name"/>">
                                     
                                     <table class="bbs-edit">
                                         <tbody>
@@ -63,7 +65,7 @@
                                             </tr>
                                             <tr>
                                                 <th class="first">작성자</th>
-                                                <td>관리자</td>
+                                                <td><sec:authentication property="principal.dto.user_name"/></td>
                                                 <th class="first">작성일</th>
                                                 <td>
                                                 <fmt:formatDate value="${now}" pattern="yyyy-MM-dd"/>
@@ -99,7 +101,8 @@
         </div>
     </div>
 
-
+    <!-- footer -->
+    <jsp:include page="../../footer.jsp"></jsp:include>
 
 <script src="https://code.jquery.com/jquery-3.6.0.js"
  integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk=" crossorigin="anonymous"></script>

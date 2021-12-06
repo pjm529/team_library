@@ -6,7 +6,7 @@ import lombok.Data;
 
 @Data
 public class AnswerBoardDTO {
-
+	
 	private Long answer_no;
 	private Long enquiry_no;
 	private String answer_title;
@@ -15,4 +15,6 @@ public class AnswerBoardDTO {
 	private String a_writer_name;
 	private int answer_hits;
 	private Timestamp answer_reg_date;
+	private String writer_id;
+	
 }

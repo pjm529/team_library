@@ -226,6 +226,11 @@ table input{
     border: 1px solid #ddd;
 }
 
+textarea{
+	width: 100%;
+	height: 300px;
+}
+
 
 /* 글쓰기 / 수정하기 / 삭제하기 btn */
 .write_btn, .update_btn, .delete_btn{

@@ -8,10 +8,8 @@
 <html>
 <head>
 <meta charset="UTF-8">
-	<link rel="stylesheet" href="/resources/css/mylib/sub3/sub3_main_page.css">
-	<link rel="stylesheet" href="/resources/css/mylib/sub3/calendar.css">
-
-
+	<link rel="stylesheet" href="/resources/css/mylib/sub3/reservationRoomPage.css">
+	<link rel="stylesheet" href="/resources/css/footer.css">
 <title>라온도서관 > 나의 도서관 > 좌석예약/조회</title>
 
 </head>
@@ -34,7 +32,7 @@
                             <a href="#">나의 도서관</a>
                         </li>
                         <li>
-                            <a href="#">좌석예약/조회</a>
+                            <a href="/mylib/reservationRoomPage">좌석예약/조회</a>
                         </li>
                     </ul>
 
@@ -50,13 +48,35 @@
                 <!-- 본문 -->
                 <div class="content">
                     <div class="doc">
-
-                        <!-- 나의 예약 현황 btn -->
                         <div style="padding: 15px;">
+                        	<!-- 열람실 이용 안내 -->
+	                        <div class="service-wrap">
+	                        	<h2><u>열람실 이용 안내</u></h2>
+	                            <div class="service-info">
+	                                <h3 style="margin-top: 10px;">이용시간</h3>
+	                                <ul class="con">
+	                                    <li>09:00 ~ 18:00</li>
+	                                </ul>
+	
+	                                <h3>유의사항</h3>
+	                                <ul class="con" style="margin-bottom: 20px;">
+	                                    <li>열람실 이용 시간은 기본 3시간이며, 연장할 경우 2시간 단위로 이용 가능합니다.</li>
+	                                    <li>대출 자료를 30일 이상 장기연체 중인 이용자는 열람실 예약이 불가합니다.</li>
+	                                    <li>흡연 및 음식물 반입을 금지합니다.</li>
+	                                    <li>실내에서는 정숙하여 주십시오.</li>
+	                                    <li>고의로 비품 및 시설을 훼손할 경우에는 변상 조치합니다.</li>
+	                                    <li>학습 이외의 용도 사용 및 유의사항 위반 시 퇴실 조치합니다.</li>
+	                                    <li>다음 이용자를 위하여 깨끗이 정리, 정돈해 주십시오.</li>
+	                                </ul>
+	                            </div>
+	                        </div>
+                        
+                        	<!-- 나의 예약 현황 btn -->
                             <div class="my-booking-status">
                                 <button class="my_info_btn" onclick="my_info_btn();">나의 예약현황</button>
                             </div>
-
+							
+							<!-- 좌석 배정 table -->
                             <div class="room-seat">
                                 <h3>좌석배정</h3>
                                 <table class="seat-info">
@@ -75,9 +95,9 @@
                                         <tr>
                                             <td class="room-name">제 1열람실</td>
                                             <td class="align-center">54</td>
-                                            <td class="align-right">52</td>
+                                            <td class="align-right">${rd1Room_usingSeat}</td>
                                             <td class="progress">
-                                                <progress value="2" max="54"></progress>
+                                                <progress value="${rd1Room_usedSeat}" max="54"></progress>
                                             </td>
                                             <td class="percent">
                                             	<div id="rd1UsedSeat"></div>
@@ -90,9 +110,9 @@
                                         <tr>
                                             <td class="room-name">제 2열람실</td>
                                             <td class="align-center">42</td>
-                                            <td class="align-right">41</td>
+                                            <td class="align-right">${rd2Room_usingSeat}</td>
                                             <td class="progress">
-                                                <progress value="40" max="100"></progress>
+                                                <progress value="${rd2Room_usedSeat}" max="42"></progress>
                                             </td>
                                             <td class="percent">
                                             	<div id="rd2UsedSeat"></div>
@@ -105,9 +125,9 @@
                                         <tr>
                                             <td class="room-name">노트북실</td>
                                             <td class="align-center">28</td>
-                                            <td class="align-right">${usingSeat}</td>
+                                            <td class="align-right">${nbRoom_usingSeat}</td>
                                             <td class="progress">
-                                                <progress value="${usedSeat}" max="28"></progress>
+                                                <progress value="${nbRoom_usedSeat}" max="28"></progress>
                                             </td>
                                             <td class="percent">
                                             	<div id="nbUsedSeat"></div>
@@ -118,48 +138,20 @@
                                             </td>
                                         </tr>
                                     </tbody>
-
                                 </table>
-
-                                <div class="calendar">
-                                    <h3>세미나실</h3>
-                                    <div class="header">
-                                        <div class="nav">
-                                            <button class="nav-btn go-prev" onclick="prevMonth();">&lt;</button>
-                                            <button class="nav-btn go-next" onclick="nextMonth();">&gt;</button>
-                                        </div>
-                                        <div class="year-month"></div>
-                                        <div class="nav">
-                                            <button class="nav-btn go-today" onclick="goToday();">오늘</button>
-                                        </div>
-                                    </div>
-
-                                    <div class="main">
-                                        <div class="days">
-                                            <div class="day">일</div>
-                                            <div class="day">월</div>
-                                            <div class="day">화</div>
-                                            <div class="day">수</div>
-                                            <div class="day">목</div>
-                                            <div class="day">금</div>
-                                            <div class="day line-none">토</div>
-                                        </div>
-                                        <div class="dates"></div>
-                                    </div>
-
-                                </div>
-
                             </div>
-
+                            
+                            
 
                         </div>
-
                     </div>
                 </div>
             </div>
-
         </div>
-
+        
+	    <!-- footer -->
+	    <jsp:include page="../../footer.jsp"></jsp:include>
+    
     </div>
 
 
@@ -167,18 +159,45 @@
     <script src="https://code.jquery.com/jquery-3.6.0.js"
         integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk=" crossorigin="anonymous"></script>
 
-    <script src="/resources/js/mylib/sub3/sub3_main_page.js"></script>
-
-
-
 	<script>
 	$(document).ready(function() {
 		
-		var usedSeat = "<c:out value='${usedSeat}'/>";
+		$(".sub3").addClass("active");
+		
+		var usedSeat = "<c:out value='${nbRoom_usedSeat}'/>";
 		var percent = (usedSeat/28) * 100;
 		$('#nbUsedSeat').html(percent.toFixed(0) + "%");
 		
+		var rd1_usedSeat = "<c:out value='${rd1Room_usedSeat}'/>";
+		var rd1_percent = (rd1_usedSeat/28) * 100;
+		$('#rd1UsedSeat').html(rd1_percent.toFixed(0) + "%");
+		
+		var rd2_usedSeat = "<c:out value='${rd2Room_usedSeat}'/>";
+		var rd2_percent = (rd2_usedSeat/28) * 100;
+		$('#rd2UsedSeat').html(rd2_percent.toFixed(0) + "%");
+		
 	}); 
+	
+	
+	/* 기준 위 부터 아래로 == 나의 예약 현황 | 좌석 배정 | 세미나실 */
+
+	// 나의 예약 현황 btn 속성 추가
+	function my_info_btn(){
+		location.href = "/mylib/myReservationInfo";
+	}
+
+	// 좌석 배정 상세 btn 속성 추가
+	function rdRoom() {
+		location.href = "/mylib/readingRoom";
+	}
+
+	function rdRoom2() {
+		location.href = "/mylib/readingRoom2";
+	}
+
+	function nbRoom(){
+		location.href = "/mylib/notebookRoom";
+	}
 	</script>
 
 </body>

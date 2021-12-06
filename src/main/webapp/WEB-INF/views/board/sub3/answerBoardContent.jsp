@@ -6,7 +6,8 @@
 <html>
 <head>
 <title>라온도서관 > 묻고답하기 > 본문</title>
-<link rel="stylesheet" href="/resources/css/board/sub3/answer_content_page.css">
+	<link rel="stylesheet" href="/resources/css/board/sub3/answer_content_page.css">
+	<link rel="stylesheet" href="/resources/css/footer.css">
 </head>
 <body>
 
@@ -60,7 +61,7 @@
                                         <!-- 작성자 | 작성일 | 조회수 -->
                                          <tr>
                                             <th class="first">작성자</th>
-                                            <td style="width: 15%;">${dto.a_writer_id}</td>
+                                            <td style="width: 15%;">${dto.a_writer_name}</td>
                                             <th class="first">작성일</th>
                                             <td>${fn:substring(dto.answer_reg_date, 0, 11)}</td>
                                             <th class="first">조회수</th>
@@ -124,7 +125,10 @@
         </div>
     </div>
 
-
+    <!-- footer -->
+    <jsp:include page="../../footer.jsp"></jsp:include>
+    
+    
 <script src="https://code.jquery.com/jquery-3.6.0.js" integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk=" crossorigin="anonymous"></script>
 <script>
 	$(function() {
