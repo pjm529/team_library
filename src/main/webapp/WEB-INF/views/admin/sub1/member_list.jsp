@@ -148,6 +148,7 @@
                             </div>
 
                             <!-- 테이블 -->
+                            <c:if test="${not empty member_list }">
                             <div class="table-wrap">
                                 <table>
                                     <thead>
@@ -215,9 +216,13 @@
 									</c:if>
 								</div>
                             </div>
+                            </c:if>
 
                         </div>
-
+						<c:if test="${empty member_list }">
+						<br>
+						<h2>조회 된 회원이 없습니다.</h2>
+						</c:if>
                     </div>
 
                 </div>

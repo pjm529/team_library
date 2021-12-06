@@ -57,7 +57,7 @@
                                 <form action="">
                                 	일정년월:
                                     <select name="year" style="width: 75px;">
-                                        <c:forEach var="i" begin="2020" end="2022">
+                                        <c:forEach var="i" begin="2020" end="2025">
                                     		<option value="${i}" ${i== year ? "selected=selected":'' }>
                                     		${i }년
                                     		</option>
@@ -77,7 +77,9 @@
                             </div>
 
                             <!-- 테이블 -->
+                            
                             <div class="table-wrap">
+                            	<c:if test="${not empty list }">
                                 <table>
                                     <thead>
                                         <tr>
@@ -111,6 +113,12 @@
 
                                     </tbody>
                                 </table>
+                                </c:if>
+                                
+                                <c:if test="${empty list }">
+                                <br>
+                                <h2>등록 된 일정이 없습니다.</h2>
+                                </c:if>
 
                                 <br>
 

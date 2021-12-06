@@ -152,6 +152,7 @@
                             </div>
 
                             <!-- 테이블 -->
+                            <c:if test="${not empty loan_list }">
                             <div class="table-wrap">
                                 <table>
                                     <thead>
@@ -215,8 +216,13 @@
                                     </c:if>
                                 </div>
                             </div>
+                            </c:if>
 
                         </div>
+                        <c:if test="${empty loan_list }">
+                        <br>
+                        <h2>조회 된 도서가 없습니다.</h2>
+                        </c:if>
 
                     </div>
 
