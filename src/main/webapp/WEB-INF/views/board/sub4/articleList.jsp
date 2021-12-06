@@ -101,22 +101,6 @@
 							
                          </div>
 						
-						<%-- <div class="search">
-							<form action="/board/articleList" method="get">
-								<input type="hidden" name="page" value="${pageMaker.cri.page}">
-								<input type="hidden" name="amount" value="${pageMaker.cri.amount}">
-								
-								<select name="type">
-									<option value="title">제목</option>
-									<option value="content">내용</option>
-									<option value="TC">제목+내용</option>
-								</select>
-								
-								<input type="text" name="keyword">
-								<input type="submit" value="검색">
-							</form>
-						</div> --%>
-						
                             <!-- 테이블 -->
                             <div class="table-wrap">
                                 <table>

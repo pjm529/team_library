@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
+<%@ taglib uri="http://www.springframework.org/security/tags" prefix="sec" %>
 <%@ page session="false" %>
 <html>
 <head>
@@ -175,7 +176,7 @@
 	                               		<button class="list_btn">목록으로</button>
 	                                </form>
 	                             </div>
-	                             
+	                             <sec:authorize access="hasRole('ROLE_ADMIN')">
 	                             <div class="delete_wrap">  
 	                             	<!-- '삭제하기' 눌렀을 때 처음 봤던 게시물 해당목록 페이지로 가기 --> 
 									<form action="/board/articleDelete" method="get" onsubmit="return confirm('삭제하시겠습니까?');">
@@ -198,14 +199,9 @@
 	                               <button class="update_btn" style="margin-right: 20px;"
 	                                        onclick="location.href='/board/articleModifyForm?article_no=${dto.article_no}&amount=${cri.amount}&page=${cri.page}'">수정하기</button> 
                            
-                           
-                       <!--    <button class="update_btn" style="margin-right: 20px;"
-	                            onclick="modifunc()">수정하기</button>  -->
-                         
                                  
-                                 </div>       
-
-                                
+                                 </div>
+                                 </sec:authorize>       
 
                             </div>
 

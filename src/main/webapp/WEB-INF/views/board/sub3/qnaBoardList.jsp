@@ -137,7 +137,7 @@
  													${eBod.answerList.answer_title}
  												</a>
                                             </td>
-                                            <td>${eBod.answerList.a_writer_name}</td>
+                                            <td>관리자</td>
                                             <td>
                                             	<fmt:formatDate var="answer_reg_date" value="${eBod.answerList.answer_reg_date}" pattern="yyyy-MM-dd"/>
 												${answer_reg_date}

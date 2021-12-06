@@ -81,7 +81,7 @@
                                             </tr>
                                             <tr>
                                                 <th class="first">작성자</th>
-                                                <td>${answer.a_writer_id}</td>
+                                                <td>관리자</td>
                                                 <th class="first">작성일</th>
                                                 <td>
                                                 ${fn:substring(answer.answer_reg_date, 0, 11)}

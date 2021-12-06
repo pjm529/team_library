@@ -62,11 +62,6 @@
 	                                <input type="hidden" name="type" value="${cri.type}">
 	                                <input type="hidden" name="keyword" value="${cri.keyword}">
 	                              	
-	                                
-	                           <!--      <input type="text" name="thumb" id="thumb">
-	                                <input type="text" name="file_name" id="file_name">  -->
-	                        
-	                                    
 	                                    <table class="bbs-edit">
 	                                        <tbody>
 	                                            <tr>
@@ -80,25 +75,14 @@
 	                                                <th class="first">작성자</th>
 	                                                <td>
 	                                                	<input type="hidden" name ="writer_name" value="${dto.writer_name}" readonly="readonly">
-	                                                	<span>${dto.writer_name}</span>
+	                                                	<span>관리자</span>
 	                                                </td>
-	                                             	<%-- <th class="first">권한</th>
-	                                                <td>
-	                                                	<input type="hidden" name ="writer_id" value="${dto.writer_id}" readonly="readonly">
-	                                                </td> --%>
 	                                                <th class="first">작성일</th>
 	                                                <td>
 	                                               		<fmt:formatDate var="article_reg_date" value="${dto.article_reg_date}" pattern="yyyy-MM-dd"/>
 	                                    					${article_reg_date}
 	                                            	</tr>
 	
-	<!--                                             <tr>
-	                                                <th class="first">비밀번호</th>
-	                                                <td colspan="3">
-	                                                    <input type="password" style="width: 30%;" maxlength="10"
-	                                                        placeholder="10자리 이내로 입력해 주세요">
-	                                                </td>
-	                                            </tr> -->
 	                                            <tr>
 	                                                <td colspan="4">
 	                                                    <textarea id="popContent" name="article_content" cols="108"

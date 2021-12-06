@@ -75,7 +75,7 @@
                                             <tr>
                                                 <th class="first">작성자</th>
                                                 <td>
-                                                	<sec:authentication property="principal.dto.user_name"/>
+                                                	관리자
                                                 </td>
                                                 
                                                <!--  <th class="first">권한</th>

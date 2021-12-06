@@ -123,8 +123,9 @@
 	                               		<button class="update_btn" style="margin-right: 20px;">수정하기</button>
 	                               	</form>
 								</div>  
-								          
-								<div class="answer_wrap">
+								
+								<sec:authorize access="hasRole('ROLE_ADMIN')">
+							    <div class="answer_wrap">
 									<form action="/board/answerBoardWrite" method="get">
 	                               		<input type="hidden" name="enquiry_no" value="${dto.enquiry_no}">
 	                               		<input type="hidden" name="amount" value="${cri.amount}">
@@ -134,6 +135,7 @@
 	                               		<button class="update_btn" style="margin-right: 20px;">답변하기</button>
 	                               	</form>
 								</div>
+							    </sec:authorize>
 
                             </div>
 

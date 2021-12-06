@@ -79,7 +79,7 @@
                                             </tr>
                                             <tr>
                                                 <th class="first">작성자</th>
-                                                <td><sec:authentication property="principal.dto.user_name"/></td>
+                                                <td>관리자</td>
                                                 <th class="first">작성일</th>
                                                 <td>
                                                 <fmt:formatDate value="${now }" pattern="yyyy-MM-dd"/>

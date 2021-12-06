@@ -74,8 +74,8 @@
                                             </tr>
                                             <tr>
                                                 <th class="first">작성자</th>
-                                                <td><sec:authentication property="principal.dto.user_name"/></td>
-                                                <th class="first">작성일</th>
+                                                <td>관리자</td>
+                                                <th class="first">작성일</th> 
                                                 <td>${today}</td>
                                             </tr>
                                             <tr>

@@ -258,7 +258,8 @@ public class EnquiryBoardController {
 
 	/* 답글 등록 */
 	@PostMapping("/answerBoardWrite")
-	public String answerBoardWrite(AnswerBoardDTO dto, Criteria cri) {
+	public String answerBoardWrite(AnswerBoardDTO dto, Criteria cri, Principal principal) {
+		dto.setA_writer_id(principal.getName());
 		aBoardService.answerBoardInsert(dto);
 
 		return "redirect:/board/qnaBoardList";

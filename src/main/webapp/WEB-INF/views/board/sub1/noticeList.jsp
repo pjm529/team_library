@@ -118,7 +118,7 @@
                                             <td class="left contentGo" style="padding-left: 15px;">
  												<a href="${noticeList.notice_no}">${noticeList.notice_title}</a>
                                             </td>
-                                            <td>${noticeList.writer_name}</td>
+                                            <td>관리자</td>
                                             <td>
                                             	<fmt:formatDate var="notice_reg_date" value="${noticeList.notice_reg_date}" pattern="yyyy-MM-dd"/>
 												${notice_reg_date}

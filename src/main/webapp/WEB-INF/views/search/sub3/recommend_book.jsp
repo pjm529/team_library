@@ -61,11 +61,13 @@
                 <div class="content">
                     <div class="doc">
                         <div class="wrapper-bbs">
+                        	<sec:authorize access="hasRole('ROLE_ADMIN')">
 							<div>
 								<form>
 	        						<input class="btn add_btn" type="submit" value="등록" style="float:left;">
 	        					</form>
 							</div>
+							</sec:authorize>
                             <!-- 도서 수 -->
                             <div class="inline">
                                 <form action="">

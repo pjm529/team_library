@@ -2,6 +2,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
+<%@ taglib uri="http://www.springframework.org/security/tags" prefix="sec" %>
 <%@ page session="false" %>
 <html>
 <head>
@@ -68,7 +69,7 @@
                                         <!-- 작성자 | 작성일 | 조회수 -->
                                         <tr>
                                             <th class="first">작성자</th>
-                                            <td style="width: 15%;">${noticeContent.writer_name}</td>
+                                            <td style="width: 15%;">관리자</td>
                                             <th class="first">작성일</th>
                                             <td>
                                             	<fmt:formatDate var="notice_reg_date" value="${noticeContent.notice_reg_date}" pattern="yyyy-MM-dd HH:ss"/>
@@ -163,7 +164,7 @@
                                 		<button class="list_btn">목록으로</button>
                                 	</form>
                                 </div>
-                                
+                                <sec:authorize access="hasRole('ROLE_ADMIN')">
                                 <div class="delete_wrap">
 	                               <form action="/board/deleteNotice" method="get" onsubmit="return false" class="delete_form">
 	                               		<input type="hidden" name="notice_no" id="notice_no" value="${noticeContent.notice_no}">
@@ -187,7 +188,8 @@
                                 		<input type="hidden" name="keyword" value="${cri.keyword}">
 	                               		<button class="update_btn" style="margin-right: 20px;">수정하기</button>
 	                               	</form>
-								</div>                      
+								</div>
+								</sec:authorize>                      
 
                             </div>
 

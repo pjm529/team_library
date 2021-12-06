@@ -78,7 +78,7 @@
                                             </tr>
                                             <tr>
                                                 <th class="first">작성자</th>
-                                                <td>${noticeContent.writer_name}</td>
+                                                <td>관리자</td>
                                                 <th class="first">작성일</th>
                                                 <td>${notice_reg_date}</td>
                                             </tr>
