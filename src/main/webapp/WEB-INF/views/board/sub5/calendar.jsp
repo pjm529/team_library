@@ -6,8 +6,8 @@
 <head>
 <title>라온도서관 > 열린공간 > 도서관일정</title>
 </head>
-<link rel="stylesheet" href="/resources/css/search/recommend_book.css">
-<link rel="stylesheet" href="/resources/css/board/sub2/calendar.css">
+<link rel="stylesheet" href="/resources/css/board/sub5/calendar.css">
+<link rel="stylesheet" href="/resources/css/board/sub5/calendar2.css">
 <link rel="stylesheet" href="/resources/css/footer.css">
 <script src="https://code.jquery.com/jquery-3.6.0.js"
 	integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk="
