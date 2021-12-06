@@ -108,7 +108,7 @@
 
 /* 내자리 */
 .mine{
-    background-color: rgb(228, 162, 76);
+    background-color: #ff6600;
     border: 1px solid #e55b00;
     border-radius: 5px;
     cursor: pointer;
