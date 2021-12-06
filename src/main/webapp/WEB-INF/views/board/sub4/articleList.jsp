@@ -19,12 +19,12 @@
                     <ul>
                         <!-- 홈 btn img -->
                         <li class="first" style="background-image: none;">
-                            <a href="#">
+                            <a href="/">
                                 <img src="/resources/imges/common/navi_home_icon.gif">
                             </a>
                         </li>
                         <li>
-                            <a href="#">열린공간</a>
+                            <a href="/board/noticeList">열린공간</a>
                         </li>
                         <li>
                             <a href="/board/articleList">분실물찾기</a>

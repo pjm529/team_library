@@ -24,7 +24,7 @@
                     <ul>
                         <!-- 홈 btn img -->
                         <li class="" style="background-image: none;">
-                            <a href="#">
+                            <a href="/">
                                 <img src="/resources/imges/common/navi_home_icon.gif">
                             </a>
                         </li>
@@ -51,7 +51,6 @@
 
                         <table>
                             
-                            <!-- name -->
                             <tr>
                                 <th class="first">
                                     <span style="color: red;">*</span>

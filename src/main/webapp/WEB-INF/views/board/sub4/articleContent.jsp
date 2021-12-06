@@ -22,10 +22,10 @@
                             </a>
                         </li>
                         <li>
-                            <a href="#">열린공간</a>
+                            <a href="/board/noticeList">열린공간</a>
                         </li>
                         <li>
-                            <a href="/articleList">분실물찾기</a>
+                            <a href="/board/articleList">분실물찾기</a>
                         </li>
                     </ul>
 

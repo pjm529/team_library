@@ -5,7 +5,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-<title>라온도서관 > 묻고답하기 > 본문</title>
+<title>라온도서관 > 열린공간 > 묻고답하기</title>
 	<link rel="stylesheet" href="/resources/css/board/sub3/answer_content_page.css">
 	<link rel="stylesheet" href="/resources/css/footer.css">
 </head>
@@ -25,7 +25,7 @@
                             </a>
                         </li>
                         <li>
-                            <a href="#">열린공간</a>
+                            <a href="/board/noticeList">열린공간</a>
                         </li>
                         <li>
                             <a href="/board/qnaBoardList">묻고답하기</a>

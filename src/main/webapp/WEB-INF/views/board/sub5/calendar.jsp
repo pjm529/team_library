@@ -23,9 +23,8 @@
 					<h3>도서관일정</h3>
 					<ul>
 						<!-- 홈 btn img -->
-						<li class="first" style="background-image: none;"><a
-							href="/search/book"> <img
-								src="/resources/imges/common/navi_home_icon.gif">
+						<li class="first" style="background-image: none;">
+						<a href="/"><img src="/resources/imges/common/navi_home_icon.gif">
 						</a></li>
 						<li><a href="/board/noticeList">열린공간</a></li>
 						<li><a href="/board/calendar">도서관일정</a></li>

@@ -27,7 +27,7 @@
                             <a href="/board/noticeList">열린공간</a>
                         </li>
                         <li>
-                            <a href="/board/notice">공지사항</a>
+                            <a href="/board/noticeList">공지사항</a>
                         </li>
                     </ul>
 

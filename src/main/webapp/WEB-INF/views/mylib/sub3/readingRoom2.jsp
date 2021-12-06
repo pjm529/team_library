@@ -36,7 +36,7 @@
                     <ul>
                         <!-- 홈 btn img -->
                         <li style="background-image: none;">
-                            <a href="#">
+                            <a href="/">
                                 <img src="/resources/imges/common/navi_home_icon.gif">
                             </a>
                         </li>

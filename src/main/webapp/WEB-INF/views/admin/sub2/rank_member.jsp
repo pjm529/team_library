@@ -23,7 +23,7 @@
                     <ul>
                         <!-- 홈 btn img -->
                         <li class="first" style="background-image: none;">
-                            <a href="#">
+                            <a href="/">
                                 <img src="/resources/imges/common/navi_home_icon.gif">
                             </a>
                         </li> 
@@ -52,7 +52,6 @@
                         <div class="wrapper-bbs" style="">
 
                             
-                            <!-- 도서 수 -->
                             <div class="inline">
                                 <form action="">
                                 	검색년월:

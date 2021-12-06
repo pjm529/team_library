@@ -24,12 +24,12 @@
                     <ul>
                         <!-- 홈 btn img -->
                         <li style="background-image: none;">
-                            <a href="#">
+                            <a href="/">
                                 <img src="/resources/imges/common/navi_home_icon.gif">
                             </a>
                         </li>
                         <li>
-                            <a href="#">나의 도서관</a>
+                            <a href="/mylib/loan-history">나의 도서관</a>
                         </li>
                         <li>
                             <a href="/mylib/reservationRoomPage">좌석예약/조회</a>

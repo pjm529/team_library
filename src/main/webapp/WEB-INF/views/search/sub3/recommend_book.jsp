@@ -31,7 +31,7 @@
                     <ul>
                         <!-- 홈 btn img -->
                         <li class="first" style="background-image: none;">
-                            <a href="/search/book">
+                            <a href="/">
                                 <img src="/resources/imges/common/navi_home_icon.gif">
                             </a>
                         </li>
