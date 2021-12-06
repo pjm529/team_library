@@ -104,9 +104,6 @@
 												     </div>
 												      
 												      </div>
-												  
-											
-												    
                                                 </div>
                                             </td>
                                         </tr>
@@ -118,15 +115,11 @@
                                 <table class="article-board">
                                 	<tbody>
                                 		<tr class="board-prev first">
-                                			<td class="first td1">
-                                				<div class="fa-angle-up"></div>	
-                                				<span><img src="/resources/imges/board/sub4/angle_up.png" width=15px; height=15px; style="float: left;"/>이전글</span>
-                                			</td>
+                                			<td class="prev" style="border-right: 1px solid #dee1e7"><img src="/resources/imges/board/sub1/angle_up.png" class="angle"> 이전글</td>
 											
 											
 											<c:if test="${dtoPre.article_no == null}">
-												<td>이전글이 없습니다.</td>
-												<td class="td3"></td>
+												<td class="td2">이전글이 없습니다.</td>
 											</c:if>
 											
 											<c:if test="${dtoPre.article_no != null}">
@@ -134,21 +127,16 @@
 	                                				<input type="hidden" value="${dtoPre.article_no}"> 
 	                                				<a href="/board/articleContent?article_no=${dtoPre.article_no}&amount=${cri.amount}&page=${cri.page}">${dtoPre.article_title}</a>                                				
 	                                			</td>
-	                                			<td class="td3">관리자</td>
                                 			</c:if>
                                 				
                                 			
                                 		</tr>
                                 		
                                 		<tr class="board-next">
-                                			<td class="first td1">
-                                				<i class="fa-angle-down"></i>
-                                				<span><img src="/resources/imges/board/sub4/angle_down.png" width=15px; height=15px; style="float:left;"/>다음글</span>
-                                			</td>
+                                			<td class="next" style="border-right: 1px solid #dee1e7;"><img src="/resources/imges/board/sub1/angle_down.png" class="angle"> 다음글</td>
                                 			
                                 			<c:if test="${dtoNext.article_no == null}">
-												<td>다음글이 없습니다.</td>
-												<td class="td3"></td>
+												<td class="td2">다음글이 없습니다.</td>
 											</c:if>
                                 			
                                 			<c:if test="${dtoNext.article_no != null}">
@@ -156,7 +144,6 @@
 	                                				<input type="hidden" value="${dtoNext.article_no}">
 	                                				<a href="/board/articleContent?article_no=${dtoNext.article_no}&amount=${cri.amount}&page=${cri.page}">${dtoNext.article_title}</a>
 	                                			</td>
-	                                			<td class="td3">관리자</td>
                                 			</c:if>
                                 			
                                 			<!-- <td class="datetime last td4"></td> -->

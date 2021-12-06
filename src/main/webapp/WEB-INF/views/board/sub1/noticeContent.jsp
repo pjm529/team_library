@@ -72,7 +72,7 @@
                                             <td style="width: 15%;">관리자</td>
                                             <th class="first">작성일</th>
                                             <td>
-                                            	<fmt:formatDate var="notice_reg_date" value="${noticeContent.notice_reg_date}" pattern="yyyy-MM-dd HH:ss"/>
+                                            	<fmt:formatDate var="notice_reg_date" value="${noticeContent.notice_reg_date}" pattern="yyyy-MM-dd"/>
                                             	${notice_reg_date}
                                             </td>
                                             <th class="first">조회수</th>
@@ -122,7 +122,7 @@
 										 	
 										 	<c:otherwise>
 										 		<td class="posts_title"><a href="/board/noticeContent?notice_no=${posts[0].notice_no}">${posts[0].notice_title}</a></td>
-												<td class="posts_writer">${posts[0].writer_name}</td>
+												<td class="posts_writer"></td>
 										 	</c:otherwise>
 										 </c:choose>
 										 
@@ -134,7 +134,7 @@
 										<c:choose>
 											<c:when test="${posts[0].notice_no > noticeContent.notice_no}">
 										 		<td class="posts_title"><a href="/board/noticeContent?notice_no=${posts[0].notice_no}">${posts[0].notice_title}</a></td>
-												<td class="posts_writer">${posts[0].writer_name}</td>
+										 		<td class="posts_writer"></td> 
 										 	</c:when>
 										
 											<c:otherwise>
@@ -145,7 +145,7 @@
 												</c:if>
 												<c:if test="${posts[1] != null}">
 													<td class="posts_title"><a href="/board/noticeContent?notice_no=${posts[1].notice_no}">${posts[1].notice_title}</a></td>
-													<td class="posts_writer">${posts[1].writer_name}</td>
+													<td class="posts_writer"></td>
 												</c:if>
 											</c:otherwise>
 										</c:choose>
