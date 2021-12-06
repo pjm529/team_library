@@ -5,7 +5,7 @@
 <%@ taglib uri="http://www.springframework.org/security/tags" prefix="sec" %>
 <html>
 <head>
-	<title>Insert Notice Form</title>
+	<title>라온도서관 > 열린공간 > 공지사항</title>
     <link rel="stylesheet" href="/resources/css/board/sub1/notice_write_page.css">
 </head>
 
@@ -120,10 +120,14 @@
 
 <script src="https://code.jquery.com/jquery-3.6.0.js"
  integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk=" crossorigin="anonymous"></script>
-
+<script type="text/javascript" src="/resources/js/ckeditor/ckeditor.js"></script>
 <script>
 	$(function(){
-		
+		 CKEDITOR.replace('popContent' , {
+			 height: 500                                                  
+	     });
+
+
 		$(".sub1").addClass("active");
 		
 		$(".write_btn").on("click", function() {

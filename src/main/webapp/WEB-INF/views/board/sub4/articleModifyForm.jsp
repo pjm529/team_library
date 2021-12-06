@@ -18,12 +18,12 @@
                     <ul>
                         <!-- 홈 btn img -->
                         <li style="background-image: none;">
-                            <a href="#">
+                            <a href="/">
                                 <img src="/resources/imges/common/navi_home_icon.gif">
                             </a>
                         </li>
                         <li>
-                            <a href="#">열린공간</a>
+                            <a href="/board/noticeList">열린공간</a>
                         </li>
                         <li>
                             <a href="/board/articleList">분실물찾기</a>
@@ -141,8 +141,13 @@
 
 
 <script src="https://code.jquery.com/jquery-3.6.0.js" integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk=" crossorigin="anonymous"></script>
+<script type="text/javascript" src="/resources/js/ckeditor/ckeditor.js"></script>
 <script>
 $(document).ready(function(){
+	
+	CKEDITOR.replace('popContent' , {
+  		 height: 500                                                  
+      });
 	$(".sub4").addClass("active");
 	
 	/* 게시물 조회화면에서 수정화면으로 이동시 보여지는 첨부파일 화면 */
