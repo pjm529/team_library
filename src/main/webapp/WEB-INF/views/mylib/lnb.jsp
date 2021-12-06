@@ -36,7 +36,7 @@
         </li>
         
         <li class="sub3">
-            <a href="/mylib/reservationRoomPage">좌석예약/조회</a>
+            <a href="/mylib/reservationRoomPage">좌석예약/조회 　 　<b>+</b></a>
             
             <ul class="sub">
                <li class="submenu8">
