@@ -175,6 +175,7 @@
     <script>
     	$(function() {
     		$(".sub3").addClass("active");
+    		$(".submenu9").addClass("active");
     		
     		$(".booking_delete_btn").on("click", function(e) {
     			

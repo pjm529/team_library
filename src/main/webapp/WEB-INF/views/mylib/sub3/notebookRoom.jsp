@@ -346,6 +346,7 @@
 	
 	$(function () {
 		$(".sub3").addClass("active");
+		$(".submenu12").addClass("active");
 		
 		/* 좌석 번호 클릭하기 전, 예약하기 버튼 비활성화 */
 		$(".booking_btn").hide(); 

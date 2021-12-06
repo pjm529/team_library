@@ -168,6 +168,7 @@
 	$(document).ready(function() {
 		
 		$(".sub3").addClass("active");
+		$(".submenu8").addClass("active");
 		
 		var usedSeat = "<c:out value='${nbRoom_usedSeat}'/>";
 		var percent = (usedSeat/28) * 100;

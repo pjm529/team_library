@@ -374,6 +374,7 @@
 
 			
             $(".sub3").addClass("active");
+            $(".submenu11").addClass("active");
 			
          // 예약된 좌석이 있으면 남은 시간 timer start
            	if($(".reserve_no").val() != ""){

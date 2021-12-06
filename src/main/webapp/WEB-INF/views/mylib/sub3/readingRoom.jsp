@@ -344,6 +344,7 @@
             $(".occupied").prop("disabled", true);
 
             $(".sub3").addClass("active");
+            $(".submenu10").addClass("active");
 
             $(".booking_btn").hide();
 
