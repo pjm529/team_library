@@ -5,8 +5,8 @@
         <div>
             <ul class="header_menu">
                 <li>
-                    <div style=" width: 250px; height: 68px; margin-right: 250px;">
-                    	<a href=""><img src="/resources/imges/common/header_logo.png" style="width: 220px;"></a>
+                    <div style=" width: 250px; height: 90px; margin-right: 250px;">
+                    	<a href="/"><img src="/resources/imges/common/header_logo.png"></a>
                     </div>
                 </li>
                 <li class="header_menu1"><span><a href="/search/book">자료검색</a></span></li>
@@ -57,7 +57,6 @@
             <li><span><a href="/mylib/loan-history">도서관련</a></span></li>
             <li><span><a href="/mylib/hope">희망도서신청</a></span></li>
             <li><span><a href="/mylib/reservationRoomPage">좌석예약/조회</a></span></li>
-            <li><span><a href="">문화강좌신청/조회</a></span></li>
             <li><span><a href="/mylib/mypage">개인정보</a></span></li>
         </ul>
     </div>

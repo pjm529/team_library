@@ -39,10 +39,6 @@
             <a href="/mylib/reservationRoomPage">좌석예약/조회</a>
         </li>
         
-        <li class="sub4">
-            <a href="#">문화강좌신청/조회</a>
-        </li>
-        
         <li class="sub5">
             <a href="/mylib/mypage">개인정보　　　　　<b>+</b></a>
             
