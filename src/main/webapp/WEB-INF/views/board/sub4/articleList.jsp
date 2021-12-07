@@ -61,7 +61,7 @@
                             		<input type="hidden" name="type" value="${pageMaker.cri.type}">
                                    	<input type="hidden" name="keyword" value="${pageMaker.cri.keyword}">
 	                                
-	                                <span style="margin-right: 10px;"> 총 게시물 : <b>${total}</b>건</span>	                                
+	                                <span style="margin-right: 10px;"> 총 게시물 : <b>${total}</b> 건</span>	                                
 	                                <select name="amount">
 	                                
 	                                 <c:if test="${pageMaker.cri.amount == 10}">
