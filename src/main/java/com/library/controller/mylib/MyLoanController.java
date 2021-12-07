@@ -8,8 +8,6 @@ import java.util.Date;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.core.context.SecurityContextHolder;
-import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -33,7 +31,7 @@ public class MyLoanController {
 
 		// 로그인 된 user_id 받아오기
 		String id = principal.getName();
-		
+
 		// 회원 대출 중 리스트
 		List<BookDTO> loan_list = myLoanService.loan_list_paging(id);
 

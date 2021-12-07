@@ -87,7 +87,7 @@ public class ArticleController {
 
 		List<ArticleAttachDTO> a = articleService.getAttachList(article_no);
 
-		return new ResponseEntity<>(articleService.getAttachList(article_no), HttpStatus.OK);
+		return new ResponseEntity<>(a, HttpStatus.OK);
 
 	}
 
