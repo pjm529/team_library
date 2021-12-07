@@ -47,7 +47,7 @@ public class EnquiryBoardController {
 	}
 
 	/* 게시물 본문 */
-	@PostMapping("/qnaBoardContent")
+	@GetMapping("/qnaBoardContent")
 	public String qnaBoardContent(@RequestParam("enquiry_no") String uenquiry_no, Model model, Criteria cri,
 			Principal principal) {
 
@@ -208,7 +208,7 @@ public class EnquiryBoardController {
 
 	/* 답글 */
 	/* 답글 게시물 본문 / 조회수 */
-	@PostMapping("/answerBoardContent")
+	@GetMapping("/answerBoardContent")
 	public String answerBoardContent(@RequestParam("answer_no") String uanswer_no, Model model, Criteria cri,
 			Principal principal) {
 
