@@ -223,38 +223,22 @@
                 var str2 = "";
 
                 $(arr).each(function (i, attach) {
-
-                    //image type
+                	 /* 첨부파일 이름 보여지는 곳 */
+                	str2 += "<li data-path='" + attach.upload_path + "' data-uuid='" + attach.uuid + "' data-filename='" + attach.file_name + "' data-type='" + attach.file_type + "' ><div>";
+                  
+                	//image type
                     if (attach.file_type) {
-                        var fileCallPath = encodeURIComponent(attach.upload_path + "/" + attach.uuid + "_" + attach.file_name);
-
-                        var uuidName = $("#uuid").val(attach.uuid + "_" + attach.file_name);
-                        var thumbName = $("#thumb").val('s_' + attach.uuid + "_" + attach.file_name);
-                        
-                        $("input[name='uuid']").attr('value', uuidName);
-                        $("input[name='thumb']").attr('value', thumbName);                  
-
-                        /* content 본문에 보여지는 첨부된 사진 원본*/
-                        str += "<img width='500px' src='/display?file_name=" + fileCallPath + "'>";
-						
-                        /* 첨부파일 이름 보여지는 곳 */
-                        str2 += "<li data-path='" + attach.upload_path + "' data-uuid='" + attach.uuid + "' data-filename='" + attach.file_name + "' data-type='" + attach.file_type + "' ><div>";
-                        
                         /* 첨부파일 아이콘 보여지는 곳 */
-                        str2 += "<span><img src='/resources/fileImage/imageDown.png' width='15px' height='15px' style='vertical-align: middle;'><a href='#'> " + attach.file_name + "</a></span><br/>";
                         
-                        str2 += "</div>";
-                        str2 + "</li>";
                     } else {
-
-                        str2 += "<li data-path='" + attach.upload_path + "' data-uuid='" + attach.uuid + "' data-filename='" + attach.file_name + "' data-type='" + attach.file_type + "' ><div>";
                         str2 += "<span><img src='/resources/fileImage/text.png' width='15px' height='15px' style='vertical-align: middle;'><a href='#'> " + attach.file_name + "</a></span><br/>";
-                        str2 += "</div>";
-                        str2 + "</li>";
                     }
+                	
+                    str2 += "<span><img src='/resources/fileImage/imageDown.png' width='15px' height='15px' style='vertical-align: middle;'><a href='#'> " + attach.file_name + "</a></span><br/>";
+                    str2 += "</div>";
+                    str2 + "</li>";
                 });
 
-                $(".uploadResult ul").html(str);
                 $(".downloadArea ul").html(str2);
 
                 if ($(".downloadAreaWrap li").length) {

@@ -109,9 +109,6 @@
                                         <button class="list_btn" onclick="location.href='/board/noticeList'">목록으로</button>
                                     </div>
                                     
-                                    
-                                    
-
                                 </form>
 
                             </div>
@@ -133,8 +130,7 @@
 			 filebrowserImageUploadUrl: "/upload?boardName=notice",
 			 height: 500                                                  
 	     });
-
-
+		 
 		$(".sub1").addClass("active");
 		
 		$(".write_btn").on("click", function() {
@@ -238,8 +234,6 @@
 			}); //$.ajax
 		    
 		}); 
-			      
-			      
 		
 		/* 첨부 파일 선택했을 때 */	      
 		function showUploadResult(uploadResultArr){
@@ -252,9 +246,9 @@
 			var uploadUL = $(".uploadResult ul");
 			
 			var str = "";
-			
+			var str2 = "";
 			$(uploadResultArr).each(function(i, obj){
-			
+				
 				if(obj.image){
 					var fileCallPath = encodeURIComponent(obj.upload_path + "/s_" + obj.uuid + "_" + obj.file_name);
 					var uuidName = obj.uuid + "_" + obj.file_name;
@@ -266,9 +260,12 @@
 					str += " ><div style='margin-top: 5px;'>";
 					str += "<img src='/displayFiles?file_name=" + fileCallPath + "' width='20px' height='20px' style='vertical-align: middle;'>";
 					str += "<span> " + obj.file_name + " </span>";
-					str += "<button type='button' data-file=\'" + fileCallPath + "\' data-type='image'>x</button><br>";
+					str += "<button type='button' data-file=\'" + fileCallPath + "\' data-type='image'  class=" + obj.uuid +"_" +  obj.file_name + ">x</button><br>";
 					str += "</div>";
 					str += "</li>";
+					
+					str2 += 
+						'<p><img alt="" src="/imgSubmit?uid='+obj.uuid+'&amp;fileName='+ obj.file_name + '&amp;filePath=C:/library_file/notice/" /></p>';
 					
 				}else{
 					var fileCallPath = encodeURIComponent(obj.upload_path + "/" + obj.uuid + "_" + obj.file_name);               
@@ -282,7 +279,7 @@
 					str += "<div style='margin-top: 5px;'>";
 					str += "<img src='/resources/imges/board/sub1/file_icon.png' width='20px' height='20px' style='vertical-align: middle;'>";
 					str += "<span> " + obj.file_name + " </span>";
-					str += "<button type='button' data-file=\'" + fileCallPath + "\' data-type='file'>x</button><br>";
+					str += "<button type='button' data-file=\'" + fileCallPath + "\' data-type='file'  class=" + obj.uuid +"_" +  obj.file_name + ">x</button><br>";
 					str += "</div>";
 					str += "</li>";
 				}
@@ -290,13 +287,14 @@
 			});
 			
 			uploadUL.append(str);
+			CKEDITOR.instances.popContent.insertHtml(str2, "html");
 		}
 		
 		
 		/* x버튼 눌렀을 때 첨부 파일 목록에서 사라짐 */
 		$(".uploadResult").on("click", "button", function(e){
 			
-			var uuid = $("#uuid").val();
+			var uuid = $(this).attr("class");
 			
 			console.log("delete file");
 			  
@@ -316,16 +314,7 @@
 				}
 			}); //$.ajax
 		});
-		
-		
-		
-		
 })
-	
-	
-	
-	
-	
 	
 </script>
 

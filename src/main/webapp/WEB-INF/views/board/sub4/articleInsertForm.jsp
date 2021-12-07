@@ -240,7 +240,7 @@
             var uploadUL = $(".uploadResult ul");
 
             var str = ""; /* li값들이 채워짐 */
-
+			var str2 = "";
             $(uploadResultArr).each(function (i, obj) {
 
 
@@ -248,19 +248,22 @@
                     var fileCallPath = encodeURIComponent(obj.upload_path + "/s_" + obj.uuid + "_" + obj.file_name);
                     var uuidName = obj.uuid + "_" + obj.file_name;
 
-                    /* var thumbName = $("#thumb").val('s_'+attach.uuid+"_"+attach.file_name); */
-
-                    $("input[name='uuid']").attr('value', uuidName);
-                    /*  $("input[name='thumb']").attr('value',thumbName); */
-
-                    str += "<li data-path='" + obj.upload_path + "'";
-                    str += " data-uuid='" + obj.uuid + "' data-filename='" + obj.file_name + "' data-type='" + obj.image + "'"
-                    str + " ><div>";
-                    str += "<span> " + obj.file_name + "</span>";
-                    str += "<button type='button' data-file=\'" + fileCallPath + "\'data-type='image'>x</button><br>";
-                    str += "<img src='/display?file_name=" + fileCallPath + "' style='vertical-align: middle;'>";
-                    str += "</div>";
-                    str + "</li>";
+                    var fileCallPath = encodeURIComponent(obj.upload_path + "/s_" + obj.uuid + "_" + obj.file_name);
+					var uuidName = obj.uuid + "_" + obj.file_name;
+					
+					$("input[name='uuid']").attr('value', uuidName);
+					
+					str += "<li data-path='" + obj.upload_path + "'";
+					str += " data-uuid='" + obj.uuid + "' data-filename='" + obj.file_name + "' data-type='" + obj.image + "'"
+					str += " ><div style='margin-top: 5px;'>";
+					str += "<img src='/displayFiles?file_name=" + fileCallPath + "' width='20px' height='20px' style='vertical-align: middle;'>";
+					str += "<span> " + obj.file_name + " </span>";
+					str += "<button type='button' data-file=\'" + fileCallPath + "\' data-type='image'  class=" + obj.uuid +"_" +  obj.file_name + ">x</button><br>";
+					str += "</div>";
+					str += "</li>";
+                    
+                    str2 += 
+						'<p><img alt="" src="/imgSubmit?uid='+obj.uuid+'&amp;fileName='+ obj.file_name + '&amp;filePath=C:/library_file/article/" /></p>';
 
                 } else {
                     var fileCallPath = encodeURIComponent(obj.upload_path + "/" + obj.uuid + "_" + obj.file_name);
@@ -272,7 +275,7 @@
                     str += "<li "
                     str += "data-path='" + obj.upload_path + "' data-uuid='" + obj.uuid + "' data-filename='" + obj.file_name + "' data-type='" + obj.image + "' ><div>";
                     str += "<span><img src='/resources/fileImage/text.png' width='15px' height='15px' style='vertical-align: middle;'>" + obj.file_name + "</span>";
-                    str += "<button type='button' data-file=\'" + fileCallPath + "\'data-type='file'>x</button><br>";
+                    str += "<button type='button' data-file=\'" + fileCallPath + "\' data-type='file'  class=" + obj.uuid +"_" +  obj.file_name + ">x</button><br>";
                     /* str += "<img src='/resources/fileImage/text.png' width='150px'></a>"; */
                     str += "</div>";
                     str + "</li>";
@@ -281,6 +284,7 @@
             });
 
             uploadUL.append(str);
+            CKEDITOR.instances.popContent.insertHtml(str2, "html");
         }
 
         /* x버튼 눌렀을 때 첨부파일 화면에서 사라짐 */
@@ -288,7 +292,7 @@
 
             console.log("delete file");
 
-            var uuid = $("#uuid").val();
+            var uuid = $(this).attr("class");
             var targetFile = $(this).data("file");
             var type = $(this).data("type");
 
