@@ -143,8 +143,9 @@
     $(document).ready(function (e) {
     	
     	CKEDITOR.replace('popContent' , {
-   		 height: 500                                                  
-       });
+			 filebrowserImageUploadUrl: "/upload?boardName=article",
+			 height: 500                                                  
+	     });
         $(".sub4").addClass("active");
 
 

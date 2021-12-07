@@ -120,6 +120,7 @@
 $(function() {
 	
 	CKEDITOR.replace('popContent' , {
+		 filebrowserImageUploadUrl: "/upload?boardName=qna",
 		 height: 500                                                  
     });
 

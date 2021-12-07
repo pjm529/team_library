@@ -144,9 +144,10 @@
     <script>
         $(function () {
 
-            CKEDITOR.replace('popContent', {
-                height: 500
-            });
+        	CKEDITOR.replace('popContent' , {
+	   			 filebrowserImageUploadUrl: "/upload?boardName=notice",
+	   			 height: 500                                                  
+	   	     });
 
             $(".sub1").addClass("active");
 

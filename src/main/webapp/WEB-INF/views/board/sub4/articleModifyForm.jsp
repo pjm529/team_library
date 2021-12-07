@@ -138,8 +138,9 @@
 $(document).ready(function(){
 	
 	CKEDITOR.replace('popContent' , {
-  		 height: 500                                                  
-      });
+		 filebrowserImageUploadUrl: "/upload?boardName=article",
+		 height: 500                                                  
+    });
 	$(".sub4").addClass("active");
 	
 	/* 게시물 조회화면에서 수정화면으로 이동시 보여지는 첨부파일 화면 */

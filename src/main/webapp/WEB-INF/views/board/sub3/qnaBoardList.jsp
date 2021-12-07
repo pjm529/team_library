@@ -241,7 +241,7 @@
 		<input type="hidden" name="type" value="${pageMaker.cri.type}">
 	</form>
 	
-	<form action="/board/qnaBoardContent" method="post" class="moveForm2">
+	<form action="/board/qnaBoardContent" method="get" class="moveForm2">
 		<input type="hidden" name="page" value="${pageMaker.cri.page}">
 		<input type="hidden" name="amount" value="${pageMaker.cri.amount}">
 		<input type="hidden" name="keyword" value="${pageMaker.cri.keyword}">

@@ -82,7 +82,7 @@
                                         <!-- 본문 내용 -->
                                         <tr>
                                             <td colspan="6">
-                                                <div class="bbs-content">
+                                                <div class="bbs-content"  style="width:950px; overflow: auto;">
                                                     <p>${noticeContent.notice_content}</p>
                                                     
                                                     <!-- 첨부 파일 -->

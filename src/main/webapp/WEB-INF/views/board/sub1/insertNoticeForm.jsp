@@ -130,6 +130,7 @@
 <script>
 	$(function(){
 		 CKEDITOR.replace('popContent' , {
+			 filebrowserImageUploadUrl: "/upload?boardName=notice",
 			 height: 500                                                  
 	     });
 
