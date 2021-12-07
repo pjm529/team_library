@@ -174,7 +174,7 @@
 
                         if (attach.file_type) {
                             var fileCallPath = encodeURIComponent(attach.upload_path + "/s_" + attach.uuid + "_" + attach.file_name);
-
+                            $("input[name='uuid']").attr('value', attach.uuid+"_"+attach.file_name);
                             str += "<li data-path='" + attach.upload_path + "' data-uuid='" + attach.uuid + "' data-filename='" + attach.file_name + "' data-type='" + attach.file_type + "' >";
                             str += "<div style='margin-top: 5px;'>";
                             str += "<img src='/displayFiles?file_name=" + fileCallPath + "' width='20px' height='20px' style='vertical-align: middle;'>";
@@ -333,24 +333,25 @@
             /* x버튼 눌렀을 때 첨부 파일 목록에서 사라짐 */
             $(".uploadResult").on("click", "button", function (e) {
 
-                console.log("delete file");
-
-                var uuid = $("#uuid").val();
-                var targetFile = $(this).data("file");
-                var type = $(this).data("type");
-
-                var targetLi = $(this).closest("li");
-
-                $.ajax({
-                    url: '/deleteNoticeFile',
-                    data: { file_name: targetFile, type: type, uuid: uuid },
-                    dataType: 'text',
-                    type: 'POST',
-                    success: function (result) {
-                        targetLi.remove();
-                        $("#uploadNoticeFile").val("");
-                    }
-                }); //$.ajax */
+            	var uuid = $("#uuid").val();
+    			
+    			console.log("delete file");
+    			  
+    			var targetFile = $(this).data("file");
+    			var type = $(this).data("type");
+    			
+    			var targetLi = $(this).closest("li");
+    			    
+    			$.ajax({
+    				url: '/deleteNoticeFile',
+    				data: {file_name: targetFile, type:type, uuid:uuid},
+    				dataType:'text',
+    				type: 'POST',
+    				success: function(result){
+    					targetLi.remove();
+    					$("#uploadNoticeFile").val("");
+    				}
+    			}); //$.ajax
             });
         });
 
