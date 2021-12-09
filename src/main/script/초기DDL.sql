@@ -4,200 +4,200 @@ create database library;
 
 use library;
 
--- È¸¿ø Å×ÀÌºí
+-- íšŒì› í…Œì´ë¸”
 CREATE TABLE `member` (
-  `user_id` varchar(20) NOT NULL, -- ¾ÆÀÌµğ
-  `user_pw` varchar(1024) NOT NULL, -- ºñ¹Ğ¹øÈ£
-  `user_name` varchar(50) NOT NULL, -- ÀÌ¸§
-  `user_birth` date DEFAULT NULL, -- »ı³â¿ùÀÏ
-  `user_tel` varchar(30) NOT NULL, -- ÀüÈ­¹øÈ£
-  `user_email` varchar(40) NOT NULL, -- ÀÌ¸ŞÀÏ
-  `user_zip` varchar(10) NOT NULL, -- ¿ìÆí¹øÈ£
-  `user_address` varchar(255) NOT NULL, -- ÁÖ¼Ò
-  `user_address_detail` varchar(255) NOT NULL, -- »ó¼¼ÁÖ¼Ò
-  `user_able_loan` int(11) NOT NULL DEFAULT '10', -- ´ëÃâ °¡´É µµ¼­ ¼ö
-  `user_book_count` int(11) NOT NULL DEFAULT '0', -- ´ëÃâ Áß µµ¼­ ¼ö
-  `user_overdue_date` int(11) DEFAULT '0', -- ´ëÃâ ºÒ°¡ ÀÏ ¼ö
-  `enabled` varchar(1) DEFAULT '1', -- ±ÇÇÑ
-  `user_reg_date` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP, -- È¸¿ø °¡ÀÔ ÀÏ
+  `user_id` varchar(20) NOT NULL, -- ì•„ì´ë””
+  `user_pw` varchar(1024) NOT NULL, -- ë¹„ë°€ë²ˆí˜¸
+  `user_name` varchar(50) NOT NULL, -- ì´ë¦„
+  `user_birth` date DEFAULT NULL, -- ìƒë…„ì›”ì¼
+  `user_tel` varchar(30) NOT NULL, -- ì „í™”ë²ˆí˜¸
+  `user_email` varchar(40) NOT NULL, -- ì´ë©”ì¼
+  `user_zip` varchar(10) NOT NULL, -- ìš°í¸ë²ˆí˜¸
+  `user_address` varchar(255) NOT NULL, -- ì£¼ì†Œ
+  `user_address_detail` varchar(255) NOT NULL, -- ìƒì„¸ì£¼ì†Œ
+  `user_able_loan` int(11) NOT NULL DEFAULT '10', -- ëŒ€ì¶œ ê°€ëŠ¥ ë„ì„œ ìˆ˜
+  `user_book_count` int(11) NOT NULL DEFAULT '0', -- ëŒ€ì¶œ ì¤‘ ë„ì„œ ìˆ˜
+  `user_overdue_date` int(11) DEFAULT '0', -- ëŒ€ì¶œ ë¶ˆê°€ ì¼ ìˆ˜
+  `enabled` varchar(1) DEFAULT '1', -- ê¶Œí•œ
+  `user_reg_date` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP, -- íšŒì› ê°€ì… ì¼
   PRIMARY KEY (`user_id`)
 ) 
 
--- È¸¿ø ±ÇÇÑ Å×ÀÌºí
+-- íšŒì› ê¶Œí•œ í…Œì´ë¸”
 CREATE TABLE `member_auth` (
-  `user_id` varchar(20) NOT NULL, -- ¾ÆÀÌµğ
-  `auth` varchar(100) NOT NULL, -- ±ÇÇÑ
+  `user_id` varchar(20) NOT NULL, -- ì•„ì´ë””
+  `auth` varchar(100) NOT NULL, -- ê¶Œí•œ
   KEY `fk_member_auth_user_id` (`user_id`),
   CONSTRAINT `fk_member_auth_userid` FOREIGN KEY (`user_id`) REFERENCES `member` (`user_id`) ON DELETE CASCADE ON UPDATE CASCADE
 )
 
--- Å»Åğ È¸¿ø Å×ÀÌºí
+-- íƒˆí‡´ íšŒì› í…Œì´ë¸”
 CREATE TABLE `secession_member` (
   `user_id` varchar(20) NOT NULL,
   `user_email` varchar(40) NOT NULL,
   PRIMARY KEY (`user_id`)
 )
 
--- ´ëÃâ ³»¿ª Å×ÀÌºí 
+-- ëŒ€ì¶œ ë‚´ì—­ í…Œì´ë¸” 
 CREATE TABLE `loan_history` (
-  `loan_no` int(11) NOT NULL AUTO_INCREMENT, -- ´ëÃâ µµ¼­ ¹øÈ£
-  `user_id` varchar(20) NOT NULL, -- ´ëÃâ È¸¿ø ¾ÆÀÌµğ
-  `user_email` varchar(40) not NULL, -- ´ëÃâ È¸¿ø ÀÌ¸ŞÀÏ
-  `book_title` varchar(100) NOT NULL, -- ´ëÃâ µµ¼­ Á¦¸ñ
-  `book_author` varchar(200) NOT NULL, -- ´ëÃâ µµ¼­ ÀúÀÚ
-  `book_isbn` varchar(20) NOT NULL, -- ´ëÃâ µµ¼­ ISBN
-  `book_cover` varchar(2000) DEFAULT NULL, -- ´ëÃâ µµ¼­ Ç¥Áö ÁÖ¼Ò
-  `book_pubdate` varchar(20) NOT NULL, -- ´ëÃâ µµ¼­ Ãâ°£ÀÏ
-  `book_publisher` varchar(50) NOT NULL, -- ´ëÃâ µµ¼­ ÃâÆÇ»ç
-  `loan_date` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP, -- ´ëÃâ ÀÏÀÚ
-  `return_date` timestamp NULL DEFAULT NULL, -- ¹İ³³ ÀÏÀÚ
-  `return_period` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00', -- µµ¼­ ¹İ³³ ±âÇÑ
-  `return_status` tinyint(1) NOT NULL DEFAULT '0', -- µµ¼­ ¹İ³³ »óÅÂ
+  `loan_no` int(11) NOT NULL AUTO_INCREMENT, -- ëŒ€ì¶œ ë„ì„œ ë²ˆí˜¸
+  `user_id` varchar(20) NOT NULL, -- ëŒ€ì¶œ íšŒì› ì•„ì´ë””
+  `user_email` varchar(40) not NULL, -- ëŒ€ì¶œ íšŒì› ì´ë©”ì¼
+  `book_title` varchar(100) NOT NULL, -- ëŒ€ì¶œ ë„ì„œ ì œëª©
+  `book_author` varchar(200) NOT NULL, -- ëŒ€ì¶œ ë„ì„œ ì €ì
+  `book_isbn` varchar(20) NOT NULL, -- ëŒ€ì¶œ ë„ì„œ ISBN
+  `book_cover` varchar(2000) DEFAULT NULL, -- ëŒ€ì¶œ ë„ì„œ í‘œì§€ ì£¼ì†Œ
+  `book_pubdate` varchar(20) NOT NULL, -- ëŒ€ì¶œ ë„ì„œ ì¶œê°„ì¼
+  `book_publisher` varchar(50) NOT NULL, -- ëŒ€ì¶œ ë„ì„œ ì¶œíŒì‚¬
+  `loan_date` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP, -- ëŒ€ì¶œ ì¼ì
+  `return_date` timestamp NULL DEFAULT NULL, -- ë°˜ë‚© ì¼ì
+  `return_period` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00', -- ë„ì„œ ë°˜ë‚© ê¸°í•œ
+  `return_status` tinyint(1) NOT NULL DEFAULT '0', -- ë„ì„œ ë°˜ë‚© ìƒíƒœ
   PRIMARY KEY (`loan_no`),
   KEY `loan_history_FK` (`user_id`),
   CONSTRAINT `loan_history_FK` FOREIGN KEY (`user_id`) REFERENCES `member` (`user_id`)
 )
 
--- Èñ¸Á µµ¼­ Å×ÀÌºí
+-- í¬ë§ ë„ì„œ í…Œì´ë¸”
 CREATE TABLE `hope` (
-  `hope_no` int(11) NOT NULL AUTO_INCREMENT, -- Èñ¸Á µµ¼­ ¹øÈ£
-  `user_id` varchar(20) NOT NULL, -- ½ÅÃ» È¸¿ø ¾ÆÀÌµğ
-  `book_title` varchar(100) NOT NULL, -- Èñ¸Á µµ¼­ Á¦¸ñ
-  `book_author` varchar(200) NOT NULL, -- Èñ¸Á µµ¼­ ÀúÀÚ
-  `book_publisher` varchar(50) NOT NULL, -- Èñ¸Á µµ¼­ ÃâÆÇ»ç
-  `book_pubdate` varchar(20) NOT NULL, -- Èñ¸Á µµ¼­ Ãâ°£ÀÏ
-  `book_isbn` varchar(20) DEFAULT NULL, -- Èñ¸Á µµ¼­ ISBN
-  `note` varchar(100) DEFAULT NULL, -- ºñ°í
-  `book_price` varchar(20) DEFAULT NULL, -- Èñ¸Á µµ¼­ °¡°İ
-  `hope_status` int(11) DEFAULT '0', -- Èñ¸Á µµ¼­ Ã³¸® »óÅÂ
-  `cancel_reason` varchar(100) DEFAULT NULL, -- Èñ¸Á µµ¼­ Ãë¼Ò »çÀ¯
-  `hope_reg_date` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP, -- Èñ¸Á µµ¼­ ½ÅÃ»ÀÏ
+  `hope_no` int(11) NOT NULL AUTO_INCREMENT, -- í¬ë§ ë„ì„œ ë²ˆí˜¸
+  `user_id` varchar(20) NOT NULL, -- ì‹ ì²­ íšŒì› ì•„ì´ë””
+  `book_title` varchar(100) NOT NULL, -- í¬ë§ ë„ì„œ ì œëª©
+  `book_author` varchar(200) NOT NULL, -- í¬ë§ ë„ì„œ ì €ì
+  `book_publisher` varchar(50) NOT NULL, -- í¬ë§ ë„ì„œ ì¶œíŒì‚¬
+  `book_pubdate` varchar(20) NOT NULL, -- í¬ë§ ë„ì„œ ì¶œê°„ì¼
+  `book_isbn` varchar(20) DEFAULT NULL, -- í¬ë§ ë„ì„œ ISBN
+  `note` varchar(100) DEFAULT NULL, -- ë¹„ê³ 
+  `book_price` varchar(20) DEFAULT NULL, -- í¬ë§ ë„ì„œ ê°€ê²©
+  `hope_status` int(11) DEFAULT '0', -- í¬ë§ ë„ì„œ ì²˜ë¦¬ ìƒíƒœ
+  `cancel_reason` varchar(100) DEFAULT NULL, -- í¬ë§ ë„ì„œ ì·¨ì†Œ ì‚¬ìœ 
+  `hope_reg_date` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP, -- í¬ë§ ë„ì„œ ì‹ ì²­ì¼
   PRIMARY KEY (`hope_no`),
   KEY `hope_FK` (`user_id`),
   CONSTRAINT `hope_FK` FOREIGN KEY (`user_id`) REFERENCES `member` (`user_id`)
 )
 
--- ÃßÃµ µµ¼­ Å×ÀÌºí
+-- ì¶”ì²œ ë„ì„œ í…Œì´ë¸”
 CREATE TABLE `recommend_book` (
-  `rec_no` int(11) NOT NULL AUTO_INCREMENT, -- ÃßÃµ µµ¼­ ¹øÈ£
-  `user_id` varchar(20) NOT NULL, -- ÃßÃµÀÚ ¾ÆÀÌµğ
-  `book_title` varchar(100) NOT NULL, -- ÃßÃµ µµ¼­ Á¦¸ñ
-  `book_author` varchar(200) NOT NULL, -- ÃßÃµ µµ¼­ ÀúÀÚ
-  `book_isbn` varchar(20) NOT NULL, -- ÃßÃµ µµ¼­ ISBN
-  `book_cover` varchar(2000) NOT NULL, -- ÃßÃµ µµ¼­ Ç¥Áö
-  `book_pubdate` varchar(20) NOT NULL, -- ÃßÃµ µµ¼­ Ãâ°£ÀÏ
-  `book_publisher` varchar(50) NOT NULL, -- ÃßÃµ µµ¼­ ÃâÆÇ»ç
-  `recommend_date` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP, -- ÃßÃµ µµ¼­ µî·ÏÀÏ
+  `rec_no` int(11) NOT NULL AUTO_INCREMENT, -- ì¶”ì²œ ë„ì„œ ë²ˆí˜¸
+  `user_id` varchar(20) NOT NULL, -- ì¶”ì²œì ì•„ì´ë””
+  `book_title` varchar(100) NOT NULL, -- ì¶”ì²œ ë„ì„œ ì œëª©
+  `book_author` varchar(200) NOT NULL, -- ì¶”ì²œ ë„ì„œ ì €ì
+  `book_isbn` varchar(20) NOT NULL, -- ì¶”ì²œ ë„ì„œ ISBN
+  `book_cover` varchar(2000) NOT NULL, -- ì¶”ì²œ ë„ì„œ í‘œì§€
+  `book_pubdate` varchar(20) NOT NULL, -- ì¶”ì²œ ë„ì„œ ì¶œê°„ì¼
+  `book_publisher` varchar(50) NOT NULL, -- ì¶”ì²œ ë„ì„œ ì¶œíŒì‚¬
+  `recommend_date` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP, -- ì¶”ì²œ ë„ì„œ ë“±ë¡ì¼
   PRIMARY KEY (`rec_no`),
   KEY `recommend_book_FK` (`user_id`),
   CONSTRAINT `recommend_book_FK` FOREIGN KEY (`user_id`) REFERENCES `member` (`user_id`)
 )
 
--- ¿­¶÷½Ç Å×ÀÌºí
+-- ì—´ëŒì‹¤ í…Œì´ë¸”
 CREATE TABLE `reading_room` (
-  `seat_no` int(11) NOT NULL, -- ÁÂ¼® ¹øÈ£
-  `user_id` varchar(20) DEFAULT NULL, -- ¿¹¾àÀÚ ¾ÆÀÌµğ
-  `checkin_time` timestamp NULL DEFAULT NULL, -- ÁÂ¼® ÀÔ½Ç ½Ã°£
-  `checkout_time` timestamp NULL DEFAULT NULL, -- ÁÂ¼® Åğ½Ç ½Ã°£
+  `seat_no` int(11) NOT NULL, -- ì¢Œì„ ë²ˆí˜¸
+  `user_id` varchar(20) DEFAULT NULL, -- ì˜ˆì•½ì ì•„ì´ë””
+  `checkin_time` timestamp NULL DEFAULT NULL, -- ì¢Œì„ ì…ì‹¤ ì‹œê°„
+  `checkout_time` timestamp NULL DEFAULT NULL, -- ì¢Œì„ í‡´ì‹¤ ì‹œê°„
   PRIMARY KEY (`seat_no`),
   UNIQUE KEY `user_id` (`user_id`)
 )
 
--- µµ¼­°ü ÀÏÁ¤ Å×ÀÌºí
+-- ë„ì„œê´€ ì¼ì • í…Œì´ë¸”
 CREATE TABLE `calendar` (
-  `cal_no` int(11) NOT NULL AUTO_INCREMENT, -- ÀÏÁ¤ ¹øÈ£
-  `groupId` int(11) NOT NULL, -- ±×·ì ¾ÆÀÌµğ
-  `user_id` varchar(20) NOT NULL, -- ÀÏÁ¤ ÀÛ¼ºÀÚ ¾ÆÀÌµğ
-  `title` varchar(1024) NOT NULL, -- ÀÏÁ¤ Á¦¸ñ
-  `start` date NOT NULL, -- ÀÏÁ¤ ½ÃÀÛ ½Ã°£
-  `end` date NOT NULL, -- ÀÏÁ¤ Á¾·á ½Ã°£
-  `allDay` int(11) NOT NULL, -- ÇÏ·çÁ¾ÀÏÀÎÁö
-  `textColor` varchar(50) NOT NULL, -- ±ÛÀÚ »ö»ó
-  `backgroundColor` varchar(50) NOT NULL, -- ¹è°æ »ö»ó
-  `borderColor` varchar(50) NOT NULL, -- ¿Ü°û¼± »ö»ó
-  `reg_date` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP, -- ÀÏÁ¤ µî·Ï ÀÏÀÚ
+  `cal_no` int(11) NOT NULL AUTO_INCREMENT, -- ì¼ì • ë²ˆí˜¸
+  `groupId` int(11) NOT NULL, -- ê·¸ë£¹ ì•„ì´ë””
+  `user_id` varchar(20) NOT NULL, -- ì¼ì • ì‘ì„±ì ì•„ì´ë””
+  `title` varchar(1024) NOT NULL, -- ì¼ì • ì œëª©
+  `start` date NOT NULL, -- ì¼ì • ì‹œì‘ ì‹œê°„
+  `end` date NOT NULL, -- ì¼ì • ì¢…ë£Œ ì‹œê°„
+  `allDay` int(11) NOT NULL, -- í•˜ë£¨ì¢…ì¼ì¸ì§€
+  `textColor` varchar(50) NOT NULL, -- ê¸€ì ìƒ‰ìƒ
+  `backgroundColor` varchar(50) NOT NULL, -- ë°°ê²½ ìƒ‰ìƒ
+  `borderColor` varchar(50) NOT NULL, -- ì™¸ê³½ì„  ìƒ‰ìƒ
+  `reg_date` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP, -- ì¼ì • ë“±ë¡ ì¼ì
   PRIMARY KEY (`cal_no`),
   KEY `calendar_FK` (`user_id`),
   CONSTRAINT `calendar_FK` FOREIGN KEY (`user_id`) REFERENCES `member` (`user_id`)
 )
 
--- °øÁö»çÇ× Å×ÀÌºí
+-- ê³µì§€ì‚¬í•­ í…Œì´ë¸”
 CREATE TABLE `notice` (
-  `notice_no` int(11) NOT NULL AUTO_INCREMENT, -- °øÁö»çÇ× ¹øÈ£
-  `notice_title` varchar(50) NOT NULL, -- °øÁö»çÇ× Á¦¸ñ
-  `notice_content` varchar(8196) NOT NULL, -- °øÁö»çÇ× ³»¿ë
-  `writer_id` varchar(20) NOT NULL, -- °øÁö»çÇ× ÀÛ¼ºÀÚ ¾ÆÀÌµğ
-  `writer_name` varchar(50) NOT NULL, -- °øÁö»çÇ× ÀÛ¼ºÀÚ ÀÌ¸§
-  `notice_reg_date` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP, -- °øÁö»çÇ× ÀÛ¼ºÀÏ
-  `notice_views` int(11) NOT NULL DEFAULT '0', -- °øÁö»çÇ× Á¶È¸¼ö
-  `notice_img` mediumblob, -- °øÁö»çÇ× Ã·ºÎÆÄÀÏ °æ·Î 
+  `notice_no` int(11) NOT NULL AUTO_INCREMENT, -- ê³µì§€ì‚¬í•­ ë²ˆí˜¸
+  `notice_title` varchar(50) NOT NULL, -- ê³µì§€ì‚¬í•­ ì œëª©
+  `notice_content` varchar(8196) NOT NULL, -- ê³µì§€ì‚¬í•­ ë‚´ìš©
+  `writer_id` varchar(20) NOT NULL, -- ê³µì§€ì‚¬í•­ ì‘ì„±ì ì•„ì´ë””
+  `writer_name` varchar(50) NOT NULL, -- ê³µì§€ì‚¬í•­ ì‘ì„±ì ì´ë¦„
+  `notice_reg_date` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP, -- ê³µì§€ì‚¬í•­ ì‘ì„±ì¼
+  `notice_views` int(11) NOT NULL DEFAULT '0', -- ê³µì§€ì‚¬í•­ ì¡°íšŒìˆ˜
+  `notice_img` mediumblob, -- ê³µì§€ì‚¬í•­ ì²¨ë¶€íŒŒì¼ ê²½ë¡œ 
   PRIMARY KEY (`notice_no`),
   KEY `notice_FK` (`writer_id`),
   CONSTRAINT `notice_FK` FOREIGN KEY (`writer_id`) REFERENCES `member` (`user_id`)
 )
 
--- °øÁö»çÇ× Ã·ºÎÆÄÀÏ Å×ÀÌºí
+-- ê³µì§€ì‚¬í•­ ì²¨ë¶€íŒŒì¼ í…Œì´ë¸”
 CREATE TABLE `notice_attach_file` (
   `uuid` varchar(500) NOT NULL, -- uuid
-  `upload_path` varchar(200) NOT NULL, -- ¾÷·Îµå °æ·Î
-  `file_name` varchar(100) NOT NULL, -- ÆÄÀÏ¸í
-  `file_type` char(1) DEFAULT '1', -- ÆÄÀÏ Å¸ÀÔ
-  `notice_no` int(11) NOT NULL, -- °øÁö»çÇ× ¹øÈ£
+  `upload_path` varchar(200) NOT NULL, -- ì—…ë¡œë“œ ê²½ë¡œ
+  `file_name` varchar(100) NOT NULL, -- íŒŒì¼ëª…
+  `file_type` char(1) DEFAULT '1', -- íŒŒì¼ íƒ€ì…
+  `notice_no` int(11) NOT NULL, -- ê³µì§€ì‚¬í•­ ë²ˆí˜¸
   PRIMARY KEY (`uuid`),
   KEY `notice_no` (`notice_no`),
   CONSTRAINT `notice_attach_file_ibfk_1` FOREIGN KEY (`notice_no`) REFERENCES `notice` (`notice_no`) ON DELETE CASCADE ON UPDATE CASCADE
 )
 
--- ºĞ½Ç¹° Å×ÀÌºí
+-- ë¶„ì‹¤ë¬¼ í…Œì´ë¸”
 CREATE TABLE `article` (
-  `article_no` int(11) NOT NULL AUTO_INCREMENT, -- ºĞ½Ç¹° Ã£±â °Ô½Ã±Û ¹øÈ£
-  `article_title` varchar(50) NOT NULL, -- ºĞ½Ç¹°Ã£±â Á¦¸ñ
-  `article_content` varchar(8196) NOT NULL, -- ºĞ½Ç¹° Ã£±â ³»¿ë
-  `writer_id` varchar(20) NOT NULL, -- ÀÛ¼ºÀÚ ¾ÆÀÌµğ
-  `writer_name` varchar(50) NOT NULL, -- ÀÛ¼ºÀÚ ÀÌ¸§
-  `article_reg_date` datetime DEFAULT CURRENT_TIMESTAMP, -- °Ô½Ã±Û µî·ÏÀÏ
-  `article_views` int(11) NOT NULL DEFAULT '0', -- °Ô½Ã±Û Á¶È¸¼ö
+  `article_no` int(11) NOT NULL AUTO_INCREMENT, -- ë¶„ì‹¤ë¬¼ ì°¾ê¸° ê²Œì‹œê¸€ ë²ˆí˜¸
+  `article_title` varchar(50) NOT NULL, -- ë¶„ì‹¤ë¬¼ì°¾ê¸° ì œëª©
+  `article_content` varchar(8196) NOT NULL, -- ë¶„ì‹¤ë¬¼ ì°¾ê¸° ë‚´ìš©
+  `writer_id` varchar(20) NOT NULL, -- ì‘ì„±ì ì•„ì´ë””
+  `writer_name` varchar(50) NOT NULL, -- ì‘ì„±ì ì´ë¦„
+  `article_reg_date` datetime DEFAULT CURRENT_TIMESTAMP, -- ê²Œì‹œê¸€ ë“±ë¡ì¼
+  `article_views` int(11) NOT NULL DEFAULT '0', -- ê²Œì‹œê¸€ ì¡°íšŒìˆ˜
   PRIMARY KEY (`article_no`),
   KEY `article_FK` (`writer_id`),
   CONSTRAINT `article_FK` FOREIGN KEY (`writer_id`) REFERENCES `member` (`user_id`)
 )
 
--- ºĞ½Ç¹° Ã·ºÎÆÄÀÏ Å×ÀÌºí
+-- ë¶„ì‹¤ë¬¼ ì²¨ë¶€íŒŒì¼ í…Œì´ë¸”
 CREATE TABLE `attach_file` (
   `uuid` varchar(500) NOT NULL, -- uuid
-  `upload_path` varchar(200) NOT NULL, -- ¾÷·Îµå °æ·Î
-  `file_name` varchar(100) NOT NULL, -- ÆÄÀÏ¸í
-  `file_type` char(1) DEFAULT '1', -- ÆÄÀÏ Å¸ÀÔ
-  `article_no` int(11) NOT NULL, -- ºĞ½Ç¹° Ã£±â °Ô½Ã±Û ¹øÈ£
+  `upload_path` varchar(200) NOT NULL, -- ì—…ë¡œë“œ ê²½ë¡œ
+  `file_name` varchar(100) NOT NULL, -- íŒŒì¼ëª…
+  `file_type` char(1) DEFAULT '1', -- íŒŒì¼ íƒ€ì…
+  `article_no` int(11) NOT NULL, -- ë¶„ì‹¤ë¬¼ ì°¾ê¸° ê²Œì‹œê¸€ ë²ˆí˜¸
   PRIMARY KEY (`uuid`),
   KEY `article_no` (`article_no`),
   CONSTRAINT `attach_file_ibfk_1` FOREIGN KEY (`article_no`) REFERENCES `article` (`article_no`) ON DELETE CASCADE ON UPDATE CASCADE
 )
 
--- ¹®ÀÇ»çÇ× Å×ÀÌºí
+-- ë¬¸ì˜ì‚¬í•­ í…Œì´ë¸”
 CREATE TABLE `enquiry` (
-  `enquiry_no` int(11) NOT NULL AUTO_INCREMENT, -- ¹®ÀÇ»çÇ× °Ô½Ã±Û ¹øÈ£
-  `enquiry_title` varchar(1024) NOT NULL, -- ¹®ÀÇ»çÇ× Á¦¸ñ
-  `enquiry_content` varchar(8196) NOT NULL, -- ¹®ÀÇ»çÇ× ³»¿ë
-  `writer_id` varchar(20) NOT NULL, -- ¹®ÀÇ»çÇ× ÀÛ¼ºÀÚ ¾ÆÀÌµğ
-  `writer_name` varchar(50) NOT NULL, -- ¹®ÀÇ»çÇ× ÀÛ¼ºÀÚ ÀÌ¸§
-  `enquiry_hits` int(11) NOT NULL DEFAULT '0', -- ¹®ÀÇ»çÇ× Á¶È¸¼ö
-  `enquiry_reg_date` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP, -- ¹®ÀÇ»çÇ× µî·ÏÀÏ
+  `enquiry_no` int(11) NOT NULL AUTO_INCREMENT, -- ë¬¸ì˜ì‚¬í•­ ê²Œì‹œê¸€ ë²ˆí˜¸
+  `enquiry_title` varchar(1024) NOT NULL, -- ë¬¸ì˜ì‚¬í•­ ì œëª©
+  `enquiry_content` varchar(8196) NOT NULL, -- ë¬¸ì˜ì‚¬í•­ ë‚´ìš©
+  `writer_id` varchar(20) NOT NULL, -- ë¬¸ì˜ì‚¬í•­ ì‘ì„±ì ì•„ì´ë””
+  `writer_name` varchar(50) NOT NULL, -- ë¬¸ì˜ì‚¬í•­ ì‘ì„±ì ì´ë¦„
+  `enquiry_hits` int(11) NOT NULL DEFAULT '0', -- ë¬¸ì˜ì‚¬í•­ ì¡°íšŒìˆ˜
+  `enquiry_reg_date` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP, -- ë¬¸ì˜ì‚¬í•­ ë“±ë¡ì¼
   PRIMARY KEY (`enquiry_no`),
   KEY `enquiry_FK` (`writer_id`),
   CONSTRAINT `enquiry_FK` FOREIGN KEY (`writer_id`) REFERENCES `member` (`user_id`)
 )
 
--- ´äº¯ Å×ÀÌºí
+-- ë‹µë³€ í…Œì´ë¸”
 CREATE TABLE `answer` (
-  `answer_no` int(11) NOT NULL AUTO_INCREMENT, -- ´äº¯ ¹øÈ£
-  `enquiry_no` int(11) NOT NULL, -- ¹®ÀÇ»çÇ× ¹øÈ£
-  `answer_title` varchar(1024) NOT NULL, -- ´äº¯ Á¦¸ñ
-  `answer_content` varchar(8196) NOT NULL, -- ´äº¯ ³»¿ë
-  `a_writer_id` varchar(20) NOT NULL, -- ´äº¯ ÀÛ¼ºÀÚ ¾ÆÀÌµğ
-  `a_writer_name` varchar(50) NOT NULL, -- ´äº¯ ÀÛ¼ºÀÚ ÀÌ¸§
-  `answer_hits` int(11) NOT NULL DEFAULT '0', -- ´äº¯ Á¶È¸¼ö
-  `answer_reg_date` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP, -- ´äº¯ µî·ÏÀÏ
+  `answer_no` int(11) NOT NULL AUTO_INCREMENT, -- ë‹µë³€ ë²ˆí˜¸
+  `enquiry_no` int(11) NOT NULL, -- ë¬¸ì˜ì‚¬í•­ ë²ˆí˜¸
+  `answer_title` varchar(1024) NOT NULL, -- ë‹µë³€ ì œëª©
+  `answer_content` varchar(8196) NOT NULL, -- ë‹µë³€ ë‚´ìš©
+  `a_writer_id` varchar(20) NOT NULL, -- ë‹µë³€ ì‘ì„±ì ì•„ì´ë””
+  `a_writer_name` varchar(50) NOT NULL, -- ë‹µë³€ ì‘ì„±ì ì´ë¦„
+  `answer_hits` int(11) NOT NULL DEFAULT '0', -- ë‹µë³€ ì¡°íšŒìˆ˜
+  `answer_reg_date` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP, -- ë‹µë³€ ë“±ë¡ì¼
   PRIMARY KEY (`answer_no`),
   KEY `fk_answer_enquiry_no` (`enquiry_no`),
   KEY `answer_FK` (`a_writer_id`),
@@ -206,17 +206,17 @@ CREATE TABLE `answer` (
 )
 
 
--- ÀÌº¥Æ® Ãâ·Â
+-- ì´ë²¤íŠ¸ ì¶œë ¥
 show variables like 'event%';
 
--- ÀÌº¥Æ® È°¼ºÈ­
+-- ì´ë²¤íŠ¸ í™œì„±í™”
 set global event_scheduler = on;
 
--- µî·Ï µÈ ÀÌº¥Æ® Ãâ·Â
+-- ë“±ë¡ ëœ ì´ë²¤íŠ¸ ì¶œë ¥
 select * from information_schema.EVENTS;
 
 
--- ´ëÃâ ºÒ°¡ ÀÏ¼ö -1
+-- ëŒ€ì¶œ ë¶ˆê°€ ì¼ìˆ˜ -1
 DELIMITER //
 CREATE PROCEDURE overdue_decrease()
 begin
@@ -225,18 +225,18 @@ begin
    where user_overdue_date > 0;
 END //
 
--- ÀÚÁ¤¸¶´Ù ´ëÃâ ºÒ°¡ ÀÏ¼ö -1 ÇÏ´Â ÀÌº¥Æ®
+-- ìì •ë§ˆë‹¤ ëŒ€ì¶œ ë¶ˆê°€ ì¼ìˆ˜ -1 í•˜ëŠ” ì´ë²¤íŠ¸
 create event overdue_decrease
 on schedule every 1 day
 starts '2021-12-04 00:00:00'
-comment '´ëÃâ ºÒ°¡ ÀÏ ¼ö'
+comment 'ëŒ€ì¶œ ë¶ˆê°€ ì¼ ìˆ˜'
 do
 call overdue_decrease(); 
 
 
 
 
--- ¿­¶÷½Ç Åğ½Ç ÇÁ·Î½ÃÀú
+-- ì—´ëŒì‹¤ í‡´ì‹¤ í”„ë¡œì‹œì €
 DELIMITER //
 CREATE PROCEDURE seat_check()
 begin
@@ -245,16 +245,16 @@ begin
     where checkout_time <= current_time;
 END //
 
--- ¿­¶÷½Ç ½Ç½Ã°£ °Ë»ç ÈÄ Åğ½Ç Ã³¸®ÇÏ´Â ÀÌº¥Æ®
+-- ì—´ëŒì‹¤ ì‹¤ì‹œê°„ ê²€ì‚¬ í›„ í‡´ì‹¤ ì²˜ë¦¬í•˜ëŠ” ì´ë²¤íŠ¸
 create event check_seat
 on schedule every 1 second
-comment '¿­¶÷½Ç ½Ç½Ã°£ °Ë»ç'
+comment 'ì—´ëŒì‹¤ ì‹¤ì‹œê°„ ê²€ì‚¬'
 do
 call seat_check(); 
 
 
 
--- °øÁö»çÇ× »èÁ¦ ½Ã °øÁö»çÇ× ¹øÈ£ Á¤·Ä
+-- ê³µì§€ì‚¬í•­ ì‚­ì œ ì‹œ ê³µì§€ì‚¬í•­ ë²ˆí˜¸ ì •ë ¬
 DELIMITER //
 CREATE PROCEDURE notice_reset()
 begin
@@ -269,7 +269,7 @@ END //
 
 
 
--- ¹®ÀÇ»çÇ× »èÁ¦ ½Ã ¹®ÀÇ»çÇ× ¹øÈ£ Á¤·Ä
+-- ë¬¸ì˜ì‚¬í•­ ì‚­ì œ ì‹œ ë¬¸ì˜ì‚¬í•­ ë²ˆí˜¸ ì •ë ¬
 DELIMITER //
 CREATE PROCEDURE enquiry_reset()
 begin
@@ -283,7 +283,7 @@ begin
 END //
 
 
--- ´äº¯ »èÁ¦ ½Ã ´äº¯ ¹øÈ£ Á¤·Ä
+-- ë‹µë³€ ì‚­ì œ ì‹œ ë‹µë³€ ë²ˆí˜¸ ì •ë ¬
 DELIMITER //
 CREATE PROCEDURE answer_reset()
 begin
@@ -296,7 +296,7 @@ begin
     DEALLOCATE PREPARE qry;
 END //
 
--- ºĞ½Ç¹° Ã£±â »èÁ¦ ½Ã ºĞ½Ç¹° Ã£±â ¹øÈ£ Á¤·Ä
+-- ë¶„ì‹¤ë¬¼ ì°¾ê¸° ì‚­ì œ ì‹œ ë¶„ì‹¤ë¬¼ ì°¾ê¸° ë²ˆí˜¸ ì •ë ¬
 DELIMITER //
 CREATE PROCEDURE article_reset()
 begin
@@ -309,25 +309,25 @@ begin
     DEALLOCATE PREPARE qry;
 END //
 
--- ÃÊ±â °ü¸®ÀÚ °èÁ¤ ¼³Á¤
+-- ì´ˆê¸° ê´€ë¦¬ì ê³„ì • ì„¤ì •
 -- id : admin
--- pw : asdfasdf
+-- pw : zxcvzxcv
 
 insert into member values
-("admin", "$2a$10$oyw6645fwRPh9BOpgsVzZuqkSQr1N/b8UGE25hiU0ww7kEQ/e.YPW", "°ü¸®ÀÚ", "2021-12-06", "01000000000",
-"library.raon@gmail.com", "63309", "Á¦ÁÖÆ¯º°ÀÚÄ¡µµ Á¦ÁÖ½Ã Ã·´Ü·Î 242 (¿µÆòµ¿)", "1", 10, 0, 0, 1, current_timestamp);
+("admin", "$2a$10$oyw6645fwRPh9BOpgsVzZuqkSQr1N/b8UGE25hiU0ww7kEQ/e.YPW", "ê´€ë¦¬ì", "2021-12-06", "01000000000",
+"library.raon@gmail.com", "63309", "ì œì£¼íŠ¹ë³„ìì¹˜ë„ ì œì£¼ì‹œ ì²¨ë‹¨ë¡œ 242 (ì˜í‰ë™)", "1", 10, 0, 0, 1, current_timestamp);
 insert into member_auth values("admin", "ROLE_MEMBER");
 insert into member_auth values("admin", "ROLE_ADMIN");
 insert into member_auth values("admin", "ROLE_MASTER");
 
--- ¿­¶÷½Ç ÁÂ¼® insert
+-- ì—´ëŒì‹¤ ì¢Œì„ insert
 DELIMITER //
 CREATE PROCEDURE insert_seat()
 begin
     DECLARE i INT DEFAULT 1;
     WHILE (i <= 124) DO
-        INSERT INTO reading_room(seat_no) VALUE (i); -- ¨Ğ Å×ÀÌºí¿¡ i°ª ³Ö¾îÁÖ±â
-        SET i = i + 1; -- ¨Ñ i°ª¿¡ 1´õÇØÁÖ°í WHILE¹® Ã³À½À¸·Î ÀÌµ¿
+        INSERT INTO reading_room(seat_no) VALUE (i); -- â““ í…Œì´ë¸”ì— iê°’ ë„£ì–´ì£¼ê¸°
+        SET i = i + 1; -- â“” iê°’ì— 1ë”í•´ì£¼ê³  WHILEë¬¸ ì²˜ìŒìœ¼ë¡œ ì´ë™
     END WHILE;
 END //
 
