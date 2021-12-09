@@ -64,6 +64,7 @@
                                         <option value="user_name">이름</option>
                                         <option value="user_tel">전화번호</option>
                                         <option value="user_email">이메일</option>
+                                        <option value="user_reg_date">회원가입일</option>
                                     	</c:if>
                                     	
                                     
@@ -72,6 +73,7 @@
                                         <option value="user_name">이름</option>
                                         <option value="user_tel">전화번호</option>
                                         <option value="user_email">이메일</option>
+                                        <option value="user_reg_date">회원가입일</option>
                                     	</c:if>
                                     	
                                     	<c:if test="${pageMaker.cri.type == 'user_name' }">
@@ -79,6 +81,7 @@
                                         <option value="user_name" selected="selected">이름</option>
                                         <option value="user_tel">전화번호</option>
                                         <option value="user_email">이메일</option>
+                                        <option value="user_reg_date">회원가입일</option>
                                     	</c:if>
                                     	
                                     	<c:if test="${pageMaker.cri.type == 'user_tel' }">
@@ -86,6 +89,7 @@
                                         <option value="user_name">이름</option>
                                         <option value="user_tel" selected="selected">전화번호</option>
                                         <option value="user_email">이메일</option>
+                                        <option value="user_reg_date">회원가입일</option>
                                     	</c:if>
                                     	
                                     	<c:if test="${pageMaker.cri.type == 'user_email' }">
@@ -93,6 +97,15 @@
                                         <option value="user_name">이름</option>
                                         <option value="user_tel">전화번호</option>
                                         <option value="user_email" selected="selected">이메일</option>
+                                        <option value="user_reg_date">회원가입일</option>
+                                    	</c:if>
+                                    	
+                                    	<c:if test="${pageMaker.cri.type == 'user_reg_date' }">
+                                    	<option value="user_id">아이디</option>
+                                        <option value="user_name">이름</option>
+                                        <option value="user_tel">전화번호</option>
+                                        <option value="user_email">이메일</option>
+                                        <option value="user_reg_date" selected="selected">회원가입일</option>
                                     	</c:if>
                                         
                                     </select>
