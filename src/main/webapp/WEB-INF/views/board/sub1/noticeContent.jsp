@@ -115,6 +115,13 @@
 										<td class="prev" style="border-right: 1px solid #dee1e7"><img src="/resources/imges/board/sub1/angle_up.png" class="angle"> 이전글</td>
 									
 										 <c:choose>
+										 
+										 	<c:when test="${posts[0].notice_no == null}">
+										 		<td class="posts_title">이전글이 없습니다.</td>
+												<td class="posts_writer"></td>
+										 	</c:when>
+										 	
+										 	
 										 	<c:when test="${posts[0].notice_no > noticeContent.notice_no}">
 										 		<td class="posts_title">이전글이 없습니다.</td>
 												<td class="posts_writer"></td>
