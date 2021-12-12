@@ -81,7 +81,7 @@
                                 </div>
 
                                 <div class="login_menu">
-                                    <span><a href="/member/signup">회원가입 ▶</a>　</span>
+                                    <span><a href="/member/signup-check">회원가입 ▶</a>　</span>
                                     <span><a href="/member/search-id">아이디 찾기 ▶</a>　</span>
                                     <span><a href="/member/search-pw">비밀번호 찾기 ▶</a></span>
                                     <p style="font-size: 20px;"></p>

@@ -46,7 +46,7 @@ public class NoticeController {
 		// 전체 게시물 수
 		int total = noticeService.getTotal(cri);
 		model.addAttribute("total", total);
-		
+
 		ViewPage vp = new ViewPage(cri, total);
 		model.addAttribute("pageMaker", vp);
 
@@ -72,7 +72,6 @@ public class NoticeController {
 		return "/board/sub1/noticeContent";
 	}
 
-	
 	/* 게시물 작성 */
 	/* 게시물 작성 page로 이동 */
 	@GetMapping("/insertNoticeForm")
@@ -94,7 +93,7 @@ public class NoticeController {
 		if (dto.getNoticeAttachList() != null) {
 			dto.getNoticeAttachList().forEach(attach -> System.out.println(attach));
 		}
-		
+
 		dto.setWriter_id(id);
 		noticeService.insert(dto);
 
@@ -153,8 +152,8 @@ public class NoticeController {
 				Files.deleteIfExists(file);
 
 				if (Files.probeContentType(file).startsWith("image")) {
-					Path thumbnail = Paths
-							.get("C:\\library_file\\notice\\" + "\\s_" + attach.getUuid() + "_" + attach.getFile_name());
+					Path thumbnail = Paths.get(
+							"C:\\library_file\\notice\\" + "\\s_" + attach.getUuid() + "_" + attach.getFile_name());
 					Files.delete(thumbnail);
 				}
 			} catch (Exception e) {

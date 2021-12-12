@@ -16,8 +16,8 @@
   crossorigin="anonymous"></script>
 <body>
 
-	<div class="header">
-    <jsp:include page="../../header.jsp"></jsp:include>
+    <div class="header">
+        <jsp:include page="../../header.jsp"></jsp:include>
     </div>
 
     <div class="container">
@@ -72,8 +72,9 @@
                                             <td style="width: 15%;">관리자</td>
                                             <th class="first">작성일</th>
                                             <td>
-                                            	<fmt:formatDate var="notice_reg_date" value="${noticeContent.notice_reg_date}" pattern="yyyy-MM-dd"/>
-                                            	${notice_reg_date}
+                                                <fmt:formatDate var="notice_reg_date"
+                                                    value="${noticeContent.notice_reg_date}" pattern="yyyy-MM-dd" />
+                                                ${notice_reg_date}
                                             </td>
                                             <th class="first">조회수</th>
                                             <td>${noticeContent.notice_views}</td>
@@ -82,114 +83,132 @@
                                         <!-- 본문 내용 -->
                                         <tr>
                                             <td colspan="6">
-                                                <div class="bbs-content">
+                                                <div class="bbs-content" style="width:950px; overflow: auto;">
                                                     <p>${noticeContent.notice_content}</p>
-                                                    
+
                                                     <!-- 첨부 파일 -->
-													<div class="panel-body">
-														<div class='uploadResult'> 
-															<ul>
-																
-															</ul>
-														</div>
-														
-														<div class="downloadAreaWrap">
-															<div class="downloadAreaTitle">첨부파일</div>
-															<div class="downloadArea">
-																<ul>
-																
-																</ul>
-															</div>
-														</div>
-													</div>
-													
+                                                    <div class="panel-body">
+                                                        <div class='uploadResult'>
+                                                            <ul>
+
+                                                            </ul>
+                                                        </div>
+
+                                                        <div class="downloadAreaWrap">
+                                                            <div class="downloadAreaTitle">첨부파일</div>
+                                                            <div class="downloadArea">
+                                                                <ul>
+
+                                                                </ul>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+
                                                 </div>
                                             </td>
                                         </tr>
                                     </tbody>
 
                                 </table>
-                                
+
                                 <table class="bbs-posts">
-									<tr class="board-prev">
-										<td class="prev" style="border-right: 1px solid #dee1e7"><img src="/resources/imges/board/sub1/angle_up.png" class="angle"> 이전글</td>
-									
-										 <c:choose>
-										 	<c:when test="${posts[0].notice_no > noticeContent.notice_no}">
-										 		<td class="posts_title">이전글이 없습니다.</td>
-												<td class="posts_writer"></td>
-										 	</c:when>
-										 	
-										 	<c:otherwise>
-										 		<td class="posts_title"><a href="/board/noticeContent?notice_no=${posts[0].notice_no}">${posts[0].notice_title}</a></td>
-												<td class="posts_writer"></td>
-										 	</c:otherwise>
-										 </c:choose>
-										 
-									</tr>
-									
-									<tr class="board-next">
-										<td class="next" style="border-right: 1px solid #dee1e7;"><img src="/resources/imges/board/sub1/angle_down.png" class="angle"> 다음글</td>
-										
-										<c:choose>
-											<c:when test="${posts[0].notice_no > noticeContent.notice_no}">
-										 		<td class="posts_title"><a href="/board/noticeContent?notice_no=${posts[0].notice_no}">${posts[0].notice_title}</a></td>
-										 		<td class="posts_writer"></td> 
-										 	</c:when>
-										
-											<c:otherwise>
-												<c:if test="${posts[1] == null}">
-												<%-- <c:if test="${fn:length(posts) == 1}"> --%>
-													<td class="posts_title">다음글이 없습니다.</td>
-													<td class="posts_writer"></td>
-												</c:if>
-												<c:if test="${posts[1] != null}">
-													<td class="posts_title"><a href="/board/noticeContent?notice_no=${posts[1].notice_no}">${posts[1].notice_title}</a></td>
-													<td class="posts_writer"></td>
-												</c:if>
-											</c:otherwise>
-										</c:choose>
-										
-									</tr>
-								</table>
-								
+                                    <tr class="board-prev">
+                                        <td class="prev" style="border-right: 1px solid #dee1e7"><img
+                                                src="/resources/imges/board/sub1/angle_up.png" class="angle"> 이전글</td>
+
+                                        <c:choose>
+
+                                            <c:when test="${posts[0].notice_no == null}">
+                                                <td class="posts_title">이전글이 없습니다.</td>
+                                                <td class="posts_writer"></td>
+                                            </c:when>
+
+
+                                            <c:when test="${posts[0].notice_no > noticeContent.notice_no}">
+                                                <td class="posts_title">이전글이 없습니다.</td>
+                                                <td class="posts_writer"></td>
+                                            </c:when>
+
+                                            <c:otherwise>
+                                                <td class="posts_title"><a
+                                                        href="/board/noticeContent?notice_no=${posts[0].notice_no}">${posts[0].notice_title}</a>
+                                                </td>
+                                                <td class="posts_writer"></td>
+                                            </c:otherwise>
+                                        </c:choose>
+
+                                    </tr>
+
+                                    <tr class="board-next">
+                                        <td class="next" style="border-right: 1px solid #dee1e7;"><img
+                                                src="/resources/imges/board/sub1/angle_down.png" class="angle"> 다음글</td>
+
+                                        <c:choose>
+                                            <c:when test="${posts[0].notice_no > noticeContent.notice_no}">
+                                                <td class="posts_title"><a
+                                                        href="/board/noticeContent?notice_no=${posts[0].notice_no}">${posts[0].notice_title}</a>
+                                                </td>
+                                                <td class="posts_writer"></td>
+                                            </c:when>
+
+                                            <c:otherwise>
+                                                <c:if test="${posts[1] == null}">
+                                                    <%-- <c:if test="${fn:length(posts) == 1}"> --%>
+                                                        <td class="posts_title">다음글이 없습니다.</td>
+                                                        <td class="posts_writer"></td>
+                                                </c:if>
+                                                <c:if test="${posts[1] != null}">
+                                                    <td class="posts_title"><a
+                                                            href="/board/noticeContent?notice_no=${posts[1].notice_no}">${posts[1].notice_title}</a>
+                                                    </td>
+                                                    <td class="posts_writer"></td>
+                                                </c:if>
+                                            </c:otherwise>
+                                        </c:choose>
+
+                                    </tr>
+                                </table>
+
 
                                 <!-- 글쓰기 btn -->
                                 <div class="list_wrap">
-                                	<form action="/board/noticeList" method="get">
-                                		<input type="hidden" name="amount" value="${cri.amount}">
-                                		<input type="hidden" name="page" value="${cri.page}">
-                                		<input type="hidden" name="type" value="${cri.type}">
-                                		<input type="hidden" name="keyword" value="${cri.keyword}">
-                                		<button class="list_btn">목록으로</button>
-                                	</form>
+                                    <form action="/board/noticeList" method="get">
+                                        <input type="hidden" name="amount" value="${cri.amount}">
+                                        <input type="hidden" name="page" value="${cri.page}">
+                                        <input type="hidden" name="type" value="${cri.type}">
+                                        <input type="hidden" name="keyword" value="${cri.keyword}">
+                                        <button class="list_btn">목록으로</button>
+                                    </form>
                                 </div>
                                 <sec:authorize access="hasRole('ROLE_ADMIN')">
-                                <div class="delete_wrap">
-	                               <form action="/board/deleteNotice" method="get" onsubmit="return false" class="delete_form">
-	                               		<input type="hidden" name="notice_no" id="notice_no" value="${noticeContent.notice_no}">
-	                               		<input type="hidden" name="amount" value="${cri.amount}">
-	                               		<input type="hidden" name="page" value="${cri.page}">
-                                		<input type="hidden" name="type" value="${cri.type}">
-                                		<input type="hidden" name="keyword" value="${cri.keyword}">
-                                		
-                                		<input type="hidden" name="uuid" id="uuid">
-                                		<input type="hidden" name="file_type" id="file_type">
-	                               		<button class="delete_btn" style="background-color: #518d7d; border: 1px solid #3e6b5f;">삭제하기</button>
-	                               	</form>
-	                            </div>
-                                
-								<div class="update_wrap">
-									<form action="/board/updateNoticeForm" method="get">
-	                               		<input type="hidden" name="notice_no" value="${noticeContent.notice_no}">
-	                               		<input type="hidden" name="amount" value="${cri.amount}">
-	                               		<input type="hidden" name="page" value="${cri.page}">
-                                		<input type="hidden" name="type" value="${cri.type}">
-                                		<input type="hidden" name="keyword" value="${cri.keyword}">
-	                               		<button class="update_btn" style="margin-right: 20px;">수정하기</button>
-	                               	</form>
-								</div>
-								</sec:authorize>                      
+                                    <div class="delete_wrap">
+                                        <form action="/board/deleteNotice" method="get" onsubmit="return false"
+                                            class="delete_form">
+                                            <input type="hidden" name="notice_no" id="notice_no"
+                                                value="${noticeContent.notice_no}">
+                                            <input type="hidden" name="amount" value="${cri.amount}">
+                                            <input type="hidden" name="page" value="${cri.page}">
+                                            <input type="hidden" name="type" value="${cri.type}">
+                                            <input type="hidden" name="keyword" value="${cri.keyword}">
+
+                                            <input type="hidden" name="uuid" id="uuid">
+                                            <input type="hidden" name="file_type" id="file_type">
+                                            <button class="delete_btn"
+                                                style="background-color: #518d7d; border: 1px solid #3e6b5f;">삭제하기</button>
+                                        </form>
+                                    </div>
+
+                                    <div class="update_wrap">
+                                        <form action="/board/updateNoticeForm" method="get">
+                                            <input type="hidden" name="notice_no" value="${noticeContent.notice_no}">
+                                            <input type="hidden" name="amount" value="${cri.amount}">
+                                            <input type="hidden" name="page" value="${cri.page}">
+                                            <input type="hidden" name="type" value="${cri.type}">
+                                            <input type="hidden" name="keyword" value="${cri.keyword}">
+                                            <button class="update_btn" style="margin-right: 20px;">수정하기</button>
+                                        </form>
+                                    </div>
+                                </sec:authorize>
 
                             </div>
 
@@ -202,99 +221,77 @@
             </div>
         </div>
     </div>
-    
-  
+
 <script>
-	$(function() {
-		
-		$(".sub1").addClass("active");
+    $(function () {
 
-		var moveForm = $(".moveForm");
-		
-		$(".delete_btn").on("click", function(e) {
-			e.preventDefault();
-			if(confirm("삭제하시겠습니까?")){
-				alert("게시물이 삭제되었습니다.");
-				$(".delete_form").attr("onsubmit", "result true");
-				$(".delete_form").submit();
-			}else{
-			}
-		})
-		
-	});
+        $(".sub1").addClass("active");
 
-	
+        var moveForm = $(".moveForm");
 
-	/* 첨부 파일 다운로드 */
-	(function(){
-		
-		$(".downloadAreaWrap").hide();
-	 
-		var notice_no = $("#notice_no").val();
-		
-		$.getJSON("/board/getNoticeAttachList", {notice_no:notice_no}, function(arr){
-		    
-			console.log(arr);
-			
-			var str = "";
-			var str2 = "";
-			
-			$(arr).each(function(i, attach){
-				   
-				//image type
-				if(attach.file_type){
-					var fileCallPath = encodeURIComponent(attach.upload_path + "/" + attach.uuid + "_" + attach.file_name);
-					var uuidName = $("#uuid").val(attach.uuid + "_" + attach.file_name);
-					var thumbName = $("#thumb").val('s_' + attach.uuid + "_" + attach.file_name);
-					$("input[name='uuid']").attr('value', uuidName);
-					$("input[name='thumb']").attr('value', thumbName);
-					
-					str += "<img src='/displayFiles?file_name=" + fileCallPath + "' style='max-width: 100%; max-height: 100%;'><br>";
-					
-					str2 += "<li data-path='" + attach.upload_path + "' data-uuid='" + attach.uuid + "' data-filename='" + attach.file_name + "' data-type='" + attach.file_type + "' ><div>";
-					str2 += "<span><a href='#' class='attached_file_name'><img src='/resources/imges/board/sub1/image_icon.png' class='attached_image_icon'> " + attach.file_name + "</a></span><br/>";
-					str2 += "</div>";
-					str2 + "</li>";
-					
-				}else{
-					str2 += "<li data-path='" + attach.upload_path + "' data-uuid='" + attach.uuid + "' data-filename='" + attach.file_name + "' data-type='" + attach.file_type + "' ><div>";
-					str2 += "<span><a href='#' class='attached_file_name'><img src='/resources/imges/board/sub1/file_icon.png' class='attached_file_icon'> " + attach.file_name + "</a></span><br/>";
-					str2 += "</div>";
-					str2 + "</li>";
-				}
-				
-				
-			});
-			$(".uploadResult ul").html(str);
-			$(".downloadArea ul").html(str2);
-			
-			if($(".downloadArea li").length){
-				$(".downloadAreaWrap").show();
-			}
-		   
-		});//end getjson
-		
-	})();//end function
-	
-		
-	$(".downloadArea").on("click", "li a", function(e){
-		e.preventDefault();
-		     
-		console.log("view image");
-		
-		var liObj = $(this).closest("li");
-		
-		var path = encodeURIComponent(liObj.data("path") + "/" + liObj.data("uuid") + "_" + liObj.data("filename"));
-		
-		self.location ="/downloadNoticeFile?file_name=" + path;
-		
-	});	
-	
-	
-		
+        $(".delete_btn").on("click", function (e) {
+            e.preventDefault();
+            if (confirm("삭제하시겠습니까?")) {
+                alert("게시물이 삭제되었습니다.");
+                $(".delete_form").attr("onsubmit", "result true");
+                $(".delete_form").submit();
+            } else {
+            	alert("취소 되었습니다.");
+            }
+        })
 
-	
-</script>    
-    
-    
+    });
+
+    /* 첨부 파일 다운로드 */
+    (function () {
+
+        $(".downloadAreaWrap").hide();
+
+        var notice_no = $("#notice_no").val();
+
+        $.getJSON("/board/getNoticeAttachList", { notice_no: notice_no }, function (arr) {
+
+            var str = "";
+            var str2 = "";
+
+            $(arr).each(function (i, attach) {
+                str2 += "<li data-path='" + attach.upload_path + "' data-uuid='" + attach.uuid + "' data-filename='" + attach.file_name + "' data-type='" + attach.file_type + "' ><div>";
+
+                //image type
+                if (attach.file_type) {
+                    str2 += "<span><a href='#' class='attached_file_name'><img src='/resources/imges/board/sub1/image_icon.png' class='attached_image_icon'> " + attach.file_name + "</a></span><br/>";
+
+                } else {
+                    str2 += "<span><a href='#' class='attached_file_name'><img src='/resources/imges/board/sub1/file_icon.png' class='attached_file_icon'> " + attach.file_name + "</a></span><br/>";
+                }
+
+                str2 += "</div>";
+                str2 + "</li>";
+
+            });
+            $(".downloadArea ul").html(str2);
+
+            if ($(".downloadArea li").length) {
+                $(".downloadAreaWrap").show();
+            }
+
+        });//end getjson
+
+    })();//end function
+
+    $(".downloadArea").on("click", "li a", function (e) {
+        e.preventDefault();
+
+        var liObj = $(this).closest("li");
+
+        var path = encodeURIComponent(liObj.data("path") + "/" + liObj.data("uuid") + "_" + liObj.data("filename"));
+
+        self.location = "/downloadNoticeFile?file_name=" + path;
+
+    });
+
+</script>
+
+
 </body>
+</html>

@@ -26,13 +26,13 @@
 		현재 홈페이지 내부에 에러가 있습니다.<br><br>
 		잠시 후 다시 한번 시도해 주시기 바랍니다.<br> 
 		</span><br>
-		<input class="btn" type="submit" value="이전 페이지">
+		<input class="btn" type="submit" value="홈으로가기">
 	</div>
 	
 <script>
 	$(function(){
 		$(".btn").on("click", function(){
-			history.back();
+			window.location.href="/";
 		})
 	})
 </script>

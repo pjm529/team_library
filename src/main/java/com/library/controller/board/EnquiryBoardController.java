@@ -12,10 +12,8 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.library.model.board.AnswerBoardDTO;
 import com.library.model.board.EnquiryBoardDTO;
@@ -49,7 +47,7 @@ public class EnquiryBoardController {
 	}
 
 	/* 게시물 본문 */
-	@PostMapping("/qnaBoardContent")
+	@GetMapping("/qnaBoardContent")
 	public String qnaBoardContent(@RequestParam("enquiry_no") String uenquiry_no, Model model, Criteria cri,
 			Principal principal) {
 
@@ -210,7 +208,7 @@ public class EnquiryBoardController {
 
 	/* 답글 */
 	/* 답글 게시물 본문 / 조회수 */
-	@PostMapping("/answerBoardContent")
+	@GetMapping("/answerBoardContent")
 	public String answerBoardContent(@RequestParam("answer_no") String uanswer_no, Model model, Criteria cri,
 			Principal principal) {
 

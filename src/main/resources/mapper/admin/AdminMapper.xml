@@ -69,6 +69,10 @@
 			  			where user_email like concat('%', #{keyword}, '%')
 			  		</if>
 			  		
+			  		<if test="type == 'user_reg_date'">
+			  			where user_reg_date like concat('%', #{keyword}, '%')
+			  		</if>
+			  		
 				</if>
 			</if>
 	    </sql>

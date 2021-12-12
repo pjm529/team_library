@@ -134,8 +134,9 @@
 	$(function() {
 
 		CKEDITOR.replace('popContent' , {
+			 filebrowserImageUploadUrl: "/upload?boardName=answer",
 			 height: 500                                                  
-	    });
+	     });
 		
 		$(".sub3").addClass("active");
 		
