@@ -61,8 +61,8 @@
 
                             <div class="table-wrap">
                                 <form action="/board/articleInsertForm" method="post" role="form">
-                                    <input type="hidden" name="writer_name" value="<sec:authentication property="
-                                        principal.dto.user_name" />">
+                                    <input type="hidden" name="writer_name" 
+                                    value="<sec:authentication property="principal.dto.user_name" />">
 
                                     <table class="bbs-edit">
                                         <tbody>
