@@ -231,13 +231,14 @@
 
                     //image type
                     if (attach.file_type) {
-                        /* 첨부파일 아이콘 보여지는 곳 */
+                    	
+                    	str2 += "<span><img src='/resources/fileImage/imageDown.png' width='15px' height='15px' style='vertical-align: middle;'><a href='#'> " + attach.file_name + "</a></span><br/>";
 
                     } else {
                         str2 += "<span><img src='/resources/fileImage/text.png' width='15px' height='15px' style='vertical-align: middle;'><a href='#'> " + attach.file_name + "</a></span><br/>";
                     }
 
-                    str2 += "<span><img src='/resources/fileImage/imageDown.png' width='15px' height='15px' style='vertical-align: middle;'><a href='#'> " + attach.file_name + "</a></span><br/>";
+                    
                     str2 += "</div>";
                     str2 + "</li>";
                 });
