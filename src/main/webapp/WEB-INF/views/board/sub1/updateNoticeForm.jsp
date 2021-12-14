@@ -284,7 +284,6 @@
             var uploadUL = $(".uploadResult ul");
 
             var str = "";
-            var str2 = "";
             $(uploadResultArr).each(function (i, obj) {
 
                 if (obj.image) {
@@ -303,8 +302,6 @@
                     str += "</div>";
                     str += "</li>";
 
-                    str2 +=
-                        '<p><img alt="" src="/imgSubmit?uid=' + obj.uuid + '&amp;fileName=' + obj.file_name + '&amp;filePath=C:/library_file/notice/" /></p>';
                 } else {
                     var fileCallPath = encodeURIComponent(obj.upload_path + "/" + obj.uuid + "_" + obj.file_name);
                     var fileLink = fileCallPath.replace(new RegExp(/\\/g), "/");
@@ -323,7 +320,6 @@
                 }
             });
             uploadUL.append(str);
-            CKEDITOR.instances.popContent.insertHtml(str2, "html");
         }
 
         /* x버튼 눌렀을 때 첨부 파일 목록에서 사라짐 */

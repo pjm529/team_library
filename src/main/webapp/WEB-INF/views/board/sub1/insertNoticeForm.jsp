@@ -240,7 +240,6 @@
             var uploadUL = $(".uploadResult ul");
 
             var str = "";
-            var str2 = "";
             $(uploadResultArr).each(function (i, obj) {
 
                 if (obj.image) {
@@ -257,9 +256,6 @@
                     str += "<button type='button' data-file=\'" + fileCallPath + "\' data-type='image'  class=" + obj.uuid + "_" + obj.file_name + ">x</button><br>";
                     str += "</div>";
                     str += "</li>";
-
-                    str2 +=
-                        '<p><img alt="" src="/imgSubmit?uid=' + obj.uuid + '&amp;fileName=' + obj.file_name + '&amp;filePath=C:/library_file/notice/" /></p>';
 
                 } else {
                     var fileCallPath = encodeURIComponent(obj.upload_path + "/" + obj.uuid + "_" + obj.file_name);
@@ -281,7 +277,6 @@
             });
 
             uploadUL.append(str);
-            CKEDITOR.instances.popContent.insertHtml(str2, "html");
         }
 
 
