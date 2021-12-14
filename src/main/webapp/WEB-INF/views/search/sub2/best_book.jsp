@@ -122,6 +122,11 @@
                                 </table>
                                 </c:if>
                             </div>
+                            
+                            <c:if test="${empty list }">
+                            <br>
+	                        <h2>대출 베스트 도서가 없습니다.</h2>
+	                        </c:if>
                         </div>
                     </div>
                 </div>
