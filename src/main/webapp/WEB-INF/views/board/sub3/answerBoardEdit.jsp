@@ -88,9 +88,9 @@
                                                 </td>
                                             </tr>
                                             <tr>
-                                                <td colspan="4">
-                                                    <textarea id="popContent" name="answer_content" cols="108"
-                                                        rows="15">${answer.answer_content}</textarea>
+                                                <td colspan="4" style="padding: 8px 0px;">
+                                                    <textarea id="popContent" name="answer_content">
+                                                    ${answer.answer_content}</textarea>
                                                 </td>
                                             </tr>
                                         </tbody>

@@ -86,9 +86,9 @@
                                                 <td>${notice_reg_date}</td>
                                             </tr>
                                             <tr>
-                                                <td colspan="4">
-                                                    <textarea id="popContent" name="notice_content" cols="108"
-                                                        rows="15">${noticeContent.notice_content}</textarea>
+                                                <td colspan="4" style="padding: 8px 0px;">
+                                                    <textarea id="popContent" name="notice_content">
+                                                    ${noticeContent.notice_content}</textarea>
                                                 </td>
                                             </tr>
                                             <tr>
