@@ -33,7 +33,7 @@ import com.library.service.board.NoticeService;
 @RequestMapping("/board/*")
 public class NoticeController {
 	
-	public String UPLOAD_PATH = com.library.controller.Path.path() + File.separator + "notice" 
+	public String UPLOAD_PATH = com.library.util.Path.path() + File.separator + "notice" 
 			+ File.separator; // 업로드 경로
 
 	@Autowired

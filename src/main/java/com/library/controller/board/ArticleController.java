@@ -34,7 +34,7 @@ import com.library.service.board.ArticleService;
 @RequestMapping("/board/*")
 public class ArticleController {
 
-	public String UPLOAD_PATH = com.library.controller.Path.path() + File.separator + "article" + File.separator; // 업로드
+	public String UPLOAD_PATH = com.library.util.Path.path() + File.separator + "article" + File.separator; // 업로드
 																													// 경로
 
 	@Autowired

@@ -7,10 +7,6 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.OutputStream;
 import java.io.PrintWriter;
-import java.io.UnsupportedEncodingException;
-import java.net.URL;
-import java.net.URLDecoder;
-import java.nio.file.Paths;
 import java.util.UUID;
 
 import javax.servlet.ServletException;
@@ -26,25 +22,22 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
 
-import lombok.extern.log4j.Log4j;
+import com.library.util.Path;
 
-@Log4j
 @Controller
 public class CkController {
-	
+
 	@ResponseBody
 	@PostMapping("/upload")
 	public void imageUpload(HttpServletRequest request, HttpServletResponse response,
 			MultipartHttpServletRequest multiFile, @RequestParam MultipartFile upload, @RequestParam String boardName)
 			throws Exception {
-		
-		
+
 		String UPLOAD_BASE_PATH = Path.path(); // 이미지 업로드 베이스 경로
-		
+
 		UPLOAD_BASE_PATH = UPLOAD_BASE_PATH.replace("\\", "/");
 		System.out.println(UPLOAD_BASE_PATH);
 
-		
 		// 랜덤 문자 생성
 		UUID uid = UUID.randomUUID();
 		OutputStream out = null;
@@ -60,7 +53,7 @@ public class CkController {
 			String fileName = upload.getOriginalFilename();
 			byte[] bytes = upload.getBytes();
 			// 이미지 경로 생성
-			String path = UPLOAD_BASE_PATH + "/" + boardName + "/"; 
+			String path = UPLOAD_BASE_PATH + "/" + boardName + "/";
 			String ckUploadPath = path + uid + "_" + fileName;
 			File folder = new File(path);
 
@@ -136,67 +129,6 @@ public class CkController {
 
 		}
 
-	}
-
-	private static String path() {
-
-		String os = System.getProperty("os.name"); // 서버 운영체제 (Mac OS X, Windows 10, ...)
-		log.info("Server OS - " + os);
-
-		// class path 를 url 형태로 얻음
-		// "file:/C:/Users/Taedi/IdeaProjects/%ed%85%8c~~~/webapps/myapp/WEB-INF/classes/"
-		// URL encodedPath = this.getClass().getResource("/"); //for non static method
-		// URL encodedPath = ImageUtil.class.getClass().getResource("/");
-		URL encodedPath = Thread.currentThread().getContextClassLoader().getResource("/");
-
-		log.info(encodedPath.toString());
-
-		// url 형식 디코딩
-		// "/C:/Users/Taedi/IdeaProjects/테스트~~~/webapps/myapp/WEB-INF/classes/"
-		String decodedPath = null;
-		try {
-			decodedPath = URLDecoder.decode(encodedPath.getFile(), "UTF-8");
-		} catch (UnsupportedEncodingException e) {
-			e.printStackTrace();
-		}
-
-		// 운영체제가 윈도우일 경우 경로 최상단의 '/' 제거
-		if (os.contains("Windows")) {
-			if (decodedPath.startsWith("/")) {
-				decodedPath = decodedPath.replaceFirst("/", "");
-			}
-		}
-
-		// 프로젝트가 배포 된 경로
-		String deployPath = Paths.get(decodedPath).getParent().getParent().getParent().toString();
-		log.info("deploying path - " + deployPath);
-
-		// 이미지 업로드 경로 지정(프로젝트 배포 경로에 따라 판단)
-		String uploadPath;
-		if (deployPath.contains("webapps")) {
-			// 배포 경로가 외부 서버일 경우
-			uploadPath = deployPath + File.separator + "team_library" + File.separator + "resources" + File.separator
-					+ "upload";
-		} else {
-			// 개발 환경일 경우(wtpwebapps, target, ...)
-			uploadPath = Paths.get(decodedPath).getParent().getParent().toString() + File.separator + "resources"
-					+ File.separator + "upload";
-
-		}
-
-		// 저장 경로가 없을 경우 생성시도
-		File folder = new File(uploadPath);
-		if (!folder.exists()) {
-			try {
-				folder.mkdir();
-				log.info("mkDir - " + uploadPath);
-			} catch (Exception e) {
-				e.printStackTrace();
-			}
-		}
-
-		log.info("uploadPath - " + uploadPath);
-		return uploadPath;
 	}
 
 }
