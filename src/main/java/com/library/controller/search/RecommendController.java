@@ -172,6 +172,13 @@ public class RecommendController {
 		recommendService.regist_book(id, book);
 		return "redirect:/search/regist-book";
 	}
+	
+	// 추촌도서 삭제
+	@PostMapping("delete-rec")
+	public String delete_rec(@RequestParam String book_isbn, DateDTO date) {
+		recommendService.delete_book(book_isbn, date);
+		return "redirect:/search/recommend-book";
+	}
 
 	// 현재 날짜
 	public String date(String type) {

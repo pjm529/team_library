@@ -80,8 +80,16 @@
                                                 <b>가격</b>: 
                                                 <fmt:formatNumber value="${book.priceStandard }" type="currency"/>
                                                 </p>
+                                                <sec:authorize access="hasRole('ROLE_ADMIN')">
+                                                <form action="/search/delete-rec" method="post" onsubmit="return false;">
+                                                	<input type="hidden" name="book_isbn" value="${book.book_isbn }">
+	                                                <input type="hidden" name="year" value="${year}">
+	                        						<input type="hidden" name="month" value="${month}">
+						                        	<input type="submit" class="btn" value="삭제" style="float: right;">
+						                        </form>
+						                        </sec:authorize>
                                             </td>
-
+	
                                         </tr>
                                     
                                     </tbody>
@@ -129,9 +137,7 @@
                             </button>
                         </form>
                         
-                        <form>
-                        	<input type="submit" class="btn" value="삭제">
-                        </form>
+                        
 
                     </div>
 
@@ -157,6 +163,16 @@
 	
 		$(function() {
 			$(".sub3").addClass("active");
+			
+			$(".btn").click(function(){
+				if (confirm("해당 추천도서를 삭제하시겠습니까?")){
+					alert("삭제되었습니다.");
+					$("form").attr("onsubmit", "return true;");
+					$("form").submit();
+				} else {
+					alert("삭제가 취소되었습니다.");
+				}
+			})
 			 
 			$("#loan_btn").click(function() {
 				

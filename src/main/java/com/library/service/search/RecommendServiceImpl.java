@@ -34,4 +34,10 @@ public class RecommendServiceImpl implements RecommendService {
 	public void regist_book(String user_id, BookDTO book) {
 		recommendMapper.regist_book(user_id, book);
 	}
+
+	// 추천 도서 삭제
+	@Override
+	public void delete_book(String book_isbn, DateDTO date) {
+		recommendMapper.delete_book(book_isbn, date);
+	}
 }
