@@ -5,6 +5,7 @@ import java.util.List;
 import org.apache.ibatis.annotations.Param;
 
 import com.library.model.search.BookDTO;
+import com.library.model.search.DateDTO;
 
 public interface BookMapper {
 
@@ -15,7 +16,7 @@ public interface BookMapper {
 	public int count(String isbn);
 
 	// 대출 베스트 출력
-	public List<BookDTO> book_rank();
+	public List<BookDTO> book_rank(DateDTO date);
 
 	// 대출자 상태 체크
 	public int statusCheck(String user_id);

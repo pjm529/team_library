@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 
 import com.library.mapper.search.BookMapper;
 import com.library.model.search.BookDTO;
+import com.library.model.search.DateDTO;
 
 @Service
 public class BookServiceImpl implements BookService {
@@ -28,8 +29,8 @@ public class BookServiceImpl implements BookService {
 
 	// 대출 베스트 출력
 	@Override
-	public List<BookDTO> book_rank() {
-		return mapper.book_rank();
+	public List<BookDTO> book_rank(DateDTO date) {
+		return mapper.book_rank(date);
 	}
 	
 	// 대출자 상태 체크

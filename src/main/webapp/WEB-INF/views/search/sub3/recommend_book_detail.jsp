@@ -128,6 +128,10 @@
                                 <img src="/resources/imges/search/book_icon.png" style="width: 30px;">　목록
                             </button>
                         </form>
+                        
+                        <form>
+                        	<input type="submit" class="btn" value="삭제">
+                        </form>
 
                     </div>
 

@@ -3,6 +3,7 @@ package com.library.service.search;
 import java.util.List;
 
 import com.library.model.search.BookDTO;
+import com.library.model.search.DateDTO;
 
 public interface BookService {
 
@@ -13,7 +14,7 @@ public interface BookService {
 	public int count(String isbn);
 
 	// 대출 베스트 출력
-	public List<BookDTO> book_rank();
+	public List<BookDTO> book_rank(DateDTO date);
 
 	// 대출자 상태 체크
 	public int statusCheck(String user_id);

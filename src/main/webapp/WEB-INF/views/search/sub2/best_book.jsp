@@ -53,7 +53,28 @@
                 <div class="content">
                     <div class="doc">
                         <div class="wrapper-bbs">
+							<!-- 년월 -->
+                            <div class="inline">
+                                <form action="">
+                                	검색년월:
+                                    <select name="year" style="width: 75px;">
+                                        <c:forEach var="i" begin="2020" end="2022">
+                                    		<option value="${i}" ${i== year ? "selected=selected":'' }>
+                                    		${i }년
+                                    		</option>
+                                    	</c:forEach>
+                                    </select>
+                                    <select name="month" style="width: 60px;">
+                                    	<c:forEach var="i" begin="1" end="12">
+                                    		<option value="${i}" ${i== month ? "selected=selected":'' }>
+                                    		${i }월
+                                    		</option>
+                                    	</c:forEach>
+                                    </select>
+                                    <button class="btn">이동</button>
+                                </form>
 
+                            </div>
                             <!-- 테이블 -->
                             <div class="table-wrap">
                             	<c:if test="${not empty list}">
@@ -89,6 +110,8 @@
                                             <td>
                                             	<form action="/search/best-book-detail" method="get">
 													<input type="hidden" name="book_isbn" value="${list.book_isbn }">
+													<input type="hidden" name="year" value="${year }">
+													<input type="hidden" name="month" value="${month }"> 
 													<button class="btn2">도서 정보</button>
 												</form>
                                             </td>

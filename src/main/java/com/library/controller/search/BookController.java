@@ -4,6 +4,8 @@ import java.io.UnsupportedEncodingException;
 import java.net.URLEncoder;
 import java.security.Principal;
 import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Date;
 import java.util.List;
 
 import org.json.simple.parser.ParseException;
@@ -17,6 +19,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.library.model.search.BookDTO;
+import com.library.model.search.DateDTO;
 import com.library.page.Criteria;
 import com.library.page.ViewPage;
 import com.library.service.search.AladinApi;
@@ -187,9 +190,9 @@ public class BookController {
 			int loan_check = bookService.loan_check(id, book_isbn);
 
 			if (loan_check == 1) {
-				
+
 				return "loan";
-				
+
 			} else {
 
 				// 대출 중인 도서 상태 체크
@@ -215,11 +218,21 @@ public class BookController {
 
 	// 대출베스트 출력
 	@GetMapping("/best-book")
-	public String best_book(Model model, Criteria cri) {
+	public String best_book(Model model, Criteria cri, DateDTO date) {
 
 		System.out.println("best_book 진입");
 
-		List<BookDTO> list = bookService.book_rank();
+		// year이 null 이면 현재 날짜 기준 year
+		if (date.getYear() == null) {
+			date.setYear(date("year"));
+		}
+
+		// month가 null 이면 현재 날짜 기준 month
+		if (date.getMonth() == null) {
+			date.setMonth(date("month"));
+		}
+
+		List<BookDTO> list = bookService.book_rank(date);
 
 		for (BookDTO book : list) {
 			book.setCount(bookService.count(book.getBook_isbn()));
@@ -227,17 +240,23 @@ public class BookController {
 
 		model.addAttribute("list", list);
 
+		// 년
+		model.addAttribute("year", date.getYear());
+		// 월
+		model.addAttribute("month", date.getMonth());
+
 		return "/search/sub2/best_book";
 
 	}
 
 	// 대출베스트 책 상세내용
 	@GetMapping("/best-book-detail")
-	public String best_book_detail(Model model, Criteria cri, @RequestParam String book_isbn) {
-
+	public String best_book_detail(Model model, Criteria cri, DateDTO date, @RequestParam String book_isbn) {
+		
 		if (book_isbn != null && book_isbn != "") {
+			
 			try {
-
+				
 				BookDTO book = api.search_detail(book_isbn);
 
 				if (book.getBook_title() != null) {
@@ -248,6 +267,21 @@ public class BookController {
 					int count = bookService.count(book_isbn);
 					count = 2 - count;
 					model.addAttribute("count", count);
+					
+					// year이 null 이면 현재 날짜 기준 year
+					if (date.getYear() == null) {
+						date.setYear(date("year"));
+					}
+
+					// month가 null 이면 현재 날짜 기준 month
+					if (date.getMonth() == null) {
+						date.setMonth(date("month"));
+					}
+					
+					// 년
+					model.addAttribute("year", date.getYear());
+					// 월
+					model.addAttribute("month", date.getMonth());
 
 				} else {
 
@@ -268,6 +302,24 @@ public class BookController {
 		}
 		model.addAttribute("cri", cri);
 		return "/search/sub2/best_book_detail";
+	}
+
+	// 현재 날짜
+	public String date(String type) {
+		Date now = new Date();
+		Calendar cal = Calendar.getInstance();
+
+		cal.setTime(now);
+
+		int year = cal.get(Calendar.YEAR);
+		int month = cal.get(Calendar.MONTH) + 1;
+
+		if (type.equals("year")) {
+			return Integer.toString(year);
+		} else {
+			return Integer.toString(month);
+		}
+
 	}
 
 }
