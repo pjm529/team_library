@@ -26,7 +26,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.library.model.board.AttachFileDTO;
-import com.library.util.Path;
+import com.library.util.PathUtil;
 
 import lombok.extern.log4j.Log4j;
 import net.coobird.thumbnailator.Thumbnailator;
@@ -35,7 +35,7 @@ import net.coobird.thumbnailator.Thumbnailator;
 @Log4j
 public class UploadController {
 
-	public String UPLOAD_PATH = Path.path() + File.separator + "article"; // 업로드 경로
+	public String UPLOAD_PATH = PathUtil.path() + File.separator + "article"; // 업로드 경로
 
 	// formData에 담긴 사진 및 파일들을 가져옴
 	@PostMapping(value = "/uploadAjaxAction", produces = MediaType.APPLICATION_JSON_UTF8_VALUE)

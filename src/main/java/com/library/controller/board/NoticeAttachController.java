@@ -26,7 +26,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.library.model.board.NoticeAttachForAjaxDTO;
-import com.library.util.Path;
+import com.library.util.PathUtil;
 
 import lombok.extern.log4j.Log4j;
 import net.coobird.thumbnailator.Thumbnailator;
@@ -35,7 +35,7 @@ import net.coobird.thumbnailator.Thumbnailator;
 @Log4j
 public class NoticeAttachController {
 
-	public String UPLOAD_PATH = Path.path() + File.separator + "notice"; // 업로드 경로
+	public String UPLOAD_PATH = PathUtil.path() + File.separator + "notice"; // 업로드 경로
 
 	// 첨부 파일 형식이 이미지인지 아닌지 체크
 	private boolean checkImageType(File file) {

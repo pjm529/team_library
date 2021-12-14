@@ -22,7 +22,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
 
-import com.library.util.Path;
+import com.library.util.PathUtil;
 
 @Controller
 public class CkController {
@@ -33,7 +33,7 @@ public class CkController {
 			MultipartHttpServletRequest multiFile, @RequestParam MultipartFile upload, @RequestParam String boardName)
 			throws Exception {
 
-		String UPLOAD_BASE_PATH = Path.path(); // 이미지 업로드 베이스 경로
+		String UPLOAD_BASE_PATH = PathUtil.path(); // 이미지 업로드 베이스 경로
 
 		UPLOAD_BASE_PATH = UPLOAD_BASE_PATH.replace("\\", "/");
 		System.out.println(UPLOAD_BASE_PATH);

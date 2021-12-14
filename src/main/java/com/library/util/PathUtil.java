@@ -9,7 +9,7 @@ import java.nio.file.Paths;
 import lombok.extern.log4j.Log4j;
 
 @Log4j
-public class Path {
+public class PathUtil {
 	
 	public static String path() {
 
