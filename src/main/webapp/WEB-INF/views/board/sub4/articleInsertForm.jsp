@@ -60,7 +60,7 @@
                             <fmt:formatDate var="today" value="${now}" pattern="yyyy-MM-dd" />
 
                             <div class="table-wrap">
-                                <form action="/board/articleInsertForm" method="post" role="form">
+                                <form action="/board/articleInsertForm" method="post" role="form" onsubmit="return false">
                                     <input type="hidden" name="writer_name" 
                                     value="<sec:authentication property="principal.dto.user_name" />">
 
@@ -70,7 +70,8 @@
                                                 <th class="first">제목</th>
                                                 <td colspan="3">
                                                     <input type="text" style="width: 80%; height: 27px;"
-                                                        placeholder="제목을 작성해 주세요" name="article_title">
+                                                        placeholder="제목을 작성해 주세요" name="article_title" id="article_title"
+                                                        autocomplete="off" required="required">
                                                 </td>
                                             </tr>
                                             <tr>
@@ -147,6 +148,23 @@
             height: 500
         });
         $(".sub4").addClass("active");
+        
+        $(".write_btn").on("click", function () {
+
+            var article_title = $("#article_title").val();
+
+            if (article_title == "") {
+
+                $("#article_title").focus();
+
+                return false;
+            }
+
+            if (confirm('등록하시겠습니까?')) {
+                $("form").attr("onsubmit", "return true;");
+                $("form").submit();
+            }
+        });
 
 
         /* 파일업로드, 전송할 때 넘겨주는 것들*/

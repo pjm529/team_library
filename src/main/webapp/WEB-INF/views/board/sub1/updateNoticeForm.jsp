@@ -76,7 +76,7 @@
                                                 <td colspan="3">
                                                     <input type="text" style="width: 80%; height: 27px;"
                                                         value="${noticeContent.notice_title}" name="notice_title"
-                                                        autocomplete="off">
+                                                         id="notice_title" autocomplete="off">
                                                 </td>
                                             </tr>
                                             <tr>
@@ -153,9 +153,17 @@
 
 
         $(".write_btn").on("click", function () {
+        	
+        	var notice_title = $("#notice_title").val();
 
+            if (notice_title == "") {
 
-            if (confirm('등록하시겠습니까?')) {
+                $("#notice_title").focus();
+
+                return false;
+            }
+
+            if (confirm('수정하시겠습니까?')) {
                 $("form").attr("onsubmit", "result true");
                 $("form").submit();
             }

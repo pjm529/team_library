@@ -58,7 +58,7 @@
 
                             <!-- 테이블 -->
                             <div class="table-wrap">
-                                <form action="/board/answerBoardWrite" method="post">
+                                <form action="/board/answerBoardWrite" method="post" onsubmit="return false;">
                                 	<input type="hidden" name="enquiry_no" value="${enquiry.enquiry_no}" >
                                 	<input type="hidden" name="a_writer_name" value="관리자">
                                     <input type="hidden" name="amount" value="${cri.amount}">
@@ -73,8 +73,8 @@
                                                 <td colspan="3">
                                                     <input type="text" style="width: 80%; height: 27px;"
                                                         placeholder="제목을 작성해 주세요"
-                                                        name="answer_title"
-                                                        value="re:${enquiry.enquiry_title}">
+                                                        name="answer_title" id="title"
+                                                        value="re:${enquiry.enquiry_title}" autocomplete="off">
                                                 </td>
                                             </tr>
                                             <tr>
@@ -140,6 +140,16 @@
 		$(".sub3").addClass("active");
 		
 		$(".write_btn").on("click", function() {
+			
+			var title = $("#title").val();
+
+	        if (title == "") {
+	
+	            $("#title").focus();
+	             
+	            return false;
+	        }
+	         
 			if(confirm('등록하시겠습니까?')) {
 				$("form").attr("onsubmit", "result true");
 				$("form").submit();

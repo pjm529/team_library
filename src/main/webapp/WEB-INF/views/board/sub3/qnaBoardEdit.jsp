@@ -57,7 +57,7 @@
 
                             <!-- 테이블 -->
                             <div class="table-wrap">
-                                <form action="/board/qnaBoardUpdate" method="post">
+                                <form action="/board/qnaBoardUpdate" method="post" onsubmit="return false;">
                                 	<input type="hidden" name="enquiry_no" value="${dto.enquiry_no}" >
                                 	<input type="hidden" name="writer_id" value="writer_id">
                                     <input type="hidden" name="writer_name" value="writer_name">
@@ -73,8 +73,8 @@
                                                 <td colspan="3">
                                                     <input type="text" style="width: 80%; height: 27px;"
                                                         placeholder="제목을 작성해 주세요"
-                                                        name="enquiry_title"
-                                                        value="${dto.enquiry_title}">
+                                                        name="enquiry_title" id="title"
+                                                        value="${dto.enquiry_title}" autocomplete="off">
                                                 </td>
                                             </tr>
                                             <tr>
@@ -140,7 +140,17 @@
 		$(".sub3").addClass("active");
 		
 		$(".write_btn").on("click", function() {
-			if(confirm('등록하시겠습니까?')) {
+			
+			var title = $("#title").val();
+
+	        if (title == "") {
+
+	            $("#title").focus();
+	             
+	            return false;
+	        }
+	         
+			if(confirm('수정하시겠습니까?')) {
 				$("form").attr("onsubmit", "result true");
 				$("form").submit();
 			}
