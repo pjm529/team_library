@@ -2,8 +2,6 @@ package com.library.controller.search;
 
 import java.security.Principal;
 import java.util.ArrayList;
-import java.util.Calendar;
-import java.util.Date;
 import java.util.List;
 
 import org.json.simple.parser.ParseException;
@@ -22,6 +20,7 @@ import com.library.page.ViewPage;
 import com.library.service.search.AladinApi;
 import com.library.service.search.BookService;
 import com.library.service.search.RecommendService;
+import com.library.util.DateUtil;
 
 @Controller
 @RequestMapping("/search")
@@ -44,12 +43,12 @@ public class RecommendController {
 
 		// year이 null 이면 현재 날짜 기준 year
 		if (date.getYear() == null) {
-			date.setYear(date("year"));
+			date.setYear(DateUtil.date("year"));
 		}
 
 		// month가 null 이면 현재 날짜 기준 month
 		if (date.getMonth() == null) {
-			date.setMonth(date("month"));
+			date.setMonth(DateUtil.date("month"));
 		}
 
 		// BookDTO 리스트 출력
@@ -180,21 +179,4 @@ public class RecommendController {
 		return "redirect:/search/recommend-book";
 	}
 
-	// 현재 날짜
-	public String date(String type) {
-		Date now = new Date();
-		Calendar cal = Calendar.getInstance();
-
-		cal.setTime(now);
-
-		int year = cal.get(Calendar.YEAR);
-		int month = cal.get(Calendar.MONTH) + 1;
-
-		if (type.equals("year")) {
-			return Integer.toString(year);
-		} else {
-			return Integer.toString(month);
-		}
-
-	}
 }

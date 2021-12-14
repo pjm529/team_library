@@ -1,8 +1,6 @@
 package com.library.controller.admin;
 
 import java.security.Principal;
-import java.util.Calendar;
-import java.util.Date;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,6 +13,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import com.library.model.board.CalendarDTO;
 import com.library.model.search.DateDTO;
 import com.library.service.board.CalendarService;
+import com.library.util.DateUtil;
 
 @Controller
 @RequestMapping("/admin")
@@ -29,12 +28,14 @@ public class AdminCalendarController {
 
 		// year이 null 이면 현재 날짜 기준 year
 		if (date.getYear() == null) {
-			date.setYear(date("year"));
+			
+			date.setYear(DateUtil.date("year"));
 		}
 
 		// month가 null 이면 현재 날짜 기준 month
 		if (date.getMonth() == null) {
-			date.setMonth(date("month"));
+			
+			date.setMonth(DateUtil.date("month"));
 		}
 
 		// year, month 조건 검색
@@ -86,24 +87,6 @@ public class AdminCalendarController {
 		calService.delete_cal(cal.getCal_no());
 		
 		return "redirect:/admin/calendar-list?year=" + date.getYear() + "&month=" + date.getMonth();
-	}
-
-	// 현재 날짜
-	public String date(String type) {
-		Date now = new Date();
-		Calendar cal = Calendar.getInstance();
-
-		cal.setTime(now);
-
-		int year = cal.get(Calendar.YEAR);
-		int month = cal.get(Calendar.MONTH) + 1;
-
-		if (type.equals("year")) {
-			return Integer.toString(year);
-		} else {
-			return Integer.toString(month);
-		}
-
 	}
 
 }
