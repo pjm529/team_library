@@ -89,7 +89,7 @@
 	            headerToolbar: {
 	                left: 'prev,next today',
 	                center: 'title',
-	                right: ''
+	                right: 'dayGridMonth'
 	            },
 	            // 이벤트명 : function(){} : 각 날짜에 대한 이벤트를 통해 처리할 내용.. 
 	            dayMaxEvents: true, // allow "more" link when too many events
