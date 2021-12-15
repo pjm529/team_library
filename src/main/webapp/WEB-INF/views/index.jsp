@@ -495,6 +495,12 @@
                             </div><br>
                             <!-- 주소영역 -->
                             <div class="address">
+                            
+                            	<div class="team" style="float: right;">
+									<p>조장 : 박준모</p>
+									<p>조원 : 김혜인, 신혜리, 장준화, 천종부</p>
+								</div>
+								
                                 <p>대구광역시 서구 서대구로 7길 2(내당동, 대구광역시립라온도서관)
                                     <span></span>TEL 053-555-1333
                                     <span></span>FAX 053-566-3318<br>
