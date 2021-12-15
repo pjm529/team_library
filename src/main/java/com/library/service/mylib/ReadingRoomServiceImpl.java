@@ -17,6 +17,10 @@ public class ReadingRoomServiceImpl implements ReadingRoomService {
 	@Autowired
 	private ReadingRoomMapper mapper;
 
+	@Override 
+	public List<ReadingRoomDTO> getReadingRoomAll() {
+		return mapper.getReadingRoomAll();
+	}
 	@Override
 	public List<ReadingRoomDTO> getReadingRoom1SeatsList() {
 		return mapper.getReadingRoom1SeatsList();

@@ -4,6 +4,14 @@
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
   
 <mapper namespace="com.library.mapper.mylib.ReadingRoomMapper">
+
+	<!-- 모든 열람실 출력 -->
+	<select id="getReadingRoomAll" resultType="com.library.model.mylib.ReadingRoomDTO">
+		select * 
+		  from reading_room 
+		 where user_id is not null
+	     order by seat_no
+	</select>
 	
 	<!-- 1열람실 출력 -->
 	<select id="getReadingRoom1SeatsList" resultType="com.library.model.mylib.ReadingRoomDTO">
