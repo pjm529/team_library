@@ -12,28 +12,3 @@ $(document).ready(function(){
   })
 
 });
-
-
-
-
-<BODY>
-    <div class="container">
- 
-    <ul class="tabs">
-        <li class="tab-link current" data-tab="tab-1">메뉴1</li>
-        <li class="tab-link" data-tab="tab-2">메뉴2</li>
-        <li class="tab-link" data-tab="tab-3">메뉴3</li>
-    </ul>
- 
-    <div id="tab-1" class="tab-content current">내용1    </div>
-    <div id="tab-2" class="tab-content">내용2    </div>
-    <div id="tab-3" class="tab-content">내용3    </div>
-</div>
- </BODY>
-
-
-
-// 달력 넘겨보도록 하는 slick JS
-
-
-// sub-banner 영역 JS
