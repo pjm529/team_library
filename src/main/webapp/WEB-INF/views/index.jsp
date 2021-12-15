@@ -1,6 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -186,57 +188,21 @@
                     <!-- main01-1 공지사항 안내	 -->
                     <div class="libray-notice">
                         <h3>공지사항</h3>
-                        <a class="btn-more" href="#a" title="공지사항 더보기">more</a>
+                        <a class="btn-more" href="/board/noticeList" title="공지사항 더보기">more</a>
                         <ul class="notice-list">
                             <li class="w-label">
-                                <a href="javascript:;" title="대구광역시립라온도서관 재개관 안내......"
-                                    onclick="window.open('#a', 'raonLibray', 'height=970', 'width=700', 'scrollbars=yes');">
-                                    <span class="tit">
-                                        <span class="label">공지</span>
-                                        대구광역시립라온도서관 재개관 안내
-                                    </span>
-                                    <span class="date">2021-10-28</span>
-                                </a>
-                            </li>
-                            <li class="w-label">
-                                <a href="javascript:;" title="COVID-19로 인해 대구광역시 산하 시립도서관 긴급......"
-                                    onclick="window.open('#a', 'raonLibray', 'height=970', 'width=700', 'scrollbars=yes');">
-                                    <span class="tit">
-                                        <span class="label">공지</span>
-                                        <span>COVID-19 관련 라온도서관 휴관 안내
+                            	<c:forEach var="noticeList" items="${noticeList}" begin="0" end="4">
+                            		<a href="/board/noticeContent?notice_no=${noticeList.notice_no }">
+	                                    <span class="tit" style="width: 230px;">
+	                                        <span class="label">공지</span>
+	                                        ${noticeList.notice_title}
+	                                    </span>
+	                                    <span class="date">
+	                                    	<fmt:formatDate var="notice_reg_date" value="${noticeList.notice_reg_date}" pattern="yyyy-MM-dd"/>
+												${notice_reg_date}
                                         </span>
-                                        <span class="date">2021-10-10</span>
-                                </a>
-                            </li>
-                            <li class="w-label">
-                                <a href="javascript:;" title="COVID-19시대, 방역수칙을 철저히 지켜 건강하게....."
-                                    onclick="window.open('#a', 'raonLibray', 'height=970', 'width=700', 'scrollbars=yes');">
-                                    <span class="tit">
-                                        <span class="label">공지</span>
-                                        <span>COVID-19시대, 방역수칙을 철저히 지..</span>
-                                    </span>
-                                    <span class="date">2021-09-01</span>
-                                </a>
-                            </li>
-                            <li class="w-label">
-                                <a href="javascript:;" title="라온도서관 개관 1주년을 기념하여 불우이웃돕기 바자회를......"
-                                    onclick="window.open('#a', 'raonLibray', 'height=970', 'width=700', 'scrollbars=yes');">
-                                    <span class="tit">
-                                        <span class="label">공지</span>
-                                        <span>라온도서관 개관 1주년 기념 바자회...</span>
-                                    </span>
-                                    <span class="date">2021-09-28</span>
-                                </a>
-                            </li>
-                            <li class="w-label">
-                                <a href="javascript:;" title="과년도 잡지 및 연간발행물 나눔행사를 진행합니다."
-                                    onclick="window.open('#a', 'raonLibray', 'height=970', 'width=700', 'scrollbars=yes');">
-                                    <span class="tit">
-                                        <span class="label">공지</span>
-                                        <span>2020년도 잡지 및 연간발행물 나눔행...</span>
-                                    </span>
-                                    <span class="date">2021-07-01</span>
-                                </a>
+	                                </a>
+                            	</c:forEach>
                             </li>
                         </ul>
                     </div>
@@ -250,17 +216,6 @@
                                     <span>년</span>
                                     <div>
                                         <span><em>12</em><i>월</i></span>
-                                        <span><em>1</em><i>월</i></span>
-                                        <span><em>2</em><i>월</i></span>
-                                        <span><em>3</em><i>월</i></span>
-                                        <span><em>4</em><i>월</i></span>
-                                        <span><em>5</em><i>월</i></span>
-                                        <span><em>6</em><i>월</i></span>
-                                        <span><em>7</em><i>월</i></span>
-                                        <span><em>8</em><i>월</i></span>
-                                        <span><em>9</em><i>월</i></span>
-                                        <span><em>10</em><i>월</i></span>
-                                        <span><em>11</em><i>월</i></span>
                                     </div>
                                     <script>
                                         $('.month-slide > div').slick();
