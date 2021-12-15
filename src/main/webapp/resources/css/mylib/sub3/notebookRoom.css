@@ -41,7 +41,6 @@
     width: 90%;
     height: 430px;
     margin: 0 auto;
-    margin-bottom: 50px;
 }
 
 .seat-wrapper{
@@ -219,4 +218,7 @@ td{
     cursor: pointer;
 }
 
-
+.wrapper-table th{
+	height: 50px;
+	padding: 0;
+}
