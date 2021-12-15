@@ -137,7 +137,7 @@ CREATE TABLE `notice` (
 -- 공지사항 첨부파일 테이블
 CREATE TABLE `notice_attach_file` (
   `uuid` varchar(500) NOT NULL, -- uuid
-  `upload_path` varchar(200) NOT NULL, -- 업로드 경로
+  `upload_path` varchar(4096) NOT NULL, -- 업로드 경로
   `file_name` varchar(100) NOT NULL, -- 파일명
   `file_type` char(1) DEFAULT '1', -- 파일 타입
   `notice_no` int(11) NOT NULL, -- 공지사항 번호
@@ -163,7 +163,7 @@ CREATE TABLE `article` (
 -- 분실물 첨부파일 테이블
 CREATE TABLE `attach_file` (
   `uuid` varchar(500) NOT NULL, -- uuid
-  `upload_path` varchar(200) NOT NULL, -- 업로드 경로
+  `upload_path` varchar(4096) NOT NULL, -- 업로드 경로
   `file_name` varchar(100) NOT NULL, -- 파일명
   `file_type` char(1) DEFAULT '1', -- 파일 타입
   `article_no` int(11) NOT NULL, -- 분실물 찾기 게시글 번호
@@ -340,7 +340,7 @@ begin
 	DECLARE j int default 7;
     WHILE (i <= 54) DO
         insert into calendar values(null, 1, 'admin', '휴관일', DATE_ADD('2021-11-29', interval j day), 
-		DATE_ADD('2021-11-29', interval j day), 1, "black", "none", "none", current_timestamp);	
+		DATE_ADD('2021-11-29', interval j day), 1, "red", "none", "none", current_timestamp);	
 		SET i = i + 1;
 		SET j = j + 7;
     END WHILE;
