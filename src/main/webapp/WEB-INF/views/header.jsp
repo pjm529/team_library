@@ -49,7 +49,7 @@
 
 <div class="header_submenu header_sub1">
     <ul class="header_submenu1">
-        <li><span><a href="/search/book">자료검색</a></span></li>
+        <li><span><a href="/search/book">도서검색</a></span></li>
         <li><span><a href="/search/best-book">대출베스트</a></span></li>
         <li><span><a href="/search/recommend-book">추천도서</a></span></li>
     </ul>
@@ -69,7 +69,7 @@
         <li><span><a href="">자주묻는질문</a></span></li>
         <li><span><a href="/board/qnaBoardList">묻고답하기</a></span></li>
         <li><span><a href="/board/articleList">분실물찾기</a></span></li>
-        <li><span><a href="">도서관일정</a></span></li>
+        <li><span><a href="/board/calendar">도서관일정</a></span></li>
     </ul>
 </div>
 
@@ -84,7 +84,7 @@
 <div class="header_submenu header_sub5">
     <ul class="header_submenu5">
         <li><span><a href="/mylib/loan-history">도서관련</a></span></li>
-        <li><span><a href="/mylib/hope">희망도서신청</a></span></li>
+        <li><span><a href="/mylib/hope">희망도서신청/조회</a></span></li>
         <li><span><a href="/mylib/reservationRoomPage">좌석예약/조회</a></span></li>
         <li><span><a href="/mylib/mypage">개인정보</a></span></li>
     </ul>
