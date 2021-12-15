@@ -238,21 +238,21 @@
                                 <h1>제 1열람실</h1>
                                 <div>
                                     <div>잔여석</div>
-                                    <div><strong id="mainCnt">0</strong>석</div>
+                                    <div><strong id="mainCnt">${rd1Room_usingSeat}</strong>석</div>
                                 </div>
                             </div>
                             <div>
                                 <h1>제 2열람실</h1>
                                 <div>
                                     <div>잔여석</div>
-                                    <div><strong id="subCnt">0</strong>석</div>
+                                    <div><strong id="subCnt">${rd2Room_usingSeat}</strong>석</div>
                                 </div>
                             </div>
                             <div>
                                 <h1>노트북실</h1>
                                 <div>
                                     <div>잔여석</div>
-                                    <div><strong id="subCnt">0</strong>석</div>
+                                    <div><strong id="subCnt">${nbRoom_usingSeat}</strong>석</div>
                                 </div>
                             </div>
                         </div>
