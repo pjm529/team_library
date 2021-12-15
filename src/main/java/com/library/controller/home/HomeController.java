@@ -14,13 +14,13 @@ import org.springframework.web.bind.annotation.RequestMethod;
 
 import com.library.model.board.CalendarDTO;
 import com.library.model.board.NoticeDTO;
-import com.library.model.member.MemberDTO;
 import com.library.model.search.BookDTO;
 import com.library.model.search.DateDTO;
 import com.library.page.Criteria;
 import com.library.service.board.CalendarService;
 import com.library.service.board.NoticeService;
 import com.library.service.mylib.ReservationRoomService;
+import com.library.service.search.BookService;
 import com.library.service.search.RecommendService;
 import com.library.util.DateUtil;
 
@@ -32,20 +32,28 @@ public class HomeController {
 
 	@Autowired
 	private ReservationRoomService resService;
-	
+
 	@Autowired
 	private CalendarService calService;
-	
+
 	@Autowired
 	private RecommendService recommendService;
 
+	@Autowired
+	private BookService bookService;
+
 	@RequestMapping(value = "/", method = RequestMethod.GET)
 	public String home(Model model, Criteria cri) {
-		
+
 		DateDTO date = new DateDTO();
 
 		date.setYear(DateUtil.date("year"));
 		date.setMonth(DateUtil.date("month"));
+		
+		// 년
+		model.addAttribute("year", date.getYear());
+		// 월
+		model.addAttribute("month", date.getMonth());
 		
 		// 공지사항
 		List<NoticeDTO> noticeList = noticeService.getListPaging(cri);
@@ -63,25 +71,24 @@ public class HomeController {
 		int nbRoom_usingSeat = resService.nbRoom_usingSeat();
 		model.addAttribute("nbRoom_usingSeat", nbRoom_usingSeat);
 
-
 		// 휴관일 검색
 		List<CalendarDTO> cal_list = calService.search_closed(date);
-		
+
 		for (CalendarDTO c : cal_list) {
 
 			c.setStart(c.getStart().substring(8, 10));
 		}
-		
+
 		model.addAttribute("cal_list", cal_list);
-		
-		// 년
-		model.addAttribute("year", date.getYear());
-		// 월
-		model.addAttribute("month", date.getMonth());
-		
+
 		// 추천도서
 		List<BookDTO> rec_list = recommendService.recommend_list(cri, date);
 		model.addAttribute("rec_list", rec_list);
+
+		// 대출 베스트
+		List<BookDTO> best_list = bookService.book_rank(date);
+		model.addAttribute("best_list", best_list);
+		
 		
 		return "index";
 	}
