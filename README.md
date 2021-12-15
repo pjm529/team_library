@@ -4,11 +4,12 @@ Spring MVC 도서관 프로젝트
 ## 차례
 
 [프로젝트 소개](#프로젝트-소개)  
-[주요 기능](#주요-기능)  
+[주요 기능](#주요-기능)    
+[외부 API](#외부-API) 
 
 ## 프로젝트 소개
 
-Spring Framework 를 활용한 도서관 제작
+Spring Framework 및 API를 활용한 도서관 제작
 
 ### 사용언어
 
@@ -45,3 +46,51 @@ Spring Framework 를 활용한 도서관 제작
 ## 주요 기능
 
 ### 메인페이지
+
+- 이미지 슬라이더, 그리드 레이아웃
+
+![main.png](github_img/main.png)
+
+### 로그인 & 회원가입
+
+- 이메일 인증, 로그인 유지, 일반 회원 가입
+
+로그인|회원가입
+|---|---|
+![login.png](github_img/login.png)|![signup.png](github_img/signup.png)
+
+![email.png](github_img/email.png)
+
+### 도서검색
+
+- 알라딘 API를 이용한 도서 검색
+
+도서검색|도서상세
+|---|---|
+![search_book.png](github_img/search_book.png)|![book_detail.png](github_img/book_detail.png)
+
+### 열람실
+
+- 열람실 예약 및 확인
+
+열람실정보|열람실
+|---|---|
+![roompage.png](github_img/roompage.png)|![reading_room.png](github_img/reading_room.png)
+
+### 마이페이지
+
+- 대출내역, 회망도서, 열람실, 개인정보
+
+![my_page.png](github_img/my_page.png)
+
+### 관리자 페이지
+
+- 회원관리, 도서 관련, 열람실, 일정, 배너, 관리자
+
+![admin_page.png](github_img/admin_page.png)
+
+## 외부 API
+
+- 주소검색 - [KaKao 주소 API](https://postcode.map.daum.net/guide)
+- 도서검색 - [Aladin API](https://www.apistore.co.kr/generalApi/generalApiView.do?general_service_seq=72)
+- 찾아오는길 - [Google Map API](https://developers.google.com/maps/documentation?hl=ko)
