@@ -162,7 +162,7 @@
 
                 e.preventDefault();
                 let popUrl = "/admin/cal-add";
-                let popOption = "width = 700px, height=300px, top=300px, scrollbars=no, resizeable=no";
+                let popOption = "width = 700px, height=250px, top=300px, scrollbars=no, resizeable=no";
                 window.open(popUrl, "일정 추가", popOption);
             });
 
