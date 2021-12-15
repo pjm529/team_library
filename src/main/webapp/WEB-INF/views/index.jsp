@@ -28,8 +28,8 @@
             <div class="tnb">
                 <div class="main-section">
                     <div class="util">
-                        <a href="#a">통합허브시스템 로그인</a><span class="text-bar"></span>
-                        <a href="#a">회원가입</a>
+                        <a href="/member/login">로그인</a><span class="text-bar"></span>
+                        <a href="/member/signup-check">회원가입</a>
                     </div>
                 </div>
             </div>
@@ -37,19 +37,19 @@
             <div class="gnb">
                 <div class="container">
                     <h1 class="logo">
-                        <a id="logoLink" href="#a" title="라온도서관 메인화면" role="button"><span
+                        <a id="logoLink" href="/" title="라온도서관 메인화면" role="button"><span
                                 class="hide">대구광역시립라온도서관</span></a>
                     </h1>
                     <ul class="gnb-ul">
                         <li class="gnb-li">
-                            <a class="Depth" href="#a">
+                            <a class="Depth" href="/search/book">
                                 <span class="">자료검색</span>
                             </a>
                             <ul class="sub-menu sm01" style="display: none;">
                                 <li>
-                                    <a class="" href="#a">도서검색</a>
-                                    <a class="" href="#a">대출베스트</a>
-                                    <a class="" href="#a">추천도서</a>
+                                    <a class="" href="/search/book">도서검색</a>
+                                    <a class="" href="/search/best-book">대출베스트</a>
+                                    <a class="" href="/search/recommend-book">추천도서</a>
                                 </li>
                             </ul>
                         </li>
@@ -60,47 +60,47 @@
                             <ul class="sub-menu sm02">
                                 <li>
                                     <a class="" href="#a">회원가입 안내</a>
-                                    <a class="" href="#a">이용시간 및 휴관일</a>
-                                    <a class="" href="#a">도서 대출 및 반납</a>
+                                    <a class="" href="/info/openingHours">이용시간 및 휴관일</a>
+                                    <a class="" href="/info/loanBook">도서 대출 및 반납</a>
                                 </li>
                             </ul>
                         </li>
                         <li class="gnb-li">
-                            <a class="Depth" href="#a">
+                            <a class="Depth" href="/board/noticeList">
                                 <span class="">열린공간</span>
                             </a>
                             <ul class="sub-menu sm03">
                                 <li>
-                                    <a class="" href="#a">공지사항</a>
+                                    <a class="" href="/board/noticeList">공지사항</a>
                                     <a class="" href="#a">자주묻는질문</a>
-                                    <a class="" href="#a">묻고답하기</a>
-                                    <a class="" href="#a">분실물찾기</a>
-                                    <a class="" href="#a">도서관일정</a>
+                                    <a class="" href="/board/qnaBoardList">묻고답하기</a>
+                                    <a class="" href="/board/articleList">분실물찾기</a>
+                                    <a class="" href="/board/calendar">도서관일정</a>
                                 </li>
                             </ul>
                         </li>
                         <li class="gnb-li">
                             <a class="Depth" href="#a">
-                                <span class="">도서관 소개</span>
+                                <span class="">도서관소개</span>
                             </a>
                             <ul class="sub-menu sm04">
                                 <li>
                                     <a class="" href="#a">인사말</a>
                                     <a class="" href="#a">연혁</a>
-                                    <a class="" href="#a">찾아오시는 길</a>
+                                    <a class="" href="/intro/road">찾아오시는길</a>
                                 </li>
                             </ul>
                         </li>
                         <li class="gnb-li">
-                            <a class="Depth" href="#a">
-                                <span class="">나의 도서관</span>
+                            <a class="Depth" href="/mylib/loan-history">
+                                <span class="">나의도서관</span>
                             </a>
                             <ul class="sub-menu sm05">
                                 <li>
-                                    <a class="" href="#a">도서 관련</a>
-                                    <a class="" href="#a">희망도서신청/조회</a>
-                                    <a class="" href="#a">열람실</a>
-                                    <a class="" href="#a">개인정보 변경</a>
+                                    <a class="" href="/mylib/loan-history">도서관련</a>
+                                    <a class="" href="/mylib/hope">희망도서신청/조회</a>
+                                    <a class="" href="/mylib/reservationRoomPage">좌석예약/조회</a>
+                                    <a class="" href="/mylib/mypage">개인정보</a>
                                 </li>
                             </ul>
                         </li>
@@ -140,24 +140,24 @@
                 <ul class="icons">
                     <li>
                         <div class="icon_img">
-                            <a href="#a"><img src="/resources/imges/index/infornation.png">
+                            <a href="/search/book"><img src="/resources/imges/index/infornation.png">
                         </div>
                         <class="contents1_bold">자료검색</class></a>
                     <li>
                         <div class="icon_img">
-                            <a href="#a"><img src="/resources/imges/index/book.png">
+                            <a href="/mylib/hope"><img src="/resources/imges/index/book.png">
                         </div>
                         <class="contents1_bold">희망도서신청</class></a>
                     </li>
                     <li>
                         <div class="icon_img">
-                            <a href="#a"><img href="#a"><img src="/resources/imges/index/my-info.png">
+                            <a href="/mylib/loan-history"><img src="/resources/imges/index/my-info.png">
                         </div>
                         <class="contents1_bold">대출내역조회</class></a>
                     </li>
                     <li>
                         <div class="icon_img">
-                            <a href="#a"><img src="https://www.jeju.go.kr/pub/site/lib/images/main/icon05.png"
+                            <a href="/board/calendar"><img src="https://www.jeju.go.kr/pub/site/lib/images/main/icon05.png"
                                     style="width: 77%;">
                         </div>
                         <class="contents1_bold">도서관 일정</class></a>
@@ -170,7 +170,7 @@
                     </li>
                     <li>
                         <div class="icon_img">
-                            <a href="#a"><img src="/resources/imges/index/reservation.png">
+                            <a href="/mylib/reservationRoomPage"><img src="/resources/imges/index/reservation.png">
                         </div>
                         <class="contents1_bold">자리예약하기</class></a>
                     </li>
