@@ -15,11 +15,13 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import com.library.model.board.CalendarDTO;
 import com.library.model.board.NoticeDTO;
 import com.library.model.member.MemberDTO;
+import com.library.model.search.BookDTO;
 import com.library.model.search.DateDTO;
 import com.library.page.Criteria;
 import com.library.service.board.CalendarService;
 import com.library.service.board.NoticeService;
 import com.library.service.mylib.ReservationRoomService;
+import com.library.service.search.RecommendService;
 import com.library.util.DateUtil;
 
 @Controller
@@ -33,6 +35,9 @@ public class HomeController {
 	
 	@Autowired
 	private CalendarService calService;
+	
+	@Autowired
+	private RecommendService recommendService;
 
 	@RequestMapping(value = "/", method = RequestMethod.GET)
 	public String home(Model model, Criteria cri) {
@@ -73,6 +78,10 @@ public class HomeController {
 		model.addAttribute("year", date.getYear());
 		// 월
 		model.addAttribute("month", date.getMonth());
+		
+		// 추천도서
+		List<BookDTO> rec_list = recommendService.recommend_list(cri, date);
+		model.addAttribute("rec_list", rec_list);
 		
 		return "index";
 	}

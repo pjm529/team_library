@@ -291,34 +291,19 @@
                     <div class="book-slide-top">
                         <ul class="book-tab" style="display: block;">
                             <li class="on">
-                                <a href="#a">추천도서</a>
+                                <a href="/search/recommend-book">추천도서</a>
                             </li>
                             <li class="">
-                                <a href="#a">대출BEST</a>
+                                <a href="/search/best-book">대출BEST</a>
                             </li>
                         </ul>
                         <h1 class="hide">추천도서</h1>
                         <ul id="recomended" class="book-slide">
-                            <div><a href="javascript:;" onclick=""><img src="http://placehold.it/155x194"
-                                        title="recomended_1" alt=""></a></div>
-                            <div><a href="javascript:;" onclick=""><img src="http://placehold.it/155x194"
-                                        title="recomended_2" alt=""></a></div>
-                            <div><a href="javascript:;" onclick=""><img src="http://placehold.it/155x194"
-                                        title="recomended_3" alt=""></a></div>
-                            <div><a href="javascript:;" onclick=""><img src="http://placehold.it/155x194"
-                                        title="recomended_4" alt=""></a></div>
-                            <div><a href="javascript:;" onclick=""><img src="http://placehold.it/155x194"
-                                        title="recomended_5" alt=""></a></div>
-                            <div><a href="javascript:;" onclick=""><img src="http://placehold.it/155x194"
-                                        title="recomended_6" alt=""></a></div>
-                            <div><a href="javascript:;" onclick=""><img src="http://placehold.it/155x194"
-                                        title="recomended_7" alt=""></a></div>
-                            <div><a href="javascript:;" onclick=""><img src="http://placehold.it/155x194"
-                                        title="recomended_8" alt=""></a></div>
-                            <div><a href="javascript:;" onclick=""><img src="http://placehold.it/155x194"
-                                        title="recomended_9" alt=""></a></div>
-                            <div><a href="javascript:;" onclick=""><img src="http://placehold.it/155x194"
-                                        title="recomended_10" alt=""></a></div>
+                            <c:forEach var="rec_list" items="${rec_list}">
+                            	<div><a href="/search/recommend-book-detail?book_isbn=${rec_list.book_isbn }&year=${year}&month=${month}">
+                            	<img src="${rec_list.book_cover }" style="width:155px;"></a></div>
+                            </c:forEach>            
+                            
                         </ul>
                         <h1 class="hide">대출BEST</h1>
                         <ul id="bestBook" class="book-slide" style="display: none;">
