@@ -88,7 +88,7 @@
                                 </td>
                             </tr>
                             
-                            <!-- email -->
+                            <!-- 제목 -->
                             <tr>
                                 <th class="first">
                                     제목
