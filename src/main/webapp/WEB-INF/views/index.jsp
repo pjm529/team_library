@@ -116,18 +116,19 @@
                     <div class="search-wrap">
                         <div class="searchbox">
                             <div class="box">
-                                <select id="op-01" class="select-op" title="검색창 옵션">
-                                    <option value="">전체</option>
-                                    <option value="">책 제목</option>
-                                    <option value="">글쓴이</option>
-                                </select>
-                                <input id="inputForm" class="mainInput" type="text" placeholder="검색창을 테스트 중입니다."
-                                    title="검색창">
-                                <div class="btn-box">
-                                    <a class="search-btn" href="#a" onclick="search-submit">
-                                        <span class="hide">검색</span>
-                                    </a>
-                                </div>
+                            	<form action="/search/book" method="get" id="search_form">
+                            		<select id="op-01" class="select-op" title="검색창 옵션" name="type">
+	                                    <option value="Title">도서명</option>
+	                                    <option value="Author">저자명</option>
+	                                </select>
+	                                <input id="inputForm" class="mainInput" type="text" placeholder="검색어를 입력하세요."
+	                                    title="검색창" name="keyword" autocomplete="off">
+	                                <div class="btn-box">
+	                                    <a class="search-btn" onclick="submit();">
+	                                        <span class="hide">검색</span>
+	                                    </a>
+	                                </div>
+                            	</form>
                             </div>
                         </div>
                     </div>
@@ -559,5 +560,9 @@
         </div>
     </div>
 </body>
-
+<script>
+	function submit() {
+		$("#search_form").submit();
+	}
+</script>
 </html>
