@@ -36,5 +36,14 @@ public class BannerController {
 
 		return "/admin/sub5/banner_list";
 	}
+	
+	// 배너 삭제
+	@PostMapping("/banner-del")
+	public String banner_del(BannerDTO banner) {
+		
+		bannerService.banner_del(banner);
+		
+		return "redirect:/admin/banner-list";
+	}
 
 }

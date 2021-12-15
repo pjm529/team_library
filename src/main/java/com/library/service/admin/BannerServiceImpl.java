@@ -19,4 +19,10 @@ public class BannerServiceImpl implements BannerService {
 		// TODO Auto-generated method stub
 		return bannerMapper.banner_list();
 	}
+
+	@Override
+	public void banner_del(BannerDTO banner) {
+		bannerMapper.banner_del(banner);
+	}
+	
 }

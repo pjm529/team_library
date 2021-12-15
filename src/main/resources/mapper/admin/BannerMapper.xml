@@ -10,5 +10,10 @@
 			select * from banner order by reg_date;
 		</select>
 		
+		<delete id="banner_del">
+			delete 
+			  from banner
+			 where uuid = #{uuid} and file_name = #{file_name};
+		</delete> 
 		
 	</mapper>
