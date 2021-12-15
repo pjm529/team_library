@@ -1,5 +1,3 @@
-drop database library;
-
 create database library;
 
 use library;
@@ -21,7 +19,7 @@ CREATE TABLE `member` (
   `enabled` varchar(1) DEFAULT '1', -- 권한
   `user_reg_date` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP, -- 회원 가입 일
   PRIMARY KEY (`user_id`)
-) 
+);
 
 -- 회원 권한 테이블
 CREATE TABLE `member_auth` (
@@ -29,14 +27,14 @@ CREATE TABLE `member_auth` (
   `auth` varchar(100) NOT NULL, -- 권한
   KEY `fk_member_auth_user_id` (`user_id`),
   CONSTRAINT `fk_member_auth_userid` FOREIGN KEY (`user_id`) REFERENCES `member` (`user_id`) ON DELETE CASCADE ON UPDATE CASCADE
-)
+);
 
 -- 탈퇴 회원 테이블
 CREATE TABLE `secession_member` (
   `user_id` varchar(20) NOT NULL,
   `user_email` varchar(40) NOT NULL,
   PRIMARY KEY (`user_id`)
-)
+);
 
 -- 대출 내역 테이블 
 CREATE TABLE `loan_history` (
@@ -51,12 +49,12 @@ CREATE TABLE `loan_history` (
   `book_publisher` varchar(50) NOT NULL, -- 대출 도서 출판사
   `loan_date` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP, -- 대출 일자
   `return_date` timestamp NULL DEFAULT NULL, -- 반납 일자
-  `return_period` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00', -- 도서 반납 기한
+  `return_period` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP, -- 도서 반납 기한
   `return_status` tinyint(1) NOT NULL DEFAULT '0', -- 도서 반납 상태
   PRIMARY KEY (`loan_no`),
   KEY `loan_history_FK` (`user_id`),
   CONSTRAINT `loan_history_FK` FOREIGN KEY (`user_id`) REFERENCES `member` (`user_id`)
-)
+);
 
 -- 희망 도서 테이블
 CREATE TABLE `hope` (
@@ -75,7 +73,7 @@ CREATE TABLE `hope` (
   PRIMARY KEY (`hope_no`),
   KEY `hope_FK` (`user_id`),
   CONSTRAINT `hope_FK` FOREIGN KEY (`user_id`) REFERENCES `member` (`user_id`)
-)
+);
 
 -- 추천 도서 테이블
 CREATE TABLE `recommend_book` (
@@ -91,7 +89,7 @@ CREATE TABLE `recommend_book` (
   PRIMARY KEY (`rec_no`),
   KEY `recommend_book_FK` (`user_id`),
   CONSTRAINT `recommend_book_FK` FOREIGN KEY (`user_id`) REFERENCES `member` (`user_id`)
-)
+);
 
 -- 열람실 테이블
 CREATE TABLE `reading_room` (
@@ -101,7 +99,7 @@ CREATE TABLE `reading_room` (
   `checkout_time` timestamp NULL DEFAULT NULL, -- 좌석 퇴실 시간
   PRIMARY KEY (`seat_no`),
   UNIQUE KEY `user_id` (`user_id`)
-)
+);
 
 -- 도서관 일정 테이블
 CREATE TABLE `calendar` (
@@ -119,7 +117,7 @@ CREATE TABLE `calendar` (
   PRIMARY KEY (`cal_no`),
   KEY `calendar_FK` (`user_id`),
   CONSTRAINT `calendar_FK` FOREIGN KEY (`user_id`) REFERENCES `member` (`user_id`)
-)
+);
 
 -- 공지사항 테이블
 CREATE TABLE `notice` (
@@ -135,7 +133,7 @@ CREATE TABLE `notice` (
   KEY `notice_FK` (`writer_id`),
   CONSTRAINT `notice_FK` FOREIGN KEY (`writer_id`) REFERENCES `member` (`user_id`)
 )
-
+;
 -- 공지사항 첨부파일 테이블
 CREATE TABLE `notice_attach_file` (
   `uuid` varchar(500) NOT NULL, -- uuid
@@ -146,7 +144,7 @@ CREATE TABLE `notice_attach_file` (
   PRIMARY KEY (`uuid`),
   KEY `notice_no` (`notice_no`),
   CONSTRAINT `notice_attach_file_ibfk_1` FOREIGN KEY (`notice_no`) REFERENCES `notice` (`notice_no`) ON DELETE CASCADE ON UPDATE CASCADE
-)
+);
 
 -- 분실물 테이블
 CREATE TABLE `article` (
@@ -160,7 +158,7 @@ CREATE TABLE `article` (
   PRIMARY KEY (`article_no`),
   KEY `article_FK` (`writer_id`),
   CONSTRAINT `article_FK` FOREIGN KEY (`writer_id`) REFERENCES `member` (`user_id`)
-)
+);
 
 -- 분실물 첨부파일 테이블
 CREATE TABLE `attach_file` (
@@ -172,7 +170,7 @@ CREATE TABLE `attach_file` (
   PRIMARY KEY (`uuid`),
   KEY `article_no` (`article_no`),
   CONSTRAINT `attach_file_ibfk_1` FOREIGN KEY (`article_no`) REFERENCES `article` (`article_no`) ON DELETE CASCADE ON UPDATE CASCADE
-)
+);
 
 -- 문의사항 테이블
 CREATE TABLE `enquiry` (
@@ -186,7 +184,7 @@ CREATE TABLE `enquiry` (
   PRIMARY KEY (`enquiry_no`),
   KEY `enquiry_FK` (`writer_id`),
   CONSTRAINT `enquiry_FK` FOREIGN KEY (`writer_id`) REFERENCES `member` (`user_id`)
-)
+);
 
 -- 답변 테이블
 CREATE TABLE `answer` (
@@ -203,7 +201,7 @@ CREATE TABLE `answer` (
   KEY `answer_FK` (`a_writer_id`),
   CONSTRAINT `answer_FK` FOREIGN KEY (`a_writer_id`) REFERENCES `member` (`user_id`),
   CONSTRAINT `fk_answer_enquiry_no` FOREIGN KEY (`enquiry_no`) REFERENCES `enquiry` (`enquiry_no`) ON DELETE CASCADE
-)
+);
 
 
 -- 이벤트 출력
@@ -333,3 +331,19 @@ END //
 
 call insert_seat();
 
+
+-- 기준일 기점으로 일주일 씩 휴관일 지정 (2021-11-29 기준)
+DELIMITER //
+CREATE PROCEDURE insert_day()
+begin
+    DECLARE i INT DEFAULT 1;
+	DECLARE j int default 7;
+    WHILE (i <= 54) DO
+        insert into calendar values(null, 1, 'admin', '휴관일', DATE_ADD('2021-11-29', interval j day), 
+		DATE_ADD('2021-11-29', interval j day), 1, "black", "none", "none", current_timestamp);	
+		SET i = i + 1;
+		SET j = j + 7;
+    END WHILE;
+END //
+
+call insert_day();
