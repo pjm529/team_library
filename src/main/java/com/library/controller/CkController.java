@@ -22,9 +22,8 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
 
-/**
- * Handles requests for the application home page.
- */
+import com.library.util.PathUtil;
+
 @Controller
 public class CkController {
 
@@ -33,6 +32,11 @@ public class CkController {
 	public void imageUpload(HttpServletRequest request, HttpServletResponse response,
 			MultipartHttpServletRequest multiFile, @RequestParam MultipartFile upload, @RequestParam String boardName)
 			throws Exception {
+
+		String UPLOAD_BASE_PATH = PathUtil.path(); // 이미지 업로드 베이스 경로
+
+		UPLOAD_BASE_PATH = UPLOAD_BASE_PATH.replace("\\", "/");
+		System.out.println(UPLOAD_BASE_PATH);
 
 		// 랜덤 문자 생성
 		UUID uid = UUID.randomUUID();
@@ -49,7 +53,7 @@ public class CkController {
 			String fileName = upload.getOriginalFilename();
 			byte[] bytes = upload.getBytes();
 			// 이미지 경로 생성
-			String path = "C:/library_file/" + boardName + "/"; // fileDir는 전역 변수라 그냥 이미지 경로 설정해주면 된다.
+			String path = UPLOAD_BASE_PATH + "/" + boardName + "/";
 			String ckUploadPath = path + uid + "_" + fileName;
 			File folder = new File(path);
 

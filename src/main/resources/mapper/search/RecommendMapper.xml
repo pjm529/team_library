@@ -30,4 +30,13 @@
 		#{book.book_pubDate}, #{book.book_publisher}, null);
 	</insert>
 	
+	<delete id="delete_book">
+		delete
+		  from recommend_book
+		 where book_isbn = #{book_isbn} and 
+		 	   recommend_date 
+		 	between concat(#{date.year}, '-', #{date.month}, '-01') and concat(#{date.year}, '-', #{date.month}, '-31' )
+	</delete>
+	
+	
 </mapper>  

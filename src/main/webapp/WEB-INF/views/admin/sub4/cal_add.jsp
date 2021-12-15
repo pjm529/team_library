@@ -48,6 +48,15 @@
                                                 <br>
                                             </td>
                                         </tr>
+                                        <tr>
+                                            <th class="first">
+                                                <span style="color: red;">*</span>
+                                                일정색상
+                                            </th>
+                                            <td class="last">
+                                                <input type='color' id='textColor' name="textColor" value='#000'>
+                                            </td>
+                                        </tr>
 
                                     </table>
 

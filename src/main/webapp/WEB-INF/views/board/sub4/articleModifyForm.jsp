@@ -8,6 +8,7 @@
 </head>
 <link rel="stylesheet" href="/resources/css/board/sub4/write_page.css">
 <link rel="stylesheet" href="/resources/css/header.css">
+<link rel="stylesheet" href="/resources/css/footer.css">
 <script
   src="https://code.jquery.com/jquery-3.6.0.js"
   integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk=" 
@@ -55,7 +56,7 @@
 
                             <!-- 테이블 -->
                             <div class="table-wrap">
-                                <form action="/board/articleModify" method="post" role="form">
+                                <form action="/board/articleModify" method="post" role="form" onsubmit="return false;">
                                     <input id="article_no" type="hidden" name="article_no" value="${dto.article_no}">
                                     <input type="hidden" name="amount" value="${cri.amount}">
                                     <input type="hidden" name="page" value="${cri.page}">
@@ -67,8 +68,8 @@
                                             <tr>
                                                 <th class="first">제목</th>
                                                 <td colspan="3">
-                                                    <input type="text" style="width: 80%; height: 27px;"
-                                                        name="article_title" value="${dto.article_title}">
+                                                    <input type="text" style="width: 80%; height: 27px;" id="article_title"
+                                                        name="article_title" value="${dto.article_title}" autocomplete="off">
                                                 </td>
                                             </tr>
                                             <tr>
@@ -86,9 +87,9 @@
                                             </tr>
 
                                             <tr>
-                                                <td colspan="4">
-                                                    <textarea id="popContent" name="article_content" cols="108"
-                                                        rows="15">${dto.article_content}</textarea>
+                                                <td colspan="4" style="padding: 8px 0px;">
+                                                    <textarea id="popContent" name="article_content">
+                                                    ${dto.article_content}</textarea>
                                                 </td>
                                             </tr>
 
@@ -107,8 +108,6 @@
                                                     </div>
 
                                                 </td>
-
-
 
                                             </tr>
                                         </tbody>
@@ -133,6 +132,9 @@
             </div>
         </div>
     </div>
+    
+    <!-- footer -->
+    <jsp:include page="../../footer.jsp"></jsp:include>
 
 <script type="text/javascript" src="/resources/js/ckeditor/ckeditor.js"></script>
 <script>
@@ -145,8 +147,25 @@
         $(".sub4").addClass("active");
 
         /* 게시물 조회화면에서 수정화면으로 이동시 보여지는 첨부파일 화면 */
-        (function () {
+        $(function () {
+			
+        	$(".write_btn").on("click", function () {
 
+                var article_title = $("#article_title").val();
+
+                if (article_title == "") {
+
+                    $("#article_title").focus();
+
+                    return false;
+                }
+
+                if (confirm('수정하시겠습니까?')) {
+                    $("form").attr("onsubmit", "return true;");
+                    $("form").submit();
+                }
+            });
+        	
             var article_no = '<c:out value="${dto.article_no}"/>';
 
             $.getJSON("/board/getAttachList", { article_no: article_no }, function (arr) {
@@ -267,7 +286,6 @@
             var uploadUL = $(".uploadResult ul");
 
             var str = "";
-            var str2 = "";
             $(uploadResultArr).each(function (i, obj) {
 
                 if (obj.image) {
@@ -286,8 +304,6 @@
                     str += "</div>";
                     str += "</li>";
 
-                    str2 +=
-                        '<p><img alt="" src="/imgSubmit?uid=' + obj.uuid + '&amp;fileName=' + obj.file_name + '&amp;filePath=C:/library_file/article/" /></p>';
                 } else {
                     var fileCallPath = encodeURIComponent(obj.upload_path + "/" + obj.uuid + "_" + obj.file_name);
                     var fileLink = fileCallPath.replace(new RegExp(/\\/g), "/");
@@ -308,7 +324,6 @@
             });
 
             uploadUL.append(str);
-            CKEDITOR.instances.popContent.insertHtml(str2, "html");
         }
 
         /* x버튼 눌렀을 때 첨부파일 화면에서 사라짐 */

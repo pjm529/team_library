@@ -18,4 +18,7 @@ public interface CalendarMapper {
 
 	// 일정 삭제
 	public void delete_cal(int cal_no);
+
+	// 휴관일 검색
+	public List<CalendarDTO> search_closed(DateDTO date);
 }

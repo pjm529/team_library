@@ -127,31 +127,30 @@
                         <h2>등록된 추천 도서가 없습니다.</h2>
                         </c:if>
                     </div>
-		        	<div class="pageInfo" style="text-align: center;">
-								
-			           <c:if test="${pageMaker.prev }">
-			               <a class="not" href="${pageMaker.startPage - 1}">이전</a>
-			           </c:if>
-			
-			           <c:forEach var="num" begin="${pageMaker.startPage }" end="${pageMaker.endPage }">
-			
-			               <c:if test="${num != 0}">
-			                   <a class="${pageMaker.cri.page == num ? " current":"not" }" href="${num }">${num }</a>
-			               </c:if>
-			
-			           </c:forEach>
-			
-			           <c:if test="${pageMaker.next }">
-			               <a class="not" href="${pageMaker.endPage + 1}">다음</a>
-			           </c:if>
-			       </div>
                 </div>
 			
             </div>
             
-            
         </div>
-        
+        <div class="pageInfo" style="text-align: center; width:970px; margin-left: 600px;">
+								
+	         <c:if test="${pageMaker.prev }">
+	             <a class="not" href="${pageMaker.startPage - 1}">이전</a>
+	         </c:if>
+	
+	         <c:forEach var="num" begin="${pageMaker.startPage }" end="${pageMaker.endPage }">
+	
+	             <c:if test="${num != 0}">
+	                 <a class="${pageMaker.cri.page == num ? " current":"not" }" href="${num }">${num }</a>
+	             </c:if>
+	
+	         </c:forEach>
+	
+	         <c:if test="${pageMaker.next }">
+	             <a class="not" href="${pageMaker.endPage + 1}">다음</a>
+	         </c:if>
+	     </div>  
+            
     </div>
 
     <form method="get" class="moveForm">
@@ -160,6 +159,7 @@
         <input type="hidden" name="page" value="${pageMaker.cri.page }">
     </form>
 
+	<br><br><br>
     <!-- footer -->
     <jsp:include page="../../footer.jsp"></jsp:include>
     <script>

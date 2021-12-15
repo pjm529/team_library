@@ -88,7 +88,7 @@
                                 </td>
                             </tr>
                             
-                            <!-- email -->
+                            <!-- 제목 -->
                             <tr>
                                 <th class="first">
                                     제목
@@ -127,7 +127,9 @@
         </div>
     </div>
 
-
+	<!-- footer -->
+    <jsp:include page="../../footer.jsp"></jsp:include>
+    
     <script>
     	$(function(){
     		$(".sub1").addClass("active");

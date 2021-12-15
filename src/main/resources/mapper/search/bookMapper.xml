@@ -21,8 +21,14 @@
 
 	<!-- 대출 베스트 출력 -->
 	<select id="book_rank" resultType="com.library.model.search.BookDTO">
-		select count(*) as 'total_count', book_title, book_isbn, book_cover, book_pubDate, book_publisher, book_author
-		 from loan_history group by book_isbn order by total_count desc limit 10;
+		select count(*) as 'total_count', book_title, book_isbn, book_cover
+					, book_pubDate, book_publisher, book_author
+		 from loan_history 
+		where loan_date between concat(#{year}, '-', #{month}, '-01') and concat(#{year}, '-', #{month}, '-31' )
+			  and return_status = true 
+		group by book_isbn 
+		order by total_count desc 
+		limit 10;
 	</select>
 	
 	<!-- 대출자 상태 체크 -->

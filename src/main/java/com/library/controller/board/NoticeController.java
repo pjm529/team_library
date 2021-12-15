@@ -32,6 +32,9 @@ import com.library.service.board.NoticeService;
 @Controller
 @RequestMapping("/board/*")
 public class NoticeController {
+	
+	public String UPLOAD_PATH = com.library.util.PathUtil.path() + File.separator + "notice" 
+			+ File.separator; // 업로드 경로
 
 	@Autowired
 	private NoticeService noticeService;
@@ -148,12 +151,13 @@ public class NoticeController {
 		attachList.forEach(attach -> {
 
 			try {
-				Path file = Paths.get("C:\\library_file\\notice\\" + attach.getUuid() + "_" + attach.getFile_name());
+				Path file = Paths
+						.get(UPLOAD_PATH + attach.getUuid() + "_" + attach.getFile_name());
 				Files.deleteIfExists(file);
 
 				if (Files.probeContentType(file).startsWith("image")) {
-					Path thumbnail = Paths.get(
-							"C:\\library_file\\notice\\" + "\\s_" + attach.getUuid() + "_" + attach.getFile_name());
+					Path thumbnail = Paths.get(UPLOAD_PATH + "\\s_" + attach.getUuid() + "_"
+							+ attach.getFile_name());
 					Files.delete(thumbnail);
 				}
 			} catch (Exception e) {
@@ -170,7 +174,7 @@ public class NoticeController {
 		System.out.println(uuid);
 		System.out.println(type);
 
-		String filePath = "C:\\library_file\\notice\\";
+		String filePath = UPLOAD_PATH;
 		File deleteFileName = new File(filePath + uuid);
 
 		if (type.equals("image")) {

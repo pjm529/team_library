@@ -40,7 +40,7 @@
 }
 
 .header_submenu {
-    width:100%;
+    width: 1900px;
     height: 35px;
     background-color: #6D7A8B;
     display: none;
@@ -89,6 +89,7 @@
 }
 
 .tnb {
+	width: 1900px;
     padding-top: 5px; 
     height: 25px;
     text-align: right;

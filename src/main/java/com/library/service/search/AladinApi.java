@@ -126,6 +126,8 @@ public class AladinApi {
 			String publisher = (String) tmp.get("publisher");
 			String description = (String) tmp.get("description");
 			
+			description = description.replace("\\", "");
+			
 			book.setBook_title(title);
 			book.setBook_author(author);
 			book.setBook_isbn(isbn);

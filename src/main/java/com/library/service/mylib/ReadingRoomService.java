@@ -6,6 +6,9 @@ import com.library.model.mylib.ReadingRoomDTO;
 
 public interface ReadingRoomService {
 
+	// 모든 열람실 출력
+	public List<ReadingRoomDTO> getReadingRoomAll();
+	
 	// 1열람실 출력
 	public List<ReadingRoomDTO> getReadingRoom1SeatsList();
 

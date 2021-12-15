@@ -1,7 +1,5 @@
 package com.library.controller.admin;
 
-import java.util.Calendar;
-import java.util.Date;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,6 +12,7 @@ import com.library.model.member.MemberDTO;
 import com.library.model.search.DateDTO;
 import com.library.page.Criteria;
 import com.library.service.admin.RankService;
+import com.library.util.DateUtil;
 
 @Controller
 @RequestMapping("/admin")
@@ -30,12 +29,12 @@ public class RankController {
 
 		// year이 null 이면 현재 날짜 기준 year
 		if (date.getYear() == null) {
-			date.setYear(date("year"));
+			date.setYear(DateUtil.date("year"));
 		}
 
 		// month가 null 이면 현재 날짜 기준 month
 		if (date.getMonth() == null) {
-			date.setMonth(date("month"));
+			date.setMonth(DateUtil.date("month"));
 		}
 
 		// 년
@@ -52,24 +51,6 @@ public class RankController {
 		model.addAttribute("rank_list", rank_list);
 		
 		return "/admin/sub2/rank_member";
-
-	}
-
-	// 현재 날짜
-	public String date(String type) {
-		Date now = new Date();
-		Calendar cal = Calendar.getInstance();
-
-		cal.setTime(now);
-
-		int year = cal.get(Calendar.YEAR);
-		int month = cal.get(Calendar.MONTH) + 1;
-
-		if (type.equals("year")) {
-			return Integer.toString(year);
-		} else {
-			return Integer.toString(month);
-		}
 
 	}
 

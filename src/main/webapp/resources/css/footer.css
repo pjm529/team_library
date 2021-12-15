@@ -1,16 +1,17 @@
 /* footer 영역 */
 footer { 
     height: auto;
-    width: 100%;
+    width: 1900px;
     background: #3d4252;
     /* border: 5px solid red; */
 }
 
 
 footer .footer_section {
-    width: 66.02%;
+    width: 1250px; 
     height: auto;
     /* border: 3px solid orange; */
+    color:#fff; 
 }
 
 
@@ -94,6 +95,15 @@ footer > div .fsite_type1:after {
     border: 2px solid brown;
 }
 
-.text-bar {
-	color: black;
+.text-bar, .top p {
+	color:#BCBBC0; 
+} 
+
+.team {
+	 float: right;
+}
+
+.team p{
+	margin: 0;
+	padding: 0;
 }

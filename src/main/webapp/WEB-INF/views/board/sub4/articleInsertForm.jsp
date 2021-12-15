@@ -9,6 +9,7 @@
 </head>
 <link rel="stylesheet" href="/resources/css/board/sub4/write_page.css">
 <link rel="stylesheet" href="/resources/css/header.css">
+<link rel="stylesheet" href="/resources/css/footer.css">
 <script
   src="https://code.jquery.com/jquery-3.6.0.js"
   integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk=" 
@@ -60,9 +61,9 @@
                             <fmt:formatDate var="today" value="${now}" pattern="yyyy-MM-dd" />
 
                             <div class="table-wrap">
-                                <form action="/board/articleInsertForm" method="post" role="form">
-                                    <input type="hidden" name="writer_name" value="<sec:authentication property="
-                                        principal.dto.user_name" />">
+                                <form action="/board/articleInsertForm" method="post" role="form" onsubmit="return false">
+                                    <input type="hidden" name="writer_name" 
+                                    value="<sec:authentication property="principal.dto.user_name" />">
 
                                     <table class="bbs-edit">
                                         <tbody>
@@ -70,7 +71,8 @@
                                                 <th class="first">제목</th>
                                                 <td colspan="3">
                                                     <input type="text" style="width: 80%; height: 27px;"
-                                                        placeholder="제목을 작성해 주세요" name="article_title">
+                                                        placeholder="제목을 작성해 주세요" name="article_title" id="article_title"
+                                                        autocomplete="off" required="required">
                                                 </td>
                                             </tr>
                                             <tr>
@@ -91,9 +93,8 @@
                                             </tr>
 
                                             <tr>
-                                                <td colspan="4">
-                                                    <textarea id="popContent" name="article_content" cols="108"
-                                                        rows="15"></textarea>
+                                                <td colspan="4" style="padding: 8px 0px;">
+                                                    <textarea id="popContent" name="article_content"></textarea>
                                                 </td>
                                             </tr>
 
@@ -138,6 +139,9 @@
         </div>
     </div>
 
+	<!-- footer -->
+    <jsp:include page="../../footer.jsp"></jsp:include>
+    
 <script type="text/javascript" src="/resources/js/ckeditor/ckeditor.js"></script>
 <script>
     $(document).ready(function (e) {
@@ -147,6 +151,23 @@
             height: 500
         });
         $(".sub4").addClass("active");
+        
+        $(".write_btn").on("click", function () {
+
+            var article_title = $("#article_title").val();
+
+            if (article_title == "") {
+
+                $("#article_title").focus();
+
+                return false;
+            }
+
+            if (confirm('등록하시겠습니까?')) {
+                $("form").attr("onsubmit", "return true;");
+                $("form").submit();
+            }
+        });
 
 
         /* 파일업로드, 전송할 때 넘겨주는 것들*/
@@ -232,7 +253,6 @@
             var uploadUL = $(".uploadResult ul");
 
             var str = ""; /* li값들이 채워짐 */
-            var str2 = "";
             $(uploadResultArr).each(function (i, obj) {
 
 
@@ -254,9 +274,6 @@
                     str += "</div>";
                     str += "</li>";
 
-                    str2 +=
-                        '<p><img alt="" src="/imgSubmit?uid=' + obj.uuid + '&amp;fileName=' + obj.file_name + '&amp;filePath=C:/library_file/article/" /></p>';
-
                 } else {
                     var fileCallPath = encodeURIComponent(obj.upload_path + "/" + obj.uuid + "_" + obj.file_name);
                     var fileLink = fileCallPath.replace(new RegExp(/\\/g), "/");
@@ -276,7 +293,6 @@
             });
 
             uploadUL.append(str);
-            CKEDITOR.instances.popContent.insertHtml(str2, "html");
         }
 
         /* x버튼 눌렀을 때 첨부파일 화면에서 사라짐 */

@@ -5,19 +5,20 @@
 <html>
 <head>
 	<title>Home</title>
+	<link rel="stylesheet" href="/resources/css/board/sub3/answer_content_page.css">
+	<link rel="stylesheet" href="/resources/css/header.css">
 </head>
 <body>
-<h1>
-	Hello world!  
-</h1>
 
-<P>  The time on the server is ${serverTime}. </P>
+<div class="header">
+	<jsp:include page="header.jsp"></jsp:include>
+</div>
+
+<P> ${serverTime}. </P>
 
 <sec:authorize access="isAuthenticated()">
-		<sec:authentication property="principal.dto"/><br>
-		<sec:authentication property="principal.dto.user_id"/>님 반갑습니다.<br>
+		<sec:authentication property="principal.dto.user_name"/>님 반갑습니다.<br>
 		당신은 <sec:authentication property="principal.dto.authList"/> 권한입니다. <br>
-		<br><button>로그아웃하러가기</button>
-</sec:authorize>
+</sec:authorize> 
 </body>
 </html>

@@ -68,8 +68,8 @@
                                                 <th class="first">제목</th>
                                                 <td colspan="3">
                                                     <input id="title" type="text" style="width: 80%; height: 27px;"
-                                                        placeholder="제목을 작성해 주세요"
-                                                        name="enquiry_title">
+                                                        placeholder="제목을 작성해 주세요" name="enquiry_title" 
+                                                        id="title" autocomplete="off" required="required">
                                                 </td>
                                             </tr>
                                             <tr>
@@ -81,9 +81,8 @@
                                                 </td>
                                             </tr>
                                             <tr>
-                                                <td colspan="4">
-                                                    <textarea id="popContent" name="enquiry_content" cols="108"
-                                                        rows="15"></textarea>
+                                                <td colspan="4" style="padding: 8px 0px;">
+                                                    <textarea id="popContent" name="enquiry_content"></textarea>
                                                 </td>
                                             </tr>
                                         </tbody>
@@ -129,11 +128,19 @@ $(function() {
 	
 	$(".write_btn").on("click", function() {
 		
+		 var title = $("#title").val();
+
+         if (title == "") {
+
+             $("#title").focus();
+             
+             return false;
+         }
 	
-		if(!confirm('등록하시겠습니까?')) {
-			 return false;
+		if(confirm('등록하시겠습니까?')) {
+			alert("게시글이 등록되었습니다.");
         }else {
-        	alert("게시글이 등록되었습니다.")
+        	return false;
         }
 	
 	});

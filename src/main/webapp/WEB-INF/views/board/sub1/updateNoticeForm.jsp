@@ -7,6 +7,7 @@
 	<title>라온도서관 > 열린공간 > 공지사항</title>
     <link rel="stylesheet" href="/resources/css/board/sub1/notice_write_page.css">
     <link rel="stylesheet" href="/resources/css/header.css">
+    <link rel="stylesheet" href="/resources/css/footer.css">
 </head>
 <script
   src="https://code.jquery.com/jquery-3.6.0.js"
@@ -76,7 +77,7 @@
                                                 <td colspan="3">
                                                     <input type="text" style="width: 80%; height: 27px;"
                                                         value="${noticeContent.notice_title}" name="notice_title"
-                                                        autocomplete="off">
+                                                         id="notice_title" autocomplete="off">
                                                 </td>
                                             </tr>
                                             <tr>
@@ -86,9 +87,9 @@
                                                 <td>${notice_reg_date}</td>
                                             </tr>
                                             <tr>
-                                                <td colspan="4">
-                                                    <textarea id="popContent" name="notice_content" cols="108"
-                                                        rows="15">${noticeContent.notice_content}</textarea>
+                                                <td colspan="4" style="padding: 8px 0px;">
+                                                    <textarea id="popContent" name="notice_content">
+                                                    ${noticeContent.notice_content}</textarea>
                                                 </td>
                                             </tr>
                                             <tr>
@@ -140,6 +141,10 @@
             </div>
         </div>
     </div>
+    
+    <!-- footer -->
+    <jsp:include page="../../footer.jsp"></jsp:include>
+    
 <script type="text/javascript" src="/resources/js/ckeditor/ckeditor.js"></script>
 <script>
     $(function () {
@@ -153,9 +158,17 @@
 
 
         $(".write_btn").on("click", function () {
+        	
+        	var notice_title = $("#notice_title").val();
 
+            if (notice_title == "") {
 
-            if (confirm('등록하시겠습니까?')) {
+                $("#notice_title").focus();
+
+                return false;
+            }
+
+            if (confirm('수정하시겠습니까?')) {
                 $("form").attr("onsubmit", "result true");
                 $("form").submit();
             }
@@ -284,7 +297,6 @@
             var uploadUL = $(".uploadResult ul");
 
             var str = "";
-            var str2 = "";
             $(uploadResultArr).each(function (i, obj) {
 
                 if (obj.image) {
@@ -303,8 +315,6 @@
                     str += "</div>";
                     str += "</li>";
 
-                    str2 +=
-                        '<p><img alt="" src="/imgSubmit?uid=' + obj.uuid + '&amp;fileName=' + obj.file_name + '&amp;filePath=C:/library_file/notice/" /></p>';
                 } else {
                     var fileCallPath = encodeURIComponent(obj.upload_path + "/" + obj.uuid + "_" + obj.file_name);
                     var fileLink = fileCallPath.replace(new RegExp(/\\/g), "/");
@@ -323,7 +333,6 @@
                 }
             });
             uploadUL.append(str);
-            CKEDITOR.instances.popContent.insertHtml(str2, "html");
         }
 
         /* x버튼 눌렀을 때 첨부 파일 목록에서 사라짐 */

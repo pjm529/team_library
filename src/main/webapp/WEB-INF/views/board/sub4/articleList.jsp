@@ -10,6 +10,7 @@
 </head>
 <link rel="stylesheet" href="/resources/css/board/sub4/sb_page.css">
 <link rel="stylesheet" href="/resources/css/header.css">
+<link rel="stylesheet" href="/resources/css/footer.css">
 <script
   src="https://code.jquery.com/jquery-3.6.0.js"
   integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk=" 
@@ -230,6 +231,9 @@
       <input type="hidden" name="type" value="${pageMaker.cri.type}">
       <input type="hidden" name="article_no" value="">
    </form>
+   
+    <!-- footer -->
+    <jsp:include page="../../footer.jsp"></jsp:include>
    
 <script>
    $(function() {

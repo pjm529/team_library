@@ -39,4 +39,10 @@ public class CalendarServiceImpl implements CalendarService {
 		calMapper.delete_cal(cal_no);
 	}
 
+	// 휴관일 검색
+	@Override
+	public List<CalendarDTO> search_closed(DateDTO date) {
+		return calMapper.search_closed(date);
+	}
+
 }

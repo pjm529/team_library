@@ -1,4 +1,5 @@
 package com.library.controller.board;
+
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
@@ -25,6 +26,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.library.model.board.AttachFileDTO;
+import com.library.util.PathUtil;
 
 import lombok.extern.log4j.Log4j;
 import net.coobird.thumbnailator.Thumbnailator;
@@ -32,34 +34,39 @@ import net.coobird.thumbnailator.Thumbnailator;
 @Controller
 @Log4j
 public class UploadController {
-	
-	// formData에 담긴 사진 및 파일들을 가져옴 
+
+	public String UPLOAD_PATH = PathUtil.path() + File.separator + "article"; // 업로드 경로
+
+	// formData에 담긴 사진 및 파일들을 가져옴
 	@PostMapping(value = "/uploadAjaxAction", produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
 	@ResponseBody
 	public ResponseEntity<List<AttachFileDTO>> uploadAjaxPost(MultipartFile[] uploadFile) {
 
 		List<AttachFileDTO> list = new ArrayList<>();
-		
+
 		// 저장되는 경로
-		String uploadFolder = "C:\\library_file\\article";
+		String uploadFolder = UPLOAD_PATH;
 
 		File uploadPath = new File(uploadFolder);
 
 		if (uploadPath.exists() == false) {
 			uploadPath.mkdirs();
 		}
-		
+
 		for (MultipartFile multipartFile : uploadFile) {
 
 			AttachFileDTO attachDTO = new AttachFileDTO();
 
 			String uploadFileName = multipartFile.getOriginalFilename();
 
+			// 파일명에 띄어쓰기 있을 시 _로 변경
+			uploadFileName = uploadFileName.replace(" ", "_");
+
 			// 파일이름 중복방지
 			uploadFileName = uploadFileName.substring(uploadFileName.lastIndexOf("\\") + 1);
 			log.info("only file name: " + uploadFileName);
 			attachDTO.setFile_name(uploadFileName);
-			
+
 			UUID uuid = UUID.randomUUID();
 
 			uploadFileName = uuid.toString() + "_" + uploadFileName;
@@ -71,13 +78,13 @@ public class UploadController {
 				attachDTO.setUuid(uuid.toString());
 				attachDTO.setUpload_path(uploadFolder);
 
-				// saveFile이 이미지일 경우 checkImageType()함수 실행, 
+				// saveFile이 이미지일 경우 checkImageType()함수 실행,
 				if (checkImageType(saveFile)) {
 
 					attachDTO.setImage(true);
-					
+
 					FileOutputStream thumbnail = new FileOutputStream(new File(uploadPath, "s_" + uploadFileName));
-						
+
 					Thumbnailator.createThumbnail(multipartFile.getInputStream(), thumbnail, 50, 50);
 
 					thumbnail.close();
@@ -93,8 +100,7 @@ public class UploadController {
 		} // end for
 		return new ResponseEntity<>(list, HttpStatus.OK);
 	}
-	
-	
+
 	// 첨부파일 이미지인지 아닌지 구별해주는 함수
 	// uploadAjaxPost()함수에 사용 됨
 	private boolean checkImageType(File file) {
@@ -111,9 +117,9 @@ public class UploadController {
 
 		return false;
 	}
-	
+
 	// view단(src = /display)의 요청에 따라서 파일을 result라는 변수에 담아 다시 view단으로 보내줌
-	@GetMapping("/display")	
+	@GetMapping("/display")
 	@ResponseBody
 	public ResponseEntity<byte[]> getFile(String file_name) {
 
@@ -132,16 +138,15 @@ public class UploadController {
 		return result;
 	}
 
-	
 	// 파일 다운로드
 	@GetMapping(value = "/download", produces = MediaType.APPLICATION_OCTET_STREAM_VALUE)
 	@ResponseBody
 	public ResponseEntity<Resource> downloadFile(@RequestHeader("User-Agent") String userAgent, String file_name) {
 
-		System.out.println("============file_name"+file_name);
-		
+		System.out.println("============file_name" + file_name);
+
 		Resource resource = new FileSystemResource(file_name);
-			
+
 		if (resource.exists() == false) {
 			return new ResponseEntity<>(HttpStatus.NOT_FOUND);
 		}
@@ -150,24 +155,24 @@ public class UploadController {
 
 		// remove UUID
 		String resourceOriginalName = resourceName.substring(resourceName.indexOf("_") + 1);
-		
+
 		// 브라우저 종류
 		HttpHeaders headers = new HttpHeaders();
 		try {
 
 			String downloadName = null;
 
-			if ( userAgent.contains("Trident")) {
+			if (userAgent.contains("Trident")) {
 				log.info("IE browser");
 				downloadName = URLEncoder.encode(resourceOriginalName, "UTF-8").replaceAll("\\+", " ");
-			}else if(userAgent.contains("Edge")) {
+			} else if (userAgent.contains("Edge")) {
 				log.info("Edge browser");
-				downloadName =  URLEncoder.encode(resourceOriginalName,"UTF-8");
-			}else {
+				downloadName = URLEncoder.encode(resourceOriginalName, "UTF-8");
+			} else {
 				log.info("Chrome browser");
 				downloadName = new String(resourceOriginalName.getBytes("UTF-8"), "ISO-8859-1");
 			}
-			
+
 			log.info("downloadName: " + downloadName);
 
 			headers.add("Content-Disposition", "attachment; filename=" + downloadName);
@@ -178,45 +183,40 @@ public class UploadController {
 
 		return new ResponseEntity<Resource>(resource, headers, HttpStatus.OK);
 	}
-	
+
 	// 첨부파일 x버튼 눌렀을 때 ajax 처리과정
 	@PostMapping("/deleteFile")
 	@ResponseBody
 	public ResponseEntity<String> deleteFile(String file_name, String type, @RequestParam("uuid") String uuid) {
 
 		log.info("deleteFile: " + file_name);
-		
+
 		fileDelete(uuid, type);
-		
+
 		return new ResponseEntity<String>("deleted", HttpStatus.OK);
 
-
 	}
-	
+
 	// 첨부파일폴더 내 파일삭제 함수
 	public void fileDelete(String uuid, String type) {
-	   
-	      String filePath = "C:\\library_file\\article\\";	      
-	      
-	      File deleteFileName = new File(filePath + uuid);
 
-	      if(type.equals("image")) {
-	    	  String thumb = "s_" + uuid;
-	    	  File deleteThumbFileName = new File(filePath + thumb);
-	          deleteFileName.delete();
-	          deleteThumbFileName.delete();
-	          System.out.println("파일삭제완료");
+		String filePath = UPLOAD_PATH + File.separator;
 
-	         
-	      }else {
-	    	 deleteFileName.delete();
-	         System.out.println("파일삭제실패");
-	         
-	      }
-	   
-	   
-	   
-	   }
+		File deleteFileName = new File(filePath + uuid);
 
+		if (type.equals("image")) {
+			String thumb = "s_" + uuid;
+			File deleteThumbFileName = new File(filePath + thumb);
+			deleteFileName.delete();
+			deleteThumbFileName.delete();
+			System.out.println("파일삭제완료");
+
+		} else {
+			deleteFileName.delete();
+			System.out.println("파일삭제실패");
+
+		}
+
+	}
 
 }

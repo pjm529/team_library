@@ -215,3 +215,8 @@ td{
     margin-top: 20px;
     cursor: pointer;
 }
+
+.wrapper-table th{
+	height: 50px;
+	padding: 0;
+}

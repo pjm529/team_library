@@ -228,7 +228,9 @@
                         <div class="wrapper-table">
                         
                             <!-- 예약 x 테이블 -->
+                            
                              <c:if test="${nbRoom_info == null}">
+                             
                             	<input type="hidden" name="user_id" value="user_id">
                             	<input type="hidden" name="seat_no" value="seat_no" class="input_selected_seat_no">
                             
@@ -252,6 +254,17 @@
                             <!-- 예약 o 테이블 -->
                             <c:if test="${nbRoom_info != null}">
                             
+                            	<!-- 열람실 명 -->
+                                <c:if test="${nbRoom_info.seat_no < 54}">
+                                    <c:set var="room_name" value="제 1열람실" /> 
+                                </c:if>
+                                <c:if test="${nbRoom_info.seat_no >= 54 && nbRoom_info.seat_no < 98}">
+                                    <c:set var="room_name" value="제 2열람실" />
+                                </c:if>
+                                <c:if test="${nbRoom_info.seat_no >= 98 }">
+                                    <c:set var="room_name" value="노트북실" />
+                                </c:if>
+                            
                             	<fmt:formatDate var="checkin_time" value="${nbRoom_info.checkin_time}" pattern="HH:mm:ss"/>
                             	<fmt:formatDate var="checkout_time" value="${nbRoom_info.checkout_time}" pattern="HH:mm:ss"/>
                             	
@@ -260,23 +273,24 @@
                             	<fmt:parseNumber var="diff_sec" value="${nbRoom_info.diff_time/1000 - diff_hour*60*60 - diff_min*60}" integerOnly="true" />
 	                    		
 	                    		<c:if test="${diff_min < 10}">
-	                    			<c:set var="diff_min" value="${diff_min}" />
+	                    			<c:set var="diff_min" value="0${diff_min}"></c:set>
 	                    		</c:if>
 	                    		
 	                    		<c:if test="${diff_sec < 10}">
-	                    			<c:set var="diff_sec" value="${diff_sec}" />
+	                    			<c:set var="diff_sec" value="0${diff_sec}"></c:set>
 	                    		</c:if>
 	                    		
 	                    		<c:set var="diff_time" value="${diff_hour}:${diff_min}:${diff_sec}" />
 	                    		
 	                    		<input type="hidden" id="diff_hour" value="${diff_hour}">
 								<input type="hidden" id="diff_min" value="${diff_min}">
+								<input type="hidden" id="diff_sec" value="${diff_sec}">
 	                    		
 	                            <table class="reserve-info">
 	                                <tbody>
 	                                    <tr>
 	                                        <th>열람실</th>
-	                                        <td colspan="2">노트북실</td>
+	                                        <td colspan="2">${room_name}</td>
 	                                        <th class="left">좌석 번호</th>
 	                                        <td colspan="2">
 	                                        	${nbRoom_info.seat_no}
@@ -289,14 +303,7 @@
 	                                        <th class="left">반납 시간</th>
 	                                        <td class="return_time" id="checkout_time">${checkout_time}</td>
 	                                        <th class="left">잔여 시간</th>
-	                                        <c:choose>
-	                                           <c:when test="${diff_hour < 1 && diff_min < 30}">
-	                                              <td style="color: red; font-weight: bold;">${diff_time}</td>
-	                                           </c:when>
-	                                           <c:otherwise>
-	                                              <td style="color: blue; font-weight: bold;">${diff_time}</td>
-	                                           </c:otherwise>
-	                                        </c:choose>
+	                                        <td id="time" style="color: blue; font-weight: bold;">${diff_time}</td>
 	                                    </tr>
 	                                </tbody>
 	
@@ -350,6 +357,16 @@
 	$(function () {
 		$(".sub3").addClass("active");
 		$(".submenu12").addClass("active");
+		
+		// 예약된 좌석이 있으면 남은 시간 timer start
+    	if($(".reserve_no").val() != ""){
+    		var hours =  $("#diff_hour").val();
+            var minutes = $("#diff_min").val();
+            var seconds = $("#diff_sec").val();
+            var totalSeconds = (60 * 60 * hours) + (60 * minutes) + parseInt(seconds, 10) - 1;
+            var display = document.querySelector('#time');
+            startTimer(totalSeconds, display);
+    	}
 		
 		/* 좌석 번호 클릭하기 전, 예약하기 버튼 비활성화 */
 		$(".booking_btn").hide(); 
@@ -508,6 +525,36 @@
 		location.href = "/mylib/notebookRoom";
 	}
 
+	function startTimer(totalSeconds, display) {
+    	
+     	  var timer = totalSeconds;
+     	  var hours;
+     	  var minutes;
+     	  var seconds;
+     	  var interval = setInterval(function () {
+     		if(timer <= 0) {
+     	      clearInterval(interval);
+     	      alert("퇴실되었습니다.");
+     	      location.reload();
+       	}
+     		
+     	    hours = parseInt(timer / 60 / 60, 10);
+     	    minutes = parseInt(timer / 60 - (hours * 60), 10);
+     	    seconds = parseInt(timer % 60, 10);
+
+     	    minutes = minutes < 10 ? "0" + minutes : minutes;
+     	    seconds = seconds < 10 ? "0" + seconds : seconds;
+     	    
+			if(hours < 1 && minutes < 30) {
+				display.style.color = "red";	
+			}
+			
+	    	display.textContent = hours + ":" + minutes + ":" + seconds;
+			
+	    	timer--;
+	    	
+     	  }, 1000);
+     	}
 </script>
 </body>
 </html>

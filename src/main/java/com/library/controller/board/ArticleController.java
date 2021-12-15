@@ -1,5 +1,6 @@
 package com.library.controller.board;
 
+import java.io.File;
 import java.io.IOException;
 import java.io.UnsupportedEncodingException;
 import java.net.URLEncoder;
@@ -33,6 +34,9 @@ import com.library.service.board.ArticleService;
 @RequestMapping("/board/*")
 public class ArticleController {
 
+	public String UPLOAD_PATH = com.library.util.PathUtil.path() + File.separator + "article" + File.separator; // 업로드
+																													// 경로
+
 	@Autowired
 	private ArticleService articleService;
 
@@ -60,13 +64,13 @@ public class ArticleController {
 	}
 
 	@PostMapping("/articleInsertForm")
-	public String articleInsert(ArticleDTO dto /*RedirectAttributes rttr*/) throws IOException, Exception {
+	public String articleInsert(ArticleDTO dto /* RedirectAttributes rttr */) throws IOException, Exception {
 
 		// 로그인 된 user_id 받아오기
 		Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
 		UserDetails userDetails = (UserDetails) principal;
 		String id = userDetails.getUsername();
-		
+
 		if (dto.getAttachList() != null) {
 
 			dto.getAttachList().forEach(attach -> System.out.println(attach));
@@ -140,8 +144,8 @@ public class ArticleController {
 		return "redirect:/board/articleList?amount=" + cri.getAmount() + "&page=" + cri.getPage() + "&keyword="
 				+ keyword + "&type" + cri.getType(); // 리다이렉트로 새로고침된 값을 뿌린다.
 	}
-	
-	//게시글 삭제시 폴더에 들어있는 사진 및 파일 삭제하는 함수
+
+	// 게시글 삭제시 폴더에 들어있는 사진 및 파일 삭제하는 함수
 	private void deleteFiles(List<ArticleAttachDTO> attachList) {
 
 		if (attachList == null || attachList.size() == 0) {
@@ -152,14 +156,13 @@ public class ArticleController {
 
 		attachList.forEach(attach -> {
 			try {
-				Path file = Paths.get("C:\\library_file\\article\\" + attach.getUuid() + "_" + attach.getFile_name());
+				Path file = Paths.get(UPLOAD_PATH + attach.getUuid() + "_" + attach.getFile_name());
 
 				Files.deleteIfExists(file);
 
 				if (Files.probeContentType(file).startsWith("image")) {
 
-					Path thumbNail = Paths
-							.get("C:\\library_file\\article\\" + "\\s_" + attach.getUuid() + "_" + attach.getFile_name());
+					Path thumbNail = Paths.get(UPLOAD_PATH + "\\s_" + attach.getUuid() + "_" + attach.getFile_name());
 
 					Files.delete(thumbNail);
 				}
@@ -171,7 +174,6 @@ public class ArticleController {
 			} // end catch
 		});// end foreachd
 	}
-
 
 	@GetMapping("/articleModifyForm")
 	public String modifyForm(@RequestParam("article_no") String a_article_no, Model model, Criteria cri) {

@@ -130,6 +130,9 @@
                         <span>　</span>
 
                         <form action="/search/best-book">
+                        	<input type="hidden" name="book_isbn" value="${list.book_isbn }">
+							<input type="hidden" name="year" value="${year }">
+							<input type="hidden" name="month" value="${month }">
                             <button class="btn3" style="display: flex; justify-content: center; align-items: center;">
                                 <img src="/resources/imges/search/book_icon.png" style="width: 30px;">　목록
                             </button>

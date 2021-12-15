@@ -87,10 +87,20 @@
 	        // new FullCalendar.Calendar(대상 DOM객체, {속성:속성값, 속성2:속성값2..}) 
 	        var calendar = new FullCalendar.Calendar(calendarEl, {
 	            headerToolbar: {
-	                left: 'prev,next today',
+	                left: 'prev,next',
 	                center: 'title',
-	                right: 'dayGridMonth'
+	                right: 'today'
 	            },
+	            
+	            titleFormat : function(date) { // title 설정
+	            	return date.date.year +"년 "+(date.date.month +1)+"월"; 
+	            },
+	            
+	            dayHeaderContent: function (date) { // 요일 설정
+	                let weekList = ["일", "월", "화", "수", "목", "금", "토"];
+	                return weekList[date.dow];
+	            },
+	            
 	            // 이벤트명 : function(){} : 각 날짜에 대한 이벤트를 통해 처리할 내용.. 
 	            dayMaxEvents: true, // allow "more" link when too many events
 	            events: data

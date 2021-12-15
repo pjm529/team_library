@@ -34,8 +34,11 @@
          <!-- 도서 대출 -->
          <s:intercept-url pattern="/search/loan" access="hasRole('ROLE_MEMBER')"/>
          <s:intercept-url pattern="/search/statusChk" access="hasRole('ROLE_MEMBER')"/>
+         
+         <!-- 추천 도서 -->
          <s:intercept-url pattern="/search/regist-book" access="hasRole('ROLE_ADMIN')"/>
          <s:intercept-url pattern="/search/regist" access="hasRole('ROLE_ADMIN')"/>
+         <s:intercept-url pattern="/search/delete-rec" access="hasRole('ROLE_ADMIN')"/>
          
          <!-- 공지사항 -->
          <s:intercept-url pattern="/board/insertNotice" access="hasRole('ROLE_ADMIN')"/>
@@ -55,13 +58,15 @@
          <s:intercept-url pattern="/board/uploadAjaxAction" access="hasRole('ROLE_ADMIN')"/>
          <s:intercept-url pattern="/board/deleteFile" access="hasRole('ROLE_ADMIN')"/>
          
-         <!-- 묻고 답하기 -->
+         <!-- 묻고 답하기 질문 -->
          <s:intercept-url pattern="/board/qnaBoardContent" access="hasRole('ROLE_MEMBER')"/>
          <s:intercept-url pattern="/board/qnaBoardWrite" access="hasRole('ROLE_MEMBER')"/>
          <s:intercept-url pattern="/board/qnaBoardInsert" access="hasRole('ROLE_MEMBER')"/>
          <s:intercept-url pattern="/board/qnaBoardEdit" access="hasRole('ROLE_MEMBER')"/>
          <s:intercept-url pattern="/board/qnaBoardUpdate" access="hasRole('ROLE_MEMBER')"/>
          <s:intercept-url pattern="/board/qnaBoardDelete" access="hasRole('ROLE_MEMBER')"/>
+         
+         <!-- 묻고 답하기 답변 -->
          <s:intercept-url pattern="/board/answerBoardContent" access="hasRole('ROLE_MEMBER')"/>
          <s:intercept-url pattern="/board/answerBoardWrite" access="hasRole('ROLE_ADMIN')"/>
          <s:intercept-url pattern="/board/answerBoardEdit" access="hasRole('ROLE_ADMIN')"/>

@@ -58,7 +58,7 @@
 
                             <!-- 테이블 -->
                             <div class="table-wrap">
-                                <form action="/board/answerBoardUpdate" method="post">
+                                <form action="/board/answerBoardUpdate" method="post" onsubmit="return false;">
                                 	<input type="hidden" name="answer_no" value="${answer.answer_no}" >
                                 	<input type="hidden" name="enquiry_no" value="${answer.enquiry_no}" >
                                 	<input type="hidden" name="a_writer_id" value="${answer.a_writer_id}">
@@ -75,8 +75,8 @@
                                                 <td colspan="3">
                                                     <input type="text" style="width: 80%; height: 27px;"
                                                         placeholder="제목을 작성해 주세요"
-                                                        name="answer_title"
-                                                        value="${answer.answer_title}">
+                                                        name="answer_title" id="title"
+                                                        value="${answer.answer_title}" autocomplete="off">
                                                 </td>
                                             </tr>
                                             <tr>
@@ -88,9 +88,9 @@
                                                 </td>
                                             </tr>
                                             <tr>
-                                                <td colspan="4">
-                                                    <textarea id="popContent" name="answer_content" cols="108"
-                                                        rows="15">${answer.answer_content}</textarea>
+                                                <td colspan="4" style="padding: 8px 0px;">
+                                                    <textarea id="popContent" name="answer_content">
+                                                    ${answer.answer_content}</textarea>
                                                 </td>
                                             </tr>
                                         </tbody>
@@ -141,9 +141,20 @@
 		$(".sub3").addClass("active");
 		
 		$(".write_btn").on("click", function() {
-			if(confirm('등록하시겠습니까?')) {
+			
+			var title = $("#title").val();
+
+	         if (title == "") {
+
+	             $("#title").focus();
+	             
+	             return false;
+	         }
+			if(confirm('수정하시겠습니까?')) {
 				$("form").attr("onsubmit", "result true");
 				$("form").submit();
+			} else {
+				return false;
 			}
 		});
 		

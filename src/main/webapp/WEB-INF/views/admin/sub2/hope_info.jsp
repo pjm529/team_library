@@ -121,7 +121,7 @@
                             </td>
                         </tr>
                         
-                        <!-- ISBN -->
+                        <!-- 비고 -->
                         <tr>
                             <th class="first">
                                 비고
@@ -179,6 +179,7 @@
                             </td>
                         </tr>
                         
+                        <!-- 신청일 -->
                         <tr>
                             <th class="first">
                                 신청일
