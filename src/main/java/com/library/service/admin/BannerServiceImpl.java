@@ -24,5 +24,10 @@ public class BannerServiceImpl implements BannerService {
 	public void banner_del(BannerDTO banner) {
 		bannerMapper.banner_del(banner);
 	}
+
+	@Override
+	public void banner_add(BannerDTO banner) {
+		bannerMapper.banner_add(banner);
+	}
 	
 }

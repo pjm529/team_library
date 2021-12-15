@@ -7,13 +7,18 @@
 		
 		<!-- 배너 출력 -->
 		<select id="banner_list" resultType="com.library.model.admin.BannerDTO">
-			select * from banner order by reg_date;
+			select * from banner order by reg_date
 		</select>
 		
 		<delete id="banner_del">
 			delete 
 			  from banner
-			 where uuid = #{uuid} and file_name = #{file_name};
+			 where path = #{path}
 		</delete> 
+		
+		<insert id="banner_add">
+			insert into banner
+			values (#{user_id}, #{path}, current_timestamp)
+		</insert>
 		
 	</mapper>

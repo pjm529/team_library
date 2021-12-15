@@ -5,7 +5,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>라온도서관 > 관리자 > 일정목록</title>
+<title>라온도서관 > 관리자 > 배너목록</title>
 <link rel="stylesheet" href="/resources/css/admin/calendar_list.css">
 <link rel="stylesheet" href="/resources/css/header.css">
 <link rel="stylesheet" href="/resources/css/footer.css">
@@ -24,7 +24,7 @@
             <div class="doc-info">
                 <!-- doc title -->
                 <div class="doc-title">
-                    <h3>일정목록</h3>
+                    <h3>배너목록</h3>
                     <ul>
                         <!-- 홈 btn img -->
                         <li class="first" style="background-image: none;">
@@ -36,7 +36,7 @@
                             <a href="/admin/member-list">관리자</a>
                         </li>
                         <li>
-                            <a href="/admin/calendar-list">일정목록</a>
+                            <a href="/admin/banner-list">배너목록</a>
                         </li>
                     </ul>
                 </div>
@@ -56,6 +56,7 @@
                             <!-- 테이블 -->
                             
                             <div class="table-wrap">
+                            	<c:if test="${not empty banner_list }">
                                 <table>
                                     <thead>
                                         <tr>
@@ -65,16 +66,15 @@
                                         </tr>
                                     </thead>
                                     <tbody>
-
+									
                                         <c:forEach var="list" items="${banner_list}">
                                             <tr>
-                                                <td><img src="/resources/banner/${list.uuid }_${list.file_name }"></td>
+                                                <td><img src="${list.path }"></td>
                                                 <td>${list.reg_date }</td>
                                                 <td>
                                                     <form action="/admin/banner-del" method="post"
                                                         onsubmit="return false;">
-                                                        <input type="hidden" name="uuid" value="${list.uuid }">
-                                                        <input type="hidden" name="file_name" value="${list.file_name }">
+                                                        <input type="hidden" name="path" value="${list.path }">
                                                         <button class="btn2">삭제</button>
                                                     </form>
 
@@ -84,6 +84,7 @@
 
                                     </tbody>
                                 </table>
+                                </c:if>
                                 
                                 <c:if test="${empty banner_list }">
                                 <br>
@@ -121,12 +122,20 @@
 
             $(".btn2").on("click", function () {
 
-                if (confirm("일정을 삭제하시겠습니까?")) {
-                    alert("일정을 삭제하였습니다.")
+                if (confirm("배너를 삭제하시겠습니까?")) {
+                    alert("배너를 삭제하였습니다.")
                     $("form").attr("onsubmit", "return true");
                     $("form").submit();
                 }
-            })
+            });
+            
+            $('.add_btn').on("click", function (e) {
+
+                e.preventDefault();
+                let popUrl = "/admin/banner-add";
+                let popOption = "width = 700px, height=200px, top=300px, scrollbars=no, resizeable=no";
+                window.open(popUrl, "배너 추가", popOption);
+            });
 
         });
 

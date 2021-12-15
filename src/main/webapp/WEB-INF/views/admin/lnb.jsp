@@ -40,6 +40,10 @@
         <li class="sub4">
             <a href="/admin/calendar-list">일정목록</a>
         </li>
+        
+        <li class="sub5">
+        	<a href="/admin/banner-list">배너목록</a>
+        </li>
         <sec:authorize access="hasRole('ROLE_MASTER')">
         <li class="sub3">
             <a href="/master/admin-list">관리자목록</a>

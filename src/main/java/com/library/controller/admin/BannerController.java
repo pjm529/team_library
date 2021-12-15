@@ -1,5 +1,6 @@
 package com.library.controller.admin;
 
+import java.security.Principal;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -36,6 +37,25 @@ public class BannerController {
 
 		return "/admin/sub5/banner_list";
 	}
+	
+	// 배너 추가 페이지
+	@GetMapping("/banner-add")
+	public String banner_addGET() {
+		return "/admin/sub5/banner_add";
+	}
+	
+	// 배너 추가
+	@PostMapping("/banner-add")
+	public String banner_addPost(Principal principal, BannerDTO banner) {
+		
+		String user_id = principal.getName();
+		
+		banner.setUser_id(user_id);
+		
+		bannerService.banner_add(banner);		
+		return "redirect:/admin/banner_add";
+	}
+	
 	
 	// 배너 삭제
 	@PostMapping("/banner-del")
