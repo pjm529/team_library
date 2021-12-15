@@ -720,7 +720,7 @@ A HORIZONTAL event
 }
 .fc .fc-daygrid-day-top {
     display: flex;
-    flex-direction: row-reverse;
+    margin-left: 5px;
   }
 .fc .fc-day-other .fc-daygrid-day-top {
     opacity: 0.3;
@@ -1466,5 +1466,13 @@ A VERTICAL event
 
 .fc-event-title{
 	font-size: 13px;
-	margin-left: 8px;
+	margin-left: 5px;
+}
+
+.fc-day-sun a {
+	color: red;
+}
+
+.fc-day-sat a{
+	color: blue;
 }
