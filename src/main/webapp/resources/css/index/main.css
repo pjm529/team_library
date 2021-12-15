@@ -415,9 +415,10 @@ p, div, span, h1, h2, h3, ul, li {
 }
 
 
+
 .bbs-box-center .person_cnt > div {
     float: left;
-    width: 33%;
+    width: 33.3%;
 }
 
 
