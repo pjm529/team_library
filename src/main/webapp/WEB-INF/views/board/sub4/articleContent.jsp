@@ -8,6 +8,7 @@
    <title>라온도서관 > 열린공간 > 분실물찾기</title>
 <link rel="stylesheet" href="/resources/css/board/sub4/content_page.css">
 <link rel="stylesheet" href="/resources/css/header.css">
+<link rel="stylesheet" href="/resources/css/footer.css">
 </head>
 <script
   src="https://code.jquery.com/jquery-3.6.0.js"
@@ -209,6 +210,9 @@
             </div>
         </div>
     </div>
+    
+    <!-- footer -->
+    <jsp:include page="../../footer.jsp"></jsp:include>
 <script>
 
     $(document).ready(function () {

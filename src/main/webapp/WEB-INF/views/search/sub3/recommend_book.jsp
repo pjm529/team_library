@@ -160,6 +160,7 @@
         <input type="hidden" name="page" value="${pageMaker.cri.page }">
     </form>
 
+	<br><br><br>
     <!-- footer -->
     <jsp:include page="../../footer.jsp"></jsp:include>
     <script>

@@ -9,6 +9,7 @@
 </head>
 <link rel="stylesheet" href="/resources/css/board/sub4/write_page.css">
 <link rel="stylesheet" href="/resources/css/header.css">
+<link rel="stylesheet" href="/resources/css/footer.css">
 <script
   src="https://code.jquery.com/jquery-3.6.0.js"
   integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk=" 
@@ -138,6 +139,9 @@
         </div>
     </div>
 
+	<!-- footer -->
+    <jsp:include page="../../footer.jsp"></jsp:include>
+    
 <script type="text/javascript" src="/resources/js/ckeditor/ckeditor.js"></script>
 <script>
     $(document).ready(function (e) {

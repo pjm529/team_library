@@ -8,7 +8,8 @@
 <head>
 	<title>라온도서관 > 열린공간 > 공지사항</title>
 <link rel="stylesheet" href="/resources/css/board/sub1/notice_content_page.css">
-<link rel="stylesheet" href="/resources/css/header.css">
+<link rel="stylesheet" href="/resources/css/header.css"> 
+<link rel="stylesheet" href="/resources/css/footer.css">
 </head>
 <script
   src="https://code.jquery.com/jquery-3.6.0.js"
@@ -221,6 +222,9 @@
             </div>
         </div>
     </div>
+    
+    <!-- footer -->
+    <jsp:include page="../../footer.jsp"></jsp:include>
 
 <script>
     $(function () {

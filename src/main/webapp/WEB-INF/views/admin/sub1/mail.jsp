@@ -127,7 +127,9 @@
         </div>
     </div>
 
-
+	<!-- footer -->
+    <jsp:include page="../../footer.jsp"></jsp:include>
+    
     <script>
     	$(function(){
     		$(".sub1").addClass("active");

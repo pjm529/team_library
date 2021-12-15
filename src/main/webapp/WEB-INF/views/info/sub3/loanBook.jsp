@@ -8,6 +8,7 @@
 <link rel="stylesheet" href="/resources/css/info/sub3/sb_page.css">
 <link rel="stylesheet" href="/resources/css/info/sub3/loanBook.css">
 <link rel="stylesheet" href="/resources/css/header.css">
+<link rel="stylesheet" href="/resources/css/footer.css">
 
 <style>
  .wrapper-bbs{
@@ -48,6 +49,7 @@ p {
 	<div class="header">
     <jsp:include page="../../header.jsp"></jsp:include>
     </div>
+    
     <div class="container">
         <div class="sub_title">
             <div class="doc-info">
@@ -145,6 +147,10 @@ p {
 
         </div>
     </div>
+    
+    <!-- footer -->
+    <jsp:include page="../../footer.jsp"></jsp:include>	
+    
 <script src="https://code.jquery.com/jquery-3.6.0.js"
     integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk=" crossorigin="anonymous"></script>
 <script>
