@@ -20,7 +20,7 @@
 	
 	<!-- 일정 등록 -->
 	<insert id="insert_cal">
-		insert into calendar values(null, 1, #{user_id}, #{title}, #{start}, #{end}, 1, "black", "none", "none", current_timestamp);
+		insert into calendar values(null, 1, #{user_id}, #{title}, #{start}, #{end}, 1, #{textColor}, "none", "none", current_timestamp);
 	</insert>
 	
 	<!-- 일정 삭제 -->
