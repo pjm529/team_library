@@ -285,12 +285,10 @@
                     <!-- <main01-03 : main-banner-box -->
                     <div class="main-banner-box">
                         <div class="slidewrap">
-                            <div><img src="https://library.daegu.go.kr/data/popupZone/h9/1638493510423"
-                                    style="width: 100%;" alt="대구전자도서관 앱서비스 중지 안내"></div>
-                            <div><img src="/resources/imges/index/main_wide_main_public_8.png" style="width: 100%;"
-                                    alt="대구도서관 온라인 독서 퀴즈"></div>
-                            <div><img src="/resources/imges/index/1620090025675.png" style="width: 100%;" alt="새로운 생활 속 거리두기 개편 안내">
-                            </div>
+                        	<c:forEach var="banner_list" items="${banner_list}">
+                              	<div><img src="${banner_list.path }"
+                                    style="width: 100%;"></div>
+                            </c:forEach>
                         </div>
                     </div>
                     <!-- 메인-베너 슬라이드 JS -->

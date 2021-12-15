@@ -12,11 +12,13 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
+import com.library.model.admin.BannerDTO;
 import com.library.model.board.CalendarDTO;
 import com.library.model.board.NoticeDTO;
 import com.library.model.search.BookDTO;
 import com.library.model.search.DateDTO;
 import com.library.page.Criteria;
+import com.library.service.admin.BannerService;
 import com.library.service.board.CalendarService;
 import com.library.service.board.NoticeService;
 import com.library.service.mylib.ReservationRoomService;
@@ -41,6 +43,10 @@ public class HomeController {
 
 	@Autowired
 	private BookService bookService;
+	
+	@Autowired
+	private BannerService bannerService;
+
 
 	@RequestMapping(value = "/", method = RequestMethod.GET)
 	public String home(Model model, Criteria cri) {
@@ -89,6 +95,9 @@ public class HomeController {
 		List<BookDTO> best_list = bookService.book_rank(date);
 		model.addAttribute("best_list", best_list);
 		
+		// 배너 목록
+		List<BannerDTO> banner_list = bannerService.banner_list();
+		model.addAttribute("banner_list", banner_list);
 		
 		return "index";
 	}
