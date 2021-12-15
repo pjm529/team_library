@@ -3,6 +3,7 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
+<%@ taglib uri="http://www.springframework.org/security/tags" prefix="sec" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -21,17 +22,36 @@
     <script type="text/javascript" src="http://cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.min.js"></script>
     <script type="text/javascript" src="/resources/js/index/main-header.js"></script>
     <script type="text/javascript" src="/resources/js/index/main.js"></script>
-    <script type="text/javascript" src="/resources/js/index/slick.js"></script>
     <script type="text/javascript" src="/resources/js/index/tab.js"></script>
 </head>
 <body>
+
     <div id="warp">
         <div id="header">
             <div class="tnb">
                 <div class="main-section">
                     <div class="util">
+                    	<sec:authorize access="isAnonymous()">
                         <a href="/member/login">로그인</a><span class="text-bar"></span>
                         <a href="/member/signup-check">회원가입</a>
+                        </sec:authorize>
+                        
+                        <!-- 로그인 시 -->
+						<sec:authorize access="isAuthenticated()">
+						<span style="color: #fff; font-weight: bold; font-size: 0.875em;">
+							<sec:authentication property="principal.dto.user_name"/>님
+						</span>
+						<span class="text-bar"></span>
+					    <span><a href="/logout">로그아웃</a></span>
+					    <span class="text-bar"></span>
+					    <span><a href="/mylib/mypage">정보수정</a></span>
+					    
+					    <!-- 관리자 권한을 가지고 있을 경우 -->
+					    <sec:authorize access="hasRole('ROLE_ADMIN')">
+					    <span class="text-bar"></span>
+					    <span><a href="/admin/member-list">관리자메뉴</a></span>
+					    </sec:authorize>
+						</sec:authorize>
                     </div>
                 </div>
             </div>
