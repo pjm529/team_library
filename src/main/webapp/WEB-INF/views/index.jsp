@@ -212,10 +212,10 @@
                         <div class="month-wrap">
                             <div class="month-slide-wrap">
                                 <div class="month-slide">
-                                    <p id="calendarYear">2021</p>
+                                    <p id="calendarYear">${year }</p>
                                     <span>년</span>
                                     <div>
-                                        <span><em>12</em><i>월</i></span>
+                                        <span><em>${month }</em><i>월</i></span>
                                     </div>
                                     <script>
                                         $('.month-slide > div').slick();
@@ -226,7 +226,11 @@
                             </div>
                             <div class="month-info">
                                 <p class="tit">휴관일</p>
-                                <p class="con"><span>06</span> <span>20</span> <span>25</span></p>
+                                <p class="con">
+                                	<c:forEach var="cal_list" items="${cal_list}">
+                                		<span>${cal_list.start }</span>
+                                	</c:forEach>
+                                </p>
                             </div>
                             <div class="month-detail">
                                 <span class="sinfo">※ 매주 월요일, 법정·임시공휴일</span>

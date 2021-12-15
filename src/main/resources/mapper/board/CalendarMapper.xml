@@ -30,4 +30,14 @@
 		 where cal_no = #{cal_no};
 	</delete>
 	
+	<!-- 휴관일 검색 -->
+	<select id="search_closed" resultType="com.library.model.board.CalendarDTO">
+		select *
+		  from calendar
+		 where start 
+		 	between concat(#{year}, '-', #{month}, '-01') and concat(#{year}, '-', #{month}, '-31' ) 
+		 	and (title = "휴관일" or textColor = "red" or textColor = "#FF0000")
+		 order by start;
+	</select>
+	
 </mapper>
