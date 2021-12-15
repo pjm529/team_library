@@ -41,7 +41,7 @@ public class BannerController {
 	// 배너 추가 페이지
 	@GetMapping("/banner-add")
 	public String banner_addGET() {
-		return "/admin/sub5/banner_add";
+		return "/admin/sub5/banner-add";
 	}
 	
 	// 배너 추가
