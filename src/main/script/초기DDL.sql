@@ -203,6 +203,15 @@ CREATE TABLE `answer` (
   CONSTRAINT `fk_answer_enquiry_no` FOREIGN KEY (`enquiry_no`) REFERENCES `enquiry` (`enquiry_no`) ON DELETE CASCADE
 );
 
+-- 배너 테이블
+CREATE TABLE `banner` (
+  `user_id` varchar(20) DEFAULT NULL,
+  `path` varchar(4096) DEFAULT NULL,
+  `reg_date` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  KEY `banner_FK` (`user_id`),
+  CONSTRAINT `banner_FK` FOREIGN KEY (`user_id`) REFERENCES `member` (`user_id`)
+)
+
 
 -- 이벤트 출력
 show variables like 'event%';
@@ -317,6 +326,10 @@ insert into member values
 insert into member_auth values("admin", "ROLE_MEMBER");
 insert into member_auth values("admin", "ROLE_ADMIN");
 insert into member_auth values("admin", "ROLE_MASTER");
+
+-- 기본 배너 추가
+insert into banner values("admin", "/resources/banner/banner1.png", current_timestamp);
+insert into banner values("admin", "/resources/banner/banner2.png", current_timestamp);
 
 -- 열람실 좌석 insert
 DELIMITER //
