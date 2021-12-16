@@ -29,6 +29,7 @@ import com.library.model.board.ArticleDTO;
 import com.library.page.Criteria;
 import com.library.page.ViewPage;
 import com.library.service.board.ArticleService;
+import com.library.util.XssUtil;
 
 @Controller
 @RequestMapping("/board/*")
@@ -78,6 +79,10 @@ public class ArticleController {
 		}
 
 		dto.setWriter_id(id);
+		
+		// 특수문자 치환
+		dto.setArticle_title(XssUtil.XssReplace(dto.getArticle_title()));
+		
 		articleService.articleInsert(dto);
 
 		/* rttr.addFlashAttribute("result", dto.getArticle_no()); */
@@ -197,7 +202,9 @@ public class ArticleController {
 		} catch (UnsupportedEncodingException e) {
 			return "redirect:/board/articleList";
 		}
-
+		
+		// 특수문자 치환
+		dto.setArticle_title(XssUtil.XssReplace(dto.getArticle_title()));
 		articleService.articleUpdate(dto);
 
 		return "redirect:/board/articleContent?amount=" + cri.getAmount() + "&page=" + cri.getPage() + "&keyword="

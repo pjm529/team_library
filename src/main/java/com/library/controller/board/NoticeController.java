@@ -28,6 +28,7 @@ import com.library.model.board.NoticeDTO;
 import com.library.page.Criteria;
 import com.library.page.ViewPage;
 import com.library.service.board.NoticeService;
+import com.library.util.XssUtil;
 
 @Controller
 @RequestMapping("/board/*")
@@ -98,6 +99,10 @@ public class NoticeController {
 		}
 
 		dto.setWriter_id(id);
+		
+		// 특수문자 치환
+		dto.setNotice_title(XssUtil.XssReplace(dto.getNotice_title()));
+		
 		noticeService.insert(dto);
 
 //		rttr.addFlashAttribute("result", dto.getNotice_no());
@@ -215,6 +220,9 @@ public class NoticeController {
 			return "redirect:/board/noticeList";
 		}
 
+		// 특수문자 치환
+		dto.setNotice_title(XssUtil.XssReplace(dto.getNotice_title()));
+		
 		noticeService.update(dto);
 
 		return "redirect:/board/noticeContent?amount=" + cri.getAmount() + "&page=" + cri.getPage() + "&keyword="
