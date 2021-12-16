@@ -178,13 +178,6 @@ ul{
 
 
 
-.accordion {
-    position:absolute;
-    top:30%;
-    left:50%;
-    transform:translateX(-50%);
-    width:900px;
-}
 
 
 input[id*="answer"] {
@@ -228,6 +221,7 @@ input[id*="answer"] + label + div {
 input[id*="answer"] + label + div p {
     display:inline-block;
     padding:20px;
+    font-size: 15px;
 }
 
 
