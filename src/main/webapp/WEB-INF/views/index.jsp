@@ -515,7 +515,11 @@
 </body>
 <script>
 	function submit() {
-		$("#search_form").submit();
+		if($("#inputForm").val() == ""){
+			alert("검색어를 입력하세요.");
+		} else {
+			$("#search_form").submit();	
+		}
 	}
 </script>
 </html>
