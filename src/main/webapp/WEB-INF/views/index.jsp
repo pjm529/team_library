@@ -76,12 +76,12 @@
                             </ul>
                         </li>
                         <li class="gnb-li">
-                            <a class="Depth" href="#a">
+                            <a class="Depth" href="/info/signup">
                                 <span class="">이용안내</span>
                             </a>
                             <ul class="sub-menu sm02">
                                 <li>
-                                    <a class="" href="#a">회원가입 안내</a>
+                                    <a class="" href="/info/signup">회원가입 안내</a>
                                     <a class="" href="/info/openingHours">이용시간 및 휴관일</a>
                                     <a class="" href="/info/loanBook">도서 대출 및 반납</a>
                                 </li>
@@ -94,7 +94,7 @@
                             <ul class="sub-menu sm03">
                                 <li>
                                     <a class="" href="/board/noticeList">공지사항</a>
-                                    <a class="" href="#a">자주묻는질문</a>
+                                    <a class="" href="/board/bestQna">자주묻는질문</a>
                                     <a class="" href="/board/qnaBoardList">묻고답하기</a>
                                     <a class="" href="/board/articleList">분실물찾기</a>
                                     <a class="" href="/board/calendar">도서관일정</a>
@@ -102,13 +102,13 @@
                             </ul>
                         </li>
                         <li class="gnb-li">
-                            <a class="Depth" href="#a">
+                            <a class="Depth" href="/intro/greeting">
                                 <span class="">도서관소개</span>
                             </a>
                             <ul class="sub-menu sm04">
                                 <li>
-                                    <a class="" href="#a">인사말</a>
-                                    <a class="" href="#a">연혁</a>
+                                    <a class="" href="/intro/greeting">인사말</a>
+                                    <a class="" href="/intro/history">연혁</a>
                                     <a class="" href="/intro/road">찾아오시는길</a>
                                 </li>
                             </ul>
@@ -179,8 +179,7 @@
                     </li>
                     <li>
                         <div class="icon_img">
-                            <a href="/board/calendar"><img src="https://www.jeju.go.kr/pub/site/lib/images/main/icon05.png"
-                                    style="width: 77%;">
+                            <a href="/board/calendar"><img src="/resources/imges/index/calendar.png">
                         </div>
                         <class="contents1_bold">도서관 일정</class></a>
                     </li>
@@ -210,20 +209,21 @@
                         <h3>공지사항</h3>
                         <a class="btn-more" href="/board/noticeList" title="공지사항 더보기">more</a>
                         <ul class="notice-list">
-                            <li class="w-label">
-                            	<c:forEach var="noticeList" items="${noticeList}" begin="0" end="4">
-                            		<a href="/board/noticeContent?notice_no=${noticeList.notice_no }">
-	                                    <span class="tit" style="width: 230px;">
-	                                        <span class="label">공지</span>
-	                                        ${noticeList.notice_title}
-	                                    </span>
-	                                    <span class="date">
-	                                    	<fmt:formatDate var="notice_reg_date" value="${noticeList.notice_reg_date}" pattern="yyyy-MM-dd"/>
-												${notice_reg_date}
-                                        </span>
-	                                </a>
-                            	</c:forEach>
+                            
+                       	<c:forEach var="noticeList" items="${noticeList}" begin="0" end="4">
+                       		<li class="w-label">
+                        		<a href="/board/noticeContent?notice_no=${noticeList.notice_no }">
+	                                 <span class="tit" style="width: 230px;">
+	                                     <span class="label">공지</span>
+	                                     ${noticeList.notice_title}
+	                                 </span>
+	                                 <span class="date">
+	                                 	<fmt:formatDate var="notice_reg_date" value="${noticeList.notice_reg_date}" pattern="yyyy-MM-dd"/>
+										${notice_reg_date}
+	                                 </span>
+								</a>
                             </li>
+                       	</c:forEach>
                         </ul>
                     </div>
                     <!-- 공지사항 종료 -->
