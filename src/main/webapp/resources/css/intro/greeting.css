@@ -150,7 +150,7 @@ ul{
 .content{
     box-sizing: border-box;
     padding-top: 0;
-    padding-bottom: 100px;
+    padding-bottom: 80px;
     width: 971px;
     margin-left: 280px;
 }
@@ -209,7 +209,6 @@ ul{
     padding-bottom: 20px;
     color: #777777;
     font-size: 24px;
-    font-weight: bold;
 }
 
 /* 게시물 개수 select */
@@ -267,4 +266,13 @@ table td .num{
 /* tbody 제목 왼쪽 정렬 */
 table td.left{
     text-align: left!important;
+}
+
+.greeting{
+	text-align: left; 
+	font-size:17px;
+}
+
+.greeting p{
+	margin: 0;
 }
