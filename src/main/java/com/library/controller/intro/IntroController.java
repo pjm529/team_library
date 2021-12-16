@@ -8,8 +8,14 @@ import org.springframework.web.bind.annotation.RequestMapping;
 @RequestMapping("/intro")
 public class IntroController {
 
+	@GetMapping("/greeting")
+	public String intro() {
+
+		return "/intro/sub1/greeting";
+	}
+	
 	@GetMapping("/history")
-	public String openingHours() {
+	public String history() {
 
 		return "/intro/sub2/history";
 	}
