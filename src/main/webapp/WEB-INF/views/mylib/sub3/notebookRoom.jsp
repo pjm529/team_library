@@ -85,7 +85,7 @@
 	                                    <c:forEach var="nb" items="${notebookRoomlist}" begin="0" end="2">
 	                               			
 	                               			<!-- seat_status == 0 => 좌석 예약 불가 (사용 중) -->
-	                                    	<c:if test="${nb.user_id == null}">
+	                                    	<c:if test="${nb.user_id != null}">
 	                                    		<c:set var="status" value="occupied"/>
 	                                    	</c:if>
 	                                    	
@@ -113,7 +113,7 @@
                                     <div class="seat-list">
                                     	<c:forEach var="nb" items="${notebookRoomlist}" begin="3" end="12">
 	                               			<!-- seat_status == 0 => 좌석 예약 불가 (사용 중) -->
-	                                    	<c:if test="${nb.user_id == null}">
+	                                    	<c:if test="${nb.user_id != null}"> 
 	                                    		<c:set var="status" value="occupied"/>
 	                                    	</c:if>
 	                                    	
@@ -140,7 +140,7 @@
                                     <div class="seat-list" style="margin-right: 145px;">
                                     	<c:forEach var="nb" items="${notebookRoomlist}" begin="13" end="20">
 	                               			<!-- seat_status == 0 => 좌석 예약 불가 (사용 중) -->
-	                                    	<c:if test="${nb.user_id == null}">
+	                                    	<c:if test="${nb.user_id != null}">
 	                                    		<c:set var="status" value="occupied"/>
 	                                    	</c:if>
 	                                    	
@@ -167,7 +167,7 @@
                                     <div class="seat-list">
                                     	<c:forEach var="nb" items="${notebookRoomlist}" begin="21" end="24">
 	                               			<!-- seat_status == 0 => 좌석 예약 불가 (사용 중) -->
-	                                    	<c:if test="${nb.user_id == null}">
+	                                    	<c:if test="${nb.user_id != null}">
 	                                    		<c:set var="status" value="occupied"/>
 	                                    	</c:if>
 	                                    	
@@ -194,7 +194,7 @@
                                     <div class="seat-list" style="width:60px; margin-right: 0px;">
                                     	<c:forEach var="nb" items="${notebookRoomlist}" begin="25" end="27">
 	                               			<!-- seat_status == 0 => 좌석 예약 불가 (사용 중) -->
-	                                    	<c:if test="${nb.user_id == null}">
+	                                    	<c:if test="${nb.user_id != null}">
 	                                    		<c:set var="status" value="occupied"/>
 	                                    	</c:if>
 	                                    	
