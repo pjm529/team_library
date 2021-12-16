@@ -173,7 +173,7 @@
                                             <input class="address_input_2" style="width: 80%; margin-bottom: 5px;"
                                                 readonly="readonly" autocomplete="off" name="user_address">
                                             <input class="address_input_3" style="width: 80%; margin-bottom: 3px;"
-                                                autocomplete="off" name="user_address_detail" maxlength="20"> <br>
+                                                autocomplete="off" name="user_address_detail" maxlength="30"> <br>
                                             <span class="address_err">주소를 입력해주세요.</span>
                                         </p>
                                     </div>
