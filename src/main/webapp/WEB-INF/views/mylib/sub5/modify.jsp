@@ -76,7 +76,7 @@
                                 </th>
                                 <td class="last">
                                     <input class="name_input" autocomplete="off" name="user_name"
-                                        value="${my.user_name }"> <br>
+                                        value="${my.user_name }" maxlength="10"> <br>
                                     <span class="name_err">이름을 2자 이상 입력해주세요.</span>
                                 </td>
                             </tr>
@@ -103,7 +103,7 @@
                                 </th>
                                 <td class="last">
                                     <input class="phone_input" autocomplete="off" maxlength="11" name="user_tel"
-                                        value="${my.user_tel }"> <br>
+                                        value="${my.user_tel }" maxlength="11"> <br>
                                     <span class="phone_err">전화번호를 10~11자 입력해주세요.</span>
                                 </td>
                             </tr>
@@ -141,7 +141,7 @@
                                                 value="${my.user_address }">
                                             <input class="address_input_3" style="width: 80%; margin-bottom: 3px;"
                                                 autocomplete="off" name="user_address_detail"
-                                                value="${my.user_address_detail }"> <br>
+                                                value="${my.user_address_detail }" maxlength="20"> <br>
                                             <span class="address_err">주소를 입력해주세요.</span>
                                         </p>
                                     </div>

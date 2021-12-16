@@ -72,7 +72,7 @@
                                                 <td colspan="3">
                                                     <input type="text" style="width: 80%; height: 27px;"
                                                         placeholder="제목을 작성해 주세요" name="article_title" id="article_title"
-                                                        autocomplete="off" required="required">
+                                                        autocomplete="off" required="required" maxlength="50">
                                                 </td>
                                             </tr>
                                             <tr>
