@@ -94,7 +94,7 @@
                             <ul class="sub-menu sm03">
                                 <li>
                                     <a class="" href="/board/noticeList">공지사항</a>
-                                    <a class="" href="/board/bestQna">자주묻는질문</a>
+                                    <a class="" href="/board/faq">자주묻는질문</a>
                                     <a class="" href="/board/qnaBoardList">묻고답하기</a>
                                     <a class="" href="/board/articleList">분실물찾기</a>
                                     <a class="" href="/board/calendar">도서관일정</a>

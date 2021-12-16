@@ -8,7 +8,7 @@
             <a href="/board/noticeList">공지사항</a>
         </li>
         <li class="sub2">
-            <a href="/board/bestQna">자주묻는질문</a>
+            <a href="/board/faq">자주묻는질문</a>
         </li>
         <li class="sub3">
             <a href="/board/qnaBoardList">묻고답하기</a>

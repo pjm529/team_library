@@ -66,7 +66,7 @@
 <div class="header_submenu header_sub3">
     <ul class="header_submenu3">
         <li><span><a href="/board/noticeList">공지사항</a></span></li>
-        <li><span><a href="/board/bestQna">자주묻는질문</a></span></li>
+        <li><span><a href="/board/faq">자주묻는질문</a></span></li>
         <li><span><a href="/board/qnaBoardList">묻고답하기</a></span></li>
         <li><span><a href="/board/articleList">분실물찾기</a></span></li>
         <li><span><a href="/board/calendar">도서관일정</a></span></li>
