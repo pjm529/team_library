@@ -77,7 +77,7 @@
                                                 <td colspan="3">
                                                     <input type="text" style="width: 80%; height: 27px;"
                                                         value="${noticeContent.notice_title}" name="notice_title"
-                                                         id="notice_title" autocomplete="off">
+                                                         id="notice_title" autocomplete="off" maxlength="50">
                                                 </td>
                                             </tr>
                                             <tr>

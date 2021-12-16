@@ -64,7 +64,7 @@ p {
                             </a>
                         </li>
                         <li>
-                            <a href="#">이용안내</a>
+                            <a href="/info/signup">이용안내</a>
                         </li>
                         <li>
                             <a href="/loanBook">도서대출/반납/예약</a>

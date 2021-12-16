@@ -5,7 +5,7 @@
      </h2>
      <ul class="subMenu">
          <li class="sub1">
-             <a href="#">회원가입안내</a>
+             <a href="/info/signup">회원가입안내</a>
          </li>
          <li class="sub2">
              <a href="/info/openingHours">이용시간 및 휴관일</a>

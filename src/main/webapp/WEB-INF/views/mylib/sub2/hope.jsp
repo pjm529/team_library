@@ -63,7 +63,7 @@
                                     <span style="color: red;">(*)</span>
                                 </th>
                                 <td class="last">
-                                    <input class="title_input" autocomplete="off" name="book_title"> <br>
+                                    <input class="title_input" autocomplete="off" name="book_title" maxlength="30"> <br>
                                 </td>
                             </tr>
                             
@@ -74,7 +74,7 @@
                                     <span style="color: red;">(*)</span>
                                 </th>
                                 <td class="last">
-                                    <input class="author_input" autocomplete="off" name="book_author"> <br>
+                                    <input class="author_input" autocomplete="off" name="book_author" maxlength="30"> <br>
                                 </td>
                             </tr>
                             
@@ -85,7 +85,7 @@
                                     <span style="color: red;">(*)</span>
                                 </th>
                                 <td class="last">
-                                    <input class="publisher_input" autocomplete="off" name="book_publisher"> <br>
+                                    <input class="publisher_input" autocomplete="off" name="book_publisher" maxlength="20"> <br>
                                 </td>
                             </tr>
                             
@@ -96,7 +96,7 @@
                                     <span style="color: red;">(*)</span>
                                 </th>
                                 <td class="last">
-                                    <input class="pubDate_input" autocomplete="off" name="book_pubDate"> <br>
+                                    <input class="pubDate_input" autocomplete="off" name="book_pubDate" maxlength="20"> <br>
                                 </td>
                             </tr>
                             
@@ -106,17 +106,17 @@
                                     ISBN
                                 </th>
                                 <td class="last">
-                                    <input class="isbn_input" autocomplete="off" name="book_isbn"> <br>
+                                    <input class="isbn_input" autocomplete="off" name="book_isbn" maxlength="13"> <br>
                                 </td>
                             </tr>
                             
-                            <!-- ISBN -->
+                            <!-- 비고 -->
                             <tr>
                                 <th class="first">
                                     비고
                                 </th>
                                 <td class="last">
-                                    <input class="note_input" autocomplete="off" name="note"> <br>
+                                    <input class="note_input" autocomplete="off" name="note" maxlength="50"> <br>
                                 </td>
                             </tr>
                             
@@ -127,7 +127,7 @@
                                     <span style="color: red;">(*)</span>
                                 </th>
                                 <td class="last">
-                                    <input class="price_input" autocomplete="off" name="book_price"> <br>
+                                    <input class="price_input" autocomplete="off" name="book_price" maxlength="10"> <br>
                                 </td>
                             </tr>
 
@@ -152,6 +152,11 @@
 	    $(function(){
 			$(".sub2").addClass("active");
 	   		$(".submenu6").addClass("active");
+	   		
+	   		// 가격 숫자만 허용
+	        $('.price_input').on("propertychange change keyup paste input", function () {
+	            $(this).val($(this).val().replace(/[^0-9]/gi, ""));
+	        });
 	   		
 	   		$(".join_button").on("click", function(){
 	   			

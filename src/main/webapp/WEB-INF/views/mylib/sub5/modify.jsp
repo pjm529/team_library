@@ -76,7 +76,7 @@
                                 </th>
                                 <td class="last">
                                     <input class="name_input" autocomplete="off" name="user_name"
-                                        value="${my.user_name }"> <br>
+                                        value="${my.user_name }" maxlength="10"> <br>
                                     <span class="name_err">이름을 2자 이상 입력해주세요.</span>
                                 </td>
                             </tr>
@@ -103,7 +103,7 @@
                                 </th>
                                 <td class="last">
                                     <input class="phone_input" autocomplete="off" maxlength="11" name="user_tel"
-                                        value="${my.user_tel }"> <br>
+                                        value="${my.user_tel }" maxlength="11"> <br>
                                     <span class="phone_err">전화번호를 10~11자 입력해주세요.</span>
                                 </td>
                             </tr>
@@ -141,7 +141,7 @@
                                                 value="${my.user_address }">
                                             <input class="address_input_3" style="width: 80%; margin-bottom: 3px;"
                                                 autocomplete="off" name="user_address_detail"
-                                                value="${my.user_address_detail }"> <br>
+                                                value="${my.user_address_detail }" maxlength="30"> <br>
                                             <span class="address_err">주소를 입력해주세요.</span>
                                         </p>
                                     </div>
@@ -294,7 +294,13 @@
 
         // 주소 입력 시 입력해달라는 문구 none;
         $('.address_input_3').on("propertychange change keyup paste input", function () {
-
+        	let re = /[\{\}\[\]\/?.;:|\)*~`!^\-_+┼<>@\#$%&\'\"\\\(\=]/gi;
+            let temp = $(this).val();
+            
+            if (re.test(temp)) { //특수문자가 포함되면 삭제하여 값으로 다시셋팅
+                $(this).val(temp.replace(re, ""));
+            }
+            
             if ($(this).val() == "") {
                 $('.address_err').css('display', 'block');
             } else {

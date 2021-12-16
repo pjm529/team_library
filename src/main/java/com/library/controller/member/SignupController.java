@@ -18,6 +18,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.library.model.member.MemberDTO;
 import com.library.service.member.SignupService;
+import com.library.util.XssUtil;
 
 @Controller
 @RequestMapping("/member")
@@ -59,6 +60,15 @@ public class SignupController {
 		String encode_pw = pwencoder.encode(member.getUser_pw());
 		member.setUser_pw(encode_pw);
 
+		// 특수문자 치환
+		member.setUser_id(XssUtil.XssReplace(member.getUser_id()));
+		member.setUser_name(XssUtil.XssReplace(member.getUser_name()));
+		member.setUser_email(XssUtil.XssReplace(member.getUser_email()));
+		member.setUser_tel(XssUtil.XssReplace(member.getUser_tel()));
+		member.setUser_zip(XssUtil.XssReplace(member.getUser_zip()));
+		member.setUser_address(XssUtil.XssReplace(member.getUser_address()));
+		member.setUser_address_detail(XssUtil.XssReplace(member.getUser_address_detail()));
+		
 		// 회원가입 service 쿼리 실행
 		signupService.signUp(member);
 

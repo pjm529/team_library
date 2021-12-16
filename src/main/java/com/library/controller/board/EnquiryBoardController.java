@@ -21,6 +21,7 @@ import com.library.page.Criteria;
 import com.library.page.ViewPage;
 import com.library.service.board.AnswerBoardService;
 import com.library.service.board.EnquiryBoardService;
+import com.library.util.XssUtil;
 
 @Controller
 @RequestMapping("/board/*")
@@ -100,6 +101,10 @@ public class EnquiryBoardController {
 		String id = userDetails.getUsername();
 
 		dto.setWriter_id(id);
+		
+		// 특수문자 치환
+		dto.setEnquiry_title(XssUtil.XssReplace(dto.getEnquiry_title()));
+		
 		eBoardService.enquiryBoardInsert(dto);
 
 		return "redirect:/board/qnaBoardList";
@@ -149,6 +154,9 @@ public class EnquiryBoardController {
 				return "redirect:/board/qnaBoardList";
 			}
 
+			// 특수문자 치환
+			dto.setEnquiry_title(XssUtil.XssReplace(dto.getEnquiry_title()));
+			
 			eBoardService.enquiryBoardUpdate(dto);
 
 			return "redirect:/board/qnaBoardContent?amount=" + cri.getAmount() + "&page=" + cri.getPage() + "&keyword="
@@ -258,6 +266,10 @@ public class EnquiryBoardController {
 	@PostMapping("/answerBoardWrite")
 	public String answerBoardWrite(AnswerBoardDTO dto, Criteria cri, Principal principal) {
 		dto.setA_writer_id(principal.getName());
+		
+		// 특수문자 치환
+		dto.setAnswer_title(XssUtil.XssReplace(dto.getAnswer_title()));
+		
 		aBoardService.answerBoardInsert(dto);
 
 		return "redirect:/board/qnaBoardList";
@@ -293,6 +305,8 @@ public class EnquiryBoardController {
 			return "redirect:/board/answerBoardEdit";
 		}
 
+		// 특수문자 치환
+		dto.setAnswer_title(XssUtil.XssReplace(dto.getAnswer_title()));
 		aBoardService.answerBoardUpdate(dto);
 
 		return "redirect:/board/answerBoardContent?amount=" + cri.getAmount() + "&page=" + cri.getPage() + "&keyword="

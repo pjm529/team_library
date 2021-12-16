@@ -73,7 +73,7 @@
                                                 <td colspan="3">
                                                     <input type="text" style="width: 80%; height: 27px;"
                                                         placeholder="제목을 작성해 주세요"
-                                                        name="enquiry_title" id="title"
+                                                        name="enquiry_title" id="title" maxlength="50"
                                                         value="${dto.enquiry_title}" autocomplete="off">
                                                 </td>
                                             </tr>

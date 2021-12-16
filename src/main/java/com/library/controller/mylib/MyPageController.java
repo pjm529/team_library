@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.library.model.member.MemberDTO;
 import com.library.service.mylib.MyPageService;
+import com.library.util.XssUtil;
 
 @Controller
 @RequestMapping("/mylib")
@@ -98,7 +99,15 @@ public class MyPageController {
 		String id = principal.getName();
 
 		member.setUser_id(id);
-
+		
+		// 특수문자 치환
+		member.setUser_name(XssUtil.XssReplace(member.getUser_name()));
+		member.setUser_tel(XssUtil.XssReplace(member.getUser_tel()));
+		member.setUser_email(XssUtil.XssReplace(member.getUser_email()));
+		member.setUser_zip(XssUtil.XssReplace(member.getUser_zip()));
+		member.setUser_address(XssUtil.XssReplace(member.getUser_address()));
+		member.setUser_address_detail(XssUtil.XssReplace(member.getUser_address_detail()));
+		
 		myPageService.my_modify(member);
 
 		return "redirect:/mylib/mypage";

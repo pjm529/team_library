@@ -33,7 +33,7 @@
                             </a>
                         </li>
                         <li>
-                            <a href="#">이용안내</a>
+                            <a href="/info/signup">이용안내</a>
                         </li>
                         <li>
                             <a href="/info/openingHours">이용시간 및 휴관일</a>

@@ -14,6 +14,7 @@ import com.library.model.mylib.HopeDTO;
 import com.library.page.Criteria;
 import com.library.page.ViewPage;
 import com.library.service.mylib.HopeService;
+import com.library.util.XssUtil;
 
 @Controller
 @RequestMapping("/mylib")
@@ -41,6 +42,15 @@ public class HopeController {
 		
 		// 로그인 된 id 받아오기
 		hope.setUser_id(principal.getName());
+		
+		// 특수문자 치환
+		hope.setBook_title(XssUtil.XssReplace(hope.getBook_title()));
+		hope.setBook_author(XssUtil.XssReplace(hope.getBook_author()));
+		hope.setBook_publisher(XssUtil.XssReplace(hope.getBook_publisher()));
+		hope.setBook_pubDate(XssUtil.XssReplace(hope.getBook_pubDate()));
+		hope.setBook_isbn(XssUtil.XssReplace(hope.getBook_isbn()));
+		hope.setNote(XssUtil.XssReplace(hope.getNote()));
+		hope.setBook_price(XssUtil.XssReplace(hope.getBook_price()));
 		
 		// 희망 도서 신청
 		hopeService.insert_hope(hope);

@@ -60,7 +60,7 @@
                                     아이디
                                 </th>
                                 <td class="last">
-                                    <input class="id_input" autocomplete="off" name="user_id"> <br>
+                                    <input class="id_input" autocomplete="off" name="user_id" maxlength="12"> <br>
                                     <span class="id_correct">사용 가능한 아이디입니다.</span>
                                     <span class="id_err_1">아이디가 이미 존재합니다.</span>
                                     <span class="id_err_2">아이디를 6~12자 입력해주세요.</span>
@@ -74,7 +74,7 @@
                                     비밀번호
                                 </th>
                                 <td class="last">
-                                    <input class="pw_input" type="password" autocomplete="off" name="user_pw"> <br>
+                                    <input class="pw_input" type="password" autocomplete="off" name="user_pw" maxlength="16"> <br>
                                     <span class="pw_err">비밀번호를 8~16자 입력해주세요.</span>
                                 </td>
                             </tr>
@@ -86,7 +86,7 @@
                                     비밀번호 확인
                                 </th>
                                 <td class="last">
-                                    <input type="password" class="pwck_input" autocomplete="off"> <br>
+                                    <input type="password" class="pwck_input" autocomplete="off" maxlength="16"> <br>
                                     <span class="pwck_correct">비밀번호가 일치합니다.</span>
                                     <span class="pwck_err_1">비밀번호가 일치하지 않습니다.</span>
                                     <span class="pwck_err_2">비밀번호 확인을 입력해주세요.</span>
@@ -100,7 +100,7 @@
                                     이름
                                 </th>
                                 <td class="last">
-                                    <input class="name_input" autocomplete="off" name="user_name"> <br>
+                                    <input class="name_input" autocomplete="off" name="user_name" maxlength="10"> <br>
                                     <span class="name_err">이름을 2자 이상 입력해주세요.</span>
                                 </td>
                             </tr>
@@ -173,7 +173,7 @@
                                             <input class="address_input_2" style="width: 80%; margin-bottom: 5px;"
                                                 readonly="readonly" autocomplete="off" name="user_address">
                                             <input class="address_input_3" style="width: 80%; margin-bottom: 3px;"
-                                                autocomplete="off" name="user_address_detail"> <br>
+                                                autocomplete="off" name="user_address_detail" maxlength="30"> <br>
                                             <span class="address_err">주소를 입력해주세요.</span>
                                         </p>
                                     </div>
@@ -519,11 +519,23 @@
             }
 
         });
+        
+        
+        // id 입력 시 특수문자 입력 불가
+        $('.id_input').on("propertychange change keyup paste input", function () {
+
+            let re = /[ \{\}\[\]\/?.,;:|\)*~`!^\-+┼<>@\#$%&\'\"\\\(\=]/gi;
+            let temp = $(this).val();
+            
+            if (re.test(temp)) { //특수문자가 포함되면 삭제하여 값으로 다시셋팅
+                $(this).val(temp.replace(re, ""));
+            }
+        })
 
         // 이름 입력 시 입력해달라는 문구 none;
-        $('.name_input').on("propertychange change keyup paste input", function () {
-
-            let re = /[ \{\}\[\]\/?.,;:|\)*~`!^\-_+┼<>@\#$%&\'\"\\\(\=123456789]/gi;
+        $('.name_input').on("propertychange change keypress paste input", function () {
+			
+            let re = /[a-z0-9]|[ \{\}\[\]\/?.,;:|\)*~`!^\-_+┼<>@\#$%&\'\"\\\(\=123456789]/gi;
             let temp = $(this).val();
 
             if (re.test(temp)) { //특수문자가 포함되면 삭제하여 값으로 다시셋팅
@@ -570,7 +582,13 @@
 
         // 주소 입력 시 입력해달라는 문구 none;
         $('.address_input_3').on("propertychange change keyup paste input", function () {
-
+        	let re = /[\{\}\[\]\/?.;:|\)*~`!^\-_+┼<>@\#$%&\'\"\\\(\=]/gi;
+             let temp = $(this).val();
+             
+             if (re.test(temp)) { //특수문자가 포함되면 삭제하여 값으로 다시셋팅
+                 $(this).val(temp.replace(re, ""));
+             }
+             
             if ($(this).val() == "") {
                 $('.address_err').css('display', 'block');
             } else {

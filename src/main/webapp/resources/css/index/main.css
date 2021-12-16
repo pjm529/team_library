@@ -93,7 +93,6 @@ p, div, span, h1, h2, h3, ul, li {
 .library-info .notice-list li a {
     display: block;
     padding: 0.625em 0.3125em;
-    width: 100%;
     position: relative;
 }
 

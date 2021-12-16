@@ -69,7 +69,8 @@
                                                 <th class="first">제목</th>
                                                 <td colspan="3">
                                                     <input type="text" style="width: 80%; height: 27px;" id="article_title"
-                                                        name="article_title" value="${dto.article_title}" autocomplete="off">
+                                                        name="article_title" value="${dto.article_title}" autocomplete="off"
+                                                         maxlength="50">
                                                 </td>
                                             </tr>
                                             <tr>
