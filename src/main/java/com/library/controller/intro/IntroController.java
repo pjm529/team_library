@@ -19,6 +19,11 @@ public class IntroController {
 
 		return "/intro/sub2/history";
 	}
+	
+	@GetMapping("/road")
+	public String road() {
+		return "/intro/sub3/road";
+	}
 
 
 }
