@@ -294,7 +294,13 @@
 
         // 주소 입력 시 입력해달라는 문구 none;
         $('.address_input_3').on("propertychange change keyup paste input", function () {
-
+        	let re = /[\{\}\[\]\/?.;:|\)*~`!^\-_+┼<>@\#$%&\'\"\\\(\=]/gi;
+            let temp = $(this).val();
+            
+            if (re.test(temp)) { //특수문자가 포함되면 삭제하여 값으로 다시셋팅
+                $(this).val(temp.replace(re, ""));
+            }
+            
             if ($(this).val() == "") {
                 $('.address_err').css('display', 'block');
             } else {
