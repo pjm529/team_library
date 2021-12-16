@@ -62,10 +62,10 @@ CREATE TABLE `hope` (
   `user_id` varchar(20) NOT NULL, -- 신청 회원 아이디
   `book_title` varchar(100) NOT NULL, -- 희망 도서 제목
   `book_author` varchar(200) NOT NULL, -- 희망 도서 저자
-  `book_publisher` varchar(50) NOT NULL, -- 희망 도서 출판사
-  `book_pubdate` varchar(20) NOT NULL, -- 희망 도서 출간일
+  `book_publisher` varchar(200) NOT NULL, -- 희망 도서 출판사
+  `book_pubdate` varchar(200) NOT NULL, -- 희망 도서 출간일
   `book_isbn` varchar(20) DEFAULT NULL, -- 희망 도서 ISBN
-  `note` varchar(100) DEFAULT NULL, -- 비고
+  `note` varchar(1024) DEFAULT NULL, -- 비고
   `book_price` varchar(20) DEFAULT NULL, -- 희망 도서 가격
   `hope_status` int(11) DEFAULT '0', -- 희망 도서 처리 상태
   `cancel_reason` varchar(100) DEFAULT NULL, -- 희망 도서 취소 사유
@@ -210,7 +210,7 @@ CREATE TABLE `banner` (
   `reg_date` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
   KEY `banner_FK` (`user_id`),
   CONSTRAINT `banner_FK` FOREIGN KEY (`user_id`) REFERENCES `member` (`user_id`)
-)
+);
 
 
 -- 이벤트 출력
