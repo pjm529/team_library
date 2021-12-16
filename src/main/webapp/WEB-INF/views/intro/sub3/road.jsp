@@ -33,7 +33,7 @@
                             </a>
                         </li>
                         <li>
-                            <a href="#">도서관소개</a>
+                            <a href="/intro/greeting">도서관소개</a>
                         </li>
                         <li>
                             <a href="/intro/road">찾아오시는길</a>
