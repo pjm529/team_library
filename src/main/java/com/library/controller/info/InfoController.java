@@ -7,7 +7,13 @@ import org.springframework.web.bind.annotation.RequestMapping;
 @Controller
 @RequestMapping("/info/*")
 public class InfoController {
+	
+	@GetMapping("/signup")
+	public String signup() {
 
+		return "/info/sub1/signup";
+	}
+	
 	@GetMapping("/openingHours")
 	public String openingHours() {
 
