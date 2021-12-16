@@ -39,9 +39,9 @@
                 </div>
             </li>
             <li class="header_menu1"><span><a href="/search/book">자료검색</a></span></li>
-            <li class="header_menu2"><span><a href="">이용안내</a></span></li>
+            <li class="header_menu2"><span><a href="/info/signup">이용안내</a></span></li>
             <li class="header_menu3"><span><a href="/board/noticeList">열린공간</a></span></li>
-            <li class="header_menu4"><span><a href="">도서관소개</a></span></li>
+            <li class="header_menu4"><span><a href="/intro/greeting">도서관소개</a></span></li>
             <li class="header_menu5"><span><a href="/mylib/loan-history">나의도서관</a></span></li>
         </ul>
     </div>
@@ -57,7 +57,7 @@
 
 <div class="header_submenu header_sub2">
     <ul class="header_submenu2">
-        <li><span><a href="">회원가입안내</a></span></li>
+        <li><span><a href="/info/signup">회원가입안내</a></span></li>
         <li><span><a href="/info/openingHours">이용시간 및 휴관일</a></span></li>
         <li><span><a href="/info/loanBook">도서대출/반납/예약</a></span></li>
     </ul>
@@ -66,7 +66,7 @@
 <div class="header_submenu header_sub3">
     <ul class="header_submenu3">
         <li><span><a href="/board/noticeList">공지사항</a></span></li>
-        <li><span><a href="">자주묻는질문</a></span></li>
+        <li><span><a href="/board/bestQna">자주묻는질문</a></span></li>
         <li><span><a href="/board/qnaBoardList">묻고답하기</a></span></li>
         <li><span><a href="/board/articleList">분실물찾기</a></span></li>
         <li><span><a href="/board/calendar">도서관일정</a></span></li>
@@ -75,8 +75,8 @@
 
 <div class="header_submenu header_sub4">
     <ul class="header_submenu4">
-        <li><span><a href="">인사말</a></span></li>
-        <li><span><a href="">연혁</a></span></li>
+        <li><span><a href="/intro/greeting">인사말</a></span></li>
+        <li><span><a href="/intro/history">연혁</a></span></li>
         <li><span><a href="/intro/road">찾아오시는길</a></span></li>
     </ul>
 </div>
