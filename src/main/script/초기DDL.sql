@@ -98,7 +98,8 @@ CREATE TABLE `reading_room` (
   `checkin_time` timestamp NULL DEFAULT NULL, -- 좌석 입실 시간
   `checkout_time` timestamp NULL DEFAULT NULL, -- 좌석 퇴실 시간
   PRIMARY KEY (`seat_no`),
-  UNIQUE KEY `user_id` (`user_id`)
+  KEY `reading_room_FK` (`user_id`),
+  CONSTRAINT `reading_room_FK` FOREIGN KEY (`user_id`) REFERENCES `member` (`user_id`) ON DELETE SET NULL
 );
 
 -- 도서관 일정 테이블
@@ -132,8 +133,8 @@ CREATE TABLE `notice` (
   PRIMARY KEY (`notice_no`),
   KEY `notice_FK` (`writer_id`),
   CONSTRAINT `notice_FK` FOREIGN KEY (`writer_id`) REFERENCES `member` (`user_id`)
-)
-;
+);
+
 -- 공지사항 첨부파일 테이블
 CREATE TABLE `notice_attach_file` (
   `uuid` varchar(500) NOT NULL, -- uuid
@@ -153,7 +154,7 @@ CREATE TABLE `article` (
   `article_content` varchar(8196) NOT NULL, -- 분실물 찾기 내용
   `writer_id` varchar(20) NOT NULL, -- 작성자 아이디
   `writer_name` varchar(50) NOT NULL, -- 작성자 이름
-  `article_reg_date` datetime DEFAULT CURRENT_TIMESTAMP, -- 게시글 등록일
+  `article_reg_date` timestamp DEFAULT CURRENT_TIMESTAMP, -- 게시글 등록일
   `article_views` int(11) NOT NULL DEFAULT '0', -- 게시글 조회수
   PRIMARY KEY (`article_no`),
   KEY `article_FK` (`writer_id`),
@@ -200,14 +201,14 @@ CREATE TABLE `answer` (
   KEY `fk_answer_enquiry_no` (`enquiry_no`),
   KEY `answer_FK` (`a_writer_id`),
   CONSTRAINT `answer_FK` FOREIGN KEY (`a_writer_id`) REFERENCES `member` (`user_id`),
-  CONSTRAINT `fk_answer_enquiry_no` FOREIGN KEY (`enquiry_no`) REFERENCES `enquiry` (`enquiry_no`) ON DELETE CASCADE
+  CONSTRAINT `fk_answer_enquiry_no` FOREIGN KEY (`enquiry_no`) REFERENCES `enquiry` (`enquiry_no`) ON DELETE CASCADE ON UPDATE CASCADE
 );
 
 -- 배너 테이블
 CREATE TABLE `banner` (
-  `user_id` varchar(20) DEFAULT NULL,
-  `path` varchar(4096) DEFAULT NULL,
-  `reg_date` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `user_id` varchar(20) NOT NULL, -- 등록자 아이디
+  `path` varchar(4096) NOT NULL, -- 경로
+  `reg_date` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP, -- 등록일
   KEY `banner_FK` (`user_id`),
   CONSTRAINT `banner_FK` FOREIGN KEY (`user_id`) REFERENCES `member` (`user_id`)
 );
