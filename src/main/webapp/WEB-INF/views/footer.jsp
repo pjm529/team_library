@@ -22,8 +22,13 @@
 							<p>조원 : 김혜인, 신혜리, 장준화, 천종부</p>
 						</div>
 						
-						<p> 대구광역시 서구 서대구로 7길 2(내당동, 라온도서관)<span></span>TEL 053-555-1333<span></span>FAX 053-566-3318<br>
-							Copyright © 라온도서관., All rights reserved.
+						<p> 대구광역시 서구 서대구로 7길 2(내당동, 라온도서관) TEL <span>053-555-1333</span> 
+							FAX <span>053-566-3318</span><br>
+							Copyright © 라온도서관. All rights reserved.
+						</p>
+						
+						<p>
+							문의사항 : <span>library.raon@gmail.com</span>
 						</p>
 						
 					</div>

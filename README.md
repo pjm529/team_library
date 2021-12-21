@@ -18,7 +18,6 @@ Spring Framework 및 API를 활용한 도서관 제작
 ![Badge](http://img.shields.io/badge/JavaScript-yellow?style=flat-square&logo=JavaScript&logoColor=white)
 ![Badge](http://img.shields.io/badge/jQuery-%230769AD?style=flat-square&logo=jQuery&logoColor=white)
 ![Badge](http://img.shields.io/badge/-Java-%23007396?style=flat-square&logo=Java&logoColor=white)
-![Badge](http://img.shields.io/badge/-MySQL-%234479A1?style=flat-square&logo=MySQL&logoColor=white)
 
 ### 개발환경
 
@@ -28,8 +27,8 @@ Spring Framework 및 API를 활용한 도서관 제작
 ![Badge](http://img.shields.io/badge/-Spring-%236DB33F?style=flat-square&logo=Spring&logoColor=white)
 ![Badge](http://img.shields.io/badge/-SpringSecurity-%236DB39F?style=flat-square&logo=SpringSecurity&logoColor=white)
 ![Badge](http://img.shields.io/badge/-ApacheTomcat-%23F8DC75?style=flat-square&logo=ApacheTomcat&logoColor=black)
+![Badge](http://img.shields.io/badge/-MySQL-%234479A1?style=flat-square&logo=MySQL&logoColor=white)
 ![Badge](http://img.shields.io/badge/-Github-%23181717?style=flat-square&logo=GitHub&logoColor=white)
-
 
 ### 구성원
 
@@ -94,3 +93,6 @@ Spring Framework 및 API를 활용한 도서관 제작
 - 주소검색 - [KaKao 주소 API](https://postcode.map.daum.net/guide)
 - 도서검색 - [Aladin API](https://www.apistore.co.kr/generalApi/generalApiView.do?general_service_seq=72)
 - 찾아오는길 - [Google Map API](https://developers.google.com/maps/documentation?hl=ko)
+
+## 참고 사이트
+- 대구광역시 도서관 홈페이지

@@ -107,3 +107,7 @@ footer > div .fsite_type1:after {
 	margin: 0;
 	padding: 0;
 }
+
+.sections span {
+	font-weight: bold;
+}
